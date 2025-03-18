@@ -1,1 +1,1 @@
-import './styles.histoire.css'
+import './histoire.styles.css';
