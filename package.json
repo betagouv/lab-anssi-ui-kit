@@ -36,6 +36,7 @@
 			"svelte": "./dist/index.js"
 		},
 		"./dist/webcomponents": {
+			"types": "./dist/webcomponents/jsx.d.ts",
 			"import": "./dist/webcomponents/index.iife.js"
 		}
 	},
