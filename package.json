@@ -1,12 +1,10 @@
 {
-	"name": "Lab. Innovation ANSSI - UI Kit",
+	"name": "@lab-anssi/ui-kit",
 	"version": "0.0.1",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/betagouv/lab-anssi-ui-kit.git"
 	},
-	"keywords": [],
-	"author": "",
 	"license": "Apache-2.0",
 	"bugs": {
 		"url": "https://github.com/betagouv/lab-anssi-ui-kit/issues"
