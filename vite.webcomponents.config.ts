@@ -2,6 +2,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
+// Ce fichier permet de build la librairie en mode "WebComponents"
+// En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
+
 export default defineConfig({
 	build: {
 		lib: {
