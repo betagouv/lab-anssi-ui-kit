@@ -1,8 +1,10 @@
 import { defineConfig } from 'histoire'
 import { HstSvelte } from '@histoire/plugin-svelte'
-import { defaultColors } from 'histoire';
 
 export default defineConfig({
+	vite: {
+		base: '/lab-anssi-ui-kit/'
+	},
 	outDir: 'dist-histoire',
 	plugins: [
 		HstSvelte(),
