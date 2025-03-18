@@ -1,7 +1,7 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import genereJSX from './outils/vite-plugin-genere-jsx';
+import genereJSX from './outils/vite-plugin-genere-jsx.js';
 
 // Ce fichier permet de build la librairie en mode "WebComponents"
 // En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
