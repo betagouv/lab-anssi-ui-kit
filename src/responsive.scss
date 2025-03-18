@@ -2,7 +2,9 @@
 @use "sass:meta";
 
 $points-de-rupture-a-partir-de: (
-        desktop: ( min-width: 932px )
+  desktop: (
+    min-width: 932px,
+  ),
 ) !default;
 
 @mixin a-partir-de($point-de-rupture) {
@@ -10,9 +12,7 @@ $points-de-rupture-a-partir-de: (
     @media #{meta.inspect(map.get($points-de-rupture-a-partir-de, $point-de-rupture))} {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @warn "Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. "
         + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
   }

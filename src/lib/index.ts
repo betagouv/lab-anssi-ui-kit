@@ -1,2 +1,1 @@
-export { default as NavigationPiedDePage } from './NavigationPiedDePage.svelte';
-
+export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDePage.svelte";
