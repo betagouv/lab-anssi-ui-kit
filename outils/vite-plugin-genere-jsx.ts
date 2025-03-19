@@ -47,10 +47,12 @@ export default function genereJSX(): Plugin {
 
           // @ts-ignore
           const props = [...contenuFichierType.matchAll(/props:\s*{\n\s*([^}]*)\n\s*}/g)];
-          const propsFormatees = props[0][1].split("\n").map(p => p.replaceAll(" ", "").replaceAll(';', ''));
+          if(props[0]) {
+            const propsFormatees = props[0][1].split("\n").map(p => p.replaceAll(" ", "").replaceAll(';', ''));
 
-          for (const prop of propsFormatees) {
-            typesJSX += `\t\t\t${prop}\n`;
+            for (const prop of propsFormatees) {
+              typesJSX += `\t\t\t${prop}\n`;
+            }
           }
           typesJSX += `\t\t};\n`;
         }
@@ -81,6 +83,7 @@ export default function genereJSX(): Plugin {
         }
       } catch (err) {
         console.error("⚠️ Erreur lors de la génération des types JSX:", err);
+        process.exit(1);
       }
     }
   };
