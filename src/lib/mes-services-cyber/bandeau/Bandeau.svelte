@@ -100,6 +100,11 @@
       display: flex;
       flex-direction: column;
 
+      @include a-partir-de(desktop) {
+        flex-direction: row;
+        gap: 16px;
+      }
+
       .fermer {
         border: none;
         cursor: pointer;
@@ -186,6 +191,10 @@
 
         @include a-partir-de(tablette) {
           max-width: 248px;
+        }
+
+        @include a-partir-de(desktop) {
+          margin-right: 32px;
         }
       }
     }
