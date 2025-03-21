@@ -1,0 +1,49 @@
+name: La publication du Storybook de Dev
+permissions: {}
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "Construis"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
+
+      - name: Utiliser la version Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Builder le storybook
+        run: npm run story:build
+
+      - name: Téléverser les fichiers
+        id: deployment-dev
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist-histoire
+
+  deploy:
+    name: "Déploie"
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}/dev
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment-dev
+        uses: actions/deploy-pages@v4
