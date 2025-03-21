@@ -39,7 +39,7 @@
           🚀 Découvrez MesServicesCyber ! <span class="badge visible-tablette">nouveauté</span>
         </h4>
         <p>
-          MesServicesCyber, la plateforme pour faciliter l'accès de aux services et ressources de
+          MesServicesCyber, la plateforme pour faciliter l'accès aux services et ressources de
           l'ANSSI et de ses partenaires.
         </p>
       </div>
