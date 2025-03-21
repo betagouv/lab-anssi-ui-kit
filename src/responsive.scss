@@ -1,11 +1,17 @@
 @use "sass:map";
 @use "sass:meta";
 
+$largeur-max-contenu: 1200px;
+
 $points-de-rupture-a-partir-de: (
   desktop: (
     min-width: 932px,
   ),
+  tablette: (
+    min-width: 576px,
+  ),
 ) !default;
+
 
 @mixin a-partir-de($point-de-rupture) {
   @if map.has-key($points-de-rupture-a-partir-de, $point-de-rupture) {
@@ -14,6 +20,20 @@ $points-de-rupture-a-partir-de: (
     }
   } @else {
     @warn "Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. "
-        + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
+  + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
+  }
+}
+
+
+.visible-tablette {
+  display: none !important;
+  @include a-partir-de(tablette) {
+    display: unset !important;
+  }
+}
+
+.invisible-tablette {
+  @include a-partir-de(tablette) {
+    display: none !important;
   }
 }
