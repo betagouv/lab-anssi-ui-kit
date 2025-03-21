@@ -67,6 +67,7 @@
         transform-origin: 0 0;
         transform: scale(50%);
         position: relative;
+        opacity: 60%;
         &:nth-child(2) {
           left: -576px;
         }
