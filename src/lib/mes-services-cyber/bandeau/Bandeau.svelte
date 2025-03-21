@@ -1,7 +1,6 @@
 <svelte:options customElement="lab-anssi-mes-services-cyber-bandeau" />
 
 <script lang="ts">
-  import { slide } from "svelte/transition";
   import croix from "$lib/assets/icones/croix-blanche.svg";
   import tuile from "$lib/assets/illustrations/tuile-msc.svg";
 
@@ -23,7 +22,7 @@
       <img src={tuile} alt="" />
     </div>
 
-    <div class="contenu" transition:slide={{ duration: 160 }}>
+    <div class="contenu">
       <button
         class="fermer"
         on:click={() => {
