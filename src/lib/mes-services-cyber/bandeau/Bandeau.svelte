@@ -103,6 +103,7 @@
       @include a-partir-de(desktop) {
         flex-direction: row;
         gap: 16px;
+        align-items: center;
       }
 
       .fermer {
