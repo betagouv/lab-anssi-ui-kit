@@ -1,0 +1,5 @@
+$assets-url-base: "/sera-remplace-pendant-le-build";
+
+@function url-asset($chemin-local) {
+  @return url("#{$assets-url-base}#{$chemin-local}");
+}
