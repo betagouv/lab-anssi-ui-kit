@@ -45,7 +45,12 @@
         </p>
       </div>
 
-      <a href="https://messervices.cyber.gouv.fr/" target="_blank" rel="noopener">
+      <a
+        href="https://messervices.cyber.gouv.fr/"
+        target="_blank"
+        rel="noopener"
+        id="matomo-bandeau-promotion-msc"
+      >
         Je découvre MesServicesCyber
       </a>
     </div>
