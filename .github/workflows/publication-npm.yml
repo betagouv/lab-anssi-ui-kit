@@ -37,8 +37,10 @@ jobs:
           provider: clevercloud
           access_key: ${{ secrets.CLEVER_S3_DES_ASSETS_ACCESS_KEY }}
           secret_key: ${{ secrets.CLEVER_S3_DES_ASSETS_SECRET_KEY }}
-          host: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST }}
-          host-bucket: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST_BUCKET }}
+
 
       - name: Envoyer les assets vers le CDN
-        run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
+        run: s3cmd --host="$HOST" --host-bucket="$HOST_BUCKET" sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
+        env:
+          HOST: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST }}
+          HOST_BUCKET: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST_BUCKET }}
