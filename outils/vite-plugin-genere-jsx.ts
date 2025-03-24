@@ -6,7 +6,8 @@ import * as prettier from "prettier";
 
 export default function genereJSX(): Plugin {
   let repertoireSortie = "build";
-  let fichierSortie = "jsx.d.ts";
+  let fichierJsx = "lab-anssi-ui-kit.jsx.d.ts";
+  let fichierIndexVide = "index.vide.js";
   let repertoireComposants = "src/lib";
 
   return {
@@ -14,7 +15,8 @@ export default function genereJSX(): Plugin {
     configResolved(config) {
       if (config.build.outDir) {
         repertoireSortie = config.build.outDir;
-        fichierSortie = path.join(repertoireSortie, fichierSortie);
+        fichierJsx = path.join(repertoireSortie, fichierJsx);
+        fichierIndexVide = path.join(repertoireSortie, fichierIndexVide);
       }
       if (config.build.lib && config.build.lib.entry) {
         repertoireComposants = path.resolve(
@@ -23,9 +25,8 @@ export default function genereJSX(): Plugin {
       }
     },
     async writeBundle() {
-      console.log(`📝 Génération des types JSX dans: ${fichierSortie}`);
-
       try {
+        console.log(`📝 Génération des types JSX dans: ${fichierJsx}`);
         const fichiers = await fs.readdir(repertoireComposants, { recursive: true });
         const fichiersSvelte = fichiers.filter((file) => file.endsWith(".svelte"));
 
@@ -61,10 +62,10 @@ export default function genereJSX(): Plugin {
 
         const typesJSXFormattes = await prettier.format(typesJSX, { parser: "typescript" });
 
-        await fs.mkdir(path.dirname(fichierSortie), { recursive: true });
-        await fs.writeFile(fichierSortie, typesJSXFormattes, "utf-8");
+        await fs.mkdir(path.dirname(fichierJsx), { recursive: true });
+        await fs.writeFile(fichierJsx, typesJSXFormattes, "utf-8");
 
-        const programmeTs = ts.createProgram([fichierSortie], {
+        const programmeTs = ts.createProgram([fichierJsx], {
           noEmit: true,
           strict: true,
           moduleResolution: ts.ModuleResolutionKind.NodeNext,
@@ -83,7 +84,16 @@ export default function genereJSX(): Plugin {
           console.log(`\n✓ Fichier JSX généré`);
         }
       } catch (err) {
-        console.error("⚠️ Erreur lors de la génération des types JSX:", err);
+        console.error("⚠️ Erreur lors de la génération des types JSX :", err);
+        process.exit(1);
+      }
+
+      try {
+        console.log(`📝 Génération du fichier index.js vide : ${fichierIndexVide}`);
+        await fs.mkdir(path.dirname(fichierIndexVide), { recursive: true });
+        await fs.writeFile(fichierIndexVide, "function noOp() { }", "utf-8");
+      } catch (err) {
+        console.error("⚠️ Erreur lors de la génération de l'index vide :", err);
         process.exit(1);
       }
     },

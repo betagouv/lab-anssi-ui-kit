@@ -36,8 +36,8 @@
       "svelte": "./dist/index.js"
     },
     "./dist/webcomponents": {
-      "types": "./dist/webcomponents/jsx.d.ts",
-      "import": "./dist/webcomponents/index.iife.js"
+      "types": "./dist/webcomponents/lab-anssi-ui-kit.jsx.d.ts",
+      "import": "./dist/webcomponents/index.vide.js"
     }
   },
   "peerDependencies": {
