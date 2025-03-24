@@ -1,13 +1,15 @@
 <svelte:options customElement="lab-anssi-mes-services-cyber-bandeau" />
 
 <script lang="ts">
-  import croix from "$lib/assets/icones/croix-blanche.svg";
-  import tuile from "$lib/assets/illustrations/tuile-msc.svg";
+  import { srcAsset } from "$lib/mes-services-cyber/assets.js";
 
   const CLE_LOCAL_STORAGE = "lab-anssi-ui-kit-msc-bandeau-affichage";
 
   type visibilite = "visible" | "invisible";
   let affichage: visibilite = (localStorage.getItem(CLE_LOCAL_STORAGE) as visibilite) || "visible";
+
+  const croix = srcAsset("/icones/croix-blanche.svg");
+  const tuile = srcAsset("/illustrations/tuile-msc.svg");
 </script>
 
 {#if affichage === "visible"}
