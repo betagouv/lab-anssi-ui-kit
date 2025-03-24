@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "dist/index.js"),
       name: "WebComponents",
-      fileName: "index",
+      fileName: "lab-anssi-ui-kit",
       formats: ["iife"],
     },
     outDir: "dist/webcomponents",
