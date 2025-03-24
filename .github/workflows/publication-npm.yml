@@ -30,3 +30,15 @@ jobs:
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Installer et configurer la CLI de S3cmd
+        uses: s3-actions/s3cmd@v1.10.0
+        with:
+          provider: clevercloud
+          access_key: ${{ secrets.CLEVER_S3_DES_ASSETS_ACCESS_KEY }}
+          secret_key: ${{ secrets.CLEVER_S3_DES_ASSETS_SECRET_KEY }}
+          host: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST }}
+          host-bucket: ${{ secrets.CLEVER_S3_DES_ASSETS_HOST_BUCKET }}
+
+      - name: Envoyer les assets vers le CDN
+        run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
