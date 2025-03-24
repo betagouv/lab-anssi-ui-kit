@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import * as path from "path";
 import type { Plugin } from "vite";
 import * as ts from "typescript";
-import * as prettier from 'prettier';
+import * as prettier from "prettier";
 
 export default function genereJSX(): Plugin {
   let repertoireSortie = "build";
@@ -17,7 +17,9 @@ export default function genereJSX(): Plugin {
         fichierSortie = path.join(repertoireSortie, fichierSortie);
       }
       if (config.build.lib && config.build.lib.entry) {
-        repertoireComposants = path.resolve(config.build.lib.entry.toString().replace("/index.js", ""));
+        repertoireComposants = path.resolve(
+          config.build.lib.entry.toString().replace("/index.js", ""),
+        );
       }
     },
     async writeBundle() {
@@ -29,8 +31,6 @@ export default function genereJSX(): Plugin {
 
         let typesJSX = `declare namespace JSX {\n\tinterface IntrinsicElements {\n`;
 
-        type Props = { nom: string; type: string; }
-        const composants: Record<string, Props[]> = {};
         for (const fichier of fichiersSvelte) {
           const chemin = path.join(repertoireComposants, fichier);
           const contenu = await fs.readFile(chemin, "utf-8");
@@ -45,10 +45,11 @@ export default function genereJSX(): Plugin {
 
           const contenuFichierType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
 
-          // @ts-ignore
           const props = [...contenuFichierType.matchAll(/props:\s*{\n\s*([^}]*)\n\s*}/g)];
-          if(props[0]) {
-            const propsFormatees = props[0][1].split("\n").map(p => p.replaceAll(" ", "").replaceAll(';', ''));
+          if (props[0]) {
+            const propsFormatees = props[0][1]
+              .split("\n")
+              .map((p) => p.replaceAll(" ", "").replaceAll(";", ""));
 
             for (const prop of propsFormatees) {
               typesJSX += `\t\t\t${prop}\n`;
@@ -58,9 +59,9 @@ export default function genereJSX(): Plugin {
         }
         typesJSX += `\t}\n}`;
 
-				const typesJSXFormattes = await prettier.format(typesJSX, { parser: "typescript" });
+        const typesJSXFormattes = await prettier.format(typesJSX, { parser: "typescript" });
 
-				await fs.mkdir(path.dirname(fichierSortie), { recursive: true });
+        await fs.mkdir(path.dirname(fichierSortie), { recursive: true });
         await fs.writeFile(fichierSortie, typesJSXFormattes, "utf-8");
 
         const programmeTs = ts.createProgram([fichierSortie], {
@@ -68,7 +69,7 @@ export default function genereJSX(): Plugin {
           strict: true,
           moduleResolution: ts.ModuleResolutionKind.NodeNext,
           skipLibCheck: true,
-          module: ts.ModuleKind.NodeNext
+          module: ts.ModuleKind.NodeNext,
         });
         const diagnostiques = ts.getPreEmitDiagnostics(programmeTs);
 
@@ -85,6 +86,6 @@ export default function genereJSX(): Plugin {
         console.error("⚠️ Erreur lors de la génération des types JSX:", err);
         process.exit(1);
       }
-    }
+    },
   };
 }
