@@ -22,6 +22,9 @@ jobs:
       - name: Installer les dépendances
         run: npm ci
 
+      - name: Exécuter les tests
+        run: npm run test
+
       - name: Builder le storybook
         run: npm run story:build
 
