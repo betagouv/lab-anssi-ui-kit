@@ -9,7 +9,7 @@ export default function injecteNonce(): Plugin {
 
       for (const file of Object.values(bundle)) {
         if (file.type === "chunk" && file.code) {
-          file.code = `const nonce = document.currentScript?.dataset?.nonce;\n${file.code}`;
+          file.code = `const nonce = document.currentScript?.nonce;\n${file.code}`;
           // Remplace `const a = u("style");`
           // par `const a = u("style");a.nonce=nonce;`
           file.code = file.code.replace(
