@@ -1,11 +1,16 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig, loadEnv } from "vite";
+import { loadEnv } from "vite";
+import { defineConfig } from "vitest/config";
 
 // On ne build jamais pour le local : allons chercher en dur les variables de PROD.
 const varEnvDeProduction = loadEnv("production", process.cwd(), "VITE_");
 
 export default defineConfig({
   plugins: [sveltekit()],
+  test: {
+    environment: "jsdom",
+  },
+  resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
   css: {
     preprocessorOptions: {
       scss: {
