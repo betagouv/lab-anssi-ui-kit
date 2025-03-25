@@ -1,5 +1,5 @@
-import { defineConfig } from 'histoire'
 import { HstSvelte } from '@histoire/plugin-svelte'
+import { defineConfig } from 'histoire'
 
 export default defineConfig({
 	vite: {
@@ -32,6 +32,6 @@ export default defineConfig({
 				900: '#352e97',
 			},
 		},
-		logoHref: 'https://acme.com',
+		logoHref: '/',
 	}
 })
