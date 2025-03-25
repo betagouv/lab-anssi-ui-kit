@@ -1,7 +1,7 @@
 <svelte:options customElement="lab-anssi-navigation-pied-de-page" />
 
 <script lang="ts">
-  export let conformiteAccessibilite: "conforme" | "nonConforme" = "conforme";
+  export let conforme: boolean = false;
 </script>
 
 <div class="conteneur-navigation-pied-de-page">
@@ -18,7 +18,7 @@
   <a href="/securite">Sécurité</a>
   <div class="separateur"></div>
   <a href="/accessibilite"
-    >Accessiblité: {conformiteAccessibilite === "conforme" ? "conforme" : "non conforme"}</a
+    >Accessiblité: {conforme ? "conforme" : "non conforme"}</a
   >
 </div>
 
