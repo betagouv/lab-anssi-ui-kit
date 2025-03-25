@@ -9,21 +9,10 @@
   let affichage: visibilite = (localStorage.getItem(CLE_LOCAL_STORAGE) as visibilite) || "visible";
 
   const croix = srcAsset("/icones/croix-blanche.svg");
-  const tuile = srcAsset("/illustrations/tuile-msc.svg");
 </script>
 
 {#if affichage === "visible"}
   <div class="largeur-totale">
-    <div class="tuiles-background">
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-      <img src={tuile} alt="" />
-    </div>
-
     <div class="contenu">
       <button
         class="fermer"
@@ -61,40 +50,8 @@
   .largeur-totale {
     position: relative;
     overflow: hidden;
-    background: #0d0c21;
-
-    .tuiles-background {
-      display: flex;
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      img {
-        transform-origin: 0 0;
-        transform: scale(50%);
-        position: relative;
-        opacity: 60%;
-        &:nth-child(2) {
-          left: -576px;
-        }
-        &:nth-child(3) {
-          left: calc(-576px * 2);
-        }
-        &:nth-child(4) {
-          left: calc(-576px * 3);
-        }
-        &:nth-child(5) {
-          left: calc(-576px * 4);
-        }
-        &:nth-child(6) {
-          left: calc(-576px * 5);
-        }
-        &:nth-child(7) {
-          left: calc(-576px * 6);
-        }
-      }
-    }
-
+    background: #0d0c21 url-asset("/illustrations/tuile-msc.svg");
+    background-size: 500px;
     .contenu {
       position: relative;
       color: white;
