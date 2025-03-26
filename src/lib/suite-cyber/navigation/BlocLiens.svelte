@@ -63,7 +63,6 @@
       display: flex;
       flex-direction: column;
       align-self: stretch;
-      gap: 10px;
       border-radius: 4px;
       border: 1px solid #ddd;
       background: #fff;
