@@ -6,17 +6,8 @@
 </script>
 
 <Hst.Story title="SuiteCyber/Navigation">
-  <SuiteCyberNavigation />
-
-  <svelte:fragment slot="controls">
-    <button
-      style="margin: 30px 0 0 10px; padding: 5px; cursor: pointer;"
-      on:click={() => {
-        localStorage.setItem("lab-anssi-ui-kit-msc-bandeau-affichage", "visible");
-        location.reload();
-      }}
-    >
-      Faire réapparaître
-    </button>
-  </svelte:fragment>
+  <div style="background-color:bisque;">
+    <SuiteCyberNavigation />
+  </div>
+  <div style="background-color: antiquewhite; height:800px;"><h1>Bienvenue</h1></div>
 </Hst.Story>
