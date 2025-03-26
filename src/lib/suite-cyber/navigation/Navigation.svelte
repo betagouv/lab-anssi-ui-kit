@@ -38,7 +38,7 @@
     </button>
     {#if estOuvert}
       <div class="contenu">
-        <button class="fermer" on:click={() => (estOuvert = false)}>
+        <button class="fermer invisible-tablette" on:click={() => (estOuvert = false)}>
           Fermer
           <img src={croix} alt="Fermer" />
         </button>
@@ -125,14 +125,6 @@
   }
 
   .navigation {
-    overflow: hidden;
-    // overflow-y: scroll;
-    // -ms-overflow-style: none; /* IE and Edge */
-    // scrollbar-width: none; /* Firefox */
-    // /* Hide scrollbar for Chrome, Safari and Opera */
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
   }
   #bouton-suite-cyber {
     display: flex;
@@ -174,6 +166,16 @@
     top: 0;
     left: 0;
     overflow-y: scroll;
+
+    @include a-partir-de(tablette) {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      left: unset;
+      width: 360px;
+      height: 540px;
+      box-shadow: 0px 4px 12px 0px rgba(0, 0, 18, 0.16);
+    }
 
     button.fermer {
       border: none;
