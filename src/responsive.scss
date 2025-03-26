@@ -37,3 +37,16 @@ $points-de-rupture-a-partir-de: (
     display: none !important;
   }
 }
+
+.visible-desktop {
+  display: none !important;
+  @include a-partir-de(desktop) {
+    display: unset !important;
+  }
+}
+
+.invisible-desktop {
+  @include a-partir-de(desktop) {
+    display: none !important;
+  }
+}
