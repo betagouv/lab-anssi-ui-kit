@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { srcAsset } from "$lib/mes-services-cyber/assets.js";
+  import { slide } from "svelte/transition";
   import AccueilMsc from "./AccueilMSC.svelte";
   import BlocLiens from "./BlocLiens.svelte";
   const gauffre = srcAsset("/icones/bouton-gauffre.svg");
@@ -34,7 +35,7 @@
     </button>
   </div>
   {#if estOuvert}
-    <div class="contenu">
+    <div class="contenu" transition:slide>
       <button class="fermer invisible-tablette" on:click={() => (estOuvert = false)}>
         Fermer
         <img src={croix} alt="Fermer" />
