@@ -170,6 +170,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            white-space: nowrap;
           }
         }
 
