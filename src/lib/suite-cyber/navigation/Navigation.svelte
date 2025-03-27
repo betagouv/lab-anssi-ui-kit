@@ -14,6 +14,7 @@
   const mss = srcAsset("/icones/MSS.svg");
   const lienExterne = srcAsset("/icones/lien-externe.svg");
 
+  export let sourceUtm: string = "";
   let estOuvert: boolean;
 
   $: estOuvert = false;
@@ -47,7 +48,7 @@
           services={[
             {
               nom: "MonEspaceNIS2",
-              lien: "https://monespacenis2.cyber.gouv.fr",
+              lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: nis2,
             },
           ]}
@@ -57,7 +58,7 @@
           services={[
             {
               nom: "Le portail du CERT-FR",
-              lien: "https://www.cert.ssi.gouv.fr",
+              lien: `https://www.cert.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
             },
           ]}
@@ -67,7 +68,7 @@
           services={[
             {
               nom: "MonServiceSécurisé",
-              lien: "https://monservicesecurise.cyber.gouv.fr",
+              lien: `https://monservicesecurise.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: mss,
               labels: ["Entités publiques"],
             },
@@ -78,13 +79,13 @@
           services={[
             {
               nom: "ADS",
-              lien: "https://club.ssi.gouv.fr",
+              lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
             },
             {
               nom: "SILENE",
-              lien: "https://club.ssi.gouv.fr",
+              lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
             },
@@ -95,13 +96,17 @@
           services={[
             {
               nom: "MonAideCyber",
-              lien: "https://monaide.cyber.gouv.fr",
+              lien: `https://monaide.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: mac,
             },
           ]}
         />
       </div>
-      <a class="lien-externe" href="https://cyber.gouv.fr" target="_blank">
+      <a
+        class="lien-externe"
+        href="https://cyber.gouv.fr?utm_campaign='suite-cyber'&utm_source='{sourceUtm}'"
+        target="_blank"
+      >
         <div>
           <span>Accéder au site de l'ANSSI</span>
           <img src={lienExterne} alt="Accéder au site de l'ANSSI" />
