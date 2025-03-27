@@ -53,7 +53,7 @@
     .titre {
       display: flex;
       align-self: stretch;
-      color: #666;
+      color: $text-mention-grey;
       font-size: 12px;
       font-weight: 700;
       line-height: 20px;
@@ -65,16 +65,16 @@
       flex-direction: column;
       align-self: stretch;
       border-radius: 4px;
-      border: 1px solid #ddd;
+      border: 1px solid $border-default-grey;
       background: #fff;
       a {
         text-decoration: none;
 
         &:hover {
-          background-color: #f6f6f6;
+          background-color: $background-default-grey-hover;
         }
         &:active {
-          background-color: #ededed;
+          background-color: $background-default-grey-active;
         }
 
         .defaut {
@@ -83,7 +83,7 @@
           align-items: center;
           gap: 12px;
           flex: 1 0 0;
-          color: #161616;
+          color: $texte-defaut;
           font-size: 16px;
           font-weight: 500;
           line-height: 24px;
@@ -110,7 +110,7 @@
             padding: 2px 8px;
             border-radius: 12px;
             background: #eee;
-            color: #161616;
+            color: $texte-defaut;
             font-size: 12px;
             font-weight: 400;
             line-height: 20px;
