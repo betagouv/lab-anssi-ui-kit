@@ -46,7 +46,7 @@
           services={[
             {
               nom: "MonEspaceNIS2",
-              lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: nis2,
               classeTracking: "nis2",
             },
@@ -57,7 +57,7 @@
           services={[
             {
               nom: "Le portail du CERT-FR",
-              lien: `https://www.cert.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://www.cert.ssi.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: certFr,
               classeTracking: "cert-fr",
             },
@@ -68,7 +68,7 @@
           services={[
             {
               nom: "MonServiceSécurisé",
-              lien: `https://monservicesecurise.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://monservicesecurise.cyber.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: mss,
               labels: ["Entités publiques"],
               classeTracking: "mss",
@@ -80,14 +80,14 @@
           services={[
             {
               nom: "ADS",
-              lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://club.ssi.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
               classeTracking: "ads",
             },
             {
               nom: "SILENE",
-              lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://club.ssi.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
               classeTracking: "silene",
@@ -99,7 +99,7 @@
           services={[
             {
               nom: "MonAideCyber",
-              lien: `https://monaide.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
+              lien: `https://monaide.cyber.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
               icone: mac,
               classeTracking: "mac",
             },
@@ -108,7 +108,7 @@
       </div>
       <a
         class="lien-externe site-anssi"
-        href="https://cyber.gouv.fr?utm_campaign='suite-cyber'&utm_source='{sourceUtm}'"
+        href="https://cyber.gouv.fr?utm_campaign=suite-cyber&utm_source={sourceUtm}"
         target="_blank"
       >
         <div>
