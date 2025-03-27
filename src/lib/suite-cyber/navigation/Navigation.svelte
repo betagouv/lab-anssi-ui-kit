@@ -15,9 +15,7 @@
   const lienExterne = srcAsset("/icones/lien-externe.svg");
 
   export let sourceUtm: string = "";
-  let estOuvert: boolean;
-
-  $: estOuvert = false;
+  let estOuvert: boolean = false;
 </script>
 
 <div class="suite-cyber">
@@ -139,7 +137,7 @@
         padding: 8px;
         justify-content: center;
         align-items: center;
-        color: #000091;
+        color: $texte-dsfr;
         font-size: 14px;
         font-weight: 500;
         line-height: 24px;
@@ -155,6 +153,10 @@
 
         > .avec-texte {
           display: none;
+
+          > span {
+            font-family: Marianne;
+          }
           @include a-partir-de(desktop) {
             display: flex;
             align-items: center;
@@ -189,6 +191,7 @@
       left: 0;
       overflow-y: scroll !important; // On force le scroll pour éviter qu'il soit masqué durant l'animation
       overflow-x: hidden;
+      z-index: $z-index-au-dessus;
 
       @include a-partir-de(tablette) {
         position: absolute;
@@ -203,7 +206,7 @@
       button.fermer {
         border: none;
         background: none;
-        color: #000091;
+        color: $texte-dsfr;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -235,7 +238,7 @@
           justify-content: center;
           align-items: center;
           gap: 6px;
-          color: #666;
+          color: $text-mention-grey;
           font-size: 12px;
           font-weight: 400;
           line-height: 20px;

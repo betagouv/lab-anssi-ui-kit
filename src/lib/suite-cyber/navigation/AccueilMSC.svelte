@@ -37,10 +37,10 @@
     text-decoration: none;
 
     &:hover {
-      background-color: #f6f6f6;
+      background-color: $background-default-grey-hover;
     }
     &:active {
-      background-color: #ededed;
+      background-color: $background-default-grey-active;
     }
 
     label {
@@ -50,7 +50,7 @@
       justify-content: center;
       align-items: flex-start;
       flex: 1 0 0;
-      color: #161616;
+      color: $texte-defaut;
       font-family: Marianne;
       font-size: 18px;
       font-style: normal;
@@ -59,7 +59,7 @@
       cursor: pointer;
 
       span {
-        color: #3a3a3a;
+        color: $texte-secondaire;
         font-family: Marianne;
         font-size: 12px;
         font-style: normal;
