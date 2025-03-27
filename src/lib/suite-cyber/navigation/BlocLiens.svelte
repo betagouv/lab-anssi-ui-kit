@@ -103,6 +103,7 @@
 
           &:last-child {
             margin-bottom: 12px;
+            margin-top: -3px;
           }
           span {
             padding: 2px 8px;

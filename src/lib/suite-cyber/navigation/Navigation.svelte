@@ -28,8 +28,8 @@
       }}
     >
       <img src={gauffre} alt="La Suite cyber" />
-      <div class="visible-desktop">
-        La Suite cyber
+      <div class="avec-texte">
+        <span>La Suite cyber</span>
         <img src={chevron} alt={estOuvert ? "ouvert" : "fermé"} class:ouvert={estOuvert} />
       </div>
     </button>
@@ -63,16 +63,6 @@
           ]}
         />
         <BlocLiens
-          titre="Se faire accompagner"
-          services={[
-            {
-              nom: "MonAideCyber",
-              lien: "https://monaide.cyber.gouv.fr",
-              icone: mac,
-            },
-          ]}
-        />
-        <BlocLiens
           titre="Piloter"
           services={[
             {
@@ -100,10 +90,20 @@
             },
           ]}
         />
+        <BlocLiens
+          titre="Accompagner"
+          services={[
+            {
+              nom: "MonAideCyber",
+              lien: "https://monaide.cyber.gouv.fr",
+              icone: mac,
+            },
+          ]}
+        />
       </div>
       <a class="lien-externe" href="https://cyber.gouv.fr" target="_blank">
         <div>
-          Accéder au site de l'ANSSI
+          <span>Accéder au site de l'ANSSI</span>
           <img src={lienExterne} alt="Accéder au site de l'ANSSI" />
         </div>
       </a>
@@ -135,10 +135,21 @@
         cursor: pointer;
         gap: 8px;
 
-        > div {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        @include a-partir-de(desktop) {
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        > .avec-texte {
+          display: none;
+          @include a-partir-de(desktop) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+          }
         }
 
         &.actif {
@@ -165,7 +176,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      overflow-y: scroll;
+      overflow-y: scroll !important; // On force le scroll pour éviter qu'il soit masqué durant l'animation
+      overflow-x: hidden;
 
       @include a-partir-de(tablette) {
         position: absolute;
@@ -187,12 +199,7 @@
         align-self: flex-end;
         gap: 8px;
         padding: 4px 8px 4px 12px;
-        margin-right: 12px;
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out;
-        &:hover {
-          transform: scale(1.3);
-        }
+        margin: 12px;
       }
 
       .services-anssi {
