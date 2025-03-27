@@ -1,5 +1,3 @@
-<svelte:options customElement="lab-anssi-bouton-suite-cyber-navigation-accueil-msc" />
-
 <script lang="ts">
   import { srcAsset } from "$lib/mes-services-cyber/assets.js";
   const accueilMSC = srcAsset("/icones/bouton-accueil-msc.svg");
