@@ -14,6 +14,9 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v3
 
+      - name: Récupérer la version
+        run: echo "release_version=$(npm pkg get version --json | tr -d '\"')" >> $GITHUB_ENV
+
       - name: Installer Node.js
         uses: actions/setup-node@v3
         with:
@@ -43,3 +46,6 @@ jobs:
 
       - name: Envoyer les assets vers le CDN
         run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
+
+      - name: Envoyer la release js
+        run: s3cmd put --guess-mime-type ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
