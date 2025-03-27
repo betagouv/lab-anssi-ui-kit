@@ -5,12 +5,32 @@
   export let Hst: Hst;
 </script>
 
-<Hst.Story title="SuiteCyber/Navigation">
-  <div style="background-color:bisque;display:flex;gap:10px">
-    <div style="margin-left: auto; margin-right:1Opx">
+<Hst.Story title="Composants/SuiteCyber/Navigation" icon="healthicons:ui-menu-grid-outline">
+  <div>
+    <header>
       <SuiteCyberNavigation />
-    </div>
-    <div>Jean Dujardin</div>
+      <span>Jeanne Dupond</span>
+    </header>
+    <main><h1>Bienvenue</h1></main>
   </div>
-  <div style="background-color: antiquewhite; height:800px;"><h1>Bienvenue</h1></div>
 </Hst.Story>
+
+<style lang="scss">
+  div {
+    background-color: white;
+  }
+  header {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    padding: 16px;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    span {
+      font-family: "Marianne";
+    }
+  }
+  main {
+    height: 800px;
+  }
+</style>
