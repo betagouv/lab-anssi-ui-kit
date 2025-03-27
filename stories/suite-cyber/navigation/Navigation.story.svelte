@@ -3,16 +3,21 @@
   import type { Hst } from "@histoire/plugin-svelte";
 
   export let Hst: Hst;
+  let sourceUtm = "";
 </script>
 
 <Hst.Story title="Composants/SuiteCyber/Navigation" icon="healthicons:ui-menu-grid-outline">
   <div>
     <header>
-      <SuiteCyberNavigation />
+      <SuiteCyberNavigation {sourceUtm} />
       <span>Jeanne Dupond</span>
     </header>
     <main><h1>Bienvenue</h1></main>
   </div>
+
+  <svelte:fragment slot="controls">
+    <Hst.Text bind:value={sourceUtm} title="Source UTM (Tracking)" />
+  </svelte:fragment>
 </Hst.Story>
 
 <style lang="scss">
