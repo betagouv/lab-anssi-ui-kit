@@ -50,6 +50,7 @@
               nom: "MonEspaceNIS2",
               lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: nis2,
+              classeTracking: "nis2",
             },
           ]}
         />
@@ -60,6 +61,7 @@
               nom: "Le portail du CERT-FR",
               lien: `https://www.cert.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
+              classeTracking: "cert-fr",
             },
           ]}
         />
@@ -71,6 +73,7 @@
               lien: `https://monservicesecurise.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: mss,
               labels: ["Entités publiques"],
+              classeTracking: "mss",
             },
           ]}
         />
@@ -82,12 +85,14 @@
               lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
+              classeTracking: "ads",
             },
             {
               nom: "SILENE",
               lien: `https://club.ssi.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: certFr,
               labels: ["Entités publiques", "Entités régulées"],
+              classeTracking: "silene",
             },
           ]}
         />
@@ -98,12 +103,13 @@
               nom: "MonAideCyber",
               lien: `https://monaide.cyber.gouv.fr?utm_campaign="suite-cyber"&utm_source="${sourceUtm}"`,
               icone: mac,
+              classeTracking: "mac",
             },
           ]}
         />
       </div>
       <a
-        class="lien-externe"
+        class="lien-externe site-anssi"
         href="https://cyber.gouv.fr?utm_campaign='suite-cyber'&utm_source='{sourceUtm}'"
         target="_blank"
       >
