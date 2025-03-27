@@ -143,6 +143,14 @@
         line-height: 24px;
         cursor: pointer;
         gap: 8px;
+        background: white;
+
+        &:active {
+          background: rgba(0, 0, 0, 0.08);
+        }
+        &:hover {
+          background: rgba(0, 0, 0, 0.04);
+        }
 
         @include a-partir-de(desktop) {
           img {
