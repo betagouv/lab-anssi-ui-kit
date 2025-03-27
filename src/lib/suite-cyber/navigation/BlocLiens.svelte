@@ -4,6 +4,7 @@
     lien: string;
     icone: string;
     labels?: string[];
+    classeTracking: string;
   };
 
   export let titre: string;
@@ -13,8 +14,8 @@
 <div class="bloc">
   <div class="titre">{titre}</div>
   <div class="conteneur">
-    {#each services as { nom, lien, icone, labels }, i}
-      <a href={lien} target="_blank">
+    {#each services as { nom, lien, icone, labels, classeTracking }, i}
+      <a href={lien} target="_blank" class={classeTracking}>
         <div class="defaut">
           <div class="icone">
             <img src={icone} alt={nom} />
