@@ -7,5 +7,16 @@ $texte-dsfr: #000091;
 $texte-defaut: #161616;
 $texte-secondaire: #3a3a3a;
 
+// Couleurs par composant
+// - Centre d'aide
+$centre-aide-background-entete: var(--centre-aide-background-entete);
+$centre-aide-background-bouton: var(--centre-aide-background-bouton);
+$centre-aide-font-color-bouton: var(--centre-aide-font-color-bouton);
+$centre-aide-border-lien-secondaire: var(--centre-aide-border-lien-secondaire);
+$centre-aide-font-color-lien-secondaire: var(--centre-aide-font-color-lien-secondaire);
+$centre-aide-background-hover-lien: var(--centre-aide-background-hover-lien);
+$centre-aide-background-hover-lien-secondaire: rgba(0, 0, 0, 0.04);
+$centre-aide-background-hover-declencheur: var(--centre-aide-background-hover-declencheur);
+
 // Affichage
 $z-index-au-dessus: 1000;
