@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createEventDispatcher, onMount } from "svelte";
+
+
   const variablesCSS = [
     "centre-aide-background-entete",
     "centre-aide-background-bouton",
@@ -51,10 +54,16 @@
     },
   };
 
+  const emetEvenement = createEventDispatcher<{ themeSelectionne: Record<VariablesCSS, string> }>();
   let themeSelectionne: Service = "MonServiceSécurisé";
+
+  onMount(() => {
+    emetEvenement('themeSelectionne', themes[themeSelectionne]);
+  });
 
   $: {
     if (themeSelectionne) {
+      emetEvenement('themeSelectionne', themes[themeSelectionne]);
       const root: HTMLElement = document.querySelector(":root");
       for (const nomVariable in themes[themeSelectionne]) {
         root.style.setProperty(`--${nomVariable}`, themes[themeSelectionne][nomVariable]);
