@@ -224,8 +224,8 @@
 
         &:after {
           content: '';
-          mask-image: url('src/lib/assets/icones/lien-externe.svg');
-          -webkit-mask-image: url('src/lib/assets/icones/lien-externe.svg');
+          mask-image: url-asset('/icones/lien-externe.svg');
+          -webkit-mask-image: url-asset('/icones/lien-externe.svg');
           display: flex;
           background-color: $centre-aide-font-color-bouton;
           width: 24px;
