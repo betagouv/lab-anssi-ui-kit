@@ -5,7 +5,13 @@
   import { srcAsset } from "$lib/assets/assets";
 
   export let nomService: string;
-  export let liens: { texte: string; href: string; }[];
+  export let liens: string;
+
+  let liensMisEnForme: { texte: string; href: string; }[] = JSON.parse(liens);
+
+  if(!Array.isArray(liensMisEnForme) || liensMisEnForme.some(l => !l.texte || !l.href)) {
+    throw new Error("Les liens doivent respecter le type : { texte: string; href: string; }[]");
+  }
 
   let ouvert: boolean = false;
 </script>
@@ -33,8 +39,8 @@
       <div class="message">
         <span>Bonjour et bienvenue sur <b>{nomService}</b>. Comment pouvons-nous vous aider ?</span>
       </div>
-      {#if liens}
-        {#each liens as lien, id (id)}
+      {#if liensMisEnForme}
+        {#each liensMisEnForme as lien, id (id)}
           <a class="lien lien-principal" href={lien.href} target="_blank">{lien.texte}</a>
         {/each}
       {/if}
