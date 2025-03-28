@@ -46,7 +46,7 @@ export default function genereJSX(): Plugin {
 
           const contenuFichierType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
 
-          const props = [...contenuFichierType.matchAll(/props:\s*{\n\s*([^}]*)\n\s*}/g)];
+          const props = [...contenuFichierType.matchAll(/props:\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/gs)];
           if (props[0]) {
             const propsFormatees = props[0][1]
               .split("\n")
