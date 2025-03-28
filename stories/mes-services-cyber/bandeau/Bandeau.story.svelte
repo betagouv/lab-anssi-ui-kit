@@ -5,7 +5,7 @@
   export let Hst: Hst;
 </script>
 
-<Hst.Story title="MesServicesCyber/Bandeau">
+<Hst.Story title="Composants/MesServicesCyber/Bandeau">
   <MesServicesCyberBandeau />
 
   <svelte:fragment slot="controls">

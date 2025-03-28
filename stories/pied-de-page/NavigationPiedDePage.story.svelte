@@ -8,7 +8,7 @@
   const source = `<NavigationPiedDePage {conforme} />`;
 </script>
 
-<Hst.Story {source} title="Pied de page/Navigation" icon="material-symbols:assistant-navigation">
+<Hst.Story {source} title="Composants/Pied de page/Navigation" icon="material-symbols:assistant-navigation">
   <NavigationPiedDePage {conforme} />
 
   <svelte:fragment slot="controls">
