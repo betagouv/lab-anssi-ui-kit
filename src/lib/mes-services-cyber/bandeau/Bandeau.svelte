@@ -1,7 +1,7 @@
 <svelte:options customElement="lab-anssi-mes-services-cyber-bandeau" />
 
 <script lang="ts">
-  import { srcAsset } from "$lib/mes-services-cyber/assets.js";
+  import { srcAsset } from "$lib/assets/assets.js";
 
   const CLE_LOCAL_STORAGE = "lab-anssi-ui-kit-msc-bandeau-affichage";
 

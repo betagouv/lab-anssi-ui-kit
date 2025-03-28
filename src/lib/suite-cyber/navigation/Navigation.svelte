@@ -1,7 +1,7 @@
 <svelte:options customElement="lab-anssi-bouton-suite-cyber-navigation" />
 
 <script lang="ts">
-  import { srcAsset } from "$lib/mes-services-cyber/assets.js";
+  import { srcAsset } from "$lib/assets/assets.js";
   import { slide } from "svelte/transition";
   import AccueilMsc from "./AccueilMSC.svelte";
   import BlocLiens from "./BlocLiens.svelte";
