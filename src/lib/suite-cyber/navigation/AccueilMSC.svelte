@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { srcAsset } from "$lib/mes-services-cyber/assets.js";
+  import { srcAsset } from "$lib/assets/assets.js";
   const accueilMSC = srcAsset("/icones/bouton-accueil-msc.svg");
   const chevronDroite = srcAsset("/icones/chevron-noir.svg");
 </script>
