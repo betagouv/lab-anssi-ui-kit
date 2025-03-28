@@ -16,12 +16,12 @@
       href: "https://aide.messervices.cyber.gouv.fr/fr",
     },
   ];
-  $: chaineLiens = JSON.stringify(liens, null, 4);
+  $: chaineLiens = JSON.stringify(liens);
 </script>
 
 <Hst.Story title="Composants/Centre d'aide" icon="material-symbols:live-help">
   <OutilSelecteurTheme />
-  <CentreAide {nomService} {liens} />
+  <CentreAide {nomService} liens={chaineLiens} />
 
   <svelte:fragment slot="controls">
     <Hst.Text title="Nom du service" bind:value={nomService} />
