@@ -1,23 +1,32 @@
 <svelte:options customElement="lab-anssi-centre-aide" />
 
 <script lang="ts">
-  import { fly } from 'svelte/transition';
+  import { fly } from "svelte/transition";
+  import { createEventDispatcher } from "svelte";
   import { srcAsset } from "$lib/assets/assets";
 
   export let nomService: string;
   export let liens: string;
 
-  let liensMisEnForme: { texte: string; href: string; }[] = JSON.parse(liens);
+  const emetEvenement = createEventDispatcher<{ lienclique: { target: EventTarget & HTMLAnchorElement } }>();
 
-  if(!Array.isArray(liensMisEnForme) || liensMisEnForme.some(l => !l.texte || !l.href)) {
-    throw new Error("Les liens doivent respecter le type : { texte: string; href: string; }[]");
+  let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] = [];
+  $: {
+    liensMisEnForme = JSON.parse(liens);
+    if (!Array.isArray(liensMisEnForme) || liensMisEnForme.some((l) => !l.texte)) {
+      throw new Error("Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]");
+    }
   }
 
   let ouvert: boolean = false;
 </script>
 
 {#if !ouvert}
-  <button class="declencheur-centre-aide" on:click={() => ouvert = true} transition:fly={{ y: 300 }}>
+  <button
+    class="declencheur-centre-aide"
+    on:click={() => (ouvert = true)}
+    transition:fly={{ y: 300 }}
+  >
     <img src={srcAsset("/icones/centre-aide.svg")} alt="Icône du centre d'aide" />
     Centre d'aide
   </button>
@@ -27,12 +36,19 @@
   <div class="centre-aide" transition:fly={{ y: 300 }}>
     <div class="entete">
       <div>
-        <img class="icone-centre-aide" src={srcAsset("/icones/centre-aide.svg")} alt="Icône du centre d'aide" />
+        <img
+          class="icone-centre-aide"
+          src={srcAsset("/icones/centre-aide.svg")}
+          alt="Icône du centre d'aide"
+        />
         <h4>Centre d'aide</h4>
       </div>
-      <button on:click={() => ouvert = false}>
+      <button on:click={() => (ouvert = false)}>
         <span>Fermer</span>
-        <img src={srcAsset("/icones/croix-blanche.svg")} alt="Icône de fermeture du centre d'aider" />
+        <img
+          src={srcAsset("/icones/croix-blanche.svg")}
+          alt="Icône de fermeture du centre d'aider"
+        />
       </button>
     </div>
     <div class="contenu">
@@ -41,14 +57,26 @@
       </div>
       {#if liensMisEnForme}
         {#each liensMisEnForme as lien, id (id)}
-          <a class="lien lien-principal" href={lien.href} target="_blank">{lien.texte}</a>
+          <a class="lien lien-principal" href={lien.href} target="_blank" id={lien.id} on:click={(e) =>{
+            if(lien.preventDefault)
+              e.preventDefault();
+            emetEvenement('lienclique', { target: e.currentTarget });
+          }}>{lien.texte}</a>
         {/each}
       {/if}
       <div class="message marge-haute">
         <span>Vous souhaitez faire une autre demande à l'ANSSI ?</span>
       </div>
-      <a class="lien secondaire centre-aide-signaler-incident" href="https://club.ssi.gouv.fr/#/declarations" target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a>
-      <a class="lien secondaire centre-aide-contacter-anssi" href="https://cyber.gouv.fr/contacter-lanssi" target="_blank">️📩 Contacter d’autres services de l’ANSSI</a>
+      <a
+        class="lien secondaire centre-aide-signaler-incident"
+        href="https://club.ssi.gouv.fr/#/declarations"
+        target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a
+      >
+      <a
+        class="lien secondaire centre-aide-contacter-anssi"
+        href="https://cyber.gouv.fr/contacter-lanssi"
+        target="_blank">️📩 Contacter d’autres services de l’ANSSI</a
+      >
     </div>
   </div>
 {/if}
@@ -59,10 +87,10 @@
     bottom: 24px;
     right: 24px;
     border-radius: 100px;
-    border: 1px solid #FFF;
+    border: 1px solid #fff;
     background: $centre-aide-background-entete;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
-    color: #F5F5FE;
+    color: #f5f5fe;
     text-align: center;
     font-size: 18px;
     font-weight: 500;
@@ -104,7 +132,7 @@
       right: 48px;
 
       border-radius: 8px;
-      border: 1px solid #FFF;
+      border: 1px solid #fff;
       box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
     }
 
@@ -184,7 +212,6 @@
       flex-direction: column;
       gap: 12px;
 
-
       @include a-partir-de(tablette) {
         padding: 32px;
       }
@@ -193,7 +220,7 @@
         display: flex;
         padding: 16px;
         border-radius: 8px;
-        background: #EDEDED;
+        background: #ededed;
 
         color: #161616;
         font-size: 1rem;
@@ -225,13 +252,14 @@
         text-align: left;
         align-items: center;
         justify-content: space-between;
+        cursor: pointer;
 
         gap: 8px;
 
-        &:after {
-          content: '';
-          mask-image: url-asset('/icones/lien-externe.svg');
-          -webkit-mask-image: url-asset('/icones/lien-externe.svg');
+        &[href]:after {
+          content: "";
+          mask-image: url-asset("/icones/lien-externe.svg");
+          -webkit-mask-image: url-asset("/icones/lien-externe.svg");
           display: flex;
           background-color: $centre-aide-font-color-bouton;
           width: 24px;
