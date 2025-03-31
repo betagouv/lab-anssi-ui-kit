@@ -76,25 +76,6 @@
           ]}
         />
         <BlocLiens
-          titre="Tester"
-          services={[
-            {
-              nom: "ADS",
-              lien: `https://club.ssi.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
-              icone: certFr,
-              labels: ["Entités publiques", "Entités régulées"],
-              classeTracking: "ads",
-            },
-            {
-              nom: "SILENE",
-              lien: `https://club.ssi.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
-              icone: certFr,
-              labels: ["Entités publiques", "Entités régulées"],
-              classeTracking: "silene",
-            },
-          ]}
-        />
-        <BlocLiens
           titre="Accompagner"
           services={[
             {
