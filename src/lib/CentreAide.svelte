@@ -225,7 +225,7 @@
         color: #161616;
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.5rem;
+        line-height: 24px;
 
         @include a-partir-de(tablette) {
           width: fit-content;
@@ -239,14 +239,14 @@
       a.lien {
         box-sizing: border-box;
         text-decoration: none;
-        padding: 10px 18px 10px 24px;
+        padding: 8px 12px 8px 16px;
         background: $centre-aide-background-bouton;
         color: $centre-aide-font-color-bouton;
         border-radius: 8px;
 
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 500;
-        line-height: 28px;
+        line-height: 24px;
         display: flex;
         flex-direction: row;
         text-align: left;
@@ -262,10 +262,10 @@
           -webkit-mask-image: url-asset("/icones/lien-externe.svg");
           display: flex;
           background-color: $centre-aide-font-color-bouton;
-          width: 24px;
-          height: 24px;
-          mask-size: 24px;
-          min-width: 24px;
+          width: 16px;
+          height: 16px;
+          mask-size: 16px;
+          min-width: 16px;
         }
 
         &:hover {
