@@ -2,3 +2,4 @@ export { default as MesServicesCyberBandeau } from "./mes-services-cyber/bandeau
 export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDePage.svelte";
 export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Navigation.svelte";
 export { default as CentreAide } from "./CentreAide.svelte";
+export { default as ResumePssi } from "./lab/ResumePssi.svelte";
