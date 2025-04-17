@@ -17,6 +17,11 @@ $centre-aide-font-color-lien-secondaire: var(--centre-aide-font-color-lien-secon
 $centre-aide-background-hover-lien: var(--centre-aide-background-hover-lien);
 $centre-aide-background-hover-lien-secondaire: rgba(0, 0, 0, 0.04);
 $centre-aide-background-hover-declencheur: var(--centre-aide-background-hover-declencheur);
+// - Lien Diagnostic Cyber
+$diagnostic-cyber-lien-color: var(--diagnostic-cyber-color, #0d0c21);
+$diagnostic-cyber-font-lien-color: var(--diagnostic-cyber-color, #0d0c21);
+$diagnostic-cyber-font-color: var(--diagnostic-cyber-color, #0d0c21);
 
 // Affichage
 $z-index-au-dessus: 1000;
+
