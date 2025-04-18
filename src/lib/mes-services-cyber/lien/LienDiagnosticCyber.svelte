@@ -60,12 +60,14 @@
       &:hover + .bloc {
         visibility: visible;
         opacity: 1;
+        top: calc(1.5rem + 4px + 4px + 2px + 12px);
       }
     }
 
     .bloc {
       position: absolute;
-      top: calc(1.5rem + 4px + 4px + 2px + 12px);
+      pointer-events: none;
+      top: calc(1.5rem + 1px);
       right: 0;
       border-radius: 8px;
       background: #fff;
@@ -78,7 +80,8 @@
       opacity: 0;
       transition:
         visibility 0.2s linear,
-        opacity 0.2s linear;
+        opacity 0.2s linear,
+        top 0.2s ease-out;
 
       h6 {
         font-size: 1.25rem;
