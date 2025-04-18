@@ -65,7 +65,7 @@
 
     .bloc {
       position: absolute;
-      top: 42px;
+      top: calc(1.5rem + 4px + 4px + 2px + 12px);
       right: 0;
       border-radius: 8px;
       background: #fff;
