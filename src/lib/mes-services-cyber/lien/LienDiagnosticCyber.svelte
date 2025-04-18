@@ -47,13 +47,14 @@
       font-weight: 500;
       text-decoration: none;
       color: $diagnostic-cyber-font-lien-color;
-      padding: 4px 12px 4px 8px;
+      padding: 4px 8px 4px 12px;
       display: flex;
+      flex-direction: row;
+      align-items: center;
       gap: 8px;
       border: 1px solid $diagnostic-cyber-lien-color;
       border-radius: 8px;
       cursor: pointer;
-      align-items: center;
       line-height: 1.5rem;
 
       &:hover + .bloc {
