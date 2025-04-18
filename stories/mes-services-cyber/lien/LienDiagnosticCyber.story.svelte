@@ -6,7 +6,9 @@
 </script>
 
 <Hst.Story title="Composants/MesServicesCyber/LienDiagnosticCyber">
-  <LienDiagnosticCyber />
+  <div style="height: 600px; padding: 30px">
+    <LienDiagnosticCyber />
+  </div>
 
   <svelte:fragment slot="controls">
     <button
