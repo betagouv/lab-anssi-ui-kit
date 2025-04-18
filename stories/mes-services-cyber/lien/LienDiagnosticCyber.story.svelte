@@ -7,6 +7,11 @@
 
 <Hst.Story title="Composants/MesServicesCyber/LienDiagnosticCyber">
   <div style="height: 600px; padding: 30px">
-    <LienDiagnosticCyber />
+    <div style="margin-left: 300px">
+      <h3>Avant</h3>
+      <LienDiagnosticCyber />
+      <h3>Après</h3>
+    </div>
+
   </div>
 </Hst.Story>
