@@ -16,7 +16,8 @@
   <p>Ceci est la documentation technique de l'UI Kit.</p>
   {#if variablesCSS}
     <div class="conteneur-titre">
-      <h2>Variables CSS obligatoires</h2>
+      <h2>Variables CSS utilisées dans l’UI kit</h2>
+      <i>Celles qui n’ont pas de valeur par défaut sont obligatoires</i>
     </div>
     <div class="conteneur-style">
       <pre>{":root {"}</pre>
@@ -26,8 +27,10 @@
       <pre>{"}"}</pre>
     </div>
   {/if}
-  <h2>Obtenir mon thème</h2>
 
+  <hr style="margin: 32px 0;"/>
+
+  <h2>Centre d’Aide : obtenir mon thème</h2>
   <div class="conteneur-titre">
     <OutilSelecteurTheme on:themeSelectionne={(e) =>{  themeSelectionne = e.detail; }}/>
     <button on:click={() => navigator.clipboard.writeText(document.getElementById('style-theme-selectionne').textContent)} title="Copier">
