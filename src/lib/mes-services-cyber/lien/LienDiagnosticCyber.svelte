@@ -14,7 +14,6 @@
   <a href={lien} {target} class="lien-diagnostic-cyber" {rel}>
     Votre diagnostic cyber gratuit
     <img
-      class="icone"
       src={srcAsset(`/icones/${icone}.svg`)}
       alt={`lien-${versExterne ? "externe" : "interne"}`}
     />
@@ -43,11 +42,12 @@
 
     .lien-diagnostic-cyber {
       font-size: 0.875rem;
+      line-height: 0.875rem;
       font-style: normal;
       font-weight: 500;
       text-decoration: none;
       color: $diagnostic-cyber-font-lien-color;
-      padding: 4px 8px 4px 12px;
+      padding: 10px 8px 8px 12px;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -55,12 +55,16 @@
       border: 1px solid $diagnostic-cyber-lien-color;
       border-radius: 8px;
       cursor: pointer;
-      line-height: 1.5rem;
 
       &:hover + .bloc {
         visibility: visible;
         opacity: 1;
         top: calc(1.5rem + 4px + 4px + 2px + 12px);
+      }
+
+      img {
+        position: relative;
+        top: -1px;
       }
     }
 
