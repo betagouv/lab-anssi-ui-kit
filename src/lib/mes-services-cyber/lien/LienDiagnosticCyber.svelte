@@ -35,7 +35,6 @@
 
 <style lang="scss">
   .lien-diagnostic-cyber {
-    font-family: Marianne;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
@@ -55,14 +54,15 @@
       opacity: 1;
     }
   }
+
   .bloc {
     right: 0;
-    border: 1px solid $diagnostic-cyber-lien-color;
     border-radius: 8px;
     background: #fff;
     display: flex;
     width: 482px;
     padding: 24px;
+    margin-top: 10px;
     align-items: center;
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 18, 0.16);
     visibility: hidden;
@@ -70,8 +70,8 @@
     transition:
       visibility 0.2s linear,
       opacity 0.2s linear;
+
     h6 {
-      font-family: Marianne;
       font-size: 1.25rem;
       font-style: normal;
       font-weight: 700;
@@ -89,7 +89,6 @@
       gap: 8px;
 
       > p {
-        font-family: Marianne;
         font-size: 0.875rem;
         font-style: normal;
         font-weight: 400;
@@ -103,6 +102,7 @@
       }
     }
   }
+
   .illustration {
     display: flex;
     height: 144px;
