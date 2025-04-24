@@ -7,13 +7,18 @@
 </script>
 
 <Hst.Story title="Composants/MesServicesCyber/LienDiagnosticCyber">
-  <div
-    style="height: 600px; width: 600px; padding: 30px; background-color: #f0f0f0; border-radius: 8px;"
-  >
-    <div style="margin-left: 300px;">
-      <h3>Avant</h3>
-      <LienDiagnosticCyber {versExterne} lien="https://" />
-      <h3>Après</h3>
+  <div style="height: 600px; padding: 30px; background-color: #f0f0f0;">
+    <div>
+      <h3>Desktop</h3>
+      <div
+        style="display: flex;flex-direction: column;justify-content: center;align-items: flex-end;"
+      >
+        <LienDiagnosticCyber {versExterne} lien="https://" />
+      </div>
+      <h3>Mobile</h3>
+      <div>
+        <LienDiagnosticCyber {versExterne} lien="https://" />
+      </div>
     </div>
   </div>
 </Hst.Story>

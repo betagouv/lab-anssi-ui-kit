@@ -37,11 +37,11 @@
 <style lang="scss">
   .racine {
     position: relative;
-    display: inline-block;
+    display: block;
 
     .lien-diagnostic-cyber {
-      font-size: 0.875rem;
-      line-height: 0.875rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
       font-style: normal;
       font-weight: 500;
       text-decoration: none;
@@ -55,6 +55,13 @@
       border-radius: 8px;
       cursor: pointer;
       text-wrap: nowrap;
+      justify-content: space-between;
+
+      @include a-partir-de(desktop) {
+        font-size: 0.875rem;
+        line-height: 0.875rem;
+        max-width: fit-content;
+      }
 
       &:hover + .bloc {
         visibility: visible;
@@ -86,6 +93,7 @@
         visibility 0.2s linear,
         opacity 0.2s linear,
         top 0.2s ease-out;
+      z-index: 1;
 
       h6 {
         font-size: 1.25rem;
