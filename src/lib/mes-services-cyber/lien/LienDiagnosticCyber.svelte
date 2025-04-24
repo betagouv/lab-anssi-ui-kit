@@ -37,8 +37,7 @@
 <style lang="scss">
   .racine {
     position: relative;
-    display: flex;
-    justify-content: flex-end;
+    display: inline-block;
 
     .lien-diagnostic-cyber {
       font-size: 0.875rem;
@@ -55,6 +54,7 @@
       border: 1px solid $diagnostic-cyber-lien-color;
       border-radius: 8px;
       cursor: pointer;
+      text-wrap: nowrap;
 
       &:hover + .bloc {
         visibility: visible;
