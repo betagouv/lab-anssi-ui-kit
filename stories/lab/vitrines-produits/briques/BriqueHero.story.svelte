@@ -10,7 +10,7 @@
     {
       titre: 'Libellé primaire',
       lien: "",
-      variation: 'primaire'
+      variation: 'primaire-inverse'
     },
     {
       titre: 'Libellé secondaire',
