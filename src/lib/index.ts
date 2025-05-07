@@ -4,3 +4,4 @@ export { default as LienDiagnosticCyber } from "./mes-services-cyber/lien/LienDi
 export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDePage.svelte";
 export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Navigation.svelte";
 export { default as ResumePssi } from "./lab/ResumePssi.svelte";
+export { default as BriqueHero } from './lab/vitrines-produits/briques/BriqueHero.svelte'

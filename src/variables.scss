@@ -7,6 +7,9 @@ $texte-dsfr: #000091;
 $texte-defaut: #161616;
 $texte-secondaire: #3a3a3a;
 
+$bouton-background-primaire: var(--bouton-background-primaire);
+$bouton-background-primaire-inverse: var(--bouton-background-primaire-inverse);
+
 // Couleurs par composant
 // - Centre d'aide
 $centre-aide-background-entete: var(--centre-aide-background-entete);
@@ -21,6 +24,9 @@ $centre-aide-background-hover-declencheur: var(--centre-aide-background-hover-de
 $diagnostic-cyber-lien-color: var(--diagnostic-cyber-color, #0d0c21);
 $diagnostic-cyber-font-lien-color: var(--diagnostic-cyber-color, #0d0c21);
 $diagnostic-cyber-font-color: var(--diagnostic-cyber-color, #0d0c21);
+
+// - Site vitrine
+$brique-background-primaire: var(--brique-background-primaire);
 
 // Affichage
 $z-index-au-dessus: 1000;
