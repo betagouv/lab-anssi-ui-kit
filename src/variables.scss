@@ -7,6 +7,9 @@ $texte-dsfr: #000091;
 $texte-defaut: #161616;
 $texte-secondaire: #3a3a3a;
 
+$bouton-background-primaire: var(--bouton-background-primaire);
+$bouton-background-primaire-inverse: var(--bouton-background-primaire-inverse);
+
 // Couleurs par composant
 // - Centre d'aide
 $centre-aide-background-entete: var(--centre-aide-background-entete);
