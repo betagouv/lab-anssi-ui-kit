@@ -179,18 +179,29 @@
 
 
     button {
+      font-family: Marianne, sans-serif;
       padding: 8px 16px;
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
+      border-radius: 4px;
     }
 
     button.primaire {
+      border: none;
       color: $centre-aide-font-color-bouton;
-      background-color: $centre-aide-background-bouton;
+      background-color: $bouton-background-primaire;
+    }
+
+    button.primaire-inverse {
+      border: none;
+      color: $centre-aide-background-entete;
+      background-color: $bouton-background-primaire-inverse;
     }
 
     button.secondaire {
+      border-radius: 4px;
+      border: 1px solid #FFF;
       color: white;
       background-color: transparent;
     }
