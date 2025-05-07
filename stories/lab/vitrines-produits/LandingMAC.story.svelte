@@ -10,7 +10,7 @@
     {
       titre: 'Devenir Aidant cyber',
       lien: "",
-      variation: 'primaire'
+      variation: 'primaire-inverse'
     },
     {
       titre: "Bénéficier d'un diagnostic cyber",
@@ -27,10 +27,10 @@
 
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/Landing MonAideCyber" icon="material-symbols:brick-outline">
+<Hst.Story title="Composants/Lab/Sites vitrines/Landing MonAideCyber" icon="uis:web-grid-alt">
   <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
   <BriqueHero titre="Mon​Aide​Cyber"
-              sousTitre="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sodales sapien, sit amet ultrices est."
+              sousTitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
               illustration={JSON.stringify(imageAffichee)}
               actions={JSON.stringify(actionsDisponibles)}
   />
