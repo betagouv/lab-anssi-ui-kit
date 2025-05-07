@@ -23,7 +23,7 @@
       <h6>Prenez votre cyberdépart !</h6>
       <p>
         Bénéficiez d'un <b>premier diagnostic gratuit</b> et anonyme dans vos locaux
-        <b>accompagné par un Aidant de la communauté MonAideCyber</b>.
+        <b>accompagné par un Aidant cyber</b>.
       </p>
     </div>
     <img
