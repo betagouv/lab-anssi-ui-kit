@@ -3,3 +3,5 @@ node_modules
 /dist-histoire
 .svelte-kit
 .vscode
+*.iml
+.idea
