@@ -2,10 +2,11 @@
   import type { Hst } from "@histoire/plugin-svelte";
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../../OutilSelecteurTheme.svelte";
+  import type { Actions, Image } from "$lib/types";
 
   export let Hst: Hst;
 
-  const actionsDisponibles = [
+  const actionsDisponibles: Actions = [
     {
       titre: 'Libellé primaire',
       lien: "",
@@ -13,29 +14,28 @@
     },
     {
       titre: 'Libellé secondaire',
-      cheminFichier: "",
+      lien: "",
       variation: 'secondaire'
     }
   ]
 
-  const imageAffichee = {
-    titre: 'Image test',
-    cheminFichier: 'src/lib/assets/illustrations/ordinateur.svg',
+  const imageAffichee: Image = {
+    lien: 'src/lib/assets/illustrations/ordinateur.svg',
     alt: "Logo ordinateur"
   }
 
-  const partenaires = [
+  const partenaires: Image[] = [
     {
-      titre: 'La CNIL',
-      cheminFichier: 'src/lib/assets/illustrations/cnil.svg',
+      lien: 'src/lib/assets/illustrations/cnil.svg',
       alt: "Logo de la CNIL"
-    }
+    },
   ]
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/BriqueHero" icon="material-symbols:assistant-navigation">
+<Hst.Story title="Composants/Lab/Sites vitrines/Brique Hero" icon="material-symbols:brick-outline">
   <OutilSelecteurTheme />
   <BriqueHero titre="Mon​Nom​De​Service"
+              badge
               sousTitre="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sodales sapien, sit amet ultrices est."
               illustration={JSON.stringify(imageAffichee)}
               actions={JSON.stringify(actionsDisponibles)}

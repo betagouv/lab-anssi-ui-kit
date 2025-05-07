@@ -2,22 +2,15 @@
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
-
-  type Image = {
-    nom: string;
-    cheminFichier: string;
-    alt: string;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  type PropsSerialisees<T> = string;
-  type Actions = { titre: string; lien: string; variation: 'primaire' | 'secondaire' }[]
+  import type { Actions, Image, PropsSerialisees } from "$lib/types";
 
   export let titre: string;
   export let sousTitre: string;
-  export let actions: PropsSerialisees<Actions>;
   export let illustration: PropsSerialisees<Image>;
-  export let partenaires: PropsSerialisees<Image[]>
+
+  export let badge: boolean = false;
+  export let actions: PropsSerialisees<Actions> = "[]";
+  export let partenaires: PropsSerialisees<Image[]> = "[]"
 
   const illustrationFormatee: Image = JSON.parse(illustration);
   const actionsFormattees: Actions = JSON.parse(actions);
@@ -27,25 +20,34 @@
 <Brique>
   <div class="hero">
     <div class="contenu">
-      <div>
+      {#if badge}
+        <div class="section-badge">
+            <div class="badge">
+              <span>Service à impact national</span>
+            </div>
+        </div>
+      {/if}
+      <div class="textes">
         <h1>{titre}</h1>
         <p>{sousTitre}</p>
       </div>
-      <div class="actions">
-        {#each actionsFormattees as action}
-          <button type="button" class={action.variation}>{action.titre}</button>
-        {/each}
-      </div>
+      {#if actionsFormattees && actionsFormattees.length > 0}
+        <div class="actions">
+          {#each actionsFormattees as action}
+            <button type="button" class={action.variation}>{action.titre}</button>
+          {/each}
+        </div>
+      {/if}
     </div>
     <div class="image">
-      <img src={illustrationFormatee.cheminFichier} alt={illustrationFormatee.alt} />
+      <img src={illustrationFormatee.lien} alt={illustrationFormatee.alt} />
     </div>
     {#if partenairesFormattees && partenairesFormattees.length > 0}
       <div class="partenaires">
         <p>Mention partenaires</p>
         <div class="liste">
           {#each partenairesFormattees as partenaire}
-            <img src={partenaire.cheminFichier} alt={partenaire.alt} />
+            <img src={partenaire.lien} alt={partenaire.alt} />
           {/each}
         </div>
       </div>
@@ -65,7 +67,6 @@
 
     @include a-partir-de(desktop) {
       grid-template-areas: 'contenu image'
-                            'actions image'
                             'partenaires image';
       grid-template-columns: 1fr 1fr;
       column-gap: 24px;
@@ -76,15 +77,41 @@
       grid-area: contenu;
       display: flex;
       flex-direction: column;
-      gap: 32px;
 
-     /* h1 {
-        text-align: center;
+      .textes {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
 
-        @include a-partir-de(tablette) {
-          text-align: left;
+      .badge {
+        text-align: left;
+        background: #defbe5;
+        color: #18753c;
+        text-transform: uppercase;
+        padding: 0 6px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 20px;
+        border-radius: 4px;
+        width: fit-content;
+        margin-bottom: 4px;
+
+        span {
+          display: flex;
+          flex-direction: row;
+          gap: 4px;
+          align-items: center;
         }
-      }*/
+
+        span:before {
+          content: url('src/lib/assets/icones/succes.svg');
+          display: flex;
+          width: 16px;
+          height: 16px;
+        }
+      }
 
       .actions {
         grid-area: actions;
@@ -108,6 +135,10 @@
       img {
         width: 100%;
         max-height: 250px;
+
+        @include a-partir-de(desktop) {
+          max-height: 355px;
+        }
       }
 
     }
@@ -118,8 +149,14 @@
       flex-direction: column;
       gap: 8px;
 
-      .partenaire {
-        color: black;
+      .liste {
+        display: flex;
+        gap: 8px;
+
+        img {
+          width: 79px;
+          height: 24px;
+        }
       }
     }
 
@@ -128,6 +165,10 @@
       margin: 0;
       line-height: 48px;
       word-break: break-word;
+
+      @include a-partir-de(tablette) {
+        font-size: 48px;
+      }
     }
 
     p {
