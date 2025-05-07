@@ -3,6 +3,7 @@
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../OutilSelecteurTheme.svelte";
   import type { Actions, Image } from "$lib/types";
+  import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
 
   export let Hst: Hst;
 
@@ -34,4 +35,5 @@
               illustration={JSON.stringify(imageAffichee)}
               actions={JSON.stringify(actionsDisponibles)}
   />
+  <CarrouselTuiles />
 </Hst.Story>
