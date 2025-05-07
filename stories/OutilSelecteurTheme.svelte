@@ -60,7 +60,7 @@
   };
 
   const emetEvenement = createEventDispatcher<{ themeSelectionne: Record<VariablesCSS, string> }>();
-  let themeSelectionne: Service = "MonServiceSécurisé";
+  export let themeSelectionne: Service = "MonServiceSécurisé";
 
   onMount(() => {
     emetEvenement('themeSelectionne', themes[themeSelectionne]);
