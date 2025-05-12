@@ -15,6 +15,7 @@
 
 <style>
   .tuile {
+    --couleur-texte: #000000;
     border-radius: 8px;
     border: 1px solid #ddd;
     background: #fff;
@@ -24,8 +25,8 @@
     align-items: center;
     gap: 12px;
     text-align: center;
-    color: var(--block-text-color);
-    max-width: 384px;
+    color: var(--couleur-texte);
+    width: 384px;
     min-width: 212px;
   }
 
