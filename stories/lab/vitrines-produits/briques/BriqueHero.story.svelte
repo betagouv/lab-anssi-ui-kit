@@ -3,6 +3,7 @@
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../../OutilSelecteurTheme.svelte";
   import type { Actions, Image } from "$lib/types";
+  import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
   export let Hst: Hst;
 
@@ -20,7 +21,7 @@
   ]
 
   const imageAffichee: Image = {
-    lien: 'src/lib/assets/illustrations/ordinateur.svg',
+    lien: genereImageDePlaceholder(600, 400),
     alt: "Logo ordinateur"
   }
 

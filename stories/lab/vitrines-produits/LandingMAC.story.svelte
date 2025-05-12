@@ -3,6 +3,7 @@
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../OutilSelecteurTheme.svelte";
   import type { Actions, Image } from "$lib/types";
+  import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
   export let Hst: Hst;
 
@@ -20,8 +21,8 @@
   ]
 
   const imageAffichee: Image = {
-    lien: 'src/lib/assets/illustrations/aidant-aidee.svg',
-    alt: "Un Aidant en train de converser avec une entité souhaitant bénéficier d'un diagnostic cyber"
+    lien: genereImageDePlaceholder(600, 400),
+    alt: ""
   }
 
 
