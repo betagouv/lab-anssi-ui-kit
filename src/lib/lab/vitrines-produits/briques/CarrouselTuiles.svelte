@@ -1,5 +1,10 @@
 <script lang="ts">
   import Tuile from "$lib/lab/vitrines-produits/briques/Tuile.svelte";
+  import type { PropsSerialisees, Tuiles } from "$lib/types";
+  import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
+
+  export let tuiles: PropsSerialisees<Tuiles> = "[]";
+  const tuilesFormatees: Tuiles = JSON.parse(tuiles);
 
   let elementCarrousel: HTMLDivElement;
 
@@ -19,42 +24,33 @@
 </script>
 
 <div class="carrousel-tuiles">
-  <div class="conteneur-tuiles" bind:this={elementCarrousel}>
-    <Tuile
-      illustration="src/lib/assets/illustrations/mon-aide-cyber/environment.svg"
-      titre="Un dispositif étatique"
-      contenu="Pourquoi, quoi, quand, qui, comment ? L'homologation de sécurité a été pensée pour être accessible à tous."
-      classe="tuile-presentation"
-    />
-    <Tuile
-      illustration="src/lib/assets/illustrations/mon-aide-cyber/environment.svg"
-      titre="Proportionnée"
-      contenu={`D'une démarche "simplifiée" à une démarche "renforcée", l'homologation doit être adaptée à la criticité d'un système et à son exposition au risque.`}
-      classe="tuile-presentation"
-    />
-    <Tuile
-      illustration="src/lib/assets/illustrations/mon-aide-cyber/environment.svg"
-      titre="Adaptée à vos usages"
-      contenu="Une homologation simplifiée pensée pour répondre à la diversité des contextes de mise en oeuvre de l'homologation de sécurité de vos systèmes d'homologation."
-      classe="tuile-presentation"
-    />
-  </div>
-  <div class="conteneur-actions">
-    <button class="precedent" on:click={precedent}>Précédent</button>
-    <button class="suivant" on:click={suivant}>Suivant</button>
-  </div>
+  <Brique variation="transparent">
+    <div class="conteneur-tuiles" bind:this={elementCarrousel}>
+      {#each tuilesFormatees as tuile}
+        <Tuile
+          illustration={tuile.lienIllustration}
+          titre={tuile.titre}
+          contenu={tuile.contenu}
+          classe="tuile-presentation"
+        />
+      {/each}
+    </div>
+    <div class="conteneur-actions">
+      <button class="precedent" on:click={precedent}>Précédent</button>
+      <button class="suivant" on:click={suivant}>Suivant</button>
+    </div>
+  </Brique>
 </div>
 
 <style lang="scss">
-
   .carrousel-tuiles {
     padding: 52px 0;
     background: linear-gradient(
-      to bottom,
-      $centre-aide-background-entete 0%,
-      $centre-aide-background-entete 30%,
-      transparent 30%,
-      transparent 100%
+            to bottom,
+            $centre-aide-background-entete 0%,
+            $centre-aide-background-entete 30%,
+            transparent 30%,
+            transparent 100%
     );
   }
   .conteneur-tuiles {

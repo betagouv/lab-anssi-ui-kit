@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let variation: 'primaire' = 'primaire';
+  export let variation: 'primaire' | 'transparent' = 'primaire';
+
 </script>
 
 <section class={variation}>
@@ -29,10 +30,17 @@
     &.primaire {
       background: $brique-background-primaire;
     }
+    &.transparent {
+      background: none;
+    }
   }
 
   .contenu-brique {
     max-width: 1200px;
     margin: 0 auto;
   }
+
+
+
+
 </style>
