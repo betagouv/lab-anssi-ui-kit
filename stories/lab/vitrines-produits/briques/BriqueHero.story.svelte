@@ -2,44 +2,40 @@
   import type { Hst } from "@histoire/plugin-svelte";
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../../OutilSelecteurTheme.svelte";
-  import type { Actions, Image } from "$lib/types";
-  import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+  import { proprietesDeVariantsHero } from "../donneesProduits";
 
   export let Hst: Hst;
-
-  const actionsDisponibles: Actions = [
-    {
-      titre: 'Libellé primaire',
-      lien: "",
-      variation: 'primaire-inverse'
-    },
-    {
-      titre: 'Libellé secondaire',
-      lien: "",
-      variation: 'secondaire'
-    }
-  ]
-
-  const imageAffichee: Image = {
-    lien: genereImageDePlaceholder(600, 400),
-    alt: "Logo placeholder"
-  }
-
-  const partenaires: Image[] = [
-    {
-      lien: 'src/lib/assets/illustrations/cnil.svg',
-      alt: "Logo de la CNIL"
-    },
-  ]
 </script>
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Brique Hero" icon="material-symbols:brick-outline">
-  <OutilSelecteurTheme />
-  <BriqueHero titre="Mon​Nom​De​Service"
-              badge
-              soustitre="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sodales sapien, sit amet ultrices est."
-              illustration={imageAffichee}
-              actions={actionsDisponibles}
-              partenaires={partenaires}
-  />
+  <Hst.Variant title="MSS">
+    <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
+    <BriqueHero titre={proprietesDeVariantsHero['mss'].titre}
+                badge={proprietesDeVariantsHero['mss'].badge}
+                soustitre={proprietesDeVariantsHero['mss'].soustitre}
+                illustration={proprietesDeVariantsHero['mss'].illustration}
+                actions={proprietesDeVariantsHero['mss'].actions}
+                partenaires={proprietesDeVariantsHero['mss'].partenaires}
+    />
+  </Hst.Variant>
+  <Hst.Variant title="MAC">
+    <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
+    <BriqueHero titre={proprietesDeVariantsHero['mac'].titre}
+                badge={proprietesDeVariantsHero['mac'].badge}
+                soustitre={proprietesDeVariantsHero['mac'].soustitre}
+                illustration={proprietesDeVariantsHero['mac'].illustration}
+                actions={proprietesDeVariantsHero['mac'].actions}
+                partenaires={proprietesDeVariantsHero['mac'].partenaires}
+    />
+  </Hst.Variant>
+  <Hst.Variant title="MSC">
+    <OutilSelecteurTheme themeSelectionne="MesServicesCyber" />
+    <BriqueHero titre={proprietesDeVariantsHero['msc'].titre}
+                badge={proprietesDeVariantsHero['msc'].badge}
+                soustitre={proprietesDeVariantsHero['msc'].soustitre}
+                illustration={proprietesDeVariantsHero['msc'].illustration}
+                actions={proprietesDeVariantsHero['msc'].actions}
+                partenaires={proprietesDeVariantsHero['msc'].partenaires}
+    />
+  </Hst.Variant>
 </Hst.Story>
