@@ -3,27 +3,55 @@
   import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
   import type { Tuiles } from "$lib/types";
   import OutilSelecteurTheme from "../../../OutilSelecteurTheme.svelte";
+  import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
   export let Hst: Hst;
 
-  const tuiles: Tuiles = [{
-    titre: 'Tuile 1',
-    contenu: 'Description de la tuile',
-    lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
-  },
-    {
-      titre: 'Tuile 2',
-      contenu: 'Description de la tuile2',
-      lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
-    },
-        {
-          titre: 'Tuile 3',
-          contenu: 'Description de la tuile3',
-          lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
-        }]
+  const tuiles: { [service: string]: Tuiles } = {
+    'mss': [
+      {
+        titre: 'Gratuit, 100% en ligne et collaboratif',
+        contenu: '',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      },
+      {
+        titre: 'Accessible à toutes les entités publiques',
+        contenu: '',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      },
+      {
+        titre: "Conçu par les spécialistes de l'ANSSI",
+        contenu: '',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      }
+    ],
+    'mac': [
+      {
+        titre: 'Un dispositif étatique',
+        contenu: 'MonAideCyber est proposé par l’Agence nationale de la sécurité des systèmes d’information.',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      },
+      {
+        titre: 'Une communauté de confiance',
+        contenu: 'Les Aidants cyber sont issus de la sphère publique ou sont membres d’associations œuvrant pour un numérique de confiance.',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      },
+      {
+        titre: 'Au service de l’intérêt général',
+        contenu: 'Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l’action.',
+        lienIllustration: genereImageDePlaceholder(96, 97)
+      }
+    ],
+  }
 </script>
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Briques/Carrousel de tuiles" icon="material-symbols:brick-outline">
-  <OutilSelecteurTheme />
-  <CarrouselTuiles tuiles={JSON.stringify(tuiles)} />
+  <Hst.Variant title="MSS">
+    <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
+    <CarrouselTuiles tuiles={tuiles['mss']} />
+  </Hst.Variant>
+  <Hst.Variant title="MAC">
+    <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
+    <CarrouselTuiles tuiles={tuiles['mac']} />
+  </Hst.Variant>
 </Hst.Story>

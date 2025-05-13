@@ -52,5 +52,5 @@
               illustration={imageAffichee}
               actions={actionsDisponibles}
   />
-  <CarrouselTuiles tuiles={JSON.stringify(tuiles)} />
+  <CarrouselTuiles {tuiles} />
 </Hst.Story>
