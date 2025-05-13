@@ -37,9 +37,9 @@
   <OutilSelecteurTheme />
   <BriqueHero titre="Mon​Nom​De​Service"
               badge
-              sousTitre="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sodales sapien, sit amet ultrices est."
-              illustration={JSON.stringify(imageAffichee)}
-              actions={JSON.stringify(actionsDisponibles)}
-              partenaires={JSON.stringify(partenaires)}
+              soustitre="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sodales sapien, sit amet ultrices est."
+              illustration={imageAffichee}
+              actions={actionsDisponibles}
+              partenaires={partenaires}
   />
 </Hst.Story>
