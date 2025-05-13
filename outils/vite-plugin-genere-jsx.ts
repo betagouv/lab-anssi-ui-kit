@@ -36,10 +36,14 @@ export default function genereJSX(): Plugin {
           const chemin = path.join(repertoireComposants, fichier);
           const contenu = await fs.readFile(chemin, "utf-8");
 
-          const nomComposant = contenu.match(/<svelte:options\s+customElement\s*=\s*"([^"]+)"/);
+          let nomComposant = contenu.match(/<svelte:options\s+customElement\s*=\s*"([^"]+)"/);
           if (!nomComposant) {
-            console.warn(`⚠️ Aucun <svelte:options customElement="..."> trouvé dans ${fichier}`);
-            continue;
+            nomComposant = contenu.match(/<svelte:options\s+customElement\s*={{\s*tag:\s*'(.*)'/);
+
+            if (!nomComposant) {
+              console.warn(`⚠️ Aucun <svelte:options customElement="..."> trouvé dans ${fichier}`);
+              continue;
+            }
           }
           const tag = nomComposant[1];
           typesJSX += `\t\t"${tag}": {\n`;
@@ -48,9 +52,10 @@ export default function genereJSX(): Plugin {
 
           const props = [...contenuFichierType.matchAll(/props:\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/gs)];
           if (props[0]) {
-            const propsFormatees = props[0][1]
-              .split("\n")
-              .map((p) => p.replaceAll(" ", "").replaceAll(";", ""));
+            const propsFormatees = props[0][1].split("\n").map((p) => {
+              const [nomProp] = p.replaceAll(" ", "").replaceAll(";", "").split(':');
+              return nomProp ? `${nomProp}: string` : undefined;
+            }).filter(p => !!p);
 
             for (const prop of propsFormatees) {
               typesJSX += `\t\t\t${prop}\n`;
