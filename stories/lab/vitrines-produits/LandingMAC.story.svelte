@@ -31,8 +31,8 @@
 <Hst.Story title="Composants/Lab/Sites vitrines/Landing MonAideCyber" icon="uis:web-grid-alt">
   <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
   <BriqueHero titre="Mon​Aide​Cyber"
-              sousTitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
-              illustration={JSON.stringify(imageAffichee)}
-              actions={JSON.stringify(actionsDisponibles)}
+              soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
+              illustration={imageAffichee}
+              actions={actionsDisponibles}
   />
 </Hst.Story>
