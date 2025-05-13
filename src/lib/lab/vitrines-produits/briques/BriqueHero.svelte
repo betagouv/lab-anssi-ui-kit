@@ -1,20 +1,27 @@
-<svelte:options customElement="lab-anssi-brique-hero" />
+<svelte:options
+  customElement={{
+		tag: 'lab-anssi-brique-hero',
+		props: {
+      titre: { reflect: false, type: 'String', attribute: 'titre' },
+      soustitre: { reflect: false, type: 'String', attribute: 'soustitre' },
+			illustration: { reflect: false, type: 'Object', attribute: 'illustration' },
+      badge: { reflect: false, type: 'Boolean', attribute: 'badge' },
+			actions: { reflect: false, type: 'Array', attribute: 'actions' },
+			partenaires: { reflect: false, type: 'Array', attribute: 'partenaires' },
+		}
+	}} />
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
-  import type { Actions, Image, PropsSerialisees } from "$lib/types";
+  import type { Actions, Image } from "$lib/types";
 
   export let titre: string;
-  export let sousTitre: string;
-  export let illustration: PropsSerialisees<Image>;
+  export let soustitre: string;
+  export let illustration: Image;
 
   export let badge: boolean = false;
-  export let actions: PropsSerialisees<Actions> = "[]";
-  export let partenaires: PropsSerialisees<Image[]> = "[]"
-
-  const illustrationFormatee: Image = JSON.parse(illustration);
-  const actionsFormattees: Actions = JSON.parse(actions);
-  const partenairesFormattees: Image[] = JSON.parse(partenaires);
+  export let actions: Actions = [];
+  export let partenaires: Image[] = []
 </script>
 
 <Brique>
@@ -29,24 +36,24 @@
       {/if}
       <div class="textes">
         <h1>{titre}</h1>
-        <p>{sousTitre}</p>
+        <p>{soustitre}</p>
       </div>
-      {#if actionsFormattees && actionsFormattees.length > 0}
+      {#if actions && actions.length > 0}
         <div class="actions">
-          {#each actionsFormattees as action}
+          {#each actions as action}
             <button type="button" class={action.variation}>{action.titre}</button>
           {/each}
         </div>
       {/if}
     </div>
     <div class="image">
-      <img src={illustrationFormatee.lien} alt={illustrationFormatee.alt} />
+      <img src={illustration.lien} alt={illustration.alt} />
     </div>
-    {#if partenairesFormattees && partenairesFormattees.length > 0}
+    {#if partenaires && partenaires.length > 0}
       <div class="partenaires">
         <p>Mention partenaires</p>
         <div class="liste">
-          {#each partenairesFormattees as partenaire}
+          {#each partenaires as partenaire}
             <img src={partenaire.lien} alt={partenaire.alt} />
           {/each}
         </div>
