@@ -1,10 +1,16 @@
-<script lang="ts">
-  import Tuile from "$lib/lab/vitrines-produits/briques/Tuile.svelte";
-  import type { PropsSerialisees, Tuiles } from "$lib/types";
-  import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
+<svelte:options customElement={{
+  tag: 'lab-anssi-carrousel-tuiles',
+  props: {
+    tuiles: { reflect: false, type: 'Array', attribute: 'tuiles' }
+  }
+}} />
 
-  export let tuiles: PropsSerialisees<Tuiles> = "[]";
-  const tuilesFormatees: Tuiles = JSON.parse(tuiles);
+<script lang="ts">
+  import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
+  import Tuile from "$lib/lab/vitrines-produits/briques/Tuile.svelte";
+  import type { Tuiles } from "$lib/types.js";
+
+  export let tuiles: Tuiles = [];
 
   let elementCarrousel: HTMLDivElement;
 
@@ -23,10 +29,10 @@
   const suivant = () => versDirection(+1);
 </script>
 
-<div class="carrousel-tuiles">
+<div class="carrousel-tuiles primaire">
   <Brique variation="transparent">
     <div class="conteneur-tuiles" bind:this={elementCarrousel}>
-      {#each tuilesFormatees as tuile}
+      {#each tuiles as tuile}
         <Tuile
           illustration={tuile.lienIllustration}
           titre={tuile.titre}
@@ -45,20 +51,20 @@
 <style lang="scss">
   .carrousel-tuiles {
     padding: 52px 0;
-    background: linear-gradient(
-            to bottom,
-            $centre-aide-background-entete 0%,
-            $centre-aide-background-entete 30%,
-            transparent 30%,
-            transparent 100%
-    );
+
+    &.primaire {
+      background: linear-gradient(
+              to bottom,
+              $centre-aide-background-entete 0%,
+              $centre-aide-background-entete 35%,
+              transparent 35%,
+              transparent 100%
+      );
+    }
   }
   .conteneur-tuiles {
     --espacement: 16px;
     display: flex;
-    /*flex-grow: 1;
-    flex-basis: 0;
-    justify-content: center;*/
     overflow-x: auto;
     gap: var(--espacement);
     scroll-snap-type: x mandatory;
