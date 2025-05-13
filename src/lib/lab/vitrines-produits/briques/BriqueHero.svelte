@@ -51,7 +51,7 @@
     </div>
     {#if partenaires && partenaires.length > 0}
       <div class="partenaires">
-        <p>Mention partenaires</p>
+        <p>Une innovation ANSSI conçue pour durer en collaboration avec :</p>
         <div class="liste">
           {#each partenaires as partenaire}
             <img src={partenaire.lien} alt={partenaire.alt} />
@@ -92,31 +92,35 @@
         margin-bottom: 32px;
       }
 
-      .badge {
-        text-align: left;
-        background: #defbe5;
-        color: #18753c;
-        text-transform: uppercase;
-        padding: 0 6px;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 20px;
-        border-radius: 4px;
-        width: fit-content;
-        margin-bottom: 4px;
+      .section-badge {
+        margin-bottom: 8px;
 
-        span {
-          display: flex;
-          flex-direction: row;
-          gap: 4px;
-          align-items: center;
-        }
+        .badge {
+          text-align: left;
+          background: #defbe5;
+          color: #18753c;
+          text-transform: uppercase;
+          padding: 0 6px;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 20px;
+          border-radius: 4px;
+          width: fit-content;
+          margin-bottom: 4px;
 
-        span:before {
-          content: url('src/lib/assets/icones/succes.svg');
-          display: flex;
-          width: 16px;
-          height: 16px;
+          span {
+            display: flex;
+            flex-direction: row;
+            gap: 4px;
+            align-items: center;
+          }
+
+          span:before {
+            content: url('src/lib/assets/icones/succes.svg');
+            display: flex;
+            width: 16px;
+            height: 16px;
+          }
         }
       }
 
@@ -155,6 +159,10 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+
+      p {
+        font-size: 14px;
+      }
 
       .liste {
         display: flex;
