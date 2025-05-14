@@ -30,17 +30,26 @@
     {
       titre: 'Un dispositif étatique',
       contenu: "Pourquoi, quoi, quand, qui, comment ? L'homologation de sécurité a été pensée pour être accessible à tous.",
-      lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
+      illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
     },
     {
       titre: 'Proportionnée',
       contenu: `D'une démarche "simplifiée" à une démarche "renforcée", l'homologation doit être adaptée à la criticité d'un système et à son exposition au risque.`,
-      lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
+      illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
     },
     {
       titre: 'Adaptée à vos usages',
       contenu: "Une homologation simplifiée pensée pour répondre à la diversité des contextes de mise en oeuvre de l'homologation de sécurité de vos systèmes d'homologation.",
-      lienIllustration: 'src/lib/assets/illustrations/mon-aide-cyber/environment.svg'
+      illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
     }]
 
 </script>

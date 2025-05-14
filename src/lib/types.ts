@@ -7,6 +7,6 @@ export type Actions = { titre: string; lien: string; variation: "primaire" | 'pr
 
 export type Tuiles = {
   titre: string;
-  lienIllustration: string;
+  illustration: Image;
   contenu: string;
 }[];

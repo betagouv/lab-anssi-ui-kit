@@ -1,13 +1,15 @@
 <script lang="ts">
+  import type { Image } from "$lib/types.js";
+
   export let titre: string;
-  export let illustration: string;
+  export let illustration: Image;
   export let contenu: string;
   export let classe: string = '';
 </script>
 
 <div class="tuile {classe ?? ''}">
   <div class="conteneur-image">
-    <img src={illustration} alt="" />
+    <img src={illustration.lien} alt={illustration.alt} />
   </div>
   <p>{titre}</p>
   <span>{contenu}</span>
