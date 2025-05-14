@@ -5,11 +5,12 @@
   import type { Action, Image, Tuiles } from "$lib/types";
   import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+  import { BriqueTitreMultimedia } from "$lib";
 
   export let Hst: Hst;
 
   const imageAffichee: Image = {
-    lien: genereImageDePlaceholder(600, 400),
+    lien: genereImageDePlaceholder(600, 400, "Illustration de couverture"),
     alt: ""
   }
 
@@ -38,7 +39,6 @@
           alt: ''
         }
     }]
-
 </script>
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Landing MonAideCyber" icon="uis:web-grid-alt">
@@ -56,4 +56,11 @@
               }}
   />
   <CarrouselTuiles {tuiles} />
+  <BriqueTitreMultimedia titre="Découvrez MonAideCyber en vidéo"
+                         multimedia={{
+                           source: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4',
+                           sourcesoustitres: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Nouvelle_doctrine_homologation.vtt',
+                           imagedecouverture: genereImageDePlaceholder(2000, 900, "Vidéo d'exemple")
+                         }}
+  />
 </Hst.Story>
