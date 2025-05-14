@@ -34,7 +34,7 @@
     <div class="conteneur-tuiles" bind:this={elementCarrousel}>
       {#each tuiles as tuile}
         <Tuile
-          illustration={tuile.lienIllustration}
+          illustration={tuile.illustration}
           titre={tuile.titre}
           contenu={tuile.contenu}
           classe="tuile-presentation"
@@ -106,7 +106,7 @@
   .conteneur-actions button {
     background: none;
     border: none;
-    color: white;
+    color: $texte-dsfr;
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
@@ -118,7 +118,7 @@
 
   .conteneur-actions .precedent:before,
   .conteneur-actions .suivant:after {
-    content: url(/statique/assets/images/fleche_gauche_bleue.svg);
+    content: url-asset('/icones/fleche_gauche_bleue.svg');
     display: flex;
     width: 24px;
     height: 24px;

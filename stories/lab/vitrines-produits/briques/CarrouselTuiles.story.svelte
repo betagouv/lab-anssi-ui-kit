@@ -12,34 +12,52 @@
       {
         titre: 'Gratuit, 100% en ligne et collaboratif',
         contenu: '',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       },
       {
         titre: 'Accessible à toutes les entités publiques',
         contenu: '',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       },
       {
         titre: "Conçu par les spécialistes de l'ANSSI",
         contenu: '',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       }
     ],
     'mac': [
       {
         titre: 'Un dispositif étatique',
         contenu: 'MonAideCyber est proposé par l’Agence nationale de la sécurité des systèmes d’information.',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       },
       {
         titre: 'Une communauté de confiance',
         contenu: 'Les Aidants cyber sont issus de la sphère publique ou sont membres d’associations œuvrant pour un numérique de confiance.',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       },
       {
         titre: 'Au service de l’intérêt général',
         contenu: 'Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l’action.',
-        lienIllustration: genereImageDePlaceholder(96, 97)
+        illustration: {
+          lien: genereImageDePlaceholder(96, 97),
+          alt: ''
+        }
       }
     ],
   }
