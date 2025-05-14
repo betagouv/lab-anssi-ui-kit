@@ -5,3 +5,4 @@ export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDe
 export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Navigation.svelte";
 export { default as ResumePssi } from "./lab/ResumePssi.svelte";
 export { default as BriqueHero } from './lab/vitrines-produits/briques/BriqueHero.svelte'
+export { default as CarrouselTuiles } from './lab/vitrines-produits/briques/CarrouselTuiles.svelte';
