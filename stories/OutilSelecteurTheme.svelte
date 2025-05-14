@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
 
-
   const variablesCSS = [
     "centre-aide-background-entete",
     "centre-aide-background-bouton",
@@ -12,7 +11,9 @@
     "centre-aide-background-hover-declencheur",
     "brique-background-primaire",
     "bouton-background-primaire",
-    "bouton-background-primaire-inverse"
+    "bouton-background-primaire-actif",
+    "bouton-background-primaire-inverse",
+    "titre-couleur-primaire"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -29,7 +30,9 @@
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
       "bouton-background-primaire": "#0279D0",
-      "bouton-background-primaire-inverse": "white"
+      "bouton-background-primaire-actif": "#09416A",
+      "bouton-background-primaire-inverse": "white",
+      "titre-couleur-primaire": "#09416A",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -41,7 +44,9 @@
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
       "bouton-background-primaire": "#5D2A9D",
-      "bouton-background-primaire-inverse": "white"
+      "bouton-background-primaire-actif": "#09416A",
+      "bouton-background-primaire-inverse": "white",
+      "titre-couleur-primaire": "#5D2A9D",
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -53,7 +58,9 @@
       "centre-aide-background-hover-declencheur": '#22213C url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
       "brique-background-primaire": "var(--centre-aide-background-entete)",
       "bouton-background-primaire": "#FED980",
-      "bouton-background-primaire-inverse": "white"
+      "bouton-background-primaire-actif": "#09416A",
+      "bouton-background-primaire-inverse": "white",
+      "titre-couleur-primaire": "#0D0C21",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -65,7 +72,9 @@
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
       "bouton-background-primaire": "#272771",
-      "bouton-background-primaire-inverse": "white"
+      "bouton-background-primaire-actif": "#09416A",
+      "bouton-background-primaire-inverse": "white",
+      "titre-couleur-primaire": "#272771",
     },
   };
 
