@@ -18,7 +18,8 @@
     "brique-hero-bouton-droite-background",
     "brique-hero-bouton-droite-background-hover",
     "brique-hero-bouton-droite-background-active",
-    "brique-hero-bouton-droite-texte"
+    "brique-hero-bouton-droite-texte",
+    "titre-couleur-primaire"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -41,7 +42,8 @@
       "brique-hero-bouton-droite-background": "transparent",
       "brique-hero-bouton-droite-background-hover": "rgba(255, 255, 255, 0.08)",
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
-      "brique-hero-bouton-droite-texte": "#FFFFFF"
+      "brique-hero-bouton-droite-texte": "#FFFFFF",
+      "titre-couleur-primaire": "#09416A",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -59,7 +61,8 @@
       "brique-hero-bouton-droite-background": "transparent",
       "brique-hero-bouton-droite-background-hover": "rgba(255, 255, 255, 0.08)",
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
-      "brique-hero-bouton-droite-texte": "white"
+      "brique-hero-bouton-droite-texte": "white",
+      "titre-couleur-primaire": "#5D2A9D",
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -77,7 +80,8 @@
       "brique-hero-bouton-droite-background": "transparent",
       "brique-hero-bouton-droite-background-hover": "rgba(255, 255, 255, 0.08)",
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
-      "brique-hero-bouton-droite-texte": "#FFFFFF"
+      "brique-hero-bouton-droite-texte": "#FFFFFF",
+      "titre-couleur-primaire": "#0D0C21",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -95,7 +99,8 @@
       "brique-hero-bouton-droite-background": "transparent",
       "brique-hero-bouton-droite-background-hover": "rgba(255, 255, 255, 0.08)",
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
-      "brique-hero-bouton-droite-texte": "#FFFFFF"
+      "brique-hero-bouton-droite-texte": "#FFFFFF",
+      "titre-couleur-primaire": "#272771",
     },
   };
 
