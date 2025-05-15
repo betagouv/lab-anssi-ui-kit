@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let variation: 'primaire' | 'transparent' = 'primaire';
+  export let variation: 'primaire' | 'transparent' | 'secondaire' = 'primaire';
   export let sansMargeHaute = false;
   export let sansMargeLaterale = false;
 </script>
@@ -40,6 +40,9 @@
     }
     &.transparent {
       background: none;
+    }
+    &.secondaire {
+      background: $brique-background-secondaire;
     }
   }
 
