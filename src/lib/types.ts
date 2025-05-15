@@ -17,3 +17,10 @@ export type Tuiles = {
   illustration: Image;
   contenu: string;
 }[];
+
+export type EtapeMarelle = {
+  titre: string;
+  description: string;
+  lien?: { href: string; texte: string; target: string; };
+  illustration: Image;
+}
