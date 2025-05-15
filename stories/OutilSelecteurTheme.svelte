@@ -11,6 +11,7 @@
     "centre-aide-background-hover-lien",
     "centre-aide-background-hover-declencheur",
     "brique-background-primaire",
+    "brique-background-secondaire",
     "bouton-background-primaire",
     "bouton-background-primaire-inverse"
   ] as const;
@@ -28,6 +29,7 @@
       "centre-aide-background-hover-lien": "#0C5C98",
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
+      "brique-background-secondaire": "transparent",
       "bouton-background-primaire": "#0279D0",
       "bouton-background-primaire-inverse": "white"
     },
@@ -40,6 +42,7 @@
       "centre-aide-background-hover-lien": "#9C51D0",
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
+      "brique-background-secondaire": "#F5F1F9",
       "bouton-background-primaire": "#5D2A9D",
       "bouton-background-primaire-inverse": "white"
     },
@@ -52,6 +55,7 @@
       "centre-aide-background-hover-lien": "#E4C274",
       "centre-aide-background-hover-declencheur": '#22213C url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
       "brique-background-primaire": "var(--centre-aide-background-entete)",
+      "brique-background-secondaire": "transparent",
       "bouton-background-primaire": "#FED980",
       "bouton-background-primaire-inverse": "white"
     },
@@ -64,6 +68,7 @@
       "centre-aide-background-hover-lien": "#41419F",
       "centre-aide-background-hover-declencheur": "var(--centre-aide-background-hover-lien)",
       "brique-background-primaire": "var(--centre-aide-background-entete)",
+      "brique-background-secondaire": "transparent",
       "bouton-background-primaire": "#272771",
       "bouton-background-primaire-inverse": "white"
     },
