@@ -116,7 +116,7 @@
           }
 
           span:before {
-            content: url('src/lib/assets/icones/succes.svg');
+            content: url-asset('/icones/succes.svg');
             display: flex;
             width: 16px;
             height: 16px;
