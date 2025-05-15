@@ -41,7 +41,7 @@
       {#if actions && actions.length > 0}
         <div class="actions">
           {#each actions as action}
-            <button type="button" class={action.variation}>{action.titre}</button>
+            <a href={action.lien} target="_blank"><button type="button" class={action.variation}>{action.titre}</button></a>
           {/each}
         </div>
       {/if}

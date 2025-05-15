@@ -11,12 +11,12 @@
   const actionsDisponibles: Actions = [
     {
       titre: 'Devenir Aidant cyber',
-      lien: "",
+      lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
       variation: 'primaire-inverse'
     },
     {
       titre: "Bénéficier d'un diagnostic cyber",
-      lien: "",
+      lien: "https://messervices.cyber.gouv.fr/cyberdepart",
       variation: 'secondaire'
     }
   ]
