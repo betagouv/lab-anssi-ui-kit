@@ -6,21 +6,23 @@
       soustitre: { reflect: false, type: 'String', attribute: 'soustitre' },
 			illustration: { reflect: false, type: 'Object', attribute: 'illustration' },
       badge: { reflect: false, type: 'Boolean', attribute: 'badge' },
-			actions: { reflect: false, type: 'Array', attribute: 'actions' },
+			actionGauche: { reflect: false, type: 'Object', attribute: 'actionGauche' },
+			actionDroite: { reflect: false, type: 'Object', attribute: 'actionDroite' },
 			partenaires: { reflect: false, type: 'Array', attribute: 'partenaires' },
 		}
 	}} />
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
-  import type { Actions, Image } from "$lib/types";
+  import type { Action, Image } from "$lib/types";
 
   export let titre: string;
   export let soustitre: string;
   export let illustration: Image;
 
   export let badge: boolean = false;
-  export let actions: Actions = [];
+  export let actionGauche: Action;
+  export let actionDroite: Action;
   export let partenaires: Image[] = []
 </script>
 
@@ -38,13 +40,14 @@
         <h1>{titre}</h1>
         <p>{soustitre}</p>
       </div>
-      {#if actions && actions.length > 0}
-        <div class="actions">
-          {#each actions as action}
-            <a href={action.lien} target="_blank"><button type="button" class={action.variation}>{action.titre}</button></a>
-          {/each}
-        </div>
-      {/if}
+      <div class="actions">
+        <a role="button" class="action-gauche" href={actionGauche.lien} target="_blank">
+          {actionGauche.titre}
+        </a>
+        <a role="button" class="action-droite" href={actionDroite.lien} target="_blank">
+          {actionDroite.titre}
+        </a>
+      </div>
     </div>
     <div class="image">
       <img src={illustration.lien} alt={illustration.alt} />
@@ -186,39 +189,57 @@
       }
     }
 
+    a[role='button'] {
+      text-decoration: none;
+      font-family: Marianne, sans-serif;
+      padding: 8px 16px;
+
+      text-align: center;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 24px;
+
+      border-radius: 4px;
+
+      &.action-gauche {
+        background-color: $brique-hero-bouton-gauche-background;
+        color: $brique-hero-bouton-gauche-texte;
+        border: none;
+        cursor: pointer;
+
+        &:active {
+          background-color: $brique-hero-bouton-gauche-background-active;
+          box-shadow: none;
+          border: none;
+        }
+
+        &:hover {
+          background-color: $brique-hero-bouton-gauche-background-hover;
+          box-shadow: none;
+          border: none;
+        }
+      }
+
+      &.action-droite {
+        background-color: $brique-hero-bouton-droite-background;
+        color: $brique-hero-bouton-droite-texte;
+        border: 1px solid $brique-hero-bouton-droite-texte;
+        cursor: pointer;
+
+        &:active {
+          background-color: $brique-hero-bouton-droite-background-active;
+        }
+
+        &:hover {
+          background-color: $brique-hero-bouton-droite-background-hover;
+        }
+      }
+    }
+
     p {
       margin: 0;
       font-size: 20px;
       line-height: 32px;
-    }
-
-
-    button {
-      font-family: Marianne, sans-serif;
-      padding: 8px 16px;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 24px;
-      border-radius: 4px;
-    }
-
-    button.primaire {
-      border: none;
-      color: $centre-aide-font-color-bouton;
-      background-color: $bouton-background-primaire;
-    }
-
-    button.primaire-inverse {
-      border: none;
-      color: $centre-aide-background-entete;
-      background-color: $bouton-background-primaire-inverse;
-    }
-
-    button.secondaire {
-      border-radius: 4px;
-      border: 1px solid #FFF;
-      color: white;
-      background-color: transparent;
     }
   }
 </style>

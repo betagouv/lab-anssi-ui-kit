@@ -9,18 +9,14 @@ export const proprietesDeVariantsHero = {
       lien: genereImageDePlaceholder(600, 400),
       alt: "Logo placeholder"
     },
-    actions: [
-      {
-        titre: 'Commencer à sécuriser',
-        lien: "",
-        variation: 'primaire-inverse'
-      },
-      {
-        titre: "Être accompagné",
-        lien: "",
-        variation: 'secondaire'
-      }
-    ],
+    actionGauche: {
+      titre: 'Commencer à sécuriser',
+      lien: "",
+    },
+    actionDroite: {
+      titre: "Être accompagné",
+      lien: "",
+    },
     partenaires: [
       {
         lien: 'src/lib/assets/illustrations/cnil.svg',
@@ -36,18 +32,14 @@ export const proprietesDeVariantsHero = {
       lien: genereImageDePlaceholder(600, 400),
       alt: "Logo placeholder"
     },
-    actions: [
-      {
-        titre: 'Devenir Aidant cyber',
+    actionGauche: {
+      titre: 'Devenir Aidant cyber',
         lien: "",
-        variation: 'primaire-inverse'
-      },
-      {
-        titre: "Bénéficier d'un diagnostic cyber",
+    },
+    actionDroite: {
+      titre: "Bénéficier d'un diagnostic cyber",
         lien: "",
-        variation: 'secondaire'
-      }
-    ],
+    },
     partenaires: []
   },
   'msc': {
@@ -58,18 +50,14 @@ export const proprietesDeVariantsHero = {
       lien: genereImageDePlaceholder(600, 400),
       alt: "Logo placeholder"
     },
-    actions: [
-      {
-        titre: 'Découvrir les services adaptés à NIS2',
-        lien: "",
-        variation: 'primaire'
-      },
-      {
-        titre: "Découvrir le catalogue complet",
-        lien: "",
-        variation: 'secondaire'
-      }
-    ],
+    actionGauche: {
+      titre: 'Découvrir les services adaptés à NIS2',
+      lien: "",
+    },
+    actionDroite: {
+      titre: "Découvrir le catalogue complet",
+      lien: "",
+    },
     partenaires: []
   },
 }

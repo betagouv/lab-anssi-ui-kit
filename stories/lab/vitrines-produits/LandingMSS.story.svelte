@@ -2,23 +2,10 @@
   import type { Hst } from "@histoire/plugin-svelte";
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../OutilSelecteurTheme.svelte";
-  import type { Actions, Image } from "$lib/types";
+  import type { Action, Image } from "$lib/types";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
   export let Hst: Hst;
-
-  const actionsDisponibles: Actions = [
-    {
-      titre: 'Commencer à sécuriser',
-      lien: "",
-      variation: 'primaire-inverse'
-    },
-    {
-      titre: "Être accompagné",
-      lien: "",
-      variation: 'secondaire'
-    }
-  ]
 
   const partenaires: Image[] = [
     {
@@ -40,7 +27,15 @@
   <BriqueHero titre="Mon​Service​Sécurisé"
               soustitre="L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement"
               illustration={imageAffichee}
-              actions={actionsDisponibles}
+              actionGauche={{
+                titre: 'Commencer à sécuriser',
+                lien: "",
+              }}
+              actionDroite={{
+                titre: "Être accompagné",
+                lien: "",
+                variation: 'secondaire'
+              }}
               badge
               {partenaires}
   />

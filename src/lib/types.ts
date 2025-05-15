@@ -3,7 +3,7 @@ export type Image = {
   alt: string;
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type Actions = { titre: string; lien: string; variation: "primaire" | 'primaire-inverse' | "secondaire" }[];
+export type Action = { titre: string; lien: string; };
 
 export type Tuiles = {
   titre: string;

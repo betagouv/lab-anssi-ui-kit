@@ -14,7 +14,8 @@
                 badge={proprietesDeVariantsHero['mss'].badge}
                 soustitre={proprietesDeVariantsHero['mss'].soustitre}
                 illustration={proprietesDeVariantsHero['mss'].illustration}
-                actions={proprietesDeVariantsHero['mss'].actions}
+                actionGauche={proprietesDeVariantsHero['mss'].actionGauche}
+                actionDroite={proprietesDeVariantsHero['mss'].actionDroite}
                 partenaires={proprietesDeVariantsHero['mss'].partenaires}
     />
   </Hst.Variant>
@@ -24,7 +25,8 @@
                 badge={proprietesDeVariantsHero['mac'].badge}
                 soustitre={proprietesDeVariantsHero['mac'].soustitre}
                 illustration={proprietesDeVariantsHero['mac'].illustration}
-                actions={proprietesDeVariantsHero['mac'].actions}
+                actionGauche={proprietesDeVariantsHero['mac'].actionGauche}
+                actionDroite={proprietesDeVariantsHero['mac'].actionDroite}
                 partenaires={proprietesDeVariantsHero['mac'].partenaires}
     />
   </Hst.Variant>
@@ -34,7 +36,8 @@
                 badge={proprietesDeVariantsHero['msc'].badge}
                 soustitre={proprietesDeVariantsHero['msc'].soustitre}
                 illustration={proprietesDeVariantsHero['msc'].illustration}
-                actions={proprietesDeVariantsHero['msc'].actions}
+                actionGauche={proprietesDeVariantsHero['msc'].actionGauche}
+                actionDroite={proprietesDeVariantsHero['msc'].actionDroite}
                 partenaires={proprietesDeVariantsHero['msc'].partenaires}
     />
   </Hst.Variant>
