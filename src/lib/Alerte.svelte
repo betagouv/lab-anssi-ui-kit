@@ -37,10 +37,11 @@
     width: 16px;
     height: 16px;
     padding: 8px;
-    margin-top: 4px;
-    margin-right: 4px;
-    background: no-repeat center url-asset("/icones/croix-bleu.svg");
+    margin-top: 3px;
+    margin-right: 3px;
+    background: no-repeat center 8px url-asset("/icones/croix-bleu.svg");
     border: 0;
     cursor: pointer;
+    box-sizing: content-box;
   }
 </style>
