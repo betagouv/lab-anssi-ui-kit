@@ -7,9 +7,6 @@ $texte-dsfr: #000091;
 $texte-defaut: #161616;
 $texte-secondaire: #3a3a3a;
 
-$bouton-background-primaire: var(--bouton-background-primaire);
-$bouton-background-primaire-inverse: var(--bouton-background-primaire-inverse);
-
 // Couleurs par composant
 // - Centre d'aide
 $centre-aide-background-entete: var(--centre-aide-background-entete);
@@ -28,6 +25,16 @@ $diagnostic-cyber-font-color: var(--diagnostic-cyber-color, #0d0c21);
 // - Site vitrine
 $brique-background-primaire: var(--brique-background-primaire);
 
+// - Brique Hero
+$brique-hero-bouton-gauche-background: var(--brique-hero-bouton-gauche-background);
+$brique-hero-bouton-gauche-background-hover: var(--brique-hero-bouton-gauche-background-hover);
+$brique-hero-bouton-gauche-background-active: var(--brique-hero-bouton-gauche-background-active);
+$brique-hero-bouton-gauche-texte: var(--brique-hero-bouton-gauche-texte);
+
+$brique-hero-bouton-droite-background: var(--brique-hero-bouton-droite-background);
+$brique-hero-bouton-droite-background-hover: var(--brique-hero-bouton-droite-background-hover);
+$brique-hero-bouton-droite-background-active: var(--brique-hero-bouton-droite-background-active);
+$brique-hero-bouton-droite-texte: var(--brique-hero-bouton-droite-texte);
+
 // Affichage
 $z-index-au-dessus: 1000;
-

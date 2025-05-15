@@ -2,24 +2,11 @@
   import type { Hst } from "@histoire/plugin-svelte";
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../../OutilSelecteurTheme.svelte";
-  import type { Actions, Image, Tuiles } from "$lib/types";
+  import type { Action, Image, Tuiles } from "$lib/types";
   import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
   export let Hst: Hst;
-
-  const actionsDisponibles: Actions = [
-    {
-      titre: 'Devenir Aidant cyber',
-      lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
-      variation: 'primaire-inverse'
-    },
-    {
-      titre: "Bénéficier d'un diagnostic cyber",
-      lien: "https://messervices.cyber.gouv.fr/cyberdepart",
-      variation: 'secondaire'
-    }
-  ]
 
   const imageAffichee: Image = {
     lien: genereImageDePlaceholder(600, 400),
@@ -59,7 +46,14 @@
   <BriqueHero titre="Mon​Aide​Cyber"
               soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
               illustration={imageAffichee}
-              actions={actionsDisponibles}
+              actionGauche={{
+                titre: 'Devenir Aidant cyber',
+                lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
+              }}
+              actionDroite={{
+                titre: "Bénéficier d'un diagnostic cyber",
+                lien: "https://messervices.cyber.gouv.fr/cyberdepart",
+              }}
   />
   <CarrouselTuiles {tuiles} />
 </Hst.Story>
