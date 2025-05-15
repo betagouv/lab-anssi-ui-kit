@@ -1,3 +1,5 @@
+<svelte:options customElement="lab-anssi-alerte" />
+
 <script lang="ts">
   export let description: string;
   let estOuvert = true;
