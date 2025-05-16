@@ -2,6 +2,13 @@ export type Image = {
   lien: string;
   alt: string;
 };
+
+export type Video = {
+  source: string;
+  sourcesoustitres?: string;
+  imagedecouverture?: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Actions = { titre: string; lien: string; variation: "primaire" | 'primaire-inverse' | "secondaire" }[];
 
@@ -10,3 +17,4 @@ export type Tuiles = {
   illustration: Image;
   contenu: string;
 }[];
+export type Service = "MonServiceSécurisé" | "MonAideCyber" | "MesServicesCyber" | "MonEspaceNIS2";

@@ -7,7 +7,10 @@ $texte-dsfr: #000091;
 $texte-defaut: #161616;
 $texte-secondaire: #3a3a3a;
 
+$titre-couleur-primaire: var(--titre-couleur-primaire);
+
 $bouton-background-primaire: var(--bouton-background-primaire);
+$bouton-background-primaire-actif: var(--bouton-background-primaire-actif);
 $bouton-background-primaire-inverse: var(--bouton-background-primaire-inverse);
 
 // Couleurs par composant
