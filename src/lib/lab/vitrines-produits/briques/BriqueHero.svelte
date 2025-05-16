@@ -3,11 +3,11 @@
 		tag: 'lab-anssi-brique-hero',
 		props: {
       titre: { reflect: false, type: 'String', attribute: 'titre' },
-      soustitre: { reflect: false, type: 'String', attribute: 'soustitre' },
+      sousTitre: { reflect: false, type: 'String', attribute: 'sous-titre' },
 			illustration: { reflect: false, type: 'Object', attribute: 'illustration' },
       badge: { reflect: false, type: 'Boolean', attribute: 'badge' },
-			actionGauche: { reflect: false, type: 'Object', attribute: 'actionGauche' },
-			actionDroite: { reflect: false, type: 'Object', attribute: 'actionDroite' },
+			actionGauche: { reflect: false, type: 'Object', attribute: 'action-gauche' },
+			actionDroite: { reflect: false, type: 'Object', attribute: 'action-droite' },
 			partenaires: { reflect: false, type: 'Array', attribute: 'partenaires' },
 		}
 	}} />
@@ -17,7 +17,7 @@
   import type { Action, Image } from "$lib/types";
 
   export let titre: string;
-  export let soustitre: string;
+  export let sousTitre: string;
   export let illustration: Image;
 
   export let badge: boolean = false;
@@ -38,7 +38,7 @@
       {/if}
       <div class="textes">
         <h1>{titre}</h1>
-        <p>{soustitre}</p>
+        <p>{sousTitre}</p>
       </div>
       <div class="actions">
         <a role="button" class="action-gauche" href={actionGauche.lien} target="_blank">

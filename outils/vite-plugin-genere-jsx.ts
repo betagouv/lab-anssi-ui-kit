@@ -4,6 +4,17 @@ import type { Plugin } from "vite";
 import * as ts from "typescript";
 import * as prettier from "prettier";
 
+export function convertisProprietesTypesEnString(p: string) {
+  const proprieteNettoyee = p.trim().replace(/['";\s]+$/g, "");
+
+  const match = proprieteNettoyee.match(/^(\w+)(\??):\s*(.+)$/);
+  if (!match) return undefined;
+  const [, nom, optionnel] = match;
+
+  const nomKebab = nom.replace(/([A-Z])/g, "-$1").toLowerCase();
+  return nomKebab ? `"${nomKebab}"${optionnel}: string` : undefined;
+}
+
 export default function genereJSX(): Plugin {
   let repertoireSortie = "build";
   let fichierJsx = "lab-anssi-ui-kit.jsx.d.ts";
@@ -49,14 +60,14 @@ export default function genereJSX(): Plugin {
           typesJSX += `\t\t"${tag}": {\n`;
 
           const contenuFichierType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
-
-          const props = [...contenuFichierType.matchAll(/props:\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/gs)];
+          const props = [
+            ...contenuFichierType.matchAll(/props:\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/gs),
+          ];
           if (props[0]) {
-            const propsFormatees = props[0][1].split("\n").map((p) => {
-              const [nomProp] = p.replaceAll(" ", "").replaceAll(";", "").split(':');
-              return nomProp ? `${nomProp}: string` : undefined;
-            }).filter(p => !!p);
-
+            const propsFormatees = props[0][1]
+              .split("\n")
+              .map(convertisProprietesTypesEnString)
+              .filter((p) => !!p);
             for (const prop of propsFormatees) {
               typesJSX += `\t\t\t${prop}\n`;
             }
