@@ -14,17 +14,14 @@
     font-family: Marianne;
     padding: 48px 16px;
     text-align: left;
-    width: calc(100vw - 32px);
     color: white;
 
     @include a-partir-de(tablette) {
       padding: 72px 24px;
-      width: calc(100vw - 48px);
     }
 
     @include a-partir-de(desktop) {
       padding: 48px 24px;
-      width: calc(100vw - 48px);
     }
 
     &.primaire {
