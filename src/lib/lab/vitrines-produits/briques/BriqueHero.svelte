@@ -6,8 +6,8 @@
       soustitre: { reflect: false, type: 'String', attribute: 'soustitre' },
 			illustration: { reflect: false, type: 'Object', attribute: 'illustration' },
       badge: { reflect: false, type: 'Boolean', attribute: 'badge' },
-			actionGauche: { reflect: false, type: 'Object', attribute: 'actionGauche' },
-			actionDroite: { reflect: false, type: 'Object', attribute: 'actionDroite' },
+			actiongauche: { reflect: false, type: 'Object', attribute: 'actiongauche' },
+			actiondroite: { reflect: false, type: 'Object', attribute: 'actiondroite' },
 			partenaires: { reflect: false, type: 'Array', attribute: 'partenaires' },
 		}
 	}} />
@@ -21,8 +21,8 @@
   export let illustration: Image;
 
   export let badge: boolean = false;
-  export let actionGauche: Action;
-  export let actionDroite: Action;
+  export let actiongauche: Action;
+  export let actiondroite: Action;
   export let partenaires: Image[] = []
 </script>
 
@@ -41,11 +41,11 @@
         <p>{soustitre}</p>
       </div>
       <div class="actions">
-        <a role="button" class="action-gauche" href={actionGauche.lien} target="_blank">
-          {actionGauche.titre}
+        <a role="button" class="action-gauche" href={actiongauche.lien} target="_blank">
+          {actiongauche.titre}
         </a>
-        <a role="button" class="action-droite" href={actionDroite.lien} target="_blank">
-          {actionDroite.titre}
+        <a role="button" class="action-droite" href={actiondroite.lien} target="_blank">
+          {actiondroite.titre}
         </a>
       </div>
     </div>
