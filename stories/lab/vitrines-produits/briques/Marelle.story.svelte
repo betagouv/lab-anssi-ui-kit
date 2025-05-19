@@ -11,13 +11,17 @@
   <Hst.Variant title="MSS">
     <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
     <Marelle
-      titre=""
-      etapesmarelle={proprietesDeVariantsHero['mss'].marelle.etapes} />
+      titre={proprietesDeVariantsHero['mss'].marelle.titre}
+      etapesmarelle={proprietesDeVariantsHero['mss'].marelle.etapes}
+      action={proprietesDeVariantsHero['mss'].marelle.action}
+    />
   </Hst.Variant>
   <Hst.Variant title="MAC">
     <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
     <Marelle
-      titre="Comment réaliser des diagnostics cyber ?"
-      etapesmarelle={proprietesDeVariantsHero['mac'].marelle.etapes} />
+      titre={proprietesDeVariantsHero['mac'].marelle.titre}
+      etapesmarelle={proprietesDeVariantsHero['mac'].marelle.etapes}
+      action={proprietesDeVariantsHero['mac'].marelle.action}
+    />
   </Hst.Variant>
 </Hst.Story>

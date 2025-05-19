@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EtapeMarelle } from "$lib/types.js";
+  import type { EtapeMarelle } from "$lib/types";
 
   export let index: number;
   export let etapeMarelle: EtapeMarelle;
@@ -130,7 +130,7 @@
   }
 
   .marelle-etape > div > p {
-    margin: 0;
+    margin: 0 0 16px 0;
 
     font-size: 16px;
     line-height: 24px;
