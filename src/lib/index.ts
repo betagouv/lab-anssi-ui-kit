@@ -8,3 +8,4 @@ export { default as LienDiagnosticCyber } from "./mes-services-cyber/lien/LienDi
 export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDePage.svelte";
 export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Navigation.svelte";
 export { default as BriqueTitreMultimedia } from "./lab/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
+export { default as Marelle } from "./lab/vitrines-produits/briques/marelle/Marelle.svelte";

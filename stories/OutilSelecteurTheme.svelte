@@ -21,7 +21,11 @@
     "brique-hero-bouton-droite-texte",
     "titre-couleur-primaire",
     "brique-background-secondaire",
-    "brique-marelle-titre-couleur"
+    "brique-marelle-titre-couleur",
+    "brique-marelle-bouton-background",
+    "brique-marelle-bouton-background-hover",
+    "brique-marelle-bouton-background-active",
+    "brique-marelle-bouton-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -47,6 +51,11 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "#FFFFFF",
       "titre-couleur-primaire": "#09416A",
+      "brique-marelle-titre-couleur": "#0279D0",
+      "brique-marelle-bouton-background": "#0C5C98",
+      "brique-marelle-bouton-background-hover": "#0279D0",
+      "brique-marelle-bouton-background-active": "#0279D0",
+      "brique-marelle-bouton-texte": "#FFFFFF"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -67,7 +76,11 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "white",
       "titre-couleur-primaire": "#5D2A9D",
-      "brique-marelle-titre-couleur": "#5D2A9D"
+      "brique-marelle-titre-couleur": "#5D2A9D",
+      "brique-marelle-bouton-background": "#5D2A9D",
+      "brique-marelle-bouton-background-hover": "#9C51D0",
+      "brique-marelle-bouton-background-active": "#9C51D0",
+      "brique-marelle-bouton-texte": "#FFFFFF"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -88,7 +101,11 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "#FFFFFF",
       "titre-couleur-primaire": "#0D0C21",
-      "brique-marelle-titre-couleur": "#0D0C21"
+      "brique-marelle-titre-couleur": "#0D0C21",
+      "brique-marelle-bouton-background": "#FED980",
+      "brique-marelle-bouton-background-hover": "#ECCA79",
+      "brique-marelle-bouton-background-active": "#DDBD70",
+      "brique-marelle-bouton-texte": "#0D0C21"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -109,7 +126,11 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "#FFFFFF",
       "titre-couleur-primaire": "#272771",
-      "brique-marelle-titre-couleur": "#272771"
+      "brique-marelle-titre-couleur": "#272771",
+      "brique-marelle-bouton-background": "#272771",
+      "brique-marelle-bouton-background-hover": "#41419F",
+      "brique-marelle-bouton-background-active": "#41419F",
+      "brique-marelle-bouton-texte": "#FFFFFF"
     },
   };
 
