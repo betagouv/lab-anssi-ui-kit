@@ -20,11 +20,11 @@
   <BriqueHero titre="Mes​Services​Cyber"
               soustitre="Accédez aux services et ressources cyber proposés par l'Agence nationale de la sécurité des systèmes d'information et ses partenaires."
               illustration={imageAffichee}
-              actionGauche={{
+              actiongauche={{
                 titre: 'Découvrir les services adaptés à NIS2',
                 lien: "",
               }}
-              actionDroite={{
+              actiondroite={{
                 titre: "Découvrir le catalogue complet",
                 lien: "",
               }}
