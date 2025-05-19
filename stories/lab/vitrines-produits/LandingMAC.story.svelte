@@ -46,11 +46,11 @@
   <BriqueHero titre="Mon​Aide​Cyber"
               soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
               illustration={imageAffichee}
-              actionGauche={{
+              actiongauche={{
                 titre: 'Devenir Aidant cyber',
                 lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
               }}
-              actionDroite={{
+              actiondroite={{
                 titre: "Bénéficier d'un diagnostic cyber",
                 lien: "https://messervices.cyber.gouv.fr/cyberdepart",
               }}

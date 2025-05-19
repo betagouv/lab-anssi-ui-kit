@@ -27,11 +27,11 @@
   <BriqueHero titre="Mon​Service​Sécurisé"
               soustitre="L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement"
               illustration={imageAffichee}
-              actionGauche={{
+              actiongauche={{
                 titre: 'Commencer à sécuriser',
                 lien: "",
               }}
-              actionDroite={{
+              actiondroite={{
                 titre: "Être accompagné",
                 lien: "",
                 variation: 'secondaire'
