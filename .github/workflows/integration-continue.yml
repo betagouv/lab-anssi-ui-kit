@@ -28,5 +28,8 @@ jobs:
       - name: Exécuter les tests
         run: npm run test
 
+      - name: Builder le storybook
+        run: npm run story:build
+
       - name: Builder le package
         run: npm run build
