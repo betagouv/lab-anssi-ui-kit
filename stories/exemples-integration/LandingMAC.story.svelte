@@ -6,6 +6,8 @@
   import CarrouselTuiles from "../../src/lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
   import { BriqueTitreMultimedia } from "$lib";
+  import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
+  import { proprietesDeVariantsHero } from "./donneesProduits";
 
   export let Hst: Hst;
 
@@ -63,4 +65,7 @@
                            imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple")
                          }}
   />
+  <Marelle titre={proprietesDeVariantsHero['mac'].marelle.titre}
+           etapesmarelle={proprietesDeVariantsHero['mac'].marelle.etapes}
+           action={proprietesDeVariantsHero['mac'].marelle.action} />
 </Hst.Story>
