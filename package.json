@@ -16,8 +16,8 @@
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "prepare": "svelte-kit sync || echo ''",
     "prepack": "svelte-kit sync && svelte-package && npm run build:webcomponents && publint",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
+    "story:dev": "HISTOIRE_ENV=development histoire dev",
+    "story:build": "HISTOIRE_ENV=production histoire build",
     "test": "vitest"
   },
   "files": [
@@ -55,6 +55,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/svelte": "^5.2.4",
     "@types/node": "^22.13.5",
+    "dotenv": "^16.5.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-svelte": "^3.0.0",
