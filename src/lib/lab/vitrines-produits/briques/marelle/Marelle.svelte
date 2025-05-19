@@ -26,7 +26,7 @@
 
 <style lang="scss">
   .titre {
-    color: $bouton-background-primaire;
+    color: $brique-marelle-titre-couleur;
     text-align: center;
     font-weight: 700;
     font-size: 28px;

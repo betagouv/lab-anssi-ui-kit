@@ -21,6 +21,7 @@
     "brique-hero-bouton-droite-texte",
     "titre-couleur-primaire",
     "brique-background-secondaire",
+    "brique-marelle-titre-couleur"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -66,6 +67,7 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "white",
       "titre-couleur-primaire": "#5D2A9D",
+      "brique-marelle-titre-couleur": "#5D2A9D"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -86,6 +88,7 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "#FFFFFF",
       "titre-couleur-primaire": "#0D0C21",
+      "brique-marelle-titre-couleur": "#0D0C21"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -106,6 +109,7 @@
       "brique-hero-bouton-droite-background-active": "rgba(255, 255, 255, 0.16)",
       "brique-hero-bouton-droite-texte": "#FFFFFF",
       "titre-couleur-primaire": "#272771",
+      "brique-marelle-titre-couleur": "#272771"
     },
   };
 

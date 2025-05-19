@@ -69,6 +69,7 @@
 
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 8px;
     }
 
@@ -111,19 +112,6 @@
   }
 
   .illustration {
-/*      width: 288px;
-      height: 162px;
-
-      @include a-partir-de(tablette) {
-        width: 544px;
-        height: 306px;
-      }
-
-      @include a-partir-de(desktop) {
-        width: 380px;
-        height: 214px;
-      }*/
-
     img {
       width: 100%;
     }
@@ -154,10 +142,10 @@
   }
 
   .marelle-etape > div > p > b {
-    color: $bouton-background-primaire;
+    color: $brique-marelle-titre-couleur;
   }
 
   .marelle-etape > div > a {
-    color: $bouton-background-primaire;
+    color: $brique-marelle-titre-couleur;
   }
 </style>
