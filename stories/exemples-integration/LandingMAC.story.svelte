@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Hst } from "@histoire/plugin-svelte";
-  import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
-  import OutilSelecteurTheme from "../../OutilSelecteurTheme.svelte";
+  import BriqueHero from "../../src/lib/lab/vitrines-produits/briques/BriqueHero.svelte";
+  import OutilSelecteurTheme from "../OutilSelecteurTheme.svelte";
   import type { Action, Image, Tuiles } from "$lib/types";
-  import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
+  import CarrouselTuiles from "../../src/lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
   import { BriqueTitreMultimedia } from "$lib";
 
@@ -41,7 +41,7 @@
     }]
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/Landing MonAideCyber" icon="uis:web-grid-alt">
+<Hst.Story title="Exemples d'intégration/Landing MonAideCyber" icon="uis:web-grid-alt">
   <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
   <BriqueHero titre="Mon​Aide​Cyber"
               soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
