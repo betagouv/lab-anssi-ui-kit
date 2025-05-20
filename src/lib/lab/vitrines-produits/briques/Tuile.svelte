@@ -38,7 +38,7 @@
     &.premiere {
       margin-left: var(--espacement);
 
-      @include a-partir-de(desktop) {
+      @include a-partir-de(largeur-max-contenu) {
         margin-left: 0;
       }
     }
@@ -46,7 +46,7 @@
     &.derniere {
       margin-right: var(--espacement);
 
-      @include a-partir-de(desktop) {
+      @include a-partir-de(largeur-max-contenu) {
         margin-right: 0;
       }
     }

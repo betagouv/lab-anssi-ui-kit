@@ -4,6 +4,9 @@
 $largeur-max-contenu: 1200px;
 
 $points-de-rupture-a-partir-de: (
+  largeur-max-contenu: (
+    min-width: $largeur-max-contenu,
+  ),
   desktop: (
     min-width: 932px,
   ),
