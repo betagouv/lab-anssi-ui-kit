@@ -14,6 +14,7 @@
   section {
     font-family: Marianne;
     padding: 48px 16px;
+    box-sizing: border-box;
     text-align: left;
     color: white;
     width: 100vw;
