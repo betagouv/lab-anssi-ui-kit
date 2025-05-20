@@ -4,10 +4,10 @@
   export let titre: string;
   export let illustration: Image;
   export let contenu: string;
-  export let classe: string = '';
+  export let position: 'premiere' | 'derniere' | null = null;
 </script>
 
-<div class="tuile {classe ?? ''}">
+<div class="tuile {position ?? ''}">
   <div class="conteneur-image">
     <img src={illustration.lien} alt={illustration.alt} />
   </div>
@@ -15,7 +15,7 @@
   <span>{contenu}</span>
 </div>
 
-<style>
+<style lang="scss">
   .tuile {
     --couleur-texte: #000000;
     border-radius: 8px;
@@ -28,8 +28,28 @@
     gap: 12px;
     text-align: center;
     color: var(--couleur-texte);
-    width: 384px;
     min-width: 212px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    width: calc(100vw - 60px);
+    max-width: 384px;
+
+    &.premiere {
+      margin-left: var(--espacement);
+
+      @include a-partir-de(desktop) {
+        margin-left: 0;
+      }
+    }
+
+    &.derniere {
+      margin-right: var(--espacement);
+
+      @include a-partir-de(desktop) {
+        margin-right: 0;
+      }
+    }
   }
 
   p {

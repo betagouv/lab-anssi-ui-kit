@@ -1,9 +1,10 @@
 <script lang="ts">
   export let variation: 'primaire' | 'transparent' = 'primaire';
-
+  export let sansMargeHaute = false;
+  export let sansMargeLaterale = false;
 </script>
 
-<section class={variation}>
+<section class={variation} class:sans-marge-haute={sansMargeHaute} class:sans-marge-laterale={sansMargeLaterale}>
   <div class="contenu-brique">
     <slot />
   </div>
@@ -15,6 +16,16 @@
     padding: 48px 16px;
     text-align: left;
     color: white;
+    width: 100vw;
+
+    &.sans-marge-haute {
+      padding-top: 0;
+    }
+
+    &.sans-marge-laterale {
+      padding-left: 0;
+      padding-right: 0;
+    }
 
     @include a-partir-de(tablette) {
       padding: 72px 24px;
