@@ -94,17 +94,12 @@
         justify-content: center;
 
         span {
-          color: white;
-          font-size: 40px;
+          color: #FFFFFF;
+          font-size: 2rem;
           font-weight: bold;
-        }
 
-        @include a-partir-de(desktop) {
-          width: 56px;
-          height: 56px;
-
-          span {
-            font-size: 23px;
+          @include a-partir-de(desktop) {
+            font-size: 2.5rem;
           }
         }
       }
@@ -120,23 +115,23 @@
   .marelle-etape > div > h4 {
     margin: 0;
 
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 28px;
 
     @include a-partir-de(desktop) {
-      font-size: 22px;
+      font-size: 1.375rem;
       line-height: 28px;
     }
   }
 
   .marelle-etape > div > p {
-    margin: 0 0 16px 0;
+    margin: 0 0 8px 0;
 
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 24px;
 
     @include a-partir-de(desktop) {
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 24px;
     }
   }
