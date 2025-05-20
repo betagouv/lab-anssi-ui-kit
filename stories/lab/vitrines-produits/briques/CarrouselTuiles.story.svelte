@@ -7,69 +7,39 @@
 
   export let Hst: Hst;
 
-  const tuiles: { [service: string]: Tuiles } = {
-    'mss': [
-      {
-        titre: 'Gratuit, 100% en ligne et collaboratif',
-        contenu: '',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
-      },
-      {
-        titre: 'Accessible à toutes les entités publiques',
-        contenu: '',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
-      },
-      {
-        titre: "Conçu par les spécialistes de l'ANSSI",
-        contenu: '',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
+  let tuiles: Tuiles = [
+    {
+      titre: "Un dispositif étatique",
+      contenu: "MonAideCyber est proposé par l’Agence nationale de la sécurité des systèmes d’information.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: ""
       }
-    ],
-    'mac': [
-      {
-        titre: 'Un dispositif étatique',
-        contenu: 'MonAideCyber est proposé par l’Agence nationale de la sécurité des systèmes d’information.',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
-      },
-      {
-        titre: 'Une communauté de confiance',
-        contenu: 'Les Aidants cyber sont issus de la sphère publique ou sont membres d’associations œuvrant pour un numérique de confiance.',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
-      },
-      {
-        titre: 'Au service de l’intérêt général',
-        contenu: 'Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l’action.',
-        illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
+    },
+    {
+      titre: "Une communauté de confiance",
+      contenu: "Les Aidants cyber sont issus de la sphère publique ou sont membres d’associations œuvrant pour un numérique de confiance.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: ""
       }
-    ],
-  }
+    },
+    {
+      titre: "Au service de l’intérêt général",
+      contenu: "Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l’action.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: ""
+      }
+    }
+  ];
 </script>
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Carrousel de tuiles" icon="material-symbols:brick-outline">
-  <Hst.Variant title="MSS">
-    <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
-    <CarrouselTuiles tuiles={tuiles['mss']} />
-  </Hst.Variant>
-  <Hst.Variant title="MAC">
-    <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
-    <CarrouselTuiles tuiles={tuiles['mac']} />
-  </Hst.Variant>
+  <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
+  <CarrouselTuiles {tuiles} />
+
+  <svelte:fragment slot="controls">
+    <Hst.Json title="Tuiles" bind:value={tuiles} />
+  </svelte:fragment>
 </Hst.Story>
