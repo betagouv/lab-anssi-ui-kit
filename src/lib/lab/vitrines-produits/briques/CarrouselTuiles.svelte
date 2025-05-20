@@ -30,14 +30,14 @@
 </script>
 
 <div class="carrousel-tuiles primaire">
-  <Brique variation="transparent">
+  <Brique variation="transparent" sansMargeHaute sansMargeLaterale>
     <div class="conteneur-tuiles" bind:this={elementCarrousel}>
-      {#each tuiles as tuile}
+      {#each tuiles as tuile, idx (idx)}
         <Tuile
           illustration={tuile.illustration}
           titre={tuile.titre}
           contenu={tuile.contenu}
-          classe="tuile-presentation"
+          position={idx === 0 ? "premiere" : idx === tuiles.length - 1 ? "derniere" : null}
         />
       {/each}
     </div>
@@ -50,20 +50,21 @@
 
 <style lang="scss">
   .carrousel-tuiles {
-    padding: 52px 0;
+    --espacement: 16px;
+    padding: 0;
 
     &.primaire {
       background: linear-gradient(
               to bottom,
               $centre-aide-background-entete 0%,
-              $centre-aide-background-entete 35%,
-              transparent 35%,
+              $centre-aide-background-entete 30%,
+              transparent 30%,
               transparent 100%
       );
     }
   }
+
   .conteneur-tuiles {
-    --espacement: 16px;
     display: flex;
     overflow-x: auto;
     gap: var(--espacement);
@@ -72,27 +73,11 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 0 32px;
+    padding: 0 0;
   }
 
   .conteneur-tuiles::-webkit-scrollbar {
     display: none;
-  }
-
-  .tuile-presentation:first-of-type {
-    margin-left: var(--espacement);
-  }
-
-  .tuile-presentation:last-of-type {
-    margin-right: var(--espacement);
-  }
-
-  .tuile-presentation {
-    box-sizing: border-box;
-    scroll-snap-align: center;
-    flex-shrink: 0;
-    width: calc(100vw - 60px);
-    max-width: 266px;
   }
 
   .conteneur-actions {
@@ -114,6 +99,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    font-family: Marianne;
   }
 
   .conteneur-actions .precedent:before,
@@ -122,7 +108,6 @@
     display: flex;
     width: 24px;
     height: 24px;
-    filter: brightness(0) invert(1);
     line-height: 28px;
   }
 
@@ -136,23 +121,21 @@
     text-decoration-thickness: 2px;
   }
 
-  @media screen and (min-width: 577px) {
-    .conteneur-tuiles {
+  @include a-partir-de(desktop) {
+    .carrousel-tuiles {
       --espacement: 24px;
-    }
-  }
 
-  @media screen and (min-width: 1247px) {
-    .conteneur-actions {
-      display: none;
-    }
+      .conteneur-actions {
+        display: none;
+      }
 
-    .tuile-presentation:first-of-type {
-      margin-left: 0;
-    }
+      .tuile-presentation:first-of-type {
+        margin-left: 0;
+      }
 
-    .tuile-presentation:last-of-type {
-      margin-right: 0;
+      .tuile-presentation:last-of-type {
+        margin-right: 0;
+      }
     }
   }
 </style>
