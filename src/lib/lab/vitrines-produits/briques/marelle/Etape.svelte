@@ -86,7 +86,7 @@
         width: 72px;
         height: 72px;
 
-        background: $centre-aide-background-hover-lien;
+        background: $brique-marelle-etapes-numero-etape-couleur;
         border-radius: 50%;
 
         display: flex;
@@ -137,11 +137,11 @@
   }
 
   .marelle-etape > div > p > b {
-    color: $brique-marelle-titre-couleur;
+    color: $brique-marelle-etapes-lien-couleur;
   }
 
   .marelle-etape > div > a {
-    color: $brique-marelle-titre-couleur;
+    color: $brique-marelle-etapes-lien-couleur;
     display: inline-flex;
     border: none;
     text-decoration: underline;
