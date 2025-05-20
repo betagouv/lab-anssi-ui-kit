@@ -147,5 +147,10 @@
 
   .marelle-etape > div > a {
     color: $brique-marelle-titre-couleur;
+    display: inline-flex;
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
   }
 </style>
