@@ -60,7 +60,7 @@
                          multimedia={{
                            source: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4',
                            sourcesoustitres: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Nouvelle_doctrine_homologation.vtt',
-                           imagedecouverture: genereImageDePlaceholder(2000, 900, "Vidéo d'exemple")
+                           imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple")
                          }}
   />
 </Hst.Story>

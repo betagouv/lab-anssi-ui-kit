@@ -16,21 +16,21 @@
       <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
       <BriqueTitreMultimedia
         titre="Titre pour MSS"
-        multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(2000, 900, "Vidéo d'exemple") }}
+        multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple") }}
       />
     </Hst.Variant>
   <Hst.Variant title="MAC">
     <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
     <BriqueTitreMultimedia
       titre="Titre pour MAC"
-      multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(2000, 900, "Vidéo d'exemple") }}
+      multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple") }}
     />
   </Hst.Variant>
   <Hst.Variant title="MSC">
     <OutilSelecteurTheme themeSelectionne="MesServicesCyber" />
     <BriqueTitreMultimedia
       titre="Titre pour MSC"
-      multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(2000, 900, "Vidéo d'exemple") }}
+      multimedia={{ source, sourcesoustitres: sousTitres, imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple") }}
     />
   </Hst.Variant>
 

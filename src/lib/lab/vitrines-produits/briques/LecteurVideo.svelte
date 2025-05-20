@@ -23,17 +23,8 @@
 
 <style lang="scss">
   video {
-    width: 328px;
-    height: 184px;
-
-    @include a-partir-de(tablette) {
-      width: 544px;
-      height: 305px;
-    }
-
-    @include a-partir-de(desktop) {
-      width: 792px;
-      height: 444px;
-    }
+    width: 100%;
+    max-width: 792px;
+    max-height: 446px;
   }
 </style>
