@@ -43,11 +43,11 @@
       color: $brique-marelle-titre-couleur;
       text-align: center;
       font-weight: 700;
-      font-size: 28px;
+      font-size: 1.75rem;
       line-height: 36px;
 
       @include a-partir-de(desktop) {
-        font-size: 32px;
+        font-size: 2rem;
         line-height: 40px;
       }
     }
