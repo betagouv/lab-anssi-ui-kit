@@ -63,7 +63,7 @@
   }
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/Briques/Carrousel de tuiles" icon="material-symbols:brick-outline">
+<Hst.Story title="Composants/Lab/Sites vitrines/Carrousel de tuiles" icon="material-symbols:brick-outline">
   <Hst.Variant title="MSS">
     <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
     <CarrouselTuiles tuiles={tuiles['mss']} />
