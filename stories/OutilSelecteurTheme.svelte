@@ -28,6 +28,8 @@
     "brique-marelle-bouton-background-hover",
     "brique-marelle-bouton-background-active",
     "brique-marelle-bouton-texte",
+    "brique-temoignages-titre-couleur",
+    "brique-temoignages-icone-couleur"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -59,7 +61,9 @@
       "brique-marelle-bouton-background": "#0C5C98",
       "brique-marelle-bouton-background-hover": "#0279D0",
       "brique-marelle-bouton-background-active": "#0279D0",
-      "brique-marelle-bouton-texte": "#FFFFFF"
+      "brique-marelle-bouton-texte": "#FFFFFF",
+      "brique-temoignages-titre-couleur": "#09416A",
+      "brique-temoignages-icone-couleur": "#0279D0"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -86,7 +90,9 @@
       "brique-marelle-bouton-background": "#5D2A9D",
       "brique-marelle-bouton-background-hover": "#9C51D0",
       "brique-marelle-bouton-background-active": "#9C51D0",
-      "brique-marelle-bouton-texte": "#FFFFFF"
+      "brique-marelle-bouton-texte": "#FFFFFF",
+      "brique-temoignages-titre-couleur": "#5D2A9D",
+      "brique-temoignages-icone-couleur": "#9C51D0"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -113,7 +119,9 @@
       "brique-marelle-bouton-background": "#FED980",
       "brique-marelle-bouton-background-hover": "#ECCA79",
       "brique-marelle-bouton-background-active": "#DDBD70",
-      "brique-marelle-bouton-texte": "#0D0C21"
+      "brique-marelle-bouton-texte": "#0D0C21",
+      "brique-temoignages-titre-couleur": "#0D0C21",
+      "brique-temoignages-icone-couleur": "#FED980"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -140,7 +148,9 @@
       "brique-marelle-bouton-background": "#272771",
       "brique-marelle-bouton-background-hover": "#41419F",
       "brique-marelle-bouton-background-active": "#41419F",
-      "brique-marelle-bouton-texte": "#FFFFFF"
+      "brique-marelle-bouton-texte": "#FFFFFF",
+      "brique-temoignages-titre-couleur": "#272771",
+      "brique-temoignages-icone-couleur": "#41419F"
     },
   };
 
