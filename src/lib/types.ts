@@ -21,6 +21,12 @@ export type Tuiles = {
 export type EtapeMarelle = {
   titre: string;
   description: string;
-  lien?: { href: string; texte: string; target: string; };
+  lien?: { href: string; texte: string; target: string };
   illustration: Image;
-}
+};
+
+export type Temoignage = {
+  auteur: string;
+  citation: string;
+  source: string;
+};
