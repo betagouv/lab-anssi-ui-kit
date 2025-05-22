@@ -7,6 +7,7 @@
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
   import { BriqueTitreMultimedia } from "$lib";
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
+  import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
 
   export let Hst: Hst;
 
@@ -91,4 +92,17 @@
              titre: 'Action',
              lien: '#'
            }} />
+  <Temoignages titre="Les témoignages de nos Aidants cyber"
+    temoignages={[
+      {
+        citation: "Encore merci pour cet outil qui, une fois la communauté d’aidants réunionnaise structurée et formée, nous aidera grandement dans le passage à l’échelle.",
+        auteur: "Matthieu D.",
+        source: 'Un utilisateur de La Réunion (974)'
+      },
+            {
+        citation: "MonAideCyber remplit très bien sa mission, et le fait de pouvoir tout de suite donner un rapport aux interlocuteurs est un réel atout.",
+        auteur: "Didier L.",
+        source: 'Un Aidant cyber, réserviste de la Police, dans le Rhône (69)'
+      }
+    ]}/>
 </Hst.Story>
