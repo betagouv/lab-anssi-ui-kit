@@ -29,7 +29,11 @@
     "brique-marelle-bouton-background-active",
     "brique-marelle-bouton-texte",
     "brique-temoignages-titre-couleur",
-    "brique-temoignages-icone-couleur"
+    "brique-temoignages-icone-couleur",
+    "brique-contenu-deux-colonnes-action-bouton-background",
+    "brique-contenu-deux-colonnes-action-bouton-background-hover",
+    "brique-contenu-deux-colonnes-action-bouton-background-active",
+    "brique-contenu-deux-colonnes-action-bouton-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -63,7 +67,11 @@
       "brique-marelle-bouton-background-active": "#0279D0",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#09416A",
-      "brique-temoignages-icone-couleur": "#0279D0"
+      "brique-temoignages-icone-couleur": "#0279D0",
+      "brique-contenu-deux-colonnes-action-bouton-background": "#FFFFFF",
+      "brique-contenu-deux-colonnes-action-bouton-background-hover": "#F6F6F6",
+      "brique-contenu-deux-colonnes-action-bouton-background-active": "#F6F6F6",
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#0279D0"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -92,7 +100,11 @@
       "brique-marelle-bouton-background-active": "#9C51D0",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#5D2A9D",
-      "brique-temoignages-icone-couleur": "#9C51D0"
+      "brique-temoignages-icone-couleur": "#9C51D0",
+      "brique-contenu-deux-colonnes-action-bouton-background": "white",
+      "brique-contenu-deux-colonnes-action-bouton-background-hover": "#F6F6F6",
+      "brique-contenu-deux-colonnes-action-bouton-background-active": "#F6F6F6",
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#5D2A9D"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -121,7 +133,11 @@
       "brique-marelle-bouton-background-active": "#DDBD70",
       "brique-marelle-bouton-texte": "#0D0C21",
       "brique-temoignages-titre-couleur": "#0D0C21",
-      "brique-temoignages-icone-couleur": "#FED980"
+      "brique-temoignages-icone-couleur": "#FED980",
+      "brique-contenu-deux-colonnes-action-bouton-background": "#FED980",
+      "brique-contenu-deux-colonnes-action-bouton-background-hover": "#ECCA79",
+      "brique-contenu-deux-colonnes-action-bouton-background-active": "#DDBD70",
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#0D0C21"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -150,7 +166,11 @@
       "brique-marelle-bouton-background-active": "#41419F",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#272771",
-      "brique-temoignages-icone-couleur": "#41419F"
+      "brique-temoignages-icone-couleur": "#41419F",
+      "brique-contenu-deux-colonnes-action-bouton-background": "#FFFFFF",
+      "brique-contenu-deux-colonnes-action-bouton-background-hover": "#FFFFFF",
+      "brique-contenu-deux-colonnes-action-bouton-background-active": "#FFFFFF",
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#272771"
     },
   };
 
