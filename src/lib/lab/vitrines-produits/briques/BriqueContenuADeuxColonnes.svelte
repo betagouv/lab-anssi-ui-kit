@@ -7,12 +7,13 @@
   export let titre: string;
   export let paragraphe: string;
   export let action: Action | undefined;
+  export let ordre: 'texte-gauche' | 'texte-droite' = 'texte-gauche';
 
   export let illustration: Image;
 </script>
 
 <Brique variation="primaire">
-  <div class="grille-contenu">
+  <div class={`grille-contenu ${ordre}`}>
     <div class="illustration">
       <img src={illustration.lien} alt={illustration.alt} />
     </div>
@@ -42,6 +43,14 @@
       grid-template-columns: 1fr 1fr;
       grid-template-areas: 'contenu illustration';
       column-gap: 24px;
+
+      &.texte-gauche {
+        grid-template-areas: 'contenu illustration';
+      }
+
+      &.texte-droite {
+        grid-template-areas: 'illustration contenu';
+      }
     }
 
     .contenu {
