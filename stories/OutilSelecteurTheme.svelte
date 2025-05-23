@@ -29,7 +29,12 @@
     "brique-marelle-bouton-background-active",
     "brique-marelle-bouton-texte",
     "brique-temoignages-titre-couleur",
-    "brique-temoignages-icone-couleur"
+    "brique-temoignages-icone-couleur",
+    "brique-presentation-anssi-titre-couleur",
+    "brique-presentation-anssi-bouton-background",
+    "brique-presentation-anssi-bouton-background-hover",
+    "brique-presentation-anssi-bouton-background-active",
+    "brique-presentation-anssi-bouton-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -63,7 +68,12 @@
       "brique-marelle-bouton-background-active": "#0279D0",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#09416A",
-      "brique-temoignages-icone-couleur": "#0279D0"
+      "brique-temoignages-icone-couleur": "#0279D0",
+      "brique-presentation-anssi-titre-couleur": "#09416A",
+      "brique-presentation-anssi-bouton-background": "transparent",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#0279D0"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -92,7 +102,12 @@
       "brique-marelle-bouton-background-active": "#9C51D0",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#5D2A9D",
-      "brique-temoignages-icone-couleur": "#9C51D0"
+      "brique-temoignages-icone-couleur": "#9C51D0",
+      "brique-presentation-anssi-titre-couleur": "#5D2A9D",
+      "brique-presentation-anssi-bouton-background": "#FFFFFF",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#5D2A9D"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -121,7 +136,12 @@
       "brique-marelle-bouton-background-active": "#DDBD70",
       "brique-marelle-bouton-texte": "#0D0C21",
       "brique-temoignages-titre-couleur": "#0D0C21",
-      "brique-temoignages-icone-couleur": "#FED980"
+      "brique-temoignages-icone-couleur": "#FED980",
+      "brique-presentation-anssi-titre-couleur": "#0D0C21",
+      "brique-presentation-anssi-bouton-background": "transparent",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#0D0C21"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -150,7 +170,12 @@
       "brique-marelle-bouton-background-active": "#41419F",
       "brique-marelle-bouton-texte": "#FFFFFF",
       "brique-temoignages-titre-couleur": "#272771",
-      "brique-temoignages-icone-couleur": "#41419F"
+      "brique-temoignages-icone-couleur": "#41419F",
+      "brique-presentation-anssi-titre-couleur": "#272771",
+      "brique-presentation-anssi-bouton-background": "#FFFFFF",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#272771"
     },
   };
 
