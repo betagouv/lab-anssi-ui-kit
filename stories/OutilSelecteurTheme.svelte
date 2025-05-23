@@ -34,6 +34,11 @@
     "brique-contenu-deux-colonnes-action-bouton-background-hover",
     "brique-contenu-deux-colonnes-action-bouton-background-active",
     "brique-contenu-deux-colonnes-action-bouton-texte",
+    "brique-presentation-anssi-titre-couleur",
+    "brique-presentation-anssi-bouton-background",
+    "brique-presentation-anssi-bouton-background-hover",
+    "brique-presentation-anssi-bouton-background-active",
+    "brique-presentation-anssi-bouton-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -71,7 +76,12 @@
       "brique-contenu-deux-colonnes-action-bouton-background": "#FFFFFF",
       "brique-contenu-deux-colonnes-action-bouton-background-hover": "#F6F6F6",
       "brique-contenu-deux-colonnes-action-bouton-background-active": "#F6F6F6",
-      "brique-contenu-deux-colonnes-action-bouton-texte": "#0279D0"
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#0279D0",
+      "brique-presentation-anssi-titre-couleur": "#09416A",
+      "brique-presentation-anssi-bouton-background": "transparent",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#0279D0"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -104,7 +114,12 @@
       "brique-contenu-deux-colonnes-action-bouton-background": "white",
       "brique-contenu-deux-colonnes-action-bouton-background-hover": "#F6F6F6",
       "brique-contenu-deux-colonnes-action-bouton-background-active": "#F6F6F6",
-      "brique-contenu-deux-colonnes-action-bouton-texte": "#5D2A9D"
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#5D2A9D",
+      "brique-presentation-anssi-titre-couleur": "#5D2A9D",
+      "brique-presentation-anssi-bouton-background": "#FFFFFF",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#5D2A9D"
     },
     MesServicesCyber: {
       "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
@@ -137,7 +152,12 @@
       "brique-contenu-deux-colonnes-action-bouton-background": "#FED980",
       "brique-contenu-deux-colonnes-action-bouton-background-hover": "#ECCA79",
       "brique-contenu-deux-colonnes-action-bouton-background-active": "#DDBD70",
-      "brique-contenu-deux-colonnes-action-bouton-texte": "#0D0C21"
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#0D0C21",
+      "brique-presentation-anssi-titre-couleur": "#0D0C21",
+      "brique-presentation-anssi-bouton-background": "transparent",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#0D0C21"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -170,7 +190,12 @@
       "brique-contenu-deux-colonnes-action-bouton-background": "#FFFFFF",
       "brique-contenu-deux-colonnes-action-bouton-background-hover": "#FFFFFF",
       "brique-contenu-deux-colonnes-action-bouton-background-active": "#FFFFFF",
-      "brique-contenu-deux-colonnes-action-bouton-texte": "#272771"
+      "brique-contenu-deux-colonnes-action-bouton-texte": "#272771",
+      "brique-presentation-anssi-titre-couleur": "#272771",
+      "brique-presentation-anssi-bouton-background": "#FFFFFF",
+      "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
+      "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
+      "brique-presentation-anssi-bouton-texte": "#272771"
     },
   };
 
