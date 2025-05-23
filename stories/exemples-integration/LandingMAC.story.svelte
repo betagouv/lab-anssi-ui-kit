@@ -8,6 +8,7 @@
   import { BriqueTitreMultimedia } from "$lib";
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
   import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
+  import BriqueContenuADeuxColonnes from "$lib/lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
 
   export let Hst: Hst;
 
@@ -105,4 +106,10 @@
         source: 'Un Aidant cyber, réserviste de la Police, dans le Rhône (69)'
       }
     ]}/>
+  <BriqueContenuADeuxColonnes titre="Rejoignez la communauté des Aidants cyber !"
+                              paragraphe="En tant que membre de la communauté, vous pourrez : <br /> - Echanger directement avec les autres Aidants cyber <br /> - Participer activement au développement du diagnostic cyber en nous partageant vos besoins et suggestions d'amélioration."
+                              action={{ titre: 'Rejoindre la communauté', lien: '#', }}
+                              ordre="texte-droite"
+                              illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: ''}}
+  ></BriqueContenuADeuxColonnes>
 </Hst.Story>
