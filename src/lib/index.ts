@@ -11,4 +11,5 @@ export { default as BriqueTitreMultimedia } from "./lab/vitrines-produits/brique
 export { default as Marelle } from "./lab/vitrines-produits/briques/marelle/Marelle.svelte";
 export { default as Temoignages } from "./lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
 export { default as BriqueContenuADeuxColonnes } from "./lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
+export { default as PresentationANSSI } from "./lab/vitrines-produits/briques/PresentationANSSI.svelte";
 export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
