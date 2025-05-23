@@ -22,6 +22,7 @@
   .alerte {
     display: flex;
     border: 1px solid #0163cb;
+    min-width: 200px;
   }
   .contenu {
     flex: 1;
@@ -29,8 +30,8 @@
     color: $texte-secondaire;
   }
   .icone {
-    width: 24px;
-    padding: 8px;
+    width: 40px;
+    min-width: 40px;
     background: no-repeat center 8px #0163cb url-asset("/icones/information.svg");
   }
   .fermer {
