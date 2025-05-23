@@ -9,8 +9,20 @@
   let titre = "Mon​Service​Sécurisé";
   let paragraphe = "L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement";
   let illustration = { lien: genereImageDePlaceholder(600, 400, 'Placeholder'), alt: "Logo placeholder" };
-  let action = { titre: "Commencer à sécuriser", lien: "#" };
-  let ordre: 'texte-gauche' | 'texte-droite' = 'texte-gauche'
+  let comporteUneAction = false;
+  let action: { titre: string; lien: string } | undefined;
+  $: action = comporteUneAction ? { titre: "Commencer à sécuriser", lien: "#" } : undefined;
+
+  let ordre: 'texte-gauche' | 'texte-droite' = 'texte-gauche';
+
+  const options = [
+    {
+      value: "texte-gauche", label: "Contenu à gauche",
+    },
+    {
+      value: "texte-droite", label: "Contenu à droite",
+    }
+  ]
 </script>
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Brique Contenu à deux colonnes" icon="material-symbols:brick-outline">
@@ -18,10 +30,13 @@
   <BriqueContenuADeuxColonnes {titre} {paragraphe} {illustration} {action} {ordre} />
 
   <svelte:fragment slot="controls">
-    <Hst.Text title="Ordre des éléments" bind:value={ordre} />
+    <Hst.Select title="Position du contenu" {options} bind:value={ordre} />
     <Hst.Text title="Titre" bind:value={titre} />
     <Hst.Text title="Texte" bind:value={paragraphe} />
+    <Hst.Checkbox title="Comporte une action ?" bind:value={comporteUneAction}/>
+    {#if comporteUneAction}
+      <Hst.Json title="Action" bind:value={action} />
+    {/if}
     <Hst.Json title="Illustration" bind:value={illustration} />
-    <Hst.Json title="Action (texte-gauche ou texte-droite)" bind:value={action} />
   </svelte:fragment>
 </Hst.Story>
