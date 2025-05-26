@@ -9,6 +9,7 @@
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
   import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
   import BriqueContenuADeuxColonnes from "$lib/lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
+  import PresentationANSSI from "$lib/lab/vitrines-produits/briques/PresentationANSSI.svelte";
   import RejoindreLaCommunaute from "$lib/lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
 
   export let Hst: Hst;
@@ -118,4 +119,5 @@
                          action={{ titre: 'Rejoindre la communauté', lien: '#', }}
                          illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: ''}}
   />
+  <PresentationANSSI />
 </Hst.Story>
