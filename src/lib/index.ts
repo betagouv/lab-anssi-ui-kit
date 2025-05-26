@@ -10,3 +10,4 @@ export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Naviga
 export { default as BriqueTitreMultimedia } from "./lab/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
 export { default as Marelle } from "./lab/vitrines-produits/briques/marelle/Marelle.svelte";
 export { default as BriqueContenuADeuxColonnes } from "./lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
+export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
