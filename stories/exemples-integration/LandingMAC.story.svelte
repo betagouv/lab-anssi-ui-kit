@@ -9,6 +9,7 @@
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
   import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
   import BriqueContenuADeuxColonnes from "$lib/lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
+  import RejoindreLaCommunaute from "$lib/lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
 
   export let Hst: Hst;
 
@@ -112,4 +113,9 @@
                               ordre="texte-droite"
                               illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: ''}}
   ></BriqueContenuADeuxColonnes>
+  <RejoindreLaCommunaute titre="Rejoignez la communauté des Aidants cyber !"
+                         raisons={['Echanger directement avec les autres Aidants cyber', 'Participer activement au développement du diagnostic cyber en nous partageant vos besoins et suggestions d\'amélioration']}
+                         action={{ titre: 'Rejoindre la communauté', lien: '#', }}
+                         illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: ''}}
+  />
 </Hst.Story>
