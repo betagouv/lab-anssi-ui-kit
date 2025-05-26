@@ -9,5 +9,6 @@ export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDe
 export { default as SuiteCyberNavigation } from "./suite-cyber/navigation/Navigation.svelte";
 export { default as BriqueTitreMultimedia } from "./lab/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
 export { default as Marelle } from "./lab/vitrines-produits/briques/marelle/Marelle.svelte";
+export { default as Temoignages } from "./lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
 export { default as BriqueContenuADeuxColonnes } from "./lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
 export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
