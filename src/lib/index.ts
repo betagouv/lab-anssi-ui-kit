@@ -2,7 +2,7 @@ export { default as Alerte } from "./Alerte.svelte";
 export { default as CentreAide } from "./CentreAide.svelte";
 export { default as ResumePssi } from "./lab/ResumePssi.svelte";
 export { default as BriqueHero } from "./lab/vitrines-produits/briques/BriqueHero.svelte";
-export { default as CarrouselTuiles } from "./lab/vitrines-produits/briques/CarrouselTuiles.svelte";
+export { default as CarrouselTuiles } from "./lab/vitrines-produits/briques/CarrouselTuiles/CarrouselTuiles.svelte";
 export { default as MesServicesCyberBandeau } from "./mes-services-cyber/bandeau/Bandeau.svelte";
 export { default as LienDiagnosticCyber } from "./mes-services-cyber/lien/LienDiagnosticCyber.svelte";
 export { default as NavigationPiedDePage } from "./pied-de-page/NavigationPiedDePage.svelte";

@@ -10,6 +10,8 @@
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Temoignage } from "$lib/types";
   import IconeTemoignage from "$lib/lab/vitrines-produits/briques/temoignages/IconeTemoignage.svelte";
+  import IconeFlecheGauche from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
+  import IconeFlecheDroite from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
   export let titre: string = "Les avis de nos utilisateurs";
   export let temoignages: Temoignage[] = [];
@@ -45,8 +47,14 @@
         {/each}
       </div>
       <div class="conteneur-actions">
-        <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}>Précédent</button>
-        <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}>Suivant</button>
+        <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}>
+          <span class="icone"><IconeFlecheGauche /></span>
+          Précédent
+        </button>
+        <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}>
+          Suivant
+          <span class="icone"><IconeFlecheDroite /></span>
+        </button>
       </div>
     </div>
   </div>
@@ -170,7 +178,7 @@
         button {
           background: none;
           border: none;
-          color: $texte-dsfr;
+          color: $brique-temoignages-bouton-action-texte-couleur;
           font-size: 1.125rem;
           font-weight: 400;
           line-height: 1.75rem;
@@ -178,20 +186,12 @@
           display: flex;
           align-items: center;
           gap: 8px;
-          font-family: Marianne;
         }
 
-        .precedent:before,
-        .suivant:after {
-          content: url-asset('/icones/fleche_gauche_bleue.svg');
+        .precedent > .icone,
+        .suivant > .icone {
           display: flex;
-          width: 24px;
-          height: 24px;
-          line-height: 1.75rem;
-        }
-
-        .suivant:after {
-          transform: rotate(180deg);
+          align-items: center;
         }
 
         button:hover {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Hst } from "@histoire/plugin-svelte";
-  import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
+  import CarrouselTuiles from "../../../../src/lib/lab/vitrines-produits/briques/CarrouselTuiles/CarrouselTuiles.svelte";
   import type { Tuiles } from "$lib/types";
   import OutilSelecteurTheme from "../../../OutilSelecteurTheme.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
