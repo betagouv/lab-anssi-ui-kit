@@ -9,6 +9,8 @@
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import Tuile from "$lib/lab/vitrines-produits/briques/Tuile.svelte";
   import type { Tuiles } from "$lib/types.js";
+  import IconeFlecheGauche from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
+  import IconeFlecheDroite from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
   export let tuiles: Tuiles = [];
 
@@ -42,8 +44,14 @@
       {/each}
     </div>
     <div class="conteneur-actions">
-      <button class="precedent" on:click={precedent}>Précédent</button>
-      <button class="suivant" on:click={suivant}>Suivant</button>
+      <button class="precedent" on:click={precedent}>
+        <span class="icone"><IconeFlecheGauche /></span>
+        Précédent
+      </button>
+      <button class="suivant" on:click={suivant}>
+        Suivant
+        <span class="icone"><IconeFlecheDroite /></span>
+      </button>
     </div>
   </Brique>
 </div>
@@ -91,7 +99,7 @@
   .conteneur-actions button {
     background: none;
     border: none;
-    color: $texte-dsfr;
+    color: $brique-carrousel-bouton-action-texte-couleur;
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
@@ -99,20 +107,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: Marianne;
   }
 
-  .conteneur-actions .precedent:before,
-  .conteneur-actions .suivant:after {
-    content: url-asset('/icones/fleche_gauche_bleue.svg');
+  .conteneur-actions .precedent > .icone,
+  .conteneur-actions .suivant > .icone {
     display: flex;
-    width: 24px;
-    height: 24px;
-    line-height: 28px;
-  }
-
-  .conteneur-actions .suivant:after {
-    transform: rotate(180deg);
+    align-items: center;
   }
 
   .conteneur-actions button:hover {

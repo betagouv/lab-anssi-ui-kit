@@ -3,7 +3,7 @@
   import BriqueHero from "../../src/lib/lab/vitrines-produits/briques/BriqueHero.svelte";
   import OutilSelecteurTheme from "../OutilSelecteurTheme.svelte";
   import type { Action, Image, Tuiles } from "$lib/types";
-  import CarrouselTuiles from "../../src/lib/lab/vitrines-produits/briques/CarrouselTuiles.svelte";
+  import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/CarrouselTuiles.svelte";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
   import { BriqueTitreMultimedia } from "$lib";
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
