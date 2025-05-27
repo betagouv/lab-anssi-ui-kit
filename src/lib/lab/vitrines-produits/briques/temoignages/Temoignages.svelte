@@ -48,7 +48,7 @@
         {/each}
       </div>
       {#if temoignages.length > 1}
-        <div class="conteneur-actions">
+        <div class="conteneur-actions" class:deux-ou-moins={temoignages.length <= 2}>
           <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}
             >
           <span class="icone"><IconeFlecheGauche /></span>Précédent
@@ -175,8 +175,10 @@
         justify-content: center;
         gap: 24px;
 
-        &.un-seul-temoignagne {
-          display: none;
+        &.deux-ou-moins {
+          @include a-partir-de(tablette-grand) {
+            display: none;
+          }
         }
 
         button {
