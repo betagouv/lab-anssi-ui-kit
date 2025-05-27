@@ -4,28 +4,45 @@
   import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
 
   export let Hst: Hst;
-  let titre = 'Titre';
+  let titre = "Titre";
   let temoignages = [
     {
-      citation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
+      citation:
+        "A Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi.",
       source: "IMT",
-      auteur: "Robert Malek"
+      auteur: "Mme. A",
     },
     {
-      citation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
+      citation:
+        "B Consectetur adipiscing elit. Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
       source: "IMT",
-      auteur: "Robert Malek"
+      auteur: "M. B",
     },
     {
-      citation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
+      citation:
+        "C Sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
       source: "IMT",
-      auteur: "Robert Malek"
-    }
+      auteur: "Mme. C",
+    },
+    {
+      citation:
+        "D Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
+      source: "IMT",
+      auteur: "M. D",
+    },
+    {
+      citation:
+        "E Dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
+      source: "IMT",
+      auteur: "M. D",
+    },
   ];
-
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/Briques/Témoignages" icon="material-symbols:brick-outline">
+<Hst.Story
+  title="Composants/Lab/Sites vitrines/Briques/Témoignages"
+  icon="material-symbols:brick-outline"
+>
   <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
   <Temoignages {titre} {temoignages} />
 
