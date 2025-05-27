@@ -17,7 +17,6 @@
     box-sizing: border-box;
     text-align: left;
     color: white;
-    width: 100vw;
 
     &.sans-marge-haute {
       padding-top: 0;
