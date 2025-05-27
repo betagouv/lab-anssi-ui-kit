@@ -47,18 +47,20 @@
           </div>
         {/each}
       </div>
-      <div class="conteneur-actions">
-        <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}
-          >
+      {#if temoignages.length > 1}
+        <div class="conteneur-actions">
+          <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}
+            >
           <span class="icone"><IconeFlecheGauche /></span>Précédent
         </button
-        >
-        <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}
-          >Suivant
+          >
+          <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}
+            >Suivant
           <span class="icone"><IconeFlecheDroite /></span>
         </button
-        >
-      </div>
+          >
+        </div>
+      {/if}
     </div>
   </div>
 </Brique>
@@ -172,6 +174,10 @@
         margin-top: 32px;
         justify-content: center;
         gap: 24px;
+
+        &.un-seul-temoignagne {
+          display: none;
+        }
 
         button {
           background: none;
