@@ -34,13 +34,13 @@
           <li>{raison}</li>
         {/each}
       </ul>
-      <div class="action">
-        {#if action}
-          <a role="button" href={action.lien} target="_blank">
-            {action.titre}
-          </a>
-        {/if}
-      </div>
+    </div>
+    <div class="action">
+      {#if action}
+        <a role="button" href={action.lien} target="_blank">
+          {action.titre}
+        </a>
+      {/if}
     </div>
   </div>
 </Brique>
@@ -49,13 +49,16 @@
   .grille-contenu {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: 'illustration'
-                          'contenu';
-    gap: 32px;
+    grid-template-areas:  'contenu'
+                          'illustration'
+                          'action';
+    row-gap: 32px;
 
     @include a-partir-de(desktop) {
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: 'illustration contenu';
+      grid-template-areas:  'illustration contenu'
+                            'illustration action';
+      row-gap: 0;
       column-gap: 24px;
     }
 
@@ -85,62 +88,68 @@
 
         margin: 0;
       }
+    }
 
-      .action {
-        a[role='button'] {
-          display: flex;
-          justify-content: center;
-          text-decoration: none;
-          font-family: Marianne, sans-serif;
-          padding: 8px 16px;
-          max-width: 100%;
+    .action {
+      grid-area: action;
 
-          text-align: center;
-          font-weight: 500;
-          font-size: 1rem;
-          line-height: 24px;
+      a[role='button'] {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        font-family: Marianne, sans-serif;
+        padding: 8px 16px;
+        max-width: 100%;
 
-          border-radius: 4px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 24px;
 
-          background-color: $brique-contenu-deux-colonnes-action-bouton-background;
-          color: $brique-contenu-deux-colonnes-action-bouton-texte;
+        border-radius: 4px;
+
+        background-color: $brique-contenu-deux-colonnes-action-bouton-background;
+        color: $brique-contenu-deux-colonnes-action-bouton-texte;
+        border: none;
+        cursor: pointer;
+
+        &:active {
+          background-color: $brique-contenu-deux-colonnes-action-bouton-background-active;
+          box-shadow: none;
           border: none;
-          cursor: pointer;
-
-          &:active {
-            background-color: $brique-contenu-deux-colonnes-action-bouton-background-active;
-            box-shadow: none;
-            border: none;
-          }
-
-          &:hover {
-            background-color: $brique-contenu-deux-colonnes-action-bouton-background-hover;
-            box-shadow: none;
-            border: none;
-          }
-
-          @include a-partir-de(tablette) {
-            max-width: unset;
-            width: fit-content;
-          }
         }
 
-        margin-top: 32px;
+        &:hover {
+          background-color: $brique-contenu-deux-colonnes-action-bouton-background-hover;
+          box-shadow: none;
+          border: none;
+        }
+
+        @include a-partir-de(tablette) {
+          max-width: unset;
+          width: fit-content;
+        }
       }
     }
 
     .illustration {
       grid-area: illustration;
+
       img {
-        width: 100%;
-        max-height: 250px;
+        width: 204px;
+        height: 157px;
+
+        display: flex;
+        margin: 0 auto 0 auto;
 
         @include a-partir-de(tablette) {
-          max-height: none;
+          width: 364px;
+          height: 282px;
         }
 
         @include a-partir-de(desktop) {
-          max-height: 330px;
+          width: 364px;
+          height: 282px;
         }
       }
     }
