@@ -18,24 +18,6 @@
       source: "IMT",
       auteur: "M. B",
     },
-    {
-      citation:
-        "C Sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
-      source: "IMT",
-      auteur: "Mme. C",
-    },
-    {
-      citation:
-        "D Nam mollis, risus id egestas semper, dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
-      source: "IMT",
-      auteur: "M. D",
-    },
-    {
-      citation:
-        "E Dui mauris semper nulla, sed egestas elit lectus sit amet mi. Morbi id leo aliquet, consectetur sem et, molestie libero.",
-      source: "IMT",
-      auteur: "M. D",
-    },
   ];
 </script>
 
