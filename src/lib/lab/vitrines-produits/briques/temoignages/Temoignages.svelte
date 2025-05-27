@@ -1,10 +1,12 @@
-<svelte:options customElement={{
-  tag: 'lab-anssi-temoignages',
-  props: {
-    titre: { reflect: false, type: 'String', attribute: 'titre' },
-    temoignages: { reflect: false, type: 'Array', attribute: 'temoignages' },
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-temoignages",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      temoignages: { reflect: false, type: "Array", attribute: "temoignages" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -20,16 +22,15 @@
 
   enum Direction {
     DROITE = 1,
-    GAUCHE = -1
+    GAUCHE = -1,
   }
 
   const scrollVers = (direction: Direction) => {
     const declageCourant = elementCarrousel.scrollLeft;
     const largeurCarte = elementCarrousel.children[0].clientWidth;
 
-    elementCarrousel.scrollLeft = declageCourant + largeurCarte * direction
+    elementCarrousel.scrollLeft = declageCourant + largeurCarte * direction;
   };
-
 </script>
 
 <Brique variation="transparent">
@@ -40,21 +41,23 @@
         {#each temoignages as temoignage, idx (idx)}
           <div class="temoignage">
             <IconeTemoignage />
-            <h4>« {temoignage.citation} »</h4>
+            <h4>«&nbsp;{temoignage.citation}&nbsp;»</h4>
             <h5>{temoignage.auteur}</h5>
             <h6>{temoignage.source}</h6>
           </div>
         {/each}
       </div>
       <div class="conteneur-actions">
-        <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}>
-          <span class="icone"><IconeFlecheGauche /></span>
-          Précédent
-        </button>
-        <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}>
-          Suivant
+        <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}
+          >
+          <span class="icone"><IconeFlecheGauche /></span>Précédent
+        </button
+        >
+        <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}
+          >Suivant
           <span class="icone"><IconeFlecheDroite /></span>
-        </button>
+        </button
+        >
       </div>
     </div>
   </div>
@@ -78,13 +81,15 @@
     }
 
     .carrousel-temoignages {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
 
       .conteneur-carrousel {
+        --gap-des-elements: 24px;
+
         display: flex;
-        gap: 24px;
+        gap: var(--gap-des-elements);
         overflow-x: auto;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
@@ -93,18 +98,10 @@
         -webkit-overflow-scrolling: touch;
         padding-bottom: 24px;
 
-        @include a-partir-de(tablette) {
-          display: flex;
-          flex-direction: row;
-        }
-
         .temoignage {
           width: 100%;
-          box-sizing: border-box;
           flex-shrink: 0;
-          scroll-snap-align: center;
-
-          padding: 0 8px 0 8px;
+          scroll-snap-align: start;
 
           &:after {
             content: "";
@@ -120,12 +117,14 @@
             }
           }
 
+          @include a-partir-de(tablette-grand) {
+            width: calc(50% - var(--gap-des-elements));
+          }
+
           @include a-partir-de(desktop) {
-            min-width: calc(1200px / 3 - 12px);
-            width: calc(1200px / 3 - 12px);
-            scroll-snap-align: start;
+            // On rajoute du padding, donc on passe en border-box pour que ça « snap » toujours pile-poil
             padding-left: 32px;
-            padding-right: 0;
+            box-sizing: border-box;
             border-left: 1px solid $border-default-grey;
           }
 
@@ -165,7 +164,6 @@
             font-weight: 400;
             line-height: 1.25rem;
           }
-
         }
       }
 
