@@ -218,19 +218,19 @@
       &.action-gauche {
         background-color: $brique-hero-bouton-gauche-background;
         color: $brique-hero-bouton-gauche-texte;
-        border: none;
+        border: 1px solid transparent;
         cursor: pointer;
 
         &:active {
           background-color: $brique-hero-bouton-gauche-background-active;
           box-shadow: none;
-          border: none;
+          border: 1px solid transparent;
         }
 
         &:hover {
           background-color: $brique-hero-bouton-gauche-background-hover;
           box-shadow: none;
-          border: none;
+          border: 1px solid transparent;
         }
       }
 
