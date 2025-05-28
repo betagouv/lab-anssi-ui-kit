@@ -4,10 +4,10 @@
   export let index: number;
   export let etapeMarelle: EtapeMarelle;
 
-  const estPair: boolean = (index + 1) % 2 === 0
+  const estPair: boolean = (index + 1) % 2 === 0;
 </script>
 
-<div class={`marelle-etape ${estPair ? 'pair' : 'impair'}`}>
+<div class={`marelle-etape ${estPair ? "pair" : "impair"}`}>
   <div class="illustration">
     <img src={etapeMarelle.illustration.lien} alt={etapeMarelle.illustration.alt} />
   </div>
@@ -20,7 +20,9 @@
     <h4>{etapeMarelle.titre}</h4>
     <p>{etapeMarelle.description}</p>
     {#if etapeMarelle.lien}
-      <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}>{etapeMarelle.lien.texte}</a>
+      <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}
+        >{etapeMarelle.lien.texte}</a
+      >
     {/if}
   </div>
 </div>
@@ -29,23 +31,25 @@
   .marelle-etape {
     display: grid;
     row-gap: 32px;
-    grid-template-areas: 'numero-etape'
-      'contenu'
-      'illustration';
+    grid-template-areas:
+      "numero-etape"
+      "contenu"
+      "illustration";
 
     @include a-partir-de(desktop) {
-      grid-template-areas: 'contenu numero-etape illustration';
+      grid-template-areas: "contenu numero-etape illustration";
       grid-template-columns: 1fr 136px 1fr;
       column-gap: 24px;
       row-gap: 24px;
 
       &.pair {
-        grid-template-areas: 'illustration numero-etape contenu';
+        grid-template-areas: "illustration numero-etape contenu";
       }
     }
 
     &.pair {
       .numero-etape {
+        padding-right: 16px;
         justify-content: center;
 
         @include a-partir-de(desktop) {
@@ -56,6 +60,7 @@
 
     &.impair {
       .numero-etape {
+        padding-left: 16px;
         justify-content: center;
 
         @include a-partir-de(desktop) {
@@ -94,7 +99,7 @@
         justify-content: center;
 
         span {
-          color: #FFFFFF;
+          color: #ffffff;
           font-size: 2rem;
           font-weight: bold;
 
