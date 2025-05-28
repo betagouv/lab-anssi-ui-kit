@@ -6,7 +6,10 @@
   export let Hst: Hst;
 </script>
 
-<Hst.Story title="Composants/Lab/Sites vitrines/Qu'est-ce que l'ANSSI ?" icon="material-symbols:brick-outline">
+<Hst.Story
+  title="Composants/Lab/Sites vitrines/Qu'est-ce que l'ANSSI ?"
+  icon="material-symbols:brick-outline"
+>
   <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
   <PresentationANSSI />
 </Hst.Story>

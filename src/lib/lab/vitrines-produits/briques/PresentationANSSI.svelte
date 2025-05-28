@@ -1,7 +1,8 @@
 <svelte:options
   customElement={{
-		tag: 'lab-anssi-presentation-anssi',
-	}} />
+    tag: "lab-anssi-presentation-anssi",
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -16,20 +17,23 @@
     <div class="contenu">
       <h2>Qu'est ce que l'ANSSI ?</h2>
       <p>
-        Créée en 2009, l’Agence nationale de la sécurité des systèmes d’information (ANSSI) est l’autorité nationale en matière de cybersécurité et de cyberdéfense.
+        Créée en 2009, l’Agence nationale de la sécurité des systèmes d’information (ANSSI) est
+        l’autorité nationale en matière de cybersécurité et de cyberdéfense.
         <br />
         <br />
         <b>
-          Son action pour la protection de la Nation face aux cyberattaques se traduit en quatre grandes missions : défendre, connaître, partager, accompagner.
+          Son action pour la protection de la Nation face aux cyberattaques se traduit en quatre
+          grandes missions : défendre, connaître, partager, accompagner.
         </b>
       </p>
     </div>
     <div class="encart-action">
-      <a class="action" role="button" href="https://cyber.gouv.fr/" target="_blank">En savoir plus</a>
+      <a class="action" role="button" href="https://cyber.gouv.fr/" target="_blank"
+        >En savoir plus</a
+      >
     </div>
   </div>
 </Brique>
-
 
 <style lang="scss">
   .presentation-anssi {
@@ -37,16 +41,18 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: 'logo-anssi'
-                        'contenu'
-                        'encart-action';
+    grid-template-areas:
+      "logo-anssi"
+      "contenu"
+      "encart-action";
     row-gap: 24px;
     padding: 16px 16px;
 
     @include a-partir-de(desktop) {
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: 'contenu logo-anssi'
-                          'encart-action logo-anssi';
+      grid-template-areas:
+        "contenu logo-anssi"
+        "encart-action logo-anssi";
     }
 
     .logo-anssi {
@@ -57,7 +63,6 @@
       @include a-partir-de(desktop) {
         align-items: center;
       }
-
 
       img {
         max-width: 140px;
@@ -108,7 +113,7 @@
         justify-content: start;
       }
 
-      a[role='button'] {
+      a[role="button"] {
         width: 100%;
 
         text-decoration: none;
@@ -142,6 +147,5 @@
         }
       }
     }
-
   }
 </style>

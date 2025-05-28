@@ -8,13 +8,18 @@
   export let nomService: string;
   export let liens: string;
 
-  const emetEvenement = createEventDispatcher<{ lienclique: { target: EventTarget & HTMLAnchorElement } }>();
+  const emetEvenement = createEventDispatcher<{
+    lienclique: { target: EventTarget & HTMLAnchorElement };
+  }>();
 
-  let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] = [];
+  let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] =
+    [];
   $: {
     liensMisEnForme = JSON.parse(liens);
     if (!Array.isArray(liensMisEnForme) || liensMisEnForme.some((l) => !l.texte)) {
-      throw new Error("Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]");
+      throw new Error(
+        "Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]",
+      );
     }
   }
 
@@ -57,11 +62,16 @@
       </div>
       {#if liensMisEnForme}
         {#each liensMisEnForme as lien, id (id)}
-          <a class="lien lien-principal" href={lien.href} target="_blank" id={lien.id} on:click={(e) =>{
-            if(lien.preventDefault)
-              e.preventDefault();
-            emetEvenement('lienclique', { target: e.currentTarget });
-          }}>{lien.texte}</a>
+          <a
+            class="lien lien-principal"
+            href={lien.href}
+            target="_blank"
+            id={lien.id}
+            on:click={(e) => {
+              if (lien.preventDefault) e.preventDefault();
+              emetEvenement("lienclique", { target: e.currentTarget });
+            }}>{lien.texte}</a
+          >
         {/each}
       {/if}
       <div class="message marge-haute">

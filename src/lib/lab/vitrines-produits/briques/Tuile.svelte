@@ -4,7 +4,7 @@
   export let titre: string;
   export let illustration: Image;
   export let contenu: string;
-  export let position: 'premiere' | 'derniere' | null = null;
+  export let position: "premiere" | "derniere" | null = null;
 </script>
 
 <div class="tuile {position ?? ''}">

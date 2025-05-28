@@ -1,13 +1,14 @@
 <svelte:options
   customElement={{
-		tag: 'lab-anssi-brique-rejoindre-la-communaute',
-		props: {
-      titre: { reflect: false, type: 'String', attribute: 'titre' },
-      raisons: { reflect: false, type: 'Array', attribute: 'raisons' },
-			action: { reflect: false, type: 'Object', attribute: 'action' },
-      illustration: { reflect: false, type: 'Object', attribute: 'illustration' }
-		}
-	}} />
+    tag: "lab-anssi-brique-rejoindre-la-communaute",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      raisons: { reflect: false, type: "Array", attribute: "raisons" },
+      action: { reflect: false, type: "Object", attribute: "action" },
+      illustration: { reflect: false, type: "Object", attribute: "illustration" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -49,15 +50,17 @@
   .grille-contenu {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:  'contenu'
-                          'illustration'
-                          'action';
+    grid-template-areas:
+      "contenu"
+      "illustration"
+      "action";
     row-gap: 32px;
 
     @include a-partir-de(desktop) {
       grid-template-columns: 1fr 1fr;
-      grid-template-areas:  'illustration contenu'
-                            'illustration action';
+      grid-template-areas:
+        "illustration contenu"
+        "illustration action";
       row-gap: 0;
       column-gap: 24px;
     }
@@ -93,7 +96,7 @@
     .action {
       grid-area: action;
 
-      a[role='button'] {
+      a[role="button"] {
         display: flex;
         justify-content: center;
         text-decoration: none;
@@ -153,6 +156,5 @@
         }
       }
     }
-
   }
 </style>

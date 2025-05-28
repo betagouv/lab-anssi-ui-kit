@@ -21,19 +21,29 @@
     </div>
     <div class="conteneur-style">
       <pre>{":root {"}</pre>
-      {#each variablesCSS as [_, variable] }
+      {#each variablesCSS as [_, variable]}
         <pre>    {variable}: "..."</pre>
       {/each}
       <pre>{"}"}</pre>
     </div>
   {/if}
 
-  <hr style="margin: 32px 0;"/>
+  <hr style="margin: 32px 0;" />
 
   <h2>Centre d’Aide : obtenir mon thème</h2>
   <div class="conteneur-titre">
-    <OutilSelecteurTheme on:themeSelectionne={(e) =>{  themeSelectionne = e.detail; }}/>
-    <button on:click={() => navigator.clipboard.writeText(document.getElementById('style-theme-selectionne').textContent)} title="Copier">
+    <OutilSelecteurTheme
+      on:themeSelectionne={(e) => {
+        themeSelectionne = e.detail;
+      }}
+    />
+    <button
+      on:click={() =>
+        navigator.clipboard.writeText(
+          document.getElementById("style-theme-selectionne").textContent,
+        )}
+      title="Copier"
+    >
       <IconeCopier />
     </button>
   </div>

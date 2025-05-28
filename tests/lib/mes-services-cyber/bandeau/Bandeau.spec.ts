@@ -18,23 +18,22 @@ describe("Le composant du bandeau des MesServicesCyber", () => {
       target: document.body,
     });
 
-    expect(document.body.textContent).toContain('Découvrez MesServicesCyber');
-    const boutonFermeture = document.querySelector('button.fermer') as HTMLButtonElement;
-    boutonFermeture.click()
+    expect(document.body.textContent).toContain("Découvrez MesServicesCyber");
+    const boutonFermeture = document.querySelector("button.fermer") as HTMLButtonElement;
+    boutonFermeture.click();
 
     await tick();
-    expect(document.body.textContent).not.toContain('Découvrez MesServicesCyber');
+    expect(document.body.textContent).not.toContain("Découvrez MesServicesCyber");
   });
 
   it("ne s'affiche pas si la variable est déjà présente dans le local storage", async () => {
-    localStorage.setItem('lab-anssi-ui-kit-msc-bandeau-affichage', 'invisible');
+    localStorage.setItem("lab-anssi-ui-kit-msc-bandeau-affichage", "invisible");
 
     composant = new Bandeau({
       target: document.body,
     });
 
     await tick();
-    expect(document.body.textContent).not.toContain('Découvrez MesServicesCyber');
+    expect(document.body.textContent).not.toContain("Découvrez MesServicesCyber");
   });
-
 });

@@ -20,6 +20,7 @@ Le storybook des composants est disponible [ici](https://betagouv.github.io/lab-
 Il est construit avec [Histoire](https://histoire.dev/)
 
 ## Architecture de build
+
 Cette librairie a pour objectif de produire des composants Svelte et leurs équivalents [Webcomponent](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
 L'architecture pour produire du Svelte utilise [SvelteKit](https://svelte.dev/docs/kit/packaging), configuré via le wizard `npx sv create`.

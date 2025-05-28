@@ -1,11 +1,12 @@
 <svelte:options
   customElement={{
-		tag: 'lab-anssi-titre-multimedia',
-		props: {
-      titre: { reflect: false, type: 'String', attribute: 'titre' },
-			multimedia: { reflect: false, type: 'Object', attribute: 'multimedia' },
-		}
-	}} />
+    tag: "lab-anssi-titre-multimedia",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      multimedia: { reflect: false, type: "Object", attribute: "multimedia" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
