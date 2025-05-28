@@ -49,16 +49,13 @@
       </div>
       {#if temoignages.length > 1}
         <div class="conteneur-actions" class:deux-ou-moins={temoignages.length <= 2}>
-          <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}
-            >
-          <span class="icone"><IconeFlecheGauche /></span>Précédent
-        </button
-          >
+          <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}>
+            <span class="icone"><IconeFlecheGauche /></span>Précédent
+          </button>
           <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}
             >Suivant
-          <span class="icone"><IconeFlecheDroite /></span>
-        </button
-          >
+            <span class="icone"><IconeFlecheDroite /></span>
+          </button>
         </div>
       {/if}
     </div>

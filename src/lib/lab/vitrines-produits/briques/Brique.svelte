@@ -1,10 +1,14 @@
 <script lang="ts">
-  export let variation: 'primaire' | 'transparent' | 'secondaire' = 'primaire';
+  export let variation: "primaire" | "transparent" | "secondaire" = "primaire";
   export let sansMargeHaute = false;
   export let sansMargeLaterale = false;
 </script>
 
-<section class={variation} class:sans-marge-haute={sansMargeHaute} class:sans-marge-laterale={sansMargeLaterale}>
+<section
+  class={variation}
+  class:sans-marge-haute={sansMargeHaute}
+  class:sans-marge-laterale={sansMargeLaterale}
+>
   <div class="contenu-brique">
     <slot />
   </div>

@@ -1,9 +1,11 @@
-<svelte:options customElement={{
-  tag: 'lab-anssi-carrousel-tuiles',
-  props: {
-    tuiles: { reflect: false, type: 'Array', attribute: 'tuiles' }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-carrousel-tuiles",
+    props: {
+      tuiles: { reflect: false, type: "Array", attribute: "tuiles" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -21,7 +23,7 @@
       const cardWidth = elementCarrousel.firstElementChild?.clientWidth || 0;
       elementCarrousel.scrollBy({
         left: direction * (cardWidth + 16),
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -63,11 +65,11 @@
 
     &.primaire {
       background: linear-gradient(
-              to bottom,
-              $centre-aide-background-entete 0%,
-              $centre-aide-background-entete 30%,
-              transparent 30%,
-              transparent 100%
+        to bottom,
+        $centre-aide-background-entete 0%,
+        $centre-aide-background-entete 30%,
+        transparent 30%,
+        transparent 100%
       );
     }
   }

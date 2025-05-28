@@ -27,13 +27,13 @@ describe("Le composant de navigation de pied de page", () => {
 
   it("peut afficher un état d'accessibilité conforme ou non", async () => {
     composant.$set({ conforme: true });
-    await tick()
+    await tick();
     expect(document.body.querySelector('a[href="/accessibilite"]')!.textContent).toBe(
       "Accessiblité: conforme",
     );
 
     composant.$set({ conforme: false });
-    await tick()
+    await tick();
     expect(document.body.querySelector('a[href="/accessibilite"]')!.textContent).toBe(
       "Accessiblité: non conforme",
     );

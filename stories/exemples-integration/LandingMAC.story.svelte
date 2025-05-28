@@ -15,102 +15,119 @@
 
   const imageAffichee: Image = {
     lien: genereImageDePlaceholder(600, 400, "Illustration de couverture"),
-    alt: ""
-  }
+    alt: "",
+  };
 
   const tuiles: Tuiles = [
     {
-      titre: 'Un dispositif étatique',
-      contenu: "Pourquoi, quoi, quand, qui, comment ? L'homologation de sécurité a été pensée pour être accessible à tous.",
+      titre: "Un dispositif étatique",
+      contenu:
+        "Pourquoi, quoi, quand, qui, comment ? L'homologation de sécurité a été pensée pour être accessible à tous.",
       illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
     },
     {
-      titre: 'Proportionnée',
+      titre: "Proportionnée",
       contenu: `D'une démarche "simplifiée" à une démarche "renforcée", l'homologation doit être adaptée à la criticité d'un système et à son exposition au risque.`,
       illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
     },
     {
-      titre: 'Adaptée à vos usages',
-      contenu: "Une homologation simplifiée pensée pour répondre à la diversité des contextes de mise en oeuvre de l'homologation de sécurité de vos systèmes d'homologation.",
+      titre: "Adaptée à vos usages",
+      contenu:
+        "Une homologation simplifiée pensée pour répondre à la diversité des contextes de mise en oeuvre de l'homologation de sécurité de vos systèmes d'homologation.",
       illustration: {
-          lien: genereImageDePlaceholder(96, 97),
-          alt: ''
-        }
-    }];
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
+    },
+  ];
 
   const etapesmarelle = [
     {
       description: "Description",
       illustration: {
         lien: genereImageDePlaceholder(600, 400, "Illustration première étape"),
-        alt: ''
+        alt: "",
       },
       lien: { href: "#", target: "_blank", texte: "Lien vers ressource externe" },
-      titre: "Première étape"
+      titre: "Première étape",
     },
     {
       description: "Description étape 2",
       illustration: {
         lien: genereImageDePlaceholder(600, 400, "Illustration deuxième étape"),
-        alt: ''
+        alt: "",
       },
       lien: { href: "#", target: "_blank", texte: "Lien vers ressource externe" },
-      titre: "Deuxième étape"
+      titre: "Deuxième étape",
     },
-  ]
+  ];
 </script>
 
 <Hst.Story title="Exemples d'intégration/Landing MonAideCyber" icon="uis:web-grid-alt">
   <OutilSelecteurTheme themeSelectionne="MonAideCyber" />
-  <BriqueHero titre="Mon​Aide​Cyber"
-              soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
-              illustration={imageAffichee}
-              actiongauche={{
-                titre: 'Devenir Aidant cyber',
-                lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
-              }}
-              actiondroite={{
-                titre: "Bénéficier d'un diagnostic cyber",
-                lien: "https://messervices.cyber.gouv.fr/cyberdepart",
-              }}
+  <BriqueHero
+    titre="Mon​Aide​Cyber"
+    soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
+    illustration={imageAffichee}
+    actiongauche={{
+      titre: "Devenir Aidant cyber",
+      lien: "https://monaide.cyber.gouv.fr/realiser-des-diagnostics-anssi",
+    }}
+    actiondroite={{
+      titre: "Bénéficier d'un diagnostic cyber",
+      lien: "https://messervices.cyber.gouv.fr/cyberdepart",
+    }}
   />
   <CarrouselTuiles {tuiles} />
-  <BriqueTitreMultimedia titre="Découvrez MonAideCyber en vidéo"
-                         multimedia={{
-                           source: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4',
-                           sourcesoustitres: 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Nouvelle_doctrine_homologation.vtt',
-                           imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple")
-                         }}
+  <BriqueTitreMultimedia
+    titre="Découvrez MonAideCyber en vidéo"
+    multimedia={{
+      source:
+        "https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4",
+      sourcesoustitres:
+        "https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Nouvelle_doctrine_homologation.vtt",
+      imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple"),
+    }}
   />
-  <Marelle titre="Titre"
-           {etapesmarelle}
-           action={{
-             titre: 'Action',
-             lien: '#'
-           }} />
-  <Temoignages titre="Les témoignages de nos Aidants cyber"
+  <Marelle
+    titre="Titre"
+    {etapesmarelle}
+    action={{
+      titre: "Action",
+      lien: "#",
+    }}
+  />
+  <Temoignages
+    titre="Les témoignages de nos Aidants cyber"
     temoignages={[
       {
-        citation: "Encore merci pour cet outil qui, une fois la communauté d’aidants réunionnaise structurée et formée, nous aidera grandement dans le passage à l’échelle.",
+        citation:
+          "Encore merci pour cet outil qui, une fois la communauté d’aidants réunionnaise structurée et formée, nous aidera grandement dans le passage à l’échelle.",
         auteur: "Matthieu D.",
-        source: 'Un utilisateur de La Réunion (974)'
+        source: "Un utilisateur de La Réunion (974)",
       },
-            {
-        citation: "MonAideCyber remplit très bien sa mission, et le fait de pouvoir tout de suite donner un rapport aux interlocuteurs est un réel atout.",
+      {
+        citation:
+          "MonAideCyber remplit très bien sa mission, et le fait de pouvoir tout de suite donner un rapport aux interlocuteurs est un réel atout.",
         auteur: "Didier L.",
-        source: 'Un Aidant cyber, réserviste de la Police, dans le Rhône (69)'
-      }
-    ]}/>
-  <RejoindreLaCommunaute titre="Rejoignez la communauté des Aidants cyber !"
-                         raisons={['Echanger directement avec les autres Aidants cyber', 'Participer activement au développement du diagnostic cyber en nous partageant vos besoins et suggestions d\'amélioration']}
-                         action={{ titre: 'Rejoindre la communauté', lien: '#', }}
-                         illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: ''}}
+        source: "Un Aidant cyber, réserviste de la Police, dans le Rhône (69)",
+      },
+    ]}
+  />
+  <RejoindreLaCommunaute
+    titre="Rejoignez la communauté des Aidants cyber !"
+    raisons={[
+      "Echanger directement avec les autres Aidants cyber",
+      "Participer activement au développement du diagnostic cyber en nous partageant vos besoins et suggestions d'amélioration",
+    ]}
+    action={{ titre: "Rejoindre la communauté", lien: "#" }}
+    illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: "" }}
   />
   <PresentationANSSI />
 </Hst.Story>

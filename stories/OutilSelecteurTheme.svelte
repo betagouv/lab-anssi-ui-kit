@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
 
-
   const variablesCSS = [
     "centre-aide-background-entete",
     "centre-aide-background-bouton",
@@ -83,7 +82,7 @@
       "brique-presentation-anssi-bouton-background": "transparent",
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
-      "brique-presentation-anssi-bouton-texte": "#0279D0"
+      "brique-presentation-anssi-bouton-texte": "#0279D0",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -122,16 +121,18 @@
       "brique-presentation-anssi-bouton-background": "#FFFFFF",
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
-      "brique-presentation-anssi-bouton-texte": "#5D2A9D"
+      "brique-presentation-anssi-bouton-texte": "#5D2A9D",
     },
     MesServicesCyber: {
-      "centre-aide-background-entete": '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
+      "centre-aide-background-entete":
+        '#0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
       "centre-aide-background-bouton": "#FED980",
       "centre-aide-font-color-bouton": "#0D0C21",
       "centre-aide-border-lien-secondaire": "#0D0C21",
       "centre-aide-font-color-lien-secondaire": "var(--centre-aide-font-color-bouton)",
       "centre-aide-background-hover-lien": "#E4C274",
-      "centre-aide-background-hover-declencheur": '#22213C url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
+      "centre-aide-background-hover-declencheur":
+        '#22213C url("src/lib/assets/illustrations/tuile-msc.svg") repeat top left / 500px',
       "brique-background-primaire": "var(--centre-aide-background-entete)",
       "brique-background-secondaire": "transparent",
       "brique-hero-bouton-gauche-background": "#FED980",
@@ -161,7 +162,7 @@
       "brique-presentation-anssi-bouton-background": "transparent",
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
-      "brique-presentation-anssi-bouton-texte": "#0D0C21"
+      "brique-presentation-anssi-bouton-texte": "#0D0C21",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -200,7 +201,7 @@
       "brique-presentation-anssi-bouton-background": "#FFFFFF",
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
-      "brique-presentation-anssi-bouton-texte": "#272771"
+      "brique-presentation-anssi-bouton-texte": "#272771",
     },
   };
 
@@ -208,12 +209,12 @@
   export let themeSelectionne: Service = "MonServiceSécurisé";
 
   onMount(() => {
-    emetEvenement('themeSelectionne', themes[themeSelectionne]);
+    emetEvenement("themeSelectionne", themes[themeSelectionne]);
   });
 
   $: {
     if (themeSelectionne) {
-      emetEvenement('themeSelectionne', themes[themeSelectionne]);
+      emetEvenement("themeSelectionne", themes[themeSelectionne]);
       const root: HTMLElement = document.querySelector(":root");
       for (const nomVariable in themes[themeSelectionne]) {
         root.style.setProperty(`--${nomVariable}`, themes[themeSelectionne][nomVariable]);

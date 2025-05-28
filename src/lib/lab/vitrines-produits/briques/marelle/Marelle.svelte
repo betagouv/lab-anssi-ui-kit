@@ -1,11 +1,13 @@
-<svelte:options customElement={{
-  tag: 'lab-anssi-marelle',
-  props: {
-    titre: { reflect: false, type: 'String', attribute: 'titre' },
-    etapesmarelle: { reflect: false, type: 'Array', attribute: 'etapesmarelle' },
-    action: { reflect: false, type: 'Object', attribute: 'action' }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-marelle",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      etapesmarelle: { reflect: false, type: "Array", attribute: "etapesmarelle" },
+      action: { reflect: false, type: "Object", attribute: "action" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -13,7 +15,7 @@
   import Etape from "$lib/lab/vitrines-produits/briques/marelle/Etape.svelte";
 
   export let titre: string = "";
-  export let etapesmarelle: EtapeMarelle[] = []
+  export let etapesmarelle: EtapeMarelle[] = [];
   export let action: Action;
 </script>
 
@@ -22,7 +24,7 @@
     <div class="titre">{titre}</div>
     <section class="marelle-etapes">
       {#each etapesmarelle as etapeMarelle, index}
-        <Etape index={index} etapeMarelle={etapeMarelle} />
+        <Etape {index} {etapeMarelle} />
       {/each}
     </section>
     {#if action}
@@ -67,7 +69,7 @@
       display: flex;
       justify-content: center;
 
-      a[role='button'] {
+      a[role="button"] {
         text-decoration: none;
         font-family: Marianne, sans-serif;
         padding: 8px 16px;

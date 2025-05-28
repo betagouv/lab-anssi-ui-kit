@@ -17,9 +17,7 @@
   <div class="separateur"></div>
   <a href="/securite">Sécurité</a>
   <div class="separateur"></div>
-  <a href="/accessibilite"
-    >Accessiblité: {conforme ? "conforme" : "non conforme"}</a
-  >
+  <a href="/accessibilite">Accessiblité: {conforme ? "conforme" : "non conforme"}</a>
 </div>
 
 <style lang="scss">

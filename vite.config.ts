@@ -1,8 +1,8 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
-import dotenv from 'dotenv';
-import { resolve } from 'path'
+import dotenv from "dotenv";
+import { resolve } from "path";
 
 // Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
 // - Build webcomponent : "production"
@@ -13,8 +13,8 @@ const varEnv = loadEnv(process.env.HISTOIRE_ENV ?? "production", process.cwd(), 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Histoire avec nos valeurs
 // Cela permet de faire fonctionner la méthode JS `srcAsset` dans le cas du Storybook déployé
-if(process.env.HISTOIRE_ENV === 'production')
-  dotenv.config({ path: resolve(process.cwd(), '.env.production') })
+if (process.env.HISTOIRE_ENV === "production")
+  dotenv.config({ path: resolve(process.cwd(), ".env.production") });
 
 export default defineConfig({
   plugins: [sveltekit()],

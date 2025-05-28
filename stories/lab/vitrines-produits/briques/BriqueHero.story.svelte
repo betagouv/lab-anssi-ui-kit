@@ -8,7 +8,8 @@
 
   let badge = true;
   let titre = "Mon​Service​Sécurisé";
-  let soustitre = "L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement";
+  let soustitre =
+    "L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement";
   let illustration = { lien: genereImageDePlaceholder(600, 400), alt: "Logo placeholder" };
   let actiongauche = { titre: "Commencer à sécuriser", lien: "" };
   let actiondroite = { titre: "Être accompagné", lien: "" };
@@ -17,7 +18,15 @@
 
 <Hst.Story title="Composants/Lab/Sites vitrines/Brique Hero" icon="material-symbols:brick-outline">
   <OutilSelecteurTheme themeSelectionne="MonServiceSécurisé" />
-  <BriqueHero {titre} {badge} {soustitre} {illustration} {actiongauche} {actiondroite} {partenaires} />
+  <BriqueHero
+    {titre}
+    {badge}
+    {soustitre}
+    {illustration}
+    {actiongauche}
+    {actiondroite}
+    {partenaires}
+  />
 
   <svelte:fragment slot="controls">
     <Hst.Checkbox title="Badge" bind:value={badge} />

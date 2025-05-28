@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-		tag: 'lab-anssi-brique-contenu-a-deux-colonnes',
-		props: {
-      titre: { reflect: false, type: 'String', attribute: 'titre' },
-      paragraphe: { reflect: false, type: 'String', attribute: 'paragraphe' },
-			action: { reflect: false, type: 'Object', attribute: 'action' },
-      ordre: { reflect: false, type: 'String', attribute: 'ordre' },
-      illustration: { reflect: false, type: 'Object', attribute: 'illustration' }
-		}
-	}} />
+    tag: "lab-anssi-brique-contenu-a-deux-colonnes",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      paragraphe: { reflect: false, type: "String", attribute: "paragraphe" },
+      action: { reflect: false, type: "Object", attribute: "action" },
+      ordre: { reflect: false, type: "String", attribute: "ordre" },
+      illustration: { reflect: false, type: "Object", attribute: "illustration" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -17,7 +18,7 @@
   export let titre: string;
   export let paragraphe: string;
   export let action: Action | undefined = undefined;
-  export let ordre: 'texte-gauche' | 'texte-droite' = 'texte-gauche';
+  export let ordre: "texte-gauche" | "texte-droite" = "texte-gauche";
 
   export let illustration: Image;
 </script>
@@ -45,21 +46,22 @@
   .grille-contenu {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: 'illustration'
-                          'contenu';
+    grid-template-areas:
+      "illustration"
+      "contenu";
     gap: 32px;
 
     @include a-partir-de(desktop) {
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: 'contenu illustration';
+      grid-template-areas: "contenu illustration";
       column-gap: 24px;
 
       &.texte-gauche {
-        grid-template-areas: 'contenu illustration';
+        grid-template-areas: "contenu illustration";
       }
 
       &.texte-droite {
-        grid-template-areas: 'illustration contenu';
+        grid-template-areas: "illustration contenu";
       }
     }
 
@@ -91,7 +93,7 @@
       }
 
       .action {
-        a[role='button'] {
+        a[role="button"] {
           display: flex;
           justify-content: center;
           text-decoration: none;
@@ -148,6 +150,5 @@
         }
       }
     }
-
   }
 </style>

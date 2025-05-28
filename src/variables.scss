@@ -59,25 +59,37 @@ $brique-marelle-bouton-texte: var(--brique-marelle-bouton-texte);
 $brique-temoignages-titre-couleur: var(--brique-temoignages-titre-couleur);
 $brique-temoignages-icone-couleur: var(--brique-temoignages-icone-couleur);
 
-$brique-temoignages-bouton-action-texte-couleur: var(--brique-carrousel-bouton-action-texte-couleur);
+$brique-temoignages-bouton-action-texte-couleur: var(
+  --brique-carrousel-bouton-action-texte-couleur
+);
 
 // - Brique de contenu à deux colonnes
 
-$brique-contenu-deux-colonnes-action-bouton-background: var(--brique-contenu-deux-colonnes-action-bouton-background);
-$brique-contenu-deux-colonnes-action-bouton-background-hover: var(--brique-contenu-deux-colonnes-action-bouton-background-hover);
-$brique-contenu-deux-colonnes-action-bouton-background-active: var(--brique-contenu-deux-colonnes-action-bouton-background-active);
-$brique-contenu-deux-colonnes-action-bouton-texte: var(--brique-contenu-deux-colonnes-action-bouton-texte);
+$brique-contenu-deux-colonnes-action-bouton-background: var(
+  --brique-contenu-deux-colonnes-action-bouton-background
+);
+$brique-contenu-deux-colonnes-action-bouton-background-hover: var(
+  --brique-contenu-deux-colonnes-action-bouton-background-hover
+);
+$brique-contenu-deux-colonnes-action-bouton-background-active: var(
+  --brique-contenu-deux-colonnes-action-bouton-background-active
+);
+$brique-contenu-deux-colonnes-action-bouton-texte: var(
+  --brique-contenu-deux-colonnes-action-bouton-texte
+);
 
 // - Brique Présentation ANSSI
 
 $brique-presentation-anssi-titre-couleur: var(--brique-presentation-anssi-titre-couleur);
 
 $brique-presentation-anssi-bouton-background: var(--brique-presentation-anssi-bouton-background);
-$brique-presentation-anssi-bouton-background-hover: var(--brique-presentation-anssi-bouton-background-hover);
-$brique-presentation-anssi-bouton-background-active: var(--brique-presentation-anssi-bouton-background-active);
+$brique-presentation-anssi-bouton-background-hover: var(
+  --brique-presentation-anssi-bouton-background-hover
+);
+$brique-presentation-anssi-bouton-background-active: var(
+  --brique-presentation-anssi-bouton-background-active
+);
 $brique-presentation-anssi-bouton-texte: var(--brique-presentation-anssi-bouton-texte);
-
 
 // Affichage
 $z-index-au-dessus: 1000;
-
