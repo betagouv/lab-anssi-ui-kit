@@ -129,7 +129,7 @@
           }
 
           span:before {
-            content: url-asset('/icones/succes.svg');
+            content: url-asset("/icones/succes.svg");
             display: flex;
             width: 16px;
             height: 16px;
@@ -155,16 +155,20 @@
 
     .image {
       grid-area: image;
+      display: flex;
+      justify-content: center;
 
       img {
         width: 100%;
-        max-height: 250px;
+
+        @include a-partir-de(tablette-grand) {
+          max-width: 588px;
+        }
 
         @include a-partir-de(desktop) {
           max-height: 355px;
         }
       }
-
     }
 
     .partenaires {
