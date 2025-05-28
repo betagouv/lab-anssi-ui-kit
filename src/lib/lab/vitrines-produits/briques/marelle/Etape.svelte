@@ -3,11 +3,9 @@
 
   export let index: number;
   export let etapeMarelle: EtapeMarelle;
-
-  const estPair: boolean = (index + 1) % 2 === 0;
 </script>
 
-<div class={`marelle-etape ${estPair ? "pair" : "impair"}`}>
+<div class="marelle-etape">
   <div class="illustration">
     <img src={etapeMarelle.illustration.lien} alt={etapeMarelle.illustration.alt} />
   </div>
@@ -42,12 +40,12 @@
       column-gap: 24px;
       row-gap: 24px;
 
-      &.pair {
+      &:nth-child(even) {
         grid-template-areas: "illustration numero-etape contenu";
       }
     }
 
-    &.pair {
+    &:nth-child(even) {
       .numero-etape {
         padding-right: 16px;
         justify-content: center;
@@ -58,7 +56,7 @@
       }
     }
 
-    &.impair {
+    &:nth-child(odd) {
       .numero-etape {
         padding-left: 16px;
         justify-content: center;
