@@ -1,16 +1,17 @@
 <svelte:options
   customElement={{
-		tag: 'lab-anssi-brique-hero',
-		props: {
-      titre: { reflect: false, type: 'String', attribute: 'titre' },
-      soustitre: { reflect: false, type: 'String', attribute: 'soustitre' },
-			illustration: { reflect: false, type: 'Object', attribute: 'illustration' },
-      badge: { reflect: false, type: 'Boolean', attribute: 'badge' },
-			actiongauche: { reflect: false, type: 'Object', attribute: 'actiongauche' },
-			actiondroite: { reflect: false, type: 'Object', attribute: 'actiondroite' },
-			partenaires: { reflect: false, type: 'Array', attribute: 'partenaires' },
-		}
-	}} />
+    tag: "lab-anssi-brique-hero",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      soustitre: { reflect: false, type: "String", attribute: "soustitre" },
+      illustration: { reflect: false, type: "Object", attribute: "illustration" },
+      badge: { reflect: false, type: "Boolean", attribute: "badge" },
+      actiongauche: { reflect: false, type: "Object", attribute: "actiongauche" },
+      actiondroite: { reflect: false, type: "Object", attribute: "actiondroite" },
+      partenaires: { reflect: false, type: "Array", attribute: "partenaires" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
@@ -23,17 +24,17 @@
   export let badge: boolean = false;
   export let actiongauche: Action;
   export let actiondroite: Action;
-  export let partenaires: Image[] = []
+  export let partenaires: Image[] = [];
 </script>
 
 <Brique>
   <div class="hero">
-    <div class="contenu">
+    <div class="contenu" class:sans-partenaires={!partenaires || partenaires.length === 0}>
       {#if badge}
         <div class="section-badge">
-            <div class="badge">
-              <span>Service à impact national</span>
-            </div>
+          <div class="badge">
+            <span>Service à impact national</span>
+          </div>
         </div>
       {/if}
       <div class="textes">
@@ -65,19 +66,27 @@
   </div>
 </Brique>
 
-
 <style lang="scss">
   .hero {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: 'contenu'
-                          'image'
-                          'partenaires';
+    grid-template-areas:
+      "contenu"
+      "image"
+      "partenaires";
     gap: 32px;
 
     @include a-partir-de(desktop) {
-      grid-template-areas: 'contenu image'
-                            'partenaires image';
+      grid-template-areas:
+        "contenu image"
+        "partenaires image";
+
+      &:has(.sans-partenaires) {
+        grid-template-areas:
+          "contenu image"
+          "contenu image";
+      }
+
       grid-template-columns: 1fr 1fr;
       column-gap: 24px;
       row-gap: 0px;
@@ -87,6 +96,7 @@
       grid-area: contenu;
       display: flex;
       flex-direction: column;
+      justify-content: center;
 
       .textes {
         display: flex;
@@ -189,7 +199,7 @@
       }
     }
 
-    a[role='button'] {
+    a[role="button"] {
       text-decoration: none;
       font-family: Marianne, sans-serif;
       padding: 8px 16px;
