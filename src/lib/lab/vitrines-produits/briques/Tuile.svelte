@@ -54,10 +54,15 @@
 
   p {
     margin: 0;
-    font-size: 22px;
+    font-size: 18px;
+    line-height: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px;
+
+    @include a-partir-de(desktop) {
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
 
   span {
