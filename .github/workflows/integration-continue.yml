@@ -28,6 +28,9 @@ jobs:
       - name: Exécuter les tests
         run: npm run test
 
+      - name: Contrôler le format
+        run: npx prettier -c .
+
       - name: Builder le storybook
         run: npm run story:build
 
