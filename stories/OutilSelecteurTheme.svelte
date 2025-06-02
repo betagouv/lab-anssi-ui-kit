@@ -39,6 +39,7 @@
     "brique-presentation-anssi-bouton-background-hover",
     "brique-presentation-anssi-bouton-background-active",
     "brique-presentation-anssi-bouton-texte",
+    "bandeau-titre-background",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -83,6 +84,7 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0279D0",
+      "bandeau-titre-background": "var(--centre-aide-background-entete)",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -122,6 +124,7 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#5D2A9D",
+      "bandeau-titre-background": "var(--centre-aide-background-entete)",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -163,6 +166,7 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0D0C21",
+      "bandeau-titre-background": "var(--centre-aide-background-entete)",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -202,6 +206,7 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#272771",
+      "bandeau-titre-background": "var(--centre-aide-background-entete)",
     },
   };
 
