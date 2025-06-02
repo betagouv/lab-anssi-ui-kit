@@ -42,6 +42,7 @@
       font-size: 28px;
       line-height: 36px;
       margin: 0;
+      text-align: center;
 
       @include a-partir-de(desktop) {
         font-size: 32px;
