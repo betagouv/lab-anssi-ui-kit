@@ -54,7 +54,7 @@
         lien: genereImageDePlaceholder(600, 400, "Illustration première étape"),
         alt: "",
       },
-      lien: { href: "#", target: "_blank", texte: "Lien vers ressource externe" },
+      lien: { href: "#", texte: "Lien vers ressource interne" },
       titre: "Première étape",
     },
     {
@@ -82,6 +82,7 @@
     actiondroite={{
       titre: "Bénéficier d'un diagnostic cyber",
       lien: "https://messervices.cyber.gouv.fr/cyberdepart",
+      target: "_blank",
     }}
   />
   <CarrouselTuiles {tuiles} />

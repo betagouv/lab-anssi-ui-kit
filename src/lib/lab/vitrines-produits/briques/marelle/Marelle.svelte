@@ -13,6 +13,7 @@
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Action, EtapeMarelle } from "$lib/types";
   import Etape from "$lib/lab/vitrines-produits/briques/marelle/Etape.svelte";
+  import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
   export let titre: string = "";
   export let etapesmarelle: EtapeMarelle[] = [];
@@ -29,7 +30,12 @@
     </section>
     {#if action}
       <div class="bouton-action">
-        <a role="button" class="action" href={action.lien} target="_blank">{action.titre}</a>
+        <a role="button" class="action" href={action.lien} target={action.target}>
+          {action.titre}
+          {#if action.target === "_blank"}
+            <LienExterne />
+          {/if}
+        </a>
       </div>
     {/if}
   </div>
@@ -73,6 +79,10 @@
         text-decoration: none;
         font-family: Marianne, sans-serif;
         padding: 8px 16px;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
 
         text-align: center;
         font-weight: 500;

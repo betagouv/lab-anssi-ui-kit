@@ -7,6 +7,7 @@
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import { srcAsset } from "$lib/assets/assets.js";
+  import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 </script>
 
 <Brique variation="transparent">
@@ -28,9 +29,10 @@
       </p>
     </div>
     <div class="encart-action">
-      <a class="action" role="button" href="https://cyber.gouv.fr/" target="_blank"
-        >En savoir plus</a
-      >
+      <a class="action" role="button" href="https://cyber.gouv.fr/" target="_blank">
+        En savoir plus
+        <LienExterne />
+      </a>
     </div>
   </div>
 </Brique>
@@ -119,6 +121,10 @@
         text-decoration: none;
         font-family: Marianne, sans-serif;
         padding: 8px 16px;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
 
         text-align: center;
         font-weight: 500;

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EtapeMarelle } from "$lib/types";
+  import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
   export let index: number;
   export let etapeMarelle: EtapeMarelle;
@@ -18,9 +19,12 @@
     <h4>{etapeMarelle.titre}</h4>
     <p>{etapeMarelle.description}</p>
     {#if etapeMarelle.lien}
-      <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}
-        >{etapeMarelle.lien.texte}</a
-      >
+      <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}>
+        {etapeMarelle.lien.texte}
+        {#if etapeMarelle.lien.target === "_blank"}
+          <LienExterne />
+        {/if}
+      </a>
     {/if}
   </div>
 </div>
@@ -144,11 +148,15 @@
   }
 
   .marelle-etape > div > a {
+    width: fit-content;
     color: $brique-marelle-etapes-lien-couleur;
-    display: inline-flex;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     border: none;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
+
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 $brique-marelle-etapes-lien-couleur;
   }
 </style>

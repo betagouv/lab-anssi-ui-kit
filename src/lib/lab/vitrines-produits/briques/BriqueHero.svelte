@@ -16,6 +16,7 @@
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
+  import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
   export let titre: string;
   export let soustitre: string;
@@ -42,11 +43,27 @@
         <p>{soustitre}</p>
       </div>
       <div class="actions">
-        <a role="button" class="action-gauche" href={actiongauche.lien} target="_blank">
+        <a
+          role="button"
+          class="action-gauche"
+          href={actiongauche.lien}
+          target={actiongauche.target ?? "_self"}
+        >
           {actiongauche.titre}
+          {#if actiongauche.target === "_blank"}
+            <LienExterne />
+          {/if}
         </a>
-        <a role="button" class="action-droite" href={actiondroite.lien} target="_blank">
+        <a
+          role="button"
+          class="action-droite"
+          href={actiondroite.lien}
+          target={actiondroite.target ?? "_self"}
+        >
           {actiondroite.titre}
+          {#if actiondroite.target === "_blank"}
+            <LienExterne />
+          {/if}
         </a>
       </div>
     </div>
@@ -216,6 +233,10 @@
       line-height: 24px;
 
       border-radius: 4px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
 
       &.action-gauche {
         background-color: $brique-hero-bouton-gauche-background;
