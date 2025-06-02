@@ -118,9 +118,7 @@
   }
 
   .conteneur-actions button:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
+    box-shadow: inset 0 -2px 0 $brique-carrousel-bouton-action-texte-couleur;
   }
 
   @include a-partir-de(desktop) {
