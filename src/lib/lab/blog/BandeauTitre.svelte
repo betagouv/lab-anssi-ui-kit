@@ -1,10 +1,28 @@
 <script lang="ts">
   export let titre: string;
   export let description: string = "";
+  export let filAriane: { label: string; href: string }[] = [];
+
+  let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
 </script>
 
 <div class="conteneur-bandeau-entete">
   <div class="contenu-bandeau-entete">
+    {#if filAriane.length}
+      <div class="fil-ariane">
+        {#if !filArianeVisible}
+          <button on:click={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
+        {:else}
+          {#each filAriane as lien, index (index)}
+            {#if index === filAriane.length - 1}
+              <span>{lien.label}</span>
+            {:else}
+              <a href={lien.href}>{lien.label}</a>
+            {/if}
+          {/each}
+        {/if}
+      </div>
+    {/if}
     <div class="conteneur-texte">
       <div class="conteneur-corps">
         <h1>{titre}</h1>
@@ -48,8 +66,7 @@
             font-size: 2rem;
             font-weight: 700;
             line-height: 2.5rem;
-            margin-top: 4px;
-            margin-bottom: 0;
+            margin: 0;
 
             @include a-partir-de(tablette) {
               font-size: 2.5rem;
@@ -62,8 +79,52 @@
             font-size: 1.125rem;
             font-weight: 400;
             line-height: 1.75rem;
-            margin-top: 8px;
-            margin-bottom: 16px;
+            margin: 0;
+          }
+        }
+      }
+
+      .fil-ariane {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        flex-wrap: wrap;
+
+        a,
+        span,
+        button {
+          color: white;
+          font-family: Marianne;
+          font-size: 0.75rem;
+          font-weight: 400;
+          line-height: 1.25rem;
+        }
+
+        button {
+          border: none;
+          background: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        button,
+        a {
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
+        a {
+          display: flex;
+          flex-direction: row;
+          gap: 4px;
+          align-items: center;
+          white-space: nowrap;
+
+          &:after {
+            content: url-asset("/icones/fleche-droite-blanche.svg");
+            width: 16px;
+            height: 16px;
+            display: flex;
           }
         }
       }
