@@ -141,6 +141,8 @@
         grid-area: actions;
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
+
         gap: 16px;
 
         @include a-partir-de(tablette) {
