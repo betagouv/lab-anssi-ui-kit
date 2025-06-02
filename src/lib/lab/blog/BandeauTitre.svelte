@@ -1,8 +1,10 @@
 <script lang="ts">
+  import type { Lien, Tag } from "$lib/types.js";
+
   export let titre: string;
   export let description: string = "";
-  export let filAriane: { label: string; href: string }[] = [];
-  export let tag: { label: string; couleurTexte: string; couleurFond: string } | null = null;
+  export let filAriane: Lien[] = [];
+  export let tag: Tag | null = null;
 
   let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
 </script>
@@ -55,6 +57,7 @@
       font-family: Marianne;
       max-width: 1200px;
       margin: 0 auto;
+      text-align: left;
 
       .conteneur-texte {
         display: flex;

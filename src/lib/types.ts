@@ -38,3 +38,14 @@ export type Temoignage = {
   citation: string;
   source: string;
 };
+
+export type Lien = {
+  label: string;
+  href: string;
+};
+
+export type Tag = {
+  label: string;
+  couleurTexte: string;
+  couleurFond: string;
+};
