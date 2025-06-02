@@ -66,7 +66,7 @@
     font-style: normal;
     font-weight: 700;
 
-    @include a-partir-de(desktop) {
+    @include a-partir-de(tablette-grand) {
       font-size: 20px;
       line-height: 28px;
     }
