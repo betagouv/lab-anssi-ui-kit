@@ -50,6 +50,13 @@
         margin-right: 0;
       }
     }
+
+    .conteneur-image {
+      img {
+        max-width: 96px;
+        max-height: 96px;
+      }
+    }
   }
 
   p {
