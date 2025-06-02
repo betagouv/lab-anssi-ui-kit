@@ -3,15 +3,17 @@
     tag: "lab-anssi-tag-nombre",
     props: {
       nombre: { reflect: true, type: "Number", attribute: "nombre" },
+      variante: { reflect: false, type: "String", attribute: "variante" },
     },
   }}
 />
 
 <script lang="ts">
   export let nombre: number;
+  export let variante: 'primaire' | 'desactive' = 'primaire';
 </script>
 
-<span>{nombre}</span>
+<span class={variante}>{nombre}</span>
 
 <style lang="scss">
   span {
@@ -29,5 +31,11 @@
     font-family: Marianne;
     font-size: 0.75rem;
     line-height: 1.25rem;
+    font-weight: 400;
+
+    &.desactive {
+      background: $background-desactive;
+      color: $texte-desactive;
+    }
   }
 </style>
