@@ -2,6 +2,7 @@
   export let titre: string;
   export let description: string = "";
   export let filAriane: { label: string; href: string }[] = [];
+  export let tag: { label: string; couleurTexte: string; couleurFond: string } | null = null;
 
   let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
 </script>
@@ -24,6 +25,13 @@
       </div>
     {/if}
     <div class="conteneur-texte">
+      {#if tag}
+        <div class="conteneur-tag">
+          <span class="tag" style="background: {tag.couleurFond}; color: {tag.couleurTexte};"
+            >{tag.label}</span
+          >
+        </div>
+      {/if}
       <div class="conteneur-corps">
         <h1>{titre}</h1>
         {#if description}
@@ -54,6 +62,19 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
+
+        .conteneur-tag {
+          padding-top: 8px;
+
+          .tag {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-family: Marianne;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 1.25rem;
+          }
+        }
 
         .conteneur-corps {
           display: flex;
