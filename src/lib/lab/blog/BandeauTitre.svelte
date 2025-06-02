@@ -1,3 +1,15 @@
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-bandeau-titre",
+    props: {
+      titre: { reflect: false, type: "String", attribute: "titre" },
+      description: { reflect: false, type: "String", attribute: "description" },
+      filAriane: { reflect: false, type: "Array", attribute: "fil-ariane" },
+      tag: { reflect: false, type: "Object", attribute: "tag" },
+    },
+  }}
+/>
+
 <script lang="ts">
   import type { Lien, Tag } from "$lib/types.js";
 
