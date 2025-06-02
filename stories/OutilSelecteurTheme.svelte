@@ -40,7 +40,7 @@
     "brique-presentation-anssi-bouton-background-active",
     "brique-presentation-anssi-bouton-texte",
     "tag-nombre-background",
-    "tag-nombre-couleur-texte"
+    "tag-nombre-couleur-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -85,8 +85,8 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0279D0",
-      "tag-nombre-background":"#0279D0",
-      "tag-nombre-couleur-texte": "#FFFFFF"
+      "tag-nombre-background": "#0279D0",
+      "tag-nombre-couleur-texte": "#FFFFFF",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -126,8 +126,8 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#5D2A9D",
-      "tag-nombre-background":"#5D2A9D",
-      "tag-nombre-couleur-texte": "#FFFFFF"
+      "tag-nombre-background": "#5D2A9D",
+      "tag-nombre-couleur-texte": "#FFFFFF",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -169,8 +169,8 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0D0C21",
-      "tag-nombre-background":"#FED980",
-      "tag-nombre-couleur-texte": "#0D0C21"
+      "tag-nombre-background": "#FED980",
+      "tag-nombre-couleur-texte": "#0D0C21",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -210,8 +210,8 @@
       "brique-presentation-anssi-bouton-background-hover": "rgba(0, 0, 0, 0.04)",
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#272771",
-      "tag-nombre-background":"#272771",
-      "tag-nombre-couleur-texte": "#FFFFFF"
+      "tag-nombre-background": "#272771",
+      "tag-nombre-couleur-texte": "#FFFFFF",
     },
   };
 
