@@ -10,7 +10,11 @@ export type Video = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type Action = { titre: string; lien: string };
+export type Action = {
+  titre: string;
+  lien: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+};
 
 export type Tuiles = {
   titre: string;
@@ -21,7 +25,11 @@ export type Tuiles = {
 export type EtapeMarelle = {
   titre: string;
   description: string;
-  lien?: { href: string; texte: string; target: string };
+  lien?: {
+    href: string;
+    texte: string;
+    target: "_self" | "_blank" | "_parent" | "_top";
+  };
   illustration: Image;
 };
 
