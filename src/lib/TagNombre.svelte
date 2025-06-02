@@ -10,7 +10,7 @@
 
 <script lang="ts">
   export let nombre: number;
-  export let variante: "primaire" | "desactive" = "primaire";
+  export let variante: "primaire" | "desactive" | "rouge" = "primaire";
 </script>
 
 <span class={variante}>{nombre}</span>
@@ -36,6 +36,10 @@
     &.desactive {
       background: $background-desactive;
       color: $texte-desactive;
+    }
+
+    &.rouge {
+      background: $background-erreur;
     }
   }
 </style>

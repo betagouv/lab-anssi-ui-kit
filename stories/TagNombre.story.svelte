@@ -11,6 +11,7 @@
   const optionsVariante = {
     primaire: "Primaire",
     desactive: "Désactivé",
+    rouge: "Rouge",
   };
 </script>
 
