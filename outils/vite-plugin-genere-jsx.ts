@@ -32,9 +32,17 @@ export default function genereJSX(): Plugin {
 
         let typesJSX = `declare namespace JSX {\n\tinterface IntrinsicElements {\n`;
 
+        const cheminFichierExport = path.join(repertoireComposants, "index.d.ts");
+        const contenuFichierExport = await fs.readFile(cheminFichierExport, "utf-8");
         for (const fichier of fichiersSvelte) {
           const chemin = path.join(repertoireComposants, fichier);
           const contenu = await fs.readFile(chemin, "utf-8");
+
+          const nomFichierSvelte = chemin.match(/[^/]+\.svelte$/)?.[0];
+          if (!nomFichierSvelte) continue;
+          if (!contenuFichierExport.includes(nomFichierSvelte)) {
+            continue;
+          }
 
           let nomComposant = contenu.match(/<svelte:options\s+customElement\s*=\s*"([^"]+)"/);
           if (!nomComposant) {
