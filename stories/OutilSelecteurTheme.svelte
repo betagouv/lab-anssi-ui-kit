@@ -40,6 +40,8 @@
     "brique-presentation-anssi-bouton-background-active",
     "brique-presentation-anssi-bouton-texte",
     "bandeau-titre-background",
+    "couleur-lien",
+    "filtre-couleur-primaire",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -85,6 +87,9 @@
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0279D0",
       "bandeau-titre-background": "var(--centre-aide-background-entete)",
+      "couleur-lien": "#0079d0",
+      "filtre-couleur-primaire":
+        "brightness(0) invert(29%) sepia(95%) saturate(1420%) hue-rotate(184deg) brightness(98%) contrast(101%)",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -125,6 +130,9 @@
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#5D2A9D",
       "bandeau-titre-background": "var(--centre-aide-background-entete)",
+      "couleur-lien": "#5D2A9D",
+      "filtre-couleur-primaire":
+        "brightness(0) invert(13%) sepia(46%) saturate(5189%) hue-rotate(261deg) brightness(104%) contrast(89%)",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -167,6 +175,9 @@
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#0D0C21",
       "bandeau-titre-background": "var(--centre-aide-background-entete)",
+      "couleur-lien": "#0D0C21",
+      "filtre-couleur-primaire":
+        "brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%)",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -207,6 +218,9 @@
       "brique-presentation-anssi-bouton-background-active": "rgba(0, 0, 0, 0.08)",
       "brique-presentation-anssi-bouton-texte": "#272771",
       "bandeau-titre-background": "var(--centre-aide-background-entete)",
+      "couleur-lien": "#272771",
+      "filtre-couleur-primaire":
+        "brightness(0) invert(16%) sepia(31%) saturate(3600%) hue-rotate(224deg) brightness(93%) contrast(101%)",
     },
   };
 
