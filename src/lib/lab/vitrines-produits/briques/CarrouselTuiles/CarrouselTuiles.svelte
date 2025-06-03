@@ -109,6 +109,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    box-shadow: inset 0 -1px 0 $brique-carrousel-bouton-action-texte-couleur;
   }
 
   .conteneur-actions .precedent > .icone,
