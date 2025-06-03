@@ -102,9 +102,9 @@
     background: none;
     border: none;
     color: $brique-carrousel-bouton-action-texte-couleur;
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 28px;
+    line-height: 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;

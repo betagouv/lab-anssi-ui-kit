@@ -182,9 +182,9 @@
           background: none;
           border: none;
           color: $brique-temoignages-bouton-action-texte-couleur;
-          font-size: 1.125rem;
+          font-size: 1rem;
           font-weight: 400;
-          line-height: 1.75rem;
+          line-height: 1.5rem;
           cursor: pointer;
           display: flex;
           align-items: center;
