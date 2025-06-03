@@ -28,29 +28,3 @@ $points-de-rupture-a-partir-de: (
   + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
   }
 }
-
-.visible-tablette {
-  display: none !important;
-  @include a-partir-de(tablette) {
-    display: unset !important;
-  }
-}
-
-.invisible-tablette {
-  @include a-partir-de(tablette) {
-    display: none !important;
-  }
-}
-
-.visible-desktop {
-  display: none !important;
-  @include a-partir-de(desktop) {
-    display: unset !important;
-  }
-}
-
-.invisible-desktop {
-  @include a-partir-de(desktop) {
-    display: none !important;
-  }
-}
