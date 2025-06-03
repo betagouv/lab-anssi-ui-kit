@@ -143,10 +143,6 @@
     }
   }
 
-  .marelle-etape > div > p > b {
-    color: $brique-marelle-etapes-lien-couleur;
-  }
-
   .marelle-etape > div > a {
     width: fit-content;
     color: $brique-marelle-etapes-lien-couleur;
