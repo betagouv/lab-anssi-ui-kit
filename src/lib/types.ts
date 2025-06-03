@@ -55,3 +55,9 @@ export type Tag = {
   couleurTexte: string;
   couleurFond: string;
 };
+
+export type TableDesMatieres = {
+  profondeur: number;
+  texte: string;
+  id: string;
+}[];

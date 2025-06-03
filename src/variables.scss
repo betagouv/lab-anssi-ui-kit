@@ -9,7 +9,14 @@ $texte-secondaire: #3a3a3a;
 
 $titre-couleur-primaire: var(--titre-couleur-primaire);
 
+$police: Marianne, sans-serif;
+
+$filtre-couleur-primaire: var(--filtre-couleur-primaire);
+
 // Couleurs par composant
+
+$couleur-lien: var(--couleur-lien);
+
 // - Centre d'aide
 $centre-aide-background-entete: var(--centre-aide-background-entete);
 $centre-aide-background-bouton: var(--centre-aide-background-bouton);
