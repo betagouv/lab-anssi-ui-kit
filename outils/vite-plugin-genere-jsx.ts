@@ -3,6 +3,7 @@ import * as path from "path";
 import type { Plugin } from "vite";
 import * as ts from "typescript";
 import * as prettier from "prettier";
+import { extraitPropsComposant } from "./extraction-props-composant";
 
 export default function genereJSX(): Plugin {
   let repertoireSortie = "build";
@@ -44,39 +45,29 @@ export default function genereJSX(): Plugin {
             continue;
           }
 
-          let nomComposant = contenu.match(/<svelte:options\s+customElement\s*=\s*"([^"]+)"/);
-          if (!nomComposant) {
-            nomComposant = contenu.match(
-              /<svelte:options\s+customElement\s*={{\s*tag:\s*['"](.*)['"]/,
+          const contenuSvelteOptions = contenu.match(/<svelte:options[\s\S]*?\/>/)?.[0];
+          if (!contenuSvelteOptions)
+            throw new Error(
+              `Impossible d'extraire le contenu du <svelte:options ... /> pour le fichier ${nomFichierSvelte}`,
+            );
+          const contenuFichierDeclarationType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
+          if (!contenuFichierDeclarationType)
+            throw new Error(
+              `Impossible de trouver le fichier de déclaration '.d.ts' pour le fichier ${nomFichierSvelte}`,
             );
 
-            if (!nomComposant) {
-              console.warn(`⚠️ Aucun <svelte:options customElement="..."> trouvé dans ${fichier}`);
-              continue;
-            }
-          }
-          const tag = nomComposant[1];
-          typesJSX += `\t\t"${tag}": {\n`;
+          const { nomWebComponent, props } = extraitPropsComposant(
+            contenuSvelteOptions,
+            contenuFichierDeclarationType,
+          );
 
-          const contenuFichierType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
-
-          const props = [
-            ...contenuFichierType.matchAll(/props:\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/gs),
-          ];
-          if (props[0]) {
-            const propsFormatees = props[0][1]
-              .split("\n")
-              .map((p) => {
-                const [nomProp] = p.replaceAll(" ", "").replaceAll(";", "").split(":");
-                return nomProp ? `${nomProp}: string` : undefined;
-              })
-              .filter((p) => !!p);
-
-            for (const prop of propsFormatees) {
-              typesJSX += `\t\t\t${prop}\n`;
-            }
-          }
-          typesJSX += `\t\t};\n`;
+          typesJSX += `"${nomWebComponent}": { ${props
+            .map((prop: { nom: string; optionnelle: boolean }) => {
+              const guillemetOptionnel = prop.nom.includes("-") ? '"' : "";
+              const identifiant = `${guillemetOptionnel}${prop.nom}${guillemetOptionnel}${prop.optionnelle ? "?" : ""}`;
+              return `${identifiant}: string;`;
+            })
+            .join("\n")} };\n`;
         }
         typesJSX += `\t}\n}`;
 
