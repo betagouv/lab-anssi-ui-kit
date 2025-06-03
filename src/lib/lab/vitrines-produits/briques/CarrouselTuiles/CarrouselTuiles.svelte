@@ -130,14 +130,6 @@
       .conteneur-actions {
         display: none;
       }
-
-      .tuile-presentation:first-of-type {
-        margin-left: 0;
-      }
-
-      .tuile-presentation:last-of-type {
-        margin-right: 0;
-      }
     }
   }
 </style>
