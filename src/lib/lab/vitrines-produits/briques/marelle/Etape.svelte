@@ -158,5 +158,9 @@
 
     text-decoration: none;
     box-shadow: inset 0 -1px 0 $brique-marelle-etapes-lien-couleur;
+
+    &:hover {
+      box-shadow: inset 0 -2px 0 $brique-marelle-etapes-lien-couleur;
+    }
   }
 </style>

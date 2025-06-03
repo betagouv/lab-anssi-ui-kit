@@ -189,6 +189,8 @@
           display: flex;
           align-items: center;
           gap: 8px;
+
+          box-shadow: inset 0 -1px 0 $brique-temoignages-bouton-action-texte-couleur;
         }
 
         .precedent > .icone,
