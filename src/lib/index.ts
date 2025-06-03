@@ -14,3 +14,4 @@ export { default as BriqueContenuADeuxColonnes } from "./lab/vitrines-produits/b
 export { default as PresentationANSSI } from "./lab/vitrines-produits/briques/PresentationANSSI.svelte";
 export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
 export { default as BandeauTitre } from "./lab/blog/BandeauTitre.svelte";
+export { default as PageCrisp } from "./lab/blog/PageCrisp.svelte";
