@@ -42,6 +42,9 @@
     "bandeau-titre-background",
     "couleur-lien",
     "filtre-couleur-primaire",
+    "sommaire-actif-indicateur-couleur",
+    "sommaire-actif-couleur",
+    "sommaire-mobile-fond"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -90,6 +93,9 @@
       "couleur-lien": "#0079d0",
       "filtre-couleur-primaire":
         "brightness(0) invert(29%) sepia(95%) saturate(1420%) hue-rotate(184deg) brightness(98%) contrast(101%)",
+      "sommaire-actif-indicateur-couleur": "#0079D0",
+      "sommaire-actif-couleur": "#0079D0",
+      "sommaire-mobile-fond": "#F1F5F9",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -133,6 +139,9 @@
       "couleur-lien": "#5D2A9D",
       "filtre-couleur-primaire":
         "brightness(0) invert(13%) sepia(46%) saturate(5189%) hue-rotate(261deg) brightness(104%) contrast(89%)",
+      "sommaire-actif-indicateur-couleur": "#FED980",
+      "sommaire-actif-couleur": "#5D2A9D",
+      "sommaire-mobile-fond": "#F5F1F9",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -178,6 +187,9 @@
       "couleur-lien": "#0D0C21",
       "filtre-couleur-primaire":
         "brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%)",
+      "sommaire-actif-indicateur-couleur": "#FED980",
+      "sommaire-actif-couleur": "#0D0C21",
+      "sommaire-mobile-fond": "#FFF7DB"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -221,6 +233,9 @@
       "couleur-lien": "#272771",
       "filtre-couleur-primaire":
         "brightness(0) invert(16%) sepia(31%) saturate(3600%) hue-rotate(224deg) brightness(93%) contrast(101%)",
+      "sommaire-actif-indicateur-couleur": "#FED980",
+      "sommaire-actif-couleur": "#272771",
+      "sommaire-mobile-fond": "#F5F5FE"
     },
   };
 

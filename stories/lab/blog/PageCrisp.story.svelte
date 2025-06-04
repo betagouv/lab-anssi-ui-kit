@@ -16,6 +16,16 @@
     });
   }
 
+  // Un bug d'histoire, qui utilise JSDom lors d'une des phases de montage du composant
+  // https://github.com/histoire-dev/histoire/issues/407
+  if (!window.IntersectionObserver) {
+    // @ts-ignore
+    window.IntersectionObserver = class IntersectionObserver {
+      observe(): void {}
+      unobserve(): void {}
+    };
+  }
+
   const contenu = (exempleContenu as string).replaceAll(
     "%%IMAGE_1000_800%%",
     genereImageDePlaceholder(1000, 800),
