@@ -11,11 +11,11 @@
 />
 
 <script lang="ts">
-  import type { Lien, Tag } from "$lib/types.js";
+  import { estLien, type NoeudFilAriane, type Tag } from "$lib/types.js";
 
   export let titre: string;
   export let description: string = "";
-  export let filAriane: Lien[] = [];
+  export let filAriane: NoeudFilAriane[] = [];
   export let tag: Tag | null = null;
 
   let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
@@ -28,11 +28,11 @@
         {#if !filArianeVisible}
           <button on:click={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
         {:else}
-          {#each filAriane as lien, index (index)}
-            {#if index === filAriane.length - 1}
-              <span>{lien.label}</span>
+          {#each filAriane as noeud, index (index)}
+            {#if estLien(noeud)}
+              <a href={noeud.href}>{noeud.label}</a>
             {:else}
-              <a href={lien.href}>{lien.label}</a>
+              <span>{noeud.label}</span>
             {/if}
           {/each}
         {/if}
