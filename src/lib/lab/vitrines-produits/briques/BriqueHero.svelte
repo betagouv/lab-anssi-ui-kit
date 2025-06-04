@@ -235,6 +235,7 @@
       border-radius: 4px;
 
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 8px;
 
