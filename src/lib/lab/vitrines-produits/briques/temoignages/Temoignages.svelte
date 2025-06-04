@@ -179,6 +179,7 @@
         }
 
         button {
+          position: relative;
           background: none;
           border: none;
           color: $brique-temoignages-bouton-action-texte-couleur;
@@ -190,17 +191,28 @@
           align-items: center;
           gap: 8px;
 
-          box-shadow: inset 0 -1px 0 $brique-temoignages-bouton-action-texte-couleur;
+          &:hover {
+            &:after {
+              bottom: -1px;
+              height: 2px;
+            }
+          }
+
+          &:after {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            content: "";
+            width: 100%;
+            height: 1px;
+            background: $brique-temoignages-bouton-action-texte-couleur;
+          }
         }
 
         .precedent > .icone,
         .suivant > .icone {
           display: flex;
           align-items: center;
-        }
-
-        button:hover {
-          box-shadow: inset 0 -2px 0 $brique-temoignages-bouton-action-texte-couleur;
         }
       }
     }
