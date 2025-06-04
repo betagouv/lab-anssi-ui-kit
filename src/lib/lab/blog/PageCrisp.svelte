@@ -10,17 +10,76 @@
 
 <script lang="ts">
   import type { TableDesMatieres } from "$lib/types";
+  import SommaireMobile from "$lib/lab/blog/SommaireMobile.svelte";
+  import { onDestroy, tick } from "svelte";
 
   export let contenu: string;
   export let tableDesMatieres: TableDesMatieres;
+
+  let composant: HTMLDivElement;
+  let observateurDIntersection: IntersectionObserver;
+
+  const observeLesSections = () => {
+    observateurDIntersection = new IntersectionObserver(
+      (sections) => {
+        sections.forEach((section) => {
+          const titreDeLaSection = section.target.querySelector("h2");
+          const lesLiens = composant.querySelectorAll(
+            `.sommaire ul li a[href='#${titreDeLaSection!.id}']`,
+          );
+
+          if (!lesLiens) return;
+
+          if (section.isIntersecting) {
+            lesLiens.forEach((l) => l.parentElement!.classList.add("actif"));
+
+            const menuMobileVisible = composant.querySelector("#section-active");
+            if (menuMobileVisible) menuMobileVisible.textContent = titreDeLaSection!.textContent;
+          } else lesLiens.forEach((l) => l.parentElement!.classList.remove("actif"));
+        });
+      },
+      { rootMargin: "-30% 0% -62% 0%" },
+    );
+
+    const lesSections = composant.querySelectorAll("article .contenu section");
+    lesSections.forEach((s) => observateurDIntersection.observe(s));
+  };
+
+  $: if (contenu) tick().then(observeLesSections);
+
+  function scroll(cible: string) {
+    if (cible) {
+      tick().then(() => {
+        const ancre = composant && composant.querySelector(cible);
+        if (ancre) {
+            ancre.scrollIntoView(true)
+        }
+      });
+    }
+  }
+
+  $: if (contenu) scroll(window.location.hash);
+
+  const ancreOuverte = (evenement: CustomEvent) => scroll(`#${evenement.detail}`);
+
+  onDestroy(() => {
+    const lesSections = composant!.querySelectorAll("section");
+    lesSections.forEach((s) => {
+      if (observateurDIntersection) observateurDIntersection.unobserve(s);
+    });
+  });
 </script>
 
-<article>
-  <div class="contenu">
-    <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-    {@html contenu}
-  </div>
-</article>
+<div bind:this={composant}>
+  <SommaireMobile {tableDesMatieres} on:ancreOuverte={ancreOuverte} />
+
+  <article>
+    <div class="contenu">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+      {@html contenu}
+    </div>
+  </article>
+</div>
 
 <style lang="scss">
   article {
@@ -56,6 +115,7 @@
         line-height: 2.25rem;
         font-weight: 700;
         margin: 0;
+        scroll-margin-top: 50px; /* Hauteur de la barre de navigation */
         @include a-partir-de(tablette) {
           font-size: 2rem;
           line-height: 2.5rem;
@@ -175,6 +235,7 @@
           height: 1px;
           background-color: $couleur-lien;
         }
+
         &:hover {
           &:before {
             bottom: -1px;
