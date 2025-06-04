@@ -44,6 +44,12 @@ export type Lien = {
   href: string;
 };
 
+type Feuille = { label: string };
+
+export type NoeudFilAriane = Lien | Feuille;
+
+export const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
+
 export type Tag = {
   label: string;
   couleurTexte: string;

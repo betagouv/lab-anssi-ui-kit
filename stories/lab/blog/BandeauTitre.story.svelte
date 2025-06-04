@@ -11,7 +11,7 @@
   let filAriane = [
     { label: "Accueil", href: "#" },
     { label: "Page N2", href: "#" },
-    { label: "Page N3", href: "#" },
+    { label: "Page N3" },
   ];
   let avecTag = true;
   let tag = {
