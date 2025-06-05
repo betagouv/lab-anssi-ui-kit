@@ -12,6 +12,7 @@
   import type { TableDesMatieres } from "$lib/types";
   import SommaireMobile from "$lib/lab/blog/SommaireMobile.svelte";
   import { onDestroy, tick } from "svelte";
+  import SommaireBureau from "$lib/lab/blog/SommaireBureau.svelte";
 
   export let contenu: string;
   export let tableDesMatieres: TableDesMatieres;
@@ -52,7 +53,7 @@
       tick().then(() => {
         const ancre = composant && composant.querySelector(cible);
         if (ancre) {
-            ancre.scrollIntoView(true)
+          ancre.scrollIntoView(true);
         }
       });
     }
@@ -74,6 +75,7 @@
   <SommaireMobile {tableDesMatieres} on:ancreOuverte={ancreOuverte} />
 
   <article>
+    <SommaireBureau {tableDesMatieres} on:ancreOuverte={ancreOuverte} />
     <div class="contenu">
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
       {@html contenu}
@@ -85,16 +87,22 @@
   article {
     font-family: $police;
     color: $texte-secondaire;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 16px 72px;
+
+    @include a-partir-de(desktop) {
+      padding: 48px 24px 72px;
+      flex-direction: row;
+      gap: 24px;
+    }
 
     .contenu {
-      padding: 48px 16px 72px;
       display: flex;
       flex-direction: column;
       gap: 72px;
-
-      @include a-partir-de(desktop) {
-        padding: 48px 24px 72px;
-      }
 
       :global(section) {
         display: flex;
