@@ -48,16 +48,30 @@
 
   $: if (contenu) tick().then(observeLesSections);
 
-  function scroll(cible: string) {
+  const attendChargementImages = async () => {
+    const images = composant.querySelectorAll("img");
+    await Promise.all(
+      Array.from(images).map((image) => {
+        if (image.complete) return Promise.resolve();
+        return new Promise((res) => {
+          image.addEventListener("load", res);
+          image.addEventListener("error", res);
+        });
+      }),
+    );
+  };
+
+  const scroll = (cible: string) => {
     if (cible) {
-      tick().then(() => {
+      tick().then(async () => {
         const ancre = composant && composant.querySelector(cible);
         if (ancre) {
+          await attendChargementImages();
           ancre.scrollIntoView(true);
         }
       });
     }
-  }
+  };
 
   $: if (contenu) scroll(window.location.hash);
 
