@@ -120,6 +120,7 @@
       }
 
       summary {
+        list-style: none;
         &::marker {
           content: "";
         }
