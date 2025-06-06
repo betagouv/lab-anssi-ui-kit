@@ -142,6 +142,9 @@
           font-size: 2rem;
           line-height: 2.5rem;
         }
+        @include a-partir-de(desktop) {
+          scroll-margin-top: 0;
+        }
       }
 
       :global(h3) {
