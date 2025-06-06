@@ -54,3 +54,9 @@
   <OutilSelecteurTheme />
   <PageCrisp {contenu} {tableDesMatieres} />
 </Hst.Story>
+
+<style>
+  :global(.__histoire-render-story:not(.__histoire-render-custom-controls)) {
+    overflow: unset;
+  }
+</style>
