@@ -44,7 +44,7 @@
     "filtre-couleur-primaire",
     "sommaire-actif-indicateur-couleur",
     "sommaire-actif-couleur",
-    "sommaire-mobile-fond"
+    "sommaire-mobile-fond",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -189,7 +189,7 @@
         "brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%)",
       "sommaire-actif-indicateur-couleur": "#FED980",
       "sommaire-actif-couleur": "#0D0C21",
-      "sommaire-mobile-fond": "#FFF7DB"
+      "sommaire-mobile-fond": "#FFF7DB",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -235,7 +235,7 @@
         "brightness(0) invert(16%) sepia(31%) saturate(3600%) hue-rotate(224deg) brightness(93%) contrast(101%)",
       "sommaire-actif-indicateur-couleur": "#FED980",
       "sommaire-actif-couleur": "#272771",
-      "sommaire-mobile-fond": "#F5F5FE"
+      "sommaire-mobile-fond": "#F5F5FE",
     },
   };
 
