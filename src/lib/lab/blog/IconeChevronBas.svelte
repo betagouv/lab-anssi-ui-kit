@@ -15,7 +15,11 @@
 </svg>
 
 <style lang="scss">
-  path {
-    fill: $sommaire-actif-couleur;
+  svg {
+    flex-shrink: 0;
+
+    path {
+      fill: $sommaire-actif-couleur;
+    }
   }
 </style>
