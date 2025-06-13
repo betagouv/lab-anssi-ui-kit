@@ -1,0 +1,37 @@
+name: La publication du Storybook de DEV
+permissions: {}
+on:
+  workflow_dispatch: # Pour activer le déclenchement manuel
+
+jobs:
+  build:
+    name: "Construis"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
+
+      - name: Utiliser la version Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Exécuter les tests
+        run: npm run test
+
+      - name: Builder le storybook
+        run: npm run story:build
+
+      - name: Installer et configurer la CLI de S3cmd
+        uses: s3-actions/s3cmd@v1.10.0
+        with:
+          provider: clevercloud
+          access_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_ACCESS_KEY }}
+          secret_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_SECRET_KEY }}
+
+      - name: Publier sur le S3
+        run: ./scripts/s3put_avec_le_bon_mime_type.sh
