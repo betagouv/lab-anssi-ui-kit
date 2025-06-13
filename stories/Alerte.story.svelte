@@ -9,7 +9,7 @@
   <div style="background-color:white; padding:48px;">
     <h3>Information</h3>
     <div style="margin: 16px 0;">
-      <Alerte description="Lorem ipsum dolor sit" />
+      <Alerte description="Oh la la" />
     </div>
     <div style="margin: 16px 0;">
       <Alerte
