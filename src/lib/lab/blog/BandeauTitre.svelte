@@ -88,6 +88,7 @@
             font-size: 0.75rem;
             font-weight: 400;
             line-height: 1.25rem;
+            display: flex;
           }
         }
 
