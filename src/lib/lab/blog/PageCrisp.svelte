@@ -110,7 +110,7 @@
     @include a-partir-de(desktop) {
       padding: 48px 24px 72px;
       flex-direction: row;
-      gap: 24px;
+      gap: 48px;
     }
 
     .contenu {

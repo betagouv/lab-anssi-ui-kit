@@ -51,16 +51,10 @@
         padding-bottom: 12px;
 
         &.actif {
-          font-weight: bold;
-
           a {
             color: $sommaire-actif-couleur;
             border-left: 2px solid $sommaire-actif-indicateur-couleur;
             padding-left: 6px;
-            font-size: 1rem;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 1.5rem;
           }
         }
 
@@ -70,6 +64,10 @@
           text-decoration: none;
           padding-left: 8px;
           display: inline-block;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.5rem;
         }
       }
     }
