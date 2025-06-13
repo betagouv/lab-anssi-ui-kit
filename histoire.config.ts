@@ -2,9 +2,6 @@ import { HstSvelte } from "@histoire/plugin-svelte";
 import { defineConfig } from "histoire";
 
 export default defineConfig({
-  vite: {
-    base: "/lab-anssi-ui-kit/",
-  },
   outDir: "dist-histoire",
   plugins: [HstSvelte()],
   setupFile: "/stories/histoire.setup.ts",
