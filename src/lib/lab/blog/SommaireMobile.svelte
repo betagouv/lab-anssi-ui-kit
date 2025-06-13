@@ -24,7 +24,8 @@
       <div class="entete-filtres">
         <IconeMenuLateral />
         <span id="section-active" class="titre-menu">
-          {tableDesMatieres[0]?.texte}
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html tableDesMatieres[0]?.texte}
         </span>
         <IconeChevronBas />
       </div>
