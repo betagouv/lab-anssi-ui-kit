@@ -1,0 +1,39 @@
+name: La publication du Storybook de DEV
+permissions: {}
+on:
+  workflow_dispatch: # Pour activer le déclenchement manuel
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: "Construis"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
+
+      - name: Utiliser la version Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Exécuter les tests
+        run: npm run test
+
+      - name: Builder le storybook
+        run: npm run story:build
+
+      - name: Déploiement Clever Cloud via SFTP
+        uses: Dylan700/sftp-upload-action@latest
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          uploads: |
+            ./dist-histoire/ => ./
