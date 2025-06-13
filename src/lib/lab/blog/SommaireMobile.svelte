@@ -69,7 +69,7 @@
     details {
       .entete-filtres {
         padding: 12px 16px;
-        background: $sommaire-mobile-fond;
+        background: white;
         color: $sommaire-actif-couleur;
         font-size: 1rem;
         font-style: normal;
@@ -112,6 +112,8 @@
       &[open] {
         summary {
           .entete-filtres {
+            background: $sommaire-mobile-fond;
+
             :global(.chevron) {
               transform: rotate(180deg);
             }
