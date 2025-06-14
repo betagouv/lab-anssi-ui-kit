@@ -61,3 +61,11 @@ export type TableDesMatieres = {
   texte: string;
   id: string;
 }[];
+
+export type ResumeArticle = {
+  idCategorie: string;
+  titre: string;
+  href: string;
+};
+
+export type CategoriesArticle = Record<string, Tag>;
