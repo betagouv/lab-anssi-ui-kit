@@ -12,6 +12,7 @@
 
 <script lang="ts">
   import { estLien, type NoeudFilAriane, type Tag } from "$lib/types.js";
+  import ComposantTag from "./Tag.svelte";
 
   export let titre: string;
   export let description: string = "";
@@ -41,9 +42,7 @@
     <div class="conteneur-texte">
       {#if tag}
         <div class="conteneur-tag">
-          <span class="tag" style="background: {tag.couleurFond}; color: {tag.couleurTexte};"
-            >{tag.label}</span
-          >
+          <ComposantTag {tag} />
         </div>
       {/if}
       <div class="conteneur-corps">
@@ -80,16 +79,6 @@
 
         .conteneur-tag {
           padding-top: 8px;
-
-          .tag {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-family: Marianne;
-            font-size: 0.75rem;
-            font-weight: 400;
-            line-height: 1.25rem;
-            display: flex;
-          }
         }
 
         .conteneur-corps {
