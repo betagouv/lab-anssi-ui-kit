@@ -39,15 +39,17 @@
       couleurFond: "#E9DDFF",
     },
   };
+  let idCategorieChoisie: string | undefined;
 </script>
 
 <Hst.Story title="Composants/Lab/Blog/Liste Articles" icon="material-symbols:event-list-rounded">
   <OutilSelecteurTheme />
-  <ListeArticles {articles} {categories} />
+  <ListeArticles {articles} {categories} {idCategorieChoisie} />
 
   <svelte:fragment slot="controls">
     <Hst.Json title="Articles" bind:value={articles} />
-    <Hst.Json title="Categories" bind:value={categories} />
+    <Hst.Json title="Catégories" bind:value={categories} />
+    <Hst.Text title="Id Catégorie présélectionnée" bind:value={idCategorieChoisie} />
   </svelte:fragment>
 </Hst.Story>
 

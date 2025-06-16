@@ -5,8 +5,8 @@
 
   export let articles: ResumeArticle[];
   export let categories: CategoriesArticle;
+  export let idCategorieChoisie: string = "tous";
 
-  let idCategorieChoisie: string = "tous";
   const optionsFiltrage = [
     { label: "Tous les articles", valeur: "tous" },
     ...Object.entries(categories).map(([idCategorie, donnees]) => ({
