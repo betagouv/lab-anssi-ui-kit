@@ -15,3 +15,4 @@ export { default as PresentationANSSI } from "./lab/vitrines-produits/briques/Pr
 export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
 export { default as BandeauTitre } from "./lab/blog/BandeauTitre.svelte";
 export { default as PageCrisp } from "./lab/blog/PageCrisp.svelte";
+export { default as ListeArticles } from "./lab/blog/ListeArticles.svelte";
