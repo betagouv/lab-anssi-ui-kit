@@ -24,7 +24,7 @@ jobs:
         run: npm run test
 
       - name: Builder le storybook
-        run: npm run story:build
+        run: npm run story:build-dev
 
       - name: Installer et configurer la CLI de S3cmd
         uses: s3-actions/s3cmd@v1.10.0
@@ -33,5 +33,11 @@ jobs:
           access_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_ACCESS_KEY }}
           secret_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_SECRET_KEY }}
 
+      - name: Nettoyer le S3
+        run: s3cmd rm s3://lab-anssi-ui-kit-dev/ --recursive --force
+
       - name: Publier sur le S3
         run: ./scripts/s3put_avec_le_bon_mime_type.sh
+
+      - name: Envoyer les assets vers le S3
+        run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-dev/src/lib/assets/

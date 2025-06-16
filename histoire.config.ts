@@ -3,7 +3,7 @@ import { defineConfig } from "histoire";
 
 export default defineConfig({
   vite: {
-    base: "/lab-anssi-ui-kit/",
+    base: process.env.HISTOIRE_ENV === "production" ? "/lab-anssi-ui-kit/" : "/",
   },
   outDir: "dist-histoire",
   plugins: [HstSvelte()],
