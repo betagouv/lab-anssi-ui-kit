@@ -23,6 +23,7 @@
   .conteneur-select {
     position: relative;
     width: fit-content;
+    max-width: 100%;
 
     img {
       position: absolute;
@@ -46,6 +47,7 @@
       font-weight: 400;
       line-height: 1.5rem;
       background: #eeeeee;
+      max-width: 100%;
 
       &:hover {
         background: $background-default-grey-hover;
