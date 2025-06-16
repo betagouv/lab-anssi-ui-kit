@@ -1,3 +1,14 @@
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-liste-articles",
+    props: {
+      articles: { reflect: false, type: "Array", attribute: "articles" },
+      categories: { reflect: false, type: "Object", attribute: "categories" },
+      idCategorieChoisie: { reflect: false, type: "String", attribute: "id-categorie-choisie" },
+    },
+  }}
+/>
+
 <script lang="ts">
   import type { CategoriesArticle, ResumeArticle } from "$lib/types";
   import CarteArticle from "$lib/lab/blog/CarteArticle.svelte";
