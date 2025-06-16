@@ -47,7 +47,7 @@
     "sommaire-mobile-fond",
     "liste-articles-couleur-fleche",
     "liste-articles-couleur-texte",
-    "liste-articles-couleur-focus"
+    "couleur-focus",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -101,7 +101,7 @@
       "sommaire-mobile-fond": "#F1F5F9",
       "liste-articles-couleur-fleche": "#0079D0",
       "liste-articles-couleur-texte": "#09416A",
-      "liste-articles-couleur-focus": "#0A76F6"
+      "couleur-focus": "#0A76F6",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -150,7 +150,7 @@
       "sommaire-mobile-fond": "#F5F1F9",
       "liste-articles-couleur-fleche": "red",
       "liste-articles-couleur-texte": "red",
-      "liste-articles-couleur-focus": "red"
+      "couleur-focus": "#5D2A9D",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -201,7 +201,7 @@
       "sommaire-mobile-fond": "#FFF7DB",
       "liste-articles-couleur-fleche": "red",
       "liste-articles-couleur-texte": "red",
-      "liste-articles-couleur-focus": "red"
+      "couleur-focus": "#FED980",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -250,7 +250,7 @@
       "sommaire-mobile-fond": "#F5F5FE",
       "liste-articles-couleur-fleche": "red",
       "liste-articles-couleur-texte": "red",
-      "liste-articles-couleur-focus": "red"
+      "couleur-focus": "#272771",
     },
   };
 
