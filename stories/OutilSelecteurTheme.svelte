@@ -45,6 +45,9 @@
     "sommaire-actif-indicateur-couleur",
     "sommaire-actif-couleur",
     "sommaire-mobile-fond",
+    "liste-articles-couleur-fleche",
+    "liste-articles-couleur-texte",
+    "liste-articles-couleur-focus"
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -96,6 +99,9 @@
       "sommaire-actif-indicateur-couleur": "#0079D0",
       "sommaire-actif-couleur": "#0079D0",
       "sommaire-mobile-fond": "#F1F5F9",
+      "liste-articles-couleur-fleche": "#0079D0",
+      "liste-articles-couleur-texte": "#09416A",
+      "liste-articles-couleur-focus": "#0A76F6"
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -142,6 +148,9 @@
       "sommaire-actif-indicateur-couleur": "#FED980",
       "sommaire-actif-couleur": "#5D2A9D",
       "sommaire-mobile-fond": "#F5F1F9",
+      "liste-articles-couleur-fleche": "red",
+      "liste-articles-couleur-texte": "red",
+      "liste-articles-couleur-focus": "red"
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -190,6 +199,9 @@
       "sommaire-actif-indicateur-couleur": "#FED980",
       "sommaire-actif-couleur": "#0D0C21",
       "sommaire-mobile-fond": "#FFF7DB",
+      "liste-articles-couleur-fleche": "red",
+      "liste-articles-couleur-texte": "red",
+      "liste-articles-couleur-focus": "red"
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -236,6 +248,9 @@
       "sommaire-actif-indicateur-couleur": "#FED980",
       "sommaire-actif-couleur": "#272771",
       "sommaire-mobile-fond": "#F5F5FE",
+      "liste-articles-couleur-fleche": "red",
+      "liste-articles-couleur-texte": "red",
+      "liste-articles-couleur-focus": "red"
     },
   };
 
