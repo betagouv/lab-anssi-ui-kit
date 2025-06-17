@@ -25,7 +25,7 @@
   données.
 </p>
 <p>
-  Nous auditions également régulièrement nos services (audits de code et tests d'intrusion) par des
+  Nous auditons également régulièrement nos services (audits de code et tests d'intrusion) par des
   prestataires qualifiés (PASSI).
 </p>
 <p>
