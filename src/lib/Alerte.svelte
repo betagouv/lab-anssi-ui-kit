@@ -18,13 +18,15 @@
 {#if estOuvert}
   <div class="alerte {type}">
     <span class="icone"></span>
-    <div class="contenu">{description}</div>
-    <button
-      class="fermer"
-      on:click={() => {
-        estOuvert = false;
-      }}
-    ></button>
+    <div class="conteneur">
+      <div class="contenu">{description}</div>
+      <button
+        class="fermer"
+        on:click={() => {
+          estOuvert = false;
+        }}
+      ></button>
+    </div>
   </div>
 {/if}
 
@@ -32,39 +34,55 @@
   .alerte {
     display: flex;
     min-width: 200px;
-    &.information {
-      border: 1px solid #0163cb;
-    }
-    &.erreur {
-      border: 1px solid #ce0500;
-    }
   }
+
+  .conteneur {
+    border: 2px solid red;
+    border-left: none;
+    display: flex;
+    width: 100%;
+    border-radius: 0 8px 8px 0;
+  }
+
   .contenu {
     flex: 1;
     padding: 8px;
     color: $texte-secondaire;
   }
+
   .icone {
     width: 40px;
     min-width: 40px;
+    border-radius: 8px 0 0 8px;
   }
+
   .information {
+    .conteneur {
+      border-color: #0163cb;
+    }
+
     .icone {
       background: no-repeat center 8px #0163cb url-asset("/icones/information.svg");
     }
   }
+
   .erreur {
+    .conteneur {
+      border-color: #ce0500;
+    }
+
     .icone {
       background: no-repeat center 8px #ce0500 url-asset("/icones/erreur.svg");
     }
   }
+
   .fermer {
     width: 16px;
     height: 16px;
     padding: 8px;
     margin-top: 3px;
     margin-right: 3px;
-    background: no-repeat center 8px url-asset("/icones/croix-bleu.svg");
+    background: no-repeat center 8px url-asset("/icones/croix-noire.svg");
     border: 0;
     cursor: pointer;
     box-sizing: content-box;
