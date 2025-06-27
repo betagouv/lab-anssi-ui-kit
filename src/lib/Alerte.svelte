@@ -4,6 +4,7 @@
     props: {
       description: { reflect: false, type: "String", attribute: "description" },
       type: { reflect: false, type: "String", attribute: "type" },
+      fermable: { reflect: false, type: "Boolean", attribute: "fermable" },
     },
   }}
 />
@@ -11,6 +12,7 @@
 <script lang="ts">
   export let description: string;
   export let type: "information" | "erreur" = "information";
+  export let fermable: boolean = true;
 
   let estOuvert = true;
 </script>
@@ -20,12 +22,14 @@
     <span class="icone"></span>
     <div class="conteneur">
       <div class="contenu">{description}</div>
-      <button
-        class="fermer"
-        on:click={() => {
-          estOuvert = false;
-        }}
-      ></button>
+      {#if fermable}
+        <button
+          class="fermer"
+          on:click={() => {
+            estOuvert = false;
+          }}
+        ></button>
+      {/if}
     </div>
   </div>
 {/if}
