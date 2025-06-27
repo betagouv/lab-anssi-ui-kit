@@ -34,6 +34,7 @@
   .alerte {
     display: flex;
     min-width: 200px;
+    font-family: Marianne, sans-serif;
   }
 
   .conteneur {
