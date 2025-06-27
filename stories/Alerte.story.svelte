@@ -29,5 +29,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet laoree
         type="erreur"
       />
     </div>
+    <h3>Sans bouton de fermeture</h3>
+    <div style="margin: 16px 0;">
+      <Alerte description="Lorem ipsum dolor sit" fermable={false} />
+    </div>
   </div>
 </Hst.Story>
