@@ -22,7 +22,7 @@
     <div class="texte">
       <h6>Prenez votre cyberdépart !</h6>
       <p>
-        Bénéficiez d'un <b>premier diagnostic gratuit</b> et anonyme dans vos locaux
+        Bénéficiez d'un <b>premier diagnostic gratuit</b> et anonyme dans vos locaux ou en visio
         <b>accompagné par un Aidant cyber</b>.
       </p>
     </div>
