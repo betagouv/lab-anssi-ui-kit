@@ -16,3 +16,4 @@ export { default as RejoindreLaCommunaute } from "./lab/vitrines-produits/brique
 export { default as BandeauTitre } from "./lab/blog/BandeauTitre.svelte";
 export { default as PageCrisp } from "./lab/blog/PageCrisp.svelte";
 export { default as ListeArticles } from "./lab/blog/ListeArticles.svelte";
+export { default as Icone } from "./lab/Icone.svelte";
