@@ -17,3 +17,4 @@ export { default as BandeauTitre } from "./lab/blog/BandeauTitre.svelte";
 export { default as PageCrisp } from "./lab/blog/PageCrisp.svelte";
 export { default as ListeArticles } from "./lab/blog/ListeArticles.svelte";
 export { default as Icone } from "./lab/Icone.svelte";
+export { default as Bouton } from "./lab/Bouton.svelte";
