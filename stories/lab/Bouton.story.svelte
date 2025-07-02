@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Hst } from "@histoire/plugin-svelte";
   import Bouton from "$lib/lab/Bouton.svelte";
+  import OutilSelecteurTheme from "../OutilSelecteurTheme.svelte";
 
   export let Hst: Hst;
 
@@ -13,6 +14,7 @@
 </script>
 
 <Hst.Story title="Composants/Lab/Bouton">
+  <OutilSelecteurTheme />
   <div style="background-color:white; padding:48px;">
     <h3>Bouton</h3>
     <Bouton titre="Libellé" {variante} {taille} {icone} />
