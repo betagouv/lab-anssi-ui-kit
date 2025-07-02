@@ -28,7 +28,7 @@
   {/if}
 </button>
 
-<style>
+<style lang="scss">
   .bouton {
     display: flex;
     align-items: center;
@@ -37,8 +37,7 @@
     cursor: pointer;
 
     &.tertiaire {
-      align-items: center;
-      color: #0d0c21;
+      color: $bouton-secondaire-tertiaire-couleur-texte;
       text-align: center;
       background: white;
       border: 1px solid #ddd;
@@ -46,7 +45,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 1.5rem;
-      border-radius: 4px;
+      border-radius: $bouton-arrondi;
 
       &.sm {
         padding: 4px 12px;
