@@ -11,7 +11,10 @@
   let icone: string = "leaf-line";
   let cible: string | undefined;
 
-  const variantesDisponibles = [{ value: "tertiaire", label: "Tertiaire" }];
+  const variantesDisponibles = [
+    { value: "primaire", label: "Primaire" },
+    { value: "tertiaire", label: "Tertiaire" },
+  ];
   const taillesDisponibles = [{ value: "sm", label: "Petit" }];
   const apparencesDisponibles = [
     { value: "lien", label: "Lien" },
