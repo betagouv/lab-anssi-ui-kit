@@ -15,14 +15,14 @@
   import Icone from "$lib/lab/Icone.svelte";
 
   export let titre: string;
-  export let variante: "primaire" | "tertiaire" = "primaire";
-  export let taille = "sm";
+  export let variante: "primaire" | "tertiaire";
+  export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
   export let sansBordure = false;
 </script>
 
 <button class={`bouton ${variante} ${taille}`} class:sansBordure on:click>
-  {titre}
+  <span>{titre}</span>
   {#if icone}
     <Icone nom={icone} taille="sm" />
   {/if}

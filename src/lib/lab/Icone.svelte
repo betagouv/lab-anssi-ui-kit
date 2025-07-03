@@ -18,6 +18,7 @@
 <style lang="scss">
   .icone {
     font-family: Marianne, arial, sans-serif;
+    line-height: var(--icon-size);
 
     &:before {
       content: "";
