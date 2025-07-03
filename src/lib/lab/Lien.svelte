@@ -19,7 +19,7 @@
 
   export let titre: string;
   export let href: string;
-  export let variante = "tertiaire";
+  export let variante: "primaire" | "tertiaire" = "tertiaire";
   export let taille = "sm";
   export let icone: string | undefined = undefined;
   export let sansBordure = false;
