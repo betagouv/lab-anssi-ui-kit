@@ -29,44 +29,5 @@
 </button>
 
 <style lang="scss">
-  .bouton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: Marianne, arial, sans-serif;
-    cursor: pointer;
-
-    &.tertiaire {
-      color: $bouton-secondaire-tertiaire-couleur-texte;
-      text-align: center;
-      background: white;
-      border: 1px solid #ddd;
-      font-size: 0.875rem;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 1.5rem;
-      border-radius: $bouton-arrondi;
-
-      &.sm {
-        padding: 4px 12px;
-      }
-
-      &.sansBordure {
-        border: none;
-      }
-
-      &:hover {
-        background: rgb(0, 0, 0, 4%);
-      }
-
-      &:active {
-        background: rgb(0, 0, 0, 8%);
-      }
-
-      &:focus {
-        outline: 2px solid #0a76f6;
-        outline-offset: 2px;
-      }
-    }
-  }
+  @import "apparence-bouton.scss";
 </style>

@@ -105,7 +105,7 @@
       "liste-articles-couleur-texte": "#09416A",
       "couleur-focus": "#0A76F6",
       "bouton-secondaire-tertiaire-couleur-texte": "#0079D0",
-      "bouton-arrondi": "4px"
+      "bouton-arrondi": "4px",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -156,7 +156,7 @@
       "liste-articles-couleur-texte": "red",
       "couleur-focus": "#5D2A9D",
       "bouton-secondaire-tertiaire-couleur-texte": "#5D2A9D",
-      "bouton-arrondi": "8px"
+      "bouton-arrondi": "8px",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -209,7 +209,7 @@
       "liste-articles-couleur-texte": "red",
       "couleur-focus": "#FED980",
       "bouton-secondaire-tertiaire-couleur-texte": "#0D0C21",
-      "bouton-arrondi": "8px"
+      "bouton-arrondi": "8px",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -260,7 +260,7 @@
       "liste-articles-couleur-texte": "red",
       "couleur-focus": "#272771",
       "bouton-secondaire-tertiaire-couleur-texte": "#272771",
-      "bouton-arrondi": "8px"
+      "bouton-arrondi": "8px",
     },
   };
 
