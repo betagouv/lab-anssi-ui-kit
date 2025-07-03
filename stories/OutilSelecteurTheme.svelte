@@ -50,6 +50,10 @@
     "couleur-focus",
     "bouton-secondaire-tertiaire-couleur-texte",
     "bouton-arrondi",
+    "bouton-primaire-couleur-texte",
+    "bouton-primaire-couleur-fond",
+    "bouton-primaire-couleur-fond-survol",
+    "bouton-primaire-couleur-fond-clique",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -105,6 +109,10 @@
       "liste-articles-couleur-texte": "#09416A",
       "couleur-focus": "#0A76F6",
       "bouton-secondaire-tertiaire-couleur-texte": "#0079D0",
+      "bouton-primaire-couleur-texte": "#FFFFFF",
+      "bouton-primaire-couleur-fond": "#0079D0",
+      "bouton-primaire-couleur-fond-survol": "#0C5C98",
+      "bouton-primaire-couleur-fond-clique": "#09416A",
       "bouton-arrondi": "4px",
     },
     MonAideCyber: {
@@ -157,6 +165,10 @@
       "couleur-focus": "#5D2A9D",
       "bouton-secondaire-tertiaire-couleur-texte": "#5D2A9D",
       "bouton-arrondi": "8px",
+      "bouton-primaire-couleur-texte": "#FFFFFF",
+      "bouton-primaire-couleur-fond": "#5D2A9D",
+      "bouton-primaire-couleur-fond-survol": "#9C51D0",
+      "bouton-primaire-couleur-fond-clique": "#9C51D0",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -210,6 +222,10 @@
       "couleur-focus": "#FED980",
       "bouton-secondaire-tertiaire-couleur-texte": "#0D0C21",
       "bouton-arrondi": "8px",
+      "bouton-primaire-couleur-texte": "#0d0c21",
+      "bouton-primaire-couleur-fond": "#fed980",
+      "bouton-primaire-couleur-fond-survol": "#ecca79",
+      "bouton-primaire-couleur-fond-clique": "#ddbd70",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -261,6 +277,10 @@
       "couleur-focus": "#272771",
       "bouton-secondaire-tertiaire-couleur-texte": "#272771",
       "bouton-arrondi": "8px",
+      "bouton-primaire-couleur-texte": "#3a3a3a",
+      "bouton-primaire-couleur-fond": "#fdc82e",
+      "bouton-primaire-couleur-fond-survol": "#ffdb71",
+      "bouton-primaire-couleur-fond-clique": "#ededed",
     },
   };
 
