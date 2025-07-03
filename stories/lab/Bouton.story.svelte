@@ -9,7 +9,10 @@
   let taille: string = "sm";
   let icone: string = "leaf-line";
 
-  const variantesDisponibles = [{ value: "tertiaire", label: "Tertiaire" }];
+  const variantesDisponibles = [
+    { value: "primaire", label: "Primaire" },
+    { value: "tertiaire", label: "Tertiaire" },
+  ];
   const taillesDisponibles = [{ value: "sm", label: "Petit" }];
 </script>
 
