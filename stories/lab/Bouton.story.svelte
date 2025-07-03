@@ -13,7 +13,11 @@
     { value: "primaire", label: "Primaire" },
     { value: "tertiaire", label: "Tertiaire" },
   ];
-  const taillesDisponibles = [{ value: "sm", label: "Petit" }];
+  const taillesDisponibles = [
+    { value: "sm", label: "Petit" },
+    { value: "md", label: "Moyen" },
+    { value: "lg", label: "Grand" },
+  ];
 </script>
 
 <Hst.Story title="Composants/Lab/Bouton">

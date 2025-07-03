@@ -14,17 +14,29 @@
     outline-offset: 2px;
   }
 
+  &.sm {
+    padding: 4px 12px;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+
+  &.md {
+    padding: 8px 16px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &.lg {
+    padding: 10px 24px;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
   &.primaire {
     background: $bouton-primaire-couleur-fond;
     color: $bouton-primaire-couleur-texte;
     border: none;
     border-radius: $bouton-arrondi;
-
-    &.sm {
-      padding: 4px 12px;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
 
     &:hover {
       background: $bouton-primaire-couleur-fond-survol;
@@ -41,12 +53,6 @@
     background: white;
     border: 1px solid #ddd;
     border-radius: $bouton-arrondi;
-
-    &.sm {
-      padding: 4px 12px;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
 
     &.sansBordure {
       border: none;
