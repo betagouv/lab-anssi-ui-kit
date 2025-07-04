@@ -83,7 +83,8 @@
     }
   }
 
-  &.tertiaire, &.tertiaire-sans-bordure {
+  &.tertiaire,
+  &.tertiaire-sans-bordure {
     color: $bouton-secondaire-tertiaire-couleur-texte;
     text-align: center;
     background: white;

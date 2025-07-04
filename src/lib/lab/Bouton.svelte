@@ -21,7 +21,11 @@
   export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
 </script>
 
-<button class={`bouton ${variante} ${taille} icone-${positionIcone}`} on:click title={positionIcone === "seule" ? titre : ""}>
+<button
+  class={`bouton ${variante} ${taille} icone-${positionIcone}`}
+  on:click
+  title={positionIcone === "seule" ? titre : ""}
+>
   {#if (positionIcone === "gauche" || positionIcone === "seule") && icone}
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
   {/if}
