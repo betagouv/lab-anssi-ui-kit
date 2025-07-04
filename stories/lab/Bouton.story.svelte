@@ -13,6 +13,7 @@
   const variantesDisponibles = [
     { value: "primaire", label: "Primaire" },
     { value: "tertiaire", label: "Tertiaire" },
+    { value: "tertiaire-sans-bordure", label: "Tertiaire sans bordure" },
   ];
   const taillesDisponibles = [
     { value: "sm", label: "Petit" },
@@ -33,8 +34,6 @@
   <div style="background-color:white; padding:48px;">
     <h3>Bouton</h3>
     <Bouton titre="Libellé" {variante} {taille} {icone} {positionIcone} />
-    <h4>Tertiaire sans bordure</h4>
-    <Bouton titre="Libellé" variante="tertiaire" {taille} {icone} sansBordure />
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />
