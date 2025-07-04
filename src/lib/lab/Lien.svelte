@@ -8,8 +8,8 @@
       taille: { reflect: false, type: "String", attribute: "taille" },
       icone: { reflect: false, type: "String", attribute: "icone" },
       apparence: { reflect: false, type: "String", attribute: "apparence" },
-      sansBordure: { reflect: false, type: "Boolean", attribute: "sans-bordure" },
       cible: { reflect: false, type: "String", attribute: "cible" },
+      positionIcone: { reflect: false, type: "String", attribute: "position-icone" },
     },
   }}
 />
@@ -19,25 +19,29 @@
 
   export let titre: string;
   export let href: string;
-  export let variante: "primaire" | "tertiaire" = "tertiaire";
-  export let taille = "sm";
+  export let variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
+  export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
-  export let sansBordure = false;
   export let apparence: "lien" | "bouton" = "lien";
   export let cible: string | undefined = undefined;
+  export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
 </script>
 
 <a
-  class={`bouton ${variante} ${taille}`}
-  class:sansBordure
+  class={`bouton ${variante} ${taille} icone-${positionIcone}`}
   {href}
   target={cible}
   class:bouton={apparence === "bouton"}
   class:lien={apparence === "lien"}
 >
-  {titre}
-  {#if icone && apparence === "bouton"}
-    <Icone nom={icone} taille="sm" />
+  {#if (positionIcone === "gauche" || positionIcone === "seule") && icone}
+    <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
+  {/if}
+  {#if positionIcone !== "seule"}
+    <span>{titre}</span>
+  {/if}
+  {#if positionIcone === "droite" && icone}
+    <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
   {/if}
   {#if cible === "_blank"}
     <Icone nom="external-link-line" taille="sm" />
@@ -52,12 +56,27 @@
   .lien {
     font-family: Marianne, arial, sans-serif;
     color: $couleur-lien;
-    display: flex;
-    gap: 2px;
+    display: inline-flex;
+    gap: 8px;
     align-items: center;
     width: fit-content;
     text-decoration: none;
     position: relative;
+
+    &.sm {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+
+    &.md {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    &.lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
 
     &:before {
       content: "";

@@ -9,11 +9,13 @@
   let variante: string = "tertiaire";
   let taille: string = "sm";
   let icone: string = "leaf-line";
+  let positionIcone: string = "droite";
   let cible: string | undefined;
 
   const variantesDisponibles = [
     { value: "primaire", label: "Primaire" },
     { value: "tertiaire", label: "Tertiaire" },
+    { value: "tertiaire-sans-bordure", label: "Tertiaire sans bordure" },
   ];
   const taillesDisponibles = [
     { value: "sm", label: "Petit" },
@@ -24,30 +26,36 @@
     { value: "lien", label: "Lien" },
     { value: "bouton", label: "Bouton" },
   ];
+
+  const positionsIconeDisponibles = [
+    { value: "sans", label: "Sans" },
+    { value: "seule", label: "Seule" },
+    { value: "droite", label: "À droite" },
+    { value: "gauche", label: "À gauche" },
+  ];
 </script>
 
 <Hst.Story title="Composants/Lab/Lien">
   <OutilSelecteurTheme />
   <div style="background-color:white; padding:48px;">
+
     <h3>Lien</h3>
-    <Lien titre="Libellé" href="#" {apparence} {variante} {taille} {icone} {cible} />
-    <h4>Tertiaire sans bordure</h4>
-    <Lien
-      titre="Libellé"
-      href="#"
-      {apparence}
-      variante="tertiaire"
-      {taille}
-      {icone}
-      sansBordure
-      {cible}
-    />
+    <Lien titre="libellé" href="#" {apparence} {variante} {taille} {icone} {cible} {positionIcone} />
+
+    <h3>Lien dans du texte</h3>
+    Lorem ipsum <Lien titre="dolor sit" href="#" {apparence} {variante} {taille} {icone} {cible} {positionIcone} /> amet.
+
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />
     <Hst.Select title="Apparence" options={apparencesDisponibles} bind:value={apparence} />
     <Hst.Select title="Variante" options={variantesDisponibles} bind:value={variante} />
     <Hst.Select title="Taille" options={taillesDisponibles} bind:value={taille} />
+    <Hst.Select
+      title="Position icône"
+      options={positionsIconeDisponibles}
+      bind:value={positionIcone}
+    />
     <Hst.Text title="Cible" bind:value={cible} />
   </svelte:fragment>
 </Hst.Story>
