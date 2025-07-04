@@ -38,18 +38,29 @@
 <Hst.Story title="Composants/Lab/Lien">
   <OutilSelecteurTheme />
   <div style="background-color:white; padding:48px;">
-
     <h3>Lien</h3>
-    <Lien titre="libellé" href="#" {apparence} {variante} {taille} {icone} {cible} {positionIcone} />
+    <Lien
+      titre="libellé"
+      href="#"
+      {apparence}
+      {variante}
+      {taille}
+      {icone}
+      {cible}
+      {positionIcone}
+    />
 
     <h3>Lien dans du texte</h3>
 
     <h4>Taille de police 1rem</h4>
-    <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.</p>
+    <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">
+      Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.
+    </p>
 
     <h4>Taille de police 2rem</h4>
-    <p style="font-size: 2rem; line-height: 3rem; color: #18753c">Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.</p>
-
+    <p style="font-size: 2rem; line-height: 3rem; color: #18753c">
+      Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.
+    </p>
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />
