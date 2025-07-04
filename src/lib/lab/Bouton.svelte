@@ -21,7 +21,7 @@
   export let sansBordure = false;
 </script>
 
-<button class={`bouton ${variante} ${taille}`} class:sansBordure on:click>
+<button class={`bouton ${variante} ${taille}`} class:sansBordure on:click class:avecIcone={!!icone}>
   <span>{titre}</span>
   {#if icone}
     <Icone nom={icone} taille="sm" />
