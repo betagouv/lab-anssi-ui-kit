@@ -19,8 +19,16 @@
     font-size: 0.875rem;
     line-height: 1.5rem;
 
-    &.avecIcone {
+    &.icone-droite {
       padding-right: 8px;
+    }
+
+    &.icone-gauche {
+      padding-left: 8px;
+    }
+
+    &.icone-seule {
+      padding: 8px;
     }
   }
 
@@ -29,8 +37,16 @@
     font-size: 1rem;
     line-height: 1.5rem;
 
-    &.avecIcone {
+    &.icone-droite {
       padding-right: 12px;
+    }
+
+    &.icone-gauche {
+      padding-left: 12px;
+    }
+
+    &.icone-seule {
+      padding: 8px;
     }
   }
 
@@ -39,8 +55,16 @@
     font-size: 1.125rem;
     line-height: 1.75rem;
 
-    &.avecIcone {
+    &.icone-droite {
       padding-right: 18px;
+    }
+
+    &.icone-gauche {
+      padding-left: 18px;
+    }
+
+    &.icone-seule {
+      padding: 12px;
     }
   }
 
