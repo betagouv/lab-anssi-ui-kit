@@ -71,7 +71,7 @@
   &.primaire {
     background: $bouton-primaire-couleur-fond;
     color: $bouton-primaire-couleur-texte;
-    border: none;
+    border: 1px solid transparent;
     border-radius: $bouton-arrondi;
 
     &:hover {
@@ -83,16 +83,11 @@
     }
   }
 
-  &.tertiaire {
+  &.tertiaire, &.tertiaire-sans-bordure {
     color: $bouton-secondaire-tertiaire-couleur-texte;
     text-align: center;
     background: white;
-    border: 1px solid #ddd;
     border-radius: $bouton-arrondi;
-
-    &.sansBordure {
-      border: none;
-    }
 
     &:hover {
       background: rgb(0, 0, 0, 4%);
@@ -106,5 +101,13 @@
       outline: 2px solid #0a76f6;
       outline-offset: 2px;
     }
+  }
+
+  &.tertiaire {
+    border: 1px solid #ddd;
+  }
+
+  &.tertiaire-sans-bordure {
+    border: 1px solid transparent;
   }
 }
