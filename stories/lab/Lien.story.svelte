@@ -43,7 +43,12 @@
     <Lien titre="libellé" href="#" {apparence} {variante} {taille} {icone} {cible} {positionIcone} />
 
     <h3>Lien dans du texte</h3>
-    Lorem ipsum <Lien titre="dolor sit" href="#" {apparence} {variante} {taille} {icone} {cible} {positionIcone} /> amet.
+
+    <h4>Taille de police 1rem</h4>
+    <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.</p>
+
+    <h4>Taille de police 2rem</h4>
+    <p style="font-size: 2rem; line-height: 3rem; color: #18753c">Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.</p>
 
   </div>
   <svelte:fragment slot="controls">
