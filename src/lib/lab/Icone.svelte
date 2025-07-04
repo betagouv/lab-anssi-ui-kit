@@ -19,6 +19,7 @@
   .icone {
     font-family: Marianne, arial, sans-serif;
     line-height: var(--icon-size);
+    height: var(--icon-size);
 
     &:before {
       content: "";
@@ -33,21 +34,15 @@
     }
 
     &.sm {
-      &:before {
-        --icon-size: 1rem;
-      }
+      --icon-size: 1rem;
     }
 
     &.md {
-      &:before {
-        --icon-size: 1.5rem;
-      }
+      --icon-size: 1.5rem;
     }
 
     &.lg {
-      &:before {
-        --icon-size: 2rem;
-      }
+      --icon-size: 2rem;
     }
   }
 
