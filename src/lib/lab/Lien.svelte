@@ -33,6 +33,7 @@
   target={cible}
   class:bouton={apparence === "bouton"}
   class:lien={apparence === "lien"}
+  title={positionIcone === "seule" ? titre : ""}
 >
   {#if (positionIcone === "gauche" || positionIcone === "seule") && icone}
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
