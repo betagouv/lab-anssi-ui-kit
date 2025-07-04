@@ -22,17 +22,15 @@
   export let variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
   export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
-  export let apparence: "lien" | "bouton" = "lien";
+  export let apparence: "lien" | "bouton" | "lien-texte" = "lien";
   export let cible: string | undefined = undefined;
   export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
 </script>
 
 <a
-  class={`bouton ${variante} ${taille} icone-${positionIcone}`}
+  class={`${variante} ${taille} icone-${positionIcone} ${apparence}`}
   {href}
   target={cible}
-  class:bouton={apparence === "bouton"}
-  class:lien={apparence === "lien"}
   title={positionIcone === "seule" ? titre : ""}
 >
   {#if (positionIcone === "gauche" || positionIcone === "seule") && icone}
@@ -45,13 +43,41 @@
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
   {/if}
   {#if cible === "_blank"}
-    <Icone nom="external-link-line" taille="sm" />
+    <Icone nom="external-link-line" />
   {/if}
 </a>
 
 <style lang="scss">
   .bouton {
     text-decoration: none;
+  }
+
+  .lien-texte {
+    font-family: Marianne, arial, sans-serif;
+    color: inherit;
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    width: fit-content;
+    text-decoration: none;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0.2em;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+    }
+
+    &:hover {
+      &:before {
+        bottom: calc(0.2em - 1px);
+        height: 2px;
+      }
+    }
   }
 
   .lien {

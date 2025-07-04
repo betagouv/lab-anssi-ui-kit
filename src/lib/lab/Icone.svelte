@@ -10,7 +10,7 @@
 
 <script lang="ts">
   export let nom: string;
-  export let taille: "sm" | "md" | "lg" = "md";
+  export let taille: "sm" | "md" | "lg" | undefined = undefined;
 </script>
 
 <span class="icone fr-icon-{nom} {taille}"></span>
@@ -18,6 +18,7 @@
 <style lang="scss">
   .icone {
     font-family: Marianne, arial, sans-serif;
+    --icon-size: 1em;
     line-height: var(--icon-size);
     height: var(--icon-size);
 
