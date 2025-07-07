@@ -61,6 +61,11 @@
     <p style="font-size: 2rem; line-height: 3rem; color: #18753c">
       Lorem ipsum <Lien titre="dolor sit plop" href="#" apparence="lien-texte" {cible} /> amet.
     </p>
+
+    <h3>Contenu riche</h3>
+    <Lien apparence="bouton" taille="lg" variante="primaire">
+      <b>En gras</b>-<i>en italique</i>
+    </Lien>
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />

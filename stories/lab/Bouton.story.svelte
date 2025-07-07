@@ -34,6 +34,10 @@
   <div style="background-color:white; padding:48px;">
     <h3>Bouton</h3>
     <Bouton titre="Libellé" {variante} {taille} {icone} {positionIcone} />
+    <h3>Contenu riche</h3>
+    <Bouton taille="lg" variante="primaire">
+      <b>En gras</b>-<i>en italique</i>
+    </Bouton>
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />

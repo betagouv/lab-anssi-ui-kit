@@ -37,7 +37,7 @@
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
   {/if}
   {#if positionIcone !== "seule"}
-    <span>{titre}</span>
+    <span><slot>{titre}</slot></span>
   {/if}
   {#if positionIcone === "droite" && icone}
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
