@@ -15,17 +15,40 @@
 
 ## Storybook des composants
 
-Le storybook des composants est disponible [ici](https://betagouv.github.io/lab-anssi-ui-kit/).
+> Nous parlons de _Storybook_ car c'est le terme généralement employé, mais nous utilisons [Histoire](https://histoire.dev/).  
+> Nous avons fait ce choix car au moment de la création de notre repo, Storybook n'était pas compatible Svelte.
 
-Il est construit avec [Histoire](https://histoire.dev/)
+Lors de la release d'une nouvelle version de l'UI Kit, le Storybook des composants [est déployé sur Github Pages : https://betagouv.github.io/lab-anssi-ui-kit/](https://betagouv.github.io/lab-anssi-ui-kit/).
 
 ## Architecture de build
 
-Cette librairie a pour objectif de produire des composants Svelte et leurs équivalents [Webcomponent](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+Cette librairie a pour objectif de produire des composants Svelte et leurs équivalents [WebComponent](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
 L'architecture pour produire du Svelte utilise [SvelteKit](https://svelte.dev/docs/kit/packaging), configuré via le wizard `npx sv create`.
-C'est ce qui explique les nombreux fichiers de configuration Svelte (Prettier, Vitest, etc...) : Ils ont été rajoutés par le wizard.
+C'est ce qui explique les nombreux fichiers de configuration Svelte (Prettier, Vitest, etc.) : ils ont été rajoutés par le wizard.
 
-Pour rajouter le build des Webcomponents, on rajoute manuellement un fichier de configuration [`vite.webcomponents.config.ts`](./vite.webcomponents.config.ts). et des appels à la commande `vite -c vite.webcomponents.config.ts build` lors des étapes de build du package.
+Pour rajouter le build des WebComponents, on rajoute manuellement un fichier de configuration [`vite.webcomponents.config.ts`](./vite.webcomponents.config.ts) et des appels à la commande `vite -c vite.webcomponents.config.ts build` lors des étapes de build du package.
 
-Résultat : dans le repertoire `dist/` on retrouvera les composants Svelte et leurs équivalents Webcomponents. Tous le contenu de `dist/` est publié via `npm publish`.
+Résultat : dans le repertoire `dist/` on retrouvera les composants Svelte et leurs équivalents Webcomponents.  
+Tout le contenu de `dist/` est publié via `npm publish`.
+
+## Développement en local
+
+La commande principale pour le développement en local est `npm run story:dev`.  
+La sortie devrait ressembler à :
+
+```shell
+
+$ npm run story:dev
+
+@lab-anssi/ui-kit@1.19.0 story:dev
+HISTOIRE_ENV=development histoire dev
+Re-optimizing dependencies because lockfile has changed
+Using 5 threads for story collection
+Collect stories start all
+  ➜  Local:   http://localhost:6006/
+  ➜  Network: use --host to expose
+```
+
+Après cette commande, le Storybook local est disponible sur http://localhost:6006/.  
+Il devrait ressembler [au Storybook disponible en ligne](https://betagouv.github.io/lab-anssi-ui-kit/).
