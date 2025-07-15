@@ -1,0 +1,16 @@
+// ============================================================================================= //
+//                                            MIXINS                                             //
+// ============================================================================================= //
+
+@use "../tokens";
+@use "../config";
+@use "@magnesium/theme";
+
+$_custom-property-prefix: "tag";
+$_tokens: tokens.comp-tag-values();
+
+@mixin theme($tokens) {
+    $tokens: theme.validation($_tokens, $tokens);
+
+    @include theme.emit-custom-props($tokens, $_custom-property-prefix);
+}

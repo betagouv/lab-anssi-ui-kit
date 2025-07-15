@@ -74,6 +74,10 @@
     "vite": "^5.0.13",
     "vitest": "^3.0.0"
   },
+  "dependencies": {
+    "@magnesium/theme": "^4.5.4",
+    "@unsass/rem": "^2.3.0"
+  },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"

@@ -1,0 +1,156 @@
+// ============================================================================================= //
+//                                            MIXINS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "../tokens";
+@use "../config";
+@use "@magnesium/theme";
+@use "../base";
+@use "../tag";
+
+$_custom-property-prefix: "card";
+$_tokens: tokens.comp-card-values();
+
+@mixin theme($tokens) {
+    $tokens: theme.validation($_tokens, $tokens);
+
+    @include theme.emit-custom-props($tokens, $_custom-property-prefix);
+}
+
+@mixin styles {
+    $tokens: theme.create-theme-vars($_tokens, $_custom-property-prefix);
+
+    .lab-card {
+        @at-root & {
+            @each $token, $value in $tokens {
+                --_#{$_custom-property-prefix}-#{$token}: #{map.get($tokens, $token)};
+            }
+        }
+
+        @include tag.theme((
+            "container-color": #eee,
+            "text-color": #161616
+        ));
+
+        @include base.box-sizing();
+
+        background-color: var(--_#{$_custom-property-prefix}-container-color);
+        width: 100%;
+        min-width: 282px;
+        max-width: 544px;
+        height: 100%;
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--_#{$_custom-property-prefix}-outline-color);
+        position: relative;
+
+        * {
+            @include base.box-sizing();
+        }
+
+        &:hover {
+
+            @include theme((
+                "container-color": var(--_#{$_custom-property-prefix}-hover-container-color)
+            ));
+        }
+
+        &:active {
+            @include theme((
+                "container-color": var(--_#{$_custom-property-prefix}-pressed-container-color)
+            ));
+        }
+    }
+
+    .lab-card__link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        text-decoration: none;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+
+        &:focus {
+            border-radius: 0;
+            outline-style: solid;
+            outline-width: var(--_#{$_custom-property-prefix}-link-outline-width);
+            outline-color: var(--_#{$_custom-property-prefix}-link-outline-color);
+            outline-offset: 3px;
+        }
+    }
+
+    .lab-card__illustration {
+        background-color: var(--_#{$_custom-property-prefix}-illustration-container-color);
+        aspect-ratio: 1.83 / 1;
+        padding: 24px 24px 0 24px;
+        overflow: hidden;
+    }
+
+    .lab-card__image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--_#{$_custom-property-prefix}-illustration-outline-color);
+        border-bottom-width: 0;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+        margin: 0;
+    }
+
+    .lab-card__content {
+        height: 252px;
+        padding: 24px;
+    }
+
+    .lab-card__title {
+        @include base.ellipsis-multiline(3);
+
+        height: 112px;
+        line-height: var(--_#{$_custom-property-prefix}-title-text-line-height);
+        font-family: var(--_#{$_custom-property-prefix}-title-text-font);
+        font-size: var(--_#{$_custom-property-prefix}-title-text-size);
+        font-weight: var(--_#{$_custom-property-prefix}-title-text-weight);
+        color: var(--_#{$_custom-property-prefix}-title-text-color);
+        margin: 4px 0 0;
+    }
+
+    .lab-card__label {
+        line-height: var(--_#{$_custom-property-prefix}-label-text-line-height);
+        font-family: var(--_#{$_custom-property-prefix}-label-text-font);
+        font-size: var(--_#{$_custom-property-prefix}-label-text-size);
+        font-weight: var(--_#{$_custom-property-prefix}-label-text-weight);
+        color: var(--_#{$_custom-property-prefix}-label-text-color);
+        margin: 0;
+    }
+
+    .lab-card__tags {
+        display: flex;
+        justify-content: start;
+        margin-top: 12px;
+
+        :global(.tag) {
+            margin-left: 8px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .lab-card__icon {
+        display: flex;
+        justify-content: end;
+        margin-top: 12px;
+
+        :global(svg) {
+            width: var(--_#{$_custom-property-prefix}-icon-width);
+            height: var(--_#{$_custom-property-prefix}-icon-height);
+            fill: var(--_#{$_custom-property-prefix}-icon-color);
+        }
+    }
+}

@@ -1,0 +1,36 @@
+// ============================================================================================= //
+//                                            TOKENS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "@unsass/rem";
+@use "../../../variables";
+
+$_default: (
+);
+
+@function values($deps: $_default) {
+    @return (
+        "container-color": #fff,
+        "outline-color": variables.$border-default-grey,
+        "hover-container-color": variables.$background-default-grey-hover,
+        "pressed-container-color": variables.$background-default-grey-active,
+        "illustration-container-color": #f4f4f4,
+        "illustration-outline-color": #e3e3fd,
+        "title-text-font": variables.$police,
+        "title-text-size": rem.convert(20),
+        "title-text-line-height": rem.convert(32),
+        "title-text-weight": 700,
+        "title-text-color": variables.$texte-dsfr,
+        "label-text-font": variables.$police,
+        "label-text-size": rem.convert(14),
+        "label-text-line-height": rem.convert(24),
+        "label-text-weight": 400,
+        "label-text-color": variables.$text-mention-grey,
+        "link-outline-color": #0a76f6,
+        "link-outline-width": 2px,
+        "icon-height": 16px,
+        "icon-width": 16px,
+        "icon-color": variables.$texte-dsfr
+    );
+}

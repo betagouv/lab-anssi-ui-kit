@@ -10,6 +10,8 @@
 
 <style lang="scss">
   .tag {
+    background-color: var(--lab-tag-container-color);
+    color: var(--lab-tag-text-color);
     padding: 2px 8px;
     border-radius: 12px;
     font-family: Marianne;
