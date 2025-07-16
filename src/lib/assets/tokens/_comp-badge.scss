@@ -1,0 +1,25 @@
+// ============================================================================================= //
+//                                            TOKENS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "./sys-typescale";
+
+$_default: (
+    "sys-typescale": sys-typescale.values()
+);
+
+@function values($deps: $_default) {
+    @return (
+        "container-color": #fee7fc,
+        "container-shape": 4px,
+        "container-height": 24px,
+        "icon-size": 16px,
+        "icon-color": #6e445a,
+        "text-font": map.get($deps, "sys-typescale", "caption-font"),
+        "text-size": map.get($deps, "sys-typescale", "caption-size"),
+        "text-line-height": map.get($deps, "sys-typescale", "caption-line-height"),
+        "text-weight": 700,
+        "text-color": #6e445a
+    );
+}

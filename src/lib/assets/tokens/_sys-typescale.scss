@@ -1,0 +1,37 @@
+// ============================================================================================= //
+//                                            TOKENS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "../config";
+@use "@magnesium/theme";
+@use "@unsass/rem";
+@use "./ref-typeface";
+
+$_default: (
+    "ref-typeface": ref-typeface.values()
+);
+
+@function values($deps: $_default, $exclude-custom-props: false) {
+    $tokens: (
+        "headline-small-font": map.get($deps, "ref-typeface", "brand"),
+        "headline-small-line-height": rem.convert(32),
+        "headline-small-size": rem.convert(20),
+        "headline-small-weight": 700,
+        "headline-small-tracking": normal,
+        /// ...
+        "caption-font": map.get($deps, "ref-typeface", "brand"),
+        "caption-line-height": rem.convert(24),
+        "caption-size": rem.convert(14),
+        "caption-weight": 400,
+        "caption-tracking": normal
+    );
+
+    @if not $exclude-custom-props {
+        @each $key, $value in $tokens {
+            $tokens: map.set($tokens, $key, theme.emit-variable($tokens, $key, true, "typography"))
+        }
+    }
+
+    @return $tokens;
+}

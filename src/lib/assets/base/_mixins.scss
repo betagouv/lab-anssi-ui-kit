@@ -1,0 +1,19 @@
+// ============================================================================================= //
+//                                             BASE                                              //
+// ============================================================================================= //
+
+@mixin box-sizing {
+    box-sizing: border-box;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+    }
+}
+
+@mixin ellipsis-multiline($line: 2, $orient: vertical) {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: $orient;
+    overflow: hidden;
+}

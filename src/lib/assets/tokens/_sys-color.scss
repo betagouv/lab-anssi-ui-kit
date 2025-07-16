@@ -1,0 +1,35 @@
+// ============================================================================================= //
+//                                            TOKENS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "../config";
+@use "@magnesium/theme";
+@use "../../../variables";
+
+$_default: (
+);
+
+@function light($deps: $_default, $exclude-custom-props: false) {
+    $tokens: (
+        "primary": #0279d0,
+        "on-primary": #fff,
+        "secondary": variables.$texte-dsfr,
+        "on-secondary": #fff,
+        "surface": variables.$texte-defaut,
+        "surface-variant": variables.$texte-secondaire,
+        "outline": variables.$border-default-grey,
+        "caption": variables.$text-mention-grey,
+        "white": #fff,
+        "black": #000
+    );
+
+    @if not $exclude-custom-props {
+        @each $key, $value in $tokens {
+            $var: theme.emit-variable($tokens, $key, true, "sys-color");
+            $tokens: map.set($tokens, $key, $var);
+        }
+    }
+
+    @return $tokens;
+}

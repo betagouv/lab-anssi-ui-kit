@@ -1,0 +1,28 @@
+// ============================================================================================= //
+//                                             TEST                                              //
+// ============================================================================================= //
+
+@use "true" as *;
+@use "../mixins";
+
+@include describe("badge") {
+    @include describe("theme()") {
+        @include it("Should return custom theme declarations.") {
+            @include assert {
+                @include output(false) {
+                    .test {
+                        @include mixins.theme((
+                            "text-color": darkcyan
+                        ));
+                    }
+                }
+
+                @include expect(false) {
+                    .test {
+                        --lab-badge-text-color: darkcyan;
+                    }
+                }
+            }
+        }
+    }
+}
