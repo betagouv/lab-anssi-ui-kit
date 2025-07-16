@@ -4,6 +4,7 @@
   let image: string = "https://picsum.photos/496/279";
   let title: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
   let label: string = "Label";
+  let badge: string = "Badge";
   let tags: string[] = [{ label: "Alpha" }, { label: "Beta" }];
   let externalLink = false;
 
@@ -12,7 +13,7 @@
 
 <Hst.Story title="Composants/Card">
   <div style="padding: 30px;">
-    <Card title="{title}" label="{label}" tags="{tags}" link="#" image="{image}"
+    <Card title="{title}" label="{label}" tags="{tags}" link="#" image="{image}" badge="{badge}"
           externalLink="{externalLink}" />
   </div>
 

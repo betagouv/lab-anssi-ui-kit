@@ -61,6 +61,13 @@ $_tokens: tokens.comp-card-values();
                 "container-color": var(--_#{$_custom-property-prefix}-pressed-container-color)
             ));
         }
+
+        :global(.lab-badge) {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+        }
     }
 
     .lab-card__link {

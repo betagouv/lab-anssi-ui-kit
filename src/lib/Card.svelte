@@ -1,13 +1,15 @@
 <script lang="ts">
-  import Tag from "$lib/lab/blog/Tag.svelte";
+  import Badge from "$lib/Badge.svelte";
   import Fleche from "$lib/lab/icones/Fleche.svelte";
   import LienExterne from "$lib/lab/icones/LienExterne.svelte";
+  import Tag from "$lib/lab/blog/Tag.svelte";
 
   export let title: string = "";
   export let label: string = "";
   export let tags: string[] = [];
   export let link: string = "";
   export let image: string = "";
+  export let badge: string = "";
   export let externalLink: boolean = false;
 
 </script>
@@ -38,6 +40,8 @@
   </div>
 
   <a class="lab-card__link" href="{link}" aria-label="{title}"></a>
+
+  <Badge title="{badge}"/>
 </div>
 
 <style lang="scss">
