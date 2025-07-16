@@ -15,7 +15,7 @@ function getScssTestFiles(dir) {
     entries.forEach(entry => {
         const fullPath = path.join(dir, entry.name);
 
-        if (entry.isDirectory() && entry.name !== 'node_modules') {
+        if (entry.isDirectory() && entry.name !== 'node_modules' && entry.name !== '.svelte-kit') {
             results.push(...getScssTestFiles(fullPath));
         }
 

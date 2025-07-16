@@ -1,0 +1,59 @@
+// ============================================================================================= //
+//                                            MIXINS                                             //
+// ============================================================================================= //
+
+@use "sass:map";
+@use "../tokens";
+@use "../config";
+@use "@magnesium/theme";
+
+$_custom-property-prefix: "badge";
+$_tokens: tokens.comp-badge-values();
+
+@mixin theme($tokens) {
+    $tokens: theme.validation($_tokens, $tokens);
+
+    @include theme.emit-custom-props($tokens, $_custom-property-prefix);
+}
+
+@mixin styles {
+    $tokens: theme.create-theme-vars($_tokens, $_custom-property-prefix);
+
+    .lab-badge {
+        @at-root & {
+            @each $token, $value in $tokens {
+                --_#{$_custom-property-prefix}-#{$token}: #{map.get($tokens, $token)};
+            }
+        }
+
+        display: flex;
+        background-color: var(--_#{$_custom-property-prefix}-container-color);
+        width: fit-content;
+        height: var(--_#{$_custom-property-prefix}-container-height);
+        align-items: center;
+        border-radius: var(--_#{$_custom-property-prefix}-container-shape);
+        padding: 4px 8px 4px 4px;
+    }
+
+    .lab-badge__text {
+        font-family: var(--_#{$_custom-property-prefix}-text-font);
+        font-size: var(--_#{$_custom-property-prefix}-text-size);
+        font-weight: var(--_#{$_custom-property-prefix}-text-weight);
+        line-height: var(--_#{$_custom-property-prefix}-text-line-height);
+        color: var(--_#{$_custom-property-prefix}-text-color);
+        text-transform: uppercase;
+    }
+
+    .lab-badge__icon {
+        display: flex;
+        width: var(--_#{$_custom-property-prefix}-icon-size);
+        height: var(--_#{$_custom-property-prefix}-icon-size);
+        margin-right: 4px;
+
+        :global(svg) {
+            width: 100%;
+            height: 100%;
+            fill: var(--_#{$_custom-property-prefix}-icon-color);
+        }
+    }
+}
