@@ -3,34 +3,37 @@
 // ============================================================================================= //
 
 @use "sass:map";
-@use "@unsass/rem";
+@use "./sys-color";
+@use "./sys-typescale";
 @use "../../../variables";
 
 $_default: (
+    "sys-color": sys-color.light(),
+    "sys-typescale": sys-typescale.values()
 );
 
 @function values($deps: $_default) {
     @return (
         "container-color": #fff,
-        "outline-color": variables.$border-default-grey,
+        "outline-color": map.get($deps, "sys-color", "outline"),
         "hover-container-color": variables.$background-default-grey-hover,
         "pressed-container-color": variables.$background-default-grey-active,
         "illustration-container-color": #f4f4f4,
         "illustration-outline-color": #e3e3fd,
-        "title-text-font": variables.$police,
-        "title-text-size": rem.convert(20),
-        "title-text-line-height": rem.convert(32),
-        "title-text-weight": 700,
-        "title-text-color": variables.$texte-dsfr,
-        "label-text-font": variables.$police,
-        "label-text-size": rem.convert(14),
-        "label-text-line-height": rem.convert(24),
-        "label-text-weight": 400,
-        "label-text-color": variables.$text-mention-grey,
+        "title-text-font": map.get($deps, "sys-typescale", "headline-small-font"),
+        "title-text-size": map.get($deps, "sys-typescale", "headline-small-size"),
+        "title-text-line-height": map.get($deps, "sys-typescale", "headline-small-line-height"),
+        "title-text-weight": map.get($deps, "sys-typescale", "headline-small-weight"),
+        "title-text-color": map.get($deps, "sys-color", "secondary"),
+        "label-text-font": map.get($deps, "sys-typescale", "caption-font"),
+        "label-text-size": map.get($deps, "sys-typescale", "caption-size"),
+        "label-text-line-height": map.get($deps, "sys-typescale", "caption-line-height"),
+        "label-text-weight": map.get($deps, "sys-typescale", "caption-weight"),
+        "label-text-color": map.get($deps, "sys-color", "caption"),
         "link-outline-color": #0a76f6,
         "link-outline-width": 2px,
         "icon-height": 16px,
         "icon-width": 16px,
-        "icon-color": variables.$texte-dsfr
+        "icon-color": map.get($deps, "sys-color", "secondary")
     );
 }
