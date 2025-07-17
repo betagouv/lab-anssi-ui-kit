@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
   import Breadcrumb from "$lib/lab/Breadcrumb.svelte";
+  import { srcAsset } from "$lib/assets/assets.js";
 </script>
 
 <div class="hero">
@@ -12,11 +13,14 @@
       Formez, sensibilisez, accompagnez vos élèves… et développez aussi vos propres compétences en
       cybersécurité
     </p>
+    <img src={srcAsset("/illustrations/hedgehog.svg")} alt="" class="hero-hedgehog" />
   </div>
 </div>
 
 <style lang="scss">
   .hero {
+    position: relative;
+    overflow: hidden;
     margin-bottom: 1rem;
     background-image: url("/src/lib/assets/illustrations/hero.jpg");
     background-size: cover;
@@ -40,6 +44,31 @@
       margin: 0 0 0.75rem;
       font-size: 1.125rem;
       line-height: 1.55;
+    }
+
+    &-hedgehog {
+      position: absolute;
+      bottom: 0;
+      right: 1rem;
+      display: block;
+      width: 2rem;
+      height: auto;
+      animation: apparition 33s infinite alternate;
+    }
+  }
+
+  @keyframes apparition {
+    0% {
+      transform: translateY(100%);
+    }
+    94% {
+      transform: translateY(100%);
+    }
+    97% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
     }
   }
 </style>
