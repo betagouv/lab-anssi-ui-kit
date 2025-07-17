@@ -1,0 +1,118 @@
+.footer {
+  font-family: $police;
+  background-color: white;
+
+  &-content {
+    max-width: $largeur-max-contenu;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  &-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $border-default-grey;
+
+    @include a-partir-de(desktop) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &-marianne {
+    height: 7.625rem;
+    width: auto;
+  }
+
+  &-right {
+    max-width: 36.75rem;
+  }
+
+  &-description {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  &-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    &-item {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: $texte-defaut;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $couleur-focus;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  &-contributors {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid $border-default-grey;
+
+    &-title {
+      margin: 0 0 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    &-item {
+      height: 5.625rem;
+      width: auto;
+    }
+  }
+
+  &-bottom {
+    padding-top: 1.5rem;
+  }
+
+  &-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &-nav {
+    &-link {
+      font-size: 0.75rem;
+      color: $text-mention-grey;
+      text-decoration: none;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $couleur-focus;
+        outline-offset: 2px;
+      }
+    }
+
+    &-separator {
+      width: 1px;
+      height: 1rem;
+      background-color: $text-mention-grey;
+      flex-shrink: 0;
+    }
+  }
+}
