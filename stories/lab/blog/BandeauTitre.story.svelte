@@ -14,7 +14,7 @@
     { label: "Page N3" },
   ];
   let avecTag = true;
-  let tag = {
+  let infosTag = {
     label: "Sécurisation et homologation",
     couleurTexte: "#0279D0",
     couleurFond: "#DCEEFF",
@@ -39,7 +39,7 @@
     {titre}
     {description}
     filAriane={avecFilAriane ? filAriane : []}
-    tag={avecTag ? tag : null}
+    infosTag={avecTag ? infosTag : null}
   />
 
   <svelte:fragment slot="controls">
@@ -49,7 +49,7 @@
     {/if}
     <Hst.Checkbox title="Avec tag" bind:value={avecTag} />
     {#if avecTag}
-      <Hst.Json title="Tag" bind:value={tag} />
+      <Hst.Json title="Infos Tag" bind:value={infosTag} />
     {/if}
     <Hst.Text title="Titre" bind:value={titre} />
     <Hst.Text title="Description" bind:value={description} />
