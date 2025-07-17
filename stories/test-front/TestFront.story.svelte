@@ -198,7 +198,42 @@
       </div>
     </section>
   </div>
-  <Footer />
+  <Footer
+    description="DemainSpécialisteCyber est une campagne nationale co-construite par l'ANSSI et son laboratoire d'innovation, le Ministère de l'Education Nationale et de la Jeunesse et le Campus Cyber, en vue de valoriser la cybersécurité et ses métiers."
+    liensPrincipaux={[
+      {
+        label: "info.gouv.fr",
+        href: "https://www.google.com",
+      },
+      {
+        label: "service-public.fr",
+        href: "https://www.google.com",
+      },
+      {
+        label: "legifrance.gouv.fr",
+        href: "https://www.google.com",
+      },
+      {
+        label: "data.gouv.fr",
+        href: "https://www.google.com",
+      },
+    ]}
+    contributeurs={[
+      {
+        label: "Contributeur 1",
+        image: "https://placedog.net/100/100",
+      },
+    ]}
+    liensNavigation={[
+      { label: "À propos", href: "#" },
+      { label: "Mentions légales", href: "#" },
+      { label: "Politique de confidentialité", href: "#" },
+      { label: "Conditions générales d'utilisation", href: "#" },
+      { label: "Statistiques d'utilisation", href: "#" },
+      { label: "Sécurité", href: "#" },
+      { label: "Accéssibilité: non conforme", href: "#" },
+    ]}
+  />
 </Hst.Story>
 
 <style lang="scss">
