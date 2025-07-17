@@ -1,21 +1,20 @@
 <script lang="ts">
   export let label: string;
-  export let couleurTexte: string;
-  export let couleurFond: string;
+  export let couleurTexte: string | undefined;
+  export let couleurFond: string | undefined;
+  export let taille: "sm" | "md" = "sm";
 </script>
 
-<span class="tag" style="background: {couleurFond}; color: {couleurTexte};">
+<span class="tag {taille}" style:background={couleurFond} style:color={couleurTexte}>
   {label}
 </span>
 
 <style lang="scss">
   .tag {
-    padding: 2px 8px;
-    border-radius: 12px;
+    color: $tag-couleur-texte;
+    background-color: $tag-couleur-fond;
     font-family: Marianne;
-    font-size: 0.75rem;
     font-weight: 400;
-    line-height: 1.25rem;
     display: inline-block;
     width: fit-content;
     white-space: nowrap;
@@ -23,5 +22,19 @@
     box-sizing: border-box;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &.sm {
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    &.md {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      padding: 4px 12px;
+      border-radius: 16px;
+    }
   }
 </style>

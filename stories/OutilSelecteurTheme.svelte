@@ -54,6 +54,8 @@
     "bouton-primaire-couleur-fond",
     "bouton-primaire-couleur-fond-survol",
     "bouton-primaire-couleur-fond-clique",
+    "tag-couleur-fond",
+    "tag-couleur-texte",
   ] as const;
   type VariablesCSS = (typeof variablesCSS)[number];
 
@@ -114,6 +116,8 @@
       "bouton-primaire-couleur-fond-survol": "#0C5C98",
       "bouton-primaire-couleur-fond-clique": "#09416A",
       "bouton-arrondi": "4px",
+      "tag-couleur-fond": "#eee",
+      "tag-couleur-texte": "#161616",
     },
     MonAideCyber: {
       "centre-aide-background-entete": "#5D2A9D",
@@ -169,6 +173,8 @@
       "bouton-primaire-couleur-fond": "#5D2A9D",
       "bouton-primaire-couleur-fond-survol": "#9C51D0",
       "bouton-primaire-couleur-fond-clique": "#9C51D0",
+      "tag-couleur-fond": "#eee",
+      "tag-couleur-texte": "#161616",
     },
     MesServicesCyber: {
       "centre-aide-background-entete":
@@ -226,6 +232,8 @@
       "bouton-primaire-couleur-fond": "#fed980",
       "bouton-primaire-couleur-fond-survol": "#ecca79",
       "bouton-primaire-couleur-fond-clique": "#ddbd70",
+      "tag-couleur-fond": "#fcf1cf",
+      "tag-couleur-texte": "#0d0c21",
     },
     MonEspaceNIS2: {
       "centre-aide-background-entete": "#272771",
@@ -281,6 +289,8 @@
       "bouton-primaire-couleur-fond": "#fdc82e",
       "bouton-primaire-couleur-fond-survol": "#ffdb71",
       "bouton-primaire-couleur-fond-clique": "#ededed",
+      "tag-couleur-fond": "#eee",
+      "tag-couleur-texte": "#161616",
     },
   };
 
