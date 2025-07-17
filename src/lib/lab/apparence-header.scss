@@ -144,4 +144,28 @@
       border-bottom-color: $texte-dsfr;
     }
   }
+
+  &-burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    color: $texte-dsfr;
+    background-color: transparent;
+    border: 1px solid $border-default-grey;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+
+    &:focus-visible {
+      outline: 2px solid $couleur-focus;
+      outline-offset: 2px;
+    }
+
+    @include a-partir-de(desktop) {
+      display: none;
+    }
+  }
 }

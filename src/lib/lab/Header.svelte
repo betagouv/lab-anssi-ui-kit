@@ -51,6 +51,9 @@
           {quickAccess.label}
         </span>
       </a>
+      <button class="header-burger" on:click={() => alert("Imaginez une animation trop cool")}>
+        <Icone nom="menu-fill" taille="sm" />
+      </button>
     </div>
   </div>
   <div class="header-service-content-mobile">
