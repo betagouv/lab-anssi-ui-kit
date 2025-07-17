@@ -1,3 +1,15 @@
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-tag",
+    props: {
+      couleurFond: { reflect: false, type: "String", attribute: "couleur-fond" },
+      couleurTexte: { reflect: false, type: "String", attribute: "couleur-texte" },
+      label: { reflect: false, type: "String", attribute: "label" },
+      taille: { reflect: false, type: "String", attribute: "taille" },
+    },
+  }}
+/>
+
 <script lang="ts">
   export let label: string;
   export let couleurTexte: string | undefined;
