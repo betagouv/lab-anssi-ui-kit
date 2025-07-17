@@ -1,0 +1,23 @@
+@use "sass:meta";
+
+// NOTE: Obliger de charger & scoper le CSS du DSFR ici car il ne peut pas être chargé dans les histoires.
+// Cela est dû à la manière dont Histoire gère les styles globaux et les composants.
+.page-dsc {
+  @include meta.load-css("@gouvfr/dsfr/dist/core/core.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/utility/icons/icons.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/button/button.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/modal/modal.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/header/header.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/navigation/navigation.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/badge/badge.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/tag/tag.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/card/card.main.min.css");
+  @include meta.load-css("@gouvfr/dsfr/dist/component/footer/footer.main.min.css");
+  
+  font-family: "Marianne", arial, sans-serif;
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+}
