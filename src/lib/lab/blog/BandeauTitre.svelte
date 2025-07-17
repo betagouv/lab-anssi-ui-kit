@@ -11,13 +11,13 @@
 />
 
 <script lang="ts">
-  import { estLien, type NoeudFilAriane, type Tag } from "$lib/types.js";
-  import ComposantTag from "./Tag.svelte";
+  import { estLien, type NoeudFilAriane, type InfosTag } from "$lib/types.js";
+  import Tag from "$lib/lab/Tag.svelte";
 
   export let titre: string;
   export let description: string = "";
   export let filAriane: NoeudFilAriane[] = [];
-  export let tag: Tag | null = null;
+  export let infosTag: InfosTag | null = null;
 
   let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
 </script>
@@ -40,9 +40,13 @@
       </div>
     {/if}
     <div class="conteneur-texte">
-      {#if tag}
+      {#if infosTag}
         <div class="conteneur-tag">
-          <ComposantTag {tag} />
+          <Tag
+            couleurFond={infosTag.couleurFond}
+            couleurTexte={infosTag.couleurTexte}
+            label={infosTag.label}
+          />
         </div>
       {/if}
       <div class="conteneur-corps">

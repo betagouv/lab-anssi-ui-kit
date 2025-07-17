@@ -50,7 +50,7 @@ export type NoeudFilAriane = Lien | Feuille;
 
 export const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 
-export type Tag = {
+export type InfosTag = {
   label: string;
   couleurTexte: string;
   couleurFond: string;
@@ -68,4 +68,4 @@ export type ResumeArticle = {
   href: string;
 };
 
-export type CategoriesArticle = Record<string, Tag>;
+export type CategoriesArticle = Record<string, InfosTag>;

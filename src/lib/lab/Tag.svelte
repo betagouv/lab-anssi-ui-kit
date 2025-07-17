@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Tag } from "$lib/types";
-
-  export let tag: Tag = null;
+  export let label: string;
+  export let couleurTexte: string;
+  export let couleurFond: string;
 </script>
 
-<span class="tag" style="background: {tag.couleurFond}; color: {tag.couleurTexte};">
-  {tag.label}
+<span class="tag" style="background: {couleurFond}; color: {couleurTexte};">
+  {label}
 </span>
 
 <style lang="scss">

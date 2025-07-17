@@ -1,15 +1,19 @@
 <script lang="ts">
-  import type { ResumeArticle, Tag } from "$lib/types";
-  import ComposantTag from "$lib/lab/blog/Tag.svelte";
+  import type { ResumeArticle, InfosTag } from "$lib/types";
+  import Tag from "$lib/lab/Tag.svelte";
   import Fleche from "$lib/lab/icones/Fleche.svelte";
 
   export let article: ResumeArticle;
-  export let categorie: Tag;
+  export let categorie: InfosTag;
 </script>
 
 <a class="carte-article" href={article.href}>
   <div class="conteneur-texte">
-    <ComposantTag tag={categorie} />
+    <Tag
+      couleurFond={categorie.couleurFond}
+      couleurTexte={categorie.couleurTexte}
+      label={categorie.label}
+    />
     <p>{article.titre}</p>
   </div>
   <div class="conteneur-fleche">
