@@ -1,3 +1,7 @@
 html {
   font-size: 16px;
 }
+
+.histoire-generic-render-story {
+  overflow: visible !important;
+}

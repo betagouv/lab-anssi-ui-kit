@@ -1,0 +1,147 @@
+.header {
+  font-family: $police;
+  background-color: white;
+
+  &-top {
+    border-bottom: 1px solid $border-default-grey;
+
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: $largeur-max-contenu;
+      margin: 0 auto;
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
+  &-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &-marianne {
+    height: 5.375rem;
+    width: auto;
+  }
+
+  &-service {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &-service-logo {
+    width: 3rem;
+    height: 3rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &-service-content {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+
+    @include a-partir-de(desktop) {
+      display: flex;
+    }
+
+    &-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem;
+
+      @include a-partir-de(desktop) {
+        display: none;
+      }
+    }
+  }
+
+  &-service-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &-marque-subtitle {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  &-quick-access {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    color: $texte-dsfr;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease-out;
+
+    @include a-partir-de(desktop) {
+      display: flex;
+    }
+
+    &:hover {
+      background-color: $background-default-grey-hover;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $couleur-focus;
+      outline-offset: 2px;
+    }
+  }
+
+  &-menu {
+    display: none;
+    max-width: $largeur-max-contenu;
+    width: calc(100% + 2rem);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    @include a-partir-de(desktop) {
+      display: block;
+    }
+
+    &-content {
+      display: flex;
+      margin: 0 -1rem;
+    }
+  }
+
+  &-menu-item {
+    padding: 1rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: $texte-defaut;
+    border-bottom: 2px solid transparent;
+    transition:
+      background-color 0.2s ease-out,
+      border-color 0.2s ease-out;
+
+    &:hover {
+      background-color: $background-default-grey-hover;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $couleur-focus;
+      outline-offset: 2px;
+    }
+
+    &.active {
+      color: $texte-dsfr;
+      border-bottom-color: $texte-dsfr;
+    }
+  }
+}
