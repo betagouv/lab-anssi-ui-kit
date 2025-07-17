@@ -57,7 +57,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      padding: 1rem;
+      padding: 1rem 1.5rem;
 
       @include a-partir-de(desktop) {
         display: none;
