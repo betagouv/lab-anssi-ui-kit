@@ -35,7 +35,6 @@
     style:background={couleurFond}
     style:color={couleurTexte}
     on:click={bascule}
-    on:click
   >
     {label}
   </button>
