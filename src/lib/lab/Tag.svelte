@@ -81,6 +81,7 @@
     display: inline-flex;
     position: relative;
     overflow: visible;
+    cursor: pointer;
     &:hover {
       background-color: $tag-selectionnable-couleur-fond-survol;
     }
