@@ -69,7 +69,7 @@
       border-radius: 16px;
     }
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid #0a76f6;
       outline-offset: 2px;
     }

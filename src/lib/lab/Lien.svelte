@@ -126,7 +126,7 @@
       background: rgb(0, 0, 0, 8%);
     }
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid #0a76f6;
       outline-offset: 2px;
     }
