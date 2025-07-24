@@ -9,6 +9,7 @@
   let taille: string = "sm";
   let icone: string = "leaf-line";
   let positionIcone: string = "droite";
+  let actif: boolean = true;
 
   const variantesDisponibles = [
     { value: "primaire", label: "Primaire" },
@@ -33,7 +34,7 @@
   <OutilSelecteurTheme />
   <div style="background-color:white; padding:48px;">
     <h3>Bouton</h3>
-    <Bouton titre="Libellé" {variante} {taille} {icone} {positionIcone} />
+    <Bouton titre="Libellé" {variante} {taille} {icone} {positionIcone} {actif} />
   </div>
   <svelte:fragment slot="controls">
     <Hst.Text title="Icône" bind:value={icone} />
@@ -44,5 +45,6 @@
       options={positionsIconeDisponibles}
       bind:value={positionIcone}
     />
+    <Hst.Checkbox title="Actif" bind:value={actif} />
   </svelte:fragment>
 </Hst.Story>

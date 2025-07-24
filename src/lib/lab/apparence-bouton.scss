@@ -68,6 +68,10 @@
     }
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &.primaire {
     background: $bouton-primaire-couleur-fond;
     color: $bouton-primaire-couleur-texte;
@@ -80,6 +84,11 @@
 
     &:active {
       background: $bouton-primaire-couleur-fond-clique;
+    }
+
+    &:disabled {
+      background: #e5e5e5;
+      color: #929292;
     }
   }
 
@@ -96,6 +105,11 @@
 
     &:active {
       background: rgb(0, 0, 0, 8%);
+    }
+
+    &:disabled {
+      background: transparent;
+      color: #929292;
     }
   }
 
