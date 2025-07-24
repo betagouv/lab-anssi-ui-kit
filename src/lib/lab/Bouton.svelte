@@ -25,7 +25,6 @@
 
 <button
   class={`bouton ${variante} ${taille} icone-${positionIcone}`}
-  on:click
   title={positionIcone === "seule" ? titre : ""}
   disabled={!actif}
 >
