@@ -68,7 +68,8 @@
     }
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled] {
     cursor: not-allowed;
   }
 
@@ -86,7 +87,8 @@
       background: $bouton-primaire-couleur-fond-clique;
     }
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled] {
       background: #e5e5e5;
       color: #929292;
     }
@@ -107,7 +109,8 @@
       background: rgb(0, 0, 0, 8%);
     }
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled] {
       background: transparent;
       color: #929292;
     }

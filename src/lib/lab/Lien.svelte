@@ -10,6 +10,7 @@
       apparence: { reflect: false, type: "String", attribute: "apparence" },
       cible: { reflect: false, type: "String", attribute: "cible" },
       positionIcone: { reflect: false, type: "String", attribute: "position-icone" },
+      actif: { reflect: false, type: "Boolean", attribute: "actif" },
     },
   }}
 />
@@ -25,6 +26,7 @@
   export let apparence: "lien" | "bouton" | "lien-texte" = "lien";
   export let cible: string | undefined = undefined;
   export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
+  export let actif: boolean = true;
 </script>
 
 <a
@@ -32,6 +34,7 @@
   {href}
   target={cible}
   title={positionIcone === "seule" ? titre : ""}
+  aria-disabled={!actif}
 >
   {#if (positionIcone === "gauche" || positionIcone === "seule") && icone}
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
