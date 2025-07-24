@@ -11,6 +11,7 @@
   let icone: string = "leaf-line";
   let positionIcone: string = "droite";
   let cible: string | undefined;
+  let actif: boolean = true;
 
   const variantesDisponibles = [
     { value: "primaire", label: "Primaire" },
@@ -48,6 +49,7 @@
       {icone}
       {cible}
       {positionIcone}
+      {actif}
     />
 
     <h3>Lien dans du texte</h3>
@@ -73,5 +75,6 @@
       bind:value={positionIcone}
     />
     <Hst.Text title="Cible" bind:value={cible} />
+    <Hst.Checkbox title="Actif" bind:value={actif} />
   </svelte:fragment>
 </Hst.Story>
