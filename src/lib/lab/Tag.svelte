@@ -7,6 +7,7 @@
       label: { reflect: false, type: "String", attribute: "label" },
       taille: { reflect: false, type: "String", attribute: "taille" },
       type: { reflect: false, type: "String", attribute: "type" },
+      presse: { reflect: false, type: "Boolean", attribute: "presse" },
     },
   }}
 />
@@ -17,7 +18,8 @@
   export let couleurFond: string | undefined;
   export let taille: "sm" | "md" = "sm";
   export let type: "defaut" | "selectionnable" = "defaut";
-  let selectionne = false;
+  export let presse: boolean = false;
+  $: selectionne = presse;
 
   const bascule = () => {
     selectionne = !selectionne;
