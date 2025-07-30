@@ -18,9 +18,10 @@
     "story:dev": "HISTOIRE_ENV=development histoire dev",
     "story:build": "HISTOIRE_ENV=production histoire build",
     "story:build-dev": "HISTOIRE_ENV=development histoire build",
-    "test": "vitest",
+    "test": "vitest run",
     "storybook:dev": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "storybook:test": "test-storybook"
   },
   "files": [
     "dist",
@@ -59,6 +60,7 @@
     "@storybook/svelte": "8.3.7",
     "@storybook/sveltekit": "8.3.7",
     "@storybook/test": "8.3.7",
+    "@storybook/test-runner": "0.19.0",
     "@sveltejs/adapter-auto": "^4.0.0",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/package": "^2.0.0",
@@ -78,7 +80,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.3",
     "publint": "^0.3.2",
-    "sass-embedded": "^1.89.2",
+    "sass": "^1.85.1",
     "storybook": "8.3.7",
     "svelte": "^4.2.19",
     "svelte-check": "^4.0.0",
