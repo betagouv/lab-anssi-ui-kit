@@ -22,7 +22,7 @@ const config: StorybookConfig = {
       ...config.server,
       fs: {
         ...config.server?.fs,
-        allow: [...(config.server?.fs?.allow || []), "./stories_storybook", "./src"],
+        allow: [...(config.server?.fs?.allow || []), "./stories_storybook", "./src", "./static"],
       },
     };
     config.css = {
