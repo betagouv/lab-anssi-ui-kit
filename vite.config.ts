@@ -18,10 +18,6 @@ if (process.env.HISTOIRE_ENV === "production")
 
 export default defineConfig({
   plugins: [sveltekit()],
-  test: {
-    environment: "jsdom",
-  },
-  resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
   css: {
     preprocessorOptions: {
       scss: {
