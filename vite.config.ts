@@ -25,6 +25,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: "modern-compiler",
         additionalData: `
           @use 'src/variables.scss' as *; 
           @use 'src/responsive.scss' as *; 
