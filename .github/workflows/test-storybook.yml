@@ -1,4 +1,4 @@
-name: 'Storybook Tests'
+name: "Storybook Tests"
 permissions: {}
 
 on:
@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Installer Playwright
-        run: npx playwright install --with-deps        
+        run: npx playwright install --with-deps
 
       - name: Construit le Storybook
         run: npm run storybook:build
