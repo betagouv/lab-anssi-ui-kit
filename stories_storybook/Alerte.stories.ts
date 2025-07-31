@@ -6,7 +6,6 @@ import Alerte from "$lib/Alerte.svelte";
 const meta = {
   title: "Composants/Alerte",
   component: Alerte,
-  tags: ["autodocs"],
   argTypes: {
     description: { control: "text", type: "string" },
     type: {

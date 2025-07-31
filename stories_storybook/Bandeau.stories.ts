@@ -6,7 +6,6 @@ import Bandeau from "$lib/mes-services-cyber/bandeau/Bandeau.svelte";
 const meta = {
   title: "Composants/Bandeau",
   component: Bandeau,
-  tags: ["autodocs"],
   play: async ({ canvas, canvasElement }) => {
     const button = canvas.getByRole("button");
     await userEvent.click(button);
