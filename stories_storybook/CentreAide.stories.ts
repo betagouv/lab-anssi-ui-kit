@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 import { withActions } from "@storybook/addon-actions/decorator";
 
-import StoryConteneur from "./StoryConteneur.svelte";
+import ConteneurStory from "./ConteneurStory.svelte";
 import CentreAide from "$lib/CentreAide.svelte";
 
 const meta = {
@@ -25,7 +25,7 @@ const meta = {
       },
     ]),
   },
-  decorators: [withActions, () => StoryConteneur],
+  decorators: [withActions, () => ConteneurStory],
 } satisfies Meta<CentreAide>;
 
 export default meta;
