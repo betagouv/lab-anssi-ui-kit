@@ -5,6 +5,7 @@
   font-family: Marianne, arial, sans-serif;
   cursor: pointer;
   justify-content: center;
+  text-align: center;
 
   font-style: normal;
   font-weight: 500;
@@ -97,7 +98,6 @@
   &.tertiaire,
   &.tertiaire-sans-bordure {
     color: $bouton-secondaire-tertiaire-couleur-texte;
-    text-align: center;
     background: white;
     border-radius: $bouton-arrondi;
 
