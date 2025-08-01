@@ -13,6 +13,7 @@
 
   const variantesDisponibles = [
     { value: "primaire", label: "Primaire" },
+    { value: "secondaire", label: "Secondaire" },
     { value: "tertiaire", label: "Tertiaire" },
     { value: "tertiaire-sans-bordure", label: "Tertiaire sans bordure" },
   ];
