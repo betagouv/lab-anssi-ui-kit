@@ -10,6 +10,11 @@
   font-style: normal;
   font-weight: 500;
 
+  &.largeur-maximale {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   &:focus-visible {
     outline: 2px solid #0a76f6;
     outline-offset: 2px;
@@ -91,6 +96,27 @@
     &:disabled,
     &[aria-disabled="true"] {
       background: #e5e5e5;
+      color: #929292;
+    }
+  }
+
+  &.secondaire {
+    color: $bouton-secondaire-tertiaire-couleur-texte;
+    background: white;
+    border: 1px solid $bouton-secondaire-couleur-bordure;
+    border-radius: $bouton-arrondi;
+
+    &:hover {
+      background: rgb(0, 0, 0, 4%);
+    }
+
+    &:active {
+      background: rgb(0, 0, 0, 8%);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      background: transparent;
       color: #929292;
     }
   }

@@ -47,6 +47,7 @@
   --liste-articles-couleur-texte: #09416a;
   --couleur-focus: #0a76f6;
   --bouton-secondaire-tertiaire-couleur-texte: #0079d0;
+  --bouton-secondaire-couleur-bordure: #0079d0;
   --bouton-primaire-couleur-texte: #ffffff;
   --bouton-primaire-couleur-fond: #0079d0;
   --bouton-primaire-couleur-fond-survol: #0c5c98;
@@ -113,6 +114,7 @@
   --liste-articles-couleur-texte: red;
   --couleur-focus: #5d2a9d;
   --bouton-secondaire-tertiaire-couleur-texte: #5d2a9d;
+  --bouton-secondaire-couleur-bordure: #0d0c21;
   --bouton-primaire-couleur-texte: #ffffff;
   --bouton-primaire-couleur-fond: #5d2a9d;
   --bouton-primaire-couleur-fond-survol: #9c51d0;
@@ -181,6 +183,7 @@
   --liste-articles-couleur-texte: red;
   --couleur-focus: #fed980;
   --bouton-secondaire-tertiaire-couleur-texte: #0d0c21;
+  --bouton-secondaire-couleur-bordure: #0d0c21;
   --bouton-primaire-couleur-texte: #0d0c21;
   --bouton-primaire-couleur-fond: #fed980;
   --bouton-primaire-couleur-fond-survol: #ecca79;
@@ -247,6 +250,7 @@
   --liste-articles-couleur-texte: red;
   --couleur-focus: #272771;
   --bouton-secondaire-tertiaire-couleur-texte: #272771;
+  --bouton-secondaire-couleur-bordure: #0d0c21;
   --bouton-primaire-couleur-texte: #3a3a3a;
   --bouton-primaire-couleur-fond: #fdc82e;
   --bouton-primaire-couleur-fond-survol: #ffdb71;

@@ -25,7 +25,7 @@
       },
       variante: {
         control: "select",
-        options: ["primaire", "tertiaire", "tertiaire-sans-bordure"],
+        options: ["primaire", "secondaire", "tertiaire", "tertiaire-sans-bordure"],
         description: "La variante du lien",
       },
       taille: {

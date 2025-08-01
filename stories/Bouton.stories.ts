@@ -17,7 +17,7 @@ const meta = {
     titre: { control: "text", description: "Le libellé du bouton" },
     variante: {
       control: "select",
-      options: ["primaire", "tertiaire", "tertiaire-sans-bordure"],
+      options: ["primaire", "secondaire", "tertiaire", "tertiaire-sans-bordure"],
       description: "La variante du bouton",
     },
     taille: { control: "select", options: ["sm", "md", "lg"], description: "La taille du bouton" },
@@ -28,6 +28,10 @@ const meta = {
       description: "La position de l'icône dans le bouton",
     },
     actif: { control: "boolean", description: "Indique si le bouton est actif ou non" },
+    largeurMaximale: {
+      control: "boolean",
+      description: "Indique si le bouton prend toute la largeur ou non",
+    },
   },
 } satisfies Meta<Bouton>;
 
