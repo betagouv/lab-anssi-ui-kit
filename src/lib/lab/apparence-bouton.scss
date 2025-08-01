@@ -1,5 +1,7 @@
 .bouton {
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
   align-items: center;
   gap: 8px;
   font-family: Marianne, arial, sans-serif;
@@ -91,6 +93,27 @@
     &:disabled,
     &[aria-disabled="true"] {
       background: #e5e5e5;
+      color: #929292;
+    }
+  }
+
+  &.secondaire {
+    color: $bouton-secondaire-tertiaire-couleur-texte;
+    background: white;
+    border: 1px solid $bouton-secondaire-couleur-bordure;
+    border-radius: $bouton-arrondi;
+
+    &:hover {
+      background: rgb(0, 0, 0, 4%);
+    }
+
+    &:active {
+      background: rgb(0, 0, 0, 8%);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      background: transparent;
       color: #929292;
     }
   }

@@ -20,7 +20,7 @@
 
   export let titre: string;
   export let href: string;
-  export let variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
+  export let variante: "primaire" | "secondaire" | "tertiaire" | "tertiaire-sans-bordure";
   export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
   export let apparence: "lien" | "bouton" | "lien-texte" = "lien";

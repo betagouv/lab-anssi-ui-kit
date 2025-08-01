@@ -16,7 +16,7 @@
   import Icone from "$lib/lab/Icone.svelte";
 
   export let titre: string;
-  export let variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
+  export let variante: "primaire" | "tertiaire" | "tertiaire" | "tertiaire-sans-bordure";
   export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
   export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
