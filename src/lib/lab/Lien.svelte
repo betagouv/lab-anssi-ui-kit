@@ -11,6 +11,7 @@
       cible: { reflect: false, type: "String", attribute: "cible" },
       positionIcone: { reflect: false, type: "String", attribute: "position-icone" },
       actif: { reflect: false, type: "Boolean", attribute: "actif" },
+      largeurMaximale: { reflect: false, type: "Boolean", attribute: "largeur-maximale" },
     },
   }}
 />
@@ -20,17 +21,19 @@
 
   export let titre: string;
   export let href: string;
-  export let variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
+  export let variante: "primaire" | "secondaire" | "tertiaire" | "tertiaire-sans-bordure";
   export let taille: "sm" | "md" | "lg";
   export let icone: string | undefined = undefined;
   export let apparence: "lien" | "bouton" | "lien-texte" = "lien";
   export let cible: string | undefined = undefined;
   export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
   export let actif: boolean = true;
+  export let largeurMaximale: boolean = false;
 </script>
 
 <a
   class={`${variante} ${taille} icone-${positionIcone} ${apparence}`}
+  class:largeur-maximale={largeurMaximale}
   {href}
   target={cible}
   title={positionIcone === "seule" ? titre : ""}
