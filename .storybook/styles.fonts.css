@@ -80,3 +80,7 @@
   font-style: italic;
   font-display: swap;
 }
+
+body {
+  font-family: Marianne, arial, sans-serif;
+}
