@@ -8,12 +8,12 @@ import { resolve } from "path";
 // - Build webcomponent : "production"
 // - Storybook local : "development"
 // - Storybook déployé : "production"
-const varEnv = loadEnv(process.env.HISTOIRE_ENV ?? "production", process.cwd(), "VITE_");
+const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Histoire avec nos valeurs
 // Cela permet de faire fonctionner la méthode JS `srcAsset` dans le cas du Storybook déployé
-if (process.env.HISTOIRE_ENV === "production")
+if (process.env.STORYBOOK_ENV === "production")
   dotenv.config({ path: resolve(process.cwd(), ".env.production") });
 
 export default defineConfig({

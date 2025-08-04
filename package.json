@@ -19,9 +19,10 @@
     "story:build": "HISTOIRE_ENV=production histoire build",
     "story:build-dev": "HISTOIRE_ENV=development histoire build",
     "test": "vitest run",
-    "storybook:dev": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
-    "storybook:test": "test-storybook"
+    "storybook:dev": "STORYBOOK_ENV=development storybook dev -p 6006",
+    "storybook:build": "STORYBOOK_ENV=production storybook build",
+    "storybook:build-dev": "STORYBOOK_ENV=development storybook build",
+    "storybook:test": "STORYBOOK_ENV=production test-storybook"
   },
   "files": [
     "dist",
