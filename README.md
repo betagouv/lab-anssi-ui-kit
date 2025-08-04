@@ -34,15 +34,15 @@ Tout le contenu de `dist/` est publié via `npm publish`.
 
 ## Développement en local
 
-La commande principale pour le développement en local est `npm run story:dev`.  
+La commande principale pour le développement en local est `npm run storybook:dev`.  
 La sortie devrait ressembler à :
 
 ```shell
 
-$ npm run story:dev
+$ npm run storybook:dev
 
-@lab-anssi/ui-kit@1.19.0 story:dev
-HISTOIRE_ENV=development histoire dev
+@lab-anssi/ui-kit@1.19.0 storybook:dev
+STORYBOOK_ENV=development histoire dev
 Re-optimizing dependencies because lockfile has changed
 Using 5 threads for story collection
 Collect stories start all

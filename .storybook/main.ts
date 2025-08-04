@@ -2,7 +2,7 @@ import path from "path";
 import type { StorybookConfig } from "@storybook/sveltekit";
 import { loadEnv } from "vite";
 
-const varEnv = loadEnv(process.env.HISTOIRE_ENV ?? "production", process.cwd(), "VITE_");
+const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 const config: StorybookConfig = {
   stories: ["../stories_storybook/**/*.mdx", "../stories_storybook/**/*.stories.@(js|ts|svelte)"],
