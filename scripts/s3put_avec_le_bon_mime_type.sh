@@ -29,9 +29,9 @@ mime_type() {
   esac
 }
 
-for file in $(find dist-histoire -type f)
+for file in $(find storybook-static -type f)
 do
   mime="$(mime_type "$file")"
-  target="$(echo "$file" | sed -e s:^dist-histoire/::)"
+  target="$(echo "$file" | sed -e s:^storybook-static/::)"
   s3cmd put "$file" "s3://lab-anssi-ui-kit-dev/$target" --mime-type="$mime"
 done
