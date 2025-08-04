@@ -12,5 +12,5 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext"
   },
-  "include": ["./stories_storybook"]
+  "include": ["./stories"]
 }
