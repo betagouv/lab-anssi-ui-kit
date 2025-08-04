@@ -5,7 +5,7 @@ import { loadEnv } from "vite";
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 const config: StorybookConfig = {
-  stories: ["../stories_storybook/**/*.mdx", "../stories_storybook/**/*.stories.@(js|ts|svelte)"],
+  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|ts|svelte)"],
   addons: [
     "@storybook/addon-svelte-csf",
     "@storybook/addon-links",
@@ -23,7 +23,7 @@ const config: StorybookConfig = {
       ...config.server,
       fs: {
         ...config.server?.fs,
-        allow: [...(config.server?.fs?.allow || []), "./stories_storybook", "./src", "./static"],
+        allow: [...(config.server?.fs?.allow || []), "./stories", "./src", "./static"],
       },
     };
     config.css = {

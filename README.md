@@ -43,7 +43,7 @@ $ npm run storybook:dev
 @storybook/core v8.3.7
 
 info => Starting manager..
-WARN No story files found for the specified pattern: stories_storybook/**/*.mdx
+WARN No story files found for the specified pattern: stories/**/*.mdx
 info => Starting preview..
 ```
 

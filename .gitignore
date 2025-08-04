@@ -1,6 +1,5 @@
 node_modules
 /dist
-/dist-histoire
 .svelte-kit
 .vscode
 *.iml
