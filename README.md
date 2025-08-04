@@ -15,10 +15,7 @@
 
 ## Storybook des composants
 
-> Nous parlons de _Storybook_ car c'est le terme généralement employé, mais nous utilisons [Histoire](https://histoire.dev/).  
-> Nous avons fait ce choix car au moment de la création de notre repo, Storybook n'était pas compatible Svelte.
-
-Lors de la release d'une nouvelle version de l'UI Kit, le Storybook des composants [est déployé sur Github Pages : https://betagouv.github.io/lab-anssi-ui-kit/](https://betagouv.github.io/lab-anssi-ui-kit/).
+Le Storybook des composants [est déployé sur Github Pages : https://betagouv.github.io/lab-anssi-ui-kit/](https://betagouv.github.io/lab-anssi-ui-kit/).
 
 ## Architecture de build
 
@@ -29,26 +26,26 @@ C'est ce qui explique les nombreux fichiers de configuration Svelte (Prettier, V
 
 Pour rajouter le build des WebComponents, on rajoute manuellement un fichier de configuration [`vite.webcomponents.config.ts`](./vite.webcomponents.config.ts) et des appels à la commande `vite -c vite.webcomponents.config.ts build` lors des étapes de build du package.
 
-Résultat : dans le repertoire `dist/` on retrouvera les composants Svelte et leurs équivalents Webcomponents.  
+Résultat : dans le repertoire `dist/` on retrouvera les composants Svelte et leurs équivalents Webcomponents.
 Tout le contenu de `dist/` est publié via `npm publish`.
 
 ## Développement en local
 
-La commande principale pour le développement en local est `npm run storybook:dev`.  
+La commande principale pour le développement en local est `npm run storybook:dev`.
 La sortie devrait ressembler à :
 
 ```shell
-
 $ npm run storybook:dev
 
-@lab-anssi/ui-kit@1.19.0 storybook:dev
-STORYBOOK_ENV=development histoire dev
-Re-optimizing dependencies because lockfile has changed
-Using 5 threads for story collection
-Collect stories start all
-  ➜  Local:   http://localhost:6006/
-  ➜  Network: use --host to expose
+> @lab-anssi/ui-kit@1.23.2 storybook:dev
+> STORYBOOK_ENV=development storybook dev -p 6006
+
+@storybook/core v8.3.7
+
+info => Starting manager..
+WARN No story files found for the specified pattern: stories_storybook/**/*.mdx
+info => Starting preview..
 ```
 
-Après cette commande, le Storybook local est disponible sur http://localhost:6006/.  
+Après cette commande, le Storybook local est disponible sur http://localhost:6006/.
 Il devrait ressembler [au Storybook disponible en ligne](https://betagouv.github.io/lab-anssi-ui-kit/).
