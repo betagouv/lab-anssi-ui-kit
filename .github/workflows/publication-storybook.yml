@@ -25,14 +25,14 @@ jobs:
       - name: Exécuter les tests
         run: npm run test
 
-      - name: Builder le storybook
-        run: npm run story:build
+      - name: Construit le Storybook
+        run: npm run storybook:build
 
       - name: Téléverser les fichiers
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist-histoire
+          path: ./storybook-static
 
   deploy:
     name: "Déploie"
