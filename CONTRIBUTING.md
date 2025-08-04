@@ -10,22 +10,26 @@
 Une PR pour nouveau composant aura typiquement 2 éléments principaux :
 
 - le composant Svelte ajouté par la PR
-- l'histoire dédiée au composant
+- une "story" dédiée au composant
 
-Le composant sera à ranger dans `/src/lib/<chemin>/<composant>.svelte` et l'histoire dans `/stories/<chemin>/<composant>.story.svelte`.
+Le composant sera à ranger dans `/src/lib/<chemin>/<composant>.svelte` et la story dans `/stories/<chemin>/<composant>.stories.ts`.
 
-L'histoire aura une forme similaire à toutes les histoires existantes :
+Chaque story est écrite en respectant la syntax [Component Story Format (CSF)](https://storybook.js.org/docs/writing-stories#component-story-format) de Storybook, qui dans sa forme minimale est à écrire comme ci-dessous :
 
-```sveltehtml
-<script lang="ts">
-  import type { Hst } from "@histoire/plugin-svelte";
+```ts
+import type { Meta, StoryObj } from "@storybook/svelte";
 
-  export let Hst: Hst;
-</script>
+import <composant> from "$lib/<chemin>/<composant>.svelte";
 
-<Hst.Story title="Composants/<composant>">
-  <!-- Utilisation du composant -->
-</Hst.Story>
+const meta = {
+  title: "Composants/<composant>",
+  component: <composant>,
+} satisfies Meta<<composant>>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Defaut: Story = {};
 ```
 
 Il est utile de vérifier que le code build correctement en jouant `npm run build` en local.

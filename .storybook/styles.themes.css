@@ -62,7 +62,6 @@
   --tag-selectionne-couleur-fond: #000091;
   --tag-selectionne-couleur-fond-survol: #1212ff;
   --tag-selectionne-couleur-fond-clique: #2323ff;
-  --histoire-contrast-color: #333;
 }
 
 .theme-mac {
@@ -129,7 +128,6 @@
   --tag-selectionne-couleur-fond: #000091;
   --tag-selectionne-couleur-fond-survol: #1212ff;
   --tag-selectionne-couleur-fond-clique: #2323ff;
-  --histoire-contrast-color: #333;
 }
 
 .theme-msc {
@@ -198,7 +196,6 @@
   --tag-selectionne-couleur-fond: #fed980;
   --tag-selectionne-couleur-fond-survol: #ecca79;
   --tag-selectionne-couleur-fond-clique: #ddbd70;
-  --histoire-contrast-color: #333;
 }
 
 .theme-men2 {
@@ -265,5 +262,4 @@
   --tag-selectionne-couleur-fond: #000091;
   --tag-selectionne-couleur-fond-survol: #1212ff;
   --tag-selectionne-couleur-fond-clique: #2323ff;
-  --histoire-contrast-color: #333;
 }

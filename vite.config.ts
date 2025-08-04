@@ -11,7 +11,7 @@ import { resolve } from "path";
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
-// c'est la seule façon de charger Histoire avec nos valeurs
+// c'est la seule façon de charger Storybook avec nos valeurs
 // Cela permet de faire fonctionner la méthode JS `srcAsset` dans le cas du Storybook déployé
 if (process.env.STORYBOOK_ENV === "production")
   dotenv.config({ path: resolve(process.cwd(), ".env.production") });
@@ -22,10 +22,10 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use 'src/variables.scss' as *; 
-          @use 'src/responsive.scss' as *; 
+          @use 'src/variables.scss' as *;
+          @use 'src/responsive.scss' as *;
           @use 'src/assets.scss' as *;
-          $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}'; 
+          $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
         `,
       },
     },
