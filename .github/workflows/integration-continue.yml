@@ -31,8 +31,8 @@ jobs:
       - name: Contrôler le format
         run: npx prettier -c .
 
-      - name: Builder le storybook
-        run: npm run story:build
+      - name: Construit le Storybook
+        run: npm run storybook:build
 
       - name: Builder le package
         run: npm run build
