@@ -23,8 +23,8 @@ jobs:
       - name: Exécuter les tests
         run: npm run test
 
-      - name: Builder le storybook
-        run: npm run story:build-dev
+      - name: Construit le Storybook de DEV
+        run: npm run storybook:build-dev
 
       - name: Installer et configurer la CLI de S3cmd
         uses: s3-actions/s3cmd@v1.10.0
