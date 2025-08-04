@@ -6,6 +6,8 @@ const meta = {
   title: "Composants/Tag",
   component: Tag,
   args: {
+    couleurFond: undefined,
+    couleurTexte: undefined,
     label: "libellé",
     taille: "md",
     type: "selectionnable",
@@ -18,7 +20,7 @@ const meta = {
     taille: { control: "select", options: ["sm", "md", "lg"], description: "La taille du tag" },
     type: {
       control: "select",
-      options: ["default", "selectionnable"],
+      options: ["defaut", "selectionnable"],
       description: "Le type de tag",
     },
     presse: { control: "boolean", description: "Indique si le tag est pressé" },
