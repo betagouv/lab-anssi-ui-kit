@@ -13,13 +13,24 @@
 />
 
 <script lang="ts">
-  export let label: string;
-  export let couleurTexte: string | undefined;
-  export let couleurFond: string | undefined;
-  export let taille: "sm" | "md" = "sm";
-  export let type: "defaut" | "selectionnable" = "defaut";
-  export let presse: boolean = false;
-  $: selectionne = presse;
+  interface Props {
+    label: string;
+    couleurTexte: string | undefined;
+    couleurFond: string | undefined;
+    taille?: "sm" | "md";
+    type?: "defaut" | "selectionnable";
+    presse?: boolean;
+  }
+
+  let {
+    label,
+    couleurTexte,
+    couleurFond,
+    taille = "sm",
+    type = "defaut",
+    presse = false,
+  }: Props = $props();
+  let selectionne = $derived(presse);
 
   const bascule = () => {
     selectionne = !selectionne;
@@ -36,7 +47,7 @@
     aria-pressed={selectionne}
     style:background={couleurFond}
     style:color={couleurTexte}
-    on:click={bascule}
+    onclick={bascule}
   >
     {label}
   </button>
