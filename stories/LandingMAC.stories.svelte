@@ -1,4 +1,6 @@
-<script context="module" lang="ts">
+<script module lang="ts">
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+
   import type { Image } from "$lib/types";
   import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
@@ -15,9 +17,10 @@
     alt: "",
   };
 
-  export const meta = {
+  const { Story } = defineMeta({
     title: "Exemple/Landing MonAideCyber",
     component: PresentationANSSI,
+    render: template,
     argTypes: {
       tuiles: [
         {
@@ -68,14 +71,10 @@
         },
       ],
     },
-  };
+  });
 </script>
 
-<script>
-  import { Story, Template } from "@storybook/addon-svelte-csf";
-</script>
-
-<Template let:args>
+{#snippet template(args)}
   <BriqueHero
     titre="MonAideCyber"
     soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
@@ -136,6 +135,6 @@
     illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: "" }}
   />
   <PresentationANSSI />
-</Template>
+{/snippet}
 
 <Story name="Defaut" />

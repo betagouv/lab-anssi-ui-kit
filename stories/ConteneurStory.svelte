@@ -5,7 +5,7 @@
 
 <div
   class="conteneur-story"
-  class:story-conteneur--droite={alignement === "droite"}
+  class:conteneur-story--droite={alignement === "droite"}
   style={hauteurMinimale ? `--min-height: ${hauteurMinimale};` : null}
 >
   <slot />

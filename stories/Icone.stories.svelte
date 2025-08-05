@@ -1,10 +1,13 @@
-<script context="module">
+<script module lang="ts">
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+
   import Icone from "$lib/lab/Icone.svelte";
 
   /** Les icônes disponibles et leur code sont sur la page du [DSFR](https://www.systeme-de-design.gouv.fr/version-courante/fr/fondamentaux/icone). Les icônes du DSFR sont elles-mêmes issues de [Remix Icons](https://remixicon.com/). */
-  export const meta = {
+  const { Story } = defineMeta({
     title: "Composants/Icone",
     component: Icone,
+    render: template,
     argTypes: {
       nom: { control: "text", description: "Le nom de l'icône" },
       taille: {
@@ -13,18 +16,14 @@
         description: "La taille de l'icône",
       },
     },
-  };
+  });
 </script>
 
-<script>
-  import { Story, Template } from "@storybook/addon-svelte-csf";
-</script>
-
-<Template let:args>
+{#snippet template(args)}
   <span style={args.couleur ? `color: ${args.couleur}` : undefined}>
     <Icone {...args} />
   </span>
-</Template>
+{/snippet}
 
 <Story
   name="Defaut"
@@ -32,7 +31,7 @@
     nom: "leaf-line",
     taille: "md",
   }}
-/>
+></Story>
 
 <!-- Les icônes sont au format SVG avec la couleur « currentColor ». Ces fichiers SVG sont utilisés
 comme image de masque et peuvent donc hériter de la couleur de leur élément parent : -->
