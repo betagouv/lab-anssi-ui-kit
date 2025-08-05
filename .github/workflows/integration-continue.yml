@@ -25,6 +25,9 @@ jobs:
       - name: Installer les dépendances
         run: npm ci
 
+      - name: Installer Playwright
+        run: npx playwright install --with-deps
+
       - name: Exécuter les tests
         run: npm run test
 

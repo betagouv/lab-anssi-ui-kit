@@ -1,8 +1,14 @@
+/// <reference types="vitest/config" />
 import { sveltekit } from "@sveltejs/kit/vite";
 import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
 import dotenv from "dotenv";
 import path, { resolve } from "path";
+import { fileURLToPath } from "node:url";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+
+const dirname =
+  typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 // Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
 // - Build webcomponent : "production"
@@ -34,5 +40,33 @@ export default defineConfig({
         `,
       },
     },
+  },
+  test: {
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // Le plugin exécutera des tests pour les histoires définies dans la configuration de votre Storybook.
+          // Voir les options sur le site: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, ".storybook"),
+          }),
+        ],
+        test: {
+          name: "storybook",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: "playwright",
+            instances: [
+              {
+                browser: "chromium",
+              },
+            ],
+          },
+          setupFiles: [".storybook/vitest.setup.ts"],
+        },
+      },
+    ],
   },
 });

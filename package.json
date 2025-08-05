@@ -19,7 +19,8 @@
     "storybook:dev": "STORYBOOK_ENV=development storybook dev -p 6006",
     "storybook:build": "STORYBOOK_ENV=production storybook build",
     "storybook:build-dev": "STORYBOOK_ENV=development storybook build",
-    "storybook:test": "STORYBOOK_ENV=production test-storybook"
+    "storybook:test": "STORYBOOK_ENV=production npm run test-storybook",
+    "test-storybook": "vitest --project=storybook"
   },
   "files": [
     "dist",
