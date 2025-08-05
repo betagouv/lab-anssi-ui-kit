@@ -1,8 +1,12 @@
 <script lang="ts">
   import { srcAsset } from "$lib/assets/assets";
 
-  export let valeur: string;
-  export let options: { label: string; valeur: unknown }[];
+  interface Props {
+    valeur: string;
+    options: { label: string; valeur: unknown }[];
+  }
+
+  let { valeur = $bindable(), options }: Props = $props();
 </script>
 
 <div class="conteneur-liste-deroulante">
@@ -13,7 +17,7 @@
     />
     <select bind:value={valeur}>
       {#each options as option, index (index)}
-        <option label={option.label} value={option.valeur} />
+        <option label={option.label} value={option.valeur}></option>
       {/each}
     </select>
   </div>
