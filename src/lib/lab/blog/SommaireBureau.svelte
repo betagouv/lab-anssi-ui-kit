@@ -2,7 +2,11 @@
   import type { TableDesMatieres } from "$lib/types";
   import { createEventDispatcher } from "svelte";
 
-  export let tableDesMatieres: TableDesMatieres;
+  interface Props {
+    tableDesMatieres: TableDesMatieres;
+  }
+
+  let { tableDesMatieres }: Props = $props();
 
   const emets = createEventDispatcher<{
     ancreOuverte: string;
@@ -17,7 +21,7 @@
   <ul>
     {#each tableDesMatieres as entree (entree.id)}
       <li>
-        <a href={`#${entree.id}`} on:click={() => ouvreEntree(entree.id)}>
+        <a href={`#${entree.id}`} onclick={() => ouvreEntree(entree.id)}>
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html entree.texte}
         </a>
