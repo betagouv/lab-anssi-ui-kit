@@ -3,8 +3,12 @@
   import Tag from "$lib/lab/Tag.svelte";
   import Fleche from "$lib/lab/icones/Fleche.svelte";
 
-  export let article: ResumeArticle;
-  export let categorie: InfosTag;
+  interface Props {
+    article: ResumeArticle;
+    categorie: InfosTag;
+  }
+
+  let { article, categorie }: Props = $props();
 </script>
 
 <a class="carte-article" href={article.href}>
