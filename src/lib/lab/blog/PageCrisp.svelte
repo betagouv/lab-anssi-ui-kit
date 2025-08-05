@@ -9,15 +9,21 @@
 />
 
 <script lang="ts">
+  import { run } from "svelte/legacy";
+
   import type { TableDesMatieres } from "$lib/types";
   import SommaireMobile from "$lib/lab/blog/SommaireMobile.svelte";
   import { onDestroy, tick } from "svelte";
   import SommaireBureau from "$lib/lab/blog/SommaireBureau.svelte";
 
-  export let contenu: string;
-  export let tableDesMatieres: TableDesMatieres;
+  interface Props {
+    contenu: string;
+    tableDesMatieres: TableDesMatieres;
+  }
 
-  let composant: HTMLDivElement;
+  let { contenu, tableDesMatieres }: Props = $props();
+
+  let composant: HTMLDivElement = $state();
   let observateurDIntersection: IntersectionObserver;
 
   const observeLesSections = () => {
@@ -46,7 +52,9 @@
     lesSections.forEach((s) => observateurDIntersection.observe(s));
   };
 
-  $: if (contenu) tick().then(observeLesSections);
+  run(() => {
+    if (contenu) tick().then(observeLesSections);
+  });
 
   const attendChargementImages = async () => {
     const images = composant.querySelectorAll("img");
@@ -73,7 +81,9 @@
     }
   };
 
-  $: if (contenu) scroll(window.location.hash);
+  run(() => {
+    if (contenu) scroll(window.location.hash);
+  });
 
   const ancreOuverte = (evenement: CustomEvent) => scroll(`#${evenement.detail}`);
 
