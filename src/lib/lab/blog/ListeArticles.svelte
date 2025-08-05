@@ -14,9 +14,13 @@
   import CarteArticle from "$lib/lab/blog/CarteArticle.svelte";
   import ListeDeroulante from "$lib/lab/blog/ListeDeroulante.svelte";
 
-  export let articles: ResumeArticle[];
-  export let categories: CategoriesArticle;
-  export let idCategorieChoisie: string = "tous";
+  interface Props {
+    articles: ResumeArticle[];
+    categories: CategoriesArticle;
+    idCategorieChoisie?: string;
+  }
+
+  let { articles, categories, idCategorieChoisie = $bindable("tous") }: Props = $props();
 
   const optionsFiltrage = [
     { label: "Tous les articles", valeur: "tous" },
@@ -26,10 +30,11 @@
     })),
   ];
 
-  $: articlesVisibles =
+  let articlesVisibles = $derived(
     idCategorieChoisie === "tous"
       ? articles
-      : articles.filter((a) => a.idCategorie === idCategorieChoisie);
+      : articles.filter((a) => a.idCategorie === idCategorieChoisie),
+  );
 </script>
 
 <div class="liste-articles">
