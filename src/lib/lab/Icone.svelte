@@ -9,8 +9,12 @@
 />
 
 <script lang="ts">
-  export let nom: string;
-  export let taille: "sm" | "md" | "lg" | undefined = undefined;
+  interface Props {
+    nom: string;
+    taille?: "sm" | "md" | "lg" | undefined;
+  }
+
+  let { nom, taille = undefined }: Props = $props();
 </script>
 
 <span class="icone fr-icon-{nom} {taille}"></span>
