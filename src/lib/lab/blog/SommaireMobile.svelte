@@ -4,9 +4,13 @@
   import IconeMenuLateral from "$lib/lab/blog/IconeMenuLateral.svelte";
   import IconeChevronBas from "$lib/lab/blog/IconeChevronBas.svelte";
 
-  export let tableDesMatieres: TableDesMatieres;
+  interface Props {
+    tableDesMatieres: TableDesMatieres;
+  }
 
-  let detailsElement: HTMLDetailsElement;
+  let { tableDesMatieres }: Props = $props();
+
+  let detailsElement: HTMLDetailsElement = $state();
 
   const emets = createEventDispatcher<{
     ancreOuverte: string;
@@ -34,7 +38,7 @@
     <ul>
       {#each tableDesMatieres as entree (entree.id)}
         <li>
-          <a href={`#${entree.id}`} on:click={() => ouvreEntree(entree.id)}>
+          <a href={`#${entree.id}`} onclick={() => ouvreEntree(entree.id)}>
             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             {@html entree.texte}</a
           >
@@ -58,7 +62,7 @@
       display: none;
     }
 
-    &:has(details[open]) {
+    &:has(:global(details[open])) {
       position: fixed;
       top: 0;
       height: 100vh;
