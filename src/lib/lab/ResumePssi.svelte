@@ -1,7 +1,11 @@
 <svelte:options customElement="lab-anssi-resume-pssi" />
 
 <script lang="ts">
-  export let nomService: string;
+  interface Props {
+    nomService: string;
+  }
+
+  let { nomService }: Props = $props();
 </script>
 
 <p>
