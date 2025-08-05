@@ -19,16 +19,31 @@
 <script lang="ts">
   import Icone from "$lib/lab/Icone.svelte";
 
-  export let titre: string;
-  export let href: string;
-  export let variante: "primaire" | "secondaire" | "tertiaire" | "tertiaire-sans-bordure";
-  export let taille: "sm" | "md" | "lg";
-  export let icone: string | undefined = undefined;
-  export let apparence: "lien" | "bouton" | "lien-texte" = "lien";
-  export let cible: string | undefined = undefined;
-  export let positionIcone: "sans" | "seule" | "droite" | "gauche" = "sans";
-  export let actif: boolean = true;
-  export let largeurMaximale: boolean = false;
+  interface Props {
+    titre: string;
+    href: string;
+    variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
+    taille: "sm" | "md" | "lg";
+    icone?: string | undefined;
+    apparence?: "lien" | "bouton" | "lien-texte";
+    cible?: string | undefined;
+    positionIcone?: "sans" | "seule" | "droite" | "gauche";
+    actif?: boolean;
+    largeurMaximale?: boolean;
+  }
+
+  let {
+    titre,
+    href,
+    variante,
+    taille,
+    icone = undefined,
+    apparence = "lien",
+    cible = undefined,
+    positionIcone = "sans",
+    actif = true,
+    largeurMaximale = false,
+  }: Props = $props();
 </script>
 
 <a
