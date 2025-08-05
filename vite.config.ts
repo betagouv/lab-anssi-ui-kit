@@ -2,7 +2,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
 import dotenv from "dotenv";
-import { resolve } from "path";
+import path, { resolve } from "path";
 
 // Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
 // - Build webcomponent : "production"
@@ -17,6 +17,11 @@ if (process.env.STORYBOOK_ENV === "production")
   dotenv.config({ path: resolve(process.cwd(), ".env.production") });
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, "src"),
+    },
+  },
   plugins: [sveltekit()],
   css: {
     preprocessorOptions: {

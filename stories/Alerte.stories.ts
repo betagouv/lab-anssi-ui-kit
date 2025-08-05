@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
-import { expect, userEvent } from "@storybook/test";
+import { expect, userEvent } from "storybook/test";
 
 import Alerte from "$lib/Alerte.svelte";
 

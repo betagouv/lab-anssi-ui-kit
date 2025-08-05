@@ -1,9 +1,12 @@
-<script context="module">
+<script module lang="ts">
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+
   import Lien from "$lib/lab/Lien.svelte";
 
-  export const meta = {
+  const { Story } = defineMeta({
     title: "Composants/Lien",
     component: Lien,
+    render: template,
     args: {
       titre: "Libellé",
       cible: "#",
@@ -41,16 +44,12 @@
       },
       actif: { control: "boolean", description: "Indique si le lien est actif" },
     },
-  };
+  });
 </script>
 
-<script>
-  import { Story, Template } from "@storybook/addon-svelte-csf";
-</script>
-
-<Template let:args>
+{#snippet template(args)}
   <Lien {...args} />
-</Template>
+{/snippet}
 
 <Story name="Defaut" />
 

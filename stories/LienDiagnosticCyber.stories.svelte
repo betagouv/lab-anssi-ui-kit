@@ -1,25 +1,24 @@
-<script context="module">
+<script module lang="ts">
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+
   import ConteneurStory from "./ConteneurStory.svelte";
   import LienDiagnosticCyber from "$lib/mes-services-cyber/lien/LienDiagnosticCyber.svelte";
 
-  export const meta = {
+  const { Story } = defineMeta({
     title: "Composants/Lien Diagnostic Cyber",
     component: LienDiagnosticCyber,
+    render: template,
     args: {
       lien: "#",
       versExterne: false,
     },
-  };
+  });
 </script>
 
-<script>
-  import { Story, Template } from "@storybook/addon-svelte-csf";
-</script>
-
-<Template let:args>
+{#snippet template(args)}
   <ConteneurStory alignement="droite">
     <LienDiagnosticCyber {...args} />
   </ConteneurStory>
-</Template>
+{/snippet}
 
 <Story name="Defaut" />

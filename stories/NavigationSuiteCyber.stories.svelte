@@ -1,24 +1,22 @@
-<script context="module">
+<script module lang="ts">
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+
   import ConteneurStory from "./ConteneurStory.svelte";
   import Navigation from "$lib/suite-cyber/navigation/Navigation.svelte";
 
-  export const meta = {
+  const { Story } = defineMeta({
     title: "Composants/Navigation Suite Cyber",
     component: Navigation,
     args: {
       sourceUtm: "mon-service-lab-anssi",
     },
-  };
+  });
 </script>
 
-<script>
-  import { Story, Template } from "@storybook/addon-svelte-csf";
-</script>
-
-<Template let:args>
+{#snippet template(args)}
   <ConteneurStory alignement="droite">
     <Navigation {...args} />
   </ConteneurStory>
-</Template>
+{/snippet}
 
 <Story name="Defaut" />
