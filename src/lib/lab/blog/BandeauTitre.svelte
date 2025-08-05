@@ -14,12 +14,16 @@
   import { estLien, type NoeudFilAriane, type InfosTag } from "$lib/types.js";
   import Tag from "$lib/lab/Tag.svelte";
 
-  export let titre: string;
-  export let description: string = "";
-  export let filAriane: NoeudFilAriane[] = [];
-  export let infosTag: InfosTag | null = null;
+  interface Props {
+    titre: string;
+    description?: string;
+    filAriane?: NoeudFilAriane[];
+    infosTag?: InfosTag | null;
+  }
 
-  let filArianeVisible = window.matchMedia("(min-width: 576px)").matches;
+  let { titre, description = "", filAriane = [], infosTag = null }: Props = $props();
+
+  let filArianeVisible = $state(window.matchMedia("(min-width: 576px)").matches);
 </script>
 
 <div class="conteneur-bandeau-entete">
@@ -27,7 +31,7 @@
     {#if filAriane.length}
       <div class="fil-ariane">
         {#if !filArianeVisible}
-          <button on:click={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
+          <button onclick={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
         {:else}
           {#each filAriane as noeud, index (index)}
             {#if estLien(noeud)}
