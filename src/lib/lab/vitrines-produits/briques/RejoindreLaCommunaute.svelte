@@ -14,10 +14,14 @@
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
 
-  export let titre: string;
-  export let raisons: string[];
-  export let action: Action | undefined = undefined;
-  export let illustration: Image;
+  interface Props {
+    titre: string;
+    raisons: string[];
+    action?: Action | undefined;
+    illustration: Image;
+  }
+
+  let { titre, raisons, action = undefined, illustration }: Props = $props();
 </script>
 
 <Brique variation="primaire">
