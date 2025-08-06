@@ -1,7 +1,17 @@
 <script lang="ts">
-  export let variation: "primaire" | "transparent" | "secondaire" = "primaire";
-  export let sansMargeHaute = false;
-  export let sansMargeLaterale = false;
+  interface Props {
+    variation?: "primaire" | "transparent" | "secondaire";
+    sansMargeHaute?: boolean;
+    sansMargeLaterale?: boolean;
+    children?: import("svelte").Snippet;
+  }
+
+  let {
+    variation = "primaire",
+    sansMargeHaute = false,
+    sansMargeLaterale = false,
+    children,
+  }: Props = $props();
 </script>
 
 <section
@@ -10,7 +20,7 @@
   class:sans-marge-laterale={sansMargeLaterale}
 >
   <div class="contenu-brique">
-    <slot />
+    {@render children?.()}
   </div>
 </section>
 
