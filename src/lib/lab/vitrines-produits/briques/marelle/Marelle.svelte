@@ -15,9 +15,13 @@
   import Etape from "$lib/lab/vitrines-produits/briques/marelle/Etape.svelte";
   import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
-  export let titre: string = "";
-  export let etapesmarelle: EtapeMarelle[] = [];
-  export let action: Action;
+  interface Props {
+    titre?: string;
+    etapesmarelle?: EtapeMarelle[];
+    action: Action;
+  }
+
+  let { titre = "", etapesmarelle = [], action }: Props = $props();
 </script>
 
 <Brique variation="secondaire">
