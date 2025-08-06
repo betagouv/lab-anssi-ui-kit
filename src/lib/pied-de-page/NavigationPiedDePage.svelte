@@ -1,7 +1,11 @@
 <svelte:options customElement="lab-anssi-navigation-pied-de-page" />
 
 <script lang="ts">
-  export let conforme: boolean = false;
+  interface Props {
+    conforme?: boolean;
+  }
+
+  let { conforme = false }: Props = $props();
 </script>
 
 <div class="conteneur-navigation-pied-de-page">
