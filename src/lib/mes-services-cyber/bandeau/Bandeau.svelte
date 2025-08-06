@@ -6,7 +6,9 @@
   const CLE_LOCAL_STORAGE = "lab-anssi-ui-kit-msc-bandeau-affichage";
 
   type visibilite = "visible" | "invisible";
-  let affichage: visibilite = (localStorage.getItem(CLE_LOCAL_STORAGE) as visibilite) || "visible";
+  let affichage: visibilite = $state(
+    (localStorage.getItem(CLE_LOCAL_STORAGE) as visibilite) || "visible",
+  );
 
   const croix = srcAsset("/icones/croix-blanche.svg");
 </script>
@@ -16,7 +18,7 @@
     <div class="contenu">
       <button
         class="fermer"
-        on:click={() => {
+        onclick={() => {
           affichage = "invisible";
           localStorage.setItem(CLE_LOCAL_STORAGE, "invisible");
         }}
