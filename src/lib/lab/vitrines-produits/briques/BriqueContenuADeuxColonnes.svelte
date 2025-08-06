@@ -15,12 +15,21 @@
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
 
-  export let titre: string;
-  export let paragraphe: string;
-  export let action: Action | undefined = undefined;
-  export let ordre: "texte-gauche" | "texte-droite" = "texte-gauche";
+  interface Props {
+    titre: string;
+    paragraphe: string;
+    action?: Action | undefined;
+    ordre?: "texte-gauche" | "texte-droite";
+    illustration: Image;
+  }
 
-  export let illustration: Image;
+  let {
+    titre,
+    paragraphe,
+    action = undefined,
+    ordre = "texte-gauche",
+    illustration,
+  }: Props = $props();
 </script>
 
 <Brique variation="primaire">
