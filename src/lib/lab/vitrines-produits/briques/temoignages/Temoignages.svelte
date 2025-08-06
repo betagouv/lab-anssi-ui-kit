@@ -15,10 +15,14 @@
   import IconeFlecheGauche from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
-  export let titre: string = "Les avis de nos utilisateurs";
-  export let temoignages: Temoignage[] = [];
+  interface Props {
+    titre?: string;
+    temoignages?: Temoignage[];
+  }
 
-  let elementCarrousel: HTMLDivElement;
+  let { titre = "Les avis de nos utilisateurs", temoignages = [] }: Props = $props();
+
+  let elementCarrousel: HTMLDivElement = $state();
 
   enum Direction {
     DROITE = 1,
@@ -49,10 +53,10 @@
       </div>
       {#if temoignages.length > 1}
         <div class="conteneur-actions" class:deux-ou-moins={temoignages.length <= 2}>
-          <button class="precedent" type="button" on:click={() => scrollVers(Direction.GAUCHE)}>
+          <button class="precedent" type="button" onclick={() => scrollVers(Direction.GAUCHE)}>
             <span class="icone"><IconeFlecheGauche /></span>Précédent
           </button>
-          <button class="suivant" type="button" on:click={() => scrollVers(Direction.DROITE)}
+          <button class="suivant" type="button" onclick={() => scrollVers(Direction.DROITE)}
             >Suivant
             <span class="icone"><IconeFlecheDroite /></span>
           </button>
