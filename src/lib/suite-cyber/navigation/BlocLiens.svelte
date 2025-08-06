@@ -7,8 +7,12 @@
     classeTracking: string;
   };
 
-  export let titre: string;
-  export let services: Service[];
+  interface Props {
+    titre: string;
+    services: Service[];
+  }
+
+  let { titre, services }: Props = $props();
 </script>
 
 <div class="bloc">
