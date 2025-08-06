@@ -1,8 +1,12 @@
 <script lang="ts">
-  export let source: string;
-  export let sourceSousTitres: string;
-  export let imageDeCouverture: string = "";
-  export let classe: string = "";
+  interface Props {
+    source: string;
+    sourceSousTitres: string;
+    imageDeCouverture?: string;
+    classe?: string;
+  }
+
+  let { source, sourceSousTitres, imageDeCouverture = "", classe = "" }: Props = $props();
 </script>
 
 <video controls class={classe} src={source} poster={imageDeCouverture}>
