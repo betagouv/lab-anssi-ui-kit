@@ -14,15 +14,19 @@
   const mss = srcAsset("/icones/MSS.svg");
   const lienExterne = srcAsset("/icones/lien-externe.svg");
 
-  export let sourceUtm: string = "";
-  let estOuvert: boolean = false;
+  interface Props {
+    sourceUtm?: string;
+  }
+
+  let { sourceUtm = "" }: Props = $props();
+  let estOuvert: boolean = $state(false);
 </script>
 
 <div class="suite-cyber">
   <div class="navigation">
     <button
       class:actif={estOuvert}
-      on:click={() => {
+      onclick={() => {
         estOuvert = !estOuvert;
       }}
     >
@@ -35,7 +39,7 @@
   </div>
   {#if estOuvert}
     <div class="contenu" transition:slide>
-      <button class="fermer invisible-tablette" on:click={() => (estOuvert = false)}>
+      <button class="fermer invisible-tablette" onclick={() => (estOuvert = false)}>
         Fermer
         <img src={croix} alt="Fermer" />
       </button>
