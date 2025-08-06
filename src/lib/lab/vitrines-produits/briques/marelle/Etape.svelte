@@ -2,8 +2,12 @@
   import type { EtapeMarelle } from "$lib/types";
   import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
-  export let index: number;
-  export let etapeMarelle: EtapeMarelle;
+  interface Props {
+    index: number;
+    etapeMarelle: EtapeMarelle;
+  }
+
+  let { index, etapeMarelle }: Props = $props();
 </script>
 
 <div class="marelle-etape">
