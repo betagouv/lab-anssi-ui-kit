@@ -18,14 +18,25 @@
   import type { Action, Image } from "$lib/types";
   import LienExterne from "$lib/lab/icones/LienExterne.svelte";
 
-  export let titre: string;
-  export let soustitre: string;
-  export let illustration: Image;
+  interface Props {
+    titre: string;
+    soustitre: string;
+    illustration: Image;
+    badge?: boolean;
+    actiongauche: Action;
+    actiondroite: Action;
+    partenaires?: Image[];
+  }
 
-  export let badge: boolean = false;
-  export let actiongauche: Action;
-  export let actiondroite: Action;
-  export let partenaires: Image[] = [];
+  let {
+    titre,
+    soustitre,
+    illustration,
+    badge = false,
+    actiongauche,
+    actiondroite,
+    partenaires = [],
+  }: Props = $props();
 </script>
 
 <Brique>
@@ -98,7 +109,7 @@
         "contenu image"
         "partenaires image";
 
-      &:has(.sans-partenaires) {
+      &:has(:global(.sans-partenaires)) {
         grid-template-areas:
           "contenu image"
           "contenu image";
