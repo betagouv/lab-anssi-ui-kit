@@ -14,9 +14,13 @@
   import IconeFlecheGauche from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
-  export let tuiles: Tuiles = [];
+  interface Props {
+    tuiles?: Tuiles;
+  }
 
-  let elementCarrousel: HTMLDivElement;
+  let { tuiles = [] }: Props = $props();
+
+  let elementCarrousel: HTMLDivElement = $state();
 
   const versDirection = (direction: number) => {
     if (elementCarrousel) {
@@ -46,11 +50,11 @@
       {/each}
     </div>
     <div class="conteneur-actions">
-      <button class="precedent" on:click={precedent}>
+      <button class="precedent" onclick={precedent}>
         <span class="icone"><IconeFlecheGauche /></span>
         Précédent
       </button>
-      <button class="suivant" on:click={suivant}>
+      <button class="suivant" onclick={suivant}>
         Suivant
         <span class="icone"><IconeFlecheDroite /></span>
       </button>
