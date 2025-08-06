@@ -1,10 +1,14 @@
 <script lang="ts">
   import type { Image } from "$lib/types.js";
 
-  export let titre: string;
-  export let illustration: Image;
-  export let contenu: string;
-  export let position: "premiere" | "derniere" | null = null;
+  interface Props {
+    titre: string;
+    illustration: Image;
+    contenu: string;
+    position?: "premiere" | "derniere" | null;
+  }
+
+  let { titre, illustration, contenu, position = null }: Props = $props();
 </script>
 
 <div class="tuile {position ?? ''}">
