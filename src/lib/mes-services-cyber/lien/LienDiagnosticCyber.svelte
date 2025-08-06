@@ -3,8 +3,12 @@
 <script lang="ts">
   import { srcAsset } from "$lib/assets/assets";
 
-  export let lien;
-  export let versExterne = false;
+  interface Props {
+    lien: any;
+    versExterne?: boolean;
+  }
+
+  let { lien, versExterne = false }: Props = $props();
   let target = versExterne ? "_blank" : "_self";
   let rel = versExterne ? "noreferrer" : undefined;
   let icone = versExterne ? "lien-externe" : "lien-interne";
