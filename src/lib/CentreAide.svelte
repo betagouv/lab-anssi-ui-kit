@@ -1,35 +1,41 @@
 <svelte:options customElement="lab-anssi-centre-aide" />
 
 <script lang="ts">
+  import { run } from "svelte/legacy";
+
   import { fly } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
   import { srcAsset } from "$lib/assets/assets";
 
-  export let nomService: string;
-  export let liens: string;
+  interface Props {
+    nomService: string;
+    liens: string;
+  }
+
+  let { nomService, liens }: Props = $props();
 
   const emetEvenement = createEventDispatcher<{
     lienclique: { target: EventTarget & HTMLAnchorElement };
   }>();
 
   let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] =
-    [];
-  $: {
+    $state([]);
+  run(() => {
     liensMisEnForme = JSON.parse(liens);
     if (!Array.isArray(liensMisEnForme) || liensMisEnForme.some((l) => !l.texte)) {
       throw new Error(
         "Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]",
       );
     }
-  }
+  });
 
-  let ouvert: boolean = false;
+  let ouvert: boolean = $state(false);
 </script>
 
 {#if !ouvert}
   <button
     class="declencheur-centre-aide"
-    on:click={() => (ouvert = true)}
+    onclick={() => (ouvert = true)}
     transition:fly={{ y: 300 }}
   >
     <img src={srcAsset("/icones/centre-aide.svg")} alt="Icône du centre d'aide" />
@@ -48,7 +54,7 @@
         />
         <h4>Centre d'aide</h4>
       </div>
-      <button on:click={() => (ouvert = false)}>
+      <button onclick={() => (ouvert = false)}>
         <span>Fermer</span>
         <img
           src={srcAsset("/icones/croix-blanche.svg")}
@@ -67,7 +73,7 @@
             href={lien.href}
             target="_blank"
             id={lien.id}
-            on:click={(e) => {
+            onclick={(e) => {
               if (lien.preventDefault) e.preventDefault();
               emetEvenement("lienclique", { target: e.currentTarget });
             }}>{lien.texte}</a
