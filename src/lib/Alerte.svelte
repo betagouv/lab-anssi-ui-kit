@@ -10,11 +10,15 @@
 />
 
 <script lang="ts">
-  export let description: string;
-  export let type: "information" | "erreur" = "information";
-  export let fermable: boolean = true;
+  interface Props {
+    description: string;
+    type?: "information" | "erreur";
+    fermable?: boolean;
+  }
 
-  let estOuvert = true;
+  let { description, type = "information", fermable = true }: Props = $props();
+
+  let estOuvert = $state(true);
 </script>
 
 {#if estOuvert}
@@ -25,7 +29,7 @@
       {#if fermable}
         <button
           class="fermer"
-          on:click={() => {
+          onclick={() => {
             estOuvert = false;
           }}
         ></button>
