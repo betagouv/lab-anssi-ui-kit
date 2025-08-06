@@ -1,6 +1,11 @@
 <script lang="ts">
-  export let hauteurMinimale: string | undefined = "600px";
-  export let alignement: "gauche" | "droite" | undefined = undefined;
+  interface Props {
+    hauteurMinimale?: string | undefined;
+    alignement?: "gauche" | "droite" | undefined;
+    children?: import("svelte").Snippet;
+  }
+
+  let { hauteurMinimale = "600px", alignement = undefined, children }: Props = $props();
 </script>
 
 <div
@@ -8,7 +13,7 @@
   class:conteneur-story--droite={alignement === "droite"}
   style={hauteurMinimale ? `--min-height: ${hauteurMinimale};` : null}
 >
-  <slot />
+  {@render children?.()}
 </div>
 
 <style lang="scss">
