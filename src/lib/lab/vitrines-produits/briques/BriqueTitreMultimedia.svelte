@@ -13,8 +13,12 @@
   import type { Video } from "$lib/types";
   import LecteurVideo from "$lib/lab/vitrines-produits/briques/LecteurVideo.svelte";
 
-  export let titre: string;
-  export let multimedia: Video;
+  interface Props {
+    titre: string;
+    multimedia: Video;
+  }
+
+  let { titre, multimedia }: Props = $props();
 </script>
 
 <Brique variation="transparent">
