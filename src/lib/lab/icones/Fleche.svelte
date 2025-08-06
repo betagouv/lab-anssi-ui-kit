@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let direction: "gauche" | "droite" = "gauche";
+  interface Props {
+    direction?: "gauche" | "droite";
+  }
+
+  let { direction = "gauche" }: Props = $props();
 </script>
 
 <svg
