@@ -13,39 +13,79 @@
 
 ---
 
-## Storybook des composants
+## Introduction
 
-Le Storybook des composants [est déployé sur Github Pages : https://betagouv.github.io/lab-anssi-ui-kit/](https://betagouv.github.io/lab-anssi-ui-kit/).
+Le **UI Kit du Lab. ANSSI** est une bibliothèque de composants **Svelte**, pensée pour accélérer la création d’interfaces cohérentes et accessibles au sein des divers [produits du **Lab ANSSI**](https://beta.gouv.fr/incubateurs/lab-innov-anssi.html).
 
-## Architecture de build
+Cette bibliothèque propose à la fois des composants **Svelte** et leurs équivalents **WebComponents**, facilitant leur intégration dans différents environnements front-end.
 
-Cette librairie a pour objectif de produire des composants Svelte et leurs équivalents [WebComponent](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+Le projet s’appuie sur des outils modernes tels que SvelteKit, Vite, Storybook et Vitest pour garantir une expérience de développement fluide, des tests robustes et une documentation interactive.
 
-L'architecture pour produire du Svelte utilise [SvelteKit](https://svelte.dev/docs/kit/packaging), configuré via le wizard `npx sv create`.
-C'est ce qui explique les nombreux fichiers de configuration Svelte (Prettier, Vitest, etc.) : ils ont été rajoutés par le wizard.
+## Pour commencer
 
-Pour rajouter le build des WebComponents, on rajoute manuellement un fichier de configuration [`vite.webcomponents.config.ts`](./vite.webcomponents.config.ts) et des appels à la commande `vite -c vite.webcomponents.config.ts build` lors des étapes de build du package.
+### Prérequis
 
-Résultat : dans le repertoire `dist/` on retrouvera les composants Svelte et leurs équivalents Webcomponents.
-Tout le contenu de `dist/` est publié via `npm publish`.
+- Node.js (version recommandée : >= 24)
+- Svelte (version recommandée : >= 5.37.3)
+- Vite (version recommandée : >= 7.0.6)
+- Storybook (version recommandée : >= 9.1.1)
+- npm
 
-## Développement en local
+### Développement en local
 
-La commande principale pour le développement en local est `npm run storybook:dev`.
-La sortie devrait ressembler à :
+Clonez le dépôt puis installez les dépendances :
 
-```shell
-$ npm run storybook:dev
-
-> @lab-anssi/ui-kit@1.23.2 storybook:dev
-> STORYBOOK_ENV=development storybook dev -p 6006
-
-@storybook/core v8.3.7
-
-info => Starting manager..
-WARN No story files found for the specified pattern: stories/**/*.mdx
-info => Starting preview..
+```bash
+git clone https://github.com/betagouv/lab-anssi-ui-kit.git
+cd lab-anssi-ui-kit
+npm install
 ```
 
-Après cette commande, le Storybook local est disponible sur http://localhost:6006/.
-Il devrait ressembler [au Storybook disponible en ligne](https://betagouv.github.io/lab-anssi-ui-kit/).
+### Documentation interactive
+
+Storybook est intégré à ce dépôt afin de fournir des exemples d’utilisation, la liste des props et des cas d’usage pour chaque composant.<br/>
+Les stories sont regroupées dans le dossier `stories/` et sont écrites en respectant [le format CSF](https://storybook.js.org/docs/writing-stories#component-story-format) de Storybook.
+
+Pour explorer et tester les composants en local, lancez Storybook à l'aide de la commande :
+
+```bash
+npm run storybook:dev
+```
+
+Suite à l'exécution de cette commande, Storybook se lancera automatiquement en ouvrant une fenêtre de votre navigateur par défaut vers l'url [http://localhost:6006](http://localhost:6006).
+
+> [!NOTE]
+> Le Storybook est également déployé en ligne sur GitHub Pages et est consultable à l'url suivante : [https://betagouv.github.io/lab-anssi-ui-kit/](https://betagouv.github.io/lab-anssi-ui-kit/)
+
+## Usage
+
+L'intégralité des composants présents dans ce dépôts sont publiés sur NPM afin qu'ils puissent être consommés dans différents environnements front-end.<br/>
+La bibliothèque expose ses composants dans un dossier `dist/` qui est construit à l'aide de la commande `npm run build`.
+
+Ainsi, pour pouvoir consommer les éléments de cette librairie dans votre projet, vous devrez commencer par installer le package à l'aide de cette commande :
+
+```bash
+npm i --save-dev @lab-anssi/ui-kit@latest
+```
+
+Vous pouvez ensuite importer les composants dans vos projets **Svelte** ou utiliser les **WebComponents** générés dans n’importe quelle application web.
+
+### Exemple d’import Svelte
+
+```ts
+import { Alerte, CentreAide, ResumePssi } from "@lab-anssi/ui-kit";
+```
+
+### Exemple d'utilisation des WebComponents
+
+Les **WebComponents** sont disponibles dans le dossier `dist/webcomponents` et peuvent être intégrés dans n’importe quel projet HTML/JS en commençant par importer la librairie WebComponents à l'aide du script suivant :
+
+```html
+<script src="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/1.23.2/lab-anssi-ui-kit.iife.js"></script>
+```
+
+Une fois cet import effectué, les WebComponents sont prêts à être consommés dans votre projet :
+
+```html
+<lab-anssi-centre-aide nom-service="MonService" liens="[...]"></lab-anssi-centre-aide>
+```
