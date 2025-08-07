@@ -4,7 +4,7 @@ import { expect, userEvent } from "storybook/test";
 import Bandeau from "$lib/mes-services-cyber/bandeau/Bandeau.svelte";
 
 const meta = {
-  title: "Composants/Bandeau",
+  title: "Composants/ANSSI/Bandeau",
   component: Bandeau,
   play: async ({ canvas, canvasElement }) => {
     const button = canvas.getByRole("button");

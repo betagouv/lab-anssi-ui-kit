@@ -10,7 +10,7 @@ const sousTitres =
 const couverture = genereImageDePlaceholder(792, 446, "Vidéo d'exemple");
 
 const meta = {
-  title: "Composants/Brique Titre Multimedia",
+  title: "Composants/ANSSI/Brique Titre Multimedia",
   component: BriqueTitreMultimedia,
   args: {
     titre: "Titre pour MSS",

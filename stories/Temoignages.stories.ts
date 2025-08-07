@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import Temoignages from "$lib/lab/vitrines-produits/briques/temoignages/Temoignages.svelte";
 
 const meta = {
-  title: "Composants/Temoignages",
+  title: "Composants/ANSSI/Temoignages",
   component: Temoignages,
   args: {
     titre: "Titre",

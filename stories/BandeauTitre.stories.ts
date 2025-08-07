@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import BandeauTitre from "$lib/lab/blog/BandeauTitre.svelte";
 
 const meta = {
-  title: "Composants/BandeauTitre",
+  title: "Composants/ANSSI/BandeauTitre",
   component: BandeauTitre,
   args: {
     titre: "Titre de la page",

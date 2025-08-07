@@ -4,7 +4,7 @@ import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
 import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
 const meta = {
-  title: "Composants/Marelle",
+  title: "Composants/ANSSI/Marelle",
   component: Marelle,
   args: {
     titre: "Titre",

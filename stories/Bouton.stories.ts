@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import Bouton from "$lib/lab/Bouton.svelte";
 
 const meta = {
-  title: "Composants/Bouton",
+  title: "Composants/ANSSI/Bouton",
   component: Bouton,
   args: {
     titre: "Libellé",

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import Tag from "$lib/lab/Tag.svelte";
 
 const meta = {
-  title: "Composants/Tag",
+  title: "Composants/ANSSI/Tag",
   component: Tag,
   args: {
     couleurFond: undefined,
