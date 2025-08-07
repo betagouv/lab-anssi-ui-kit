@@ -4,7 +4,7 @@ import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";
 import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
 const meta = {
-  title: "Composants/Brique Hero",
+  title: "Composants/ANSSI/Brique Hero",
   component: BriqueHero,
   args: {
     badge: true,

@@ -4,7 +4,7 @@ import BriqueContenuADeuxColonnes from "$lib/lab/vitrines-produits/briques/Briqu
 import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
 const meta = {
-  title: "Composants/Brique Contenu A Deux Colonnes",
+  title: "Composants/ANSSI/Brique Contenu A Deux Colonnes",
   component: BriqueContenuADeuxColonnes,
   args: {
     titre: "Mon​Service​Sécurisé",

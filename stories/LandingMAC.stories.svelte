@@ -18,7 +18,7 @@
   };
 
   const { Story } = defineMeta({
-    title: "Exemple/Landing MonAideCyber",
+    title: "Exemple/ANSSI/Landing MonAideCyber",
     component: PresentationANSSI,
     render: template,
     argTypes: {
