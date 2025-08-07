@@ -1,0 +1,5 @@
+# CODEOWNERS
+
+# Les utilisateurs ci-dessous sont responsables par défaut du code du repo.
+# À moins qu'un match ultérieur ne prévale, @ThibaudMZN et @tiloyi seront taggués pour examiner les Pull Request.
+*       @ThibaudMZN @tiloyi
