@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import PresentationANSSI from "$lib/lab/vitrines-produits/briques/PresentationANSSI.svelte";
 
 const meta = {
-  title: "Composants/Presentation ANSSI",
+  title: "Composants/ANSSI/Presentation ANSSI",
   component: PresentationANSSI,
 } satisfies Meta<PresentationANSSI>;
 

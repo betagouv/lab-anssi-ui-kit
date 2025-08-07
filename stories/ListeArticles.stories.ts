@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import ListeArticles from "$lib/lab/blog/ListeArticles.svelte";
 
 const meta = {
-  title: "Composants/ListeArticles",
+  title: "Composants/ANSSI/ListeArticles",
   component: ListeArticles,
   args: {
     articles: [

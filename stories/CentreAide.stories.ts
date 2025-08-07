@@ -4,7 +4,7 @@ import ConteneurStory from "./ConteneurStory.svelte";
 import CentreAide from "$lib/CentreAide.svelte";
 
 const meta = {
-  title: "Composants/CentreAide",
+  title: "Composants/ANSSI/CentreAide",
   component: CentreAide,
   args: {
     nomService: "MonServiceSécurisé",

@@ -5,7 +5,7 @@
 
   /** Les icônes disponibles et leur code sont sur la page du [DSFR](https://www.systeme-de-design.gouv.fr/version-courante/fr/fondamentaux/icone). Les icônes du DSFR sont elles-mêmes issues de [Remix Icons](https://remixicon.com/). */
   const { Story } = defineMeta({
-    title: "Composants/Icone",
+    title: "Composants/ANSSI/Icone",
     component: Icone,
     render: template,
     argTypes: {

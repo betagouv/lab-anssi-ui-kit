@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import NavigationPiedDePage from "$lib/pied-de-page/NavigationPiedDePage.svelte";
 
 const meta = {
-  title: "Composants/NavigationPiedDePage",
+  title: "Composants/ANSSI/NavigationPiedDePage",
   component: NavigationPiedDePage,
   args: {
     conforme: false,

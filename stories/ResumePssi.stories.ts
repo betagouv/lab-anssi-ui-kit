@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import ResumePssi from "$lib/lab/ResumePssi.svelte";
 
 const meta = {
-  title: "Composants/ResumePssi",
+  title: "Composants/ANSSI/ResumePssi",
   component: ResumePssi,
   args: {
     nomService: "MonService",

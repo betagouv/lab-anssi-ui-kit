@@ -4,7 +4,7 @@ import RejoindreLaCommunaute from "$lib/lab/vitrines-produits/briques/RejoindreL
 import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
 const meta = {
-  title: "Composants/Brique Rejoindre La Communauté",
+  title: "Composants/ANSSI/Brique Rejoindre La Communauté",
   component: RejoindreLaCommunaute,
   args: {
     titre: "Rejoindre la communauté",

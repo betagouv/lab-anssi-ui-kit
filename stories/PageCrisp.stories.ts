@@ -10,7 +10,7 @@ const contenu = (exempleContenu as string).replaceAll(
 );
 
 const meta = {
-  title: "Composants/PageCrisp",
+  title: "Composants/ANSSI/PageCrisp",
   component: PageCrisp,
   args: {
     contenu,

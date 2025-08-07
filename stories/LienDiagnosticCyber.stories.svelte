@@ -5,7 +5,7 @@
   import LienDiagnosticCyber from "$lib/mes-services-cyber/lien/LienDiagnosticCyber.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/Lien Diagnostic Cyber",
+    title: "Composants/ANSSI/Lien Diagnostic Cyber",
     component: LienDiagnosticCyber,
     render: template,
     args: {

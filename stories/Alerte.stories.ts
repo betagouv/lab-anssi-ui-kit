@@ -4,7 +4,7 @@ import { expect, userEvent } from "storybook/test";
 import Alerte from "$lib/Alerte.svelte";
 
 const meta = {
-  title: "Composants/Alerte",
+  title: "Composants/ANSSI/Alerte",
   component: Alerte,
   argTypes: {
     description: { control: "text", type: "string" },

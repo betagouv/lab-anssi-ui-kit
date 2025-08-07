@@ -4,7 +4,7 @@ import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/
 import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
 
 const meta = {
-  title: "Composants/Carrousel de tuiles",
+  title: "Composants/ANSSI/Carrousel de tuiles",
   component: CarrouselTuiles,
   args: {
     tuiles: [
