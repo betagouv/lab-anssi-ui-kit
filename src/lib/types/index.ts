@@ -1,3 +1,5 @@
+export type * from "./global.ts";
+
 export type Image = {
   lien: string;
   alt: string;
