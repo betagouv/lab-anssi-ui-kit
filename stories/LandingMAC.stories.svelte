@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
 
   import type { Image } from "$lib/types";
-  import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+  import { genereImageDePlaceholder } from "./utilitaires/generateurImagesPlaceholders";
 
   import Marelle from "$lib/lab/vitrines-produits/briques/marelle/Marelle.svelte";
   import BriqueHero from "$lib/lab/vitrines-produits/briques/BriqueHero.svelte";

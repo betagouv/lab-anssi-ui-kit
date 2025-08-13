@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 
 import BriqueContenuADeuxColonnes from "$lib/lab/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
-import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+import { genereImageDePlaceholder } from "./utilitaires/generateurImagesPlaceholders";
 
 const meta = {
   title: "Composants/ANSSI/Brique Contenu A Deux Colonnes",

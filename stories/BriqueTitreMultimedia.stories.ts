@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 
 import BriqueTitreMultimedia from "$lib/lab/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
-import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+import { genereImageDePlaceholder } from "./utilitaires/generateurImagesPlaceholders";
 
 const source =
   "https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4";
