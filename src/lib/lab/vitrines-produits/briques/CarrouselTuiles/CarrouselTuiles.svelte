@@ -10,7 +10,7 @@
 <script lang="ts">
   import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import Tuile from "$lib/lab/vitrines-produits/briques/Tuile.svelte";
-  import type { Tuiles } from "$lib/types.js";
+  import type { Tuiles } from "$lib/types";
   import IconeFlecheGauche from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
