@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 
 import PageCrisp from "$lib/lab/blog/PageCrisp.svelte";
-import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+import { genereImageDePlaceholder } from "./utilitaires/generateurImagesPlaceholders";
 import exempleContenu from "../stories/lab/blog/exemple-page-crisp.html?raw";
 
 const contenu = (exempleContenu as string).replaceAll(

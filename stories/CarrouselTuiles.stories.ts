@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 
 import CarrouselTuiles from "$lib/lab/vitrines-produits/briques/CarrouselTuiles/CarrouselTuiles.svelte";
-import { genereImageDePlaceholder } from "$lib/generateurImagesPlaceholders";
+import { genereImageDePlaceholder } from "./utilitaires/generateurImagesPlaceholders";
 
 const meta = {
   title: "Composants/ANSSI/Carrousel de tuiles",
