@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Image } from "$lib/types.js";
+  import type { Image } from "$lib/types";
 
   interface Props {
     titre: string;

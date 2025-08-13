@@ -11,7 +11,7 @@
 />
 
 <script lang="ts">
-  import { estLien, type NoeudFilAriane, type InfosTag } from "$lib/types.js";
+  import { estLien, type NoeudFilAriane, type InfosTag } from "$lib/types";
   import Tag from "$lib/lab/Tag.svelte";
 
   interface Props {
