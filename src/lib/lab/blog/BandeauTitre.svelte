@@ -11,8 +11,10 @@
 />
 
 <script lang="ts">
-  import { estLien, type NoeudFilAriane, type InfosTag } from "$lib/types";
+  import type { Lien, NoeudFilAriane, InfosTag } from "$lib/types";
   import Tag from "$lib/lab/Tag.svelte";
+
+  const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 
   interface Props {
     titre: string;

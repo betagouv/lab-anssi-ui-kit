@@ -30,3 +30,14 @@ export type iconPlace = "only" | "left" | "right";
 export type Size = "sm" | "md" | "lg" | "xl";
 export type Status = "success" | "warning" | "error" | "info" | "new";
 export type Target = "self" | "blank";
+
+export type Image = {
+  lien: string;
+  alt: string;
+};
+
+export type Video = {
+  source: string;
+  sourcesoustitres?: string;
+  imagedecouverture?: string;
+};
