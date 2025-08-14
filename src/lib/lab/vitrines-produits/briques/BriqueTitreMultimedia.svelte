@@ -9,8 +9,9 @@
 />
 
 <script lang="ts">
-  import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import type { Video } from "$lib/types";
+
+  import Brique from "$lib/lab/vitrines-produits/briques/Brique.svelte";
   import LecteurVideo from "$lib/lab/vitrines-produits/briques/LecteurVideo.svelte";
 
   interface Props {

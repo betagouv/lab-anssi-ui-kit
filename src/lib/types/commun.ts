@@ -1,15 +1,9 @@
-export type Image = {
-  lien: string;
-  alt: string;
-};
+/**
+ * Le fichier `commun.ts` contient des types communs partagés entre plusieurs composants d'un même "scope".
+ * Ces `types` peuvent être utilisés pour assurer la cohérence et la réutilisabilité au sein de ce scope.
+ */
+import type { Image } from "./global";
 
-export type Video = {
-  source: string;
-  sourcesoustitres?: string;
-  imagedecouverture?: string;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Action = {
   titre: string;
   lien: string;
@@ -47,8 +41,6 @@ export type Lien = {
 type Feuille = { label: string };
 
 export type NoeudFilAriane = Lien | Feuille;
-
-export const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 
 export type InfosTag = {
   label: string;
