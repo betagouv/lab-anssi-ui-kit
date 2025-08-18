@@ -37,6 +37,10 @@ const config: StorybookConfig = {
             @use '${path.resolve(__dirname, "../src/assets.scss")}' as *;
             $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
           `,
+          loadPaths: [
+            `${path.resolve(__dirname, "../node_modules/@gouvfr/dsfr")}`,
+            `${path.resolve(__dirname, "../node_modules/@gouvfr/dsfr/src")}`,
+          ],
         },
       },
     };
