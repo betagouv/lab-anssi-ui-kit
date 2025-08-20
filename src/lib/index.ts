@@ -21,3 +21,4 @@ export { default as Bouton } from "./lab/Bouton.svelte";
 export { default as Lien } from "./lab/Lien.svelte";
 export { default as Tag } from "./lab/Tag.svelte";
 export { default as AncresParcours } from "./composants/AncresParcours.svelte";
+export { default as FiltresCatalogue } from "./composants/FiltresCatalogue.svelte";
