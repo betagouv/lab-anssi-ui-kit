@@ -36,6 +36,7 @@ export default defineConfig({
           @use 'src/variables.scss' as *;
           @use 'src/responsive.scss' as *;
           @use 'src/assets.scss' as *;
+          @use 'src/lib/styles/mixins.scss' as *;
           $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
         `,
         loadPaths: ["node_modules/@gouvfr/dsfr", "node_modules/@gouvfr/dsfr/src"],
