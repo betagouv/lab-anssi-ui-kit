@@ -35,6 +35,7 @@ const config: StorybookConfig = {
             @use '${path.resolve(__dirname, "../src/variables.scss")}' as *;
             @use '${path.resolve(__dirname, "../src/responsive.scss")}' as *;
             @use '${path.resolve(__dirname, "../src/assets.scss")}' as *;
+            @use '${path.resolve(__dirname, "../src/lib/styles/mixins.scss")}' as *;
             $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
           `,
           loadPaths: [
