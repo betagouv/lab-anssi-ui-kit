@@ -6,6 +6,10 @@
   } from "@gouvfr/dsfr/src/dsfr/component/button/template/stories/button-arg-types.js";
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 
+  // Styles
+  import "@gouvfr/dsfr/dist/core/core.min.css";
+  import "@gouvfr/dsfr/dist/component/button/button.min.css";
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Button",
     component: DsfrButton,

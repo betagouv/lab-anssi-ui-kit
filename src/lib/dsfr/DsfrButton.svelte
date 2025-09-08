@@ -1,6 +1,7 @@
 <svelte:options
   customElement={{
     tag: "dsfr-button",
+    shadow: "none",
     props: {
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
@@ -84,8 +85,8 @@
 </svelte:element>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
+  // @import "@gouvfr/dsfr/dist/core/core.min.css";
+  // @import "@gouvfr/dsfr/dist/component/button/button.min.css";
 
   .fr-btn {
     box-sizing: border-box;
