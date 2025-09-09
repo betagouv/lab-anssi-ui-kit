@@ -1,0 +1,93 @@
+<svelte:options
+  customElement={{
+    tag: "dsfr-tag",
+    props: {
+      label: { attribute: "label", type: "String" },
+      type: { attribute: "type", type: "String" },
+      size: { attribute: "size", type: "String" },
+      href: { attribute: "href", type: "String" },
+      blank: { attribute: "blank", type: "Boolean" },
+      title: { attribute: "title", type: "String" },
+      pressed: { attribute: "pressed", type: "Boolean" },
+      disabled: { attribute: "disabled", type: "Boolean" },
+      hasIcon: { attribute: "has-icon", type: "Boolean" },
+      icon: { attribute: "icon", type: "String" },
+      accent: { attribute: "accent", type: "String" },
+    },
+  }}
+/>
+
+<script lang="ts">
+  import type { Accent, Size } from "$lib/types";
+  import { setIconClass } from "$lib/utilitaires";
+
+  type TagSize = Extract<Size, "sm" | "md">;
+  type Markup = "a" | "button" | "p" | undefined;
+
+  interface Props {
+    /** Libellé du tag */
+    label: string;
+    /** Type du tag<br>Valeurs :<br>- Défaut : tag non cliquable pour donner une information sur un contenu<br>- Cliquable : Le tag cliquable donne accès à une page avec des contenus associés à ce tag<br>- Sélectionnable : Le tag sélectionnable permet d’activer/désactiver un filtre<br>- Supprimable : Le tag supprimable permet de désactiver un filtre */
+    type?: "default" | "clickable" | "pressable" | "dismissible";
+    /** Taille du tag */
+    size?: TagSize;
+    /** Lien de redirection du tag cliquable */
+    href?: string;
+    /** Ouvre le lien dans un nouvel onglet */
+    blank?: boolean;
+    /** Attribut title de l\'actionneur. Si blank = true, il est obligatoire et doit reprendre le titre suivi de la mention "- nouvelle fenêtre" */
+    title?: string;
+    /** Le tag est sélectionné */
+    pressed?: boolean;
+    /** Le tag est désactivé */
+    disabled?: boolean;
+    /** Le tag a une icône */
+    hasIcon?: boolean;
+    /** Nom de l'icône dans le tag */
+    icon?: string;
+    /** Couleur du tag cliquable */
+    accent?: Accent;
+  }
+
+  let { label, type, size, href, blank, title, pressed, disabled, hasIcon, icon, accent }: Props =
+    $props();
+
+  let markup: Markup = $derived.by(() => {
+    let tag: Markup;
+
+    const expr = "Papayas";
+    switch (type) {
+      case "clickable":
+        tag = "a";
+        break;
+      case "pressable":
+      case "dismissible":
+        tag = "button";
+        break;
+      default:
+        tag = "p";
+    }
+
+    return tag;
+  });
+
+  let accentClass = $derived.by(() => {
+    return type === "clickable" && accent && `fr-tag--${accent}`;
+  });
+  let dissmissClass = $derived.by(() => type === "dismissible" && "fr-tag--dismiss");
+  let iconClass = $derived.by(() => {
+    return hasIcon && icon && `fr-tag--icon-left ${setIconClass(icon)}`;
+  });
+  let sizeClass = $derived(`fr-tag--${size}`);
+</script>
+
+<svelte:element
+  this={markup}
+  class={["fr-tag", accentClass, dissmissClass, iconClass, sizeClass]}
+  href={markup === "a" && !disabled ? href : undefined}
+  aria-disabled={markup === "a" && disabled ? "true" : undefined}
+  role={markup === "a" && disabled ? "link" : undefined}
+  disabled={(type === "pressable" || type === "dismissible") && disabled}
+>
+  {label}
+</svelte:element>
