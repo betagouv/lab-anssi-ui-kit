@@ -23,7 +23,9 @@ export { default as Tag } from "./lab/Tag.svelte";
 export { default as AncresParcours } from "./composants/AncresParcours.svelte";
 export { default as FiltresCatalogue } from "./composants/FiltresCatalogue.svelte";
 export { default as Hero } from "./composants/Hero.svelte";
+
 export { default as DsfrAlert } from "./dsfr/DsfrAlert.svelte";
 export { default as DsfrBadge } from "./dsfr/DsfrBadge.svelte";
 export { default as DsfrButton } from "./dsfr/DsfrButton.svelte";
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
+export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
