@@ -6,6 +6,11 @@
   } from "@gouvfr/dsfr/src/dsfr/component/badge/template/stories/badge-arg-types.js";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
 
+  // Styles
+  import "@gouvfr/dsfr/dist/core/core.min.css";
+  import "@gouvfr/dsfr/dist/component/form/form.min.css";
+  import "@gouvfr/dsfr/dist/component/select/select.min.css";
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Badge",
     component: DsfrBadge,
