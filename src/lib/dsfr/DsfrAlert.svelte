@@ -1,6 +1,7 @@
 <svelte:options
   customElement={{
     tag: "dsfr-alert",
+    shadow: "none",
     props: {
       buttonCloseLabel: { attribute: "button-close-label", type: "String" },
       hasTitle: { attribute: "has-title", type: "Boolean" },
@@ -66,8 +67,3 @@
     </button>
   {/if}
 </div>
-
-<style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
-</style>
