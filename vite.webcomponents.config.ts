@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import genereJSX from "./outils/vite-plugin-genere-jsx";
 import injecteNonce from "./outils/vite-plugin-injecte-nonce";
+import { purgeCSSPlugin } from "@fullhuman/postcss-purgecss";
 
 // Ce fichier permet de build la librairie en mode "WebComponents"
 // En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
@@ -16,6 +17,17 @@ export default defineConfig({
       formats: ["iife"],
     },
     outDir: "dist/webcomponents",
+  },
+  css: {
+    postcss: {
+      plugins: [
+        purgeCSSPlugin({
+          content: ["./dist/**/*.svelte"],
+          fontFace: true,
+          variables: true,
+        }),
+      ],
+    },
   },
   plugins: [svelte(), genereJSX(), injecteNonce()],
 });
