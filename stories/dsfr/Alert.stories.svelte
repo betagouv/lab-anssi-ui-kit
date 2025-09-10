@@ -6,10 +6,6 @@
   } from "@gouvfr/dsfr/src/dsfr/component/alert/template/stories/alert-arg-types.js";
   import DsfrAlert from "$lib/dsfr/DsfrAlert.svelte";
 
-  // Styles
-  import "@gouvfr/dsfr/dist/core/core.min.css";
-  import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
-
   const { Story } = defineMeta({
     title: "Composants/dsfr/Alert",
     component: DsfrAlert,

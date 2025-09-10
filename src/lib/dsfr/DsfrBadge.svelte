@@ -1,7 +1,6 @@
 <svelte:options
   customElement={{
     tag: "dsfr-badge",
-    shadow: "none",
     props: {
       label: { attribute: "label", type: "String" },
       accent: { attribute: "accent", type: "String" },
@@ -63,3 +62,9 @@
     {label}
   {/if}
 </p>
+
+<style lang="scss">
+  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss";
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/badge/badge.min.css";
+</style>
