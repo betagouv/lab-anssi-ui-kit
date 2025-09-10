@@ -1,0 +1,17 @@
+<script module>
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+  import {
+    inputArgTypes,
+    inputArgs,
+  } from "@gouvfr/dsfr/src/dsfr/component/input/template/stories/input-arg-types.js";
+  import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
+
+  const { Story } = defineMeta({
+    title: "Composants/dsfr/Input",
+    component: DsfrInput,
+    argTypes: inputArgTypes,
+    args: inputArgs,
+  });
+</script>
+
+<Story name="Défaut" />
