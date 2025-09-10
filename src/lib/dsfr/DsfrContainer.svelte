@@ -26,3 +26,14 @@
 <div class={[!fluid && "fr-container", fluid && "fr-container--fluid"]}>
   {@render children?.()}
 </div>
+
+<style lang="scss">
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+
+  .fr-container {
+    &,
+    &--fluid {
+      box-sizing: border-box;
+    }
+  }
+</style>
