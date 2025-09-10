@@ -20,3 +20,7 @@ export { default as Icone } from "./lab/Icone.svelte";
 export { default as Bouton } from "./lab/Bouton.svelte";
 export { default as Lien } from "./lab/Lien.svelte";
 export { default as Tag } from "./lab/Tag.svelte";
+export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
+export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
+export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
+export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
