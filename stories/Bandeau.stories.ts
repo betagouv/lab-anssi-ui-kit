@@ -3,6 +3,11 @@ import { expect, userEvent } from "storybook/test";
 
 import Bandeau from "$lib/mes-services-cyber/bandeau/Bandeau.svelte";
 
+// Styles
+import "@gouvfr/dsfr/dist/core/core.min.css";
+import "@gouvfr/dsfr/dist/component/form/form.min.css";
+import "@gouvfr/dsfr/dist/component/select/select.min.css";
+
 const meta = {
   title: "Composants/ANSSI/Bandeau",
   component: Bandeau,
