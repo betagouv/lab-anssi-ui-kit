@@ -23,3 +23,4 @@ export { default as Tag } from "./lab/Tag.svelte";
 export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
 export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
+export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
