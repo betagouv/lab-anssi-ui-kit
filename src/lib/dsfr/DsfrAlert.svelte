@@ -68,6 +68,6 @@
 </div>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
+  //@import "@gouvfr/dsfr/dist/core/core.min.css";
+  //@import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
 </style>

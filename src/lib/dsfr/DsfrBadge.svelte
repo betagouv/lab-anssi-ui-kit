@@ -64,7 +64,7 @@
 </p>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss";
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/badge/badge.min.css";
+  //@use "@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss";
+  //@import "@gouvfr/dsfr/dist/core/core.min.css";
+  //@import "@gouvfr/dsfr/dist/component/badge/badge.min.css";
 </style>

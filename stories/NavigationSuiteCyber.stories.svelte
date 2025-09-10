@@ -9,7 +9,6 @@
   import "@gouvfr/dsfr/dist/component/form/form.min.css";
   import "@gouvfr/dsfr/dist/component/select/select.min.css";
 
-
   const { Story } = defineMeta({
     title: "Composants/ANSSI/Navigation Suite Cyber",
     component: Navigation,
