@@ -1,11 +1,11 @@
 /// <reference types="vitest/config" />
-import { sveltekit } from "@sveltejs/kit/vite";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import dotenv from "dotenv";
+import { fileURLToPath } from "node:url";
+import path, { resolve } from "path";
 import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
-import dotenv from "dotenv";
-import path, { resolve } from "path";
-import { fileURLToPath } from "node:url";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -28,7 +28,7 @@ export default defineConfig({
       src: path.resolve(__dirname, "src"),
     },
   },
-  plugins: [sveltekit()],
+  plugins: [svelte()],
   css: {
     preprocessorOptions: {
       scss: {

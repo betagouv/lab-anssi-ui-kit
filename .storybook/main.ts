@@ -1,5 +1,5 @@
+import type { StorybookConfig } from "@storybook/svelte-vite";
 import path from "path";
-import type { StorybookConfig } from "@storybook/sveltekit";
 import { loadEnv } from "vite";
 
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     "@storybook/addon-themes",
   ],
   framework: {
-    name: "@storybook/sveltekit",
+    name: "@storybook/svelte-vite",
     options: {},
   },
   viteFinal: async (config) => {
@@ -23,6 +23,12 @@ const config: StorybookConfig = {
       fs: {
         ...config.server?.fs,
         allow: [...(config.server?.fs?.allow || []), "./stories", "./src", "./static"],
+      },
+    };
+    config.resolve = {
+      alias: {
+        src: path.resolve(__dirname, "../src"),
+        $lib: path.resolve(__dirname, "../src/lib"),
       },
     };
     config.css = {

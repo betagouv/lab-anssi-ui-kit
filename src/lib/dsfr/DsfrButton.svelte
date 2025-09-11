@@ -84,8 +84,8 @@
 </svelte:element>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
 
   .fr-btn {
     box-sizing: border-box;
