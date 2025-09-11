@@ -9,22 +9,15 @@
 
 <script lang="ts">
   interface Props {
-    /**
-     * Permet de définir le conteneur comme "fluide" ou non
-     */
+    /** Permet de définir le conteneur comme "fluide" ou non */
     fluid?: boolean;
-
-    /**
-     * Permet de définir le contenu du conteneur
-     */
-    children?: import("svelte").Snippet;
   }
 
-  let { fluid = false, children }: Props = $props();
+  let { fluid = false }: Props = $props();
 </script>
 
 <div class={[!fluid && "fr-container", fluid && "fr-container--fluid"]}>
-  {@render children?.()}
+  <slot></slot>
 </div>
 
 <style lang="scss">

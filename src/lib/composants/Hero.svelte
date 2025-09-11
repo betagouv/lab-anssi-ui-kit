@@ -14,14 +14,12 @@
 />
 
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 
   interface Props {
     titre: string;
     baliseTitre: string;
     description: string;
-    actions?: Snippet;
     inverse?: boolean;
     urlImage?: string | undefined;
     sansImage?: boolean;
@@ -32,7 +30,6 @@
     baliseTitre = "h1",
     description,
     inverse = false,
-    actions,
     urlImage,
     sansImage = false,
   }: Props = $props();
@@ -53,9 +50,9 @@
         </svelte:element>
         <p class="lab-anssi-hero__description">{description}</p>
 
-        {#if actions}
+        {#if $$slots.actions}
           <div class="lab-anssi-hero__actions">
-            {@render actions()}
+            <slot name="actions" />
           </div>
         {/if}
       </div>
