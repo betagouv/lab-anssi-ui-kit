@@ -17,8 +17,8 @@
 />
 
 <script lang="ts">
-  import { setIconClass } from "$lib/utilitaires";
   import type { Size } from "$lib/types";
+  import { setIconClass } from "$lib/utilitaires";
 
   type AlertSize = Extract<Size, "sm" | "md">;
 
@@ -68,6 +68,6 @@
 </div>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/alert/main" as *;
 </style>

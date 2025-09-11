@@ -28,12 +28,5 @@
 </div>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-
-  .fr-container {
-    &,
-    &--fluid {
-      box-sizing: border-box;
-    }
-  }
+  @use "@gouvfr/dsfr/src/dsfr/main" as *;
 </style>
