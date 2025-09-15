@@ -10,6 +10,7 @@
       optionGroups: { attribute: "option-groups", type: "Object" },
       hint: { attribute: "hint", type: "String" },
       placeholder: { attribute: "placeholder", type: "String" },
+      placeholderDisabled: { attribute: "placeholder-disabled", type: "Boolean" },
       disabled: { attribute: "disabled", type: "Boolean" },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
@@ -46,6 +47,8 @@
     hint?: string;
     /** Texte avant sélection d'une option */
     placeholder?: string;
+    /** Placeholder désactivé */
+    placeholderDisabled?: boolean | undefined;
     /** Désactive la liste déroulante */
     disabled?: boolean;
     /** Statut du message */
@@ -66,6 +69,7 @@
     options,
     hint,
     placeholder,
+    placeholderDisabled,
     disabled,
     status = "default",
     errorMessage,
@@ -100,7 +104,7 @@
     onchange={handleChange}
   >
     {#if placeholder}
-      <option value="" selected disabled>{placeholder}</option>
+      <option value="" selected disabled={placeholderDisabled}>{placeholder}</option>
     {/if}
     {#if $$slots.default}
       <slot></slot>
