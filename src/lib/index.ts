@@ -30,6 +30,7 @@ export { default as DsfrBadgesGroup } from "./dsfr/DsfrBadgesGroup.svelte";
 export { default as DsfrButton } from "./dsfr/DsfrButton.svelte";
 export { default as DsfrCard } from "./dsfr/DsfrCard.svelte";
 export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
+export { default as DsfrCheckboxesGroup } from "./dsfr/DsfrCheckboxesGroup.svelte";
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
