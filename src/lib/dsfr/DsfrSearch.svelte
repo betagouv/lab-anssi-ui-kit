@@ -1,0 +1,83 @@
+<svelte:options
+  customElement={{
+    tag: "dsfr-search",
+    props: {
+      inputId: { attribute: "input-id", type: "String" },
+      inputLabel: { attribute: "input-label", type: "String" },
+      buttonLabel: { attribute: "button-label", type: "String" },
+      buttonTitle: { attribute: "button-title", type: "String" },
+      size: { attribute: "size", type: "String" },
+      inputPlaceholder: { attribute: "input-placeholder", type: "String" },
+      value: { attribute: "value", type: "String", reflect: true },
+    },
+  }}
+/>
+
+<script lang="ts">
+  import type { Size } from "$lib/types";
+  import { createEventDispatcher } from "svelte";
+
+  type SearchSize = Extract<Size, "md" | "lg">;
+  interface Props {
+    /** Attribut 'id' de l'input */
+    inputId: string;
+    /** Libellé de l'input */
+    inputLabel: string;
+    /** Libellé du bouton */
+    buttonLabel: string;
+    /** Titre du bouton */
+    buttonTitle: string;
+    /** Taille de la barre de recherche (défaut: md) */
+    size?: SearchSize;
+    /** Placeholder de l'input */
+    inputPlaceholder?: string;
+    /** Valeur initiale du champs de saisie */
+    value?: string;
+  }
+
+  const dispatch = createEventDispatcher();
+
+  let {
+    inputId,
+    inputLabel,
+    buttonLabel,
+    buttonTitle,
+    size = "md",
+    inputPlaceholder,
+    value = $bindable(),
+  }: Props = $props();
+
+  const sizeClass = $derived(`fr-search-bar--${size}`);
+
+  function handleInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    dispatch("valuechanged", target.value);
+  }
+</script>
+
+<div class={["fr-search-bar", sizeClass]} role="search">
+  <label class="fr-label" for={inputId}> {inputLabel} </label>
+  <input
+    type="search"
+    id={inputId}
+    class="fr-input"
+    bind:value
+    placeholder={inputPlaceholder}
+    oninput={handleInput}
+  />
+
+  <button title={buttonTitle} type="button" class="fr-btn">
+    {buttonLabel}
+  </button>
+</div>
+
+<style lang="scss">
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/input/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/search/main" as *;
+
+  .fr-search-bar {
+    box-sizing: border-box;
+  }
+</style>
