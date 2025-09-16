@@ -34,5 +34,6 @@ export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
 export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
+export { default as DsfrSearch } from "./dsfr/DsfrSearch.svelte";
 export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
 export { default as DsfrTagsGroup } from "./dsfr/DsfrTagsGroup.svelte";
