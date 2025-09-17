@@ -26,6 +26,7 @@ export { default as Hero } from "./composants/Hero.svelte";
 
 export { default as DsfrAlert } from "./dsfr/DsfrAlert.svelte";
 export { default as DsfrBadge } from "./dsfr/DsfrBadge.svelte";
+export { default as DsfrBadgesGroup } from "./dsfr/DsfrBadgesGroup.svelte";
 export { default as DsfrButton } from "./dsfr/DsfrButton.svelte";
 export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
