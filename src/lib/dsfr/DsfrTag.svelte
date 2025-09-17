@@ -98,4 +98,8 @@
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/tag/main" as *;
+
+  .fr-tag {
+    box-sizing: border-box;
+  }
 </style>
