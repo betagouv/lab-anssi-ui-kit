@@ -1,0 +1,96 @@
+<svelte:options
+  customElement={{
+    tag: "dsfr-tags-group",
+    props: {
+      tags: { attribute: "tags", type: "Array" },
+      type: { attribute: "type", type: "String" },
+      size: { attribute: "size", type: "String" },
+      groupMarkup: { attribute: "group-markup", type: "String" },
+      hasIcon: { attribute: "has-icon", type: "Boolean" },
+    },
+  }}
+/>
+
+<script lang="ts">
+  import type { Accent, Size } from "$lib/types";
+
+  type TagsGroupSize = Extract<Size, "sm" | "md">;
+  type TagType = "default" | "clickable" | "pressable" | "dismissible";
+  type TagMarkup = "a" | "button" | "p";
+  type Tag = {
+    label: string;
+    accent?: Accent;
+    size: TagsGroupSize;
+    href: string;
+    pressed: boolean;
+    blank: boolean;
+    disabled: boolean;
+    id: string;
+    type: TagType;
+    markup: TagMarkup;
+  };
+  type GroupMarkup = "div" | "ul";
+  interface Props {
+    /** Liste des tags à afficher dans le groupe */
+    tags: Tag[];
+    /** Type des tags dans le groupe */
+    type?: "default" | "clickable" | "pressable" | "dismissible";
+    /** Taille des tags dans le groupe */
+    size?: TagsGroupSize;
+    /** Type de balise HTML pour la liste du groupe de tags */
+    groupMarkup?: GroupMarkup;
+    /** Si true, ajoute une icone dans le titre des onglets */
+    hasIcon?: boolean;
+  }
+
+  let { tags, type = "default", size = "md", groupMarkup, hasIcon }: Props = $props();
+
+  const dissmissClass = $derived.by(() => type === "dismissible" && "fr-tag--dismiss");
+  const sizeClass = $derived(`fr-tags-group--${size}`);
+
+  const markup: TagMarkup = $derived.by(() => {
+    switch (type) {
+      case "clickable":
+        return "a";
+      case "pressable":
+      case "dismissible":
+        return "button";
+      default:
+        return "p";
+    }
+  });
+</script>
+
+{#snippet tagItem(tag: Tag)}
+  <svelte:element
+    this={markup}
+    class={["fr-tag", dissmissClass]}
+    id={tag.id}
+    href={type === "clickable" && !tag.disabled ? tag.href : undefined}
+    type={type === "pressable" || type === "dismissible" ? "button" : undefined}
+    aria-pressed={type === "pressable" ? "false" : undefined}
+  >
+    {tag.label}
+  </svelte:element>
+{/snippet}
+
+<svelte:element this={groupMarkup} class={["fr-tags-group", sizeClass]}>
+  {#each tags as tag}
+    {#if groupMarkup === "ul"}
+      <li>
+        {@render tagItem(tag)}
+      </li>
+    {:else}
+      {@render tagItem(tag)}
+    {/if}
+  {/each}
+</svelte:element>
+
+<style lang="scss">
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/tag/main" as *;
+
+  .fr-tag {
+    box-sizing: border-box;
+  }
+</style>
