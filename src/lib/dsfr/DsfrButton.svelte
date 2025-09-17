@@ -26,34 +26,35 @@
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;
 
   interface Props {
+    disabled: boolean;
     hasIcon: boolean;
+    href: string;
     icon: string;
     iconPlace: "only" | "left" | "right";
-    markup: "button" | "a" | "input";
-    type: "button" | "submit" | "reset";
-    href: string;
-    target: "self" | "blank";
-    label: string;
-    kind: "primary" | "secondary" | "tertiary" | "tertiary-no-outline" | "inverted";
-    size: ButtonSize;
     id?: string;
+    kind: "primary" | "secondary" | "tertiary" | "tertiary-no-outline" | "inverted";
+    label: string;
+    markup: "button" | "a" | "input";
+    size: ButtonSize;
+    target: "self" | "blank";
     title: string;
-    disabled: boolean;
+    type: "button" | "submit" | "reset";
   }
 
-  let {
-    label = "libellé du bouton",
-    kind = "primary",
-    size = "md",
+  const {
     disabled = false,
     hasIcon = false,
+    href,
     icon = "checkbox-line",
     iconPlace = "left",
-    markup = "button",
-    type = "button",
-    href,
-    target = "self",
     id,
+    kind = "primary",
+    label = "libellé du bouton",
+    markup = "button",
+    size = "md",
+    target = "self",
+    title = "",
+    type = "button",
   }: Props = $props();
 
   function setButtonType(markup: string) {
@@ -61,14 +62,7 @@
     return undefined;
   }
 
-  let iconClass = $derived.by(() => {
-    return hasIcon && icon && setIconClass(icon);
-  });
-  let iconPlaceClass = $derived.by(() => {
-    return hasIcon && iconPlace !== "only" && `fr-btn--icon-${iconPlace}`;
-  });
-  let kindClass = $derived(`fr-btn--${kind}`);
-  let sizeClass = $derived(`fr-btn--${size}`);
+  const iconClass = $derived<boolean | string>(hasIcon && icon && setIconClass(icon));
 </script>
 
 <svelte:element
@@ -78,7 +72,18 @@
   href={markup === "a" ? href : undefined}
   target={markup === "a" ? target : undefined}
   {disabled}
-  class={["fr-btn", iconClass, iconPlaceClass, kindClass, sizeClass]}
+  {title}
+  class={["fr-btn", iconClass]}
+  class:fr-btn--primary={kind === "primary"}
+  class:fr-btn--secondary={kind === "secondary"}
+  class:fr-btn--tertiary={kind === "tertiary"}
+  class:fr-btn--tertiary-no-outline={kind === "tertiary-no-outline"}
+  class:fr-btn--inverted={kind === "inverted"}
+  class:fr-btn--sm={size === "sm"}
+  class:fr-btn--md={size === "md"}
+  class:fr-btn--lg={size === "lg"}
+  class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
+  class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
 >
   {label}
 </svelte:element>
