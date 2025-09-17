@@ -13,6 +13,7 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
+  import { createEventDispatcher } from "svelte";
 
   type TagsGroupSize = Extract<Size, "sm" | "md">;
   type TagType = "default" | "clickable" | "pressable" | "dismissible";
@@ -59,6 +60,20 @@
         return "p";
     }
   });
+
+  let dispatch = createEventDispatcher<{ selected: string; unselected: string }>();
+
+  const onpressed = (event: MouseEvent) => {
+    let button = event.target as HTMLButtonElement;
+    let ariaPressed = button.ariaPressed;
+    const isPressed = ariaPressed === "true";
+    button.ariaPressed = (!isPressed).toString();
+    if (isPressed) {
+      dispatch("unselected", button.id);
+    } else {
+      dispatch("selected", button.id);
+    }
+  };
 </script>
 
 {#snippet tagItem(tag: Tag)}
@@ -69,6 +84,7 @@
     href={type === "clickable" && !tag.disabled ? tag.href : undefined}
     type={type === "pressable" || type === "dismissible" ? "button" : undefined}
     aria-pressed={type === "pressable" ? "false" : undefined}
+    onclick={type === "pressable" ? onpressed : undefined}
   >
     {tag.label}
   </svelte:element>
