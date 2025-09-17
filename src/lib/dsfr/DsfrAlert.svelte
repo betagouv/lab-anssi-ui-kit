@@ -68,6 +68,9 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/alert/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/alert/main" as *;
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/alert/alert.min.css";
 </style>

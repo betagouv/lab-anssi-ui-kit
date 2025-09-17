@@ -72,12 +72,17 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/input/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/search/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/input/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/search/main" as *;
 
-  .fr-search-bar {
-    box-sizing: border-box;
-  }
+  // .fr-search-bar {
+  //   box-sizing: border-box;
+  // }
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/input/input.min.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
+  @import "@gouvfr/dsfr/dist/component/search/search.min.css";
 </style>

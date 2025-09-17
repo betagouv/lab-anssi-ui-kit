@@ -58,10 +58,12 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/badge/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/badge/main" as *;
 
-  .fr-badge {
-    box-sizing: border-box;
-  }
+  // .fr-badge {
+  //   box-sizing: border-box;
+  // }
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/badge/badge.min.css";
 </style>

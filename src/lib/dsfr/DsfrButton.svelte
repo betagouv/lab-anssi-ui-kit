@@ -89,19 +89,21 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
 
-  .fr-btn {
-    box-sizing: border-box;
+  // .fr-btn {
+  //   box-sizing: border-box;
 
-    &--inverted {
-      --hover: var(--background-default-grey-hover);
-      --active: var(--background-default-grey-active);
+  //   &--inverted {
+  //     --hover: var(--background-default-grey-hover);
+  //     --active: var(--background-default-grey-active);
 
-      background-color: var(--background-default-grey);
-      box-shadow: inset 0 0 0 1px var(--background-default-grey);
-      color: var(--text-action-high-blue-france);
-    }
-  }
+  //     background-color: var(--background-default-grey);
+  //     box-shadow: inset 0 0 0 1px var(--background-default-grey);
+  //     color: var(--text-action-high-blue-france);
+  //   }
+  // }
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
 </style>

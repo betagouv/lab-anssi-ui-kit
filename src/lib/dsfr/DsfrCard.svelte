@@ -248,18 +248,22 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/link/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/card/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/link/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/card/main" as *;
 
-  .fr-card {
-    box-sizing: border-box;
+  // .fr-card {
+  //   box-sizing: border-box;
 
-    &__header :global(.fr-badges-group) {
-      left: 0;
-      padding: 0.75rem;
-      position: absolute;
-      top: 0;
-    }
-  }
+  //   &__header :global(.fr-badges-group) {
+  //     left: 0;
+  //     padding: 0.75rem;
+  //     position: absolute;
+  //     top: 0;
+  //   }
+  // }
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/link/link.min.css";
+  @import "@gouvfr/dsfr/dist/component/card/card.min.css";
 </style>

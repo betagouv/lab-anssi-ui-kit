@@ -130,7 +130,11 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/select/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/select/main" as *;
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/form/form.min.css";
+  @import "@gouvfr/dsfr/dist/component/select/select.min.css";
 </style>

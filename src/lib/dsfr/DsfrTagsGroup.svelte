@@ -103,10 +103,13 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/tag/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/component/tag/main" as *;
 
-  .fr-tag {
-    box-sizing: border-box;
-  }
+  // .fr-tag {
+  //   box-sizing: border-box;
+  // }
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/dist/component/tag/tag.min.css";
 </style>

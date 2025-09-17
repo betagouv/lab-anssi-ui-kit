@@ -21,5 +21,7 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  // @use "@gouvfr/dsfr/src/dsfr/main" as *;
+
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
 </style>
