@@ -33,28 +33,6 @@ export default defineConfig({
     },
   },
   css: {
-    postcss: {
-      plugins: [
-        purgeCSSPlugin({
-          content: ["**/*.svelte"],
-          fontFace: true,
-          safelist: [":host"],
-        }),
-        root2host,
-        discardEmptyBlocks(),
-        cssnano({
-          preset: [
-            "default",
-            {
-              discardEmpty: true,
-              discardComments: {
-                removeAll: true,
-              },
-            },
-          ],
-        }),
-      ],
-    },
     preprocessorOptions: {
       scss: {
         additionalData: `
