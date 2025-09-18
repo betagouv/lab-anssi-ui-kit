@@ -15,3 +15,15 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-tags-group
+      tags={args.tags}
+      type={args.type}
+      size={args.size}
+      group-markup={args.groupMarkup}
+      has-icon={args.hasIcon}
+    ></dsfr-tags-group>
+  {/snippet}
+</Story>

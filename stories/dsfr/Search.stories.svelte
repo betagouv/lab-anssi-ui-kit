@@ -15,3 +15,17 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-search
+      input-id={args.inputId}
+      input-label={args.inputLabel}
+      button-label={args.buttonLabel}
+      button-title={args.buttonTitle}
+      size={args.size}
+      input-placeholder={args.inputPlaceholder}
+      value={args.value}
+    ></dsfr-search>
+  {/snippet}
+</Story>

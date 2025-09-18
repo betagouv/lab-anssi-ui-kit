@@ -40,3 +40,23 @@
     backgrounds: { value: "blueFranceLab" },
   }}
 />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-button
+      disabled={args.disabled}
+      has-icon={args.hasIcon}
+      href={args.href}
+      icon={args.icon}
+      icon-place={args.iconPlace}
+      id={args.id}
+      kind={args.kind}
+      label={args.label}
+      markup={args.markup}
+      size={args.size}
+      target={args.target}
+      title={args.title}
+      type={args.type}
+    ></dsfr-button>
+  {/snippet}
+</Story>
