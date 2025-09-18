@@ -15,3 +15,21 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-tag
+      label={args.label}
+      type={args.type}
+      size={args.size}
+      href={args.href}
+      blank={args.blank}
+      title={args.title}
+      pressed={args.pressed}
+      disabled={args.disabled}
+      has-icon={args.hasIcon}
+      icon={args.icon}
+      accent={args.accent}
+    ></dsfr-tag>
+  {/snippet}
+</Story>

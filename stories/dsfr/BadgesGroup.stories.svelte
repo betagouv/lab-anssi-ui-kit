@@ -15,3 +15,10 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-badges-group badges={args.badges} size={args.size} group-markup={args.groupMarkup}
+    ></dsfr-badges-group>
+  {/snippet}
+</Story>

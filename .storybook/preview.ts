@@ -1,6 +1,8 @@
 import type { Preview, SvelteRenderer } from "@storybook/svelte";
 import { withThemeByClassName } from "@storybook/addon-themes";
 
+import "/static/webcomponents/lab-anssi-ui-kit.iife.js";
+
 import "./styles.fonts.css";
 import "./styles.themes.css";
 

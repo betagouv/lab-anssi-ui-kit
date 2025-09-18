@@ -96,3 +96,21 @@
     dismissible: true,
   }}
 />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-alert
+      disabled={args.disabled}
+      button-close-label={args.buttonCloseLabel}
+      hasTitle={args.hasTitle}
+      title={args.title}
+      has-description={args.hasDescription}
+      text={args.text}
+      type={args.type}
+      size={args.size}
+      id={args.id}
+      dismissible={args.dismissible}
+      icon={args.icon}
+    ></dsfr-alert>
+  {/snippet}
+</Story>

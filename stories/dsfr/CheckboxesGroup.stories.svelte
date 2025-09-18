@@ -37,3 +37,20 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-checkboxes-group
+      id={args.id}
+      legend={args.legend}
+      checkboxes={args.checkboxes}
+      hint={args.hint}
+      size={args.size}
+      inline={args.inline}
+      disabled={args.disabled}
+      status={args.status}
+      erro-message={args.errorMessage}
+      valid-message={args.validMessage}
+    ></dsfr-checkboxes-group>
+  {/snippet}
+</Story>

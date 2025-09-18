@@ -39,3 +39,18 @@
       "Label très long qui sera tronqué lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus sit amet luctus",
   }}
 />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-badge
+      label={args.label}
+      accent={args.accent}
+      ellipsis={args.ellipsis}
+      has-icon={args.hasIcon}
+      icon={args.icon}
+      size={args.size}
+      status={args.status}
+      type={args.type}
+    ></dsfr-badge>
+  {/snippet}
+</Story>

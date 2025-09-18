@@ -20,7 +20,8 @@
     "storybook:build": "STORYBOOK_ENV=production storybook build",
     "storybook:build-dev": "STORYBOOK_ENV=development storybook build",
     "storybook:test": "STORYBOOK_ENV=production npm run test-storybook",
-    "test-storybook": "vitest --project=storybook"
+    "test-storybook": "vitest --project=storybook",
+    "postbuild:webcomponents": "cp -r dist/webcomponents/ static"
   },
   "files": [
     "dist",

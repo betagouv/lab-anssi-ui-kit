@@ -52,3 +52,9 @@
     </style>
   {/snippet}
 </Story>
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-container fluid={args.fluid}></dsfr-container>
+  {/snippet}
+</Story>
