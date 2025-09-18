@@ -37,5 +37,8 @@ export default ts.config(
       },
     },
   },
+  {
+    ignores: ["static/**/*.js"],
+  },
   storybook.configs["flat/recommended"],
 );

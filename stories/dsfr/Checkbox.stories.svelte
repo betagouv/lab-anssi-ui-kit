@@ -15,3 +15,21 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="WebComponent">
+  {#snippet template(args)}
+    <dsfr-checkbox
+      id={args.id}
+      label={args.label}
+      name={args.name}
+      size={args.size}
+      hint={args.hint}
+      disabled={args.disabled}
+      checked={args.checked}
+      value={args.value}
+      status={args.status}
+      error-message={args.errorMessage}
+      valid-message={args.validMessage}
+    ></dsfr-checkbox>
+  {/snippet}
+</Story>
