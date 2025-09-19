@@ -94,6 +94,8 @@
 
   .fr-btn {
     box-sizing: border-box;
+    justify-content: center;
+    width: 100%;
 
     &--inverted {
       --hover: var(--background-default-grey-hover);
