@@ -254,6 +254,7 @@
 
   .fr-card {
     box-sizing: border-box;
+    height: 100%;
 
     &__header :global(.fr-badges-group) {
       left: 0;
