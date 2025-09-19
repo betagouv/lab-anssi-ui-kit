@@ -116,7 +116,6 @@
       {/each}
     {/if}
   </select>
-
   {#if status !== "default"}
     <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
       <p
@@ -133,4 +132,8 @@
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/select/main" as *;
+
+  .fr-select-group:not(:last-child) {
+    margin-bottom: 0;
+  }
 </style>

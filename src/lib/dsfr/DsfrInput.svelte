@@ -76,14 +76,15 @@
   }
 </script>
 
-<div class={["fr-input-group", disabledClass]} id="input-group-16">
-  <label class="fr-label" for={id}>
-    {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+<div class={["fr-input-group", disabledClass]}>
+  {#if label}
+    <label class="fr-label" for={id}>
+      {label}
+      {#if hint}
+        <span class="fr-hint-text">{hint}</span>
+      {/if}
+    </label>
+  {/if}
   <input
     {type}
     {id}
