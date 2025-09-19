@@ -56,7 +56,9 @@
 </script>
 
 <div class={["fr-search-bar", sizeClass]} role="search">
-  <label class="fr-label" for={inputId}> {inputLabel} </label>
+  {#if inputLabel}
+    <label class="fr-label" for={inputId}> {inputLabel} </label>
+  {/if}
   <input
     type="search"
     id={inputId}
