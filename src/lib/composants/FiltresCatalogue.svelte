@@ -51,12 +51,14 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss";
+  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/decisions";
   @import "@gouvfr/dsfr/src/dsfr/core/style/selector/setting/breakpoint";
   @import "@gouvfr/dsfr/src/dsfr/core/style/selector/tool/breakpoint";
 
   .lab-anssi-filtres {
     box-sizing: border-box;
+    background: var(--filtres-bg, #ffffff);
+    border-radius: 4px;
 
     &__conteneur {
       display: flex;
