@@ -75,7 +75,6 @@
       flex: 1;
       border: 1px solid var(--border-default-grey);
       padding: 16px 24px 24px;
-      white-space: nowrap;
 
       // Font properties
       font-weight: 700;
