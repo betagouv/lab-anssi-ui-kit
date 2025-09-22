@@ -252,11 +252,16 @@
   @use "@gouvfr/dsfr/src/dsfr/component/link/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/card/main" as *;
 
+  :host {
+    display: block;
+  }
+
   .fr-card {
     box-sizing: border-box;
     height: 100%;
 
-    &__header :global(.fr-badges-group) {
+    &__header :global(.fr-badges-group),
+    :global(::slotted([slot="headerbadges"])) {
       left: 0;
       padding: 0.75rem;
       position: absolute;
