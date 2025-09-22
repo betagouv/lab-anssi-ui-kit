@@ -38,21 +38,18 @@ export default defineConfig({
         purgeCSSPlugin({
           content: ["**/*.svelte"],
           fontFace: true,
-          safelist: [":host"],
+          safelist: [
+            ":host",
+            /\bfr-alert\S*/,
+            /\bfr-badge\S*/,
+            /\bfr-btn\S*/,
+            /\bfr-icon\S*/,
+            /\bfr-tag\S*/,
+          ],
         }),
         root2host,
         discardEmptyBlocks(),
-        cssnano({
-          preset: [
-            "default",
-            {
-              discardEmpty: true,
-              discardComments: {
-                removeAll: true,
-              },
-            },
-          ],
-        }),
+        cssnano({ preset: "default" }),
       ],
     },
     preprocessorOptions: {
