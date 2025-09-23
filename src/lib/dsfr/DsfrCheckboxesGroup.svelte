@@ -18,14 +18,13 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { createEventDispatcher } from "svelte";
 
   type CheckboxesSize = Extract<Size, "sm" | "md">;
   type Checkbox = {
     label: string;
     id: string;
     name?: string;
-    value?: string;
+    value: string;
     hint?: string;
     disabled?: boolean;
   };
@@ -44,6 +43,8 @@
     inline?: boolean;
     /** Désactive l’ensemble des checkboxes */
     disabled?: boolean;
+    /** Valeur des checkboxes */
+    values?: SelectedValues;
     /** Statut du message */
     status?: "default" | "valid" | "error";
     /** Texte du message d'erreur */
@@ -60,18 +61,16 @@
     size = "md",
     inline,
     disabled,
+    values = [],
     status,
     errorMessage,
     validMessage,
   }: Props = $props();
 
   type SelectedValues = string[];
-  let checkboxesValues: SelectedValues = $state([]);
-
-  const dispatch = createEventDispatcher<{ valuechanged: SelectedValues }>();
 
   function handleChange(event: Event) {
-    dispatch("valuechanged", checkboxesValues);
+    $host().dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
   }
 </script>
 
@@ -95,10 +94,10 @@
         <input
           type="checkbox"
           id={item.id}
-          name={item.value}
+          name={item.name}
           disabled={item.disabled || undefined}
           value={item.value}
-          bind:group={checkboxesValues}
+          bind:group={values}
           onchange={handleChange}
         />
         <label class="fr-label" for={item.id}>
@@ -111,8 +110,7 @@
       </div>
     </div>
   {/each}
-
-  {#if status !== "default"}
+  {#if status !== "default" && (errorMessage || validMessage)}
     <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
       <p
         class={["fr-message", `fr-message--${status}`]}
@@ -131,5 +129,19 @@
 
   .fr-fieldset {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    &__legend {
+      &--regular {
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    &__element {
+      padding: 0;
+    }
   }
 </style>
