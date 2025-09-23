@@ -37,8 +37,27 @@ export default defineConfig({
       plugins: [
         purgeCSSPlugin({
           content: ["**/*.svelte"],
-          fontFace: true,
-          safelist: [":host"],
+          blocklist: [
+            // supprime la police Marianne
+            "@font-face",
+            // suppprime les variables commençant par ces préfixes
+            /^--background-.*/,
+            /^--text-.*/,
+            /^--border-.*/,
+            /^--grey-.*/,
+            /^--blue-.*/,
+            /^--info-.*/,
+          ],
+          safelist: [
+            // ":host",
+            // garde les styles des états
+            /^·*--hover$/g,
+            /^·*--active$/g,
+            /^·*--focus$/g,
+            /^·*--disabled$/g,
+            // garde toutes les icones !
+            /^\.fr-icon-.*$/,
+          ],
         }),
         root2host,
         discardEmptyBlocks(),
