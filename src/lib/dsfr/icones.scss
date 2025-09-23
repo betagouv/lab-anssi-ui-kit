@@ -1,0 +1,7 @@
+@mixin icone($name, $categorie) {
+  &:global(.fr-icon-#{$name}::after),
+  &:global(.fr-icon-#{$name}::before) {
+    -webkit-mask-image: url("/icons/#{$categorie}/#{$name}.svg");
+    mask-image: url("/icons/#{$categorie}/#{$name}.svg");
+  }
+}

@@ -91,6 +91,7 @@
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
+  @use "./icones" as *;
 
   .fr-btn {
     box-sizing: border-box;
@@ -105,5 +106,22 @@
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-action-high-blue-france);
     }
+
+    // Inclus les icônes utilisables dans les boutons
+    @include icone(arrow-down-s-line, "arrows");
+    @include icone(arrow-left-s-line, "arrows");
+    @include icone(arrow-right-line, "arrows");
+    @include icone(arrow-right-s-line, "arrows");
+    @include icone(arrow-up-line, "arrows");
+    @include icone(fr--arrow-left-s-first-line, "arrows");
+    @include icone(fr--arrow-right-s-last-line, "arrows");
+    @include icone(add-line, "system");
+    @include icone(close-circle-line, "system");
+    @include icone(close-line, "system");
+    @include icone(delete-bin-line, "system");
+    @include icone(external-link-line, "system");
+    @include icone(menu-fill, "system");
+    @include icone(search-line, "system");
+    @include icone(user-add-line, "system");
   }
 </style>
