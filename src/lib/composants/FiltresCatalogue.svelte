@@ -3,48 +3,42 @@
     tag: "lab-anssi-filtres",
     props: {
       filtres: { attribute: "filtres", type: "Array" },
-      idFiltreActif: { attribute: "id-filtre-actif", type: "String" },
       horizontal: { attribute: "horizontal", type: "Boolean" },
+      valeur: { attribute: "valeur", type: "String" },
     },
   }}
 />
 
 <script lang="ts">
-  type Filtre = { icon: string; id: string; label: string; value: string };
+  type Filtre = { icone: string; libelle: string; valeur: string };
 
   interface Props {
     filtres: Filtre[];
     horizontal?: boolean;
-    idFiltreActif?: string;
+    valeur?: string;
   }
 
-  let { filtres, horizontal = false, idFiltreActif }: Props = $props();
+  let { filtres, horizontal = false, valeur = "" }: Props = $props();
 
-  // Fonction pour gérer le changement de filtre
-  function handleFilterClick(filtre: Filtre) {
-    if (idFiltreActif !== filtre.id) {
-      idFiltreActif = filtre.id;
-    }
-  }
-
-  // Fonction pour obtenir le filtre actuel
-  function getActiveFilter() {
-    return filtres.find((filter) => filter.id === idFiltreActif) || filtres[0];
+  function handleFilterClick(nouvelleValeur: string) {
+    if (valeur === nouvelleValeur) return;
+    valeur = nouvelleValeur;
+    $host().dispatchEvent(new CustomEvent("valeurachangee", { detail: nouvelleValeur }));
   }
 </script>
 
 <div class={["lab-anssi-filtres", { "lab-anssi-filtres--horizontal": horizontal }]}>
   <div class="lab-anssi-filtres__conteneur">
-    {#each filtres as filtre}
+    {#each filtres as { icone: icon, valeur: id, libelle: label } (id)}
       <button
         class="lab-anssi-filtres__item"
-        class:active={filtre.id === idFiltreActif}
-        onclick={() => handleFilterClick(filtre)}
+        class:active={id === valeur}
+        onclick={() => handleFilterClick(id)}
       >
         <div class="lab-anssi-filtres__icon">
-          {@html filtre.icon}
+          {@html icon}
         </div>
-        <span class="lab-anssi-filtres__label">{filtre.label}</span>
+        <span class="lab-anssi-filtres__label">{label}</span>
       </button>
     {/each}
   </div>
