@@ -38,6 +38,7 @@ export { default as DsfrPagination } from "./dsfr/DsfrPagination.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
 export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
 export { default as DsfrSearch } from "./dsfr/DsfrSearch.svelte";
+export { default as DsfrSideMenu } from "./dsfr/DsfrSideMenu.svelte";
 export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
 export { default as DsfrTextarea } from "./dsfr/DsfrTextarea.svelte";
 export { default as DsfrTagsGroup } from "./dsfr/DsfrTagsGroup.svelte";
