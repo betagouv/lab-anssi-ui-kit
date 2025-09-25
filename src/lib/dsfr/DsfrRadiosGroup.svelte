@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-radio-group",
+    tag: "dsfr-radios-group",
     props: {
       id: { attribute: "id", type: "String" },
       legend: { attribute: "legend", type: "String" },
@@ -19,9 +19,8 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { ref } from "process";
 
-  type RadioSize = Extract<Size, "sm" | "md">;
+  type RadiosSize = Extract<Size, "sm" | "md">;
   type Radio = {
     label: string;
     id: string;
@@ -40,7 +39,11 @@
     /** Texte additionnel sous la légende */
     hint?: string;
     /** Taille des checkboxes */
-    size?: RadioSize;
+    size?: RadiosSize;
+    /** Passe en mode radios riches (ajoute un encadré et la possibilité d’associer un pictogramme) */
+    rich?: boolean;
+    /** Ajoute un pictogramme au radio riche */
+    hasPictogram?: boolean;
     /** Eléments du formulaire en ligne */
     inline?: boolean;
     /** Désactive l’ensemble des radios */
@@ -61,16 +64,17 @@
     radios,
     hint,
     size = "md",
+    rich,
+    hasPictogram,
     inline,
     disabled,
-    value = "",
-    status,
+    value,
+    status = "default",
     errorMessage,
     validMessage,
   }: Props = $props();
 
   let currentValue = $state(value);
-  const sizeClass = $derived(`fr-radio-group--${size}`);
 
   function handleChange(event: Event) {
     $host().dispatchEvent(new CustomEvent("valuechanged", { detail: currentValue }));
@@ -78,11 +82,9 @@
 </script>
 
 <fieldset
-  class={["fr-fieldset"]}
-  class:fr-fieldset--default={status === "default" || !status}
-  class:fr-fieldset--valid={status === "valid"}
-  class:fr-fieldset--error={status === "error"}
+  class={["fr-fieldset", `fr-fieldset--${status}`]}
   aria-labelledby={`${id}-legend ${id}-messages`}
+  role="group"
   {id}
   {disabled}
 >
@@ -95,29 +97,15 @@
   </legend>
 
   {#each radios as { id, name, value, disabled, label } (id)}
-    <div class={["fr-fieldset__element"]} class:fr-fieldset__element--inline={inline}>
-      <div
-        class={["fr-checkbox-group"]}
-        class:fr-checkbox-group--sm={size === "sm"}
-        class:fr-checkbox-group--md={size === "md"}
-      >
-        <div class={["fr-radio-group", sizeClass]}>
-          <input
-            type="radio"
-            {id}
-            {name}
-            {value}
-            {disabled}
-            bind:group={currentValue}
-            onchange={handleChange}
-          />
-          <label class="fr-label" for={id}>
-            {label}
-            {#if hint}
-              <span class="fr-hint-text">{hint}</span>
-            {/if}
-          </label>
-        </div>
+    <div class={["fr-fieldset__element", inline && "fr-fieldset__element--inline"]}>
+      <div class={["fr-radio-group", `fr-radio-group--${size}`]}>
+        <input type="radio" {id} {name} {value} bind:group={currentValue} onchange={handleChange} />
+        <label class="fr-label" for={id}>
+          {label}
+          {#if hint}
+            <span class="fr-hint-text">{hint}</span>
+          {/if}
+        </label>
       </div>
     </div>
   {/each}
@@ -144,11 +132,9 @@
     padding: 0;
 
     &__legend {
-      &--regular {
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &__element {
