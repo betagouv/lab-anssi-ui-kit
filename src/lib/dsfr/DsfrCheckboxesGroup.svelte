@@ -12,6 +12,7 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      noMargin: { attribute: "no-margin", type: "Boolean" },
     },
   }}
 />
@@ -51,6 +52,8 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Supprime les marges autour du composant */
+    noMargin?: boolean;
   }
 
   let {
@@ -65,6 +68,7 @@
     status,
     errorMessage,
     validMessage,
+    noMargin,
   }: Props = $props();
 
   type SelectedValues = string[];
@@ -129,19 +133,22 @@
 
   .fr-fieldset {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 
-    &__legend {
-      &--regular {
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
-    }
-
-    &__element {
+    &--no-margin {
+      margin: 0;
       padding: 0;
+
+      .fr-fieldset {
+        &__legend {
+          margin: 0;
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        &__element {
+          padding: 0;
+        }
+      }
     }
   }
 </style>
