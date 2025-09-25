@@ -29,83 +29,79 @@
 
 <div class={["lab-anssi-filtres", { "lab-anssi-filtres--horizontal": horizontal }]}>
   <div class="lab-anssi-filtres__conteneur">
-    {#each filtres as { icone: icon, valeur: id, libelle: label } (id)}
-      <button
-        class="lab-anssi-filtres__item"
-        class:active={id === valeur}
-        onclick={() => handleFilterClick(id)}
-      >
-        <div class="lab-anssi-filtres__icon">
-          {@html icon}
-        </div>
-        <span class="lab-anssi-filtres__label">{label}</span>
-      </button>
+    {#each filtres as { icone, valeur: id, libelle } (id)}
+      <label class="lab-anssi-filtres__element">
+        <input
+          type="radio"
+          class="lab-anssi-filtres__input"
+          name="filtres"
+          value={id}
+          checked={id === valeur}
+          hidden
+          onchange={() => handleFilterClick(id)}
+        />
+        <span class="lab-anssi-filtres__icone">
+          {@html icone}
+        </span>
+        <span class="lab-anssi-filtres__libelle">{libelle}</span>
+      </label>
     {/each}
   </div>
 </div>
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/decisions";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/selector/setting/breakpoint";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/selector/tool/breakpoint";
 
   .lab-anssi-filtres {
     box-sizing: border-box;
     background: var(--filtres-bg, #ffffff);
+    border: 1px solid var(--border-default-grey);
     border-radius: 4px;
 
     &__conteneur {
       display: flex;
-      gap: 0;
+      flex-direction: column;
 
-      @include respond-to("sm") {
-        overflow-x: auto;
+      @include a-partir-de("tablette-grand") {
+        flex-direction: row;
       }
     }
 
-    &__item {
-      @include reset-bouton();
+    &__element {
+      align-items: center;
+      color: var(--text-action-high-grey);
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      padding: 7px;
 
-      flex: 1;
-      border: 1px solid var(--border-default-grey);
-      padding: 16px 24px 24px;
-
-      // Font properties
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 24px;
-      text-align: center;
-      text-decoration: none;
+      @include a-partir-de("tablette-grand") {
+        flex-direction: column;
+        flex: 1;
+        gap: 0;
+        padding: 15px 15px 23px;
+      }
 
       &:not(:last-child) {
-        border-right: none;
-      }
+        border-bottom: 1px solid var(--border-default-grey);
 
-      &:first-child {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      &:last-child {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+        @include a-partir-de("tablette-grand") {
+          border-bottom: none;
+          border-right: 1px solid var(--border-default-grey);
+        }
       }
 
       &:hover {
-        background-color: var(--background-alt-grey);
+        background-color: var(--background-default-grey-hover);
       }
 
       &:active {
         background-color: var(--background-default-grey-active);
       }
 
-      &:focus-visible {
-        @include set-focus();
-      }
-
-      // Modifier pour l'élément actif
-      &.active {
+      &:has(input:checked) {
         background-color: var(--background-action-low-blue-france);
+        color: var(--text-action-high-blue-france);
 
         &:hover {
           background-color: var(--background-action-low-blue-france-hover);
@@ -117,37 +113,55 @@
       }
     }
 
-    &__icon,
-    &__label {
-      cursor: pointer;
-    }
+    &__icone {
+      flex-shrink: 0;
+      height: 42px;
+      width: 42px;
 
-    &__icon {
-      margin: 0 auto;
-      width: 56px;
-      height: 56px;
+      @include a-partir-de("tablette-grand") {
+        height: 56px;
+        margin: 0 auto;
+        width: 56px;
+      }
 
       :global(svg) {
-        max-width: 100%;
-        height: auto;
         display: block;
+        height: auto;
+        max-width: 100%;
+      }
+    }
+
+    &__libelle {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+
+      @include a-partir-de("tablette-grand") {
+        text-align: center;
       }
     }
 
     &--horizontal {
-      .lab-anssi-filtres {
-        &__item {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding-block: 8px;
-          gap: 8px;
-        }
+      @include a-partir-de("tablette-grand") {
+        .lab-anssi-filtres {
+          &__element {
+            flex-direction: row;
+            gap: 8px;
+            justify-content: center;
+            padding-block: 3px;
+          }
 
-        &__icon {
-          margin: 0;
-          height: 42px;
-          width: 42px;
+          &__icone {
+            margin: 0;
+            height: 42px;
+            width: 42px;
+          }
+
+          &__libelle {
+            font-size: 14px;
+            gap: 8px;
+            text-align: left;
+          }
         }
       }
     }
