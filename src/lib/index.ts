@@ -34,6 +34,7 @@ export { default as DsfrCheckboxesGroup } from "./dsfr/DsfrCheckboxesGroup.svelt
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
+export { default as DsfrRadiosGroup } from "./dsfr/DsfrRadiosGroup.svelte";
 export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
 export { default as DsfrSearch } from "./dsfr/DsfrSearch.svelte";
 export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
