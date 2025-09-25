@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-checkboxes-group",
+    tag: "dsfr-radios-group",
     props: {
       id: { attribute: "id", type: "String" },
       legend: { attribute: "legend", type: "String" },
-      checkboxes: { attribute: "checkboxes", type: "Object" },
+      radios: { attribute: "radios", type: "Object" },
       hint: { attribute: "hint", type: "String" },
       size: { attribute: "size", type: "String" },
       inline: { attribute: "inline", type: "Boolean" },
       disabled: { attribute: "disabled", type: "Boolean" },
+      value: { attribute: "value", type: "String", reflect: true },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
@@ -20,8 +21,9 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
 
-  type CheckboxesSize = Extract<Size, "sm" | "md">;
-  type Checkbox = {
+  type Size = "sm" | "md";
+  type RadiosSize = Extract<Size, "sm" | "md">;
+  type Radio = {
     label: string;
     id: string;
     name?: string;
@@ -34,18 +36,22 @@
     id: string;
     /** Légende de l’ensemble des checkboxes */
     legend: string;
-    /** Liste de checkbox */
-    checkboxes: Checkbox[];
+    /** Liste de radio */
+    radios: Radio[];
     /** Texte additionnel sous la légende */
     hint?: string;
     /** Taille des checkboxes */
-    size?: CheckboxesSize;
+    size?: RadiosSize;
+    /** Passe en mode radios riches (ajoute un encadré et la possibilité d’associer un pictogramme) */
+    rich?: boolean;
+    /** Ajoute un pictogramme au radio riche */
+    hasPictogram?: boolean;
     /** Eléments du formulaire en ligne */
     inline?: boolean;
-    /** Désactive l’ensemble des checkboxes */
+    /** Désactive l’ensemble des radios */
     disabled?: boolean;
-    /** Valeur des checkboxes */
-    values?: SelectedValues;
+    /** Valeur des radios */
+    value?: string;
     /** Statut du message */
     status?: "default" | "valid" | "error";
     /** Texte du message d'erreur */
@@ -56,31 +62,34 @@
     noMargin?: boolean;
   }
 
-  let {
+  const {
     id,
     legend,
-    checkboxes,
+    radios,
     hint,
     size = "md",
+    rich,
+    hasPictogram,
     inline,
     disabled,
-    values = [],
-    status,
+    value,
+    status = "default",
     errorMessage,
     validMessage,
-    noMargin,
+    noMargin = false,
   }: Props = $props();
 
-  type SelectedValues = string[];
+  let currentValue = $state(value);
 
   function handleChange(event: Event) {
-    $host().dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: currentValue }));
   }
 </script>
 
 <fieldset
-  class={["fr-fieldset", `fr-fieldset--${status}`]}
+  class={["fr-fieldset", `fr-fieldset--${status}`, noMargin && "fr-fieldset--no-margin"]}
   aria-labelledby={`${id}-legend ${id}-messages`}
+  role="group"
   {id}
   {disabled}
 >
@@ -92,23 +101,14 @@
     {/if}
   </legend>
 
-  {#each checkboxes as item (item.id)}
-    <div class={["fr-fieldset__element", { "fr-fieldset__element--inline": inline }]}>
-      <div class={["fr-checkbox-group", `fr-checkbox-group--${size}`]}>
-        <input
-          type="checkbox"
-          id={item.id}
-          name={item.name}
-          disabled={item.disabled || undefined}
-          value={item.value}
-          bind:group={values}
-          onchange={handleChange}
-        />
-        <label class="fr-label" for={item.id}>
-          {item.label}
-
-          {#if item.hint}
-            <span class="fr-hint-text">{item.hint}</span>
+  {#each radios as { id, name, value, disabled, label } (id)}
+    <div class={["fr-fieldset__element", inline && "fr-fieldset__element--inline"]}>
+      <div class={["fr-radio-group", `fr-radio-group--${size}`]}>
+        <input type="radio" {id} {name} {value} bind:group={currentValue} onchange={handleChange} />
+        <label class="fr-label" for={id}>
+          {label}
+          {#if hint}
+            <span class="fr-hint-text">{hint}</span>
           {/if}
         </label>
       </div>
@@ -129,7 +129,7 @@
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/checkbox/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/radio/main" as *;
 
   .fr-fieldset {
     box-sizing: border-box;
@@ -147,6 +147,16 @@
 
         &__element {
           padding: 0;
+
+          &--inline {
+            :not(:first-of-type) {
+              padding-left: 8px;
+            }
+
+            :not(:last-of-type) {
+              padding-right: 8px;
+            }
+          }
         }
       }
     }
