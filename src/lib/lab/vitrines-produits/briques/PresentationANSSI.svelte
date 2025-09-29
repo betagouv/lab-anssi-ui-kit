@@ -23,8 +23,8 @@
         <br />
         <br />
         <b>
-          Son action pour la protection de la Nation face aux cyberattaques se traduit en quatre
-          grandes missions : défendre, connaître, partager, accompagner.
+          Son action pour la protection de la Nation face aux cyberattaques se traduit en cinq
+          grandes missions : défendre, connaître, partager, accompagner, réguler.
         </b>
       </p>
     </div>
