@@ -64,6 +64,6 @@
 </p>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/badge/main" as *;
 </style>
