@@ -36,7 +36,7 @@ export default defineConfig({
     postcss: {
       plugins: [
         purgeCSSPlugin({
-          content: ["**/*.svelte"],
+          content: ["src/lib/dsfr/**/*.svelte"],
           blocklist: [
             // supprime la police Marianne
             "@font-face",
