@@ -89,7 +89,7 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
   @use "./icones" as *;
 

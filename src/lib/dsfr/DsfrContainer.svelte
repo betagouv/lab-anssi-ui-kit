@@ -21,5 +21,5 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
 </style>

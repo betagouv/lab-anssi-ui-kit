@@ -1,8 +1,6 @@
-import { purgeCSSPlugin } from "@fullhuman/postcss-purgecss";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import cssnano from "cssnano";
 import path, { resolve } from "path";
-import { default as discardEmptyBlocks } from "postcss-discard-empty";
 import root2host from "postcss-root-to-host";
 import { defineConfig, loadEnv } from "vite";
 import injecteNonce from "./outils/vite-plugin-injecte-nonce";
@@ -35,32 +33,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        purgeCSSPlugin({
-          content: ["**/*.svelte"],
-          blocklist: [
-            // supprime la police Marianne
-            "@font-face",
-            // suppprime les variables commençant par ces préfixes
-            /^--background-.*/,
-            /^--text-.*/,
-            /^--border-.*/,
-            /^--grey-.*/,
-            /^--blue-.*/,
-            /^--info-.*/,
-          ],
-          safelist: [
-            // ":host",
-            // garde les styles des états
-            /^·*--hover$/g,
-            /^·*--active$/g,
-            /^·*--focus$/g,
-            /^·*--disabled$/g,
-            // garde toutes les icones !
-            /^\.fr-icon-.*$/,
-          ],
-        }),
         root2host,
-        discardEmptyBlocks(),
         cssnano({
           preset: [
             "default",
