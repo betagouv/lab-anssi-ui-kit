@@ -78,8 +78,8 @@
 </nav>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/core/main";
+  @use "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
 
   .fr-breadcrumb {
     &--inverse {
