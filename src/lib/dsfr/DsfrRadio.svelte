@@ -92,4 +92,7 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("radio-group");
 </style>

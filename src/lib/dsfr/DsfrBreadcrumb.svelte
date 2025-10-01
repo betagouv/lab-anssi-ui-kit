@@ -81,6 +81,9 @@
   @use "@gouvfr/dsfr/src/dsfr/core/main";
   @use "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
 
+  @include set-shadow-host();
+  @include set-dsfr-sizing("breadcrumb");
+
   .fr-breadcrumb {
     &--inverse {
       --text-mention-grey: var(--grey-1000-50);

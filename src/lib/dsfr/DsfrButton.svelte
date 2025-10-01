@@ -97,8 +97,10 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
+  @include set-shadow-host("inline-flex");
+  @include set-dsfr-sizing("btn");
+
   .fr-btn {
-    box-sizing: border-box;
     justify-content: center;
     width: 100%;
 

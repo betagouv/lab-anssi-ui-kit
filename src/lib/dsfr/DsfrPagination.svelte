@@ -151,7 +151,6 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/pagination/pagination.main.css";
 
-  .fr-pagination {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("pagination");
 </style>

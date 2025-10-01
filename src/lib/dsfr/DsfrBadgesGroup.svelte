@@ -65,7 +65,6 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
 
-  .fr-badge {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("badges-group");
 </style>

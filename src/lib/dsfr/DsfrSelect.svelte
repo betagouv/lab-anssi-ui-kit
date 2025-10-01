@@ -137,6 +137,9 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
+  @include set-shadow-host();
+  @include set-dsfr-sizing("select-group");
+
   .fr-select-group:not(:last-child) {
     margin-bottom: 0;
   }

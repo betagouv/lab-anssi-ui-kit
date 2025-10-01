@@ -187,7 +187,6 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.main.css";
 
-  .fr-sidemenu {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("sidemenu");
 </style>
