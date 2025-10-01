@@ -131,9 +131,10 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
-  .fr-fieldset {
-    box-sizing: border-box;
+  @include set-shadow-host();
+  @include set-dsfr-sizing("fieldset");
 
+  .fr-fieldset {
     margin: 0;
     padding: 0;
 

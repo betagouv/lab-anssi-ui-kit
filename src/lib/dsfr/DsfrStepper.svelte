@@ -53,7 +53,6 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/stepper/stepper.main.css";
 
-  .fr-stepper {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("stepper");
 </style>

@@ -24,4 +24,8 @@
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("container");
+  @include set-dsfr-sizing("container-fluid");
 </style>
