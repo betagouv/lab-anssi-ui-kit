@@ -90,7 +90,7 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
+  @use "@gouvfr/dsfr/dist/component/button/button.min.css";
   @use "./icones" as *;
 
   .fr-btn {

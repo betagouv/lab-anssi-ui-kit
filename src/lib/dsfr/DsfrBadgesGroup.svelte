@@ -59,7 +59,7 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/badge/main" as *;
+  @use "@gouvfr/dsfr/dist/component/badge/badge.min.css";
 
   .fr-badge {
     box-sizing: border-box;

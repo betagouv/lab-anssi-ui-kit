@@ -123,8 +123,8 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/radio/main" as *;
+  @use "@gouvfr/dsfr/dist/component/form/form.min.css" as *;
+  @use "@gouvfr/dsfr/dist/component/radio/radio.min.css";
 
   .fr-fieldset {
     box-sizing: border-box;
