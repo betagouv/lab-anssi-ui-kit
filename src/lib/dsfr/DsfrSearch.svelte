@@ -74,10 +74,14 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/dist/component/input/input.min.css";
-  @use "@gouvfr/dsfr/dist/component/button/button.min.css";
-  @use "@gouvfr/dsfr/dist/component/search/search.min.css";
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/input/input.main.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
+  @import "@gouvfr/dsfr/dist/component/search/search.main.css";
 
   .fr-search-bar {
     box-sizing: border-box;

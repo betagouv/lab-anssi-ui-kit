@@ -129,9 +129,13 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/dist/component/form/form.min.css";
-  @use "@gouvfr/dsfr/dist/component/select/select.min.css";
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   .fr-select-group:not(:last-child) {
     margin-bottom: 0;

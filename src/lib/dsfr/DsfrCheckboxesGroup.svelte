@@ -123,9 +123,13 @@
 </fieldset>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/dist/component/form/form.min.css";
-  @use "@gouvfr/dsfr/dist/component/checkbox/checkbox.min.css";
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   .fr-fieldset {
     box-sizing: border-box;
