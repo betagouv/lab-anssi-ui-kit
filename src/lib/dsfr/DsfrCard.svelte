@@ -249,8 +249,8 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/dist/component/link/link.min.css";
-  @use "@gouvfr/dsfr/dist/component/card/card.min.css";
+  @use "@gouvfr/dsfr/dist/component/link/link.main.css";
+  @use "@gouvfr/dsfr/dist/component/card/card.main.css";
 
   :host {
     display: block;
