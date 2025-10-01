@@ -31,5 +31,3 @@
 <Story name="Defaut" />
 
 <Story name="Désactivé" args={{ disabled: true }} />
-
-<Story name="Petit" args={{ size: "sm" }} />
