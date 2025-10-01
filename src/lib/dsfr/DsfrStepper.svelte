@@ -47,7 +47,7 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/stepper/main" as *;
+  @use "@gouvfr/dsfr/dist/component/stepper/stepper.min.css";
 
   .fr-stepper {
     box-sizing: border-box;

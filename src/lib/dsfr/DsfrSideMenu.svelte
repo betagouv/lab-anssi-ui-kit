@@ -177,7 +177,7 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/sidemenu/main" as *;
+  @use "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.min.css";
 
   .fr-sidemenu {
     box-sizing: border-box;

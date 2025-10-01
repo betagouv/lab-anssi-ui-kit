@@ -86,5 +86,5 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/radio/main" as *;
+  @use "@gouvfr/dsfr/dist/component/radio/radio.min.css";
 </style>

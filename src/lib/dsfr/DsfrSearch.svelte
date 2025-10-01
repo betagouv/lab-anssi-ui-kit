@@ -75,9 +75,9 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/input/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/search/main" as *;
+  @use "@gouvfr/dsfr/dist/component/input/input.min.css";
+  @use "@gouvfr/dsfr/dist/component/button/button.min.css";
+  @use "@gouvfr/dsfr/dist/component/search/search.min.css";
 
   .fr-search-bar {
     box-sizing: border-box;
