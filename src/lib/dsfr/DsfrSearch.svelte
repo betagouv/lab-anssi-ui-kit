@@ -83,7 +83,6 @@
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/dist/component/search/search.main.css";
 
-  .fr-search-bar {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("search-bar");
 </style>

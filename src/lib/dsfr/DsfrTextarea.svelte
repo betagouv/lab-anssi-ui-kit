@@ -119,7 +119,6 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
-  .fr-input-group {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("input-group");
 </style>

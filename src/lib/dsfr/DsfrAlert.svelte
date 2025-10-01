@@ -74,4 +74,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("alert");
 </style>

@@ -69,4 +69,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
+
+  @include set-shadow-host("inline-flex");
+  @include set-dsfr-sizing("badge");
 </style>

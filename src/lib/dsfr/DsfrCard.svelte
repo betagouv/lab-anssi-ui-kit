@@ -252,12 +252,10 @@
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
   @use "@gouvfr/dsfr/dist/component/card/card.main.css";
 
-  :host {
-    display: block;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("card");
 
   .fr-card {
-    box-sizing: border-box;
     height: 100%;
 
     &__header :global(.fr-badges-group),

@@ -110,4 +110,7 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("checkbox-group");
 </style>
