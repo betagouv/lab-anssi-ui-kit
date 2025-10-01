@@ -82,5 +82,6 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
-  }
+  },
+  "customElements": "custom-elements.json"
 }
