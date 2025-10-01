@@ -143,7 +143,7 @@
 </nav>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @import "@gouvfr/dsfr/dist/component/pagination/pagination.min.css";
 
   .fr-pagination {

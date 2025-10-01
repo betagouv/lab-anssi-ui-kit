@@ -104,6 +104,6 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/checkbox/main" as *;
+  @use "@gouvfr/dsfr/dist/component/form/form.min.css";
+  @use "@gouvfr/dsfr/dist/component/checkbox/checkbox.min.css";
 </style>
