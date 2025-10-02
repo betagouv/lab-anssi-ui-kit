@@ -46,6 +46,7 @@
 
   let { title, titleId, hasTitle = true, items, modifier, buttonLabel, buttonId }: Props = $props();
   let collapseElement: HTMLDivElement;
+  let triggerButton: HTMLButtonElement;
 
   const COLLAPSE_ID_PREFIX = "sidemenu-collapse-";
 
@@ -61,14 +62,20 @@
 
   const getMarkup = (item: MenuItem) => (isLink(item) ? "a" : "button");
 
-  function handleClick(event: MouseEvent) {
+  function handleClickNode(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
     const ariaExpanded = button.ariaExpanded;
     const ariaControls = button.getAttribute("aria-controls");
     const isExpanded = ariaExpanded === "true";
     button.ariaExpanded = (!isExpanded).toString();
 
-    const collapseElement = ariaControls ? button.parentElement.querySelector(`#${ariaControls}`) : null;
+    if (!isExpanded) {
+      replieAutresMenusDuMemeNiveau(button);
+    }
+
+    const collapseElement = ariaControls
+      ? button.parentElement.querySelector(`#${ariaControls}`)
+      : null;
     if (collapseElement) {
       if (isExpanded) {
         collapseElement.classList.remove("fr-collapse--expanded");
@@ -81,7 +88,33 @@
   function handleClickLeaf(event: MouseEvent) {
     triggerButton.ariaExpanded = "false";
     collapseElement.ariaExpanded = "false";
+    replieTousLesItems();
     collapseElement.classList.remove("fr-collapse--expanded");
+  }
+
+  function replieTousLesItems() {
+    collapseElement
+      .querySelectorAll(".fr-collapse")
+      .forEach((element) => element.classList.remove("fr-collapse--expanded"));
+    collapseElement
+      .querySelectorAll(".fr-sidemenu__btn")
+      .forEach((element) => (element.ariaExpanded = "false"));
+  }
+
+  function replieAutresMenusDuMemeNiveau(button: HTMLButtonElement) {
+    const autreBoutons = button.parentElement.parentElement
+      .querySelectorAll(`:scope > * > button`)
+      .values()
+      .filter(
+        (bouton) => bouton.getAttribute("aria-controls") !== button.getAttribute("aria-controls"),
+      );
+    autreBoutons.forEach((autreBouton) => {
+      autreBouton.ariaExpanded = "false";
+      const collapseElement = autreBouton.parentElement.querySelector(
+        `#${autreBouton.getAttribute("aria-controls")}`,
+      );
+      collapseElement?.classList.remove("fr-collapse--expanded");
+    });
   }
 </script>
 
@@ -95,7 +128,7 @@
       aria-expanded={!isLink(item) && item.isCollapsible ? "false" : undefined}
       aria-controls={!isLink(item) ? setCollapseId(item.collapseId, index) : undefined}
       aria-current={item.active ? (isLink(item) ? "page" : true) : undefined}
-      onclick={handleClick}
+      onclick={item.isCollapsible ? handleClickNode : handleClickLeaf}
       {...item.attributes}
     >
       {item.label}
@@ -121,7 +154,8 @@
       aria-controls={buttonId}
       type="button"
       class="fr-sidemenu__btn"
-      onclick={handleClick}
+      onclick={handleClickNode}
+      bind:this={triggerButton}
     >
       {buttonLabel}
     </button>
