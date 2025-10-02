@@ -140,21 +140,4 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("fieldset");
-
-  .fr-fieldset {
-    margin: 0;
-    padding: 0;
-
-    .fr-fieldset {
-      &__legend {
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      &__element {
-        padding: 0;
-      }
-    }
-  }
 </style>
