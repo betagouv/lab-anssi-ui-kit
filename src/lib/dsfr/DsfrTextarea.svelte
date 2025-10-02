@@ -28,8 +28,6 @@
     label?: string;
     /** Texte additionnel sous le libellé du champs de saisie */
     hint?: string;
-    /** Ajoute une icône dans le champs de saisie */
-    icon?: string;
     /** Valeur initiale du champs de saisie */
     value?: string;
     /** Texte avant saisie dans le champs de saisie */
@@ -66,17 +64,16 @@
     rows,
   }: Props = $props();
 
-  const disabledClass = $derived.by(() => {
-    return disabled && "fr-input-group--disabled";
-  });
-
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
 </script>
 
-<div class={["fr-input-group", disabledClass]} id={`input-group-${id}`}>
+<div
+  class={["fr-input-group", `fr-input-group--${status}`, { "fr-input-group--disabled": disabled }]}
+  id={`input-group-${id}`}
+>
   {#if label}
     <label class="fr-label" for={id}>
       {label}

@@ -86,7 +86,7 @@
   }
 </script>
 
-<div class={["fr-select-group", disabledClass]}>
+<div class={["fr-select-group", `fr-select-group--${status}`, disabledClass]}>
   <label class="fr-label" for={id}>
     {label}
 
@@ -99,9 +99,7 @@
     aria-describedby={status ? `${id}-messages` : undefined}
     {id}
     name={id}
-    bind:value
     {disabled}
-    onchange={handleChange}
   >
     {#if placeholder}
       <option value="" selected disabled={placeholderDisabled}>{placeholder}</option>
@@ -131,8 +129,14 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/select";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";

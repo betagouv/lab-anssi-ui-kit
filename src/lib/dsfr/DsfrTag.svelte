@@ -20,6 +20,7 @@
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
   import { setIconClass } from "$lib/utilitaires";
+  import { createEventDispatcher } from "svelte";
 
   type TagSize = Extract<Size, "sm" | "md">;
   type Markup = "a" | "button" | "p" | undefined;
@@ -82,6 +83,19 @@
     return hasIcon && icon && `fr-tag--icon-left ${setIconClass(icon)}`;
   });
   const sizeClass = $derived(`fr-tag--${size}`);
+
+  let dispatch = createEventDispatcher<{ selected: string; unselected: string }>();
+  const onpressed = (event: MouseEvent) => {
+    let button = event.target as HTMLButtonElement;
+    let ariaPressed = button.ariaPressed;
+    const isPressed = ariaPressed === "true";
+    button.ariaPressed = (!isPressed).toString();
+    if (isPressed) {
+      dispatch("unselected", button.id);
+    } else {
+      dispatch("selected", button.id);
+    }
+  };
 </script>
 
 <svelte:element
@@ -90,7 +104,11 @@
   href={markup === "a" && !disabled ? href : undefined}
   aria-disabled={markup === "a" && disabled ? "true" : undefined}
   role={markup === "a" && disabled ? "link" : undefined}
+  type={markup === "button" ? "button" : undefined}
   disabled={(type === "pressable" || type === "dismissible") && disabled}
+  aria-pressed={type === "pressable" ? (pressed ? "true" : "false") : undefined}
+  onclick={type === "pressable" ? onpressed : undefined}
+  target={type === "clickable" && blank ? "_blank" : undefined}
 >
   {label}
 </svelte:element>
@@ -98,7 +116,18 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/tag/tag.main.css";
 

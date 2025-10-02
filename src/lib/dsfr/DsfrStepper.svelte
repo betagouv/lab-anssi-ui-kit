@@ -50,6 +50,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/font-weight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/stepper/stepper.main.css";
 

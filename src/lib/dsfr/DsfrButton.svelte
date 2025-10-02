@@ -73,15 +73,7 @@
   target={markup === "a" ? target : undefined}
   {disabled}
   {title}
-  class={["fr-btn", iconClass]}
-  class:fr-btn--primary={kind === "primary"}
-  class:fr-btn--secondary={kind === "secondary"}
-  class:fr-btn--tertiary={kind === "tertiary"}
-  class:fr-btn--tertiary-no-outline={kind === "tertiary-no-outline"}
-  class:fr-btn--inverted={kind === "inverted"}
-  class:fr-btn--sm={size === "sm"}
-  class:fr-btn--md={size === "md"}
-  class:fr-btn--lg={size === "lg"}
+  class={["fr-btn", `fr-btn--${kind}`, `fr-btn--${size}`, iconClass]}
   class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
   class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
 >
@@ -89,11 +81,18 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "./icones" as *;
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
@@ -112,22 +111,5 @@
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-action-high-blue-france);
     }
-
-    // Inclus les icônes utilisables dans les boutons
-    @include icone(arrow-down-s-line, "arrows");
-    @include icone(arrow-left-s-line, "arrows");
-    @include icone(arrow-right-line, "arrows");
-    @include icone(arrow-right-s-line, "arrows");
-    @include icone(arrow-up-line, "arrows");
-    @include icone(fr--arrow-left-s-first-line, "arrows");
-    @include icone(fr--arrow-right-s-last-line, "arrows");
-    @include icone(add-line, "system");
-    @include icone(close-circle-line, "system");
-    @include icone(close-line, "system");
-    @include icone(delete-bin-line, "system");
-    @include icone(external-link-line, "system");
-    @include icone(menu-fill, "system");
-    @include icone(search-line, "system");
-    @include icone(user-add-line, "system");
   }
 </style>

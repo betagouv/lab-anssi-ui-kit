@@ -47,7 +47,7 @@
     return type === "accent" && accent && `fr-badge--${accent}`;
   });
   let iconClass = $derived.by(() => {
-    return hasIcon && icon && `fr-badge--icon-left ${setIconClass(icon)}`;
+    return type !== "status" && hasIcon && icon && `fr-badge--icon-left ${setIconClass(icon)}`;
   });
   let sizeClass = $derived(`fr-badge--${size}`);
   let statusClass = $derived.by(() => {
@@ -67,6 +67,8 @@
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/ellipsis";
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
 
