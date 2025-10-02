@@ -129,20 +129,5 @@
 
   .fr-fieldset {
     box-sizing: border-box;
-
-    margin: 0;
-    padding: 0;
-
-    .fr-fieldset {
-      &__legend {
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      &__element {
-        padding: 0;
-      }
-    }
   }
 </style>
