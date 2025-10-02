@@ -47,7 +47,7 @@
     return type === "accent" && accent && `fr-badge--${accent}`;
   });
   let iconClass = $derived.by(() => {
-    return hasIcon && icon && `fr-badge--icon-left ${setIconClass(icon)}`;
+    return type !== "status" && hasIcon && icon && `fr-badge--icon-left ${setIconClass(icon)}`;
   });
   let sizeClass = $derived(`fr-badge--${size}`);
   let statusClass = $derived.by(() => {
@@ -65,5 +65,6 @@
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/utility/main";
   @use "@gouvfr/dsfr/src/dsfr/component/badge/main" as *;
 </style>
