@@ -23,7 +23,8 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module/container";
+  @include grid($grid-settings);
 
   @include set-shadow-host();
   @include set-dsfr-sizing("container");

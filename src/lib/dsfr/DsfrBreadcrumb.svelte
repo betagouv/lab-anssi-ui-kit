@@ -78,8 +78,10 @@
 </nav>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main";
-  @use "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("breadcrumb");

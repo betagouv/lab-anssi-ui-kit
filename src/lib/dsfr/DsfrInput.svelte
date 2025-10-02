@@ -20,6 +20,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { setIconClass } from "$lib/utilitaires";
 
   interface Props {
     /** Attribut id du champs de saisie */
@@ -57,6 +58,7 @@
     label,
     hint,
     type = "text",
+    icon,
     value = $bindable(),
     placeholder,
     name,
@@ -69,6 +71,7 @@
   const disabledClass = $derived.by(() => {
     return disabled && "fr-input-group--disabled";
   });
+  const iconClass = $derived(setIconClass(icon));
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -76,7 +79,7 @@
   }
 </script>
 
-<div class={["fr-input-group", disabledClass]}>
+<div class={["fr-input-group", disabledClass, `fr-input-group--${status}`]}>
   {#if label}
     <label class="fr-label" for={id}>
       {label}
@@ -85,17 +88,33 @@
       {/if}
     </label>
   {/if}
-  <input
-    {type}
-    {id}
-    class="fr-input"
-    {name}
-    bind:value
-    {placeholder}
-    {disabled}
-    aria-describedby={status ? `${id}-messages` : undefined}
-    oninput={handleInput}
-  />
+  {#if icon}
+    <div class={["fr-input-wrap", iconClass]}>
+      <input
+        {type}
+        {id}
+        class="fr-input"
+        {name}
+        bind:value
+        {placeholder}
+        {disabled}
+        aria-describedby={status ? `${id}-messages` : undefined}
+        oninput={handleInput}
+      />
+    </div>
+  {:else}
+    <input
+      {type}
+      {id}
+      class="fr-input"
+      {name}
+      bind:value
+      {placeholder}
+      {disabled}
+      aria-describedby={status ? `${id}-messages` : undefined}
+      oninput={handleInput}
+    />
+  {/if}
 
   {#if status !== "default"}
     <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
@@ -112,8 +131,15 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";

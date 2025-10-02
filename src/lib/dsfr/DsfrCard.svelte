@@ -248,7 +248,10 @@
 </div>
 
 <style lang="scss">
+  // DSFR Core styles
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/utility/main";
+  // DSFR Component styles
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
   @use "@gouvfr/dsfr/dist/component/card/card.main.css";
 

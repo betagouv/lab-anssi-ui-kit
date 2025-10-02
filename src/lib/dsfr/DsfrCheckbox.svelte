@@ -71,7 +71,7 @@
   }
 </script>
 
-<div class={["fr-checkbox-group", sizeClass]}>
+<div class={["fr-checkbox-group", sizeClass, `fr-checkbox-group--${status}`]}>
   <input
     type="checkbox"
     {id}
@@ -105,8 +105,15 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
+  @include _core-scheme;
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";

@@ -62,6 +62,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/ellipsis";
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
 
