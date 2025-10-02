@@ -4,6 +4,7 @@ import path, { resolve } from "path";
 import root2host from "postcss-root-to-host";
 import { defineConfig, loadEnv } from "vite";
 import injecteNonce from "./outils/vite-plugin-injecte-nonce";
+import replaceIconPaths from "./outils/postcss-replace-icon-paths.js";
 
 // Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
 // - Build webcomponent : "production"
@@ -33,6 +34,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
+        replaceIconPaths({ assetsPath: varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE }),
         root2host,
         cssnano({
           preset: [
