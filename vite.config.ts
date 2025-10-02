@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import path, { resolve } from "path";
 import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
+import replaceIconPaths from "./outils/postcss-replace-icon-paths.js";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -30,6 +31,9 @@ export default defineConfig({
   },
   plugins: [svelte()],
   css: {
+    postcss: {
+      plugins: [replaceIconPaths({ assetsPath: "src/lib/assets" })],
+    },
     preprocessorOptions: {
       scss: {
         additionalData: `
