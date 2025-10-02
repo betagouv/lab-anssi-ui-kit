@@ -63,6 +63,9 @@
   }
 
   const iconClass = $derived<boolean | string>(hasIcon && icon && setIconClass(icon));
+  let iconPlaceClass = $derived.by(() => {
+    return hasIcon && iconPlace !== "only" && `fr-btn--icon-${iconPlace}`;
+  });
 </script>
 
 <svelte:element
@@ -73,25 +76,15 @@
   target={markup === "a" ? target : undefined}
   {disabled}
   {title}
-  class={["fr-btn", iconClass]}
-  class:fr-btn--primary={kind === "primary"}
-  class:fr-btn--secondary={kind === "secondary"}
-  class:fr-btn--tertiary={kind === "tertiary"}
-  class:fr-btn--tertiary-no-outline={kind === "tertiary-no-outline"}
-  class:fr-btn--inverted={kind === "inverted"}
-  class:fr-btn--sm={size === "sm"}
-  class:fr-btn--md={size === "md"}
-  class:fr-btn--lg={size === "lg"}
-  class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
-  class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
+  class={["fr-btn", `fr-btn--${kind}`, `fr-btn--${size}`, iconClass, iconPlaceClass]}
 >
   {label}
 </svelte:element>
 
 <style lang="scss">
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/utility/main";
   @use "@gouvfr/dsfr/src/dsfr/component/button/main" as *;
-  @use "./icones" as *;
 
   .fr-btn {
     box-sizing: border-box;
@@ -106,22 +99,5 @@
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-action-high-blue-france);
     }
-
-    // Inclus les icônes utilisables dans les boutons
-    @include icone(arrow-down-s-line, "arrows");
-    @include icone(arrow-left-s-line, "arrows");
-    @include icone(arrow-right-line, "arrows");
-    @include icone(arrow-right-s-line, "arrows");
-    @include icone(arrow-up-line, "arrows");
-    @include icone(fr--arrow-left-s-first-line, "arrows");
-    @include icone(fr--arrow-right-s-last-line, "arrows");
-    @include icone(add-line, "system");
-    @include icone(close-circle-line, "system");
-    @include icone(close-line, "system");
-    @include icone(delete-bin-line, "system");
-    @include icone(external-link-line, "system");
-    @include icone(menu-fill, "system");
-    @include icone(search-line, "system");
-    @include icone(user-add-line, "system");
   }
 </style>
