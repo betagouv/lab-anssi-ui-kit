@@ -64,14 +64,24 @@
   function handleClick(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
     const ariaExpanded = button.ariaExpanded;
+    const ariaControls = button.getAttribute("aria-controls");
     const isExpanded = ariaExpanded === "true";
     button.ariaExpanded = (!isExpanded).toString();
 
-    if (isExpanded) {
-      collapseElement.classList.remove("fr-collapse--expanded");
-    } else {
-      collapseElement.classList.add("fr-collapse--expanded");
+    const collapseElement = ariaControls ? button.parentElement.querySelector(`#${ariaControls}`) : null;
+    if (collapseElement) {
+      if (isExpanded) {
+        collapseElement.classList.remove("fr-collapse--expanded");
+      } else {
+        collapseElement.classList.add("fr-collapse--expanded");
+      }
     }
+  }
+
+  function handleClickLeaf(event: MouseEvent) {
+    triggerButton.ariaExpanded = "false";
+    collapseElement.ariaExpanded = "false";
+    collapseElement.classList.remove("fr-collapse--expanded");
   }
 </script>
 
