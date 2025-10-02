@@ -137,27 +137,4 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("fieldset");
-
-  .fr-fieldset {
-    margin: 0;
-    padding: 0;
-
-    &__legend {
-      margin: 0;
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    &__element {
-      padding: 0;
-
-      &--inline:not(:first-of-type) {
-        padding-left: 8px;
-      }
-
-      &--inline:not(:last-of-type) {
-        padding-right: 8px;
-      }
-    }
-  }
 </style>
