@@ -45,6 +45,7 @@
   }
 
   let { title, titleId, hasTitle = true, items, modifier, buttonLabel, buttonId }: Props = $props();
+  let collapseElement: HTMLDivElement;
 
   const COLLAPSE_ID_PREFIX = "sidemenu-collapse-";
 
@@ -63,17 +64,13 @@
   function handleClick(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
     const ariaExpanded = button.ariaExpanded;
-    const ariaControls = button.getAttribute("aria-controls");
     const isExpanded = ariaExpanded === "true";
     button.ariaExpanded = (!isExpanded).toString();
 
-    const collapseElement = ariaControls ? document.getElementById(ariaControls) : null;
-    if (collapseElement) {
-      if (isExpanded) {
-        collapseElement.classList.remove("fr-collapse--expanded");
-      } else {
-        collapseElement.classList.add("fr-collapse--expanded");
-      }
+    if (isExpanded) {
+      collapseElement.classList.remove("fr-collapse--expanded");
+    } else {
+      collapseElement.classList.add("fr-collapse--expanded");
     }
   }
 </script>
@@ -118,7 +115,7 @@
     >
       {buttonLabel}
     </button>
-    <div class="fr-collapse" id={buttonId}>
+    <div class="fr-collapse" id={buttonId} bind:this={collapseElement}>
       {#if hasTitle && title}
         <p class="fr-sidemenu__title" id={titleId}>
           {title}
