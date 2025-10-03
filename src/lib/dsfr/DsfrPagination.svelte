@@ -143,8 +143,8 @@
 </nav>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/pagination/pagination.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @use "@gouvfr/dsfr/src/dsfr/component/pagination/main" as *;
 
   .fr-pagination {
     box-sizing: border-box;

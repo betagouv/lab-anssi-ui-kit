@@ -71,7 +71,7 @@
   }
 </script>
 
-<div class={["fr-checkbox-group", sizeClass]}>
+<div class={["fr-checkbox-group", sizeClass, `fr-checkbox-group--${status}`]}>
   <input
     type="checkbox"
     {id}

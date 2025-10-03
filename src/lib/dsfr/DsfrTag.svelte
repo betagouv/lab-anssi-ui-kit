@@ -20,6 +20,7 @@
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
   import { setIconClass } from "$lib/utilitaires";
+  import { createEventDispatcher } from "svelte";
 
   type TagSize = Extract<Size, "sm" | "md">;
   type Markup = "a" | "button" | "p" | undefined;
@@ -82,6 +83,19 @@
     return hasIcon && icon && `fr-tag--icon-left ${setIconClass(icon)}`;
   });
   const sizeClass = $derived(`fr-tag--${size}`);
+
+  let dispatch = createEventDispatcher<{ selected: string; unselected: string }>();
+  const onpressed = (event: MouseEvent) => {
+    let button = event.target as HTMLButtonElement;
+    let ariaPressed = button.ariaPressed;
+    const isPressed = ariaPressed === "true";
+    button.ariaPressed = (!isPressed).toString();
+    if (isPressed) {
+      dispatch("unselected", button.id);
+    } else {
+      dispatch("selected", button.id);
+    }
+  };
 </script>
 
 <svelte:element
@@ -90,7 +104,10 @@
   href={markup === "a" && !disabled ? href : undefined}
   aria-disabled={markup === "a" && disabled ? "true" : undefined}
   role={markup === "a" && disabled ? "link" : undefined}
+  type={markup === "button" ? "button" : undefined}
   disabled={(type === "pressable" || type === "dismissible") && disabled}
+  aria-pressed={type === "pressable" ? "false" : undefined}
+  onclick={type === "pressable" ? onpressed : undefined}
 >
   {label}
 </svelte:element>

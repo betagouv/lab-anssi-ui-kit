@@ -76,7 +76,10 @@
   }
 </script>
 
-<div class={["fr-input-group", disabledClass]} id={`input-group-${id}`}>
+<div
+  class={["fr-input-group", disabledClass, `fr-input-group--${status}`]}
+  id={`input-group-${id}`}
+>
   {#if label}
     <label class="fr-label" for={id}>
       {label}

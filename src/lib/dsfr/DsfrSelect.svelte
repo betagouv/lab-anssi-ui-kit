@@ -86,7 +86,7 @@
   }
 </script>
 
-<div class={["fr-select-group", disabledClass]}>
+<div class={["fr-select-group", `fr-select-group--${status}`, disabledClass]}>
   <label class="fr-label" for={id}>
     {label}
 
