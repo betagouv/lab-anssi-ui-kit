@@ -143,10 +143,14 @@
 </nav>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/pagination/pagination.min.css";
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/pagination/pagination.main.css";
 
-  .fr-pagination {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("pagination");
 </style>

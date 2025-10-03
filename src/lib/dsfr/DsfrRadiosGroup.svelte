@@ -122,12 +122,18 @@
 </fieldset>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/radio/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("fieldset");
 
   .fr-fieldset {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 

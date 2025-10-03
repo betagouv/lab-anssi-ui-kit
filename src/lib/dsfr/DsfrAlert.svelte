@@ -68,6 +68,13 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/alert/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("alert");
 </style>

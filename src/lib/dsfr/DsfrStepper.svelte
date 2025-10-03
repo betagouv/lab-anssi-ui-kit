@@ -46,10 +46,13 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/stepper/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/stepper/stepper.main.css";
 
-  .fr-stepper {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("stepper");
 </style>

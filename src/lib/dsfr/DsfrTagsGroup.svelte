@@ -103,10 +103,13 @@
 </svelte:element>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/tag/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/tag/tag.main.css";
 
-  .fr-tag {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("tags-group");
 </style>

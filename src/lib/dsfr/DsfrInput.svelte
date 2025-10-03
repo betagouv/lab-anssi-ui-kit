@@ -110,9 +110,16 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/input/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/dist/component/input/input.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("input-group");
 
   .fr-input-group:not(:last-child) {
     margin-bottom: 0;

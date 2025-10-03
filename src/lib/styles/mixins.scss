@@ -15,3 +15,30 @@
   appearance: none;
   cursor: pointer;
 }
+
+/// Ajoute un style `display` au composant hôte dans le Shadow DOM.
+/// Permet également d'injecter du contenu CSS supplémentaire via `@content`.
+///
+/// @param {String} $display [block] - La valeur de la propriété CSS `display` à appliquer au `:host`.
+/// @content - Contenu CSS additionnel à insérer dans le bloc `:host`.
+///
+@mixin set-shadow-host($display: "block") {
+  :host {
+    display: #{$display};
+
+    @content;
+  }
+}
+
+/// Applique `box-sizing: border-box` au composant spécifié et à tous ses descendants.
+///
+/// @param {String} $component - Le nom du composant à cibler (utilisé dans la classe `.fr-#{$component}`).
+/// @content Permet d'injecter du contenu additionnel à l'intérieur du bloc du composant.
+///
+@mixin set-dsfr-sizing($component) {
+  .fr-#{$component} {
+    box-sizing: border-box;
+
+    @content;
+  }
+}

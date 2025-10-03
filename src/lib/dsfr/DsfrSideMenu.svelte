@@ -132,10 +132,17 @@
 </nav>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/component/sidemenu/main" as *;
+  // DSFR Core styles
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/collapse/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.main.css";
 
-  .fr-sidemenu {
-    box-sizing: border-box;
-  }
+  @include set-shadow-host();
+  @include set-dsfr-sizing("sidemenu");
 </style>

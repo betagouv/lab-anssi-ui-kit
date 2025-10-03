@@ -78,8 +78,11 @@
 </nav>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.min.css";
+  @use "@gouvfr/dsfr/src/dsfr/core/main";
+  @use "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("breadcrumb");
 
   .fr-breadcrumb {
     &--inverse {
