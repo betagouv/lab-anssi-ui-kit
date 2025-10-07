@@ -38,6 +38,7 @@ export { default as DsfrFooter } from "./dsfr/DsfrFooter.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
 export { default as DsfrLink } from "./dsfr/DsfrLink.svelte";
 export { default as DsfrLogo } from "./dsfr/DsfrLogo.svelte";
+export { default as DsfrNavigation } from "./dsfr/DsfrNavigation.svelte";
 export { default as DsfrPagination } from "./dsfr/DsfrPagination.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
 export { default as DsfrRadiosGroup } from "./dsfr/DsfrRadiosGroup.svelte";
