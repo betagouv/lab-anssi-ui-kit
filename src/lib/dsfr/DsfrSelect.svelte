@@ -99,7 +99,9 @@
     aria-describedby={status ? `${id}-messages` : undefined}
     {id}
     name={id}
+    bind:value
     {disabled}
+    onchange={handleChange}
   >
     {#if placeholder}
       <option value="" selected disabled={placeholderDisabled}>{placeholder}</option>
