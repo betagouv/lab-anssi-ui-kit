@@ -54,7 +54,7 @@ jobs:
         run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
 
       - name: Envoyer la release js
-        run: s3cmd put --guess-mime-type ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
+        run: s3cmd put --mime-type='application/javascript' ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
 
       - name: Envoyer la feuille de style DSFR
-        run: s3cmd put --guess-mime-type ./dist/assets/dsfr-variables.css s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
+        run: s3cmd put --mime-type='text/css' ./dist/assets/dsfr-variables.css s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
