@@ -13,6 +13,7 @@
   "scripts": {
     "build": "vite build && npm run prepack",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
+    "build:styles:dsfr": "sass node_modules/@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss dist/assets/dsfr-variables.css -I node_modules/@gouvfr/dsfr",
     "prepare": "husky",
     "prepack": "npm run build:webcomponents && npm run copy:icons && publint",
     "test": "vitest run",

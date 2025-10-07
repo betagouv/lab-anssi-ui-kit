@@ -35,6 +35,9 @@ jobs:
       - name: Builder le package
         run: npm run build
 
+      - name: Builder les styles
+        run: npm run build:styles:dsfr
+
       - name: Publier sur NPM
         run: npm publish --provenance --access public
         env:
@@ -52,3 +55,6 @@ jobs:
 
       - name: Envoyer la release js
         run: s3cmd put --guess-mime-type ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
+
+      - name: Envoyer la feuille de style DSFR
+        run: s3cmd put --guess-mime-type ./dist/assets/dsfr-variables.css s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
