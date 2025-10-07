@@ -20,7 +20,7 @@
 />
 
 <script lang="ts">
-  import type { Size } from "$lib/types";
+  import type { Kind, Size } from "$lib/types";
   import { setIconClass } from "$lib/utilitaires";
 
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;
@@ -32,7 +32,7 @@
     icon: string;
     iconPlace: "only" | "left" | "right";
     id?: string;
-    kind: "primary" | "secondary" | "tertiary" | "tertiary-no-outline" | "inverted";
+    kind: Kind;
     label: string;
     markup: "button" | "a" | "input";
     size: ButtonSize;
