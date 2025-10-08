@@ -70,10 +70,17 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("alert");
