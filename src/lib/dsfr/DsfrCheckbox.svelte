@@ -67,7 +67,7 @@
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    dispatch("valuechanged", target.checked);
   }
 </script>
 
