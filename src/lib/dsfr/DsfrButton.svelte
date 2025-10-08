@@ -36,7 +36,7 @@
     label: string;
     markup: "button" | "a" | "input";
     size: ButtonSize;
-    target: "self" | "blank";
+    target: "_self" | "_blank";
     title: string;
     type: "button" | "submit" | "reset";
   }
@@ -52,7 +52,7 @@
     label = "libellé du bouton",
     markup = "button",
     size = "md",
-    target = "self",
+    target = "_self",
     title = "",
     type = "button",
   }: Props = $props();
@@ -83,6 +83,7 @@
 <style lang="scss">
   // DSFR Core styles
   @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
