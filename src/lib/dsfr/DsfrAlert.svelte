@@ -47,8 +47,8 @@
     buttonCloseLabel,
   }: Props = $props();
 
-  const iconClass = $derived(setIconClass(icon));
   let displayAlert = $state(true);
+  let iconClass = $derived(icon && setIconClass(icon));
 </script>
 
 {#if displayAlert}
