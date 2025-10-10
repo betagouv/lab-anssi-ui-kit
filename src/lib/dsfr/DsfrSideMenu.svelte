@@ -188,5 +188,10 @@
   @import "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("sidemenu");
+  @include set-dsfr-sizing("sidemenu") {
+    &,
+    &__inner {
+      height: inherit;
+    }
+  }
 </style>
