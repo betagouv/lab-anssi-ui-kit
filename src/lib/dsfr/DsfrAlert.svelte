@@ -21,7 +21,6 @@
   import { setIconClass } from "$lib/utilitaires";
 
   type AlertSize = Extract<Size, "sm" | "md">;
-
   interface Props {
     buttonCloseLabel?: string;
     hasTitle?: boolean;
@@ -48,24 +47,30 @@
     buttonCloseLabel,
   }: Props = $props();
 
-  let iconClass = $derived(setIconClass(icon));
-  let typeClass = $derived(`fr-alert--${type}`);
-  let sizeClass = $derived(`fr-alert--${size}`);
+  const iconClass = $derived(setIconClass(icon));
+  let displayAlert = $state(true);
 </script>
 
-<div {id} class={["fr-alert", iconClass, typeClass, sizeClass]}>
-  {#if hasTitle || size === "md"}
-    <h3 class="fr-alert__title">{title}</h3>
-  {/if}
-  {#if hasDescription || size === "sm"}
-    <p>{text}</p>
-  {/if}
-  {#if dismissible}
-    <button title={buttonCloseLabel} type="button" class="fr-btn--close fr-btn">
-      {buttonCloseLabel}
-    </button>
-  {/if}
-</div>
+{#if displayAlert}
+  <div {id} class={["fr-alert", `fr-alert--${type}`, `fr-alert--${size}`, iconClass]}>
+    {#if hasTitle || size === "md"}
+      <h3 class="fr-alert__title">{title}</h3>
+    {/if}
+    {#if hasDescription || size === "sm"}
+      <p>{text}</p>
+    {/if}
+    {#if dismissible}
+      <button
+        title={buttonCloseLabel}
+        type="button"
+        class="fr-btn--close fr-btn"
+        onclick={() => (displayAlert = false)}
+      >
+        {buttonCloseLabel}
+      </button>
+    {/if}
+  </div>
+{/if}
 
 <style lang="scss">
   // DSFR Core styles
@@ -76,8 +81,12 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
+  @include _core-scheme();
+  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
   @import "@gouvfr/dsfr/dist/component/button/button.min.css";
