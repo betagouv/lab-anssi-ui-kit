@@ -4,7 +4,7 @@
 
   const { Story } = defineMeta({
     component: AncresParcours,
-    title: "Composants/ANSSI/Ancres",
+    title: "Composants/ANSSI/Ancres Parcours",
     args: {
       ancres: [
         { label: "Section 1", cible: "#section1" },
