@@ -45,4 +45,10 @@
   });
 </script>
 
-<Story name="Défaut" />
+<Story name="Défaut">
+  {#snippet template(args)}
+    <div style="width: 300px">
+      <DsfrSideMenu {...args} />
+    </div>
+  {/snippet}
+</Story>
