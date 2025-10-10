@@ -18,6 +18,7 @@
       detailEndIcon: { attribute: "detail-end-icon", type: "String" },
       markup: { attribute: "markup", type: "String" },
       hasBadge: { attribute: "has-badge", type: "Boolean" },
+      hasTag: { attribute: "has-tag", type: "Boolean" },
       enlarge: { attribute: "enlarge", type: "Boolean" },
       actionMarkup: { attribute: "action-markup", type: "String" },
       actionTitle: { attribute: "action-title", type: "String" },
@@ -76,6 +77,8 @@
     detailEndIcon?: string;
     /** Si true, ajoute des badges dans le contenu */
     hasBadge?: boolean;
+    /** Si true, ajoute des tags dans le contenu */
+    hasTag?: boolean;
     /** Niveau de titre de la carte (default: h3) */
     markup?: "h2" | "h3" | "h4" | "h5";
     /** Si true, agrandi la zone de clic à toute la carte */
@@ -130,6 +133,7 @@
     detailEndIcon,
     markup = "h3",
     hasBadge = false,
+    hasTag = false,
     enlarge = true,
     actionMarkup = "a",
     href,
@@ -191,12 +195,12 @@
         {:else}
           <svelte:element
             this={actionMarkup}
-            href={actionMarkup === "a" ? href : undefined}
+            href={actionMarkup === "a" && !disabled ? href : undefined}
             target={actionMarkup === "a" && blank ? "_blank" : undefined}
             aria-disabled={actionMarkup === "a" && disabled ? "true" : undefined}
             role={actionMarkup === "a" && disabled ? "link" : undefined}
             type={actionMarkup === "button" ? "button" : undefined}
-            disabled={actionMarkup === "button" && disabled}
+            disabled={actionMarkup === "button" && disabled ? "true" : undefined}
             hreflang={actionMarkup === "a" && lang ? lang : undefined}
             title={actionTitle}
           >
@@ -207,13 +211,16 @@
       {#if hasDescription}
         <p class="fr-card__desc">{description}</p>
       {/if}
-      {#if hasDetailStart || hasBadge}
+      {#if hasDetailStart || hasBadge || hasTag}
         <div class="fr-card__start">
           {#if hasDetailStart && detailStart}
             <p class={["fr-card__detail", detailStartIconClass]}>{detailStart}</p>
           {/if}
-          {#if $$slots.badgesgroup}
+          {#if hasBadge && !hasTag && $$slots.badgesgroup}
             <slot name="badgesgroup" />
+          {/if}
+          {#if hasTag && !hasBadge && $$slots.tagsgroup}
+            <slot name="tagsgroup" />
           {/if}
         </div>
       {/if}
@@ -253,12 +260,10 @@
   @use "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
-  @use "@gouvfr/dsfr/dist/component/card/card.main.css";
+  @import "@gouvfr/dsfr/dist/component/card/card.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("card");
-
-  .fr-card {
+  @include set-dsfr-sizing("card") {
     height: 100%;
 
     &__header :global(.fr-badges-group),
