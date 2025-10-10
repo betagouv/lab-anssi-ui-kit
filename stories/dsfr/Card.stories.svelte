@@ -18,7 +18,26 @@
   });
 </script>
 
-<Story name="Defaut" />
+<Story name="Defaut">
+  {#snippet template(args)}
+    <DsfrCard {...args}>
+      <!-- Default Badges Group -->
+      <DsfrBadgesGroup
+        slot="badgesgroup"
+        badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
+        size="sm"
+      />
+
+      <!-- Default Tags Group -->
+      <DsfrTagsGroup
+        slot="tagsgroup"
+        tags={[{ id: "tag-1", label: "Libellé du tag" }]}
+        size="sm"
+        groupMarkup="div"
+      />
+    </DsfrCard>
+  {/snippet}
+</Story>
 
 <Story
   name="Lab ANSSI - Carte Catalogue"
