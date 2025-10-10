@@ -42,6 +42,7 @@
         legacy: false,
       )
     );
+    background-color: transparent;
 
     @content;
   }
