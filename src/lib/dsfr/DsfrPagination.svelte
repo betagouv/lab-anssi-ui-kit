@@ -66,7 +66,16 @@
   }: Props = $props();
 
   const HIDDEN_CLASS = "fr-hidden fr-unhidden-lg";
+  const disabledFirst = $derived(currentPageIndex === 1);
+  const disabledLast = $derived(currentPageIndex === pages.length);
 
+  /**
+   * Retourne la classe CSS à appliquer pour masquer ou styliser un lien de pagination selon sa position et ses propriétés d'affichage.
+   *
+   * @param {PagePosition} position - La position du lien dans la pagination ("first", "last", "prev", "next", etc.).
+   * @param {Object} link - L'objet représentant le lien de pagination, contenant notamment la propriété `displayedLg`.
+   * @returns {string|undefined} La classe CSS à appliquer pour masquer ou styliser le lien, ou `undefined` si aucune classe n'est nécessaire.
+   */
   function getHiddenClass(position: PagePosition, link): string {
     const isFirstOrLast = position === "first" || position === "last";
     const isPrevOrNext = position === "prev" || position === "next";
@@ -82,8 +91,51 @@
     }
   }
 
-  function setCurrentPage(index: number): AriaCurrent | undefined {
-    return index === currentPageIndex ? "page" : undefined;
+  /**
+   * Détermine la valeur de l'attribut `aria-current` pour une page de pagination.
+   *
+   * @param {number} index - L'index de la page à vérifier.
+   * @returns {AriaCurrent | undefined} Retourne "page" si l'index correspond à la page courante, sinon `undefined`.
+   */
+  function setAriaCurrent(index: number): AriaCurrent | undefined {
+    if (index === null) return undefined;
+
+    return index + 1 === currentPageIndex ? "page" : undefined;
+  }
+
+  /**
+   * Génère ou annule le lien de pagination en fonction de la position et de l'état de désactivation.
+   *
+   * @param {string} href - L'URL à utiliser pour le lien de pagination.
+   * @param {PagePosition} position - La position de la page ("first", "prev", "next", "last").
+   * @returns {string | undefined} L'URL du lien si la position n'est pas désactivée, sinon `undefined`.
+   */
+  function setHref(href: string, position: PagePosition): string | undefined {
+    if (
+      (["first", "prev"].includes(position) && disabledFirst) ||
+      (["last", "next"].includes(position) && disabledLast)
+    ) {
+      return undefined;
+    }
+
+    return href;
+  }
+
+  /**
+   * Détermine si un lien de pagination doit être désactivé selon sa position.
+   *
+   * @param {PagePosition} position - La position du lien de pagination ('first', 'prev', 'next', 'last').
+   * @returns {boolean | string | undefined} Retourne `true` si le lien doit être désactivé, sinon `undefined`.
+   */
+  function setAriaDisabled(position: PagePosition): string | undefined {
+    if (
+      (["first", "prev"].includes(position) && disabledFirst) ||
+      (["last", "next"].includes(position) && disabledLast)
+    ) {
+      return "true";
+    }
+
+    return undefined;
   }
 </script>
 
@@ -95,10 +147,10 @@
         getHiddenClass(position, link),
         { [`fr-pagination__link--${position}`]: position },
       ]}
-      href={link.href}
+      href={setHref(link.href, position)}
       title={link.title}
-      data-index={index}
-      aria-current={index ? setCurrentPage(index + 1) : undefined}
+      aria-current={setAriaCurrent(index)}
+      aria-disabled={setAriaDisabled(position)}
     >
       {link.label}
     </a>
@@ -120,16 +172,8 @@
       {@render pageItem(prev, null, "prev")}
     {/if}
 
-    {#each pages.slice(0, 3) as page, index}
+    {#each pages as page, index}
       {@render pageItem(page, index)}
-    {/each}
-
-    <li>
-      <span class="fr-pagination__link {HIDDEN_CLASS}"> … </span>
-    </li>
-
-    {#each pages.slice(-3) as page}
-      {@render pageItem(page, null)}
     {/each}
 
     {#if hasPrevAndNext}
