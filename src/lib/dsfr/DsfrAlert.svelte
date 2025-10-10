@@ -48,7 +48,7 @@
     buttonCloseLabel,
   }: Props = $props();
 
-  let iconClass = $derived(setIconClass(icon));
+  let iconClass = $derived(setIconClass(icon, { optional: true }));
   let typeClass = $derived(`fr-alert--${type}`);
   let sizeClass = $derived(`fr-alert--${size}`);
 </script>
