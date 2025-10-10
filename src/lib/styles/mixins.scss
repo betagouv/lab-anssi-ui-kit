@@ -1,3 +1,6 @@
+@use "src/module/color";
+@use "@gouvfr/dsfr/src/dsfr/core/index" as *;
+
 /// Ajoute un style d'outline personnalisé lors du focus clavier (`:focus-visible`).
 @mixin set-focus() {
   outline: {
@@ -25,6 +28,20 @@
 @mixin set-shadow-host($display: "block") {
   :host {
     display: #{$display};
+    @include text-adjustments();
+    @include text-style(md);
+    @include color.background(
+      default grey,
+      (
+        legacy: false,
+      )
+    );
+    @include color.text(
+      default grey,
+      (
+        legacy: false,
+      )
+    );
 
     @content;
   }
