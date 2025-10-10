@@ -23,6 +23,7 @@
     accent?: Accent;
     size: TagsGroupSize;
     href: string;
+    icon: string;
     pressed: boolean;
     blank: boolean;
     disabled: boolean;
@@ -79,7 +80,11 @@
 {#snippet tagItem(tag: Tag)}
   <svelte:element
     this={markup}
-    class={["fr-tag", dissmissClass]}
+    class={[
+      "fr-tag",
+      dissmissClass,
+      hasIcon && tag.icon && `fr-tag--icon-left fr-icon-${tag.icon}`,
+    ]}
     id={tag.id}
     href={type === "clickable" && !tag.disabled ? tag.href : undefined}
     type={type === "pressable" || type === "dismissible" ? "button" : undefined}
@@ -112,6 +117,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
