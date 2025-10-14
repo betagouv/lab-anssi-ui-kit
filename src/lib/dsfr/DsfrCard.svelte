@@ -244,14 +244,16 @@
       </div>
     {/if}
   </div>
-  <div class="fr-card__header">
-    <div class="fr-card__img">
-      <img class={["fr-responsive-img", imageRatioClass]} {src} {alt} />
+  {#if src}
+    <div class="fr-card__header">
+      <div class="fr-card__img">
+        <img class={["fr-responsive-img", imageRatioClass]} {src} {alt} />
+      </div>
+      {#if hasHeaderBadge}
+        <slot name="headerbadges" />
+      {/if}
     </div>
-    {#if hasHeaderBadge}
-      <slot name="headerbadges" />
-    {/if}
-  </div>
+  {/if}
 </div>
 
 <style lang="scss">
