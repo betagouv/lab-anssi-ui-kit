@@ -26,6 +26,7 @@
     accent?: Accent;
     ellipsis?: boolean;
     hasIcon?: boolean;
+    hasNoIcon?: boolean;
     icon?: string;
     size?: BadgeSize;
     status?: Status;
@@ -36,9 +37,10 @@
     accent,
     ellipsis = false,
     hasIcon = false,
+    hasNoIcon = false,
     icon,
     label,
-    size,
+    size = "md",
     status,
     type,
   }: Props = $props();
@@ -47,15 +49,16 @@
     return type === "accent" && accent && `fr-badge--${accent}`;
   });
   let iconClass = $derived.by(() => {
+    if (type === "status" && hasNoIcon) return "fr-badge--no-icon";
+
     return type !== "status" && hasIcon && icon && `fr-badge--icon-left ${setIconClass(icon)}`;
   });
-  let sizeClass = $derived(`fr-badge--${size}`);
   let statusClass = $derived.by(() => {
     return type === "status" && status && `fr-badge--${status}`;
   });
 </script>
 
-<p class={["fr-badge", accentClass, iconClass, sizeClass, statusClass]}>
+<p class={["fr-badge", `fr-badge--${size}`, accentClass, iconClass, statusClass]}>
   {#if ellipsis}
     <span class="fr-ellipsis">{label}</span>
   {:else}
