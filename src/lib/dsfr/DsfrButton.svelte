@@ -2,6 +2,12 @@
   customElement={{
     tag: "dsfr-button",
     props: {
+      label: { attribute: "label", type: "String" },
+      kind: { attribute: "kind", type: "String" },
+      size: { attribute: "size", type: "String" },
+      id: { attribute: "id", type: "String" },
+      title: { attribute: "title", type: "String" },
+      disabled: { attribute: "disabled", type: "Boolean" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
       iconPlace: { attribute: "icon-place", type: "String" },
@@ -9,12 +15,6 @@
       type: { attribute: "type", type: "String" },
       href: { attribute: "href", type: "String" },
       target: { attribute: "target", type: "String" },
-      label: { attribute: "label", type: "String" },
-      kind: { attribute: "kind", type: "String" },
-      size: { attribute: "size", type: "String" },
-      id: { attribute: "id", type: "String" },
-      title: { attribute: "title", type: "String" },
-      disabled: { attribute: "disabled", type: "Boolean" },
     },
   }}
 />
@@ -24,36 +24,48 @@
   import { setIconClass } from "$lib/utilitaires";
 
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;
-
   interface Props {
-    disabled: boolean;
-    hasIcon: boolean;
-    href: string;
-    icon: string;
-    iconPlace: "only" | "left" | "right";
-    id?: string;
-    kind: Kind;
+    /** Libellé du bouton */
     label: string;
-    markup: "button" | "a" | "input";
-    size: ButtonSize;
-    target: "_self" | "_blank";
-    title: string;
-    type: "button" | "submit" | "reset";
+    /** Type du bouton */
+    kind?: Kind;
+    /** Taille du bouton */
+    size?: ButtonSize;
+    /** Attribut 'id' du bouton */
+    id?: string;
+    /** Attribut 'title' du bouton */
+    title?: string;
+    /** Le bouton est désactivé */
+    disabled?: boolean;
+    /** Le bouton a une icône */
+    hasIcon?: boolean;
+    /** Nom de l'icône dans le bouton */
+    icon?: string;
+    /** Emplacement de l'icône<br>Si non défini alors que le paramètre icon est défini, bouton avec icône seule, sans label<br>valeurs :<br>- left : icône à gauche du label<br>- right : icône à droite du label */
+    iconPlace?: "only" | "left" | "right";
+    /** Type de balise HTML */
+    markup?: "button" | "a" | "input";
+    /** Type de bouton */
+    type?: "button" | "submit" | "reset";
+    /** Lien de destination */
+    href?: string;
+    /** Cible du lien */
+    target?: "_self" | "_blank";
   }
 
   const {
-    disabled = false,
-    hasIcon = false,
+    disabled,
+    hasIcon,
     href,
-    icon = "checkbox-line",
+    icon,
     iconPlace = "left",
     id,
     kind = "primary",
-    label = "libellé du bouton",
+    label,
     markup = "button",
     size = "md",
     target = "_self",
-    title = "",
+    title,
     type = "button",
   }: Props = $props();
 
@@ -98,19 +110,28 @@
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
   @include set-shadow-host("inline-flex");
-  @include set-dsfr-sizing("btn");
-
-  .fr-btn {
+  @include set-dsfr-sizing("btn") {
     justify-content: center;
     width: 100%;
 
-    &--inverted {
+    &--secondary {
       --hover: var(--background-default-grey-hover);
       --active: var(--background-default-grey-active);
+    }
 
+    &--inverted-primary {
+      --hover: var(--background-default-grey-hover);
+      --active: var(--background-default-grey-active);
       background-color: var(--background-default-grey);
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-action-high-blue-france);
+    }
+
+    &--inverted-secondary {
+      --hover: var(--background-transparent-hover, rgb(255 255 255 / 8%));
+      --active: var(--background-transparent-active, rgb(255 255 255 / 16%));
+      box-shadow: inset 0 0 0 1px var(--background-default-grey);
+      color: var(--text-inverted-grey);
     }
   }
 </style>

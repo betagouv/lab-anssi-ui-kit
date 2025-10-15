@@ -62,7 +62,13 @@ export type ResumeArticle = {
 
 export type CategoriesArticle = Record<string, InfosTag>;
 
-export type Kind = "primary" | "secondary" | "tertiary" | "tertiary-no-outline" | "inverted";
+export type Kind =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "tertiary-no-outline"
+  | "inverted-primary"
+  | "inverted-secondary";
 
 export type TranslateLanguage = {
   active: boolean;

@@ -34,8 +34,16 @@
 <Story name="Défaut" />
 
 <Story
-  name="Inverted"
-  args={{ ...buttonArgs, kind: "inverted" }}
+  name="Inverted Primary"
+  args={{ ...buttonArgs, kind: "inverted-primary" }}
+  globals={{
+    backgrounds: { value: "blueFranceLab" },
+  }}
+/>
+
+<Story
+  name="Inverted Secondary"
+  args={{ ...buttonArgs, kind: "inverted-secondary" }}
   globals={{
     backgrounds: { value: "blueFranceLab" },
   }}
