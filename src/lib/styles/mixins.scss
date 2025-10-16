@@ -60,3 +60,18 @@
     @content;
   }
 }
+
+/// Mixin pour cacher visuellement un élément tout en le gardant accessible aux lecteurs d'écran.
+///
+/// @author [WCAG 2.2 Technique C7](https://www.w3.org/WAI/WCAG22/Techniques/css/C7)
+///
+@mixin visually-hidden() {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  padding: 0;
+  width: 1px;
+}
