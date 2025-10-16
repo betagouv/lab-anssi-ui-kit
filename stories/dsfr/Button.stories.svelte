@@ -33,6 +33,8 @@
 
 <Story name="Défaut" />
 
+<Story name="Centered" args={{ centered: true }} />
+
 <Story
   name="Inverted Primary"
   args={{ ...buttonArgs, kind: "inverted-primary" }}
