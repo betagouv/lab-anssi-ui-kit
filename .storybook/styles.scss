@@ -3,5 +3,6 @@
 // Importe les variables de couleurs du DSFR
 @import "@gouvfr/dsfr/src/dsfr/core/style/color/module";
 @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/body";
+@import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
 @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
 @include _core-reset-scheme($legacy: false);
