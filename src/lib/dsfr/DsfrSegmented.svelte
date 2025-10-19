@@ -2,14 +2,14 @@
   customElement={{
     tag: "dsfr-segmented",
     props: {
-      size: { attribute: "size", type: "String" }
+      size: { attribute: "size", type: "String" },
       legend: { attribute: "legend", type: "String" },
       legendInline: { attribute: "legend-inline", type: "Boolean" },
       noLegend: { attribute: "no-legend", type: "Boolean" },
       hint: { attribute: "hint", type: "String" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       elements: { attribute: "elements", type: "Array" },
-      value: { attribute: "value", type: "String" }
+      value: { attribute: "value", type: "String" },
     },
   }}
 />
