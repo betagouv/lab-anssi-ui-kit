@@ -35,6 +35,7 @@ export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
 export { default as DsfrCheckboxesGroup } from "./dsfr/DsfrCheckboxesGroup.svelte";
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
 export { default as DsfrContent } from "./dsfr/DsfrContent.svelte";
+export { default as DsfrConnect } from "./dsfr/DsfrConnect.svelte";
 export { default as DsfrFooter } from "./dsfr/DsfrFooter.svelte";
 export { default as DsfrHeader } from "./dsfr/DsfrHeader.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
