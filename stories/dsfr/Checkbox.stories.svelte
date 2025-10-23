@@ -15,3 +15,11 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="Un label avec un lien" args={{ ...checkboxArgs, label: undefined }}>
+  {#snippet template(args)}
+    <DsfrCheckbox {...args}>
+      Un label avec un&nbsp;<a href="https://google.fr" target="_blank">lien</a>
+    </DsfrCheckbox>
+  {/snippet}
+</Story>

@@ -26,7 +26,7 @@
     /** Attribut id de la checkbox */
     id: string;
     /** Libellé de la checkbox */
-    label: string;
+    label?: string;
     /** Attribut name de la checkbox */
     name?: string;
     /** Taille de checkbox */
@@ -83,7 +83,11 @@
     onchange={handleChange}
   />
   <label class="fr-label" for={id}>
-    {label}
+    {#if label}
+      {label}
+    {:else}
+      <slot></slot>
+    {/if}
 
     {#if hint}
       <span class="fr-hint-text">{hint}</span>
