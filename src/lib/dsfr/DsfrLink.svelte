@@ -90,10 +90,10 @@
   target={blank ? "_blank" : "_self"}
   title={blank ? title : undefined}
 >
-  {label}
-
   {#if download && detail}
-    <span class="fr-link__detail">{detail}</span>
+    {label}<span class="fr-link__detail">{detail}</span>
+  {:else}
+    {label}
   {/if}
 </a>
 
