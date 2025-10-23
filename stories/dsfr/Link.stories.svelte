@@ -15,3 +15,5 @@
 </script>
 
 <Story name="Défaut" />
+
+<Story name="Ouverture dans un nouvel onglet" args={{ ...linkArgs, blank: true }} />
