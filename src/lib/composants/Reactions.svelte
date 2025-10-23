@@ -3,7 +3,7 @@
     tag: "lab-anssi-reactions",
     props: {
       reactions: { attribute: "reactions", type: "Array" },
-      style: { attribute: "style", type: "String" },
+      variant: { attribute: "variant", type: "String" },
       tooltipTexte: { attribute: "tooltip-texte", type: "String" },
       tooltipId: { attribute: "tooltip-id", type: "String" },
     },
@@ -23,7 +23,7 @@
     /** Liste des réactions */
     reactions?: Reaction[];
     /** Style des boutons de réaction<br>Valeurs :<br>- tertiaire : boutons avec bordure<br>- tertiaire-sans-bordure : boutons sans bordure */
-    style?: "tertiaire" | "tertiaire-sans-bordure";
+    variant?: "tertiaire" | "tertiaire-sans-bordure";
     /** Contenu de l'infobulle */
     tooltipTexte?: string;
     /** Identifiant de l'infobulle */
@@ -32,7 +32,7 @@
 
   let {
     reactions = [],
-    style = "tertiaire-sans-bordure",
+    variant = "tertiaire-sans-bordure",
     tooltipTexte,
     tooltipId,
   }: Props = $props();
@@ -156,7 +156,7 @@
   </button>
 {/snippet}
 
-<div class={["lab-anssi-reactions", `lab-anssi-reactions--${style}`]}>
+<div class={["lab-anssi-reactions", `lab-anssi-reactions--${variant}`]}>
   <div class="lab-anssi-reactions__conteneur">
     <button
       type="button"

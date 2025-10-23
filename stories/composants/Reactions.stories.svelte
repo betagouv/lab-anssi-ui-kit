@@ -11,7 +11,7 @@
         { id: "2", emoji: "❤️", compteur: 12, actif: true },
         { id: "3", emoji: "👍", compteur: 34 },
       ],
-      style: "tertiaire-sans-bordure",
+      variant: "tertiaire-sans-bordure",
       tooltipTexte: "Ajouter une réaction",
       tooltipId: "tooltipReactions",
     },
