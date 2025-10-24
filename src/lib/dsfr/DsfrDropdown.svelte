@@ -61,6 +61,7 @@
   let dropdown;
 
   function handleClick(event: MouseEvent) {
+    event.stopPropagation();
     const button = event.currentTarget as HTMLButtonElement;
     const ariaExpanded = button.ariaExpanded;
     const ariaControls = button.getAttribute("aria-controls");
