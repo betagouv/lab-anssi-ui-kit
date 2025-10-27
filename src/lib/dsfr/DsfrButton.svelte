@@ -57,6 +57,8 @@
     centered?: boolean | undefined;
     /** Détermine si le bouton est utilisé comme déclencheur d'un élément extensible */
     expandable?: boolean | undefined;
+    /** Classes CSS supplémentaires */
+    class?: string;
   }
 
   const {
@@ -75,6 +77,7 @@
     type = "button",
     centered = false,
     expandable = false,
+    class: className = "",
     ...restProps
   }: Props = $props();
 
@@ -105,7 +108,7 @@
   target={markup === "a" ? target : undefined}
   {disabled}
   {title}
-  class={["fr-btn", `fr-btn--${kind}`, `fr-btn--${size}`, iconClass]}
+  class={["fr-btn", `fr-btn--${kind}`, `fr-btn--${size}`, iconClass, className]}
   class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
   class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
   class:fr-btn--centered={isCentered}
