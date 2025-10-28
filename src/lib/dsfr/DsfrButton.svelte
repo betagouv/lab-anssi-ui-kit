@@ -59,6 +59,16 @@
     expandable?: boolean | undefined;
     /** Classes CSS supplémentaires */
     class?: string;
+    /** Type d'icône utilitaire */
+    preset?:
+      | "close"
+      | "tooltip"
+      | "fullscreen"
+      | "display"
+      | "account"
+      | "team"
+      | "briefcase"
+      | "sort";
   }
 
   const {
@@ -78,6 +88,7 @@
     centered = false,
     expandable = false,
     class: className = "",
+    preset,
     ...restProps
   }: Props = $props();
 
@@ -87,6 +98,9 @@
   }
 
   const iconClass = $derived<boolean | string>(hasIcon && icon && setIconClass(icon));
+  const kindClass = $derived<string>(!preset && kind && `fr-btn--${kind}`);
+  const sizeClass = $derived<string>(!preset && size && `fr-btn--${size}`);
+  const utilityClass = $derived<string | boolean>(preset && `fr-btn--${preset}`);
   const isCentered = $derived.by(() => {
     if (hasIcon && iconPlace === "only") return false;
 
@@ -108,7 +122,7 @@
   target={markup === "a" ? target : undefined}
   {disabled}
   {title}
-  class={["fr-btn", `fr-btn--${kind}`, `fr-btn--${size}`, iconClass, className]}
+  class={["fr-btn", iconClass, kindClass, utilityClass, className]}
   class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
   class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
   class:fr-btn--centered={isCentered}
