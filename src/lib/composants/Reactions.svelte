@@ -98,6 +98,43 @@
   }
 
   /**
+   * Gère la position du popover lors du défilement de la page.
+   * Recalcule et ajuste automatiquement la position verticale du popover
+   * pour qu'il reste visible dans la fenêtre d'affichage.
+   * Masque également le tooltip si celui-ci est affiché.
+   *
+   * @returns {void}
+   */
+  function handlePopoverScroll() {
+    if (!popoverShown || !popoverElement || !triggerButton) return;
+
+    tooltipShown = false;
+
+    const GAP = 4;
+
+    // Récupération des nouvelles dimensions après scroll
+    const buttonRect = triggerButton.getBoundingClientRect();
+    const popoverRect = popoverElement.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const VERTICAL_MARGIN = 8;
+
+    // Recalcul de la position verticale
+    let newTop = buttonRect.top - popoverRect.height - GAP;
+
+    // Ajustement vertical si nécessaire
+    if (newTop < VERTICAL_MARGIN) {
+      newTop = buttonRect.bottom + GAP;
+
+      if (newTop + popoverRect.height > viewportHeight - VERTICAL_MARGIN) {
+        newTop = Math.max(VERTICAL_MARGIN, (viewportHeight - popoverRect.height) / 2);
+      }
+    }
+
+    // Application de la nouvelle position
+    popoverElement.style.top = `${newTop}px`;
+  }
+
+  /**
    * Gère le clic sur un bouton de réaction.
    *
    * @param {MouseEvent} event - L'événement de clic provenant du bouton de réaction.
@@ -186,6 +223,8 @@
     tooltipShown = true;
   }
 </script>
+
+<svelte:window onscroll={handlePopoverScroll} />
 
 {#snippet boutonReaction({ id, emoji, compteur = null, actif = false })}
   <button
