@@ -308,4 +308,8 @@
       }
     }
   }
+
+  .fr-footer__logo {
+    --border-default-grey: transparent;
+  }
 </style>
