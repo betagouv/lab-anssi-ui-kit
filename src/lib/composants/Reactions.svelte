@@ -40,6 +40,7 @@
   let tooltipShown = $state(false);
   let popoverShown = $state(false);
 
+  let popoverElement: HTMLElement | null = null;
   let tooltipElement: HTMLElement | null = null;
   let triggerButton: HTMLElement | null = null;
 
@@ -50,33 +51,49 @@
    *
    * @param {ToggleEvent} event - L'événement de bascule du popover.
    */
-  function handlePopoverPosition(event: ToggleEvent) {
-    const GAP = 4; // Espace entre le bouton et le popover
+  function handlePopover(event: ToggleEvent) {
+    if (!popoverElement) return;
 
-    const popover = event.currentTarget as HTMLElement;
-    const popoverId = popover.getAttribute("id");
+    const GAP = 4;
+
+    const popoverId = popoverElement.getAttribute("id");
     if (!popoverId) return;
 
-    const parent = popover.closest(".lab-anssi-reactions");
-
-    const button = parent.querySelector(`[popovertarget="${popoverId}"]`) as HTMLElement;
+    const parent = popoverElement.closest(".lab-anssi-reactions");
+    const button = parent?.querySelector(`[popovertarget="${popoverId}"]`) as HTMLElement;
     if (!button) return;
-
-    const buttonRect = button.getBoundingClientRect();
-    const popoverRect = popover.getBoundingClientRect();
-
-    const popoverTop = buttonRect.top - popoverRect.height - GAP;
-    const popoverLeft = buttonRect.left;
-
-    popover.style.top = `${popoverTop + window.scrollY}px`;
-    popover.style.left = `${popoverLeft + window.scrollX}px`;
 
     if (event.newState === "open") {
       popoverShown = true;
-      popover.style.opacity = "1";
+
+      // Récupération des dimensions
+      const buttonRect = button.getBoundingClientRect();
+      const popoverRect = popoverElement.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Marges de sécurité
+      const VERTICAL_MARGIN = 8;
+
+      // Position par défaut : au-dessus et aligné à gauche du bouton
+      let top = buttonRect.top - popoverRect.height - GAP;
+      let left = buttonRect.left;
+
+      // Ajustement vertical : si pas assez de place en haut, placer en bas
+      if (top < VERTICAL_MARGIN) {
+        top = buttonRect.bottom + GAP;
+
+        if (top + popoverRect.height > viewportHeight - VERTICAL_MARGIN) {
+          top = Math.max(VERTICAL_MARGIN, (viewportHeight - popoverRect.height) / 2);
+        }
+      }
+
+      // Application des positions finales
+      popoverElement.style.top = `${top}px`;
+      popoverElement.style.left = `${left}px`;
+      popoverElement.style.opacity = "1";
     } else {
       popoverShown = false;
-      popover.style.opacity = "0";
+      popoverElement.style.opacity = "0";
     }
   }
 
@@ -234,9 +251,10 @@
 
   <div
     id="popoverReactions"
-    class="lab-anssi-reactions__tooltip"
+    class="lab-anssi-reactions__popover"
     popover
-    ontoggle={handlePopoverPosition}
+    ontoggle={handlePopover}
+    bind:this={popoverElement}
   >
     <div class="lab-anssi-reactions__conteneur">
       {#each reactions as { id, emoji, actif } (id)}
@@ -326,7 +344,7 @@
       @include visually-hidden();
     }
 
-    &__tooltip {
+    &__popover {
       &:popover-open {
         border-width: 0;
         background-color: #fff;
