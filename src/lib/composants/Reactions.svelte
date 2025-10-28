@@ -37,9 +37,12 @@
     tooltipId,
   }: Props = $props();
 
-  let tooltip;
   let tooltipShown = $state(false);
   let popoverShown = $state(false);
+
+  let tooltipElement: HTMLElement | null = null;
+  let triggerButton: HTMLElement | null = null;
+
   let dispatch = createEventDispatcher<{ ajouteReaction: string; supprimeReaction: string }>();
 
   /**
@@ -109,30 +112,61 @@
   /**
    * Gère l'affichage et le positionnement d'un tooltip lors d'un survol de souris.
    *
-   * @param {MouseEvent} event - Événement souris du gestionnaire de survol ; event.currentTarget doit être un HTMLElement.
+   * @param {MouseEvent} event - Événement souris du gestionnaire de survol
    * @returns {void}
    */
-  function handleMouseOver(event: MouseEvent): void {
-    if (!tooltip || popoverShown) return;
+  function handleTooltip(): void {
+    if (!tooltipElement || popoverShown) return;
 
-    const button = event.currentTarget as HTMLElement;
-    const buttonRect = button.getBoundingClientRect();
+    const buttonRect = triggerButton.getBoundingClientRect();
     const buttonRectCenter = buttonRect.left + buttonRect.width * 0.5;
 
-    tooltip.style.display = "block";
-    const tooltipRect = tooltip.getBoundingClientRect();
-    const tooltipRectCenter = tooltipRect.left + tooltipRect.width * 0.5;
+    tooltipElement.style.display = "block";
 
-    const top = buttonRect.top - tooltipRect.height;
-    const left = buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
+    const tooltipRect = tooltipElement.getBoundingClientRect();
 
-    tooltip.style.top = `${top}px`;
-    tooltip.style.left = `${left}px`;
+    // Dimensions de la fenêtre
+    const viewportWidth = window.innerWidth;
 
-    const arrowPosition = buttonRectCenter - tooltipRectCenter - 8;
-    tooltip.style.setProperty("--arrow-x", `${arrowPosition.toFixed(2)}px`);
+    // Position par défaut : au-dessus et centré
+    let top = buttonRect.top - tooltipRect.height;
+    let left = buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
 
-    tooltipShown = !tooltipShown;
+    // Ajustement horizontal : éviter que le tooltip sorte des côtés
+    const HORIZONTAL_MARGIN = 8;
+    if (left < HORIZONTAL_MARGIN) {
+      left = HORIZONTAL_MARGIN;
+    } else if (left + tooltipRect.width > viewportWidth - HORIZONTAL_MARGIN) {
+      left = viewportWidth - tooltipRect.width - HORIZONTAL_MARGIN;
+    }
+
+    // Ajustement vertical : si pas assez de place en haut, placer en bas
+    const VERTICAL_MARGIN = 8;
+    if (top < VERTICAL_MARGIN) {
+      top = buttonRect.bottom;
+      // Ajouter une classe pour inverser la flèche si nécessaire
+      tooltipElement.classList.remove("fr-placement--top");
+      tooltipElement.classList.add("fr-placement--bottom");
+    } else {
+      tooltipElement.classList.remove("fr-placement--bottom");
+      tooltipElement.classList.add("fr-placement--top");
+    }
+
+    // Application des positions finales
+    tooltipElement.style.top = `${top}px`;
+    tooltipElement.style.left = `${left}px`;
+
+    // Calcul de la position de la flèche en fonction du décalage horizontal
+    const tooltipCenter = left + tooltipRect.width / 2;
+    const arrowPosition = buttonRectCenter - tooltipCenter;
+
+    // Limiter la position de la flèche dans les limites du tooltip
+    const maxArrowOffset = tooltipRect.width / 2 - 16; // 16px de marge pour la flèche
+    const clampedArrowPosition = Math.max(-maxArrowOffset, Math.min(maxArrowOffset, arrowPosition));
+
+    tooltipElement.style.setProperty("--arrow-x", `${clampedArrowPosition.toFixed(2)}px`);
+
+    tooltipShown = true;
   }
 </script>
 
@@ -166,8 +200,9 @@
       onclick={() => (tooltipShown = false)}
       onblur={() => (tooltipShown = false)}
       onmouseout={() => (tooltipShown = false)}
-      onfocus={handleMouseOver}
-      onmouseover={handleMouseOver}
+      onfocus={handleTooltip}
+      onmouseover={handleTooltip}
+      bind:this={triggerButton}
     >
       <span class="lab-anssi-reactions__icone">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
@@ -180,11 +215,11 @@
     </button>
     {#if tooltipTexte}
       <span
-        class="fr-tooltip fr-placement fr-placement--start fr-placement--top"
+        class="fr-tooltip fr-placement fr-placement--start"
         class:fr-tooltip--shown={tooltipShown}
         id={tooltipId}
         role="tooltip"
-        bind:this={tooltip}
+        bind:this={tooltipElement}
       >
         {tooltipTexte}
       </span>
@@ -321,5 +356,9 @@
         }
       }
     }
+  }
+
+  .fr-tooltip {
+    pointer-events: none;
   }
 </style>
