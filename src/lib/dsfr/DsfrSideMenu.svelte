@@ -159,7 +159,7 @@
     >
       {buttonLabel}
     </button>
-    <div class="fr-collapse" id={buttonId} bind:this={collapseElement}>
+    <div class="fr-collapse fr-sidemenu__collapse" id={buttonId} bind:this={collapseElement}>
       {#if hasTitle && title}
         <p class="fr-sidemenu__title" id={titleId}>
           {title}
@@ -192,6 +192,14 @@
     &,
     &__inner {
       height: inherit;
+    }
+
+    &__inner {
+      & > .fr-sidemenu__collapse {
+        @include respond-from("md") {
+          padding: var(--component-padding, 0);
+        }
+      }
     }
   }
 </style>
