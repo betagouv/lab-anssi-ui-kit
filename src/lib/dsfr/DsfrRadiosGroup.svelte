@@ -74,7 +74,7 @@
     validMessage,
   }: Props = $props();
 
-  let currentValue = $state(value);
+  let currentValue = $derived(value);
 
   function handleChange(event: Event) {
     $host().dispatchEvent(new CustomEvent("valuechanged", { detail: currentValue }));
