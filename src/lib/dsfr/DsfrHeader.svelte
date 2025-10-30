@@ -44,6 +44,7 @@
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
+  import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
 
@@ -319,17 +320,16 @@
                 role={openedSearchModal ? "dialog" : undefined}
               >
                 <div class="fr-container fr-container-lg--fluid">
-                  <button
+                  <DsfrButton
                     data-fr-opened={openedSearchModal}
                     aria-controls={searchModalId}
                     title="Fermer"
-                    type="button"
                     id={`${searchId}-close`}
-                    class="fr-btn--close fr-btn"
+                    preset="close"
                     onclick={(event) => handleOpenMenu(event, "search")}
                   >
                     Fermer
-                  </button>
+                  </DsfrButton>
                   <slot name="searchbar">
                     <DsfrSearch
                       inputId={searchInputId}
@@ -357,17 +357,22 @@
     >
       <div class="fr-container">
         {#if hasNavigation}
-          <button
+          <DsfrButton
             data-fr-opened={openedMenuModal}
             aria-controls={menuModalId}
-            title="Fermer"
-            type="button"
+            label="Fermer"
             id={`${menuId}-close`}
-            class="fr-btn--close fr-btn"
+            preset="close"
             onclick={(event) => handleOpenMenu(event, "menu")}
           >
             Fermer
-          </button>
+          </DsfrButton>
+        {/if}
+
+        {#if hasToolLinks}
+          <div class="fr-header__menu-links">
+            <slot name="modalToolLinks"></slot>
+          </div>
         {/if}
 
         <!-- Navigation -->
@@ -407,6 +412,96 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+    }
+
+    :global(.fr-modal > * > .fr-btn--close) {
+      margin-bottom: 1.5rem;
+    }
+
+    :global(
+      .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+          [class^="fr-btns-group--icon-"]
+        ):not([class*=" fr-btns-group--icon-"])
+        .fr-btn
+    ) {
+      justify-content: flex-start;
+      max-height: none;
+      max-width: 100%;
+      overflow: initial;
+    }
+
+    :global(
+      .fr-header__menu-links
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+          [class^="fr-btns-group--icon-"]
+        ):not([class*=" fr-btns-group--icon-"])
+        .fr-btn
+    ) {
+      margin-bottom: 0;
+    }
+
+    :global(
+      .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+          [class^="fr-btns-group--icon-"]
+        ):not([class*=" fr-btns-group--icon-"])
+        .fr-btn::before
+    ) {
+      --icon-size: 1rem;
+      margin-left: -0.125rem;
+      margin-right: 0.5rem;
+    }
+
+    &__menu-links {
+      :global(.fr-btn) {
+        --hover: inherit;
+        --active: inherit;
+        background-color: transparent;
+        box-shadow: none;
+        color: var(--text-action-high-blue-france);
+      }
+
+      :global(
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+            [class^="fr-btns-group--icon-"]
+          ):not([class*=" fr-btns-group--icon-"])
+          .fr-btn:not([class^="fr-icon-"]):not([class*=" fr-icon-"]):not([class^="fr-fi-"]):not(
+            [class*=" fr-fi-"]
+          )
+      ),
+      :global(
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+            [class^="fr-btns-group--icon-"]
+          ):not([class*=" fr-btns-group--icon-"])
+          .fr-btn[class*=" fr-fi-"]
+      ),
+      :global(
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+            [class^="fr-btns-group--icon-"]
+          ):not([class*=" fr-btns-group--icon-"])
+          .fr-btn[class*=" fr-icon-"]
+      ),
+      :global(
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+            [class^="fr-btns-group--icon-"]
+          ):not([class*=" fr-btns-group--icon-"])
+          .fr-btn[class^="fr-fi-"]
+      ),
+      :global(
+        .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not(
+            [class^="fr-btns-group--icon-"]
+          ):not([class*=" fr-btns-group--icon-"])
+          .fr-btn[class^="fr-icon-"]
+      ) {
+        min-height: 3rem;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    @media (min-width: 62em) {
+      :global(.fr-modal > * > .fr-btn--close) {
+        display: none;
+      }
     }
   }
 
