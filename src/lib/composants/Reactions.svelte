@@ -314,7 +314,7 @@
     &__conteneur {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: var(--gap, 4px);
     }
 
     &__declencheur,
@@ -401,6 +401,8 @@
 
     &--tertiaire {
       & > .lab-anssi-reactions__conteneur {
+        --gap: 8px;
+
         .lab-anssi-reactions {
           &__declencheur,
           &__bouton {
