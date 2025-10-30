@@ -106,9 +106,9 @@
    * @returns {void}
    */
   function handlePopoverScroll() {
-    if (!popoverShown || !popoverElement || !triggerButton) return;
-
     tooltipShown = false;
+
+    if (!popoverShown || !popoverElement || !triggerButton) return;
 
     const GAP = 4;
 
@@ -161,6 +161,8 @@
     } else {
       dispatch("ajouteReaction", id);
     }
+
+    popoverElement.hidePopover();
   }
 
   /**
