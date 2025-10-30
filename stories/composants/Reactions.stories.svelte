@@ -22,3 +22,5 @@
 </script>
 
 <Story name="Defaut" />
+
+<Story name="Variation tertiaire" args={{ variant: "tertiaire" }} />
