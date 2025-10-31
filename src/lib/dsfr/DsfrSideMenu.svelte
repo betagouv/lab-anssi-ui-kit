@@ -9,6 +9,7 @@
       titleId: { attribute: "title-id", type: "String" },
       hasTitle: { attribute: "has-title", type: "Boolean" },
       modifier: { attribute: "modifier", type: "String" },
+      activeItem: { attribute: "active-item", type: "String" },
     },
   }}
 />
@@ -42,9 +43,20 @@
     hasTitle?: boolean;
     /** Modifier de style de sidemenu */
     modifier?: Modifier;
+    /** Défini le lien actif basé sur la valeur du href */
+    activeItem?: string;
   }
 
-  let { title, titleId, hasTitle = true, items, modifier, buttonLabel, buttonId }: Props = $props();
+  let {
+    title,
+    titleId,
+    hasTitle = true,
+    items,
+    modifier,
+    buttonLabel,
+    buttonId,
+    activeItem,
+  }: Props = $props();
   let collapseElement: HTMLDivElement;
   let triggerButton: HTMLButtonElement;
 
@@ -116,6 +128,10 @@
       collapseElement?.classList.remove("fr-collapse--expanded");
     });
   }
+
+  function isItemActive(item: MenuItem): boolean {
+    return (activeItem && item.href === activeItem) || item.active || false;
+  }
 </script>
 
 {#snippet listItem(item: MenuItem, index: number)}
@@ -127,7 +143,7 @@
       type={!isLink(item) ? "button" : undefined}
       aria-expanded={!isLink(item) && item.isCollapsible ? "false" : undefined}
       aria-controls={!isLink(item) ? setCollapseId(item.collapseId, index) : undefined}
-      aria-current={item.active ? (isLink(item) ? "page" : true) : undefined}
+      aria-current={isItemActive(item) ? (isLink(item) ? "page" : true) : undefined}
       onclick={item.isCollapsible ? handleClickNode : handleClickLeaf}
       {...item.attributes}
     >

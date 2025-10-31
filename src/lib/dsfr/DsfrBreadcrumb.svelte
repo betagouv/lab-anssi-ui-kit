@@ -8,6 +8,7 @@
       buttonLabel: { attribute: "button-label", type: "String" },
       markup: { attribute: "markup", type: "String" },
       inverse: { attribute: "inverse", type: "Boolean" },
+      hasMarginVariant: { attribute: "has-margin-variant", type: "Boolean" },
     },
   }}
 />
@@ -32,9 +33,19 @@
     inverse?: boolean;
     /** Tag html des boutons (default: a) */
     markup?: Markup;
+    /** Si vrai, applique la possibilité de personnaliser les marges à l'aide d'une custom property */
+    hasMarginVariant?: boolean;
   }
 
-  let { id, segments = [], markup = "a", buttonAriaLabel, buttonLabel, inverse }: Props = $props();
+  let {
+    id,
+    segments = [],
+    markup = "a",
+    buttonAriaLabel,
+    buttonLabel,
+    inverse,
+    hasMarginVariant,
+  }: Props = $props();
 
   let isExpanded = $state(false);
 
@@ -45,7 +56,10 @@
 
 <nav
   role="navigation"
-  class={["fr-breadcrumb", { "fr-breadcrumb--inverse": inverse }]}
+  class={[
+    "fr-breadcrumb",
+    { "fr-breadcrumb--inverse": inverse, "fr-breadcrumb--margin": hasMarginVariant },
+  ]}
   aria-label={buttonAriaLabel}
 >
   <button
@@ -84,12 +98,14 @@
   @import "@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("breadcrumb");
-
-  .fr-breadcrumb {
+  @include set-dsfr-sizing("breadcrumb") {
     &--inverse {
       --text-mention-grey: var(--grey-1000-50);
       --text-default-grey: var(--grey-1000-50);
+    }
+
+    &--margin {
+      margin: var(--dsfr-breadcrumb-margin, initial);
     }
   }
 </style>
