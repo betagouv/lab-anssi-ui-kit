@@ -32,6 +32,7 @@
 
 {#if text}
   <div {id} class={["fr-highlight", accentClass]}>
+    <slot name="title"></slot>
     <p class={`fr-text--${size}`}>{text}</p>
   </div>
 {/if}
