@@ -89,7 +89,7 @@
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.min.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("alert");
