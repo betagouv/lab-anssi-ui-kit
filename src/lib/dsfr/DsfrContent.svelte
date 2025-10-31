@@ -118,8 +118,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/media/module/ratio";
   @import "@gouvfr/dsfr/src/dsfr/core/style/media/module/responsive";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/content/content.main.min.css";
-  @import "@gouvfr/dsfr/dist/component/link/link.main.min.css";
+  @import "@gouvfr/dsfr/dist/component/content/content.main.css";
+  @import "@gouvfr/dsfr/dist/component/link/link.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("content-media");
