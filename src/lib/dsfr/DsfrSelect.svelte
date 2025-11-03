@@ -15,6 +15,7 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      infoMessage: { attribute: "info-message", type: "String" },
     },
   }}
 />
@@ -52,11 +53,13 @@
     /** Désactive la liste déroulante */
     disabled?: boolean;
     /** Statut du message */
-    status?: "default" | "valid" | "error";
+    status?: "default" | "valid" | "error" | "info";
     /** Texte du message d'erreur */
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Texte du message d'information */
+    infoMessage?: string;
   }
 
   const dispatch = createEventDispatcher();
@@ -74,11 +77,13 @@
     status = "default",
     errorMessage,
     validMessage,
+    infoMessage,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
     return disabled && "fr-select-group--disabled";
   });
+  const statusClass = $derived(status !== "info" && `fr-select-group--${status}`);
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -86,7 +91,7 @@
   }
 </script>
 
-<div class={["fr-select-group", `fr-select-group--${status}`, disabledClass]}>
+<div class={["fr-select-group", statusClass, disabledClass]}>
   <label class="fr-label" for={id}>
     {label}
 
@@ -122,7 +127,7 @@
         class={["fr-message", `fr-message--${status}`]}
         id={status ? `${id}-message-${status}` : undefined}
       >
-        {validMessage || errorMessage}
+        {validMessage || errorMessage || infoMessage}
       </p>
     </div>
   {/if}

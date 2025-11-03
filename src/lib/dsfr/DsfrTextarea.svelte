@@ -13,6 +13,7 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      infoMessage: { attribute: "info-message", type: "String" },
       rows: { attribute: "rows", type: "String" },
     },
   }}
@@ -39,13 +40,15 @@
     /** Désactive le champs de saisie */
     disabled?: boolean;
     /** Statut du message */
-    status?: "default" | "valid" | "error";
+    status?: "default" | "valid" | "error" | "info";
     /** Texte du message d'erreur */
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
     /** Nombre de lignes */
     rows?: number;
+    /** Texte du message d'information */
+    infoMessage?: string;
   }
 
   const dispatch = createEventDispatcher();
@@ -61,6 +64,7 @@
     status = "default",
     errorMessage,
     validMessage,
+    infoMessage,
     rows,
   }: Props = $props();
 
@@ -68,10 +72,11 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+  const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
 </script>
 
 <div
-  class={["fr-input-group", `fr-input-group--${status}`, { "fr-input-group--disabled": disabled }]}
+  class={["fr-input-group", statusClass, { "fr-input-group--disabled": disabled }]}
   id={`input-group-${id}`}
 >
   {#if label}
@@ -101,7 +106,7 @@
         class={["fr-message", `fr-message--${status}`]}
         id={status ? `${id}-message-${status}` : undefined}
       >
-        {validMessage || errorMessage}
+        {validMessage || errorMessage || infoMessage}
       </p>
     </div>
   {/if}
