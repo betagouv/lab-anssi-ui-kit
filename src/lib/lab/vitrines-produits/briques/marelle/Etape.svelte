@@ -1,3 +1,13 @@
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-marelle-etape",
+    props: {
+      index: { attribute: "index", type: "Number" },
+      etapeMarelle: { attribute: "etape-marelle", type: "Object" },
+    },
+  }}
+/>
+
 <script lang="ts">
   import type { EtapeMarelle } from "$lib/types";
   import LienExterne from "$lib/lab/icones/LienExterne.svelte";
@@ -20,15 +30,21 @@
     </div>
   </div>
   <div class="contenu">
-    <h4>{etapeMarelle.titre}</h4>
-    <p>{etapeMarelle.description}</p>
+    <slot name="etape-titre">
+      <h4>{etapeMarelle.titre}</h4>
+    </slot>
+    <slot name="etape-description">
+      <p>{etapeMarelle.description}</p>
+    </slot>
     {#if etapeMarelle.lien}
-      <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}>
-        {etapeMarelle.lien.texte}
-        {#if etapeMarelle.lien.target === "_blank"}
-          <LienExterne />
-        {/if}
-      </a>
+      <slot name="etape-lien">
+        <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}>
+          {etapeMarelle.lien.texte}
+          {#if etapeMarelle.lien.target === "_blank"}
+            <LienExterne />
+          {/if}
+        </a>
+      </slot>
     {/if}
   </div>
 </div>
