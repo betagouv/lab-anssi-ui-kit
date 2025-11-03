@@ -28,9 +28,11 @@
   <div class="brique-marelle">
     <div class="titre">{titre}</div>
     <section class="marelle-etapes">
-      {#each etapesmarelle as etapeMarelle, index}
-        <Etape {index} {etapeMarelle} />
-      {/each}
+      <slot>
+        {#each etapesmarelle as etapeMarelle, index}
+          <Etape {index} {etapeMarelle} />
+        {/each}
+      </slot>
     </section>
     {#if action}
       <div class="bouton-action">
