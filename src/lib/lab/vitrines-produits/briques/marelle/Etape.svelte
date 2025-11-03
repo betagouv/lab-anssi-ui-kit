@@ -108,6 +108,7 @@
           color: #ffffff;
           font-size: 2rem;
           font-weight: bold;
+          padding-bottom: 4px;
 
           @include a-partir-de(desktop) {
             font-size: 2.5rem;
