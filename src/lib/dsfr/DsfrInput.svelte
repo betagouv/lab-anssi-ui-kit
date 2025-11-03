@@ -14,6 +14,7 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      infoMessage: { attribute: "info-message", type: "String" },
     },
   }}
 />
@@ -44,11 +45,13 @@
     /** Désactive le champs de saisie */
     disabled?: boolean;
     /** Statut du message */
-    status?: "default" | "valid" | "error";
+    status?: "default" | "valid" | "error" | "info";
     /** Texte du message d'erreur */
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Texte du message d'information */
+    infoMessage?: string;
   }
 
   const dispatch = createEventDispatcher();
@@ -66,12 +69,14 @@
     status = "default",
     errorMessage,
     validMessage,
+    infoMessage,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
     return disabled && "fr-input-group--disabled";
   });
   const iconClass = $derived(setIconClass(icon));
+  const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -79,7 +84,7 @@
   }
 </script>
 
-<div class={["fr-input-group", disabledClass, `fr-input-group--${status}`]}>
+<div class={["fr-input-group", disabledClass, statusClass]}>
   {#if label}
     <label class="fr-label" for={id}>
       {label}
@@ -122,7 +127,7 @@
         class={["fr-message", `fr-message--${status}`]}
         id={status ? `${id}-message-${status}` : undefined}
       >
-        {validMessage || errorMessage}
+        {validMessage || errorMessage || infoMessage}
       </p>
     </div>
   {/if}
