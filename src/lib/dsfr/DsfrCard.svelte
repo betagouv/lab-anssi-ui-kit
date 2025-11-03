@@ -113,6 +113,8 @@
     variations?: "none" | "grey" | "no-border" | "no-background" | "shadow";
     /** Si true, passe la carte en mode téléchargement */
     download?: boolean;
+    /** Si true, ajoute une icône de téléchargement à côté du titre */
+    hasDownloadIcon?: boolean;
     /** Ajoute l'attribut hreflang au lien, pour définir la langue du document lié (Ex: 'fr') */
     lang?: string;
   }
@@ -152,6 +154,7 @@
     variations = "none",
     download = false,
     lang,
+    hasDownloadIcon = false,
   }: Props = $props();
 
   const enlargeClass = $derived.by(() => {
@@ -173,6 +176,7 @@
   const imageRatioClass = $derived(`fr-ratio-${imageRatio}`);
   const variationsClass = $derived(`fr-card--${variations}`);
   const downloadClass = $derived.by(() => download && "fr-card--download");
+  const downloadIconClass = $derived.by(() => hasDownloadIcon && "fr-card--download-icon");
 </script>
 
 <div
@@ -185,6 +189,7 @@
     horizontalProportionClass,
     sizeClass,
     variationsClass,
+    downloadIconClass,
   ]}
 >
   <div class="fr-card__body">
@@ -274,6 +279,25 @@
       padding: 0.75rem;
       position: absolute;
       top: 0;
+    }
+
+    &--download-icon {
+      .fr-card__title {
+        a::after,
+        button::after {
+          flex: 0 0 auto;
+          display: inline-block;
+          vertical-align: calc((0.75em - var(--icon-size)) * 0.5);
+          background-color: currentColor;
+          width: var(--icon-size);
+          height: var(--icon-size);
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          -webkit-mask-image: url("../../icons/system/download-line.svg");
+          mask-image: url("../../icons/system/download-line.svg");
+          content: "";
+        }
+      }
     }
   }
 </style>
