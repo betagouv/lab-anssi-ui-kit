@@ -40,14 +40,16 @@
 <div class="carrousel-tuiles primaire">
   <Brique variation="transparent" sansMargeHaute sansMargeLaterale>
     <div class="conteneur-tuiles" bind:this={elementCarrousel}>
-      {#each tuiles as tuile, idx (idx)}
-        <Tuile
-          illustration={tuile.illustration}
-          titre={tuile.titre}
-          contenu={tuile.contenu}
-          position={idx === 0 ? "premiere" : idx === tuiles.length - 1 ? "derniere" : null}
-        />
-      {/each}
+      <slot>
+        {#each tuiles as tuile, idx (idx)}
+          <Tuile
+            illustration={tuile.illustration}
+            titre={tuile.titre}
+            contenu={tuile.contenu}
+            position={idx === 0 ? "premiere" : idx === tuiles.length - 1 ? "derniere" : null}
+          />
+        {/each}
+      </slot>
     </div>
     <div class="conteneur-actions">
       <button class="precedent" onclick={precedent}>
