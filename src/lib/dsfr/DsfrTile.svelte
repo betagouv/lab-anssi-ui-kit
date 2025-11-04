@@ -216,5 +216,7 @@
   @import "@gouvfr/dsfr/dist/component/tile/tile.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("tile");
+  @include set-dsfr-sizing("tile") {
+    height: 100%;
+  }
 </style>
