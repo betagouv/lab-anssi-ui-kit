@@ -38,6 +38,7 @@
       navigationId: { attribute: "navigation-id", type: "String" },
       navigationAriaLabel: { attribute: "navigation-aria-label", type: "String" },
       navigationItems: { attribute: "navigation-items", type: "Object" },
+      hasHeaderTag: { attribute: "has-header-tag", type: "Boolean" },
     },
   }}
 />
@@ -138,6 +139,8 @@
     navigationAriaLabel?: string;
     /** Éléments de la navigation principale */
     navigationItems?: MenuItem[];
+    /** Utiliser une balise <header> pour le composant */
+    hasHeaderTag?: boolean;
   }
 
   let {
@@ -177,6 +180,7 @@
     navigationId,
     navigationAriaLabel,
     navigationItems,
+    hasHeaderTag = true,
   }: Props = $props();
 
   let openedMenuModal = $state(false);
@@ -224,7 +228,12 @@
   });
 </script>
 
-<header role="banner" class="fr-header" {id}>
+<svelte:element
+  this={hasHeaderTag ? "header" : "div"}
+  role={hasHeaderTag ? "banner" : undefined}
+  class="fr-header"
+  {id}
+>
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">
@@ -388,7 +397,7 @@
       </div>
     </div>
   {/if}
-</header>
+</svelte:element>
 
 <style lang="scss">
   @import "@gouvfr/dsfr/src/dsfr/core/index";
