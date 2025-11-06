@@ -146,7 +146,7 @@
     horizontal = false,
     horizontalProportion = "default",
     src,
-    alt,
+    alt = "",
     hasHeaderBadge = false,
     imageRatio = "default",
     hasButtons = false,
