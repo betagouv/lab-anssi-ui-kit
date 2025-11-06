@@ -26,7 +26,9 @@
 
 <Brique variation="secondaire">
   <div class="brique-marelle">
-    <div class="titre">{titre}</div>
+    <slot name="marelle-titre">
+      <div class="titre">{titre}</div>
+    </slot>
     <section class="marelle-etapes">
       <slot>
         {#each etapesmarelle as etapeMarelle, index}
