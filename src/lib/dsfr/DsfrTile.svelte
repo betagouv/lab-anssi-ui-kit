@@ -26,6 +26,7 @@
       horizontal: { attribute: "horizontal", type: "Boolean" },
       verticalBreakpoint: { attribute: "vertical-breakpoint", type: "String" },
       variations: { attribute: "variations", type: "String" },
+      markupLevel: { attribute: "markup-level", type: "Number" },
     },
   }}
 />
