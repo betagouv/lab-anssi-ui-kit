@@ -200,7 +200,7 @@
     const button = event.target as HTMLButtonElement;
     const isOpened = button.getAttribute("data-fr-opened") === "true";
     const modalId = button.getAttribute("aria-controls");
-    const modal = modalId ? button.closest("header").querySelector(`#${modalId}`) : null;
+    const modal = modalId ? button.closest(".fr-header").querySelector(`#${modalId}`) : null;
 
     if (type === "menu") {
       openedMenuModal = !isOpened;
