@@ -16,6 +16,10 @@ const dirname =
 // - Storybook local : "development"
 // - Storybook déployé : "production"
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
+const assetsPath =
+  process.env.STORYBOOK_ENV === "production"
+    ? varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE
+    : "src/lib/assets";
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Storybook avec nos valeurs
@@ -32,7 +36,7 @@ export default defineConfig({
   plugins: [svelte()],
   css: {
     postcss: {
-      plugins: [replaceIconPaths({ assetsPath: "src/lib/assets" })],
+      plugins: [replaceIconPaths({ assetsPath })],
     },
     preprocessorOptions: {
       scss: {
