@@ -286,29 +286,6 @@
   @include set-shadow-host();
   @include set-dsfr-sizing("footer");
 
-  .fr-footer__bottom-link {
-    &::after,
-    &::before {
-      display: inline-flex;
-    }
-  }
-
-  .fr-footer__bottom-item {
-    &:not(:first-of-type) {
-      .fr-footer__bottom-link::before {
-        content: "";
-        width: 4px;
-      }
-    }
-
-    &:not(:last-of-type) {
-      .fr-footer__bottom-link::after {
-        content: "";
-        width: 5px;
-      }
-    }
-  }
-
   .fr-footer__logo {
     --border-default-grey: transparent;
   }
