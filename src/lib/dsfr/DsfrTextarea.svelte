@@ -15,6 +15,11 @@
       validMessage: { attribute: "valid-message", type: "String" },
       infoMessage: { attribute: "info-message", type: "String" },
       rows: { attribute: "rows", type: "String" },
+      form: { attribute: "form", type: "String" },
+      maxlength: { attribute: "maxlength", type: "Number" },
+      minlength: { attribute: "minlength", type: "Number" },
+      readonly: { attribute: "readonly", type: "Boolean" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -36,7 +41,7 @@
     /** Attribut name du champs de saisie */
     name?: string;
     /** Attribut autocomplete du champs de saisie, voir la liste des valeurs possibles sur MDN */
-    autocomplete?: string;
+    autocomplete?: "on" | "off";
     /** Désactive le champs de saisie */
     disabled?: boolean;
     /** Statut du message */
@@ -49,6 +54,16 @@
     rows?: number;
     /** Texte du message d'information */
     infoMessage?: string;
+    /** ID du formulaire auquel associer ce champ */
+    form?: string;
+    /** Longueur maximale du texte */
+    maxlength?: number;
+    /** Longueur minimale du texte */
+    minlength?: number;
+    /** Rend le champ en lecture seule */
+    readonly?: boolean;
+    /** Rend le champ obligatoire */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -66,6 +81,12 @@
     validMessage,
     infoMessage,
     rows,
+    autocomplete,
+    form,
+    maxlength,
+    minlength,
+    readonly,
+    required,
   }: Props = $props();
 
   function handleInput(event: Event) {
@@ -98,6 +119,12 @@
     aria-describedby={status ? `${id}-messages` : undefined}
     oninput={handleInput}
     {rows}
+    {autocomplete}
+    {form}
+    {maxlength}
+    {minlength}
+    {readonly}
+    {required}
   ></textarea>
 
   {#if status !== "default"}
