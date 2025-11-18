@@ -21,6 +21,16 @@
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -64,6 +74,8 @@
     readonly?: boolean;
     /** Rend le champ obligatoire */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -87,13 +99,26 @@
     minlength,
     readonly,
     required,
+    internals,
   }: Props = $props();
 
+  function updateFormValue(newValue: string | undefined) {
+    if (internals) {
+      internals.setFormValue(newValue || "");
+    }
+  }
+
   function handleInput(event: Event) {
-    const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    const target = event.target as HTMLTextAreaElement;
+    value = target.value;
+    updateFormValue(value);
+    dispatch("valuechanged", value);
   }
   const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
+
+  $effect(() => {
+    updateFormValue();
+  });
 </script>
 
 <div
