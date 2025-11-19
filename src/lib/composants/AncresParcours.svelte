@@ -24,26 +24,6 @@
   let scrollEnd = $state(true);
 
   /**
-   * Gère le clic sur une ancre de navigation.
-   * Met à jour l'index actif et effectue un défilement fluide vers l'élément cible correspondant à l'ancre.
-   *
-   * @param {string} cible - Sélecteur CSS de l'élément cible vers lequel scroller.
-   * @param {number} index - Index de l'ancre sélectionnée, utilisé pour mettre à jour l'état actif.
-   */
-  function gestionClicAncre(cible: string, index: number): void {
-    indexActif = index;
-
-    // Scroll vers l'élément avec l'ancre
-    const element = document.querySelector(cible);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }
-
-  /**
    * Gère l'affichage des ombres en fonction de la position du scroll.
    * Met à jour les indicateurs `scrollStart` et `scrollEnd` selon la position du scroll :
    * - Si le scroll est au début, `scrollStart` est false et `scrollEnd` est true.
@@ -78,11 +58,7 @@
 >
   <div class="lab-anssi-ancres__conteneur" onscroll={handleScroll}>
     {#each ancres as ancre, index}
-      <a
-        href={ancre.cible}
-        class={["lab-anssi-ancres__item", { active: index === indexActif }]}
-        onclick={() => gestionClicAncre(ancre.cible, index)}
-      >
+      <a href={ancre.cible} class={["lab-anssi-ancres__item", { active: index === indexActif }]}>
         {ancre.label}
       </a>
     {/each}
