@@ -35,8 +35,9 @@
 />
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
+  type TextareaStatus = "default" | "valid" | "error";
   interface Props {
     /** Attribut id du champs de saisie */
     id: string;
@@ -55,7 +56,7 @@
     /** Désactive le champs de saisie */
     disabled?: boolean;
     /** Statut du message */
-    status?: "default" | "valid" | "error" | "info";
+    status?: TextareaStatus;
     /** Texte du message d'erreur */
     errorMessage?: string;
     /** Texte du message de succès */
@@ -88,7 +89,7 @@
     placeholder,
     name,
     disabled,
-    status = "default",
+    status,
     errorMessage,
     validMessage,
     infoMessage,
@@ -102,9 +103,35 @@
     internals,
   }: Props = $props();
 
+  let textareaElement: HTMLTextAreaElement;
+  let localStatus: TextareaStatus = $state("default");
+  let finalStatus = $derived(status ?? localStatus);
+  let formWasSubmitted = $state(false);
+
+  /**
+   * Met à jour la valeur du formulaire et gère la validation du textarea.
+   *
+   * Cette fonction synchronise la valeur du textarea avec les mécanismes internes
+   * du formulaire, vérifie la validité des données saisies et met à jour
+   * l'état de validation ainsi que les messages d'erreur correspondants.
+   *
+   * @param {string | undefined} newValue - La nouvelle valeur à assigner au textarea
+   */
   function updateFormValue(newValue: string | undefined) {
-    if (internals) {
-      internals.setFormValue(newValue || "");
+    if (!internals || !textareaElement) return;
+
+    internals.setFormValue(newValue || "");
+
+    const isValid = textareaElement.validity.valid;
+    const flags = !isValid ? textareaElement.validity : {};
+    const message = !isValid ? textareaElement.validationMessage : "";
+    const anchor = !isValid ? textareaElement : null;
+
+    internals.setValidity(flags, message, anchor);
+
+    if (!status) {
+      localStatus = isValid ? "valid" : "error";
+      errorMessage = isValid ? undefined : textareaElement.validationMessage;
     }
   }
 
@@ -114,11 +141,33 @@
     updateFormValue(value);
     dispatch("valuechanged", value);
   }
-  const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
 
   $effect(() => {
     updateFormValue();
   });
+
+  onMount(() => {
+    /**
+     * Gestionnaire d'événement déclenché lorsque le champ textarea est invalide lors de la validation.
+     * Empêche l'affichage de la bulle de validation native du navigateur et déclenche
+     * la validation personnalisée du formulaire.
+     *
+     * @param {Event} e - L'événement d'invalidité déclenché par le navigateur
+     */
+    function handleInvalid(e: Event) {
+      e.preventDefault();
+      formWasSubmitted = true;
+      updateFormValue(value);
+    }
+
+    $host()?.addEventListener("invalid", handleInvalid);
+
+    return () => $host()?.removeEventListener("invalid", handleInvalid);
+  });
+
+  const statusClass = $derived(
+    formWasSubmitted && finalStatus !== "info" && `fr-input-group--${finalStatus}`,
+  );
 </script>
 
 <div
@@ -135,13 +184,14 @@
     </label>
   {/if}
   <textarea
+    bind:this={textareaElement}
     {id}
     class="fr-input"
     {name}
     bind:value
     {placeholder}
     {disabled}
-    aria-describedby={status ? `${id}-messages` : undefined}
+    aria-describedby={formWasSubmitted && finalStatus ? `${id}-messages` : undefined}
     oninput={handleInput}
     {rows}
     {autocomplete}
@@ -152,11 +202,15 @@
     {required}
   ></textarea>
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
+  {#if formWasSubmitted && finalStatus !== "default" && (validMessage || errorMessage || infoMessage)}
+    <div
+      class="fr-messages-group"
+      id={finalStatus ? `${id}-messages` : undefined}
+      aria-live="polite"
+    >
       <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
+        class={["fr-message", `fr-message--${finalStatus}`]}
+        id={finalStatus ? `${id}-message-${finalStatus}` : undefined}
       >
         {validMessage || errorMessage || infoMessage}
       </p>
