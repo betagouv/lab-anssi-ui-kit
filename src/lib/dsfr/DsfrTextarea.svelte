@@ -122,17 +122,17 @@
 
     internals.setFormValue(newValue || "");
 
+    if (status) return;
+
     const isValid = textareaElement.validity.valid;
     const flags = !isValid ? textareaElement.validity : {};
     const message = !isValid ? textareaElement.validationMessage : "";
-    const anchor = !isValid ? textareaElement : null;
+    const anchor = !isValid ? textareaElement : undefined;
 
     internals.setValidity(flags, message, anchor);
 
-    if (!status) {
-      localStatus = isValid ? "valid" : "error";
-      errorMessage = isValid ? undefined : textareaElement.validationMessage;
-    }
+    localStatus = isValid ? "valid" : "error";
+    errorMessage = isValid ? undefined : textareaElement.validationMessage;
   }
 
   function handleInput(event: Event) {
@@ -166,8 +166,21 @@
   });
 
   const statusClass = $derived(
-    formWasSubmitted && finalStatus !== "info" && `fr-input-group--${finalStatus}`,
+    status || (formWasSubmitted && finalStatus !== "default" && finalStatus !== "info")
+      ? `fr-input-group--${finalStatus}`
+      : undefined,
   );
+
+  // Si status est défini manuellement, on l'affiche directement
+  // Sinon, on attend la soumission du formulaire
+  const showErrorMessage = $derived(
+    (status === "error" || (formWasSubmitted && finalStatus === "error")) && errorMessage,
+  );
+  const showValidMessage = $derived(
+    (status === "valid" || (formWasSubmitted && finalStatus === "valid")) && validMessage,
+  );
+  const showInfoMessage = $derived((status === "info" || finalStatus === "info") && infoMessage);
+  const showMessages = $derived(showErrorMessage || showValidMessage || showInfoMessage);
 </script>
 
 <div
@@ -191,7 +204,7 @@
     bind:value
     {placeholder}
     {disabled}
-    aria-describedby={formWasSubmitted && finalStatus ? `${id}-messages` : undefined}
+    aria-describedby={showMessages ? `${id}-messages` : undefined}
     oninput={handleInput}
     {rows}
     {autocomplete}
@@ -202,18 +215,21 @@
     {required}
   ></textarea>
 
-  {#if formWasSubmitted && finalStatus !== "default" && (validMessage || errorMessage || infoMessage)}
-    <div
-      class="fr-messages-group"
-      id={finalStatus ? `${id}-messages` : undefined}
-      aria-live="polite"
-    >
-      <p
-        class={["fr-message", `fr-message--${finalStatus}`]}
-        id={finalStatus ? `${id}-message-${finalStatus}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
+  {#if showMessages}
+    <div class="fr-messages-group" id={`${id}-messages`} aria-live="polite">
+      {#if showErrorMessage}
+        <p class="fr-message fr-message--error" id={`${id}-message-error`}>
+          {errorMessage}
+        </p>
+      {:else if showValidMessage}
+        <p class="fr-message fr-message--valid" id={`${id}-message-valid`}>
+          {validMessage}
+        </p>
+      {:else if showInfoMessage}
+        <p class="fr-message fr-message--info" id={`${id}-message-info`}>
+          {infoMessage}
+        </p>
+      {/if}
     </div>
   {/if}
 </div>
