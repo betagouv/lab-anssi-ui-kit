@@ -16,6 +16,8 @@
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
       infoMessage: { attribute: "info-message", type: "String" },
+      form: { attribute: "form", type: "String" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -60,6 +62,10 @@
     validMessage?: string;
     /** Texte du message d'information */
     infoMessage?: string;
+    /** Attribut form du composant */
+    form?: string;
+    /** Attribut required du composant */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -78,6 +84,8 @@
     errorMessage,
     validMessage,
     infoMessage,
+    form,
+    required,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -107,6 +115,8 @@
     bind:value
     {disabled}
     onchange={handleChange}
+    {form}
+    {required}
   >
     {#if placeholder}
       <option value="" selected disabled={placeholderDisabled}>{placeholder}</option>

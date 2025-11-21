@@ -7,8 +7,16 @@
       buttonLabel: { attribute: "button-label", type: "String" },
       buttonTitle: { attribute: "button-title", type: "String" },
       size: { attribute: "size", type: "String" },
-      inputPlaceholder: { attribute: "input-placeholder", type: "String" },
+      placeholder: { attribute: "placeholder", type: "String" },
       value: { attribute: "value", type: "String", reflect: true },
+      disabled: { attribute: "disabled", type: "Boolean" },
+      form: { attribute: "form", type: "String" },
+      maxlength: { attribute: "maxlength", type: "Number" },
+      minlength: { attribute: "minlength", type: "Number" },
+      name: { attribute: "name", type: "String" },
+      pattern: { attribute: "pattern", type: "String" },
+      readonly: { attribute: "readonly", type: "Boolean" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -30,9 +38,25 @@
     /** Taille de la barre de recherche (défaut: md) */
     size?: SearchSize;
     /** Placeholder de l'input */
-    inputPlaceholder?: string;
+    placeholder?: string;
     /** Valeur initiale du champs de saisie */
     value?: string;
+    /** Désactive le champ de saisie */
+    disabled?: boolean;
+    /** Attribut form du composant */
+    form?: string;
+    /** Longueur maximale du champ de saisie */
+    maxlength?: number;
+    /** Longueur minimale du champ de saisie */
+    minlength?: number;
+    /** Attribut name du composant */
+    name?: string;
+    /** Attribut pattern du composant */
+    pattern?: string;
+    /** Rend le champ de saisie en lecture seule */
+    readonly?: boolean;
+    /** Rend le champ de saisie obligatoire */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -43,8 +67,16 @@
     buttonLabel,
     buttonTitle,
     size = "md",
-    inputPlaceholder,
+    placeholder,
     value = $bindable(),
+    disabled,
+    form,
+    maxlength,
+    minlength,
+    name,
+    pattern,
+    readonly,
+    required,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-search-bar--${size}`);
@@ -64,11 +96,19 @@
     id={inputId}
     class="fr-input"
     bind:value
-    placeholder={inputPlaceholder}
+    {placeholder}
     oninput={handleInput}
+    {disabled}
+    {form}
+    {maxlength}
+    {minlength}
+    {name}
+    {pattern}
+    {readonly}
+    {required}
   />
 
-  <button title={buttonTitle} type="button" class="fr-btn">
+  <button title={buttonTitle} type="button" class="fr-btn" {disabled}>
     {buttonLabel}
   </button>
 </div>

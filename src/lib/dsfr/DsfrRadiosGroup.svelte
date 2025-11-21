@@ -28,6 +28,8 @@
     value: string;
     hint?: string;
     disabled?: boolean;
+    form?: string;
+    required?: boolean;
   };
   interface Props {
     /** Attribut id du formulaire */
@@ -96,10 +98,19 @@
     {/if}
   </legend>
 
-  {#each radios as { id, name, value, disabled, label } (id)}
+  {#each radios as { id, name, value, disabled, label, form, required } (id)}
     <div class={["fr-fieldset__element", inline && "fr-fieldset__element--inline"]}>
       <div class={["fr-radio-group", `fr-radio-group--${size}`]}>
-        <input type="radio" {id} {name} {value} bind:group={currentValue} onchange={handleChange} />
+        <input
+          type="radio"
+          {id}
+          {name}
+          {value}
+          bind:group={currentValue}
+          onchange={handleChange}
+          {form}
+          {required}
+        />
         <label class="fr-label" for={id}>
           {label}
           {#if hint}

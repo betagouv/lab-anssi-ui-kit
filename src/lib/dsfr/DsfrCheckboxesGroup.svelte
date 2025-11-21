@@ -27,6 +27,8 @@
     value: string;
     hint?: string;
     disabled?: boolean;
+    form?: string;
+    required?: boolean;
   };
   interface Props {
     /** Attribut id du formulaire */
@@ -99,6 +101,8 @@
           value={item.value}
           bind:group={values}
           onchange={handleChange}
+          form={item.form}
+          required={item.required}
         />
         <label class="fr-label" for={item.id}>
           {item.label}

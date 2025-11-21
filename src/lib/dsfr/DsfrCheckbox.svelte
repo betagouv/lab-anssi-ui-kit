@@ -13,6 +13,8 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      form: { attribute: "form", type: "String" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -45,6 +47,10 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Attribut form de la checkbox */
+    form?: string;
+    /** Attribut required de la checkbox */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -61,6 +67,8 @@
     status = "default",
     errorMessage,
     validMessage,
+    form,
+    required,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-checkbox-group--${size}`);
@@ -81,6 +89,8 @@
     bind:checked
     aria-describedby={status ? `${id}-messages` : undefined}
     onchange={handleChange}
+    {form}
+    {required}
   />
   <label class="fr-label" for={id}>
     {#if label}
