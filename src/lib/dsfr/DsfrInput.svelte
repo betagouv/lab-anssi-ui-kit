@@ -15,6 +15,15 @@
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
       infoMessage: { attribute: "info-message", type: "String" },
+      form: { attribute: "form", type: "String" },
+      max: { attribute: "max", type: "String" },
+      maxlength: { attribute: "maxlength", type: "Number" },
+      min: { attribute: "min", type: "String" },
+      minlength: { attribute: "minlength", type: "Number" },
+      pattern: { attribute: "pattern", type: "String" },
+      readonly: { attribute: "readonly", type: "Boolean" },
+      required: { attribute: "required", type: "Boolean" },
+      step: { attribute: "step", type: "Number" },
     },
   }}
 />
@@ -52,6 +61,24 @@
     validMessage?: string;
     /** Texte du message d'information */
     infoMessage?: string;
+    /** Attribut form du composant */
+    form?: string;
+    /** Valeur de l'attribut max du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_ */
+    max?: string;
+    /** Longueur maximale du champs de saisie _(valable uniquement pour les champs de type "text", "search", "url", "tel", "email", "password")_ */
+    maxlength?: number;
+    /** Valeur de l'attribut min du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_ */
+    min?: string;
+    /** Longueur minimale du champs de saisie _(valable uniquement pour les champs de type "text", "search", "url", "tel", "email", "password")_ */
+    minlength?: number;
+    /** Attribut pattern du champs de saisie _(valable uniquement pour les champs de type "text", "search", "url", "tel", "email", "password")_ */
+    pattern?: string;
+    /** Rend le champs de saisie en lecture seule */
+    readonly?: boolean;
+    /** Rend le champs de saisie obligatoire */
+    required?: boolean;
+    /** Valeur de l'attribut step du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_  */
+    step?: number;
   }
 
   const dispatch = createEventDispatcher();
@@ -70,6 +97,15 @@
     errorMessage,
     validMessage,
     infoMessage,
+    form,
+    max,
+    maxlength,
+    min,
+    minlength,
+    pattern,
+    readonly,
+    required,
+    step,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -77,6 +113,7 @@
   });
   const iconClass = $derived(setIconClass(icon));
   const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
+  const isTypeDateOrNumber = $derived(type === "number" || type === "date");
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -105,6 +142,15 @@
         {disabled}
         aria-describedby={status ? `${id}-messages` : undefined}
         oninput={handleInput}
+        {form}
+        {readonly}
+        {required}
+        max={isTypeDateOrNumber ? max : undefined}
+        maxlength={!isTypeDateOrNumber ? maxlength : undefined}
+        min={isTypeDateOrNumber ? min : undefined}
+        minlength={!isTypeDateOrNumber ? minlength : undefined}
+        pattern={!isTypeDateOrNumber ? pattern : undefined}
+        step={isTypeDateOrNumber ? step : undefined}
       />
     </div>
   {:else}
@@ -118,6 +164,15 @@
       {disabled}
       aria-describedby={status ? `${id}-messages` : undefined}
       oninput={handleInput}
+      {form}
+      {readonly}
+      {required}
+      max={isTypeDateOrNumber ? max : undefined}
+      maxlength={!isTypeDateOrNumber ? maxlength : undefined}
+      min={isTypeDateOrNumber ? min : undefined}
+      minlength={!isTypeDateOrNumber ? minlength : undefined}
+      pattern={!isTypeDateOrNumber ? pattern : undefined}
+      step={isTypeDateOrNumber ? step : undefined}
     />
   {/if}
 
