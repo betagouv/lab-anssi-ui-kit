@@ -13,6 +13,8 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      form: { attribute: "form", type: "String" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -46,6 +48,9 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    form?: string;
+    /** Attribut required de la checkbox */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -63,6 +68,8 @@
     status = "default",
     errorMessage,
     validMessage,
+    form,
+    required,
     ...restProps
   }: Props = $props();
 
@@ -95,6 +102,8 @@
     {disabled}
     bind:checked
     onchange={handleChange}
+    {form}
+    {required}
     {...restProps}
   />
   <label
