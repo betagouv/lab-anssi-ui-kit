@@ -13,6 +13,8 @@
       pictogramName: { attribute: "pictogram-name", type: "String" },
       pictogramAccent: { attribute: "pictogram-accent", type: "String" },
       disabled: { attribute: "disabled", type: "Boolean" },
+      form: { attribute: "form", type: "String" },
+      required: { attribute: "required", type: "Boolean" },
     },
   }}
 />
@@ -45,6 +47,10 @@
     pictogramAccent?: Accent;
     /** Désactive le radio */
     disabled?: boolean;
+    /** Attribut form du composant */
+    form?: string;
+    /** Attribut required du composant */
+    required?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -61,6 +67,8 @@
     pictogramName,
     pictogramAccent,
     disabled,
+    form,
+    required,
   }: Props = $props();
 
   const richClass = $derived.by(() => {
@@ -75,7 +83,7 @@
 </script>
 
 <div class={["fr-radio-group", richClass, sizeClass]}>
-  <input type="radio" {id} {name} {value} {disabled} onchange={handleChange} />
+  <input type="radio" {id} {name} {value} {disabled} onchange={handleChange} {form} {required} />
   <label class="fr-label" for={id}>
     {label}
     {#if hint}
