@@ -8,7 +8,7 @@
   import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
   import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
   import Reactions from "$lib/composants/Reactions.svelte";
-  import Icone from "$lib/lab/Icone.svelte";
+  import Icone from "$lib/composants/Icone.svelte";
 
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 

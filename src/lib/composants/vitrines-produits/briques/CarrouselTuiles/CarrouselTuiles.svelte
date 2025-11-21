@@ -1,0 +1,153 @@
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-carrousel-tuiles",
+    props: {
+      tuiles: { reflect: false, type: "Array", attribute: "tuiles" },
+    },
+  }}
+/>
+
+<script lang="ts">
+  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import Tuile from "$lib/composants/vitrines-produits/briques/Tuile.svelte";
+  import type { Tuiles } from "$lib/types";
+  import IconeFlecheGauche from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
+  import IconeFlecheDroite from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
+
+  interface Props {
+    tuiles?: Tuiles;
+  }
+
+  let { tuiles = [] }: Props = $props();
+
+  let elementCarrousel: HTMLDivElement = $state();
+
+  const versDirection = (direction: number) => {
+    if (elementCarrousel) {
+      const cardWidth = elementCarrousel.firstElementChild?.clientWidth || 0;
+      elementCarrousel.scrollBy({
+        left: direction * (cardWidth + 16),
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const precedent = () => versDirection(-1);
+
+  const suivant = () => versDirection(+1);
+</script>
+
+<div class="carrousel-tuiles primaire">
+  <Brique variation="transparent" sansMargeHaute sansMargeLaterale>
+    <div class="conteneur-tuiles" bind:this={elementCarrousel}>
+      <slot>
+        {#each tuiles as tuile, idx (idx)}
+          <Tuile
+            illustration={tuile.illustration}
+            titre={tuile.titre}
+            contenu={tuile.contenu}
+            position={idx === 0 ? "premiere" : idx === tuiles.length - 1 ? "derniere" : null}
+          />
+        {/each}
+      </slot>
+    </div>
+    <div class="conteneur-actions">
+      <button class="precedent" onclick={precedent}>
+        <span class="icone"><IconeFlecheGauche /></span>
+        Précédent
+      </button>
+      <button class="suivant" onclick={suivant}>
+        Suivant
+        <span class="icone"><IconeFlecheDroite /></span>
+      </button>
+    </div>
+  </Brique>
+</div>
+
+<style lang="scss">
+  .carrousel-tuiles {
+    --espacement: 16px;
+    padding: 0;
+
+    &.primaire {
+      background: linear-gradient(
+        to bottom,
+        $centre-aide-background-entete 0%,
+        $centre-aide-background-entete 30%,
+        transparent 30%,
+        transparent 100%
+      );
+    }
+  }
+
+  .conteneur-tuiles {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--espacement);
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 0;
+  }
+
+  .conteneur-tuiles::-webkit-scrollbar {
+    display: none;
+  }
+
+  .conteneur-actions {
+    display: flex;
+    margin-top: 32px;
+    justify-content: center;
+    padding: 0 var(--espacement);
+    gap: 24px;
+  }
+
+  .conteneur-actions button {
+    position: relative;
+    background: none;
+    border: none;
+    color: $brique-carrousel-bouton-action-texte-couleur;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      &:after {
+        bottom: -1px;
+        height: 2px;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: $brique-carrousel-bouton-action-texte-couleur;
+    }
+  }
+
+  .conteneur-actions .precedent > .icone,
+  .conteneur-actions .suivant > .icone {
+    display: flex;
+    align-items: center;
+  }
+
+  @include a-partir-de(desktop) {
+    .carrousel-tuiles {
+      --espacement: 24px;
+
+      .conteneur-actions {
+        display: none;
+      }
+    }
+  }
+</style>
