@@ -51,5 +51,5 @@
     }
   }
 
-  @import "jeu-icone.scss";
+  @import "../styles/jeu-icone.scss";
 </style>

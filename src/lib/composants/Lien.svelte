@@ -153,5 +153,5 @@
     }
   }
 
-  @import "apparence-bouton.scss";
+  @import "../styles/apparence-bouton.scss";
 </style>
