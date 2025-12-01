@@ -38,7 +38,7 @@ Clonez le dépôt puis installez les dépendances :
 ```bash
 git clone https://github.com/betagouv/lab-anssi-ui-kit.git
 cd lab-anssi-ui-kit
-npm install
+npm ci
 ```
 
 ### Documentation interactive
