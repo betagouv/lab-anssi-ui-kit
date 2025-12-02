@@ -4,22 +4,11 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import path, { resolve } from "path";
-import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
-import { replaceIconPaths } from "./outils";
+import { assetsPath, replaceIconPaths, varEnv } from "./outils";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
-
-// Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
-// - Build webcomponent : "production"
-// - Storybook local : "development"
-// - Storybook déployé : "production"
-const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
-const assetsPath =
-  process.env.STORYBOOK_ENV === "production"
-    ? varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE
-    : "src/lib/assets";
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Storybook avec nos valeurs

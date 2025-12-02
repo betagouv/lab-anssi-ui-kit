@@ -2,14 +2,8 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import cssnano from "cssnano";
 import path, { resolve } from "path";
 import root2host from "postcss-root-to-host";
-import { defineConfig, loadEnv } from "vite";
-import { injecteNonce, replaceIconPaths } from "./outils";
-
-// Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
-// - Build webcomponent : "production"
-// - Storybook local : "development"
-// - Storybook déployé : "production"
-const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
+import { defineConfig } from "vite";
+import { assetsPath, injecteNonce, replaceIconPaths, varEnv } from "./outils";
 
 // Ce fichier permet de build la librairie en mode "WebComponents"
 // En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
@@ -33,7 +27,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        replaceIconPaths({ assetsPath: varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE }),
+        replaceIconPaths({ assetsPath }),
         root2host,
         cssnano({
           preset: [
