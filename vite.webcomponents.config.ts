@@ -5,6 +5,7 @@ import root2host from "postcss-root-to-host";
 import { defineConfig } from "vite";
 import {
   assetsPath,
+  extractDataUriSvg,
   injecteNonce,
   replaceIconPaths,
   varEnv,
@@ -33,6 +34,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
+        extractDataUriSvg(assetsPath),
         replaceIconPaths({ assetsPath }),
         root2host,
         cssnano({

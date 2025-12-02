@@ -1,5 +1,6 @@
 import { loadEnv } from "vite";
 
+export { default as extractDataUriSvg } from "./postcss-extract-data-uri-svg";
 export { default as replaceIconPaths } from "./postcss-replace-icon-paths";
 export { default as injecteNonce } from "./vite-plugin-injecte-nonce";
 export { default as viteScssPreprocessorOptions } from "./vite-preprocessor-options";

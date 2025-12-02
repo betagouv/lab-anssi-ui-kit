@@ -18,5 +18,6 @@ export default function viteScssPreprocessorOptions(varEnv: Record<string, strin
         `,
     loadPaths: ["node_modules/@gouvfr/dsfr", "node_modules/@gouvfr/dsfr/src"],
     quietDeps: true,
+    silenceDeprecations: ["import"],
   };
 }
