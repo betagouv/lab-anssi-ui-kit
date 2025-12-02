@@ -1,6 +1,6 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import cssnano from "cssnano";
-import path, { resolve } from "path";
+import path from "path";
 import root2host from "postcss-root-to-host";
 import { defineConfig } from "vite";
 import {
@@ -17,7 +17,7 @@ import {
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/lib/index.ts"),
+      entry: path.resolve(__dirname, "src/lib/index.ts"),
       name: "WebComponents",
       fileName: "lab-anssi-ui-kit",
       formats: ["iife"],
