@@ -3,7 +3,7 @@ import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
-import path, { resolve } from "path";
+import path from "path";
 import { defineConfig } from "vitest/config";
 import { assetsPath, replaceIconPaths, varEnv, viteScssPreprocessorOptions } from "./outils";
 
@@ -14,7 +14,7 @@ const dirname =
 // c'est la seule façon de charger Storybook avec nos valeurs
 // Cela permet de faire fonctionner la méthode JS `srcAsset` dans le cas du Storybook déployé
 if (process.env.STORYBOOK_ENV === "production")
-  dotenv.config({ path: resolve(process.cwd(), ".env.production") });
+  dotenv.config({ path: path.resolve(process.cwd(), ".env.production") });
 
 export default defineConfig({
   resolve: {
