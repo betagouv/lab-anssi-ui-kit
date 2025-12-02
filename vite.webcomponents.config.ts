@@ -3,8 +3,7 @@ import cssnano from "cssnano";
 import path, { resolve } from "path";
 import root2host from "postcss-root-to-host";
 import { defineConfig, loadEnv } from "vite";
-import injecteNonce from "./outils/vite-plugin-injecte-nonce";
-import replaceIconPaths from "./outils/postcss-replace-icon-paths.js";
+import { injecteNonce, replaceIconPaths } from "./outils";
 
 // Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
 // - Build webcomponent : "production"
