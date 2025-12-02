@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import path, { resolve } from "path";
 import { defineConfig } from "vitest/config";
-import { assetsPath, replaceIconPaths, varEnv } from "./outils";
+import { assetsPath, replaceIconPaths, varEnv, viteScssPreprocessorOptions } from "./outils";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -28,17 +28,7 @@ export default defineConfig({
       plugins: [replaceIconPaths({ assetsPath })],
     },
     preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use 'src/variables.scss' as *;
-          @use 'src/responsive.scss' as *;
-          @use 'src/assets.scss' as *;
-          @use 'src/lib/styles/mixins.scss' as *;
-          $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
-        `,
-        loadPaths: ["node_modules/@gouvfr/dsfr", "node_modules/@gouvfr/dsfr/src"],
-        quietDeps: true,
-      },
+      scss: viteScssPreprocessorOptions(varEnv),
     },
   },
   test: {

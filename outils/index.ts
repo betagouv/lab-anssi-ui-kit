@@ -2,6 +2,7 @@ import { loadEnv } from "vite";
 
 export { default as replaceIconPaths } from "./postcss-replace-icon-paths";
 export { default as injecteNonce } from "./vite-plugin-injecte-nonce";
+export { default as viteScssPreprocessorOptions } from "./vite-preprocessor-options";
 
 // Variables d'environnement chargées selon le contexte d'exécution.
 // Charge le bon environnement pour faire fonctionner la fonction SCSS `url-asset()`
