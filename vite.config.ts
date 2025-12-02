@@ -3,29 +3,18 @@ import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
-import path, { resolve } from "path";
-import { loadEnv } from "vite";
+import path from "path";
 import { defineConfig } from "vitest/config";
-import replaceIconPaths from "./outils/postcss-replace-icon-paths.js";
+import { assetsPath, replaceIconPaths, varEnv, viteScssPreprocessorOptions } from "./outils";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
-
-// Charge le bon environnement pour faire fonctionner la méthode SCSS `url-asset`
-// - Build webcomponent : "production"
-// - Storybook local : "development"
-// - Storybook déployé : "production"
-const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
-const assetsPath =
-  process.env.STORYBOOK_ENV === "production"
-    ? varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE
-    : "src/lib/assets";
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Storybook avec nos valeurs
 // Cela permet de faire fonctionner la méthode JS `srcAsset` dans le cas du Storybook déployé
 if (process.env.STORYBOOK_ENV === "production")
-  dotenv.config({ path: resolve(process.cwd(), ".env.production") });
+  dotenv.config({ path: path.resolve(process.cwd(), ".env.production") });
 
 export default defineConfig({
   resolve: {
@@ -39,17 +28,7 @@ export default defineConfig({
       plugins: [replaceIconPaths({ assetsPath })],
     },
     preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use 'src/variables.scss' as *;
-          @use 'src/responsive.scss' as *;
-          @use 'src/assets.scss' as *;
-          @use 'src/lib/styles/mixins.scss' as *;
-          $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
-        `,
-        loadPaths: ["node_modules/@gouvfr/dsfr", "node_modules/@gouvfr/dsfr/src"],
-        quietDeps: true,
-      },
+      scss: viteScssPreprocessorOptions(varEnv),
     },
   },
   test: {
