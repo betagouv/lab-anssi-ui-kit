@@ -3,7 +3,13 @@ import cssnano from "cssnano";
 import path, { resolve } from "path";
 import root2host from "postcss-root-to-host";
 import { defineConfig } from "vite";
-import { assetsPath, injecteNonce, replaceIconPaths, varEnv } from "./outils";
+import {
+  assetsPath,
+  injecteNonce,
+  replaceIconPaths,
+  varEnv,
+  viteScssPreprocessorOptions,
+} from "./outils";
 
 // Ce fichier permet de build la librairie en mode "WebComponents"
 // En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
@@ -43,17 +49,7 @@ export default defineConfig({
       ],
     },
     preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use 'src/variables.scss' as *;
-          @use 'src/responsive.scss' as *;
-          @use 'src/assets.scss' as *;
-          @use 'src/lib/styles/mixins.scss' as *;
-          $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
-        `,
-        loadPaths: ["node_modules/@gouvfr/dsfr", "node_modules/@gouvfr/dsfr/src"],
-        quietDeps: true,
-      },
+      scss: viteScssPreprocessorOptions(varEnv),
     },
   },
   plugins: [svelte({ emitCss: false }), injecteNonce()],
