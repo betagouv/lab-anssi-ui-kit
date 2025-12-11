@@ -51,7 +51,7 @@ jobs:
           secret_key: ${{ secrets.CLEVER_S3_DES_ASSETS_SECRET_KEY }}
 
       - name: Envoyer les assets vers le CDN
-        run: s3cmd sync --recursive -M ./src/lib/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
+        run: s3cmd sync --recursive -M ./dist/assets/* s3://lab-anssi-ui-kit-prod-s3-assets
 
       - name: Envoyer la release js
         run: s3cmd put --mime-type='application/javascript' ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
