@@ -46,6 +46,8 @@ const extractDataUriSvg = (assetsPath: string) => {
     },
 
     OnceExit() {
+      if (svgMap.size === 0) return;
+
       const assetsDir = join(process.cwd(), "dist", "assets", "icones", "extract");
       mkdirSync(assetsDir, { recursive: true });
 
