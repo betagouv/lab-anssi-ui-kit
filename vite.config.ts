@@ -35,6 +35,14 @@ export default defineConfig({
     projects: [
       {
         extends: true,
+        test: {
+          name: "unit",
+          include: ["tests/**/*.spec.ts"],
+          environment: "node",
+        },
+      },
+      {
+        extends: true,
         plugins: [
           // Le plugin exécutera des tests pour les histoires définies dans la configuration de votre Storybook.
           // Voir les options sur le site: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
