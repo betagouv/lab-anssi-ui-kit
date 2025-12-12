@@ -57,7 +57,9 @@
       <h3 class="fr-alert__title">{title}</h3>
     {/if}
     {#if hasDescription || size === "sm"}
-      <p>{text}</p>
+      <slot name="description">
+        <p>{text}</p>
+      </slot>
     {/if}
     {#if dismissible}
       <button

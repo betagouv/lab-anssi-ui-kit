@@ -5,6 +5,7 @@
     alertArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/alert/template/stories/alert-arg-types.js";
   import DsfrAlert from "$lib/dsfr/DsfrAlert.svelte";
+  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Alert",
@@ -96,3 +97,22 @@
     dismissible: true,
   }}
 />
+
+<Story
+  name="With Slot Description"
+  args={{
+    title: "Titre de l'alerte",
+    hasTitle: true,
+    hasDescription: true,
+    dismissible: true,
+  }}
+>
+  {#snippet template(args)}
+    <DsfrAlert {...args}>
+      <p slot="description">
+        Ceci est une <strong>description personnalisée</strong> de l'alerte utilisant un slot avec
+        un&nbsp;<DsfrLink href="https://cyber.gouv.fr/" blank label="lien" />.
+      </p>
+    </DsfrAlert>
+  {/snippet}
+</Story>
