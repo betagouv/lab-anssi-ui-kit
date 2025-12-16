@@ -5,6 +5,9 @@ import "./styles.fonts.css";
 import "./styles.themes.css";
 import "./styles.scss";
 
+// Chargement des WebComponents
+import "../dist/webcomponents/lab-anssi-ui-kit.iife.js";
+
 const preview: Preview = {
   decorators: [
     withThemeByClassName<SvelteRenderer>({

@@ -29,6 +29,7 @@ const config: StorybookConfig = {
           "./static",
           ".storybook",
           "node_modules",
+          "./dist",
         ],
       },
     };

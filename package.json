@@ -17,9 +17,9 @@
     "prepare": "husky",
     "prepack": "npm run build:webcomponents && npm run copy:icons && publint",
     "test": "vitest run",
-    "storybook:dev": "STORYBOOK_ENV=development storybook dev -p 6006",
-    "storybook:build": "STORYBOOK_ENV=production storybook build",
-    "storybook:build-dev": "STORYBOOK_ENV=development storybook build",
+    "storybook:dev": "npm run build:webcomponents && STORYBOOK_ENV=development storybook dev -p 6006",
+    "storybook:build": "npm run build:webcomponents && STORYBOOK_ENV=production storybook build",
+    "storybook:build-dev": "npm run build:webcomponents && STORYBOOK_ENV=development storybook build",
     "storybook:test": "STORYBOOK_ENV=production npm run test-storybook",
     "test-storybook": "vitest --project=storybook",
     "copy:icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* src/lib/assets/icones/dsfr && cp -r src/lib/assets/ dist/"
