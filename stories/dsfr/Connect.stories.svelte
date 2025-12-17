@@ -1,5 +1,7 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import DsfrConnect from "$lib/dsfr/DsfrConnect.svelte";
 
   const { Story } = defineMeta({
@@ -47,7 +49,20 @@
       id: "france-connect",
       href: "#",
     },
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrConnect>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-connect
+    id={args.id}
+    href={args.href}
+    variant={args.variant}
+    markup={args.markup}
+    disabled={args.disabled || undefined}
+  ></dsfr-connect>
+{/snippet}
 
 <Story name="Défaut" />

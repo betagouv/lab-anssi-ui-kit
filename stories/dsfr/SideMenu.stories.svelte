@@ -1,10 +1,13 @@
 <script module lang="ts">
-  import DsfrSideMenu from "$lib/dsfr/DsfrSideMenu.svelte";
+  import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import {
     sidemenuArgTypes,
     sidemenuArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/sidemenu/template/stories/sidemenu-arg-types.js";
-  import { defineMeta } from "@storybook/addon-svelte-csf";
+
+  import DsfrSideMenu from "$lib/dsfr/DsfrSideMenu.svelte";
 
   const getItemArgs = (id: string | number, type = "link", isActive = false) => ({
     id: type === "link" ? `sidemenu-item-${id}` : `sidemenu-${id}`,
@@ -42,13 +45,25 @@
       ],
       buttonId: "sidemenu-collapse-1",
     },
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrSideMenu>;
 </script>
 
-<Story name="Défaut">
-  {#snippet template(args)}
-    <div style="width: 300px">
-      <DsfrSideMenu {...args} />
-    </div>
-  {/snippet}
-</Story>
+{#snippet template(args: Args)}
+  <div style="width: 300px">
+    <dsfr-side-menu
+      title={args.title}
+      items={args.items}
+      button-label={args.buttonLabel}
+      button-id={args.buttonId}
+      title-id={args.titleId}
+      has-title={args.hasTitle || undefined}
+      modifier={args.modifier}
+      active-item={args.activeItem}
+    ></dsfr-side-menu>
+  </div>
+{/snippet}
+
+<Story name="Défaut" />

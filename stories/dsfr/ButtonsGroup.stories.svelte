@@ -1,9 +1,12 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import {
     buttonsGroupArgTypes,
     buttonsGroupArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/button/template/stories/buttons-group-arg-types.js";
+
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
@@ -33,7 +36,24 @@
         },
       ],
     },
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrButtonsGroup>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-buttons-group
+    size={args.size}
+    has-icon={args.hasIcon}
+    icon-place={args.iconPlace}
+    group-markup={args.groupMarkup}
+    inline={args.inline}
+    equisized={args.equisized || undefined}
+    align={args.align}
+    reverse={args.reverse || undefined}
+    buttons={args.buttons}
+  ></dsfr-buttons-group>
+{/snippet}
 
 <Story name="Défaut" />
