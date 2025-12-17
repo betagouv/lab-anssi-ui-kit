@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
 
   import ConteneurStory from "./ConteneurStory.svelte";
   import Navigation from "$lib/composants/suite-cyber/navigation/Navigation.svelte";
@@ -10,12 +11,16 @@
     args: {
       sourceUtm: "mon-service-lab-anssi",
     },
+    render: template,
   });
+
+  type Args = ComponentProps<Navigation>;
 </script>
 
-{#snippet template(args)}
+{#snippet template(args: Args)}
   <ConteneurStory alignement="droite">
-    <Navigation {...args} />
+    <lab-anssi-bouton-suite-cyber-navigation source-utm={args.sourceUtm}
+    ></lab-anssi-bouton-suite-cyber-navigation>
   </ConteneurStory>
 {/snippet}
 

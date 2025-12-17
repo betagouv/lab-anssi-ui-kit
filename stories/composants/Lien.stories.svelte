@@ -1,12 +1,12 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
 
   import Lien from "$lib/composants/Lien.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/ANSSI/Lien",
     component: Lien,
-    render: template,
     args: {
       titre: "Libellé",
       cible: "#",
@@ -44,23 +44,39 @@
       },
       actif: { control: "boolean", description: "Indique si le lien est actif" },
     },
+    render: template,
   });
+
+  type Args = ComponentProps<Lien>;
 </script>
 
-{#snippet template(args)}
-  <Lien {...args} />
+{#snippet template(args: Args)}
+  <lab-anssi-lien
+    titre={args.titre}
+    href={args.href}
+    variante={args.variante}
+    taille={args.taille}
+    icone={args.icone}
+    apparence={args.apparence}
+    cible={args.cible}
+    position-icone={args.positionIcone}
+    actif={args.actif || undefined}
+    largeur-maximale={args.largeurMaximale || undefined}
+  ></lab-anssi-lien>
 {/snippet}
 
 <Story name="Defaut" />
 
 <Story name="Taille de police 1rem">
   <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">
-    Lorem ipsum <Lien titre="dolor sit plop" cible="#" apparence="lien-texte" /> amet.
+    Lorem ipsum <lab-anssi-lien titre="dolor sit plop" cible="#" apparence="lien-texte"
+    ></lab-anssi-lien> amet.
   </p>
 </Story>
 
 <Story name="Taille de police 2rem">
   <p style="font-size: 2rem; line-height: 3rem; color: #18753c">
-    Lorem ipsum <Lien titre="dolor sit plop" cible="#" apparence="lien-texte" /> amet.
+    Lorem ipsum <lab-anssi-lien titre="dolor sit plop" cible="#" apparence="lien-texte"
+    ></lab-anssi-lien> amet.
   </p>
 </Story>

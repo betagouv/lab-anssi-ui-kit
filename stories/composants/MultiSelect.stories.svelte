@@ -1,10 +1,12 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import MultiSelect from "$lib/composants/MultiSelect.svelte";
 
   const { Story } = defineMeta({
-    component: MultiSelect,
     title: "Composants/ANSSI/MultiSelect",
+    component: MultiSelect,
     args: {
       id: "multi-select-1",
       label: "Label du multi-select",
@@ -25,8 +27,26 @@
         control: { type: "array" },
       },
     },
+    render: template,
   });
+
+  type Args = ComponentProps<MultiSelect>;
 </script>
+
+{#snippet template(args: Args)}
+  <lab-anssi-multi-select
+    id={args.id}
+    label={args.label}
+    options={args.options}
+    hint={args.hint}
+    placeholder={args.placeholder}
+    disabled={args.disabled || undefined}
+    values={args.values}
+    status={args.status}
+    error-message={args.errorMessage}
+    valid-message={args.validMessage}
+  ></lab-anssi-multi-select>
+{/snippet}
 
 <Story name="Defaut" />
 
