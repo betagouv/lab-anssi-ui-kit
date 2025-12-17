@@ -1,10 +1,14 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import {
     alertArgs,
     alertArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/alert/template/stories/alert-arg-types.js";
+
   import DsfrAlert from "$lib/dsfr/DsfrAlert.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
 
   const { Story } = defineMeta({
@@ -12,8 +16,26 @@
     component: DsfrAlert,
     args: alertArgs,
     argTypes: alertArgTypes,
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrAlert>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-alert
+    button-close-label={args.buttonCloseLabel}
+    has-title={args.hasTitle || undefined}
+    title={args.title}
+    has-description={args.hasDescription || undefined}
+    text={args.text}
+    type={args.type}
+    size={args.size}
+    id={args.id}
+    dismissible={args.dismissible || undefined}
+    icon={args.icon}
+  ></dsfr-alert>
+{/snippet}
 
 <Story name="Défaut" />
 
@@ -107,12 +129,17 @@
     dismissible: true,
   }}
 >
-  {#snippet template(args)}
-    <DsfrAlert {...args}>
+  {#snippet template(args: Args)}
+    <dsfr-alert
+      has-title={args.hasTitle}
+      title={args.title}
+      has-description={args.hasDescription}
+      dismissible={args.dismissible}
+    >
       <p slot="description">
         Ceci est une <strong>description personnalisée</strong> de l'alerte utilisant un slot avec
-        un&nbsp;<DsfrLink href="https://cyber.gouv.fr/" blank label="lien" />.
+        un&nbsp;<dsfr-link href="https://cyber.gouv.fr/" blank label="lien"></dsfr-link>.
       </p>
-    </DsfrAlert>
+    </dsfr-alert>
   {/snippet}
 </Story>

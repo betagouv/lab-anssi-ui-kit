@@ -1,9 +1,12 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import {
     badgeArgs,
     badgeArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/badge/template/stories/badge-arg-types.js";
+
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
 
   const { Story } = defineMeta({
@@ -11,8 +14,25 @@
     component: DsfrBadge,
     argTypes: badgeArgTypes,
     args: badgeArgs,
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrBadge>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-badge
+    label={args.label}
+    accent={args.accent}
+    ellipsis={args.ellipsis || undefined}
+    has-icon={args.hasIcon || undefined}
+    has-no-icon={args.hasNoIcon || undefined}
+    icon={args.icon}
+    size={args.size}
+    status={args.status}
+    type={args.type}
+  ></dsfr-badge>
+{/snippet}
 
 <Story name="Défaut" />
 

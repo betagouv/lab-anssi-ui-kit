@@ -1,8 +1,11 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-  import DsfrContent from "$lib/dsfr/DsfrContent.svelte";
+  import { type ComponentProps } from "svelte";
+
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
   import svg from "/static/images/gouvernement.svg?raw";
+
+  import DsfrContent from "$lib/dsfr/DsfrContent.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Content Media",
@@ -96,7 +99,26 @@
       },
       svg: svg,
     },
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrContent>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-content
+    size={args.size}
+    caption={args.caption}
+    has-link={args.hasLink || undefined}
+    link-label={args.linkLabel}
+    link-href={args.linkHref}
+    type={args.type}
+    img-ratio={args.imgRatio}
+    vid-ratio={args.vidRatio}
+    img={args.img}
+    vid={args.vid}
+    svg={args.svg}
+  ></dsfr-content>
+{/snippet}
 
 <Story name="Défaut" />

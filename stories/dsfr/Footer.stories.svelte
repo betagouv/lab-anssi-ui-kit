@@ -1,5 +1,7 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import {
     footerArgTypes,
     footerArgs,
@@ -46,7 +48,36 @@
         },
       ],
     },
+    render: template,
   });
+
+  type Args = ComponentProps<DsfrFooter>;
 </script>
+
+{#snippet template(args: Args)}
+  <dsfr-footer
+    id={args.id}
+    is-mourning={args.isMourning || undefined}
+    brand-logo-title={args.brandLogoTitle}
+    brand-link-title={args.brandLinkTitle}
+    brand-link-href={args.brandLinkHref}
+    brand-link-id={args.brandLinkId}
+    has-brand-operator={args.hasBrandOperator || undefined}
+    brand-operator-alt={args.brandOperatorAlt}
+    brand-operator-src={args.brandOperatorSrc}
+    brand-operator-style={args.brandOperatorStyle}
+    has-description={args.hasDescription || undefined}
+    content-description={args.contentDescription}
+    has-partners={args.hasPartners || undefined}
+    partner-title={args.partnerTitle}
+    main-partner-src={args.mainPartnerSrc}
+    main-partner-href={args.mainPartnerHref}
+    main-partner-alt={args.mainPartnerAlt}
+    main-partner-style={args.mainPartnerStyle}
+    sub-partners={JSON.stringify(args.subPartners)}
+    bottom-links={JSON.stringify(args.bottomLinks)}
+    bottom-copyright={args.bottomCopyright}
+  ></dsfr-footer>
+{/snippet}
 
 <Story name="Défaut" />
