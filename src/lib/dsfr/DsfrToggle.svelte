@@ -48,6 +48,7 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Attribut form du composant */
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
