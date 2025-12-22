@@ -21,16 +21,16 @@ jobs:
           node-version: 24
 
       - name: Installer les dépendances
-        run: npm ci
+        run: npm install -g "$(jq -r '.packageManager' package.json)" && pnpm install
 
       - name: Installer Playwright
         run: ./node_modules/.bin/playwright install --with-deps
 
       - name: Construit le Storybook
-        run: npm run storybook:build
+        run: pnpm run storybook:build
 
       - name: Sers le Storybook et lance les tests
         run: |
           ./node_modules/.bin/concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "./node_modules/.bin/http-server storybook-static --port 6006 --silent" \
-            "./node_modules/.bin/wait-on tcp:127.0.0.1:6006 && npm run storybook:test"
+            "./node_modules/.bin/wait-on tcp:127.0.0.1:6006 && pnpm run storybook:test"

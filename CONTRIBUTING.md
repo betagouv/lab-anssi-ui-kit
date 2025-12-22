@@ -7,7 +7,7 @@ Pour contribuer à ce projet, veuillez suivre les étapes suivantes :
 1. Forkez le dépôt sur votre compte GitHub.
 2. Créez une branche dédiée à votre contribution (ex : `feature/mon-nouveau-composant`).
 3. Développez votre fonctionnalité ou correctif en respectant les conventions du projet.
-4. Vérifiez que le code build correctement (`npm run build`) et que les tests passent (`npm test`).
+4. Vérifiez que le code build correctement (`pnpm run build`) et que les tests passent (`pnpm test`).
 5. Soumettez une Pull Request (PR) détaillée sur le dépôt principal.
 6. Attendez la revue et les retours éventuels des mainteneurs.
 
@@ -17,9 +17,9 @@ Une PR pour l’ajout d’un nouveau composant doit contenir :
 
 - Le fichier du composant Svelte dans `src/lib/<chemin>/<composant>.svelte`.
 - Une story dédiée dans `stories/<chemin>/<composant>.stories.ts` ou `.stories.svelte`.
-- Des exemples d’utilisation et la documentation des props dans la story (format CSF recommandé).
+- Des exemples d'utilisation et la documentation des props dans la story (format CSF recommandé).
 - Des tests unitaires si le composant contient de la logique métier.
-- La vérification du build (`npm run build`) et des tests (`npm test`).
+- La vérification du build (`pnpm run build`) et des tests (`pnpm test`).
 
 Chaque story doit être écrite en respectant la syntax [Component Story Format (CSF)](https://storybook.js.org/docs/writing-stories#component-story-format) de Storybook, qui dans sa forme minimale est à écrire comme ci-dessous :
 

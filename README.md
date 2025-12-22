@@ -29,7 +29,7 @@ Le projet s’appuie sur des outils modernes tels que SvelteKit, Vite, Storybook
 - Svelte (version recommandée : >= 5.37.3)
 - Vite (version recommandée : >= 7.0.6)
 - Storybook (version recommandée : >= 9.1.1)
-- npm
+- pnpm (voir la version exacte spécifiée dans le `package.json`)
 
 ### Développement en local
 
@@ -38,7 +38,7 @@ Clonez le dépôt puis installez les dépendances :
 ```bash
 git clone https://github.com/betagouv/lab-anssi-ui-kit.git
 cd lab-anssi-ui-kit
-npm ci
+pnpm install
 ```
 
 ### Documentation interactive
@@ -49,7 +49,7 @@ Les stories sont regroupées dans le dossier `stories/` et sont écrites en resp
 Pour explorer et tester les composants en local, lancez Storybook à l'aide de la commande :
 
 ```bash
-npm run storybook:dev
+pnpm run storybook:dev
 ```
 
 Suite à l'exécution de cette commande, Storybook se lancera automatiquement en ouvrant une fenêtre de votre navigateur par défaut vers l'url [http://localhost:6006](http://localhost:6006).
@@ -60,12 +60,12 @@ Suite à l'exécution de cette commande, Storybook se lancera automatiquement en
 ## Usage
 
 L'intégralité des composants présents dans ce dépôts sont publiés sur NPM afin qu'ils puissent être consommés dans différents environnements front-end.<br/>
-La bibliothèque expose ses composants dans un dossier `dist/` qui est construit à l'aide de la commande `npm run build`.
+La bibliothèque expose ses composants dans un dossier `dist/` qui est construit à l'aide de la commande `pnpm run build`.
 
 Ainsi, pour pouvoir consommer les éléments de cette librairie dans votre projet, vous devrez commencer par installer le package à l'aide de cette commande :
 
 ```bash
-npm i --save-dev @lab-anssi/ui-kit@latest
+pnpm add -D @lab-anssi/ui-kit@latest
 ```
 
 Vous pouvez ensuite importer les composants dans vos projets **Svelte** ou utiliser les **WebComponents** générés dans n’importe quelle application web.
@@ -93,7 +93,7 @@ Une fois cet import effectué, les WebComponents sont prêts à être consommés
 ## Release
 
 - Mettre à jour le `package.json` avec la nouvelle version
-- Exécuter `npm i --package-lock-only`
+- Exécuter `pnpm install`
 - Faire un commit et une PR `[VERSION] Passe à la version X.X.X`
 - Valider la PR puis la merger
 - Dans `GitHub > Release` cliquer sur le bouton `Draft a new release`

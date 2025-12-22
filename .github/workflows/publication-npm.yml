@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Récupérer la version
-        run: echo "release_version=$(npm pkg get version --json | tr -d '\"')" >> $GITHUB_ENV
+        run: echo "release_version=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Installer Node.js
         uses: actions/setup-node@v3
@@ -24,22 +24,22 @@ jobs:
           registry-url: "https://registry.npmjs.org/"
 
       - name: Installer les dépendances
-        run: npm ci
+        run: npm install -g "$(jq -r '.packageManager' package.json)" && pnpm install
 
       - name: Installer Playwright
         run: ./node_modules/.bin/playwright install --with-deps
 
       - name: Exécuter les tests
-        run: npm run test
+        run: pnpm run test
 
       - name: Builder le package
-        run: npm run build
+        run: pnpm run build
 
       - name: Builder les styles
-        run: npm run build:styles:dsfr
+        run: pnpm run build:styles:dsfr
 
       - name: Publier sur NPM
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
