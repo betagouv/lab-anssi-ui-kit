@@ -12,29 +12,15 @@ const contenuSvelteOptionsComplexe = `
   }}
 />
 `;
-const contenuFichierDeclarationType = (
-  nomProp: string = "uneprops",
-  estOptionnelle: boolean = false,
-) => `
-import { SvelteComponent } from "svelte";
-declare const __propDef: {
-    props: {
-        ${nomProp}${estOptionnelle ? "?" : ""}: {
-          propsA: string;
-          propsB: string;
-        };
+const contenuSvelteScript = (nomProp: string = "uneprops", estOptionnelle: boolean = false) => `
+  interface Props {
+    ${nomProp}${estOptionnelle ? "?" : ""}: {
+      propsA: string;
+      propsB: string;
     };
-    events: {};
-    slots: {};
-    exports?: {} | undefined;
-    bindings?: string | undefined;
-};
-export type UnComposantProps = typeof __propDef.props;
-export type UnComposantEvents = typeof __propDef.events;
-export type UnComposantSlots = typeof __propDef.slots;
-export default class UnComposant extends SvelteComponent<UnComposantProps, UnComposantEvents, UnComposantSlots> {
-}
-export {};
+  }
+
+  let { ${nomProp} }: Props = $props();
 `;
 
 describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX)", () => {
@@ -42,7 +28,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
     it("sait extraire le nom pour une déclaration  simple", () => {
       const { nomWebComponent } = extraitPropsComposant(
         contenuSvelteOptionsSimple,
-        contenuFichierDeclarationType(),
+        contenuSvelteScript(),
       );
 
       expect(nomWebComponent).toBe("lab-anssi-un-composant");
@@ -51,7 +37,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
     it("sait extraire le nom pour une déclaration complexe", () => {
       const { nomWebComponent } = extraitPropsComposant(
         contenuSvelteOptionsComplexe,
-        contenuFichierDeclarationType(),
+        contenuSvelteScript(),
       );
 
       expect(nomWebComponent).toBe("lab-anssi-un-composant");
@@ -61,10 +47,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
   describe("sur extraction des props du web component", () => {
     describe("pour une déclaration simple", () => {
       it("sait extraire les props", () => {
-        const { props } = extraitPropsComposant(
-          contenuSvelteOptionsSimple,
-          contenuFichierDeclarationType(),
-        );
+        const { props } = extraitPropsComposant(contenuSvelteOptionsSimple, contenuSvelteScript());
 
         expect(props[0].nom).toBe("uneprops");
       });
@@ -72,7 +55,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
       it("sait dire si une props est optionnelle", () => {
         const { props } = extraitPropsComposant(
           contenuSvelteOptionsSimple,
-          contenuFichierDeclarationType("uneprops", true),
+          contenuSvelteScript("uneprops", true),
         );
 
         expect(props[0].optionnelle).toBe(true);
@@ -82,7 +65,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
         expect(() =>
           extraitPropsComposant(
             contenuSvelteOptionsSimple,
-            contenuFichierDeclarationType("unePropsAvecMajuscule"),
+            contenuSvelteScript("unePropsAvecMajuscule"),
           ),
         ).not.toThrowError();
       });
@@ -98,7 +81,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
 
         const { props } = extraitPropsComposant(
           contenuSvelteOptionsComplexeSansProps,
-          contenuFichierDeclarationType(),
+          contenuSvelteScript(),
         );
 
         expect(props).toEqual([]);
@@ -109,7 +92,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
       it("sait extraire les props", () => {
         const { props } = extraitPropsComposant(
           contenuSvelteOptionsComplexe,
-          contenuFichierDeclarationType("uneProps"),
+          contenuSvelteScript("uneProps"),
         );
 
         expect(props[0].nom).toBe("une-props");
@@ -118,7 +101,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
       it("sait dire si une props est optionnelle", () => {
         const { props } = extraitPropsComposant(
           contenuSvelteOptionsComplexe,
-          contenuFichierDeclarationType("uneProps", true),
+          contenuSvelteScript("uneProps", true),
         );
 
         expect(props[0]).toEqual({ nom: "une-props", optionnelle: true });
@@ -133,7 +116,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
         expect(() =>
           extraitPropsComposant(
             contenuSvelteOptionsComplexeAvecMajuscule,
-            contenuFichierDeclarationType("uneProps", true),
+            contenuSvelteScript("uneProps", true),
           ),
         ).toThrowError(
           "Il est impossible d'utiliser des props avec majuscules pour les web components",
