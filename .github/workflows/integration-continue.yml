@@ -23,19 +23,19 @@ jobs:
           node-version: 24
 
       - name: Installer les dépendances
-        run: npm ci
+        run: npm install -g "$(jq -r '.packageManager' package.json)" && pnpm install
 
       - name: Installer Playwright
         run: ./node_modules/.bin/playwright install --with-deps
 
       - name: Exécuter les tests
-        run: npm run test
+        run: pnpm run test
 
       - name: Contrôler le format
         run: ./node_modules/.bin/prettier -c .
 
       - name: Construit le Storybook
-        run: npm run storybook:build
+        run: pnpm run storybook:build
 
       - name: Builder le package
-        run: npm run build
+        run: pnpm run build
