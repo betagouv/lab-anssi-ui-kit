@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 import {
   assetsPath,
   extractDataUriSvg,
+  genereJSX,
   injecteNonce,
   replaceIconPaths,
   varEnv,
@@ -54,5 +55,5 @@ export default defineConfig({
       scss: viteScssPreprocessorOptions(varEnv),
     },
   },
-  plugins: [svelte({ emitCss: false }), injecteNonce()],
+  plugins: [svelte({ emitCss: false }), genereJSX(), injecteNonce()],
 });

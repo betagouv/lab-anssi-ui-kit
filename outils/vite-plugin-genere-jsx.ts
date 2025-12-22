@@ -3,7 +3,45 @@ import * as path from "path";
 import type { Plugin } from "vite";
 import * as ts from "typescript";
 import * as prettier from "prettier";
+import { parse } from "svelte/compiler";
 import { extraitPropsComposant } from "./extraction-props-composant";
+
+/**
+ * Extrait le contenu de la balise <script> d'un composant Svelte
+ * en utilisant le parser officiel Svelte.
+ *
+ * Pour gérer les composants avec du SCSS (qui ne peut pas être parsé par le
+ * parser CSS de Svelte), on remplace temporairement le contenu de <style>
+ * par du CSS vide valide avant le parsing, puis on utilise les positions de l'AST
+ * pour extraire le contenu du <script> du fichier original.
+ */
+function extraitScriptComposant(contenuSvelte: string): string | undefined {
+  try {
+    // Remplace le contenu de <style> par du CSS vide valide pour éviter les erreurs de parsing
+    // On garde les balises pour préserver les positions dans l'AST
+    const contenuAvecStyleVide = contenuSvelte.replace(
+      /(<style[^>]*>)[\s\S]*?(<\/style>)/g,
+      "$1$2",
+    );
+
+    // Parse le composant Svelte modifié
+    const ast = parse(contenuAvecStyleVide);
+
+    // Cherche le nœud <script> dans l'AST
+    const instanceScript = ast.instance;
+    if (instanceScript && instanceScript.content) {
+      const start = instanceScript.content.start;
+      const end = instanceScript.content.end;
+      return contenuSvelte.substring(start, end);
+    }
+
+    return undefined;
+  } catch (error) {
+    // Si le parsing échoue, on retourne undefined
+    console.error("Erreur lors du parsing Svelte:", error);
+    return undefined;
+  }
+}
 
 export default function genereJSX(): Plugin {
   let repertoireSortie = "build";
@@ -21,7 +59,7 @@ export default function genereJSX(): Plugin {
       }
       if (config.build.lib && config.build.lib.entry) {
         repertoireComposants = path.resolve(
-          config.build.lib.entry.toString().replace("/index.js", ""),
+          config.build.lib.entry.toString().replace(/\/index\.(js|ts)$/, ""),
         );
       }
     },
@@ -33,7 +71,7 @@ export default function genereJSX(): Plugin {
 
         let typesJSX = `declare namespace JSX {\n\tinterface IntrinsicElements {\n`;
 
-        const cheminFichierExport = path.join(repertoireComposants, "index.d.ts");
+        const cheminFichierExport = path.join(repertoireComposants, "index.ts");
         const contenuFichierExport = await fs.readFile(cheminFichierExport, "utf-8");
         for (const fichier of fichiersSvelte) {
           const chemin = path.join(repertoireComposants, fichier);
@@ -50,15 +88,16 @@ export default function genereJSX(): Plugin {
             throw new Error(
               `Impossible d'extraire le contenu du <svelte:options ... /> pour le fichier ${nomFichierSvelte}`,
             );
-          const contenuFichierDeclarationType = await fs.readFile(`${chemin}.d.ts`, "utf-8");
-          if (!contenuFichierDeclarationType)
+
+          const contenuSvelteScript = extraitScriptComposant(contenu);
+          if (!contenuSvelteScript)
             throw new Error(
-              `Impossible de trouver le fichier de déclaration '.d.ts' pour le fichier ${nomFichierSvelte}`,
+              `Impossible d'extraire le contenu du <script> pour le fichier ${nomFichierSvelte}`,
             );
 
           const { nomWebComponent, props } = extraitPropsComposant(
             contenuSvelteOptions,
-            contenuFichierDeclarationType,
+            contenuSvelteScript,
           );
 
           typesJSX += `"${nomWebComponent}": { ${props
