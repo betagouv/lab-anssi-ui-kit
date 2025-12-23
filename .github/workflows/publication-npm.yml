@@ -39,7 +39,7 @@ jobs:
         run: pnpm run build:styles:dsfr
 
       - name: Publier sur NPM
-        run: pnpm publish --provenance --access public
+        run: pnpm publish --provenance --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
