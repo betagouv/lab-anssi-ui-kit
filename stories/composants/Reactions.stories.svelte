@@ -1,10 +1,12 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
+
   import Reactions from "$lib/composants/Reactions.svelte";
 
   const { Story } = defineMeta({
-    component: Reactions,
     title: "Composants/ANSSI/Reactions",
+    component: Reactions,
     args: {
       reactions: [
         { id: "1", emoji: "🔥", compteur: 9 },
@@ -18,8 +20,20 @@
     parameters: {
       layout: "centered",
     },
+    render: template,
   });
+
+  type Args = ComponentProps<Reactions>;
 </script>
+
+{#snippet template(args: Args)}
+  <lab-anssi-reactions
+    reactions={args.reactions}
+    variant={args.variant}
+    tooltip-texte={args.tooltipTexte}
+    tooltip-id={args.tooltipId}
+  ></lab-anssi-reactions>
+{/snippet}
 
 <Story name="Defaut" />
 

@@ -1,15 +1,23 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { type ComponentProps } from "svelte";
 
   import type { Image } from "$lib/types";
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders";
 
+  // @ts-ignore: Required Import to use this component as webcomponent
   import Marelle from "$lib/composants/vitrines-produits/briques/marelle/Marelle.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import BriqueHero from "$lib/composants/vitrines-produits/briques/BriqueHero.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import BriqueTitreMultimedia from "$lib/composants/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import Temoignages from "$lib/composants/vitrines-produits/briques/temoignages/Temoignages.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import PresentationANSSI from "$lib/composants/vitrines-produits/briques/PresentationANSSI.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import RejoindreLaCommunaute from "$lib/composants/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
   import CarrouselTuiles from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/CarrouselTuiles.svelte";
 
   const imageAffichee: Image = {
@@ -71,11 +79,14 @@
         },
       ],
     },
+    tags: ["!autodocs"],
   });
+
+  type Args = ComponentProps<PresentationANSSI>;
 </script>
 
-{#snippet template(args)}
-  <BriqueHero
+{#snippet template(args: Args)}
+  <lab-anssi-brique-hero
     titre="MonAideCyber"
     soustitre="Des Aidants cyber mobilisés pour aider les entités publiques et privées à prendre leur cyberdépart !"
     illustration={imageAffichee}
@@ -88,9 +99,9 @@
       lien: "https://messervices.cyber.gouv.fr/cyberdepart",
       target: "_blank",
     }}
-  />
-  <CarrouselTuiles tuiles={args.tuiles} />
-  <BriqueTitreMultimedia
+  ></lab-anssi-brique-hero>
+  <lab-anssi-carrousel-tuiles tuiles={args.tuiles}></lab-anssi-carrousel-tuiles>
+  <lab-anssi-titre-multimedia
     titre="Découvrez MonAideCyber en vidéo"
     multimedia={{
       source:
@@ -99,16 +110,16 @@
         "https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Nouvelle_doctrine_homologation.vtt",
       imagedecouverture: genereImageDePlaceholder(792, 446, "Vidéo d'exemple"),
     }}
-  />
-  <Marelle
+  ></lab-anssi-titre-multimedia>
+  <lab-anssi-marelle
     titre="Titre"
     etapesmarelle={args.etapesmarelle}
     action={{
       titre: "Action",
       lien: "#",
     }}
-  />
-  <Temoignages
+  ></lab-anssi-marelle>
+  <lab-anssi-temoignages
     titre="Les témoignages de nos Aidants cyber"
     temoignages={[
       {
@@ -124,8 +135,8 @@
         source: "Un Aidant cyber, réserviste de la Police, dans le Rhône (69)",
       },
     ]}
-  />
-  <RejoindreLaCommunaute
+  ></lab-anssi-temoignages>
+  <lab-anssi-brique-rejoindre-la-communaute
     titre="Rejoignez la communauté des Aidants cyber !"
     raisons={[
       "Echanger directement avec les autres Aidants cyber",
@@ -133,8 +144,8 @@
     ]}
     action={{ titre: "Rejoindre la communauté", lien: "#" }}
     illustration={{ lien: genereImageDePlaceholder(600, 400, "Image de substitution"), alt: "" }}
-  />
-  <PresentationANSSI />
+  ></lab-anssi-brique-rejoindre-la-communaute>
+  <lab-anssi-presentation-anssi></lab-anssi-presentation-anssi>
 {/snippet}
 
 <Story name="Defaut" />

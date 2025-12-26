@@ -1,19 +1,36 @@
-<script module>
+<script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-
-  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
-  import DsfrDropdown from "$lib/dsfr/DsfrDropdown.svelte";
-  import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
-  import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
-  import Reactions from "$lib/composants/Reactions.svelte";
-  import Icone from "$lib/composants/Icone.svelte";
+  import { type ComponentProps } from "svelte";
 
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrDropdown from "$lib/dsfr/DsfrDropdown.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import Reactions from "$lib/composants/Reactions.svelte";
+
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import Icone from "$lib/composants/Icone.svelte";
+
   const { Story } = defineMeta({
     title: "Exemple/ANSSI/Carte Jeu",
+    component: Reactions,
     args: {
       reactions: [
         { id: "1", emoji: "🔥", compteur: 0 },
@@ -34,27 +51,30 @@
       dropdownButtonIconPlace: "only",
       masque: false,
     },
+    tags: ["!autodocs"],
     parameters: {
       layout: "centered",
     },
   });
+
+  type Args = ComponentProps<Reactions>;
 </script>
 
 <Story name="Défaut">
-  {#snippet template(args)}
+  {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
       <div class="lab-anssi-carte-jeux">
         <div class="lab-anssi-carte-jeux__header">
           <div class="lab-anssi-carte-jeux__actions">
-            <DsfrButton
+            <dsfr-button
               size="sm"
               kind="tertiary-no-outline"
               label="Modifier"
               hasIcon
               icon="edit-line"
-            />
-            <DsfrDropdown
+            ></dsfr-button>
+            <dsfr-dropdown
               align={args.dropdownAlign}
               collapseId={args.dropdownCollapseId}
               id={args.dropdownId}
@@ -64,18 +84,18 @@
               buttonIcon={args.dropdownButtonIcon}
               buttonIconPlace={args.dropdownButtonIconPlace}
             >
-              <DsfrToggle
+              <dsfr-toggle
                 left
                 label="Masquer de la vitrine des jeux"
                 id="toggleExemple"
                 onchange={() => (args.masque = !args.masque)}
-              />
-            </DsfrDropdown>
+              ></dsfr-toggle>
+            </dsfr-dropdown>
           </div>
 
           {#if args.masque}
             <p class="lab-anssi-carte-jeux__masque">
-              <Icone nom="eye-off-line" />
+              <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
               Masqué de la vitrine des jeux
             </p>
           {/if}
@@ -83,7 +103,7 @@
 
         <!-- Conteneur -->
         <div class="lab-anssi-carte-jeux__conteneur">
-          <DsfrCard
+          <dsfr-card
             title="Titre de la carte"
             src={Placeholder}
             hasHeaderBadge
@@ -95,26 +115,26 @@
             href="#"
             size="sm"
           >
-            <DsfrBadgesGroup
+            <dsfr-badges-group
               badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
               size="sm"
-            />
+            ></dsfr-badges-group>
 
-            <DsfrTagsGroup
+            <dsfr-tags-group
               tags={[{ id: "tag-1", label: "Libellé du tag" }]}
               size="sm"
               groupMarkup="div"
-            />
-          </DsfrCard>
+            ></dsfr-tags-group>
+          </dsfr-card>
         </div>
 
         <div class="lab-anssi-carte-jeux__reactions">
-          <Reactions
+          <lab-anssi-reactions
             reactions={args.reactions}
             style={args.style}
             tooltipTexte={args.tooltipTexte}
             tooltipId={args.tooltipId}
-          />
+          ></lab-anssi-reactions>
         </div>
       </div>
     </div>
@@ -168,20 +188,20 @@
     ],
   }}
 >
-  {#snippet template(args)}
+  {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
       <div class="lab-anssi-carte-jeux">
         <div class="lab-anssi-carte-jeux__header">
           <div class="lab-anssi-carte-jeux__actions">
-            <DsfrButton
+            <dsfr-button
               size="sm"
               kind="tertiary-no-outline"
               label="Modifier"
               hasIcon
               icon="edit-line"
-            />
-            <DsfrDropdown
+            ></dsfr-button>
+            <dsfr-dropdown
               align={args.dropdownAlign}
               collapseId={args.dropdownCollapseId}
               id={args.dropdownId}
@@ -191,18 +211,18 @@
               buttonIcon={args.dropdownButtonIcon}
               buttonIconPlace={args.dropdownButtonIconPlace}
             >
-              <DsfrToggle
+              <dsfr-toggle
                 left
                 label="Masquer de la vitrine des jeux"
                 id="toggleExemple"
                 onchange={() => (args.masque = !args.masque)}
-              />
-            </DsfrDropdown>
+              ></dsfr-toggle>
+            </dsfr-dropdown>
           </div>
 
           {#if args.masque}
             <p class="lab-anssi-carte-jeux__masque">
-              <Icone nom="eye-off-line" />
+              <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
               Masqué de la vitrine des jeux
             </p>
           {/if}
@@ -210,7 +230,7 @@
 
         <!-- Conteneur -->
         <div class="lab-anssi-carte-jeux__conteneur">
-          <DsfrCard
+          <dsfr-card
             title="Titre de la carte"
             src={Placeholder}
             hasHeaderBadge
@@ -222,26 +242,26 @@
             href="#"
             size="sm"
           >
-            <DsfrBadgesGroup
+            <dsfr-badges-group
               badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
               size="sm"
-            />
+            ></dsfr-badges-group>
 
-            <DsfrTagsGroup
+            <dsfr-tags-group
               tags={[{ id: "tag-1", label: "Libellé du tag" }]}
               size="sm"
               groupMarkup="div"
-            />
-          </DsfrCard>
+            ></dsfr-tags-group>
+          </dsfr-card>
         </div>
 
         <div class="lab-anssi-carte-jeux__reactions">
-          <Reactions
+          <lab-anssi-reactions
             reactions={args.reactions}
             style={args.style}
             tooltipTexte={args.tooltipTexte}
             tooltipId={args.tooltipId}
-          />
+          ></lab-anssi-reactions>
         </div>
       </div>
     </div>
@@ -295,20 +315,20 @@
     ],
   }}
 >
-  {#snippet template(args)}
+  {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
       <div class="lab-anssi-carte-jeux">
         <div class="lab-anssi-carte-jeux__header">
           <div class="lab-anssi-carte-jeux__actions">
-            <DsfrButton
+            <dsfr-button
               size="sm"
               kind="tertiary-no-outline"
               label="Modifier"
               hasIcon
               icon="edit-line"
-            />
-            <DsfrDropdown
+            ></dsfr-button>
+            <dsfr-dropdown
               align={args.dropdownAlign}
               collapseId={args.dropdownCollapseId}
               id={args.dropdownId}
@@ -318,18 +338,18 @@
               buttonIcon={args.dropdownButtonIcon}
               buttonIconPlace={args.dropdownButtonIconPlace}
             >
-              <DsfrToggle
+              <dsfr-toggle
                 left
                 label="Masquer de la vitrine des jeux"
                 id="toggleExemple"
                 onchange={() => (args.masque = !args.masque)}
-              />
-            </DsfrDropdown>
+              ></dsfr-toggle>
+            </dsfr-dropdown>
           </div>
 
           {#if args.masque}
             <p class="lab-anssi-carte-jeux__masque">
-              <Icone nom="eye-off-line" />
+              <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
               Masqué de la vitrine des jeux
             </p>
           {/if}
@@ -337,7 +357,7 @@
 
         <!-- Conteneur -->
         <div class="lab-anssi-carte-jeux__conteneur">
-          <DsfrCard
+          <dsfr-card
             title="Titre de la carte"
             src={Placeholder}
             hasHeaderBadge
@@ -349,26 +369,26 @@
             href="#"
             size="sm"
           >
-            <DsfrBadgesGroup
+            <dsfr-badges-group
               badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
               size="sm"
-            />
+            ></dsfr-badges-group>
 
-            <DsfrTagsGroup
+            <dsfr-tags-group
               tags={[{ id: "tag-1", label: "Libellé du tag" }]}
               size="sm"
               groupMarkup="div"
-            />
-          </DsfrCard>
+            ></dsfr-tags-group>
+          </dsfr-card>
         </div>
 
         <div class="lab-anssi-carte-jeux__reactions">
-          <Reactions
+          <lab-anssi-reactions
             reactions={args.reactions}
             style={args.style}
             tooltipTexte={args.tooltipTexte}
             tooltipId={args.tooltipId}
-          />
+          ></lab-anssi-reactions>
         </div>
       </div>
     </div>
@@ -422,20 +442,20 @@
     ],
   }}
 >
-  {#snippet template(args)}
+  {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
       <div class="lab-anssi-carte-jeux">
         <div class="lab-anssi-carte-jeux__header">
           <div class="lab-anssi-carte-jeux__actions">
-            <DsfrButton
+            <dsfr-button
               size="sm"
               kind="tertiary-no-outline"
               label="Modifier"
               hasIcon
               icon="edit-line"
-            />
-            <DsfrDropdown
+            ></dsfr-button>
+            <dsfr-dropdown
               align={args.dropdownAlign}
               collapseId={args.dropdownCollapseId}
               id={args.dropdownId}
@@ -445,18 +465,18 @@
               buttonIcon={args.dropdownButtonIcon}
               buttonIconPlace={args.dropdownButtonIconPlace}
             >
-              <DsfrToggle
+              <dsfr-toggle
                 left
                 label="Masquer de la vitrine des jeux"
                 id="toggleExemple"
                 onchange={() => (args.masque = !args.masque)}
-              />
-            </DsfrDropdown>
+              ></dsfr-toggle>
+            </dsfr-dropdown>
           </div>
 
           {#if args.masque}
             <p class="lab-anssi-carte-jeux__masque">
-              <Icone nom="eye-off-line" />
+              <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
               Masqué de la vitrine des jeux
             </p>
           {/if}
@@ -464,7 +484,7 @@
 
         <!-- Conteneur -->
         <div class="lab-anssi-carte-jeux__conteneur">
-          <DsfrCard
+          <dsfr-card
             title="Titre de la carte"
             src={Placeholder}
             hasHeaderBadge
@@ -476,26 +496,26 @@
             href="#"
             size="sm"
           >
-            <DsfrBadgesGroup
+            <dsfr-badges-group
               badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
               size="sm"
-            />
+            ></dsfr-badges-group>
 
-            <DsfrTagsGroup
+            <dsfr-tags-group
               tags={[{ id: "tag-1", label: "Libellé du tag" }]}
               size="sm"
               groupMarkup="div"
-            />
-          </DsfrCard>
+            ></dsfr-tags-group>
+          </dsfr-card>
         </div>
 
         <div class="lab-anssi-carte-jeux__reactions">
-          <Reactions
+          <lab-anssi-reactions
             reactions={args.reactions}
             style={args.style}
             tooltipTexte={args.tooltipTexte}
             tooltipId={args.tooltipId}
-          />
+          ></lab-anssi-reactions>
         </div>
       </div>
     </div>
@@ -540,20 +560,20 @@
 </Story>
 
 <Story name="Masqué" args={{ masque: true }}>
-  {#snippet template(args)}
+  {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
       <div class="lab-anssi-carte-jeux">
         <div class="lab-anssi-carte-jeux__header">
           <div class="lab-anssi-carte-jeux__actions">
-            <DsfrButton
+            <dsfr-button
               size="sm"
               kind="tertiary-no-outline"
               label="Modifier"
               hasIcon
               icon="edit-line"
-            />
-            <DsfrDropdown
+            ></dsfr-button>
+            <dsfr-dropdown
               align={args.dropdownAlign}
               collapseId={args.dropdownCollapseId}
               id={args.dropdownId}
@@ -563,19 +583,19 @@
               buttonIcon={args.dropdownButtonIcon}
               buttonIconPlace={args.dropdownButtonIconPlace}
             >
-              <DsfrToggle
+              <dsfr-toggle
                 left
                 label="Masquer de la vitrine des jeux"
                 id="toggleExemple"
                 checked={args.masque}
                 onchange={() => (args.masque = !args.masque)}
-              />
-            </DsfrDropdown>
+              ></dsfr-toggle>
+            </dsfr-dropdown>
           </div>
 
           {#if args.masque}
             <p class="lab-anssi-carte-jeux__masque">
-              <Icone nom="eye-off-line" />
+              <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
               Masqué de la vitrine des jeux
             </p>
           {/if}
@@ -583,7 +603,7 @@
 
         <!-- Conteneur -->
         <div class="lab-anssi-carte-jeux__conteneur">
-          <DsfrCard
+          <dsfr-card
             title="Titre de la carte"
             src={Placeholder}
             hasHeaderBadge
@@ -595,26 +615,26 @@
             href="#"
             size="sm"
           >
-            <DsfrBadgesGroup
+            <dsfr-badges-group
               badges={[{ label: "Libellé badge", accent: "purple-glycine" }]}
               size="sm"
-            />
+            ></dsfr-badges-group>
 
-            <DsfrTagsGroup
+            <dsfr-tags-group
               tags={[{ id: "tag-1", label: "Libellé du tag" }]}
               size="sm"
               groupMarkup="div"
-            />
-          </DsfrCard>
+            ></dsfr-tags-group>
+          </dsfr-card>
         </div>
 
         <div class="lab-anssi-carte-jeux__reactions">
-          <Reactions
+          <lab-anssi-reactions
             reactions={args.reactions}
             style={args.style}
             tooltipTexte={args.tooltipTexte}
             tooltipId={args.tooltipId}
-          />
+          ></lab-anssi-reactions>
         </div>
       </div>
     </div>
