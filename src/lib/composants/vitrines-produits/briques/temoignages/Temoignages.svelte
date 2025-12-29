@@ -4,23 +4,30 @@
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       temoignages: { reflect: false, type: "Array", attribute: "temoignages" },
+      size: { reflect: false, type: "String", attribute: "size" },
     },
   }}
 />
 
 <script lang="ts">
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import type { Temoignage } from "$lib/types";
-  import IconeTemoignage from "$lib/composants/vitrines-produits/briques/temoignages/IconeTemoignage.svelte";
+  import { setThemeable } from "$lib/utilitaires";
+
+  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
   import IconeFlecheGauche from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
+
+  setThemeable($host());
 
   interface Props {
     titre?: string;
     temoignages?: Temoignage[];
+    size?: "md" | "lg" | "xl";
   }
 
-  let { titre = "Les avis de nos utilisateurs", temoignages = [] }: Props = $props();
+  let { titre = "Les avis de nos utilisateurs", temoignages = [], size = "xl" }: Props = $props();
 
   let elementCarrousel: HTMLDivElement = $state();
 
@@ -39,27 +46,57 @@
 
 <Brique variation="transparent">
   <div class="brique-temoignages">
-    <h3>{titre}</h3>
+    {#if titre}
+      <h3>{titre}</h3>
+    {/if}
     <div class="carrousel-temoignages">
       <div class="conteneur-carrousel" bind:this={elementCarrousel}>
         {#each temoignages as temoignage, idx (idx)}
           <div class="temoignage">
-            <IconeTemoignage />
-            <h4>«&nbsp;{temoignage.citation}&nbsp;»</h4>
-            <h5>{temoignage.auteur}</h5>
-            <h6>{temoignage.source}</h6>
+            <dsfr-quote
+              text={temoignage.citation}
+              has-author={!!temoignage.auteur}
+              author={temoignage.auteur}
+              has-details={true}
+              sources={[temoignage.source]}
+              {size}
+            ></dsfr-quote>
           </div>
         {/each}
       </div>
       {#if temoignages.length > 1}
         <div class="conteneur-actions" class:deux-ou-moins={temoignages.length <= 2}>
-          <button class="precedent" type="button" onclick={() => scrollVers(Direction.GAUCHE)}>
-            <span class="icone"><IconeFlecheGauche /></span>Précédent
-          </button>
-          <button class="suivant" type="button" onclick={() => scrollVers(Direction.DROITE)}
-            >Suivant
-            <span class="icone"><IconeFlecheDroite /></span>
-          </button>
+          <dsfr-button
+            label="Précédent"
+            kind="tertiary-no-outline"
+            has-icon
+            icon="arrow-left-line"
+            role="button"
+            tabindex="0"
+            onclick={() => scrollVers(Direction.GAUCHE)}
+            onkeydown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                scrollVers(Direction.GAUCHE);
+              }
+            }}
+          ></dsfr-button>
+          <dsfr-button
+            label="Suivant"
+            kind="tertiary-no-outline"
+            has-icon
+            icon="arrow-right-line"
+            icon-place="right"
+            role="button"
+            tabindex="0"
+            onclick={() => scrollVers(Direction.DROITE)}
+            onkeydown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                scrollVers(Direction.DROITE);
+              }
+            }}
+          ></dsfr-button>
         </div>
       {/if}
     </div>
@@ -98,73 +135,15 @@
         -ms-overflow-style: none;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 24px;
+      }
 
-        .temoignage {
-          width: 100%;
-          flex-shrink: 0;
-          scroll-snap-align: start;
+      .temoignage {
+        width: 100%;
+        flex-shrink: 0;
+        scroll-snap-align: start;
 
-          &:after {
-            content: "";
-            border-bottom: 1px solid $border-default-grey;
-            width: 15%;
-            display: block;
-            padding-bottom: 32px;
-            margin: 0 auto 0 0;
-
-            @include a-partir-de(desktop) {
-              content: "";
-              border-bottom: none;
-            }
-          }
-
-          @include a-partir-de(tablette-grand) {
-            width: calc(50% - var(--gap-des-elements));
-          }
-
-          @include a-partir-de(desktop) {
-            // On rajoute du padding, donc on passe en border-box pour que ça « snap » toujours pile-poil
-            padding-left: 32px;
-            box-sizing: border-box;
-            border-left: 1px solid $border-default-grey;
-          }
-
-          color: #161616;
-          font-size: 1.25rem;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 2rem;
-
-          h4 {
-            margin: 8px 0 0;
-            font-size: 1.25rem;
-            font-weight: 700;
-            line-height: 2rem;
-          }
-
-          h5 {
-            margin: 16px 0 0;
-            color: $texte-defaut;
-            font-size: 0.875rem;
-            font-weight: 700;
-            line-height: 1.5rem;
-
-            @include a-partir-de(tablette) {
-              font-size: 1rem;
-              font-weight: 700;
-              line-height: 1.5rem;
-            }
-          }
-
-          h6 {
-            margin: 4px 0 0;
-            color: $text-mention-grey;
-
-            font-size: 0.75rem;
-            font-style: italic;
-            font-weight: 400;
-            line-height: 1.25rem;
-          }
+        @include a-partir-de(tablette-grand) {
+          width: calc(50% - var(--gap-des-elements));
         }
       }
 
@@ -212,8 +191,7 @@
           }
         }
 
-        .precedent > .icone,
-        .suivant > .icone {
+        .icone {
           display: flex;
           align-items: center;
         }
