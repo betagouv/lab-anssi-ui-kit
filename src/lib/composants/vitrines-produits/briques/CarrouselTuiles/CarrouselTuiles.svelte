@@ -8,9 +8,10 @@
 />
 
 <script lang="ts">
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
-  import Tuile from "$lib/composants/vitrines-produits/briques/Tuile.svelte";
   import type { Tuiles } from "$lib/types";
+
+  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import DsfrTile from "$lib/dsfr/DsfrTile.svelte";
   import IconeFlecheGauche from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
@@ -42,21 +43,26 @@
     <div class="conteneur-tuiles" bind:this={elementCarrousel}>
       <slot>
         {#each tuiles as tuile, idx (idx)}
-          <Tuile
-            illustration={tuile.illustration}
-            titre={tuile.titre}
-            contenu={tuile.contenu}
-            position={idx === 0 ? "premiere" : idx === tuiles.length - 1 ? "derniere" : null}
-          />
+          <div class="tuile">
+            <DsfrTile
+              title={tuile.titre}
+              hasDescription
+              description={tuile.contenu}
+              actionMarkup="false"
+              noLink={true}
+            >
+              <img slot="pictogram" src={tuile.illustration.lien} alt={tuile.illustration.alt} />
+            </DsfrTile>
+          </div>
         {/each}
       </slot>
     </div>
     <div class="conteneur-actions">
-      <button class="precedent" onclick={precedent}>
+      <button type="button" class="precedent" onclick={precedent}>
         <span class="icone"><IconeFlecheGauche /></span>
         Précédent
       </button>
-      <button class="suivant" onclick={suivant}>
+      <button type="button" class="suivant" onclick={suivant}>
         Suivant
         <span class="icone"><IconeFlecheDroite /></span>
       </button>
@@ -67,7 +73,6 @@
 <style lang="scss">
   .carrousel-tuiles {
     --espacement: 16px;
-    padding: 0;
 
     &.primaire {
       background: linear-gradient(
@@ -89,11 +94,10 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 0 0;
-  }
 
-  .conteneur-tuiles::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .conteneur-actions {
@@ -102,6 +106,11 @@
     justify-content: center;
     padding: 0 var(--espacement);
     gap: 24px;
+
+    .icone {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .conteneur-actions button {
@@ -135,19 +144,45 @@
     }
   }
 
-  .conteneur-actions .precedent > .icone,
-  .conteneur-actions .suivant > .icone {
+  .tuile {
+    --couleur-texte: #000000;
+
+    background: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    color: var(--couleur-texte);
+    min-width: 212px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    width: calc(100vw - 60px);
+    max-width: 384px;
+
+    &:first-child {
+      margin-left: var(--espacement);
+
+      @include a-partir-de(largeur-max-contenu) {
+        margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      margin-right: var(--espacement);
+
+      @include a-partir-de(largeur-max-contenu) {
+        margin-right: 0;
+      }
+    }
   }
 
   @include a-partir-de(desktop) {
     .carrousel-tuiles {
       --espacement: 24px;
+    }
 
-      .conteneur-actions {
-        display: none;
-      }
+    .conteneur-actions {
+      display: none;
     }
   }
 </style>
