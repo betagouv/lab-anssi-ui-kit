@@ -26,7 +26,7 @@
 
 <style lang="scss">
   section {
-    padding: 48px 16px;
+    padding: var(--padding-section, 48px 16px);
     box-sizing: border-box;
     text-align: left;
     color: white;
@@ -41,11 +41,11 @@
     }
 
     @include a-partir-de(tablette) {
-      padding: 72px 24px;
+      padding: var(--padding-section, 72px 24px);
     }
 
     @include a-partir-de(desktop) {
-      padding: 48px 24px;
+      padding: var(--padding-section, 48px 24px);
     }
 
     &.primaire {
