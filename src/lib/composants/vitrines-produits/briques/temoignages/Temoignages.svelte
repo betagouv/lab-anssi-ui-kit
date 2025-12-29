@@ -9,18 +9,20 @@
 />
 
 <script lang="ts">
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import type { Temoignage } from "$lib/types";
-  import IconeTemoignage from "$lib/composants/vitrines-produits/briques/temoignages/IconeTemoignage.svelte";
+
+  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
   import IconeFlecheGauche from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
   import IconeFlecheDroite from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
 
   interface Props {
     titre?: string;
     temoignages?: Temoignage[];
+    size?: "md" | "lg" | "xl";
   }
 
-  let { titre = "Les avis de nos utilisateurs", temoignages = [] }: Props = $props();
+  let { titre = "Les avis de nos utilisateurs", temoignages = [], size = "xl" }: Props = $props();
 
   let elementCarrousel: HTMLDivElement = $state();
 
@@ -44,10 +46,15 @@
       <div class="conteneur-carrousel" bind:this={elementCarrousel}>
         {#each temoignages as temoignage, idx (idx)}
           <div class="temoignage">
-            <IconeTemoignage />
-            <h4>«&nbsp;{temoignage.citation}&nbsp;»</h4>
-            <h5>{temoignage.auteur}</h5>
-            <h6>{temoignage.source}</h6>
+            <DsfrQuote
+              text={temoignage.citation}
+              hasAuthor={!!temoignage.auteur}
+              author={temoignage.auteur}
+              hasDetails={true}
+              sources={[temoignage.source]}
+              accent="blue-cumulus"
+              {size}
+            />
           </div>
         {/each}
       </div>
@@ -100,73 +107,16 @@
         -ms-overflow-style: none;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 24px;
+      }
 
-        .temoignage {
-          width: 100%;
-          flex-shrink: 0;
-          scroll-snap-align: start;
+      .temoignage {
+        width: 100%;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        color: #161616;
 
-          &:after {
-            content: "";
-            border-bottom: 1px solid $border-default-grey;
-            width: 15%;
-            display: block;
-            padding-bottom: 32px;
-            margin: 0 auto 0 0;
-
-            @include a-partir-de(desktop) {
-              content: "";
-              border-bottom: none;
-            }
-          }
-
-          @include a-partir-de(tablette-grand) {
-            width: calc(50% - var(--gap-des-elements));
-          }
-
-          @include a-partir-de(desktop) {
-            // On rajoute du padding, donc on passe en border-box pour que ça « snap » toujours pile-poil
-            padding-left: 32px;
-            box-sizing: border-box;
-            border-left: 1px solid $border-default-grey;
-          }
-
-          color: #161616;
-          font-size: 1.25rem;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 2rem;
-
-          h4 {
-            margin: 8px 0 0;
-            font-size: 1.25rem;
-            font-weight: 700;
-            line-height: 2rem;
-          }
-
-          h5 {
-            margin: 16px 0 0;
-            color: $texte-defaut;
-            font-size: 0.875rem;
-            font-weight: 700;
-            line-height: 1.5rem;
-
-            @include a-partir-de(tablette) {
-              font-size: 1rem;
-              font-weight: 700;
-              line-height: 1.5rem;
-            }
-          }
-
-          h6 {
-            margin: 4px 0 0;
-            color: $text-mention-grey;
-
-            font-size: 0.75rem;
-            font-style: italic;
-            font-weight: 400;
-            line-height: 1.25rem;
-          }
+        @include a-partir-de(tablette-grand) {
+          width: calc(50% - var(--gap-des-elements));
         }
       }
 
@@ -213,8 +163,7 @@
           }
         }
 
-        .precedent > .icone,
-        .suivant > .icone {
+        .icone {
           display: flex;
           align-items: center;
         }
