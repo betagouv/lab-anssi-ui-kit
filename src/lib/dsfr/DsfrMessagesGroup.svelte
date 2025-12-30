@@ -42,7 +42,7 @@
 </script>
 
 {#snippet message(status: string, message: string)}
-  <p class="fr-message fr-message--{status}" id="{id}-message-{status}">
+  <p id="{id}-message-{status}" class="fr-message fr-message--{status}">
     {message}
   </p>
 {/snippet}
