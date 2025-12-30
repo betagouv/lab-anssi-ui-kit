@@ -18,6 +18,7 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type CheckboxesSize = Extract<Size, "sm" | "md">;
   type Checkbox = {
@@ -114,16 +115,12 @@
       </div>
     </div>
   {/each}
-  {#if status !== "default" && (errorMessage || validMessage)}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    {#if status !== "default" && (errorMessage || validMessage)}
+      <DsfrMessagesGroup {id} {errorMessage} {validMessage} />
+    {/if}
+  </slot>
 </fieldset>
 
 <style lang="scss">
@@ -139,7 +136,11 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/fieldset";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();
