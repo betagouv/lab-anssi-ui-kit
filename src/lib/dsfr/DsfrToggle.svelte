@@ -16,6 +16,16 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -53,6 +63,8 @@
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -72,6 +84,7 @@
     validMessage,
     form,
     required,
+    internals,
     ...restProps
   }: Props = $props();
 
@@ -89,6 +102,16 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.checked);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    if (checked) {
+      internals.setFormValue(value ?? "on");
+    } else {
+      internals.setFormValue(null);
+    }
+  });
 </script>
 
 <div

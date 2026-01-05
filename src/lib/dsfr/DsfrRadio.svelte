@@ -93,6 +93,16 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    if (checked) {
+      internals.setFormValue(value);
+    } else {
+      internals.setFormValue(null);
+    }
+  });
 </script>
 
 <div class={["fr-radio-group", richClass, sizeClass]}>
