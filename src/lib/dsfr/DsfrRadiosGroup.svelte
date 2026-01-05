@@ -20,7 +20,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 

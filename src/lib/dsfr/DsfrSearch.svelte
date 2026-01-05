@@ -18,6 +18,16 @@
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -60,6 +70,8 @@
     readonly?: boolean;
     /** Rend le champ de saisie obligatoire */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -80,6 +92,7 @@
     pattern,
     readonly,
     required,
+    internals,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-search-bar--${size}`);
@@ -88,6 +101,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-search-bar", sizeClass]} role="search">

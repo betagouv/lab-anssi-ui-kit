@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Messages Group",

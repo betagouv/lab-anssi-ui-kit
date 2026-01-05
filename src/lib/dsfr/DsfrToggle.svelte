@@ -22,7 +22,7 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
-  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 

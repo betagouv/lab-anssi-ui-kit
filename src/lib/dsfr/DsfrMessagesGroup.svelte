@@ -74,6 +74,7 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   // DSFR Component styles
   @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/message";

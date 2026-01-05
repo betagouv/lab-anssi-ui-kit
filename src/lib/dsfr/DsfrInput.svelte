@@ -27,6 +27,13 @@
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+
         connectedCallback() {
           super.connectedCallback();
 
@@ -46,7 +53,7 @@
   import { createEventDispatcher } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
 
-  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -97,6 +104,8 @@
     required?: boolean;
     /** Valeur de l'attribut step du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_  */
     step?: number;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -124,6 +133,7 @@
     readonly,
     required,
     step,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -137,6 +147,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-input-group", disabledClass, statusClass]}>
