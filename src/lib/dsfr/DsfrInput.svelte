@@ -25,6 +25,16 @@
       required: { attribute: "required", type: "Boolean" },
       step: { attribute: "step", type: "Number" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -80,6 +90,8 @@
     required?: boolean;
     /** Valeur de l'attribut step du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_  */
     step?: number;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -107,6 +119,7 @@
     readonly,
     required,
     step,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -120,6 +133,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-input-group", disabledClass, statusClass]}>

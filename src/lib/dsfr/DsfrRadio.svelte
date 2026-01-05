@@ -16,6 +16,16 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -51,6 +61,8 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -69,6 +81,7 @@
     disabled,
     form,
     required,
+    internals,
   }: Props = $props();
 
   const richClass = $derived.by(() => {

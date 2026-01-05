@@ -19,6 +19,16 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -67,6 +77,8 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -87,6 +99,7 @@
     infoMessage,
     form,
     required,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -98,6 +111,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
