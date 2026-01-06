@@ -19,8 +19,8 @@
 </p>
 <p>
   L'ANSSI soumet {nomService} à un rythme d'homologation soutenu dans le cadre d'une démarche de renforcement
-  continu de la sécurité du service numérique, dont plusieurs éléments clés mais non exhaustifs sont
-  résumés ci-dessous.
+  continu de la sécurité du service numérique, dont plusieurs éléments clés mais non exhaustifs sont résumés
+  ci-dessous.
 </p>
 <h2>Gouvernance</h2>
 <p>
