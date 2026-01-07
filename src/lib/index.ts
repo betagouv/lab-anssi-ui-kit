@@ -27,6 +27,7 @@ export { default as Hero } from "./composants/Hero.svelte";
 export { default as MultiSelect } from "./composants/MultiSelect.svelte";
 export { default as Reactions } from "./composants/Reactions.svelte";
 
+export { default as DsfrAccordion } from "./dsfr/DsfrAccordion.svelte";
 export { default as DsfrAlert } from "./dsfr/DsfrAlert.svelte";
 export { default as DsfrBadge } from "./dsfr/DsfrBadge.svelte";
 export { default as DsfrBadgesGroup } from "./dsfr/DsfrBadgesGroup.svelte";
