@@ -105,6 +105,7 @@
     value = $bindable(),
     placeholder,
     name,
+    autocomplete,
     disabled,
     status = "default",
     errorMessage,
@@ -122,22 +123,159 @@
     internals,
   }: Props = $props();
 
+  let formControlElement: HTMLInputElement;
+  let customValidityMessage = $state("");
+  let hasInteracted = $state(false);
+  let host = $host();
+  let localStatus = $state<"default" | "error">("default");
+  let localErrorMessage = $state("");
+
+  // Détermine si l'utilisateur a pris la main sur le status
+  const isUserControlled = $derived(status !== "default");
+
+  // Status et message calculés à afficher
+  const computedStatus = $derived(isUserControlled ? status : localStatus);
+  const computedErrorMessage = $derived(isUserControlled ? errorMessage : localErrorMessage);
+
   const disabledClass = $derived.by(() => {
     return disabled && "fr-input-group--disabled";
   });
   const iconClass = $derived(setIconClass(icon));
-  const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
+  const statusClass = $derived(
+    computedStatus !== "info" &&
+      computedStatus !== "default" &&
+      `fr-input-group--${computedStatus}`,
+  );
   const isTypeDateOrNumber = $derived(type === "number" || type === "date");
 
+  /**
+   * Met à jour la validité de l'input.
+   * Vérifie les messages de validité personnalisés et la validité native du formulaire.
+   * Met à jour l'état local et le message d'erreur si l'utilisateur a interagi avec le champ.
+   */
+  function updateValidity() {
+    if (!internals || !formControlElement) return;
+
+    if (customValidityMessage) {
+      internals.setValidity({ customError: true }, customValidityMessage, formControlElement);
+
+      if (hasInteracted) {
+        localStatus = "error";
+        localErrorMessage = customValidityMessage;
+      }
+    } else if (!formControlElement.validity.valid) {
+      internals.setValidity(
+        formControlElement.validity,
+        formControlElement.validationMessage,
+        formControlElement,
+      );
+
+      if (hasInteracted) {
+        localStatus = "error";
+        localErrorMessage = formControlElement.validationMessage;
+      }
+    } else {
+      internals.setValidity({});
+
+      if (hasInteracted) {
+        localStatus = "default";
+        localErrorMessage = "";
+      }
+    }
+  }
+
+  /**
+   * Gère l'événement blur de l'input.
+   * Marque le composant comme ayant interagi si la valeur n'est pas vide.
+   *
+   * @param {Event} event - L'événement blur déclenché
+   */
+  function handleBlur(event: Event) {
+    const target = event.target as HTMLInputElement;
+
+    if (!hasInteracted && target.value) {
+      hasInteracted = true;
+      updateValidity();
+    }
+  }
+
+  /**
+   * Gère l'événement input de l'input.
+   * Met à jour la valeur du composant et déclenche l'événement 'valuechanged'.
+   *
+   * @param {Event} event - L'événement input déclenché
+   */
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
+    value = target.value;
+
     dispatch("valuechanged", target.value);
   }
+
+  /**
+   * Gère l'événement invalid de l'input.
+   * Marque le composant comme ayant interagi et met à jour la validité.
+   *
+   * @param {Event} event - L'événement invalid déclenché
+   */
+  function handleInvalid(event: Event) {
+    event.preventDefault();
+    hasInteracted = true;
+    updateValidity();
+  }
+
+  /**
+   * Gère l'événement formreset du formulaire.
+   * Réinitialise l'état du composant lors du reset du formulaire.
+   */
+  function handleFormReset() {
+    value = "";
+    hasInteracted = false;
+    localStatus = "default";
+    localErrorMessage = "";
+    customValidityMessage = "";
+
+    if (internals) {
+      internals.setValidity({});
+    }
+  }
+
+  /**
+   * Définit un message de validité personnalisé pour l'input.
+   * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
+   *
+   * @param {string} message - Le message de validité personnalisé à définir
+   */
+  export function setCustomValidity(message: string) {
+    customValidityMessage = message;
+    updateValidity();
+  }
+
+  $effect(() => {
+    if (!internals || !formControlElement) return;
+
+    internals.setFormValue(value ?? "");
+    updateValidity();
+  });
+
+  $effect(() => {
+    if (!host) return;
+
+    host.addEventListener("invalid", handleInvalid);
+
+    return () => {
+      host.removeEventListener("invalid", handleInvalid);
+    };
+  });
 
   $effect(() => {
     if (!internals) return;
 
-    internals.setFormValue(value ?? "");
+    internals.form?.addEventListener("reset", handleFormReset);
+
+    return () => {
+      internals.form?.removeEventListener("reset", handleFormReset);
+    };
   });
 </script>
 
@@ -153,6 +291,7 @@
   {#if icon}
     <div class={["fr-input-wrap", iconClass]}>
       <input
+        bind:this={formControlElement}
         {type}
         {id}
         class="fr-input"
@@ -160,8 +299,11 @@
         bind:value
         {placeholder}
         {disabled}
-        aria-describedby={status ? `${id}-messages` : undefined}
+        aria-describedby={computedStatus ? `${id}-messages` : undefined}
+        {autocomplete}
         oninput={handleInput}
+        onblur={handleBlur}
+        oninvalid={handleInvalid}
         {form}
         {readonly}
         {required}
@@ -175,6 +317,7 @@
     </div>
   {:else}
     <input
+      bind:this={formControlElement}
       {type}
       {id}
       class="fr-input"
@@ -182,8 +325,11 @@
       bind:value
       {placeholder}
       {disabled}
-      aria-describedby={status ? `${id}-messages` : undefined}
+      aria-describedby={computedStatus ? `${id}-messages` : undefined}
+      {autocomplete}
       oninput={handleInput}
+      onblur={handleBlur}
+      oninvalid={handleInvalid}
       {form}
       {readonly}
       {required}
@@ -197,8 +343,14 @@
   {/if}
 
   <slot name="messages-group">
-    {#if status !== "default"}
-      <DsfrMessagesGroup {id} {errorMessage} {validMessage} {infoMessage} spaced />
+    {#if computedStatus !== "default"}
+      <DsfrMessagesGroup
+        {id}
+        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        {validMessage}
+        {infoMessage}
+        spaced
+      />
     {/if}
   </slot>
 </div>
