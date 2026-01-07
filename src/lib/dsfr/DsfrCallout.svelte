@@ -69,7 +69,9 @@
   {/if}
   <p class="fr-callout__text">{text}</p>
   {#if hasButton}
-    <DsfrButton label={buttonLabel} />
+    <slot name="button">
+      <DsfrButton label={buttonLabel} />
+    </slot>
   {/if}
 </div>
 
