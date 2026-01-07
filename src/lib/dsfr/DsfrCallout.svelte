@@ -43,7 +43,7 @@
     /** Libellé du bouton */
     buttonLabel: string;
     /** Couleur d'accentuation */
-    accent?: Accent;
+    accent?: "default" | Accent;
   }
 
   let {
@@ -56,7 +56,7 @@
     titleMarkup = "h3",
     hasButton = false,
     buttonLabel = "Libellé du bouton",
-    accent,
+    accent = "default",
   }: Props = $props();
 
   const accentClass = $derived(accent && `fr-callout--${accent}`);
@@ -69,7 +69,9 @@
   {/if}
   <p class="fr-callout__text">{text}</p>
   {#if hasButton}
-    <DsfrButton label={buttonLabel} />
+    <slot name="button">
+      <DsfrButton label={buttonLabel} />
+    </slot>
   {/if}
 </div>
 
@@ -88,6 +90,10 @@
   @include set-dsfr-sizing("callout") {
     &__text:not(:last-child) {
       margin-bottom: 1rem;
+    }
+
+    &--default {
+      --border-default-blue-france: #0279d0;
     }
   }
 </style>
