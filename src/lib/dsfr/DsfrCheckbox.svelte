@@ -16,12 +16,23 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { createEventDispatcher } from "svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type ChecboxSize = Extract<Size, "sm" | "md">;
   interface Props {
@@ -51,6 +62,8 @@
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -69,6 +82,7 @@
     validMessage,
     form,
     required,
+    internals,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-checkbox-group--${size}`);
@@ -77,6 +91,16 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.checked);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    if (checked) {
+      internals.setFormValue(value ?? "on");
+    } else {
+      internals.setFormValue(null);
+    }
+  });
 </script>
 
 <div class={["fr-checkbox-group", sizeClass, `fr-checkbox-group--${status}`]}>
@@ -104,16 +128,11 @@
     {/if}
   </label>
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+  <slot name="messages-group">
+    {#if status !== "default"}
+      <DsfrMessagesGroup {id} {errorMessage} {validMessage} spaced />
+    {/if}
+  </slot>
 </div>
 
 <style lang="scss">
@@ -129,7 +148,10 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();

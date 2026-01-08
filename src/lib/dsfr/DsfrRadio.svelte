@@ -16,6 +16,16 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -51,6 +61,8 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -69,6 +81,7 @@
     disabled,
     form,
     required,
+    internals,
   }: Props = $props();
 
   const richClass = $derived.by(() => {
@@ -103,7 +116,10 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
 
   @include set-shadow-host();

@@ -25,12 +25,23 @@
       required: { attribute: "required", type: "Boolean" },
       step: { attribute: "step", type: "Number" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { setIconClass } from "$lib/utilitaires";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   interface Props {
     /** Attribut id du champs de saisie */
@@ -79,6 +90,8 @@
     required?: boolean;
     /** Valeur de l'attribut step du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_  */
     step?: number;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -106,6 +119,7 @@
     readonly,
     required,
     step,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -119,6 +133,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-input-group", disabledClass, statusClass]}>
@@ -176,16 +196,11 @@
     />
   {/if}
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+  <slot name="messages-group">
+    {#if status !== "default"}
+      <DsfrMessagesGroup {id} {errorMessage} {validMessage} {infoMessage} spaced />
+    {/if}
+  </slot>
 </div>
 
 <style lang="scss">
@@ -201,7 +216,10 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();

@@ -19,11 +19,22 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type Option = {
     value: string;
@@ -66,6 +77,8 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -86,6 +99,7 @@
     infoMessage,
     form,
     required,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -97,6 +111,12 @@
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
@@ -131,16 +151,12 @@
       {/each}
     {/if}
   </select>
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    {#if status !== "default"}
+      <DsfrMessagesGroup {id} {errorMessage} {validMessage} {infoMessage} spaced />
+    {/if}
+  </slot>
 </div>
 
 <style lang="scss">
@@ -155,7 +171,10 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/select";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   @include set-shadow-host();

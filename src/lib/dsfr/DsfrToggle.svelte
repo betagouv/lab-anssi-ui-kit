@@ -21,6 +21,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type Status = "default" | "valid" | "error";
   interface Props {
@@ -121,13 +122,12 @@
       {hint}
     </p>
   {/if}
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={messagesGroupId} aria-live="polite">
-      <p class={["fr-message", `fr-message--${status}`]} id={`${messagesGroupId}-${status}`}>
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    {#if status !== "default"}
+      <DsfrMessagesGroup {id} {errorMessage} {validMessage} spaced />
+    {/if}
+  </slot>
 </div>
 
 <style lang="scss">
@@ -141,7 +141,9 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   // DSFR Components
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
+  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
+  @include _form-scheme();
   @import "@gouvfr/dsfr/dist/component/toggle/toggle.main.css";
 
   @include set-shadow-host();
