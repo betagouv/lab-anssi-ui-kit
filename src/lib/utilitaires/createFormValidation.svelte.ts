@@ -26,7 +26,7 @@ export function createFormValidation() {
   let localErrorMessage = $state("");
 
   let internals: ElementInternals | undefined;
-  let formControlElement: HTMLInputElement | HTMLTextAreaElement | undefined;
+  let formControlElement: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | undefined;
   let host: HTMLElement | undefined;
   let resetValueCallback: (() => void) | undefined;
 
@@ -73,7 +73,7 @@ export function createFormValidation() {
    * @param {Event} event - L'événement blur déclenché
    */
   function handleBlur(event: Event) {
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
+    const target = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
     if (!hasInteracted && target.value) {
       hasInteracted = true;
@@ -128,13 +128,13 @@ export function createFormValidation() {
    * Cette méthode doit être appelée dans un $effect pour établir les liaisons.
    *
    * @param {ElementInternals} internalsRef - L'interface ElementInternals du custom element
-   * @param {HTMLInputElement | HTMLTextAreaElement} element - L'élément de formulaire natif
+   * @param {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} element - L'élément de formulaire natif
    * @param {HTMLElement} hostElement - L'élément hôte du custom element
    * @param {() => void} resetCallback - Fonction pour réinitialiser la valeur lors du reset
    */
   function setup(
     internalsRef: ElementInternals | undefined,
-    element: HTMLInputElement | HTMLTextAreaElement | undefined,
+    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | undefined,
     hostElement: HTMLElement | undefined,
     resetCallback: () => void,
   ) {
