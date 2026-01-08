@@ -36,6 +36,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   interface Props {
@@ -103,69 +104,19 @@
   }: Props = $props();
 
   let formControlElement: HTMLTextAreaElement;
-  let customValidityMessage = $state("");
-  let hasInteracted = $state(false);
   let host = $host();
-  let localStatus = $state<"default" | "error">("default");
-  let localErrorMessage = $state("");
+
+  // Création de l'état de validation partagé
+  const formValidation = createFormValidation();
 
   // Détermine si l'utilisateur a pris la main sur le status
   const isUserControlled = $derived(status !== "default");
 
   // Status et message calculés à afficher
-  const computedStatus = $derived(isUserControlled ? status : localStatus);
-  const computedErrorMessage = $derived(isUserControlled ? errorMessage : localErrorMessage);
-
-  /**
-   * Met à jour la validité du textarea.
-   * Vérifie les messages de validité personnalisés et la validité native du formulaire.
-   * Met à jour l'état local et le message d'erreur si l'utilisateur a interagi avec le champ.
-   */
-  function updateValidity() {
-    if (!internals || !formControlElement) return;
-
-    if (customValidityMessage) {
-      internals.setValidity({ customError: true }, customValidityMessage, formControlElement);
-
-      if (hasInteracted) {
-        localStatus = "error";
-        localErrorMessage = customValidityMessage;
-      }
-    } else if (!formControlElement.validity.valid) {
-      internals.setValidity(
-        formControlElement.validity,
-        formControlElement.validationMessage,
-        formControlElement,
-      );
-
-      if (hasInteracted) {
-        localStatus = "error";
-        localErrorMessage = formControlElement.validationMessage;
-      }
-    } else {
-      internals.setValidity({});
-
-      if (hasInteracted) {
-        localStatus = "default";
-        localErrorMessage = "";
-      }
-    }
-  }
-
-  /**
-   * Gère l'événement blur du textarea.
-   * Marque le composant comme ayant interagi si la valeur n'est pas vide.
-   *
-   * @param {Event} event - L'événement blur déclenché
-   */
-  function handleBlur(event: Event) {
-    const target = event.target as HTMLTextAreaElement;
-
-    if (!hasInteracted && target.value) {
-      hasInteracted = true;
-      updateValidity();
-    }
-  }
+  const computedStatus = $derived(isUserControlled ? status : formValidation.localStatus);
+  const computedErrorMessage = $derived(
+    isUserControlled ? errorMessage : formValidation.localErrorMessage,
+  );
 
   /**
    * Gère l'événement input du textarea.
@@ -181,69 +132,30 @@
   }
 
   /**
-   * Gère l'événement invalid du textarea.
-   * Marque le composant comme ayant interagi et met à jour la validité.
-   *
-   * @param {Event} event - L'événement invalid déclenché
-   */
-  function handleInvalid(event: Event) {
-    event.preventDefault();
-    hasInteracted = true;
-    updateValidity();
-  }
-
-  /**
    * Définit un message de validité personnalisé pour le textarea.
    * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
    *
    * @param {string} message - Le message de validité personnalisé à définir
    */
   export function setCustomValidity(message: string) {
-    customValidityMessage = message;
-    updateValidity();
+    formValidation.setCustomValidity(message);
   }
 
+  // Configure la validation avec les références nécessaires
   $effect(() => {
-    if (!internals || !formControlElement) return;
-
-    internals.setFormValue(value ?? "");
-    updateValidity();
+    formValidation.setup(internals, formControlElement, host, () => {
+      value = "";
+    });
   });
 
-  /**
-   * Gère l'événement formreset du formulaire.
-   * Réinitialise l'état du composant lors du reset du formulaire.
-   */
-  function handleFormReset() {
-    value = "";
-    hasInteracted = false;
-    localStatus = "default";
-    localErrorMessage = "";
-    customValidityMessage = "";
-
-    if (internals) {
-      internals.setValidity({});
-    }
-  }
-
+  // Synchronise la valeur du formulaire et met à jour la validité
   $effect(() => {
-    if (!host) return;
-
-    host.addEventListener("invalid", handleInvalid);
-
-    return () => {
-      host.removeEventListener("invalid", handleInvalid);
-    };
+    formValidation.syncFormValue(value);
   });
 
+  // Attache les event listeners pour la validation
   $effect(() => {
-    if (!internals) return;
-
-    internals.form?.addEventListener("reset", handleFormReset);
-
-    return () => {
-      internals.form?.removeEventListener("reset", handleFormReset);
-    };
+    return formValidation.attachListeners();
   });
 
   const statusClass = $derived(
@@ -282,8 +194,8 @@
     {readonly}
     {required}
     oninput={handleInput}
-    onblur={handleBlur}
-    oninvalid={handleInvalid}
+    onblur={formValidation.handleBlur}
+    oninvalid={formValidation.handleInvalid}
   ></textarea>
 
   <slot name="messages-group">
