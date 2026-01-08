@@ -34,6 +34,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type Option = {
@@ -102,20 +103,68 @@
     internals,
   }: Props = $props();
 
+  let formControlElement: HTMLSelectElement;
+  let host = $host();
+
+  // Création de l'état de validation partagé
+  const formValidation = createFormValidation();
+
+  // Détermine si l'utilisateur a pris la main sur le status
+  const isUserControlled = $derived(status !== "default");
+
+  // Status et message calculés à afficher
+  const computedStatus = $derived(isUserControlled ? status : formValidation.localStatus);
+  const computedErrorMessage = $derived(
+    isUserControlled ? errorMessage : formValidation.localErrorMessage,
+  );
+
   const disabledClass = $derived.by(() => {
     return disabled && "fr-select-group--disabled";
   });
-  const statusClass = $derived(status !== "info" && `fr-select-group--${status}`);
+  const statusClass = $derived(
+    computedStatus !== "info" &&
+      computedStatus !== "default" &&
+      `fr-select-group--${computedStatus}`,
+  );
 
+  /**
+   * Gère l'événement change du select.
+   * Met à jour la valeur du composant et déclenche l'événement 'valuechanged'.
+   *
+   * @param {Event} event - L'événement change déclenché
+   */
   function handleChange(event: Event) {
-    const target = event.target as HTMLInputElement;
+    const target = event.target as HTMLSelectElement;
+    value = target.value;
+
     dispatch("valuechanged", target.value);
   }
 
-  $effect(() => {
-    if (!internals) return;
+  /**
+   * Définit un message de validité personnalisé pour le select.
+   * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
+   *
+   * @param {string} message - Le message de validité personnalisé à définir
+   */
+  export function setCustomValidity(message: string) {
+    formValidation.setCustomValidity(message);
+  }
 
-    internals.setFormValue(value ?? "");
+  // Configure la validation avec les références nécessaires
+  $effect(() => {
+    formValidation.setup(internals, formControlElement, host, () => {
+      value = options?.[0]?.value ?? "";
+    });
+  });
+
+  // Synchronise la valeur du formulaire et met à jour la validité
+  $effect(() => {
+    formValidation.syncFormValue(value);
+  });
+
+  // Attache les event listeners pour la validation
+  $effect(() => {
+    return formValidation.attachListeners();
   });
 </script>
 
@@ -128,13 +177,16 @@
     {/if}
   </label>
   <select
+    bind:this={formControlElement}
     class="fr-select"
-    aria-describedby={status ? `${id}-messages` : undefined}
+    aria-describedby={computedStatus ? `${id}-messages` : undefined}
     {id}
     name={id}
     bind:value
     {disabled}
     onchange={handleChange}
+    onblur={formValidation.handleBlur}
+    oninvalid={formValidation.handleInvalid}
     {form}
     {required}
   >
@@ -153,8 +205,14 @@
   </select>
 
   <slot name="messages-group">
-    {#if status !== "default"}
-      <DsfrMessagesGroup {id} {errorMessage} {validMessage} {infoMessage} spaced />
+    {#if computedStatus !== "default"}
+      <DsfrMessagesGroup
+        {id}
+        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        {validMessage}
+        {infoMessage}
+        spaced
+      />
     {/if}
   </slot>
 </div>
