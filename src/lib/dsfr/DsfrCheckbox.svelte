@@ -32,6 +32,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { createEventDispatcher } from "svelte";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type ChecboxSize = Extract<Size, "sm" | "md">;
@@ -85,34 +86,89 @@
     internals,
   }: Props = $props();
 
-  const sizeClass = $derived(`fr-checkbox-group--${size}`);
+  let formControlElement: HTMLInputElement;
+  let host = $host();
 
+  // Création de l'état de validation partagé
+  const formValidation = createFormValidation();
+
+  // Détermine si l'utilisateur a pris la main sur le status
+  const isUserControlled = $derived(status !== "default");
+
+  // Status et message calculés à afficher
+  const computedStatus = $derived(isUserControlled ? status : formValidation.localStatus);
+  const computedErrorMessage = $derived(
+    isUserControlled ? errorMessage : formValidation.localErrorMessage,
+  );
+
+  const sizeClass = $derived(`fr-checkbox-group--${size}`);
+  const statusClass = $derived(
+    computedStatus !== "default" && `fr-checkbox-group--${computedStatus}`,
+  );
+
+  /**
+   * Gère l'événement change de la checkbox.
+   * Met à jour la valeur du composant et déclenche l'événement 'valuechanged'.
+   *
+   * @param {Event} event - L'événement change déclenché
+   */
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.checked);
+    checked = target.checked;
+
+    dispatch("valuechanged", checked);
   }
 
+  /**
+   * Définit un message de validité personnalisé pour la checkbox.
+   * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
+   *
+   * @param {string} message - Le message de validité personnalisé à définir
+   */
+  export function setCustomValidity(message: string) {
+    formValidation.setCustomValidity(message);
+  }
+
+  // Configure la validation avec les références nécessaires
   $effect(() => {
-    if (!internals) return;
+    formValidation.setup(internals, formControlElement, host, () => {
+      checked = false;
+    });
+  });
+
+  // Synchronise la valeur du formulaire et met à jour la validité
+  // Pour les checkboxes, on envoie la valeur ou null selon l'état checked
+  $effect(() => {
+    if (!internals || !formControlElement) return;
 
     if (checked) {
       internals.setFormValue(value ?? "on");
     } else {
       internals.setFormValue(null);
     }
+
+    formValidation.updateValidity();
+  });
+
+  // Attache les event listeners pour la validation
+  $effect(() => {
+    return formValidation.attachListeners();
   });
 </script>
 
-<div class={["fr-checkbox-group", sizeClass, `fr-checkbox-group--${status}`]}>
+<div class={["fr-checkbox-group", sizeClass, statusClass]}>
   <input
+    bind:this={formControlElement}
     type="checkbox"
     {id}
     {name}
     {disabled}
     {value}
     bind:checked
-    aria-describedby={status ? `${id}-messages` : undefined}
+    aria-describedby={computedStatus ? `${id}-messages` : undefined}
     onchange={handleChange}
+    onblur={formValidation.handleBlur}
+    oninvalid={formValidation.handleInvalid}
     {form}
     {required}
   />
@@ -129,8 +185,13 @@
   </label>
 
   <slot name="messages-group">
-    {#if status !== "default"}
-      <DsfrMessagesGroup {id} {errorMessage} {validMessage} spaced />
+    {#if computedStatus !== "default"}
+      <DsfrMessagesGroup
+        {id}
+        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        {validMessage}
+        spaced
+      />
     {/if}
   </slot>
 </div>
