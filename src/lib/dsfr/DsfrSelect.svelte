@@ -12,13 +12,14 @@
       hint: { attribute: "hint", type: "String" },
       placeholder: { attribute: "placeholder", type: "String" },
       placeholderDisabled: { attribute: "placeholder-disabled", type: "Boolean" },
-      disabled: { attribute: "disabled", type: "Boolean" },
+      disabled: { attribute: "disabled", type: "Boolean", reflect: true },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
       infoMessage: { attribute: "info-message", type: "String" },
-      form: { attribute: "form", type: "String" },
+      form: { attribute: "form", type: "String", reflect: true },
       required: { attribute: "required", type: "Boolean" },
+      name: { attribute: "name", type: "String", reflect: true },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -36,6 +37,7 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -87,6 +89,8 @@
     onvaluechanged?: (value: string) => void;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Attribut name du champs de saisie */
+    name?: string;
   }
 
   const dispatch = createEventDispatcher();
@@ -110,23 +114,79 @@
     required,
     onvaluechanged,
     internals,
+    name,
   }: Props = $props();
+
+  let formControlElement: HTMLSelectElement;
+  let host = $host();
+
+  // Création de l'état de validation partagé
+  const formValidation = createFormValidation();
+
+  // Détermine si l'utilisateur a pris la main sur le status
+  const isUserControlled = $derived(status !== "default");
+
+  // Status et message calculés à afficher
+  const computedStatus = $derived(isUserControlled ? status : formValidation.localStatus);
+  const computedErrorMessage = $derived(
+    isUserControlled ? errorMessage : formValidation.localErrorMessage,
+  );
 
   const disabledClass = $derived.by(() => {
     return disabled && "fr-select-group--disabled";
   });
-  const statusClass = $derived(status !== "info" && `fr-select-group--${status}`);
+  const statusClass = $derived(
+    computedStatus !== "info" &&
+      computedStatus !== "default" &&
+      `fr-select-group--${computedStatus}`,
+  );
 
+  /**
+   * Gère l'événement change du select.
+   * Met à jour la valeur du composant et déclenche l'événement 'valuechanged'.
+   *
+   * @param {Event} event - L'événement change déclenché
+   */
   function handleChange(event: Event) {
-    const target = event.target as HTMLInputElement;
+    const target = event.target as HTMLSelectElement;
+    value = target.value;
+
     dispatch("valuechanged", target.value);
     onvaluechanged?.(target.value);
   }
 
-  $effect(() => {
-    if (!internals) return;
+  /**
+   * Définit un message de validité personnalisé pour le select.
+   * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
+   *
+   * @param {string} message - Le message de validité personnalisé à définir
+   */
+  export function setCustomValidity(message: string) {
+    formValidation.setCustomValidity(message);
+  }
 
-    internals.setFormValue(value ?? "");
+  // Configure la validation avec les références nécessaires
+  $effect(() => {
+    formValidation.setup(internals, formControlElement, host, () => {
+      value = "";
+    });
+  });
+
+  // Synchronise la valeur du formulaire et met à jour la validité
+  $effect(() => {
+    formValidation.syncFormValue(value, isUserControlled);
+  });
+
+  // Quand l'utilisateur prend la main sur le status, on efface les erreurs de validation natives
+  $effect(() => {
+    if (isUserControlled) {
+      internals?.setValidity({});
+    }
+  });
+
+  // Attache les event listeners pour la validation
+  $effect(() => {
+    return formValidation.attachListeners();
   });
 </script>
 
@@ -139,13 +199,16 @@
     {/if}
   </label>
   <select
+    bind:this={formControlElement}
     class="fr-select"
-    aria-describedby={status ? `${id}-messages` : undefined}
+    aria-describedby={computedStatus !== "default" ? `${id}-messages` : undefined}
     {id}
-    name={id}
+    {name}
     bind:value
     {disabled}
     onchange={handleChange}
+    onblur={formValidation.handleBlur}
+    oninvalid={formValidation.handleInvalid}
     {form}
     {required}
   >
@@ -164,7 +227,15 @@
   </select>
 
   <slot name="messages-group">
-    <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} {infoMessage} />
+    {#if computedStatus !== "default"}
+      <DsfrMessagesGroup
+        {id}
+        status={computedStatus}
+        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        {validMessage}
+        {infoMessage}
+      />
+    {/if}
   </slot>
 </div>
 
