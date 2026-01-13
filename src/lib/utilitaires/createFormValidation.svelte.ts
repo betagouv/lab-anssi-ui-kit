@@ -26,7 +26,12 @@ export function createFormValidation() {
   let localErrorMessage = $state("");
 
   let internals: ElementInternals | undefined;
-  let formControlElement: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | undefined;
+  let formControlElement:
+    | HTMLInputElement
+    | HTMLTextAreaElement
+    | HTMLSelectElement
+    | HTMLFieldSetElement
+    | undefined;
   let host: HTMLElement | undefined;
   let resetValueCallback: (() => void) | undefined;
 
@@ -73,9 +78,19 @@ export function createFormValidation() {
    * @param {Event} event - L'événement blur déclenché
    */
   function handleBlur(event: Event) {
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+    const target = event.target as
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
+      | HTMLFieldSetElement;
 
-    if (!hasInteracted && target.value) {
+    // Pour les fieldsets, on vérifie différemment car ils n'ont pas de propriété value
+    if (formControlElement instanceof HTMLFieldSetElement) {
+      if (!hasInteracted) {
+        hasInteracted = true;
+        updateValidity();
+      }
+    } else if (!hasInteracted && "value" in target && target.value) {
       hasInteracted = true;
       updateValidity();
     }
@@ -128,13 +143,18 @@ export function createFormValidation() {
    * Cette méthode doit être appelée dans un $effect pour établir les liaisons.
    *
    * @param {ElementInternals} internalsRef - L'interface ElementInternals du custom element
-   * @param {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} element - L'élément de formulaire natif
+   * @param {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLFieldSetElement} element - L'élément de formulaire natif
    * @param {HTMLElement} hostElement - L'élément hôte du custom element
    * @param {() => void} resetCallback - Fonction pour réinitialiser la valeur lors du reset
    */
   function setup(
     internalsRef: ElementInternals | undefined,
-    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | undefined,
+    element:
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
+      | HTMLFieldSetElement
+      | undefined,
     hostElement: HTMLElement | undefined,
     resetCallback: () => void,
   ) {

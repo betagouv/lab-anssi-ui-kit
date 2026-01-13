@@ -32,7 +32,7 @@
     has-pictogram={args.hasPictogram || undefined}
     inline={args.inline || undefined}
     disabled={args.disabled || undefined}
-    value={args.value}
+    value={args.value || ""}
     status={args.status}
     error-message={args.errorMessage}
     valid-message={args.validMessage}
