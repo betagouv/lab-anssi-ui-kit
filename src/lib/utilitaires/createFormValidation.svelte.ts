@@ -75,7 +75,7 @@ export function createFormValidation() {
   function handleBlur(event: Event) {
     const target = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-    if (!hasInteracted && target.value) {
+    if (!hasInteracted && "value" in target && target.value) {
       hasInteracted = true;
       updateValidity();
     }
@@ -124,8 +124,8 @@ export function createFormValidation() {
   }
 
   /**
-   * Configure la validation avec les références nécessaires.
-   * Cette méthode doit être appelée dans un $effect pour établir les liaisons.
+   * Stocke les références nécessaires à la validation.
+   * À appeler une fois au montage du composant dans un $effect.
    *
    * @param {ElementInternals} internalsRef - L'interface ElementInternals du custom element
    * @param {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} element - L'élément de formulaire natif
