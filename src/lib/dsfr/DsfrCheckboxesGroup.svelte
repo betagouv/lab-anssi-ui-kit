@@ -9,18 +9,33 @@
       size: { attribute: "size", type: "String" },
       inline: { attribute: "inline", type: "Boolean" },
       disabled: { attribute: "disabled", type: "Boolean" },
+      values: { attribute: "values", type: "Object", reflect: true },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
+      form: { attribute: "form", type: "String" },
+      required: { attribute: "required", type: "Boolean" },
+    },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
     },
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   type CheckboxesSize = Extract<Size, "sm" | "md">;
+  type SelectedValues = string[];
   type Checkbox = {
     label: string;
     id: string;
@@ -34,7 +49,7 @@
   interface Props {
     /** Attribut id du formulaire */
     id: string;
-    /** Légende de l’ensemble des checkboxes */
+    /** Légende de l'ensemble des checkboxes */
     legend: string;
     /** Liste de checkbox */
     checkboxes: Checkbox[];
@@ -44,7 +59,7 @@
     size?: CheckboxesSize;
     /** Eléments du formulaire en ligne */
     inline?: boolean;
-    /** Désactive l’ensemble des checkboxes */
+    /** Désactive l'ensemble des checkboxes */
     disabled?: boolean;
     /** Valeur des checkboxes */
     values?: SelectedValues;
@@ -54,6 +69,12 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Attribut form du composant */
+    form?: string;
+    /** Rend le groupe de checkboxes obligatoire (au moins une sélection requise) */
+    required?: boolean;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   let {
@@ -64,24 +85,98 @@
     size = "md",
     inline,
     disabled,
-    values = [],
-    status,
+    values = $bindable([]),
+    status = "default",
     errorMessage,
     validMessage,
+    form,
+    required,
+    internals,
   }: Props = $props();
 
-  type SelectedValues = string[];
+  let firstCheckboxElement: HTMLInputElement;
+  let host = $host();
 
-  function handleChange(event: Event) {
-    $host().dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
+  // Création de l'état de validation partagé
+  const formValidation = createFormValidation();
+
+  // Détermine si l'utilisateur a pris la main sur le status
+  const isUserControlled = $derived(status !== "default");
+
+  // Status et message calculés à afficher
+  const computedStatus = $derived(isUserControlled ? status : formValidation.localStatus);
+  const computedErrorMessage = $derived(
+    isUserControlled ? errorMessage : formValidation.localErrorMessage,
+  );
+
+  /**
+   * Gère l'événement change du groupe de checkboxes.
+   * Met à jour les valeurs et déclenche l'événement 'valueschanged'.
+   */
+  function handleChange() {
+    host.dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
   }
+
+  /**
+   * Capture la référence du premier input checkbox pour la validation.
+   */
+  function captureFirstCheckbox(node: HTMLInputElement) {
+    if (!firstCheckboxElement) {
+      firstCheckboxElement = node;
+    }
+  }
+
+  /**
+   * Définit un message de validité personnalisé pour le groupe de checkboxes.
+   * Met à jour le message de validité personnalisé et déclenche la vérification de validité.
+   *
+   * @param {string} message - Le message de validité personnalisé à définir
+   */
+  export function setCustomValidity(message: string) {
+    formValidation.setCustomValidity(message);
+  }
+
+  // Configure la validation avec les références nécessaires
+  // Pour un groupe de checkboxes, on utilise le premier input comme référence
+  $effect(() => {
+    formValidation.setup(internals, firstCheckboxElement, host, () => {
+      values = [];
+    });
+  });
+
+  // Synchronise la valeur du formulaire et met à jour la validité
+  // Pour les checkboxes, on utilise FormData pour envoyer plusieurs valeurs avec le même nom
+  $effect(() => {
+    if (!internals) return;
+
+    const formData = new FormData();
+    const fieldName = id;
+
+    if (values && values.length > 0) {
+      for (const val of values) {
+        formData.append(fieldName, val);
+      }
+      internals.setFormValue(formData);
+    } else {
+      internals.setFormValue("");
+    }
+
+    formValidation.updateValidity();
+  });
+
+  // Attache les event listeners pour la validation
+  $effect(() => {
+    return formValidation.attachListeners();
+  });
 </script>
 
 <fieldset
-  class={["fr-fieldset", `fr-fieldset--${status}`]}
+  class={["fr-fieldset", `fr-fieldset--${computedStatus}`]}
   aria-labelledby={`${id}-legend ${id}-messages`}
+  role="group"
   {id}
   {disabled}
+  {form}
 >
   <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id={`${id}-legend`}>
     {legend}
@@ -97,13 +192,16 @@
         <input
           type="checkbox"
           id={item.id}
-          name={item.name}
-          disabled={item.disabled || undefined}
-          value={item.value}
+          name={id || item.name}
+          value={item.value || item.id}
           bind:group={values}
           onchange={handleChange}
-          form={item.form}
-          required={item.required}
+          onblur={formValidation.handleBlur}
+          oninvalid={formValidation.handleInvalid}
+          use:captureFirstCheckbox
+          disabled={item.disabled || disabled}
+          form={item.form || form}
+          required={required || item.required}
         />
         <label class="fr-label" for={item.id}>
           {item.label}
@@ -117,8 +215,12 @@
   {/each}
 
   <slot name="messages-group">
-    {#if status !== "default" && (errorMessage || validMessage)}
-      <DsfrMessagesGroup {id} {errorMessage} {validMessage} />
+    {#if computedStatus !== "default"}
+      <DsfrMessagesGroup
+        {id}
+        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        {validMessage}
+      />
     {/if}
   </slot>
 </fieldset>
