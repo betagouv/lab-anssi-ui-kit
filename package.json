@@ -32,6 +32,12 @@
     "!dist/**/*.spec.*"
   ],
   "type": "module",
+  "exports": {
+    "./dist/webcomponents": {
+      "types": "./dist/webcomponents/lab-anssi-ui-kit.jsx.d.ts",
+      "import": "./dist/webcomponents/lab-anssi-ui-kit.iife.js"
+    }
+  },
   "peerDependencies": {
     "svelte": "~5.38.8"
   },
