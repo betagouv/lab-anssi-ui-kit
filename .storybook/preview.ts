@@ -2,8 +2,8 @@ import type { Preview, SvelteRenderer } from "@storybook/svelte";
 import { withThemeByClassName } from "@storybook/addon-themes";
 
 import "./styles.fonts.css";
-import "./styles.themes.css";
 import "./styles.scss";
+import "./lab-anssi-themes.css";
 
 const preview: Preview = {
   decorators: [
@@ -12,7 +12,7 @@ const preview: Preview = {
         MonServiceSécurisé: "theme-mss",
         MonAideCyber: "theme-mac",
         MesServicesCyber: "theme-msc",
-        MonEspaceNIS2: "theme-men2",
+        MonEspaceNIS2: "theme-nis2",
       },
       defaultTheme: "MonServiceSécurisé",
     }),
