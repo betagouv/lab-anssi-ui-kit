@@ -1,0 +1,96 @@
+{
+  "background": {
+    "$type": "string",
+    "msc-pattern": {
+      "$value": "#0d0c21 url(\"src/lib/assets/illustrations/tuile-msc.svg\") repeat top left/500px"
+    },
+    "msc-pattern-hover": {
+      "$value": "#22213c url(\"src/lib/assets/illustrations/tuile-msc.svg\") repeat top left/500px"
+    }
+  },
+  "color": {
+    "$type": "color",
+    "black-alpha-4": { "$value": "rgba(0, 0, 0, 0.04)" },
+    "black-alpha-8": { "$value": "rgba(0, 0, 0, 0.08)" },
+    "blue": {
+      "400": { "$value": "#0a76f6" },
+      "500": { "$value": "#0279d0" },
+      "550": { "$value": "#0079d0" },
+      "600": { "$value": "#0c5c98" },
+      "700": { "$value": "#09416a" }
+    },
+    "dark": {
+      "200": { "$value": "#161616" },
+      "300": { "$value": "#3a3a3a" },
+      "400": { "$value": "#22213c" },
+      "500": { "$value": "#0d0c21" }
+    },
+    "feedback": {
+      "red": { "$value": "red" }
+    },
+    "gold": {
+      "200": { "$value": "#fff7db" },
+      "300": { "$value": "#fcf1cf" },
+      "350": { "$value": "#faecb7" },
+      "400": { "$value": "#f8e5a0" },
+      "450": { "$value": "#ffdb71" },
+      "500": { "$value": "#fed980" },
+      "550": { "$value": "#fdc82e" },
+      "600": { "$value": "#ecca79" },
+      "650": { "$value": "#e4c274" },
+      "700": { "$value": "#ddbd70" }
+    },
+    "gray": {
+      "50": { "$value": "#f6f6f6" },
+      "100": { "$value": "#f1f5f9" },
+      "200": { "$value": "#eeeeee" },
+      "300": { "$value": "#ededed" }
+    },
+    "indigo": {
+      "100": { "$value": "#f5f5fe" },
+      "200": { "$value": "#e3e3fd" },
+      "300": { "$value": "#c1c1fb" },
+      "400": { "$value": "#adadf9" },
+      "500": { "$value": "#000091" },
+      "600": { "$value": "#1212ff" },
+      "700": { "$value": "#2323ff" }
+    },
+    "navy": {
+      "100": { "$value": "#f5f5fe" },
+      "400": { "$value": "#41419f" },
+      "500": { "$value": "#272771" }
+    },
+    "purple": {
+      "100": { "$value": "#f5f1f9" },
+      "400": { "$value": "#9c51d0" },
+      "500": { "$value": "#5d2a9d" }
+    },
+    "transparent": { "$value": "transparent" },
+    "white": { "$value": "#ffffff" },
+    "white-alpha-8": { "$value": "rgba(255, 255, 255, 0.08)" },
+    "white-alpha-16": { "$value": "rgba(255, 255, 255, 0.16)" }
+  },
+  "filter": {
+    "$type": "string",
+    "blue": {
+      "$value": "brightness(0) invert(29%) sepia(95%) saturate(1420%) hue-rotate(184deg) brightness(98%) contrast(101%)"
+    },
+    "dark": {
+      "$value": "brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%)"
+    },
+    "navy": {
+      "$value": "brightness(0) invert(16%) sepia(31%) saturate(3600%) hue-rotate(224deg) brightness(93%) contrast(101%)"
+    },
+    "purple": {
+      "$value": "brightness(0) invert(13%) sepia(46%) saturate(5189%) hue-rotate(261deg) brightness(104%) contrast(89%)"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": { "$value": 0 },
+    "xs": { "$value": "4px" },
+    "sm": { "$value": "6px" },
+    "md": { "$value": "8px" },
+    "lg": { "$value": "10px" }
+  }
+}

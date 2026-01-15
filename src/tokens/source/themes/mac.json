@@ -1,0 +1,116 @@
+{
+  "centre-aide": {
+    "$type": "color",
+    "background": {
+      "entete": { "$value": "{color.purple.500}" },
+      "bouton": { "$value": "{centre-aide.background.entete}" },
+      "hover-lien": { "$value": "{color.purple.400}" },
+      "hover-declencheur": { "$value": "{centre-aide.background.hover-lien}" }
+    },
+    "font-color": {
+      "bouton": { "$value": "{color.white}" },
+      "lien-secondaire": { "$value": "{centre-aide.background.entete}" }
+    },
+    "border": {
+      "lien-secondaire": { "$value": "{centre-aide.background.entete}" }
+    }
+  },
+  "brique": {
+    "$type": "color",
+    "background": {
+      "primaire": { "$value": "{centre-aide.background.entete}" },
+      "secondaire": { "$value": "{color.purple.100}" }
+    },
+    "hero": {
+      "bouton-gauche": {
+        "background": { "$value": "{color.white}" },
+        "background-hover": { "$value": "{color.gray.50}" },
+        "background-active": { "$value": "{color.gray.50}" },
+        "texte": { "$value": "{color.purple.500}" }
+      },
+      "bouton-droite": {
+        "background": { "$value": "{color.transparent}" },
+        "background-hover": { "$value": "{color.white-alpha-8}" },
+        "background-active": { "$value": "{color.white-alpha-16}" },
+        "texte": { "$value": "{color.white}" }
+      }
+    },
+    "carrousel": {
+      "bouton-action-texte-couleur": { "$value": "{color.purple.500}" }
+    },
+    "marelle": {
+      "titre-couleur": { "$value": "{color.purple.500}" },
+      "etapes-numero-etape-couleur": { "$value": "{color.purple.400}" },
+      "etapes-lien-couleur": { "$value": "{color.purple.500}" },
+      "bouton-background": { "$value": "{color.purple.500}" },
+      "bouton-background-hover": { "$value": "{color.purple.400}" },
+      "bouton-background-active": { "$value": "{color.purple.400}" },
+      "bouton-texte": { "$value": "{color.white}" }
+    },
+    "temoignages": {
+      "titre-couleur": { "$value": "{color.purple.500}" },
+      "icone-couleur": { "$value": "{color.purple.400}" }
+    },
+    "contenu-deux-colonnes": {
+      "action-bouton-background": { "$value": "{color.white}" },
+      "action-bouton-background-hover": { "$value": "{color.gray.50}" },
+      "action-bouton-background-active": { "$value": "{color.gray.50}" },
+      "action-bouton-texte": { "$value": "{color.purple.500}" }
+    },
+    "presentation-anssi": {
+      "titre-couleur": { "$value": "{color.purple.500}" },
+      "bouton-background": { "$value": "{color.white}" },
+      "bouton-background-hover": { "$value": "{color.black-alpha-4}" },
+      "bouton-background-active": { "$value": "{color.black-alpha-8}" },
+      "bouton-texte": { "$value": "{color.purple.500}" }
+    }
+  },
+  "titre": {
+    "couleur-primaire": { "$value": "{color.purple.500}", "$type": "color" }
+  },
+  "bandeau": {
+    "titre-background": { "$value": "{centre-aide.background.entete}", "$type": "color" }
+  },
+  "couleur": {
+    "$type": "color",
+    "lien": { "$value": "{color.purple.500}" },
+    "focus": { "$value": "{color.purple.500}" }
+  },
+  "filtre": {
+    "couleur-primaire": { "$value": "{filter.purple}", "$type": "color" }
+  },
+  "sommaire": {
+    "$type": "color",
+    "actif-indicateur-couleur": { "$value": "{color.gold.500}" },
+    "actif-couleur": { "$value": "{color.purple.500}" },
+    "mobile-fond": { "$value": "{color.purple.100}" }
+  },
+  "liste-articles": {
+    "$type": "color",
+    "couleur-fleche": { "$value": "{color.feedback.red}" },
+    "couleur-texte": { "$value": "{color.feedback.red}" }
+  },
+  "bouton": {
+    "$type": "color",
+    "secondaire-tertiaire-couleur-texte": { "$value": "{color.purple.500}" },
+    "secondaire-couleur-bordure": { "$value": "{color.dark.500}" },
+    "primaire-couleur-texte": { "$value": "{color.white}" },
+    "primaire-couleur-fond": { "$value": "{color.purple.500}" },
+    "primaire-couleur-fond-survol": { "$value": "{color.purple.400}" },
+    "primaire-couleur-fond-clique": { "$value": "{color.purple.400}" },
+    "arrondi": { "$value": "{radius.md}" }
+  },
+  "tag": {
+    "$type": "color",
+    "couleur-fond": { "$value": "{color.gray.200}" },
+    "couleur-texte": { "$value": "{color.dark.200}" },
+    "selectionnable-couleur-texte": { "$value": "{color.indigo.500}" },
+    "selectionnable-couleur-fond": { "$value": "{color.indigo.200}" },
+    "selectionnable-couleur-fond-survol": { "$value": "{color.indigo.300}" },
+    "selectionnable-couleur-fond-clique": { "$value": "{color.indigo.400}" },
+    "selectionne-couleur-texte": { "$value": "{color.indigo.100}" },
+    "selectionne-couleur-fond": { "$value": "{color.indigo.500}" },
+    "selectionne-couleur-fond-survol": { "$value": "{color.indigo.600}" },
+    "selectionne-couleur-fond-clique": { "$value": "{color.indigo.700}" }
+  }
+}
