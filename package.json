@@ -13,7 +13,7 @@
   "packageManager": "pnpm@10.24.0",
   "scripts": {
     "build": "vite build && npm run prepack",
-    "build:tokens": "node src/tokens/build.config.js && pnpm prettier -w src/tokens/build",
+    "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
     "prepare": "husky",
