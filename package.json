@@ -13,6 +13,7 @@
   "packageManager": "pnpm@10.24.0",
   "scripts": {
     "build": "vite build && npm run prepack",
+    "build:tokens": "node src/tokens/build.config.js && pnpm prettier -w src/tokens/build",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
     "prepare": "husky",
@@ -79,6 +80,7 @@
     "publint": "~0.3.16",
     "sass": "~1.97.2",
     "storybook": "~10.1.11",
+    "style-dictionary": "^5.1.3",
     "svelte": "~5.46.1",
     "svelte-check": "~4.3.5",
     "typescript": "~5.9.3",
