@@ -38,6 +38,9 @@ jobs:
       - name: Builder les styles
         run: pnpm run build:styles:dsfr
 
+      - name: Builder les tokens
+        run: pnpm run build:tokens && cp -r ./src/tokens/build/* ./dist/assets/
+
       - name: Publier sur NPM
         run: pnpm publish --provenance --access public --no-git-checks
         env:
