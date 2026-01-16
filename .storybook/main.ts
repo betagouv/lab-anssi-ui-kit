@@ -1,6 +1,10 @@
+import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/svelte-vite";
-import path from "path";
+import path, { dirname } from "path";
 import { loadEnv } from "vite";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
