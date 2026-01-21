@@ -51,7 +51,7 @@ function transformeLesVariables(
           }
         });
       } catch {
-        // Si la référence n'est pas trouvée, garder la valeurDuToken résolue
+        // Si la référence n'est pas trouvée, garder la valeur résolue
       }
     }
 
@@ -60,25 +60,62 @@ function transformeLesVariables(
 }
 
 /**
- * Format CSS avec sélecteur :root (pour consommateurs finaux)
+ * Vérifie si un token est marqué comme themeable
+ */
+function estThemable(token: TransformedToken): boolean {
+  return token.original?.$themeable === true || token.$themeable === true;
+}
+
+/**
+ * Format CSS avec sélecteur :root et [data-themeable] (pour consommateurs finaux)
+ * Les tokens avec $themeable: true vont dans [data-themeable]
+ * Les autres tokens vont dans :root
  */
 StyleDictionary.registerFormat({
   name: "css/theme-root",
   format: async ({ dictionary, options, file }: FormatFnArguments) => {
     const entete = await fileHeader({ file });
     const tousLesTokens: TransformedTokens = dictionary.unfilteredTokens ?? dictionary.tokens;
-    const variables = transformeLesVariables(
-      dictionary.allTokens,
+
+    // Séparer les tokens en deux groupes
+    const tokensRacine = dictionary.allTokens.filter(
+      (token: TransformedToken) => !estThemable(token),
+    );
+    const tokensThemables = dictionary.allTokens.filter((token: TransformedToken) =>
+      estThemable(token),
+    );
+
+    // Générer les variables pour chaque groupe
+    const variablesRacine = transformeLesVariables(
+      tokensRacine,
       tousLesTokens,
       options.outputReferences,
     );
-    return `${entete}:root {\n${variables.join("\n")}\n}\n`;
+    const variablesThemables = transformeLesVariables(
+      tokensThemables,
+      tousLesTokens,
+      options.outputReferences,
+    );
+
+    // Construire le CSS final
+    let contenuCss = entete;
+
+    if (variablesRacine.length > 0) {
+      contenuCss += `:root {\n${variablesRacine.join("\n")}\n}\n`;
+    }
+
+    if (variablesThemables.length > 0) {
+      contenuCss += `\n[data-themeable] {\n${variablesThemables.join("\n")}\n}\n`;
+    }
+
+    return contenuCss;
   },
 });
 
 /**
  * Action qui s'exécute après la génération des fichiers
- * Lit le fichier généré, remplace :root par .theme-{nom}, et l'ajoute au fichier contenant l'ensemble des thèmes
+ * Lit le fichier généré, remplace :root par .theme-{nom} et [data-themeable] par .theme-{nom} [data-themeable],
+ * puis l'ajoute au fichier contenant l'ensemble des thèmes
  */
 StyleDictionary.registerAction({
   name: "concateneTousLesThemes",
@@ -89,10 +126,11 @@ StyleDictionary.registerAction({
     const fichierTheme = join(config.buildPath ?? "", `lab-anssi-theme.${nomTheme}.css`);
     const contenu = readFileSync(fichierTheme, "utf-8") + "\n";
 
-    // Remplacer :root par .theme-{nom} et retirer le header
+    // Remplacer :root par .theme-{nom}, [data-themeable] par .theme-{nom} [data-themeable], et retirer le header
     const contenuTheme = contenu
       .replace(/\/\*\*[\s\S]*?\*\/\s*/, "") // Retirer le header
-      .replace(":root {", `.theme-${nomTheme} {`);
+      .replace(":root {", `.theme-${nomTheme} {`)
+      .replace("[data-themeable] {", `.theme-${nomTheme} [data-themeable] {`);
 
     appendFileSync(FICHIER_TOUS_THEMES, contenuTheme);
   },
