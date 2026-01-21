@@ -175,4 +175,7 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("btns-group");
+  @include set-dsfr-sizing("btn") {
+    @include set-border-radius();
+  }
 </style>

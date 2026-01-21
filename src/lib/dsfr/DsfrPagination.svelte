@@ -204,5 +204,9 @@
   @import "@gouvfr/dsfr/dist/component/pagination/pagination.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("pagination");
+  @include set-dsfr-sizing("pagination") {
+    &__link {
+      @include set-border-radius();
+    }
+  }
 </style>

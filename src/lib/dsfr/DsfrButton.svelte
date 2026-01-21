@@ -161,6 +161,8 @@
   }
 
   @include set-dsfr-sizing("btn") {
+    @include set-border-radius();
+
     width: var(--component-width, fit-content);
 
     &--tertiary {

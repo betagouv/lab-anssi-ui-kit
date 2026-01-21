@@ -75,3 +75,11 @@
   padding: 0;
   width: 1px;
 }
+
+/// Applique un rayon de bordure personnalisable via une variable CSS avec une valeur par défaut.
+///
+/// @param {Number} $radius [0] - La valeur par défaut du rayon de bordure en cas où la variable CSS `--lab-border-radius` n'est pas définie.
+///
+@mixin set-border-radius($radius: 0) {
+  border-radius: var(--lab-border-radius, #{$radius});
+}
