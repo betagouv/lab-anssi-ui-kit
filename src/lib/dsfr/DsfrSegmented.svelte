@@ -16,8 +16,10 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type SegmentedSize = Extract<Size, "sm" | "md">;
   type Segmented = {

@@ -23,7 +23,9 @@
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;
   interface Props {

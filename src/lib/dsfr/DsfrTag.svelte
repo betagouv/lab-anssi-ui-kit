@@ -19,8 +19,10 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type TagSize = Extract<Size, "sm" | "md">;
   type Markup = "a" | "button" | "p" | undefined;

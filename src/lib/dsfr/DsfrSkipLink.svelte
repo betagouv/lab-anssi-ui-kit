@@ -9,7 +9,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
   import DsfrLink from "./DsfrLink.svelte";
+
+  setThemeable($host());
 
   type Link = {
     label: string;

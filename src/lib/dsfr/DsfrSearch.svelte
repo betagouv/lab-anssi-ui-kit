@@ -23,7 +23,10 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type SearchSize = Extract<Size, "md" | "lg">;
   interface Props {

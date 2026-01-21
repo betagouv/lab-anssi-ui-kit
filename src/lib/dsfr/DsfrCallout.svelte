@@ -18,9 +18,11 @@
 
 <script lang="ts">
   import type { Accent } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+
+  setThemeable($host());
 
   export type TitleMarkup = "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   export interface Props {

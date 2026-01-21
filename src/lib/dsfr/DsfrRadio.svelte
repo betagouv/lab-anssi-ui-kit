@@ -21,7 +21,10 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type RadioSize = Extract<Size, "sm" | "md">;
   interface Props {

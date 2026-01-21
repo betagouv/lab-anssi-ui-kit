@@ -15,6 +15,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
+
   type MenuItem = {
     id: string;
     label: string;

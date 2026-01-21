@@ -18,6 +18,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
+
   type AriaCurrent = "page" | "step" | "location" | "date" | "time" | "true" | "false" | boolean;
   type PageLink = {
     label: string;

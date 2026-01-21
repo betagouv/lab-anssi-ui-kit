@@ -18,6 +18,9 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type CheckboxesSize = Extract<Size, "sm" | "md">;
   type Checkbox = {
