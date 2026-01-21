@@ -1,8 +1,21 @@
 {
+  "blue-mss": {
+    "$type": "color",
+    "50": { "$value": "#eaf5ff" },
+    "75": { "$value": "#dbeeff" },
+    "100": { "$value": "#cce6ff" },
+    "150": { "$value": "#bcdfff" },
+    "600": { "$value": "#0079d0", "$description": "Couleur primaire" },
+    "700": { "$value": "#0c5c98", "$description": "Couleur état hover" },
+    "900": { "$value": "#09416a", "$description": "Couleur état actif" }
+  },
+  "slate-mss": {
+    "800": { "$value": "#2f3a43", "$type": "color" }
+  },
   "centre-aide": {
     "$type": "color",
     "background": {
-      "entete": { "$value": "{color.blue.500}" },
+      "entete": { "$value": "{blue-mss.600}" },
       "bouton": { "$value": "{centre-aide.background.entete}" },
       "hover-lien": { "$value": "{color.blue.600}" },
       "hover-declencheur": { "$value": "{centre-aide.background.hover-lien}" }
@@ -26,7 +39,7 @@
         "background": { "$value": "{color.white}" },
         "background-hover": { "$value": "{color.gray.50}" },
         "background-active": { "$value": "{color.gray.50}" },
-        "texte": { "$value": "{color.blue.500}" }
+        "texte": { "$value": "{blue-mss.600}" }
       },
       "bouton-droite": {
         "background": { "$value": "{color.transparent}" },
@@ -36,33 +49,33 @@
       }
     },
     "carrousel": {
-      "bouton-action-texte-couleur": { "$value": "{color.blue.500}" }
+      "bouton-action-texte-couleur": { "$value": "{blue-mss.600}" }
     },
     "marelle": {
       "titre-couleur": { "$value": "{color.blue.700}" },
-      "etapes-numero-etape-couleur": { "$value": "{color.blue.500}" },
-      "etapes-lien-couleur": { "$value": "{color.blue.500}" },
+      "etapes-numero-etape-couleur": { "$value": "{blue-mss.600}" },
+      "etapes-lien-couleur": { "$value": "{blue-mss.600}" },
       "bouton-background": { "$value": "{color.blue.600}" },
-      "bouton-background-hover": { "$value": "{color.blue.500}" },
-      "bouton-background-active": { "$value": "{color.blue.500}" },
+      "bouton-background-hover": { "$value": "{blue-mss.600}" },
+      "bouton-background-active": { "$value": "{blue-mss.600}" },
       "bouton-texte": { "$value": "{color.white}" }
     },
     "temoignages": {
       "titre-couleur": { "$value": "{color.blue.700}" },
-      "icone-couleur": { "$value": "{color.blue.500}" }
+      "icone-couleur": { "$value": "{blue-mss.600}" }
     },
     "contenu-deux-colonnes": {
       "action-bouton-background": { "$value": "{color.white}" },
       "action-bouton-background-hover": { "$value": "{color.gray.50}" },
       "action-bouton-background-active": { "$value": "{color.gray.50}" },
-      "action-bouton-texte": { "$value": "{color.blue.500}" }
+      "action-bouton-texte": { "$value": "{blue-mss.600}" }
     },
     "presentation-anssi": {
       "titre-couleur": { "$value": "{color.blue.700}" },
       "bouton-background": { "$value": "{color.transparent}" },
       "bouton-background-hover": { "$value": "{color.black-alpha-4}" },
       "bouton-background-active": { "$value": "{color.black-alpha-8}" },
-      "bouton-texte": { "$value": "{color.blue.500}" }
+      "bouton-texte": { "$value": "{blue-mss.600}" }
     }
   },
   "titre": {
@@ -112,5 +125,164 @@
     "selectionne-couleur-fond": { "$value": "{color.indigo.500}" },
     "selectionne-couleur-fond-survol": { "$value": "{color.indigo.600}" },
     "selectionne-couleur-fond-clique": { "$value": "{color.indigo.700}" }
+  },
+  "lab-border-radius": {
+    "$type": "dimension",
+    "$value": "{bouton.arrondi}"
+  },
+  "artwork": {
+    "$dsfr": true,
+    "major-blue-france": {
+      "$type": "color",
+      "$value": "{slate-mss.800}",
+      "$themeable": true
+    },
+    "minor": {
+      "blue-france": {
+        "$type": "color",
+        "$value": "{blue-mss.600}",
+        "$themeable": true
+      },
+      "red-marianne": {
+        "$type": "color",
+        "$value": "{blue-mss.600}",
+        "$themeable": true
+      }
+    },
+    "decorative": {
+      "blue-france": {
+        "$type": "color",
+        "$value": "{blue-mss.50}",
+        "$themeable": true
+      }
+    }
+  },
+  "background": {
+    "$dsfr": true,
+    "alt-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.50}",
+      "$themeable": true
+    },
+    "action": {
+      "high-blue-france": {
+        "$type": "color",
+        "$value": "{blue-mss.600}",
+        "$themeable": true
+      },
+      "high-blue-france-hover": {
+        "$type": "color",
+        "$value": "{blue-mss.700}",
+        "$themeable": true
+      },
+      "high-blue-france-active": {
+        "$type": "color",
+        "$value": "{blue-mss.900}",
+        "$themeable": true
+      },
+      "low-blue-france": {
+        "$type": "color",
+        "$value": "{blue-mss.50}",
+        "$themeable": true
+      },
+      "low-blue-france-hover": {
+        "$type": "color",
+        "$value": "{blue-mss.75}",
+        "$themeable": true
+      },
+      "low-blue-france-active": {
+        "$type": "color",
+        "$value": "{blue-mss.100}",
+        "$themeable": true
+      }
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "open": {
+      "blue-france": {
+        "$type": "color",
+        "$value": "{blue-mss.50}",
+        "$themeable": true
+      },
+      "blue-france-hover": {
+        "$type": "color",
+        "$value": "{blue-mss.75}",
+        "$themeable": true
+      },
+      "blue-france-active": {
+        "$type": "color",
+        "$value": "{blue-mss.100}",
+        "$themeable": true
+      }
+    },
+    "flat-blue-france-lab": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "contrast-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.75}",
+      "$themeable": true
+    }
+  },
+  "border": {
+    "$dsfr": true,
+    "active-alt-blue-france-lab": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "default-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "action-high-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "open-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.50}",
+      "$themeable": true
+    },
+    "plain-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    }
+  },
+  "text": {
+    "$dsfr": true,
+    "title-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.900}",
+      "$themeable": true
+    },
+    "action-high-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{blue-mss.600}",
+      "$themeable": true
+    },
+    "marianne": {
+      "$type": "color",
+      "$value": "#000000",
+      "$themeable": true
+    }
   }
 }
