@@ -140,7 +140,15 @@
 }
 
 .theme-mss {
-  --centre-aide-background-entete: #0279d0;
+  --blue-mss-50: #eaf5ff;
+  --blue-mss-75: #dbeeff;
+  --blue-mss-100: #cce6ff;
+  --blue-mss-150: #bcdfff;
+  --blue-mss-600: #0079d0;
+  --blue-mss-700: #0c5c98;
+  --blue-mss-900: #09416a;
+  --slate-mss-800: #2f3a43;
+  --centre-aide-background-entete: var(--blue-mss-600);
   --centre-aide-background-bouton: var(--centre-aide-background-entete);
   --centre-aide-background-hover-lien: #0c5c98;
   --centre-aide-background-hover-declencheur: var(--centre-aide-background-hover-lien);
@@ -152,30 +160,30 @@
   --brique-hero-bouton-gauche-background: #ffffff;
   --brique-hero-bouton-gauche-background-hover: #f6f6f6;
   --brique-hero-bouton-gauche-background-active: #f6f6f6;
-  --brique-hero-bouton-gauche-texte: #0279d0;
+  --brique-hero-bouton-gauche-texte: var(--blue-mss-600);
   --brique-hero-bouton-droite-background: rgba(0, 0, 0, 0);
   --brique-hero-bouton-droite-background-hover: rgba(255, 255, 255, 0.08);
   --brique-hero-bouton-droite-background-active: rgba(255, 255, 255, 0.16);
   --brique-hero-bouton-droite-texte: #ffffff;
-  --brique-carrousel-bouton-action-texte-couleur: #0279d0;
+  --brique-carrousel-bouton-action-texte-couleur: var(--blue-mss-600);
   --brique-marelle-titre-couleur: #09416a;
-  --brique-marelle-etapes-numero-etape-couleur: #0279d0;
-  --brique-marelle-etapes-lien-couleur: #0279d0;
+  --brique-marelle-etapes-numero-etape-couleur: var(--blue-mss-600);
+  --brique-marelle-etapes-lien-couleur: var(--blue-mss-600);
   --brique-marelle-bouton-background: #0c5c98;
-  --brique-marelle-bouton-background-hover: #0279d0;
-  --brique-marelle-bouton-background-active: #0279d0;
+  --brique-marelle-bouton-background-hover: var(--blue-mss-600);
+  --brique-marelle-bouton-background-active: var(--blue-mss-600);
   --brique-marelle-bouton-texte: #ffffff;
   --brique-temoignages-titre-couleur: #09416a;
-  --brique-temoignages-icone-couleur: #0279d0;
+  --brique-temoignages-icone-couleur: var(--blue-mss-600);
   --brique-contenu-deux-colonnes-action-bouton-background: #ffffff;
   --brique-contenu-deux-colonnes-action-bouton-background-hover: #f6f6f6;
   --brique-contenu-deux-colonnes-action-bouton-background-active: #f6f6f6;
-  --brique-contenu-deux-colonnes-action-bouton-texte: #0279d0;
+  --brique-contenu-deux-colonnes-action-bouton-texte: var(--blue-mss-600);
   --brique-presentation-anssi-titre-couleur: #09416a;
   --brique-presentation-anssi-bouton-background: rgba(0, 0, 0, 0);
   --brique-presentation-anssi-bouton-background-hover: rgba(0, 0, 0, 0.04);
   --brique-presentation-anssi-bouton-background-active: rgba(0, 0, 0, 0.08);
-  --brique-presentation-anssi-bouton-texte: #0279d0;
+  --brique-presentation-anssi-bouton-texte: var(--blue-mss-600);
   --titre-couleur-primaire: #09416a;
   --bandeau-titre-background: var(--centre-aide-background-entete);
   --couleur-lien: #0079d0;
@@ -204,6 +212,37 @@
   --tag-selectionne-couleur-fond: #000091;
   --tag-selectionne-couleur-fond-survol: #1212ff;
   --tag-selectionne-couleur-fond-clique: #2323ff;
+  --lab-border-radius: var(--bouton-arrondi);
+}
+
+.theme-mss [data-themeable] {
+  --background-alt-blue-france: var(--blue-mss-50);
+  --background-action-high-blue-france: var(--blue-mss-600);
+  --background-action-high-blue-france-hover: var(--blue-mss-700);
+  --background-action-high-blue-france-active: var(--blue-mss-900);
+  --background-action-low-blue-france: var(--blue-mss-50);
+  --background-action-low-blue-france-hover: var(--blue-mss-75);
+  --background-action-low-blue-france-active: var(--blue-mss-100);
+  --background-active-blue-france: var(--blue-mss-600);
+  --background-open-blue-france: var(--blue-mss-50);
+  --background-open-blue-france-hover: var(--blue-mss-75);
+  --background-open-blue-france-active: var(--blue-mss-100);
+  --background-flat-blue-france-lab: var(--blue-mss-600);
+  --background-contrast-blue-france: var(--blue-mss-75);
+  --artwork-major-blue-france: var(--slate-mss-800);
+  --artwork-minor-blue-france: var(--blue-mss-600);
+  --artwork-minor-red-marianne: var(--blue-mss-600);
+  --artwork-decorative-blue-france: var(--blue-mss-50);
+  --border-active-alt-blue-france-lab: var(--blue-mss-600);
+  --border-default-blue-france: var(--blue-mss-600);
+  --border-action-high-blue-france: var(--blue-mss-600);
+  --border-active-blue-france: var(--blue-mss-600);
+  --border-open-blue-france: var(--blue-mss-50);
+  --border-plain-blue-france: var(--blue-mss-600);
+  --text-title-blue-france: var(--blue-mss-900);
+  --text-action-high-blue-france: var(--blue-mss-600);
+  --text-active-blue-france: var(--blue-mss-600);
+  --text-marianne: #000000;
 }
 
 .theme-nis2 {
