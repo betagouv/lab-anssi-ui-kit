@@ -10,9 +10,10 @@ const preview: Preview = {
     withThemeByClassName<SvelteRenderer>({
       themes: {
         MonServiceSécurisé: "theme-mss",
-        MonAideCyber: "theme-mac",
         MesServicesCyber: "theme-msc",
+        MonAideCyber: "theme-mac",
         MonEspaceNIS2: "theme-nis2",
+        DSFR: "theme-dsfr",
       },
       defaultTheme: "MonServiceSécurisé",
     }),
