@@ -19,7 +19,10 @@
 <script lang="ts">
   import { clickOutside } from "$lib/directives/actions.svelte.ts";
   import type { Kind, Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
   import DsfrButton from "./DsfrButton.svelte";
+
+  setThemeable($host());
 
   type ButtonKind = Extract<Kind, "tertiary" | "tertiary-no-outline">;
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;

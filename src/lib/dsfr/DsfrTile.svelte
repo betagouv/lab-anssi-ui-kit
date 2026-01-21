@@ -33,6 +33,9 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type TitleMarkup = "h2" | "h3" | "h4" | "h5";
   type TileSize = Extract<Size, "sm" | "md">;

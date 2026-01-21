@@ -15,6 +15,9 @@
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
   interface Props {
     /** Attribut 'id' du sélecteur de langue */
     id: string;

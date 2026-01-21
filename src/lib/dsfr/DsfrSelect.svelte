@@ -23,7 +23,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type Option = {
     value: string;

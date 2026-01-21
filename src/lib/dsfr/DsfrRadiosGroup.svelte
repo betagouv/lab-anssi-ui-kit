@@ -19,6 +19,9 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type RadiosSize = Extract<Size, "sm" | "md">;
   type Radio = {

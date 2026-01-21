@@ -19,6 +19,9 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type QuoteSize = Extract<Size, "md" | "lg" | "xl">;
   interface Props {

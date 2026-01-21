@@ -30,7 +30,9 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   interface Props {
     /** Attribut id du champs de saisie */

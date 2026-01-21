@@ -10,6 +10,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
+
   type MenuItem = {
     id: string;
     type?: "link" | "menu" | "mega-menu";

@@ -13,7 +13,10 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   type TagsGroupSize = Extract<Size, "sm" | "md">;
   type TagType = "default" | "clickable" | "pressable" | "dismissible";

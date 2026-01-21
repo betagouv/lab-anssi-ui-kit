@@ -20,7 +20,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+
+  setThemeable($host());
 
   interface Props {
     /** Attribut id du champs de saisie */

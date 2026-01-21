@@ -12,6 +12,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
+
   type Markup = "h2" | "h3" | "h4" | "h5";
   type Level = 2 | 3 | 4 | 5;
   interface Props {

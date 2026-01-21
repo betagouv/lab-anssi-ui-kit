@@ -18,7 +18,9 @@
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { setIconClass, setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type AlertSize = Extract<Size, "sm" | "md">;
   interface Props {

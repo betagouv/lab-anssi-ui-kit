@@ -12,6 +12,9 @@
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host());
 
   type HighlightSize = Extract<Size, "sm" | "md" | "lg">;
   interface Props {
