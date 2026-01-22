@@ -71,6 +71,14 @@
 }
 
 .theme-msc {
+  --yellow-msc-50: #fff7e6;
+  --yellow-msc-75: #fff0cf;
+  --yellow-msc-100: #fee9b8;
+  --yellow-msc-150: #fee2a2;
+  --yellow-msc-200: #fed980;
+  --yellow-msc-250: #ecca79;
+  --yellow-msc-275: #ddbd70;
+  --midnight-blue-msc-950: #0d0c21;
   --centre-aide-background-entete: #0d0c21 url("src/lib/assets/illustrations/tuile-msc.svg") repeat
     top left/500px;
   --centre-aide-background-bouton: #fed980;
@@ -137,6 +145,38 @@
   --tag-selectionne-couleur-fond: #fed980;
   --tag-selectionne-couleur-fond-survol: #ecca79;
   --tag-selectionne-couleur-fond-clique: #ddbd70;
+  --lab-border-radius: var(--bouton-arrondi);
+}
+
+.theme-msc [data-themeable] {
+  --background-alt-blue-france: var(--yellow-msc-200);
+  --background-action-high-blue-france: var(--yellow-msc-200);
+  --background-action-high-blue-france-hover: var(--yellow-msc-250);
+  --background-action-high-blue-france-active: var(--yellow-msc-275);
+  --background-action-low-blue-france: var(--yellow-msc-50);
+  --background-action-low-blue-france-hover: var(--yellow-msc-75);
+  --background-action-low-blue-france-active: var(--yellow-msc-100);
+  --background-active-blue-france: var(--yellow-msc-200);
+  --background-open-blue-france: var(--yellow-msc-50);
+  --background-open-blue-france-hover: var(--yellow-msc-75);
+  --background-open-blue-france-active: var(--yellow-msc-100);
+  --background-flat-blue-france-lab: var(--midnight-blue-msc-950);
+  --background-contrast-blue-france: var(--yellow-msc-75);
+  --artwork-major-blue-france: var(--midnight-blue-msc-950);
+  --artwork-minor-blue-france: var(--yellow-msc-200);
+  --artwork-minor-red-marianne: var(--yellow-msc-200);
+  --artwork-decorative-blue-france: var(--yellow-msc-50);
+  --border-active-alt-blue-france-lab: var(--yellow-msc-200);
+  --border-default-blue-france: var(--yellow-msc-200);
+  --border-action-high-blue-france: var(--midnight-blue-msc-950);
+  --border-active-blue-france: var(--midnight-blue-msc-950);
+  --border-open-blue-france: var(--yellow-msc-50);
+  --border-plain-blue-france: var(--midnight-blue-msc-950);
+  --text-title-blue-france: var(--midnight-blue-msc-950);
+  --text-action-high-blue-france: var(--midnight-blue-msc-950);
+  --text-inverted-blue-france: var(--midnight-blue-msc-950);
+  --text-active-blue-france: var(--midnight-blue-msc-950);
+  --text-marianne: #000000;
 }
 
 .theme-mss {

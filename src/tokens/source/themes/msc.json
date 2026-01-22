@@ -1,4 +1,17 @@
 {
+  "yellow-msc": {
+    "$type": "color",
+    "50": { "$value": "#fff7e6" },
+    "75": { "$value": "#fff0cf" },
+    "100": { "$value": "#fee9b8" },
+    "150": { "$value": "#fee2a2" },
+    "200": { "$value": "#fed980", "$description": "Couleur primaire" },
+    "250": { "$value": "#ecca79", "$description": "Couleur état hover" },
+    "275": { "$value": "#ddbd70", "$description": "Couleur état actif" }
+  },
+  "midnight-blue-msc": {
+    "950": { "$value": "#0d0c21", "$type": "color" }
+  },
   "centre-aide": {
     "$type": "color",
     "background": {
@@ -112,5 +125,167 @@
     "selectionne-couleur-fond": { "$value": "{color.gold.500}" },
     "selectionne-couleur-fond-survol": { "$value": "{color.gold.600}" },
     "selectionne-couleur-fond-clique": { "$value": "{color.gold.700}" }
+  },
+  "lab-border-radius": {
+    "$type": "dimension",
+    "$value": "{bouton.arrondi}"
+  },
+  "artwork": {
+    "$dsfr": true,
+    "major-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "minor": {
+      "blue-france": {
+        "$type": "color",
+        "$value": "{yellow-msc.200}",
+        "$themeable": true
+      },
+      "red-marianne": {
+        "$type": "color",
+        "$value": "{yellow-msc.200}",
+        "$themeable": true
+      }
+    },
+    "decorative-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.50}",
+      "$themeable": true
+    }
+  },
+  "background": {
+    "$dsfr": true,
+    "alt-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.200}",
+      "$themeable": true
+    },
+    "action": {
+      "high-blue-france": {
+        "$type": "color",
+        "$value": "{yellow-msc.200}",
+        "$themeable": true
+      },
+      "high-blue-france-hover": {
+        "$type": "color",
+        "$value": "{yellow-msc.250}",
+        "$themeable": true
+      },
+      "high-blue-france-active": {
+        "$type": "color",
+        "$value": "{yellow-msc.275}",
+        "$themeable": true
+      },
+      "low-blue-france": {
+        "$type": "color",
+        "$value": "{yellow-msc.50}",
+        "$themeable": true
+      },
+      "low-blue-france-hover": {
+        "$type": "color",
+        "$value": "{yellow-msc.75}",
+        "$themeable": true
+      },
+      "low-blue-france-active": {
+        "$type": "color",
+        "$value": "{yellow-msc.100}",
+        "$themeable": true
+      }
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.200}",
+      "$themeable": true
+    },
+    "open": {
+      "blue-france": {
+        "$type": "color",
+        "$value": "{yellow-msc.50}",
+        "$themeable": true
+      },
+      "blue-france-hover": {
+        "$type": "color",
+        "$value": "{yellow-msc.75}",
+        "$themeable": true
+      },
+      "blue-france-active": {
+        "$type": "color",
+        "$value": "{yellow-msc.100}",
+        "$themeable": true
+      }
+    },
+    "flat-blue-france-lab": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "contrast-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.75}",
+      "$themeable": true
+    }
+  },
+  "border": {
+    "$dsfr": true,
+    "active-alt-blue-france-lab": {
+      "$type": "color",
+      "$value": "{yellow-msc.200}",
+      "$themeable": true
+    },
+    "default-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.200}",
+      "$themeable": true
+    },
+    "action-high-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "open-blue-france": {
+      "$type": "color",
+      "$value": "{yellow-msc.50}",
+      "$themeable": true
+    },
+    "plain-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    }
+  },
+  "text": {
+    "$dsfr": true,
+    "title-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "action-high-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "inverted-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "active-blue-france": {
+      "$type": "color",
+      "$value": "{midnight-blue-msc.950}",
+      "$themeable": true
+    },
+    "marianne": {
+      "$type": "color",
+      "$value": "#000000",
+      "$themeable": true
+    }
   }
 }
