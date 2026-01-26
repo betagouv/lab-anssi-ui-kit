@@ -147,4 +147,7 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("fieldset");
+  @include set-dsfr-sizing("checkbox-group") {
+    @include set-themeable-checkbox();
+  }
 </style>
