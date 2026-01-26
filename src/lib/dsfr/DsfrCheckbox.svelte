@@ -136,5 +136,7 @@
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("checkbox-group");
+  @include set-dsfr-sizing("checkbox-group") {
+    @include set-themeable-checkbox();
+  }
 </style>

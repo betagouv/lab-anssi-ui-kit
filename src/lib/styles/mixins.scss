@@ -83,3 +83,46 @@
 @mixin set-border-radius($radius: 0) {
   border-radius: var(--lab-border-radius, #{$radius});
 }
+
+/// Reproduis une coche (checkmark) en pure CSS via des bordures.
+///
+/// @param {Color} $color [var(--border-action-high-blue-france)] - Couleur de la coche.
+@mixin set-icon-check($icon-color: var(--border-action-high-blue-france)) {
+  border-left: 2px solid $icon-color;
+  border-bottom: 2px solid $icon-color;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  transform: rotate(-45deg) translate(1px, -1px) scale(0.7);
+  width: 16px;
+
+  @content;
+}
+
+/// Applique des styles personnalisés à une case à cocher en affichant une coche personnalisée.
+///
+/// Cette mixin masque l'icône par défaut de la case à cocher et ajoute une coche stylisée
+/// en pure CSS lorsque la case est cochée.
+///
+@mixin set-themeable-checkbox() {
+  input[type="checkbox"]:checked + label {
+    &::before {
+      --data-uri-svg: none;
+    }
+
+    &::after {
+      @include set-icon-check(var(--text-inverted-blue-france)) {
+        left: calc(-2rem + 4px);
+        position: absolute;
+        top: 6px;
+        z-index: 1;
+      }
+    }
+  }
+
+  .fr-label {
+    &::before {
+      --data-uri-svg: none;
+    }
+  }
+}

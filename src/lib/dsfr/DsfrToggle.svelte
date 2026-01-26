@@ -117,7 +117,7 @@
     data-fr-unchecked-label={state ? "Désactivé" : undefined}
     style={state ? "--toggle-status-width: 2.5rem;" : undefined}
   >
-    {label}
+    <span>{label}</span>
   </label>
   {#if hint}
     <p id={hintId} class="fr-hint-text">
@@ -148,5 +148,53 @@
   @import "@gouvfr/dsfr/dist/component/toggle/toggle.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("toggle");
+  @include set-dsfr-sizing("toggle") {
+    input[type="checkbox"] {
+      &:checked ~ .fr-toggle__label {
+        &::after,
+        &::before {
+          --data-uri-svg: none;
+        }
+
+        &::before {
+          background-color: var(--background-active-blue-france);
+        }
+
+        span::after {
+          --color-icon-check: var(--border-action-high-blue-france);
+
+          @include set-icon-check(var(--color-icon-check)) {
+            left: calc(40px - 20px);
+            position: absolute;
+            top: 6px;
+            z-index: 1;
+          }
+        }
+      }
+
+      &:disabled ~ .fr-toggle__label {
+        &::before {
+          --data-uri-svg: none;
+          --color-label-shadow: var(--border-disabled-grey);
+        }
+
+        span::after {
+          --color-icon-check: var(--text-disabled-grey);
+        }
+      }
+    }
+
+    label::before {
+      --data-uri-svg: none;
+      box-shadow: inset 0 0 0 1px var(--color-label-shadow, currentColor);
+    }
+
+    &--label-left input[type="checkbox"]:checked ~ .fr-toggle__label {
+      span::after {
+        left: calc(100% - 20px);
+      }
+    }
+  }
+
+  //
 </style>
