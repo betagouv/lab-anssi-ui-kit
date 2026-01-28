@@ -1,6 +1,15 @@
-@use "@gouvfr/dsfr/src/dsfr/core/style/color/module/decisions";
 @import "@gouvfr/dsfr/src/dsfr/core/index";
-// Elevation
+@import "@gouvfr/dsfr/src/dsfr/core/style/display/module/no-scroll";
 @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
-// Dark Theme
-@import "@gouvfr/dsfr/src/dsfr/scheme/style/module";
+@import "@gouvfr/dsfr/src/dsfr/core/style/color/module"; // Light Theme
+@import "@gouvfr/dsfr/src/dsfr/scheme/style/module"; // Dark Theme
+
+@include generate-margin-vars();
+
+:root {
+  @include init-underline;
+  @include enable-underline;
+  @include enable-external;
+
+  --text-decoration: none;
+}
