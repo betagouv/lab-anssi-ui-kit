@@ -190,14 +190,23 @@
       background-color: var(--background-default-grey);
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-action-high-blue-france);
+
+      &:disabled {
+        box-shadow: inset 0 0 0 1px var(--border-disabled-grey);
+      }
     }
 
     &--inverted-secondary {
       --hover: var(--background-transparent-hover, rgb(255 255 255 / 8%));
       --active: var(--background-transparent-active, rgb(255 255 255 / 16%));
-      background-color: transparent;
+      --background-action-high-blue-france: transparent;
+      --background-disabled-grey: transparent;
       box-shadow: inset 0 0 0 1px var(--background-default-grey);
       color: var(--text-inverted-grey);
+
+      &:disabled {
+        box-shadow: inset 0 0 0 1px var(--border-disabled-grey);
+      }
     }
 
     &--centered {
