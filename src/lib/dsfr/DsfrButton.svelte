@@ -124,7 +124,7 @@
   target={markup === "a" ? target : undefined}
   {disabled}
   {title}
-  class={["fr-btn", iconClass, kindClass, utilityClass, className]}
+  class={["fr-btn", iconClass, kindClass, utilityClass, sizeClass, className]}
   class:fr-btn--icon-left={hasIcon && iconPlace === "left"}
   class:fr-btn--icon-right={hasIcon && iconPlace === "right"}
   class:fr-btn--centered={isCentered}
