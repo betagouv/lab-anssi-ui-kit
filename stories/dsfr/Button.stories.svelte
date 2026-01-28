@@ -20,7 +20,15 @@
         },
         description:
           "Type du bouton<br>Valeurs :<br>- Primaire : bouton d'action principal, unique dans la page<br>- Secondaire : bouton d'action moins prioritaire<br>- Tertiaire : bouton d'action contextuelle ou alternative<br>Tertiaire sans bordure : version alternative",
-        options: ["primary", "secondary", "tertiary", "tertiary-no-outline", "inverted"],
+        options: [
+          "primary",
+          "secondary",
+          "tertiary",
+          "tertiary-no-outline",
+          "inverted",
+          "inverted-primary",
+          "inverted-secondary",
+        ],
       },
     },
     args: buttonArgs,

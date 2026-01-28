@@ -13,12 +13,36 @@
   import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
+  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Card",
     component: DsfrCard,
     argTypes: cardArgTypes,
-    args: { ...cardArgs, src: Placeholder },
+    args: {
+      ...cardArgs,
+      src: Placeholder,
+      buttons: [
+        {
+          label: "libellé du bouton 1",
+          kind: "primary",
+          disabled: false,
+          icon: "checkbox-circle-line",
+        },
+        {
+          label: "libellé du bouton 2",
+          kind: "secondary",
+          disabled: false,
+          icon: "checkbox-circle-line",
+        },
+        {
+          label: "libellé du bouton 3",
+          kind: "secondary",
+          disabled: false,
+          icon: "checkbox-circle-line",
+        },
+      ],
+    },
     render: template,
   });
 
@@ -92,6 +116,9 @@
       size="sm"
       groupMarkup="div"
     ></dsfr-tags-group>
+
+    <!-- Buttons Group (slot: buttonsgroup) -->
+    <dsfr-buttons-group slot="buttonsgroup" buttons={args.buttons}></dsfr-buttons-group>
   </dsfr-card>
 {/snippet}
 
