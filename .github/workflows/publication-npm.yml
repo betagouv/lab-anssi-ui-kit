@@ -59,5 +59,8 @@ jobs:
       - name: Envoyer la release js
         run: s3cmd put --mime-type='application/javascript' ./dist/webcomponents/lab-anssi-ui-kit.iife.js s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
 
-      - name: Envoyer la feuille de style DSFR
-        run: s3cmd put --mime-type='text/css' ./dist/assets/dsfr-variables.css s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
+      - name: Envoyer les feuilles de style des thèmes & du DSFR
+        run: |
+          for file in ./dist/assets/*.css; do
+            s3cmd put --mime-type='text/css' "$file" s3://lab-anssi-ui-kit-prod-s3-assets/${{ env.release_version }}/
+          done
