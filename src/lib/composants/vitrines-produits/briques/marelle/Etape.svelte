@@ -4,7 +4,6 @@
     props: {
       index: { attribute: "index", type: "Number" },
       etapeMarelle: { attribute: "etape-marelle", type: "Object" },
-      pair: { attribute: "pair", type: "Boolean" },
     },
   }}
 />
@@ -16,10 +15,11 @@
   interface Props {
     index: number;
     etapeMarelle: EtapeMarelle;
-    pair: boolean;
   }
 
-  let { index, etapeMarelle, pair = false }: Props = $props();
+  let { index, etapeMarelle }: Props = $props();
+
+  const pair = (index + 1) % 2 === 0;
 </script>
 
 <div class="marelle-etape" class:marelle-etape--pair={pair} class:marelle-etape--impair={!pair}>
@@ -66,13 +66,11 @@
       column-gap: 24px;
       row-gap: 24px;
 
-      &:nth-child(even),
       &.marelle-etape--pair {
         grid-template-areas: "illustration numero-etape contenu";
       }
     }
 
-    &:nth-child(even),
     &.marelle-etape--pair {
       .numero-etape {
         padding-right: 16px;
@@ -84,7 +82,6 @@
       }
     }
 
-    &:nth-child(odd),
     &.marelle-etape--impair {
       .numero-etape {
         padding-left: 16px;
