@@ -36,7 +36,9 @@
 {#if text}
   <div {id} class={["fr-highlight", accentClass]}>
     <slot name="title"></slot>
-    <p class={`fr-text--${size}`}>{text}</p>
+    <slot name="text">
+      <p class={`fr-text--${size}`}>{text}</p>
+    </slot>
   </div>
 {/if}
 
