@@ -159,7 +159,7 @@
     "$dsfr": true,
     "alt-blue-france": {
       "$type": "color",
-      "$value": "{yellow-msc.200}",
+      "$value": "{yellow-msc.50}",
       "$themeable": true
     },
     "action": {
@@ -239,10 +239,17 @@
       "$value": "{yellow-msc.200}",
       "$themeable": true
     },
-    "action-high-blue-france": {
-      "$type": "color",
-      "$value": "{midnight-blue-msc.950}",
-      "$themeable": true
+    "action": {
+      "high-blue-france": {
+        "$type": "color",
+        "$value": "{midnight-blue-msc.950}",
+        "$themeable": true
+      },
+      "low-blue-france": {
+        "$type": "color",
+        "$value": "{yellow-msc.150}",
+        "$themeable": true
+      }
     },
     "active-blue-france": {
       "$type": "color",
