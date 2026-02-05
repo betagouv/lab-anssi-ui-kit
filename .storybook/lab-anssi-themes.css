@@ -149,7 +149,7 @@
 }
 
 .theme-msc [data-themeable] {
-  --background-alt-blue-france: var(--yellow-msc-200);
+  --background-alt-blue-france: var(--yellow-msc-50);
   --background-action-high-blue-france: var(--yellow-msc-200);
   --background-action-high-blue-france-hover: var(--yellow-msc-250);
   --background-action-high-blue-france-active: var(--yellow-msc-275);
@@ -169,6 +169,7 @@
   --border-active-alt-blue-france-lab: var(--yellow-msc-200);
   --border-default-blue-france: var(--yellow-msc-200);
   --border-action-high-blue-france: var(--midnight-blue-msc-950);
+  --border-action-low-blue-france: var(--yellow-msc-150);
   --border-active-blue-france: var(--midnight-blue-msc-950);
   --border-open-blue-france: var(--yellow-msc-50);
   --border-plain-blue-france: var(--midnight-blue-msc-950);
