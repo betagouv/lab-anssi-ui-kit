@@ -64,4 +64,5 @@ export { default as DsfrTextarea } from "./dsfr/DsfrTextarea.svelte";
 export { default as DsfrTile } from "./dsfr/DsfrTile.svelte";
 export { default as DsfrTagsGroup } from "./dsfr/DsfrTagsGroup.svelte";
 export { default as DsfrToggle } from "./dsfr/DsfrToggle.svelte";
+export { default as DsfrTranscription } from "./dsfr/DsfrTranscription.svelte";
 export { default as DsfrTranslate } from "./dsfr/DsfrTranslate.svelte";
