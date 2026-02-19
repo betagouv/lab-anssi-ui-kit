@@ -182,7 +182,7 @@
       <div class="fr-footer__content">
         {#if hasDescription && contentDescription}
           <p class="fr-footer__content-desc">
-            {contentDescription}
+            {@html contentDescription}
           </p>
         {/if}
         {#if contentLinks.length > 0}
