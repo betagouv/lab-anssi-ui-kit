@@ -53,6 +53,7 @@ export { default as DsfrPagination } from "./dsfr/DsfrPagination.svelte";
 export { default as DsfrQuote } from "./dsfr/DsfrQuote.svelte";
 export { default as DsfrRadio } from "./dsfr/DsfrRadio.svelte";
 export { default as DsfrRadiosGroup } from "./dsfr/DsfrRadiosGroup.svelte";
+export { default as DsfrRange } from "./dsfr/DsfrRange.svelte";
 export { default as DsfrSegmented } from "./dsfr/DsfrSegmented.svelte";
 export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
 export { default as DsfrSearch } from "./dsfr/DsfrSearch.svelte";
