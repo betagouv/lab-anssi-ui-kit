@@ -4,6 +4,17 @@ permissions: {}
 on:
   push:
     branches: [main]
+    paths:
+      - "src/**"
+      - ".storybook/**"
+      - "outils/**"
+      - "scripts/**"
+      - "vite.config.ts"
+      - "vite.webcomponents.config.ts"
+      - "svelte.config.js"
+      - "tsconfig.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/**"
 
 jobs:
   build:
