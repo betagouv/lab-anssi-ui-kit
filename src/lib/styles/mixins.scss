@@ -1,6 +1,3 @@
-@use "src/module/color";
-@use "@gouvfr/dsfr/src/dsfr/core/index" as *;
-
 /// Ajoute un style d'outline personnalisé lors du focus clavier (`:focus-visible`).
 @mixin set-focus() {
   outline: {
@@ -17,48 +14,6 @@
   font-family: inherit;
   appearance: none;
   cursor: pointer;
-}
-
-/// Ajoute un style `display` au composant hôte dans le Shadow DOM.
-/// Permet également d'injecter du contenu CSS supplémentaire via `@content`.
-///
-/// @param {String} $display [block] - La valeur de la propriété CSS `display` à appliquer au `:host`.
-/// @content - Contenu CSS additionnel à insérer dans le bloc `:host`.
-///
-@mixin set-shadow-host($display: "block") {
-  :host {
-    display: #{$display};
-    @include text-adjustments();
-    @include text-style(md);
-    @include color.background(
-      default grey,
-      (
-        legacy: false,
-      )
-    );
-    @include color.text(
-      default grey,
-      (
-        legacy: false,
-      )
-    );
-    background-color: transparent;
-
-    @content;
-  }
-}
-
-/// Applique `box-sizing: border-box` au composant spécifié et à tous ses descendants.
-///
-/// @param {String} $component - Le nom du composant à cibler (utilisé dans la classe `.fr-#{$component}`).
-/// @content Permet d'injecter du contenu additionnel à l'intérieur du bloc du composant.
-///
-@mixin set-dsfr-sizing($component) {
-  .fr-#{$component} {
-    box-sizing: border-box;
-
-    @content;
-  }
 }
 
 /// Mixin pour cacher visuellement un élément tout en le gardant accessible aux lecteurs d'écran.
@@ -82,47 +37,4 @@
 ///
 @mixin set-border-radius($radius: 0) {
   border-radius: var(--lab-border-radius, #{$radius});
-}
-
-/// Reproduis une coche (checkmark) en pure CSS via des bordures.
-///
-/// @param {Color} $color [var(--border-action-high-blue-france)] - Couleur de la coche.
-@mixin set-icon-check($icon-color: var(--border-action-high-blue-france)) {
-  border-left: 2px solid $icon-color;
-  border-bottom: 2px solid $icon-color;
-  content: "";
-  display: inline-block;
-  height: 10px;
-  transform: rotate(-45deg) translate(1px, -1px) scale(0.7);
-  width: 16px;
-
-  @content;
-}
-
-/// Applique des styles personnalisés à une case à cocher en affichant une coche personnalisée.
-///
-/// Cette mixin masque l'icône par défaut de la case à cocher et ajoute une coche stylisée
-/// en pure CSS lorsque la case est cochée.
-///
-@mixin set-themeable-checkbox() {
-  input[type="checkbox"]:checked + label {
-    &::before {
-      --data-uri-svg: none;
-    }
-
-    &::after {
-      @include set-icon-check(var(--text-inverted-blue-france)) {
-        left: calc(-2rem + 4px);
-        position: absolute;
-        top: 6px;
-        z-index: 1;
-      }
-    }
-  }
-
-  .fr-label {
-    &::before {
-      --data-uri-svg: none;
-    }
-  }
 }

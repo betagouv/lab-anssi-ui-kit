@@ -44,7 +44,7 @@
 
 <style lang="scss">
   // DSFR Core styles
-  // @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/font-weight";
