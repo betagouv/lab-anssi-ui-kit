@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import path from "path";
 import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
 import { assetsPath, replaceIconPaths, varEnv, viteScssPreprocessorOptions } from "./outils";
 
 const dirname =
@@ -55,7 +56,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: "playwright",
+            provider: playwright({}),
             instances: [
               {
                 browser: "chromium",
