@@ -20,6 +20,8 @@
 <span class="icone fr-icon-{nom} {taille}"></span>
 
 <style lang="scss">
+  @use "../styles/jeu-icone.scss";
+
   .icone {
     font-family: Marianne, arial, sans-serif;
     --icon-size: 1em;
@@ -50,6 +52,4 @@
       --icon-size: 2rem;
     }
   }
-
-  @import "../styles/jeu-icone.scss";
 </style>
