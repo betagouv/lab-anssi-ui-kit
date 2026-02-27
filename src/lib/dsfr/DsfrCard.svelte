@@ -265,6 +265,7 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles

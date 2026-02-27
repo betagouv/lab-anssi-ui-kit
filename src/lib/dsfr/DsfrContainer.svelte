@@ -22,6 +22,7 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module/container";
   @include grid($grid-settings);

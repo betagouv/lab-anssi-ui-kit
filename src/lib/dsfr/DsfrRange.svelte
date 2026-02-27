@@ -280,6 +280,7 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/dist/core/core.min.css";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";

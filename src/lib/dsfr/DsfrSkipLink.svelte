@@ -42,6 +42,7 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module/container";
