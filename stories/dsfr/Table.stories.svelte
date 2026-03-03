@@ -104,3 +104,16 @@
     hasFooterPagination: true,
   }}
 />
+
+<Story name="Tableau vide avec slot personnalisé">
+  {#snippet template(_args: Args)}
+    <DsfrTable
+      id="table-empty-custom"
+      caption="Grandes villes de France"
+      columns={citiesColumns}
+      rows={[]}
+    >
+      <p slot="empty" class="fr-text--sm">Aucune ville ne correspond à votre recherche.</p>
+    </DsfrTable>
+  {/snippet}
+</Story>
