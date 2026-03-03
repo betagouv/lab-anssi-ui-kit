@@ -33,6 +33,7 @@
 />
 
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
@@ -96,9 +97,21 @@
     sort?: boolean;
     inline?: boolean;
     multiline?: boolean;
+    /**
+     * Si true, le contenu de chaque cellule est rendu comme du HTML brut via {@html}.
+     * Fonctionne avec l'API columns/rows, y compris en tant que web component.
+     * ⚠️ Ne pas utiliser avec des données non maîtrisées (risque XSS).
+     */
+    html?: boolean;
+    /**
+     * Snippet de rendu personnalisé pour les cellules de cette colonne (Svelte uniquement).
+     * Reçoit la valeur brute de la cellule et la ligne d'origine complète.
+     * Non sérialisable en JSON : incompatible avec le passage via attribut HTML.
+     */
+    render?: Snippet<[value: unknown, row: Row]>;
   }
 
-  type Row = Record<string, string>;
+  type Row = Record<string, unknown>;
 
   export interface Props {
     /** Id du tableau */
@@ -237,7 +250,7 @@
       ? [
           rows.map((row) =>
             columns.map((col) => ({
-              content: row[col.key] ?? "",
+              content: row[col.key] != null ? String(row[col.key]) : "",
               align: col.align,
               valign: col.valign,
               fixed: col.fixed,
@@ -263,6 +276,14 @@
   let currentPage = $state(1);
 
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
+
+  // Lignes d'origine (Row[]) alignées sur displayedRows, pour les render snippets par colonne.
+  let displayedOriginalRows = $derived.by((): Row[] => {
+    if (!rows) return [];
+    if (isServerSide) return rows;
+    if (!hasFooterSelect && !hasFooterPagination) return rows;
+    return rows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+  });
 
   let displayedRows = $derived.by(() => {
     const allRows = computedTbodies[0] ?? [];
@@ -407,8 +428,18 @@
                       tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
                     <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
                       {#each row as cell, cellIndex (cellIndex)}
+                        {@const col = columns?.[cellIndex]}
                         <td class={getCellClasses(cell)}>
-                          {cell.content}
+                          {#if col?.render && tIndex === 0}
+                            {@render col.render(
+                              displayedOriginalRows[index][col.key],
+                              displayedOriginalRows[index],
+                            )}
+                          {:else if col?.html}
+                            {@html cell.content}
+                          {:else}
+                            {cell.content}
+                          {/if}
                         </td>
                       {/each}
                     </tr>

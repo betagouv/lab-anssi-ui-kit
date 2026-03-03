@@ -7,6 +7,8 @@
     tableArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/table/template/stories/table-arg-types.js";
 
+  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
   import tableData from "../utilitaires/tableData.json";
@@ -19,6 +21,130 @@
   const citiesRows = tableData.tbodies[0].map((row) =>
     Object.fromEntries(row.map((cell, i) => [String(i), cell.content])),
   );
+
+  // --- Maquette NIS2 ---
+
+  interface NisExigence {
+    entityTypes: ("EE" | "EI")[];
+    objective: string;
+    category: string;
+    ref: string;
+    content: string;
+  }
+
+  interface IsoRef {
+    ref: string;
+    label: string;
+  }
+
+  type Correspondance = "ÉLEVÉE" | "MOYENNE" | "FAIBLE / NULLE";
+
+  interface NisRow extends Record<string, unknown> {
+    exigence: NisExigence;
+    correspondance: Correspondance;
+    isoRefs: IsoRef[];
+    observation: string;
+  }
+
+  const nisRows: NisRow[] = [
+    {
+      exigence: {
+        entityTypes: ["EE", "EI"],
+        objective: "Objectif de sécurité 1 : Recensement des systèmes d'information",
+        category: "Recensement des SI",
+        ref: "1.1-EI/EE",
+        content:
+          "L'entité liste l'ensemble de ses activités et services qui ne correspondent pas aux critères pour lesquels l'entité est devenue une entité importante ou essentielle (par exemple : une entité essentielle au titre d'une activité exploitation d'oléoduc, tous les autres activités et services qu'elle fournit).",
+      },
+      correspondance: "MOYENNE",
+      isoRefs: [
+        {
+          ref: "27002:2022:6.9",
+          label: "Inventaire des informations et autres actifs associés",
+        },
+      ],
+      observation:
+        "Afin de valider la mesure du référentiel NIS2, la recommandation ISO doit être contextualisée par un travail de l'inventaire des activités et services de l'entité.",
+    },
+    {
+      exigence: {
+        entityTypes: ["EE", "EI"],
+        objective: "Objectif de sécurité 1 : Recensement des systèmes d'information",
+        category: "Recensement des SI",
+        ref: "1.2-EI/EE",
+        content:
+          "L'entité identifie dans la liste prévue au (a) les systèmes d'information qui ne sont exposés à aucun des risques mentionnés à l'alinéa 2 de l'objectif de sécurité.",
+      },
+      correspondance: "MOYENNE",
+      isoRefs: [
+        {
+          ref: "27002:2022:6.2",
+          label: "Appréciation des risques de sécurité de l'information",
+        },
+        {
+          ref: "27002:2022:6.9",
+          label: "Inventaire des informations et autres actifs associés",
+        },
+      ],
+      observation:
+        "L'appréciation des risques effectuée dans le cadre des mesures ISO peut être réutilisée pour identifier les SI n'étant exposés à aucun des risques mentionnés à l'alinéa 2 de l'objectif de sécurité 1.",
+    },
+    {
+      exigence: {
+        entityTypes: ["EE", "EI"],
+        objective: "Objectif de sécurité 1 : Recensement des systèmes d'information",
+        category: "Recensement des SI",
+        ref: "1.3-EI/EE",
+        content:
+          "L'entité valide et réexamine annuellement, ou en tant que de besoin notamment en cas de mise en service d'un nouveau système d'information, la liste prévue au (a).",
+      },
+      correspondance: "FAIBLE / NULLE",
+      isoRefs: [],
+      observation: "",
+    },
+    {
+      exigence: {
+        entityTypes: ["EE", "EI"],
+        objective:
+          "Objectif de sécurité 2 : Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
+        category: "Rôles et responsabilités",
+        ref: "2.A.1-EI/EE",
+        content:
+          "Le dirigeant exécutif de l'entité est responsable de la conformité de la sécurité numérique au sein de son entité et en particulier du suivi de la conformité des systèmes d'information aux présentes mesures.",
+      },
+      correspondance: "ÉLEVÉE",
+      isoRefs: [
+        { ref: "27001:2022:5.1", label: "Leadership et engagement" },
+        { ref: "27002:2022:6.4", label: "Responsabilités de la direction" },
+        {
+          ref: "27002:2022:5.31",
+          label: "Exigences légales, statutaires, réglementaires et contractuelles",
+        },
+      ],
+      observation: "Il convient d'expliciter la responsabilité du dirigeant exécutif.",
+    },
+    {
+      exigence: {
+        entityTypes: ["EE", "EI"],
+        objective:
+          "Objectif de sécurité 2 : Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
+        category: "Rôles et responsabilités",
+        ref: "2.A.2-EI/EE",
+        content:
+          "Il désigne au moins une personne qui le conseille et l'accompagne dans l'exercice de cette responsabilité. Cette personne est le point de contact privilégié de l'Agence nationale de la sécurité des systèmes d'information pour tous les sujets relatifs à la sécurité numérique.",
+      },
+      correspondance: "ÉLEVÉE",
+      isoRefs: [
+        {
+          ref: "27002:2022:5.2",
+          label: "Fonctions et responsabilités liées à la sécurité de l'information",
+        },
+        { ref: "27002:2022:5.3", label: "Contacts avec les autorités" },
+      ],
+      observation:
+        "Il est nécessaire de préciser l'organisation (rôles et responsabilités) mise en place dans le cadre de l'ISO en identifiant une personne conseillant le dirigeant exécutif, et point de contact de l'ANSSI.",
+    },
+  ];
 
   // État local pour la story "pagination côté serveur"
   let serverPage = $state(1);
@@ -68,6 +194,54 @@
 
   type Args = ComponentProps<DsfrTable>;
 </script>
+
+{#snippet contenuCellulePopulation(value: unknown, _row: Record<string, unknown>)}
+  <strong>{value as string} hab.</strong>
+{/snippet}
+
+{#snippet contenuCelluleExigence(value: unknown, _row: Record<string, unknown>)}
+  {@const exigence = value as NisExigence}
+
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <div style="display:flex; gap:4px; flex-wrap:wrap;">
+      {#each exigence.entityTypes as type}
+        <dsfr-badge
+          label={type}
+          type="accent"
+          accent={type === "EE" ? "green-bourgeon" : "blue-ecume"}
+          size="sm"
+          has-no-icon
+        ></dsfr-badge>
+      {/each}
+    </div>
+    <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
+      <dsfr-tag label={exigence.objective} size="sm"></dsfr-tag>
+      <dsfr-tag label={exigence.category} size="sm"></dsfr-tag>
+      <dsfr-tag label={exigence.ref} size="sm"></dsfr-tag>
+    </div>
+    <p style="margin:0; font-size:0.875rem; line-height:1.5;">{exigence.content}</p>
+  </div>
+{/snippet}
+
+{#snippet contenuCelluleCorrespondance(value: unknown, _row: Record<string, unknown>)}
+  {@const level = value as string}
+  {@const status = level === "ÉLEVÉE" ? "error" : level === "MOYENNE" ? "warning" : "success"}
+
+  <dsfr-badge label={level} type="status" {status}></dsfr-badge>
+{/snippet}
+
+{#snippet contenuCelluleRefsISO(value: unknown, _row: Record<string, unknown>)}
+  {@const refs = value as IsoRef[]}
+
+  <div style="display:flex; flex-direction:column; gap:4px;">
+    {#each refs as isoRef}
+      <p style="margin:0; font-size:0.875rem;">
+        + {isoRef.ref}
+        {isoRef.label}
+      </p>
+    {/each}
+  </div>
+{/snippet}
 
 {#snippet template(args: Args)}
   <dsfr-table
@@ -144,6 +318,50 @@
         serverPerPage = perPage;
         serverPage = 1;
       }}
+    />
+  {/snippet}
+</Story>
+
+<Story name="Avec contenu riche (snippet)">
+  {#snippet template(_args: Args)}
+    <DsfrTable
+      id="table-rich-snippet"
+      caption="Grandes villes de France"
+      columns={[
+        { key: "0", label: "Ville" },
+        { key: "1", label: "Département" },
+        { key: "2", label: "Région" },
+        { key: "3", label: "Population (2020)", render: contenuCellulePopulation },
+        { key: "4", label: "Superficie (km²)" },
+      ]}
+      rows={citiesRows.slice(0, 10)}
+    />
+  {/snippet}
+</Story>
+
+<Story name="Avec contenu riche (Maquette NIS2)">
+  {#snippet template(_args: Args)}
+    <DsfrTable
+      id="table-nis2"
+      caption="Liste des exigences NIS 2"
+      multiline
+      columns={[
+        {
+          key: "exigence",
+          label: "Exigence NIS 2",
+          render: contenuCelluleExigence,
+          multiline: true,
+        },
+        { key: "correspondance", label: "Correspondance", render: contenuCelluleCorrespondance },
+        {
+          key: "isoRefs",
+          label: "Référence ISO 27001/27002",
+          render: contenuCelluleRefsISO,
+          multiline: true,
+        },
+        { key: "observation", label: "Observations", multiline: true },
+      ]}
+      rows={nisRows}
     />
   {/snippet}
 </Story>
