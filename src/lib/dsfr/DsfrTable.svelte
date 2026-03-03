@@ -372,21 +372,31 @@
               </thead>
             {/if}
 
-            {#each computedTbodies as tbody, tIndex (tIndex)}
+            {#if nbRows === 0}
               <tbody>
-                {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
-                  {@const globalIndex =
-                    tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
-                  <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
-                    {#each row as cell, cellIndex (cellIndex)}
-                      <td class={getCellClasses(cell)}>
-                        {cell.content}
-                      </td>
-                    {/each}
-                  </tr>
-                {/each}
+                <tr>
+                  <td colspan={computedThead[0]?.length ?? 1}>
+                    <slot name="empty"></slot>
+                  </td>
+                </tr>
               </tbody>
-            {/each}
+            {:else}
+              {#each computedTbodies as tbody, tIndex (tIndex)}
+                <tbody>
+                  {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
+                    {@const globalIndex =
+                      tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
+                    <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
+                      {#each row as cell, cellIndex (cellIndex)}
+                        <td class={getCellClasses(cell)}>
+                          {cell.content}
+                        </td>
+                      {/each}
+                    </tr>
+                  {/each}
+                </tbody>
+              {/each}
+            {/if}
           </table>
         </slot>
       </div>
