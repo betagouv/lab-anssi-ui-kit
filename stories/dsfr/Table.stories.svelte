@@ -20,6 +20,13 @@
     Object.fromEntries(row.map((cell, i) => [String(i), cell.content])),
   );
 
+  // État local pour la story "pagination côté serveur"
+  let serverPage = $state(1);
+  let serverPerPage = $state(5);
+  let serverRows = $derived(
+    citiesRows.slice((serverPage - 1) * serverPerPage, serverPage * serverPerPage),
+  );
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Table",
     component: DsfrTable,
@@ -115,5 +122,28 @@
     >
       <p slot="empty" class="fr-text--sm">Aucune ville ne correspond à votre recherche.</p>
     </DsfrTable>
+  {/snippet}
+</Story>
+
+<Story name="Avec pagination côté serveur">
+  {#snippet template(_args: Args)}
+    <DsfrTable
+      id="table-server"
+      caption="Grandes villes de France (pagination côté serveur)"
+      columns={citiesColumns}
+      rows={serverRows}
+      totalRows={citiesRows.length}
+      hasFooter
+      hasFooterSelect
+      hasFooterPagination
+      itemsPerPage={[5, 10, 20]}
+      onpagechange={(page) => {
+        serverPage = page;
+      }}
+      onrowsperpagechange={(perPage) => {
+        serverPerPage = perPage;
+        serverPage = 1;
+      }}
+    />
   {/snippet}
 </Story>

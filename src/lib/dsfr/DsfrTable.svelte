@@ -27,6 +27,7 @@
       columns: { attribute: "columns", type: "Array" },
       rows: { attribute: "rows", type: "Array" },
       itemsPerPage: { attribute: "items-per-page", type: "Array" },
+      totalRows: { attribute: "total-rows", type: "Number" },
     },
   }}
 />
@@ -150,6 +151,16 @@
     rows?: Row[];
     /** Options permettant de définir le nombre de lignes par page */
     itemsPerPage?: number[];
+    /**
+     * Nombre total de lignes (mode pagination serveur).
+     * Si fourni, désactive le slicing interne : le composant affiche les `rows` telles quelles
+     * et délègue la gestion des données au parent via `onpagechange` / `onrowsperpagechange`.
+     */
+    totalRows?: number;
+    /** Callback appelé lors d'un changement de page */
+    onpagechange?: (page: number) => void;
+    /** Callback appelé lors d'un changement du nombre de lignes par page */
+    onrowsperpagechange?: (rowsPerPage: number) => void;
   }
 
   let {
@@ -178,6 +189,9 @@
     columns,
     rows,
     itemsPerPage = [5, 10, 20],
+    totalRows,
+    onpagechange,
+    onrowsperpagechange,
   }: Props = $props();
 
   let captionEl: HTMLElement | undefined = $state();
@@ -235,7 +249,10 @@
       : (table?.tbodies ?? []),
   );
 
-  let nbRows = $derived(computedTbodies[0]?.length ?? 0);
+  // En mode serveur _(présence de `totalRows`)_, le parent gère le découpage : on affiche toutes les rows reçues.
+  // En mode client, le composant calcule lui-même le nombre total depuis les données.
+  let isServerSide = $derived(totalRows !== undefined);
+  let nbRows = $derived(isServerSide ? (totalRows ?? 0) : (computedTbodies[0]?.length ?? 0));
 
   let rowsPerPage = $state(itemsPerPage[0]);
 
@@ -249,7 +266,7 @@
 
   let displayedRows = $derived.by(() => {
     const allRows = computedTbodies[0] ?? [];
-
+    if (isServerSide) return allRows;
     if (!hasFooterSelect && !hasFooterPagination) return allRows;
 
     return allRows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
@@ -268,10 +285,12 @@
     const newValue = parseInt(value, 10);
     rowsPerPage = newValue;
     currentPage = 1;
+    onrowsperpagechange?.(newValue);
   }
 
   function handlePageChange(page: number) {
     currentPage = page;
+    onpagechange?.(page);
   }
 
   /**
