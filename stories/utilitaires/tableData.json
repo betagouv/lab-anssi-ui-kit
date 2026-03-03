@@ -1,0 +1,225 @@
+{
+  "thead": [
+    [
+      { "content": "Ville" },
+      { "content": "Département" },
+      { "content": "Région" },
+      { "content": "Population (2020)" },
+      { "content": "Superficie (km²)" }
+    ]
+  ],
+  "tbodies": [
+    [
+      [
+        { "content": "Paris" },
+        { "content": "Paris (75)" },
+        { "content": "Île-de-France" },
+        { "content": "2 145 906" },
+        { "content": "105" }
+      ],
+      [
+        { "content": "Marseille" },
+        { "content": "Bouches-du-Rhône (13)" },
+        { "content": "Provence-Alpes-Côte d'Azur" },
+        { "content": "861 635" },
+        { "content": "240" }
+      ],
+      [
+        { "content": "Lyon" },
+        { "content": "Métropole de Lyon (69)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "522 969" },
+        { "content": "48" }
+      ],
+      [
+        { "content": "Toulouse" },
+        { "content": "Haute-Garonne (31)" },
+        { "content": "Occitanie" },
+        { "content": "493 465" },
+        { "content": "118" }
+      ],
+      [
+        { "content": "Nice" },
+        { "content": "Alpes-Maritimes (06)" },
+        { "content": "Provence-Alpes-Côte d'Azur" },
+        { "content": "342 669" },
+        { "content": "72" }
+      ],
+      [
+        { "content": "Nantes" },
+        { "content": "Loire-Atlantique (44)" },
+        { "content": "Pays de la Loire" },
+        { "content": "320 732" },
+        { "content": "65" }
+      ],
+      [
+        { "content": "Montpellier" },
+        { "content": "Hérault (34)" },
+        { "content": "Occitanie" },
+        { "content": "295 542" },
+        { "content": "57" }
+      ],
+      [
+        { "content": "Strasbourg" },
+        { "content": "Bas-Rhin (67)" },
+        { "content": "Grand Est" },
+        { "content": "285 751" },
+        { "content": "78" }
+      ],
+      [
+        { "content": "Bordeaux" },
+        { "content": "Gironde (33)" },
+        { "content": "Nouvelle-Aquitaine" },
+        { "content": "257 068" },
+        { "content": "49" }
+      ],
+      [
+        { "content": "Lille" },
+        { "content": "Nord (59)" },
+        { "content": "Hauts-de-France" },
+        { "content": "234 475" },
+        { "content": "35" }
+      ],
+      [
+        { "content": "Rennes" },
+        { "content": "Ille-et-Vilaine (35)" },
+        { "content": "Bretagne" },
+        { "content": "220 488" },
+        { "content": "50" }
+      ],
+      [
+        { "content": "Reims" },
+        { "content": "Marne (51)" },
+        { "content": "Grand Est" },
+        { "content": "182 592" },
+        { "content": "47" }
+      ],
+      [
+        { "content": "Toulon" },
+        { "content": "Var (83)" },
+        { "content": "Provence-Alpes-Côte d'Azur" },
+        { "content": "176 198" },
+        { "content": "43" }
+      ],
+      [
+        { "content": "Saint-Étienne" },
+        { "content": "Loire (42)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "171 057" },
+        { "content": "80" }
+      ],
+      [
+        { "content": "Le Havre" },
+        { "content": "Seine-Maritime (76)" },
+        { "content": "Normandie" },
+        { "content": "170 352" },
+        { "content": "47" }
+      ],
+      [
+        { "content": "Grenoble" },
+        { "content": "Isère (38)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "158 454" },
+        { "content": "18" }
+      ],
+      [
+        { "content": "Dijon" },
+        { "content": "Côte-d'Or (21)" },
+        { "content": "Bourgogne-Franche-Comté" },
+        { "content": "156 920" },
+        { "content": "40" }
+      ],
+      [
+        { "content": "Angers" },
+        { "content": "Maine-et-Loire (49)" },
+        { "content": "Pays de la Loire" },
+        { "content": "155 844" },
+        { "content": "43" }
+      ],
+      [
+        { "content": "Nîmes" },
+        { "content": "Gard (30)" },
+        { "content": "Occitanie" },
+        { "content": "151 001" },
+        { "content": "161" }
+      ],
+      [
+        { "content": "Villeurbanne" },
+        { "content": "Métropole de Lyon (69)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "150 768" },
+        { "content": "15" }
+      ],
+      [
+        { "content": "Clermont-Ferrand" },
+        { "content": "Puy-de-Dôme (63)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "147 181" },
+        { "content": "42" }
+      ],
+      [
+        { "content": "Le Mans" },
+        { "content": "Sarthe (72)" },
+        { "content": "Pays de la Loire" },
+        { "content": "143 813" },
+        { "content": "53" }
+      ],
+      [
+        { "content": "Aix-en-Provence" },
+        { "content": "Bouches-du-Rhône (13)" },
+        { "content": "Provence-Alpes-Côte d'Azur" },
+        { "content": "143 097" },
+        { "content": "186" }
+      ],
+      [
+        { "content": "Brest" },
+        { "content": "Finistère (29)" },
+        { "content": "Bretagne" },
+        { "content": "141 603" },
+        { "content": "49" }
+      ],
+      [
+        { "content": "Tours" },
+        { "content": "Indre-et-Loire (37)" },
+        { "content": "Centre-Val de Loire" },
+        { "content": "136 565" },
+        { "content": "35" }
+      ],
+      [
+        { "content": "Amiens" },
+        { "content": "Somme (80)" },
+        { "content": "Hauts-de-France" },
+        { "content": "134 706" },
+        { "content": "50" }
+      ],
+      [
+        { "content": "Limoges" },
+        { "content": "Haute-Vienne (87)" },
+        { "content": "Nouvelle-Aquitaine" },
+        { "content": "130 782" },
+        { "content": "78" }
+      ],
+      [
+        { "content": "Annecy" },
+        { "content": "Haute-Savoie (74)" },
+        { "content": "Auvergne-Rhône-Alpes" },
+        { "content": "130 241" },
+        { "content": "19" }
+      ],
+      [
+        { "content": "Perpignan" },
+        { "content": "Pyrénées-Orientales (66)" },
+        { "content": "Occitanie" },
+        { "content": "122 560" },
+        { "content": "68" }
+      ],
+      [
+        { "content": "Boulogne-Billancourt" },
+        { "content": "Hauts-de-Seine (92)" },
+        { "content": "Île-de-France" },
+        { "content": "121 268" },
+        { "content": "6" }
+      ]
+    ]
+  ]
+}
