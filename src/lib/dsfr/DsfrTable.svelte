@@ -13,6 +13,12 @@
       layoutFixed: { attribute: "layout-fixed", type: "Boolean" },
       size: { attribute: "size", type: "String" },
       fixedFirstCellHead: { attribute: "fixed-first-cell-head", type: "Boolean" },
+      hasHeader: { attribute: "has-header", type: "Boolean" },
+      hasHeaderSegmented: { attribute: "has-header-segmented", type: "Boolean" },
+      hasHeaderSearch: { attribute: "has-header-search", type: "Boolean" },
+      hasHeaderDetails: { attribute: "has-header-details", type: "Boolean" },
+      headerDetails: { attribute: "header-details", type: "String" },
+      hasHeaderButtons: { attribute: "has-header-buttons", type: "Boolean" },
       table: { attribute: "table", type: "Object" },
       columns: { attribute: "columns", type: "Array" },
       rows: { attribute: "rows", type: "Array" },
@@ -108,6 +114,18 @@
     size?: TableSize;
     /** Fixe la première cellule de l'en-tête en sticky */
     fixedFirstCellHead?: boolean;
+    /** Affiche la section en-tête du tableau */
+    hasHeader?: boolean;
+    /** Affiche un contrôle segmenté dans l'en-tête */
+    hasHeaderSegmented?: boolean;
+    /** Affiche une barre de recherche dans l'en-tête */
+    hasHeaderSearch?: boolean;
+    /** Affiche un texte de détail dans l'en-tête */
+    hasHeaderDetails?: boolean;
+    /** Texte de détail affiché dans l'en-tête */
+    headerDetails?: string;
+    /** Affiche des boutons d'actions dans l'en-tête */
+    hasHeaderButtons?: boolean;
     /** Données du tableau (source par défaut pour columns et rows) */
     table?: Table;
     /** Données des colonnes. Prends le pas sur `table.thead` si défini */
@@ -128,6 +146,12 @@
     layoutFixed = false,
     size = "md",
     fixedFirstCellHead = false,
+    hasHeader = false,
+    hasHeaderSegmented = false,
+    hasHeaderSearch = false,
+    hasHeaderDetails = false,
+    headerDetails,
+    hasHeaderButtons = false,
     table,
     columns,
     rows,
@@ -231,6 +255,28 @@
   class:fr-table--layout-fixed={layoutFixed}
   data-fr-js-table="true"
 >
+  {#if hasHeader}
+    <div class="fr-table__header">
+      {#if hasHeaderSegmented}
+        <slot name="headersegmented"></slot>
+      {/if}
+
+      {#if hasHeaderSearch}
+        <slot name="headersearch"></slot>
+      {/if}
+
+      {#if hasHeaderDetails && headerDetails}
+        <p class="fr-table__detail">{headerDetails}</p>
+      {/if}
+
+      {#if hasHeaderButtons}
+        <slot name="headerbuttons"></slot>
+      {/if}
+
+      <slot name="tableheader"></slot>
+    </div>
+  {/if}
+
   <div class="fr-table__wrapper" style={`--table-offset: ${tableOffset};`}>
     <div class="fr-table__container">
       <div class="fr-table__content">
