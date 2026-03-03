@@ -19,9 +19,14 @@
       hasHeaderDetails: { attribute: "has-header-details", type: "Boolean" },
       headerDetails: { attribute: "header-details", type: "String" },
       hasHeaderButtons: { attribute: "has-header-buttons", type: "Boolean" },
+      hasFooter: { attribute: "has-footer", type: "Boolean" },
+      hasFooterSelect: { attribute: "has-footer-select", type: "Boolean" },
+      hasFooterPagination: { attribute: "has-footer-pagination", type: "Boolean" },
+      hasFooterButtons: { attribute: "has-footer-buttons", type: "Boolean" },
       table: { attribute: "table", type: "Object" },
       columns: { attribute: "columns", type: "Array" },
       rows: { attribute: "rows", type: "Array" },
+      itemsPerPage: { attribute: "items-per-page", type: "Array" },
     },
   }}
 />
@@ -29,6 +34,9 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
+
+  import DsfrPagination from "$lib/dsfr/DsfrPagination.svelte";
+  import DsfrSelect from "$lib/dsfr/DsfrSelect.svelte";
 
   setThemeable($host());
 
@@ -126,12 +134,22 @@
     headerDetails?: string;
     /** Affiche des boutons d'actions dans l'en-tête */
     hasHeaderButtons?: boolean;
+    /** Affiche la section pied de page du tableau */
+    hasFooter?: boolean;
+    /** Affiche le sélecteur de nombre de lignes par page */
+    hasFooterSelect?: boolean;
+    /** Affiche la pagination */
+    hasFooterPagination?: boolean;
+    /** Affiche des boutons d'actions dans le pied de page */
+    hasFooterButtons?: boolean;
     /** Données du tableau (source par défaut pour columns et rows) */
     table?: Table;
     /** Données des colonnes. Prends le pas sur `table.thead` si défini */
     columns?: Column[];
     /** Données des lignes. Prends le pas sur `table.tbodies` si défini */
     rows?: Row[];
+    /** Options permettant de définir le nombre de lignes par page */
+    itemsPerPage?: number[];
   }
 
   let {
@@ -152,9 +170,14 @@
     hasHeaderDetails = false,
     headerDetails,
     hasHeaderButtons = false,
+    hasFooter = false,
+    hasFooterSelect = false,
+    hasFooterPagination = false,
+    hasFooterButtons = false,
     table,
     columns,
     rows,
+    itemsPerPage = [5, 10, 20],
   }: Props = $props();
 
   let captionEl: HTMLElement | undefined = $state();
@@ -211,6 +234,45 @@
         ]
       : (table?.tbodies ?? []),
   );
+
+  let nbRows = $derived(computedTbodies[0]?.length ?? 0);
+
+  let rowsPerPage = $state(itemsPerPage[0]);
+
+  $effect(() => {
+    rowsPerPage = itemsPerPage[0];
+  });
+
+  let currentPage = $state(1);
+
+  let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
+
+  let displayedRows = $derived.by(() => {
+    const allRows = computedTbodies[0] ?? [];
+
+    if (!hasFooterSelect && !hasFooterPagination) return allRows;
+
+    return allRows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+  });
+
+  let paginationPages = $derived(
+    Array.from({ length: totalPages }, (_, i) => ({
+      label: String(i + 1),
+      title: `Page ${i + 1}`,
+      href: "#",
+      displayedLg: false,
+    })),
+  );
+
+  function handleRowsPerPageChange(value: string) {
+    const newValue = parseInt(value, 10);
+    rowsPerPage = newValue;
+    currentPage = 1;
+  }
+
+  function handlePageChange(page: number) {
+    currentPage = page;
+  }
 
   /**
    * Génère les classes CSS applicables à une cellule de tableau en fonction de ses propriétés.
@@ -312,8 +374,10 @@
 
             {#each computedTbodies as tbody, tIndex (tIndex)}
               <tbody>
-                {#each tbody as row, index (index)}
-                  <tr id={`${id}-row-key-${index}`} data-row-key={index}>
+                {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
+                  {@const globalIndex =
+                    tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
+                  <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
                     {#each row as cell, cellIndex (cellIndex)}
                       <td class={getCellClasses(cell)}>
                         {cell.content}
@@ -328,6 +392,60 @@
       </div>
     </div>
   </div>
+
+  {#if hasFooter}
+    <div class="fr-table__footer">
+      {#if hasFooterSelect}
+        <div class="fr-table__footer--start">
+          <p class="fr-table__detail">
+            {(currentPage - 1) * rowsPerPage + 1}-{Math.min(currentPage * rowsPerPage, nbRows)} sur {nbRows}
+            {nbRows > 1 ? "lignes" : "ligne"}
+          </p>
+
+          <slot name="footerselect">
+            {#if itemsPerPage.length > 1}
+              <DsfrSelect
+                id={`${id}-footer-select`}
+                label="Nombre de lignes par page"
+                placeholder="Nombre de lignes par page"
+                hideLabel
+                placeholderDisabled
+                value={String(rowsPerPage)}
+                options={itemsPerPage.map((item) => ({
+                  value: item.toString(),
+                  label: `${item} lignes par page`,
+                }))}
+                onvaluechanged={handleRowsPerPageChange}
+              />
+            {/if}
+          </slot>
+        </div>
+      {/if}
+
+      {#if hasFooterPagination}
+        <div class="fr-table__footer--middle">
+          <slot name="footerpagination">
+            <DsfrPagination
+              pages={paginationPages}
+              currentPageIndex={currentPage}
+              hasPrevAndNext
+              prev={{ label: "Précédent", href: "#", title: "Page précédente" }}
+              next={{ label: "Suivant", href: "#", title: "Page suivante" }}
+              onpagechange={handlePageChange}
+            />
+          </slot>
+        </div>
+      {/if}
+
+      {#if hasFooterButtons}
+        <div class="fr-table__footer--end">
+          <div class="fr-table__footer--end-wrapper">
+            <slot name="footerbuttons"></slot>
+          </div>
+        </div>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">

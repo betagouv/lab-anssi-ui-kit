@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/table/template/stories/table-arg-types.js";
 
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
+  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
   import tableData from "../utilitaires/tableData.json";
 
   const citiesColumns = tableData.thead[0].map((cell, i) => ({
@@ -37,6 +38,21 @@
       ...tableArgs,
       columns: citiesColumns,
       rows: citiesRows,
+      buttons: [
+        {
+          label: "Action tableau",
+          kind: "primary",
+          disabled: false,
+          icon: "checkbox-circle-line",
+        },
+        {
+          label: "Action tableau",
+          kind: "secondary",
+          disabled: false,
+          icon: "checkbox-circle-line",
+        },
+      ],
+      itemsPerPage: [5, 10, 20],
       layoutFixed: false,
       fixedFirstCellHead: false,
     },
@@ -65,9 +81,26 @@
     has-header-details={args.hasHeaderDetails || undefined}
     header-details={args.headerDetails}
     has-header-buttons={args.hasHeaderButtons || undefined}
+    has-footer={args.hasFooter || undefined}
+    has-footer-select={args.hasFooterSelect || undefined}
+    has-footer-pagination={args.hasFooterPagination || undefined}
+    has-footer-buttons={args.hasFooterButtons || undefined}
     columns={args.columns}
     rows={args.rows}
-  ></dsfr-table>
+    items-per-page={JSON.stringify(args.itemsPerPage)}
+  >
+    <dsfr-buttons-group slot="footerbuttons" buttons={args.buttons} inline="true"
+    ></dsfr-buttons-group>
+  </dsfr-table>
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story
+  name="Avec pagination"
+  args={{
+    hasFooter: true,
+    hasFooterSelect: true,
+    hasFooterPagination: true,
+  }}
+/>
