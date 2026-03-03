@@ -10,6 +10,15 @@
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
   import tableData from "../utilitaires/tableData.json";
 
+  const citiesColumns = tableData.thead[0].map((cell, i) => ({
+    key: String(i),
+    label: cell.content,
+  }));
+
+  const citiesRows = tableData.tbodies[0].map((row) =>
+    Object.fromEntries(row.map((cell, i) => [String(i), cell.content])),
+  );
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Table",
     component: DsfrTable,
@@ -26,6 +35,8 @@
     },
     args: {
       ...tableArgs,
+      columns: citiesColumns,
+      rows: citiesRows,
       layoutFixed: false,
       fixedFirstCellHead: false,
     },
@@ -48,7 +59,8 @@
     layout-fixed={args.layoutFixed || undefined}
     size={args.size}
     fixed-first-cell-head={args.fixedFirstCellHead || undefined}
-    table={tableData}
+    columns={args.columns}
+    rows={args.rows}
   ></dsfr-table>
 {/snippet}
 

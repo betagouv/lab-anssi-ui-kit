@@ -14,6 +14,8 @@
       size: { attribute: "size", type: "String" },
       fixedFirstCellHead: { attribute: "fixed-first-cell-head", type: "Boolean" },
       table: { attribute: "table", type: "Object" },
+      columns: { attribute: "columns", type: "Array" },
+      rows: { attribute: "rows", type: "Array" },
     },
   }}
 />
@@ -69,6 +71,20 @@
     tbodies: TbodyCell[][][];
   }
 
+  interface Column {
+    key: string;
+    label: string;
+    size?: CellSize;
+    align?: CellAlign;
+    valign?: CellValign;
+    fixed?: boolean | FixedBreakpoint;
+    sort?: boolean;
+    inline?: boolean;
+    multiline?: boolean;
+  }
+
+  type Row = Record<string, string>;
+
   export interface Props {
     /** Id du tableau */
     id?: string;
@@ -92,8 +108,12 @@
     size?: TableSize;
     /** Fixe la première cellule de l'en-tête en sticky */
     fixedFirstCellHead?: boolean;
-    /** Données du tableau */
+    /** Données du tableau (source par défaut pour columns et rows) */
     table?: Table;
+    /** Données des colonnes. Prends le pas sur `table.thead` si défini */
+    columns?: Column[];
+    /** Données des lignes. Prends le pas sur `table.tbodies` si défini */
+    rows?: Row[];
   }
 
   let {
@@ -109,6 +129,8 @@
     size = "md",
     fixedFirstCellHead = false,
     table,
+    columns,
+    rows,
   }: Props = $props();
 
   let captionEl: HTMLElement | undefined = $state();
@@ -131,6 +153,40 @@
 
     return () => observer.disconnect();
   });
+
+  let computedThead = $derived(
+    columns
+      ? [
+          columns.map((col) => ({
+            content: col.label,
+            size: col.size,
+            align: col.align,
+            valign: col.valign,
+            fixed: col.fixed,
+            sort: col.sort,
+            inline: col.inline,
+            multiline: col.multiline,
+          })),
+        ]
+      : (table?.thead ?? []),
+  );
+
+  let computedTbodies = $derived(
+    rows && columns
+      ? [
+          rows.map((row) =>
+            columns.map((col) => ({
+              content: row[col.key] ?? "",
+              align: col.align,
+              valign: col.valign,
+              fixed: col.fixed,
+              inline: col.inline,
+              multiline: col.multiline,
+            })),
+          ),
+        ]
+      : (table?.tbodies ?? []),
+  );
 
   /**
    * Génère les classes CSS applicables à une cellule de tableau en fonction de ses propriétés.
@@ -187,9 +243,9 @@
               {/if}
             </caption>
 
-            {#if table?.thead?.length}
+            {#if computedThead?.length}
               <thead>
-                {#each table.thead as row, rowIndex (rowIndex)}
+                {#each computedThead as row, rowIndex (rowIndex)}
                   <tr>
                     {#each row as cell, colIndex (colIndex)}
                       <th
@@ -208,7 +264,7 @@
               </thead>
             {/if}
 
-            {#each table?.tbodies ?? [] as tbody, tIndex (tIndex)}
+            {#each computedTbodies as tbody, tIndex (tIndex)}
               <tbody>
                 {#each tbody as row, index (index)}
                   <tr id={`${id}-row-key-${index}`} data-row-key={index}>
