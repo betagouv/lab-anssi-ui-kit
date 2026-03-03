@@ -4,6 +4,7 @@
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
+      hideLabel: { attribute: "hide-label", type: "Boolean" },
       value: { attribute: "value", type: "String", reflect: true },
       groupedOptions: { attribute: "grouped-options", type: "Boolean" },
       options: { attribute: "options", type: "Array" },
@@ -41,6 +42,8 @@
     id: string;
     /** Libellé de la liste déroulante */
     label: string;
+    /** Permet de masquer le label */
+    hideLabel?: boolean;
     /** Valeur initiale du champ */
     value?: string;
     /** Groupe d\'options */
@@ -69,6 +72,8 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
 
   const dispatch = createEventDispatcher();
@@ -76,6 +81,7 @@
   let {
     id,
     label,
+    hideLabel = false,
     value = $bindable(),
     groupedOptions,
     options,
@@ -89,6 +95,7 @@
     infoMessage,
     form,
     required,
+    onvaluechanged,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -99,11 +106,12 @@
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
     dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
   }
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
-  <label class="fr-label" for={id}>
+  <label class="fr-label" class:fr-sr-only={hideLabel} for={id}>
     {label}
 
     {#if hint}
@@ -162,9 +170,17 @@
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("select-group");
+  @include set-dsfr-sizing("select-group") {
+    &:has(.fr-sr-only) .fr-select {
+      margin-top: 0;
+    }
+  }
 
   .fr-select-group:not(:last-child) {
     margin-bottom: 0;
+  }
+
+  .fr-sr-only {
+    @include visually-hidden();
   }
 </style>
