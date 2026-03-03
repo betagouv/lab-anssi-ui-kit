@@ -59,6 +59,12 @@
     layout-fixed={args.layoutFixed || undefined}
     size={args.size}
     fixed-first-cell-head={args.fixedFirstCellHead || undefined}
+    has-header={args.hasHeader || undefined}
+    has-header-segmented={args.hasHeaderSegmented || undefined}
+    has-header-search={args.hasHeaderSearch || undefined}
+    has-header-details={args.hasHeaderDetails || undefined}
+    header-details={args.headerDetails}
+    has-header-buttons={args.hasHeaderButtons || undefined}
     columns={args.columns}
     rows={args.rows}
   ></dsfr-table>
