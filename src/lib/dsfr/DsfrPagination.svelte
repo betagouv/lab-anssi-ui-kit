@@ -53,6 +53,8 @@
     prevAndNextHasLgLabel?: boolean;
     /** Page courante */
     currentPageIndex?: number;
+    /** Callback appelé lors du changement de page */
+    onpagechange?: (page: number) => void;
   }
 
   let {
@@ -67,6 +69,7 @@
     prevAndNextDisplayedLg = false,
     prevAndNextHasLgLabel = false,
     currentPageIndex,
+    onpagechange,
   }: Props = $props();
 
   const HIDDEN_CLASS = "fr-hidden fr-unhidden-lg";
@@ -141,6 +144,34 @@
 
     return undefined;
   }
+
+  /**
+   * Gère le clic sur un lien de pagination et appelle le callback de changement de page.
+   *
+   * @param {MouseEvent} e - L'événement clic.
+   * @param {number | null | undefined} index - L'index de la page cliquée, ou null/undefined pour les boutons spéciaux (first, prev, next, last).
+   * @param {PagePosition} [position] - La position du lien cliqué ('first', 'prev', 'next', 'last', ou undefined pour un numéro de page).
+   */
+  function handlePageClick(
+    e: MouseEvent,
+    index: number | null | undefined,
+    position?: PagePosition,
+  ) {
+    if (!onpagechange) return;
+    e.preventDefault();
+
+    if ((position === "first" || position === "prev") && disabledFirst) return;
+    if ((position === "last" || position === "next") && disabledLast) return;
+
+    let targetPage: number;
+    if (position === "prev") targetPage = (currentPageIndex ?? 2) - 1;
+    else if (position === "next") targetPage = (currentPageIndex ?? 0) + 1;
+    else if (position === "first") targetPage = 1;
+    else if (position === "last") targetPage = pages.length;
+    else targetPage = (index ?? 0) + 1;
+
+    onpagechange(targetPage);
+  }
 </script>
 
 {#snippet pageItem(link: PageLink, index?: number | null, position?: PagePosition)}
@@ -155,6 +186,7 @@
       title={link.title}
       aria-current={setAriaCurrent(index)}
       aria-disabled={setAriaDisabled(position)}
+      onclick={(e) => handlePageClick(e, index, position)}
     >
       {link.label}
     </a>
