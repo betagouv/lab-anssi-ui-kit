@@ -28,6 +28,7 @@
       rows: { attribute: "rows", type: "Array" },
       itemsPerPage: { attribute: "items-per-page", type: "Array" },
       totalRows: { attribute: "total-rows", type: "Number" },
+      rich: { attribute: "rich", type: "Boolean" },
     },
   }}
 />
@@ -174,6 +175,12 @@
     onpagechange?: (page: number) => void;
     /** Callback appelé lors d'un changement du nombre de lignes par page */
     onrowsperpagechange?: (rowsPerPage: number) => void;
+    /**
+     * Bascule le rendu interne en divs avec rôles ARIA.
+     * Permet aux consommateurs d'injecter du contenu riche dans les cellules via des slots nommés
+     * (ex: slot="cell:maColonne:0"), sans contrainte sur le format table HTML.
+     */
+    rich?: boolean;
   }
 
   let {
@@ -205,6 +212,7 @@
     totalRows,
     onpagechange,
     onrowsperpagechange,
+    rich = false,
   }: Props = $props();
 
   let captionEl: HTMLElement | undefined = $state();
@@ -322,6 +330,36 @@
    * @param {boolean} [forceFixed=false] - Force l'application de la classe de cellule fixe
    * @returns {string[]} Un tableau contenant les classes CSS à appliquer à la cellule
    */
+  /**
+   * Action Svelte : crée un `<slot name="...">` programmatiquement dans le `<td>`,
+   * en déplaçant le contenu Svelte existant comme fallback du slot.
+   * Contourne la restriction compile-time de Svelte sur les noms de slot dynamiques.
+   * Est un no-op si `slotName` est null (mode non-rich).
+   */
+  function cellSlot(node: HTMLElement, slotName: string | null) {
+    if (!slotName) return;
+
+    const slot = document.createElement("slot");
+    slot.name = slotName;
+
+    while (node.firstChild) {
+      slot.appendChild(node.firstChild);
+    }
+    node.appendChild(slot);
+
+    return {
+      update(newSlotName: string | null) {
+        if (newSlotName) slot.name = newSlotName;
+      },
+      destroy() {
+        while (slot.firstChild) {
+          node.insertBefore(slot.firstChild, slot);
+        }
+        slot.remove();
+      },
+    };
+  }
+
   function getCellClasses(
     cell: TheadCell | TbodyCell,
     isHeader = false,
@@ -429,7 +467,10 @@
                     <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
                       {#each row as cell, cellIndex (cellIndex)}
                         {@const col = columns?.[cellIndex]}
-                        <td class={getCellClasses(cell)}>
+                        <td
+                          class={getCellClasses(cell)}
+                          use:cellSlot={rich && col ? `cell:${col.key}:${globalIndex}` : null}
+                        >
                           {#if col?.render && tIndex === 0}
                             {@render col.render(
                               displayedOriginalRows[index][col.key],
