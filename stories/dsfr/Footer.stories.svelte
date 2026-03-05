@@ -22,7 +22,17 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Footer",
     component: DsfrFooter,
-    argTypes: footerArgTypes,
+    argTypes: {
+      ...footerArgTypes,
+      compact: {
+        control: "boolean",
+        description: "Affiche uniquement le bloc du bas",
+        type: {
+          value: "boolean",
+        },
+        table: { category: "bottom" },
+      },
+    },
     args: {
       ...footerArgs,
       brandOperatorSrc: PlaceholderPortrait,
@@ -77,6 +87,7 @@
     sub-partners={JSON.stringify(args.subPartners)}
     bottom-links={JSON.stringify(args.bottomLinks)}
     bottom-copyright={args.bottomCopyright}
+    compact={args.compact || undefined}
   ></dsfr-footer>
 {/snippet}
 
