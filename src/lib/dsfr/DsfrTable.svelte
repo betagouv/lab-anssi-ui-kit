@@ -216,11 +216,11 @@
   }: Props = $props();
 
   let captionEl: HTMLElement | undefined = $state();
-  let tableOffset = $state("0");
+  let tableOffset = $state("0px");
 
   $effect(() => {
     if (!captionEl || noCaption) {
-      tableOffset = "0";
+      tableOffset = "0px";
       return;
     }
 
