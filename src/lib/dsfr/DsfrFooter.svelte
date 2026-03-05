@@ -23,6 +23,7 @@
       subPartners: { attribute: "sub-partners", type: "Array" },
       bottomLinks: { attribute: "bottom-links", type: "Array" },
       bottomCopyright: { attribute: "bottom-copyright", type: "String" },
+      compact: { attribute: "compact", type: "Boolean" },
     },
   }}
 />
@@ -89,6 +90,8 @@
     bottomLinks?: BottomLink[];
     /** Texte de droits d'auteur */
     bottomCopyright?: string;
+    /** Affiche uniquement le bloc du bas */
+    compact?: boolean;
   }
 
   let {
@@ -113,6 +116,7 @@
     subPartners,
     bottomLinks,
     bottomCopyright,
+    compact,
   }: Props = $props();
 
   /** Liste des liens (non modifiables) */
@@ -154,91 +158,93 @@
   });
 </script>
 
-<footer class="fr-footer" role="contentinfo" {id}>
+<footer class="fr-footer" class:fr-footer--compact={compact} role="contentinfo" {id}>
   <div class="fr-container">
-    <div class="fr-footer__body">
-      <div class="fr-footer__brand fr-enlarge-link">
-        {#if hasBrandOperator}
-          <p class="fr-logo">{@html brandLogoTitle}</p>
-          <a
-            id={brandLinkId}
-            title={brandLinkTitle}
-            href={brandLinkHref}
-            class="fr-footer__brand-link"
-          >
-            <img
-              class="fr-footer__logo"
-              style={brandOperatorStyle}
-              src={brandOperatorSrc}
-              alt={brandOperatorAlt}
-            />
-          </a>
-        {:else}
-          <a id={brandLinkId} title={brandLinkTitle} href={brandLinkHref}>
+    {#if !compact}
+      <div class="fr-footer__body">
+        <div class="fr-footer__brand fr-enlarge-link">
+          {#if hasBrandOperator}
             <p class="fr-logo">{@html brandLogoTitle}</p>
-          </a>
-        {/if}
-      </div>
-      <div class="fr-footer__content">
-        {#if hasDescription && contentDescription}
-          <p class="fr-footer__content-desc">
-            {@html contentDescription}
-          </p>
-        {/if}
-        {#if contentLinks.length > 0}
-          <ul class="fr-footer__content-list">
-            {#each contentLinks as link, index}
-              <li class="fr-footer__content-item">
-                <a
-                  title={link.attributes?.title}
-                  id={"footer__content-link-" + index}
-                  href={link.href}
-                  target={link.blank ? "_blank" : "_self"}
-                  rel={link.blank ? "noopener external" : undefined}
-                  class="fr-footer__content-link"
-                >
-                  {link.label}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        {/if}
-      </div>
-    </div>
-    {#if hasPartners}
-      <div class="fr-footer__partners">
-        <h2 class="fr-footer__partners-title">{partnerTitle}</h2>
-        <div class="fr-footer__partners-logos">
-          <div class="fr-footer__partners-main">
-            <a class="fr-footer__partners-link" href={mainPartnerHref}>
+            <a
+              id={brandLinkId}
+              title={brandLinkTitle}
+              href={brandLinkHref}
+              class="fr-footer__brand-link"
+            >
               <img
                 class="fr-footer__logo"
-                style={mainPartnerStyle}
-                src={mainPartnerSrc}
-                alt={mainPartnerAlt}
+                style={brandOperatorStyle}
+                src={brandOperatorSrc}
+                alt={brandOperatorAlt}
               />
             </a>
-          </div>
-          {#if subPartners && subPartners.length > 0}
-            <div class="fr-footer__partners-sub">
-              <ul>
-                {#each subPartners as link, index}
-                  <li>
-                    <a class="fr-footer__partners-link" href={link.href}>
-                      <img
-                        class="fr-footer__logo"
-                        style={link.style}
-                        src={link.src}
-                        alt={link.alt}
-                      />
-                    </a>
-                  </li>
-                {/each}
-              </ul>
-            </div>
+          {:else}
+            <a id={brandLinkId} title={brandLinkTitle} href={brandLinkHref}>
+              <p class="fr-logo">{@html brandLogoTitle}</p>
+            </a>
+          {/if}
+        </div>
+        <div class="fr-footer__content">
+          {#if hasDescription && contentDescription}
+            <p class="fr-footer__content-desc">
+              {@html contentDescription}
+            </p>
+          {/if}
+          {#if contentLinks.length > 0}
+            <ul class="fr-footer__content-list">
+              {#each contentLinks as link, index}
+                <li class="fr-footer__content-item">
+                  <a
+                    title={link.attributes?.title}
+                    id={"footer__content-link-" + index}
+                    href={link.href}
+                    target={link.blank ? "_blank" : "_self"}
+                    rel={link.blank ? "noopener external" : undefined}
+                    class="fr-footer__content-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              {/each}
+            </ul>
           {/if}
         </div>
       </div>
+      {#if hasPartners}
+        <div class="fr-footer__partners">
+          <h2 class="fr-footer__partners-title">{partnerTitle}</h2>
+          <div class="fr-footer__partners-logos">
+            <div class="fr-footer__partners-main">
+              <a class="fr-footer__partners-link" href={mainPartnerHref}>
+                <img
+                  class="fr-footer__logo"
+                  style={mainPartnerStyle}
+                  src={mainPartnerSrc}
+                  alt={mainPartnerAlt}
+                />
+              </a>
+            </div>
+            {#if subPartners && subPartners.length > 0}
+              <div class="fr-footer__partners-sub">
+                <ul>
+                  {#each subPartners as link, index}
+                    <li>
+                      <a class="fr-footer__partners-link" href={link.href}>
+                        <img
+                          class="fr-footer__logo"
+                          style={link.style}
+                          src={link.src}
+                          alt={link.alt}
+                        />
+                      </a>
+                    </li>
+                  {/each}
+                </ul>
+              </div>
+            {/if}
+          </div>
+        </div>
+      {/if}
     {/if}
     <div class="fr-footer__bottom">
       {#if bottomLinks && bottomLinks.length > 0}
@@ -284,9 +290,18 @@
   @import "@gouvfr/dsfr/dist/component/footer/footer.min.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("footer");
+  @include set-dsfr-sizing("footer") {
+    &--compact {
+      padding-top: 0;
 
-  .fr-footer__logo {
-    --border-default-grey: transparent;
+      .fr-footer__bottom {
+        box-shadow: none;
+        margin-top: 0;
+      }
+    }
+
+    &__logo {
+      --border-default-grey: transparent;
+    }
   }
 </style>
