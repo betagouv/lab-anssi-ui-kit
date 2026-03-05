@@ -550,6 +550,9 @@
 </div>
 
 <style lang="scss">
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/table/table.main.css";
+  // DSFR Component styles
+  @import "@gouvfr/dsfr/dist/component/table/table.main.min.css";
+
+  @include set-shadow-host();
+  @include set-dsfr-sizing("table");
 </style>
