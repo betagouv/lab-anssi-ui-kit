@@ -2,10 +2,10 @@ export const injecteNonceWebcomponents = (code: string) => {
   let codeAvecNonce = `const nonce = document.currentScript?.nonce;\n${code}`;
 
   const createElementFuncName =
-    code.match(/function (.+)\(.,.,.\){return document.createElementNS\(/g)?.[1] ??
+    code.match(/function (\s+)\(\s,\s,\s\){return document.createElementNS\(/g)?.[1] ??
     "document.createElement";
 
-  const modeleRecherche = `const (.)\\s*=\\s*${createElementFuncName}\\(["']style["']\\);`;
+  const modeleRecherche = `\\s*=${createElementFuncName}\\(["']style["']\\);`;
 
   codeAvecNonce = codeAvecNonce
     .replace(
