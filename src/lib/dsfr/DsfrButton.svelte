@@ -135,9 +135,9 @@
 </svelte:element>
 
 <style lang="scss">
-  // DSFR Modules
-  @use "src/module/color";
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "src/module/color";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";

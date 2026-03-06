@@ -69,6 +69,8 @@
 </a>
 
 <style lang="scss">
+  @use "../styles/apparence-bouton.scss";
+
   .bouton {
     text-decoration: none;
   }
@@ -152,6 +154,4 @@
       outline-offset: 2px;
     }
   }
-
-  @import "../styles/apparence-bouton.scss";
 </style>

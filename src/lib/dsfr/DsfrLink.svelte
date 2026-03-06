@@ -101,7 +101,9 @@
 
 <style lang="scss">
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/dist/core/core.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/link/link.main.css";

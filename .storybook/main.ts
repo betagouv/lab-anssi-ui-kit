@@ -2,6 +2,7 @@ import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/svelte-vite";
 import path, { dirname } from "path";
 import { loadEnv } from "vite";
+import viteScssPreprocessorOptions from "../outils/vite-preprocessor-options.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,20 +47,7 @@ const config: StorybookConfig = {
       ...config.css,
       preprocessorOptions: {
         ...config.preprocessorOptions,
-        scss: {
-          ...config.preprocessorOptions?.scss,
-          additionalData: `
-            @use '${path.resolve(__dirname, "../src/variables.scss")}' as *;
-            @use '${path.resolve(__dirname, "../src/responsive.scss")}' as *;
-            @use '${path.resolve(__dirname, "../src/assets.scss")}' as *;
-            @use '${path.resolve(__dirname, "../src/lib/styles/mixins.scss")}' as *;
-            $assets-url-base: '${varEnv.VITE_LAB_ANSSI_UI_KIT_ASSET_BASE}';
-          `,
-          loadPaths: [
-            `${path.resolve(__dirname, "../node_modules/@gouvfr/dsfr")}`,
-            `${path.resolve(__dirname, "../node_modules/@gouvfr/dsfr/src")}`,
-          ],
-        },
+        scss: viteScssPreprocessorOptions(varEnv),
       },
     };
     return config;
