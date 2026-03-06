@@ -3,14 +3,14 @@ import { injecteNonceWebcomponents } from "../../outils/injection-nonce.js";
 
 const codeWebcomponents = `
 var WebComponents = function() {
-  function p(n) {
+  function createElement(n) {
     return document.createElement(n);
   }
   function a() {
-    const x = p("style");
+    const x = createElement("style");
   }
   function b() {
-    const y = p("style");
+    const styleEl = Dr("style");
   }
 }({});
 `;
@@ -25,7 +25,7 @@ describe("L'utilitaire d'injection du nonce (pour les styles des composants Svel
   it("affecte le nonce a toutes les balises de styles injectées", () => {
     const codeAvecNonce = injecteNonceWebcomponents(codeWebcomponents);
 
-    expect(codeAvecNonce).toContain(' const x = p("style");x.nonce=nonce;');
-    expect(codeAvecNonce).toContain(' const y = p("style");y.nonce=nonce;');
+    expect(codeAvecNonce).toContain(' const x = createElement("style");x.nonce=nonce;');
+    expect(codeAvecNonce).toContain(' const styleEl = Dr("style");styleEl.nonce=nonce;');
   });
 });
