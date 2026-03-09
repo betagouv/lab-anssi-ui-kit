@@ -287,8 +287,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/outdated";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/logo/logo.min.css";
-  @import "@gouvfr/dsfr/dist/component/footer/footer.min.css";
+  @import "@gouvfr/dsfr/dist/component/logo/logo.main.css";
+  @import "@gouvfr/dsfr/dist/component/footer/footer.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("footer") {
