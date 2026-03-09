@@ -220,14 +220,14 @@
       {/if}
       {#if hasDetailStart || hasBadge || hasTag}
         <div class="fr-card__start">
-          {#if hasDetailStart && detailStart}
-            <p class={["fr-card__detail", detailStartIconClass]}>{detailStart}</p>
-          {/if}
           {#if hasBadge && !hasTag && $$slots.badgesgroup}
             <slot name="badgesgroup" />
           {/if}
           {#if hasTag && !hasBadge && $$slots.tagsgroup}
             <slot name="tagsgroup" />
+          {/if}
+          {#if hasDetailStart && detailStart}
+            <p class={["fr-card__detail", detailStartIconClass]}>{detailStart}</p>
           {/if}
         </div>
       {/if}
