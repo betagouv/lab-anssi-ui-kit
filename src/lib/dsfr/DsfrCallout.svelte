@@ -87,7 +87,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/callout/callout.min.css";
+  @import "@gouvfr/dsfr/dist/component/callout/callout.main.min.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("callout") {
