@@ -170,7 +170,9 @@
         {/if}
       </svelte:element>
       {#if hasDescription}
-        <p class="fr-tile__desc">{description}</p>
+        <slot name="description">
+          <p class="fr-tile__desc">{description}</p>
+        </slot>
       {/if}
       {#if hasDetails || download}
         <p class="fr-tile__detail">{details}</p>
