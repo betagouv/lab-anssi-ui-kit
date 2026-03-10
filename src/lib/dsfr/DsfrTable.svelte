@@ -550,6 +550,8 @@
 </div>
 
 <style lang="scss">
+  // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/table/table.main.min.css";
 
