@@ -124,8 +124,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
+  @import "src/lib/styles/dsfr-label-hint.scss";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();

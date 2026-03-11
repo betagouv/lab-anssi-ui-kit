@@ -139,7 +139,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   // DSFR Components
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/toggle/toggle.main.css";
 
   @include set-shadow-host();

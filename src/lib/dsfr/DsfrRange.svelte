@@ -291,7 +291,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/range/range.main.css";
 
   @include set-shadow-host();
