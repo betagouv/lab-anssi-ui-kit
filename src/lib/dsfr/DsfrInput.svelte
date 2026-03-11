@@ -31,6 +31,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { setIconClass, setThemeable } from "$lib/utilitaires";
+
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -126,12 +128,7 @@
 
 <div class={["fr-input-group", disabledClass, statusClass]}>
   {#if label}
-    <label class="fr-label" for={id}>
-      {label}
-      {#if hint}
-        <span class="fr-hint-text">{hint}</span>
-      {/if}
-    </label>
+    <DsfrLabel for={id} {label} {hint} context="field" {status} {disabled} />
   {/if}
   {#if icon}
     <div class={["fr-input-wrap", iconClass]}>
