@@ -154,7 +154,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/select";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   @include set-shadow-host();
@@ -162,9 +161,5 @@
     &:has(.fr-sr-only) .fr-select {
       margin-top: 0;
     }
-  }
-
-  .fr-select-group:not(:last-child) {
-    margin-bottom: 0;
   }
 </style>

@@ -193,13 +193,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("input-group");
-
-  .fr-input-group:not(:last-child) {
-    margin-bottom: 0;
-  }
 </style>

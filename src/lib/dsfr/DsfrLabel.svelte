@@ -93,10 +93,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
-  @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
-  @import "@gouvfr/dsfr/src/dsfr/component/form/style/scheme";
-  @include _form-scheme();
+  @import "src/lib/styles/dsfr-label-hint.scss";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("label") {

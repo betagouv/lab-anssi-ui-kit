@@ -106,8 +106,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "src/lib/styles/dsfr-label-hint.scss";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
 
   @include set-shadow-host();
