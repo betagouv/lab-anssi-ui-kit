@@ -25,6 +25,7 @@
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
 
   setThemeable($host());
 
@@ -91,9 +92,7 @@
 </script>
 
 <div class={["fr-search-bar", sizeClass]} role="search">
-  {#if inputLabel}
-    <label class="fr-label" for={inputId}> {inputLabel} </label>
-  {/if}
+  <DsfrLabel for={inputId} label={inputLabel} hidden />
   <input
     type="search"
     id={inputId}

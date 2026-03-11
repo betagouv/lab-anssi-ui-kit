@@ -26,6 +26,7 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -112,13 +113,7 @@
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
-  <label class="fr-label" class:fr-sr-only={hideLabel} for={id}>
-    {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+  <DsfrLabel for={id} {label} {hint} hidden={hideLabel} context="field" {status} {disabled} />
   <select
     class="fr-select"
     aria-describedby={status ? `${id}-messages` : undefined}
@@ -171,9 +166,5 @@
 
   .fr-select-group:not(:last-child) {
     margin-bottom: 0;
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
   }
 </style>
