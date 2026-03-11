@@ -1,3 +1,5 @@
+@use "../../assets.scss" as *;
+
 .fr-icon-ancient-gate-fill:before {
   -webkit-mask-image: url-asset("/icones/dsfr/buildings/ancient-gate-fill.svg");
   mask-image: url-asset("/icones/dsfr/buildings/ancient-gate-fill.svg");
