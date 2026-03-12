@@ -267,7 +267,7 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/utility/main";
+  @use "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
   @import "@gouvfr/dsfr/dist/component/card/card.main.css";
