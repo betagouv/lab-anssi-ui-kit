@@ -202,7 +202,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
-  @import "@gouvfr/dsfr/src/dsfr/utility/main";
+  @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";

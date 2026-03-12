@@ -68,7 +68,6 @@
 
 <style lang="scss">
   .brique-temoignages {
-
     h3 {
       color: $brique-temoignages-titre-couleur;
 
