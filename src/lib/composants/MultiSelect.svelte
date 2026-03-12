@@ -163,7 +163,6 @@
 </div>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/decisions";
   @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/select/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/checkbox/main" as *;

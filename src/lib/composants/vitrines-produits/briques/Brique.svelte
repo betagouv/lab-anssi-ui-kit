@@ -26,7 +26,6 @@
 
 <style lang="scss">
   section {
-    font-family: Marianne;
     padding: 48px 16px;
     box-sizing: border-box;
     text-align: left;

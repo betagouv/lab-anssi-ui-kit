@@ -119,7 +119,6 @@
         width: 100%;
 
         text-decoration: none;
-        font-family: Marianne, sans-serif;
         padding: 8px 16px;
 
         display: flex;

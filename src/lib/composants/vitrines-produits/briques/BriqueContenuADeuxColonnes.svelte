@@ -106,7 +106,6 @@
           display: flex;
           justify-content: center;
           text-decoration: none;
-          font-family: Marianne, sans-serif;
           padding: 8px 16px;
           max-width: 100%;
 

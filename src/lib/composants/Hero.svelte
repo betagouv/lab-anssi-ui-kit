@@ -69,7 +69,6 @@
 </section>
 
 <style lang="scss">
-  @use "@gouvfr/dsfr/src/dsfr/core/style/color/module/_decisions.scss";
   @import "@gouvfr/dsfr/src/dsfr/core/style/selector/setting/breakpoint";
   @import "@gouvfr/dsfr/src/dsfr/core/style/selector/tool/breakpoint";
 
