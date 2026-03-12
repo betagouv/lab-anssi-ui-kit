@@ -36,7 +36,6 @@
     width: 282px;
     flex: 0 0 auto;
     align-self: flex-start;
-    font-family: $police;
 
     @include a-partir-de(desktop) {
       display: flex;

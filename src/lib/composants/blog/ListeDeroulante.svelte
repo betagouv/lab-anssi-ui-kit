@@ -45,7 +45,6 @@
       box-shadow: inset 0 -2px 0 0 $texte-secondaire;
       cursor: pointer;
       color: $texte-secondaire;
-      font-family: Marianne;
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;

@@ -24,7 +24,6 @@
 
 <style lang="scss">
   .accueil-msc {
-    font-family: Marianne;
     font-style: normal;
     font-weight: normal;
     cursor: pointer;
@@ -51,7 +50,6 @@
       align-items: flex-start;
       flex: 1 0 0;
       color: $texte-defaut;
-      font-family: Marianne;
       font-size: 18px;
       font-style: normal;
       font-weight: 700;
@@ -60,7 +58,6 @@
 
       span {
         color: $texte-secondaire;
-        font-family: Marianne;
         font-size: 12px;
         font-style: normal;
         font-weight: 400;

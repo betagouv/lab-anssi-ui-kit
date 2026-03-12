@@ -57,7 +57,6 @@
   .tag {
     color: $tag-couleur-texte;
     background-color: $tag-couleur-fond;
-    font-family: Marianne;
     font-weight: 400;
     display: inline-block;
     width: fit-content;
