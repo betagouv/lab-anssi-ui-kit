@@ -22,6 +22,8 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -83,13 +85,7 @@
   id={`input-group-${id}`}
 >
   {#if label}
-    <label class="fr-label" for={id}>
-      {label}
-
-      {#if hint}
-        <span class="fr-hint-text">{hint}</span>
-      {/if}
-    </label>
+    <DsfrLabel for={id} {label} {hint} context="field" {status} {disabled} />
   {/if}
   <textarea
     {id}
@@ -103,16 +99,7 @@
     {rows}
   ></textarea>
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+  <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} {infoMessage} />
 </div>
 
 <style lang="scss">
@@ -122,7 +109,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();

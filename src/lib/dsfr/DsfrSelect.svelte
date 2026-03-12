@@ -26,6 +26,8 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -111,13 +113,7 @@
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
-  <label class="fr-label" class:fr-sr-only={hideLabel} for={id}>
-    {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+  <DsfrLabel for={id} {label} {hint} hidden={hideLabel} context="field" {status} {disabled} />
   <select
     class="fr-select"
     aria-describedby={status ? `${id}-messages` : undefined}
@@ -142,16 +138,7 @@
       {/each}
     {/if}
   </select>
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+  <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} {infoMessage} />
 </div>
 
 <style lang="scss">
@@ -167,7 +154,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/select";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   @include set-shadow-host();
@@ -175,13 +161,5 @@
     &:has(.fr-sr-only) .fr-select {
       margin-top: 0;
     }
-  }
-
-  .fr-select-group:not(:last-child) {
-    margin-bottom: 0;
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
   }
 </style>

@@ -32,6 +32,9 @@
   import { createEventDispatcher } from "svelte";
   import { setIconClass, setThemeable } from "$lib/utilitaires";
 
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+
   setThemeable($host());
 
   interface Props {
@@ -125,12 +128,7 @@
 
 <div class={["fr-input-group", disabledClass, statusClass]}>
   {#if label}
-    <label class="fr-label" for={id}>
-      {label}
-      {#if hint}
-        <span class="fr-hint-text">{hint}</span>
-      {/if}
-    </label>
+    <DsfrLabel for={id} {label} {hint} context="field" {status} {disabled} />
   {/if}
   {#if icon}
     <div class={["fr-input-wrap", iconClass]}>
@@ -178,16 +176,7 @@
     />
   {/if}
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+  <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} {infoMessage} />
 </div>
 
 <style lang="scss">
@@ -204,13 +193,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("input-group");
-
-  .fr-input-group:not(:last-child) {
-    margin-bottom: 0;
-  }
 </style>

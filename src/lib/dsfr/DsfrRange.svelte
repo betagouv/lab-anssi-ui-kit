@@ -32,6 +32,8 @@
   import type { Size, Status } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+
   setThemeable($host());
 
   type RangeSize = Extract<Size, "sm" | "md">;
@@ -209,14 +211,7 @@
   ]}
   id="{id}-group"
 >
-  <label class="fr-label" id="{id}-label" for={id}>
-    {label}
-    {#if hint}
-      <span class="fr-hint-text">
-        {hint}
-      </span>
-    {/if}
-  </label>
+  <DsfrLabel for={id} {label} {hint} id="{id}-label" {status} {disabled} />
 
   <div
     bind:this={rangeEl}
@@ -283,7 +278,6 @@
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/dist/core/core.min.css";
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/range/range.main.css";
 
   @include set-shadow-host();
