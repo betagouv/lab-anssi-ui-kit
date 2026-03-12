@@ -56,7 +56,6 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    font-family: $police;
 
     @include a-partir-de(desktop) {
       display: none;

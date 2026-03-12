@@ -42,7 +42,6 @@
   .racine {
     position: relative;
     display: block;
-    font-family: $police;
 
     .lien-diagnostic-cyber {
       font-size: 1rem;

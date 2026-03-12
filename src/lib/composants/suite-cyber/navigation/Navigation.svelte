@@ -107,7 +107,6 @@
 
 <style lang="scss">
   .suite-cyber {
-    font-family: Marianne;
     font-style: normal;
     font-weight: normal;
     position: relative;
@@ -208,7 +207,6 @@
         gap: 8px;
         padding: 4px 8px 4px 12px;
         margin: 12px;
-        font-family: "Marianne";
       }
 
       .services-anssi {

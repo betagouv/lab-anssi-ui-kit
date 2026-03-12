@@ -116,7 +116,6 @@
     padding: 10px 24px 10px 18px;
     cursor: pointer;
     z-index: 1000;
-    font-family: Marianne;
 
     &:hover {
       background: $centre-aide-background-hover-declencheur;
@@ -136,7 +135,6 @@
     height: 100%;
     background: white;
     z-index: 9;
-    font-family: Marianne;
     overflow-y: scroll;
 
     @include a-partir-de(tablette) {
@@ -213,7 +211,6 @@
           font-weight: 500;
           margin-right: 8px;
           color: white;
-          font-family: Marianne;
 
           @include a-partir-de(tablette) {
             display: inline-block;

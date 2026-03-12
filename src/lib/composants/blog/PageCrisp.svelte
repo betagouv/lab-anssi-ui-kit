@@ -109,7 +109,6 @@
 
 <style lang="scss">
   article {
-    font-family: $police;
     color: $texte-secondaire;
     display: flex;
     flex-direction: column;

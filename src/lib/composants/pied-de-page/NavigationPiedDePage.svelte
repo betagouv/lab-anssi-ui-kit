@@ -26,7 +26,6 @@
 
 <style lang="scss">
   .conteneur-navigation-pied-de-page {
-    font-family: "Marianne";
     list-style: none;
     display: flex;
     flex-direction: row;
