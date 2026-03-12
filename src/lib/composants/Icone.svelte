@@ -23,7 +23,6 @@
   @use "../styles/jeu-icone.scss";
 
   .icone {
-    font-family: Marianne, arial, sans-serif;
     --icon-size: 1em;
     line-height: var(--icon-size);
     height: var(--icon-size);

@@ -35,7 +35,6 @@
     background: white;
     padding: 24px 24px 52px 24px;
     gap: 12px;
-    font-family: Marianne;
     text-decoration: none;
     position: relative;
 

@@ -75,7 +75,6 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      font-family: Marianne;
       max-width: 1200px;
       margin: 0 auto;
       text-align: left;
@@ -98,7 +97,6 @@
           gap: 8px;
 
           h1 {
-            font-family: Marianne;
             font-size: 2rem;
             font-weight: 700;
             line-height: 2.5rem;
@@ -111,7 +109,6 @@
           }
 
           span {
-            font-family: Marianne;
             font-size: 1.125rem;
             font-weight: 400;
             line-height: 1.75rem;
@@ -130,7 +127,6 @@
         span,
         button {
           color: white;
-          font-family: Marianne;
           font-size: 0.75rem;
           font-weight: 400;
           line-height: 1.25rem;

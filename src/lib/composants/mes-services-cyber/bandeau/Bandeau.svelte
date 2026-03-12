@@ -57,7 +57,6 @@
     .contenu {
       position: relative;
       color: white;
-      font-family: "Marianne";
       padding: 16px;
       max-width: $largeur-max-contenu;
       margin: auto;

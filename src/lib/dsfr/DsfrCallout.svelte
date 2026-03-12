@@ -81,7 +81,6 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/font-face";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";

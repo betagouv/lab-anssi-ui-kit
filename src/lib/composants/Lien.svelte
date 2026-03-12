@@ -76,7 +76,6 @@
   }
 
   .lien-texte {
-    font-family: Marianne, arial, sans-serif;
     color: inherit;
     display: inline-flex;
     gap: 2px;
@@ -104,7 +103,6 @@
   }
 
   .lien {
-    font-family: Marianne, arial, sans-serif;
     color: $couleur-lien;
     display: inline-flex;
     gap: 8px;

@@ -68,7 +68,6 @@
 
 <style lang="scss">
   .brique-temoignages {
-    font-family: Marianne;
 
     h3 {
       color: $brique-temoignages-titre-couleur;

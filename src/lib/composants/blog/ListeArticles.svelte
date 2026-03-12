@@ -54,7 +54,6 @@
     padding: 48px 16px;
     max-width: 1200px;
     margin: 0 auto;
-    font-family: Marianne;
     display: flex;
     flex-direction: column;
     gap: 32px;
