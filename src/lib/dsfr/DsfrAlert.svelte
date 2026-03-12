@@ -91,7 +91,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme();
-  @import "@gouvfr/dsfr/src/dsfr/utility/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";

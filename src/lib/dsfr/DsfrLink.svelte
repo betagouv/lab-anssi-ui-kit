@@ -111,7 +111,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
-  @import "@gouvfr/dsfr/src/dsfr/utility/main";
+  @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/link/link.main.css";
 
