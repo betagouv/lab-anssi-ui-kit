@@ -11,12 +11,26 @@
       status: { attribute: "status", type: "String" },
       type: { attribute: "type", type: "String" },
     },
+    extend: (CustomElementClass) => {
+      return class extends CustomElementClass {
+        connectedCallback() {
+          super.connectedCallback();
+
+          const iconsStyleSheet = getIconsStyleSheet();
+          const shadow = this.shadowRoot;
+
+          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
+            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
+          }
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { getIconsStyleSheet, setIconClass } from "$lib/utilitaires";
 
   type BadgeSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";
@@ -72,7 +86,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/ellipsis";
-  @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
 

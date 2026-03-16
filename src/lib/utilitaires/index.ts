@@ -1,3 +1,5 @@
+export { getIconsStyleSheet } from "./icons-stylesheet";
+
 /**
  * Génère une classe d'icône FR avec validation
  * @param {string} icon - Le nom de l'icône
