@@ -37,12 +37,26 @@
       download: { attribute: "download", type: "Boolean" },
       lang: { attribute: "lang", type: "String" },
     },
+    extend: (CustomElementClass) => {
+      return class extends CustomElementClass {
+        connectedCallback() {
+          super.connectedCallback();
+
+          const iconsStyleSheet = getIconsStyleSheet();
+          const shadow = this.shadowRoot;
+
+          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
+            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
+          }
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setIconClass, setThemeable } from "$lib/utilitaires";
+  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 
@@ -267,7 +281,6 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
-  @use "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
   @import "@gouvfr/dsfr/dist/component/card/card.main.css";

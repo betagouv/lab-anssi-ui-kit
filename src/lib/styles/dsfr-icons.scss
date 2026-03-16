@@ -1,0 +1,4 @@
+// Feuille de style partagée pour les icônes DSFR
+// Destinée à être importée une seule fois dans le bundle via adoptedStyleSheets
+// Ne pas importer directement dans un <style> de composant Svelte
+@import "@gouvfr/dsfr/src/dsfr/utility/icons/main";

@@ -6,10 +6,25 @@
       size: { attribute: "size", type: "String" },
       groupMarkup: { attribute: "group-markup", type: "String" },
     },
+    extend: (CustomElementClass) => {
+      return class extends CustomElementClass {
+        connectedCallback() {
+          super.connectedCallback();
+
+          const iconsStyleSheet = getIconsStyleSheet();
+          const shadow = this.shadowRoot;
+
+          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
+            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
+          }
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
+  import { getIconsStyleSheet } from "$lib/utilitaires";
   import type { Accent, Size } from "$lib/types";
   import { setIconClass } from "$lib/utilitaires";
 
@@ -68,7 +83,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/ellipsis";
-  @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
 

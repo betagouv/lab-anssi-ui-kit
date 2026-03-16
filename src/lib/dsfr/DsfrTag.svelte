@@ -14,12 +14,26 @@
       icon: { attribute: "icon", type: "String" },
       accent: { attribute: "accent", type: "String" },
     },
+    extend: (CustomElementClass) => {
+      return class extends CustomElementClass {
+        connectedCallback() {
+          super.connectedCallback();
+
+          const iconsStyleSheet = getIconsStyleSheet();
+          const shadow = this.shadowRoot;
+
+          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
+            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
+          }
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setIconClass, setThemeable } from "$lib/utilitaires";
+  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
 
   setThemeable($host());
@@ -130,7 +144,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
-  @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/tag/tag.main.css";
 
