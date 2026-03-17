@@ -22,6 +22,7 @@
       indicators: { attribute: "indicators", type: "Boolean" },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
+      hideOutputLabel: { attribute: "hide-output-label", type: "Boolean" },
     },
   }}
 />
@@ -78,6 +79,8 @@
     status?: RangeStatus;
     /** Texte du message d'erreur */
     errorMessage?: string;
+    /** Permet de masquer le texte de l'élément 'output' */
+    hideOutputLabel?: boolean;
   }
 
   let {
@@ -101,6 +104,7 @@
     indicators = true,
     status = "default",
     errorMessage,
+    hideOutputLabel = false,
   }: Props = $props();
 
   const dispatch = createEventDispatcher();
@@ -233,7 +237,11 @@
     style:--progress-right={progressRight}
     style:--step-width={stepWidth}
   >
-    <span class="fr-range__output" style:transform={outputTransform}>
+    <span
+      class="fr-range__output"
+      class:fr-range__output--hide={hideOutputLabel}
+      style:transform={outputTransform}
+    >
       {outputText}
     </span>
 
@@ -288,4 +296,12 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("range-group");
+
+  .fr-range[data-fr-js-range] {
+    .fr-range__output {
+      &.fr-range__output--hide {
+        visibility: hidden;
+      }
+    }
+  }
 </style>

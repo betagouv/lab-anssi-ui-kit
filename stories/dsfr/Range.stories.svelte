@@ -42,6 +42,7 @@
     indicators={args.indicators ?? true}
     status={args.status}
     error-message={args.errorMessage}
+    hide-output-label={args.hideOutputLabel || undefined}
   ></dsfr-range>
 {/snippet}
 
