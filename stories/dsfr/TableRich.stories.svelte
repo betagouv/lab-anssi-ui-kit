@@ -11,6 +11,7 @@
   import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   type Nis2Correspondance = "ÉLEVÉE" | "MOYENNE" | "FAIBLE / NULLE";
 
@@ -177,6 +178,13 @@
       itemsPerPage: [5, 10, 20],
       layoutFixed: false,
       fixedFirstCellHead: false,
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-table"),
+        },
+      },
     },
     render: template,
   });

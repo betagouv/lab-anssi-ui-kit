@@ -10,12 +10,20 @@
   import DsfrAlert from "$lib/dsfr/DsfrAlert.svelte";
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Alert",
     component: DsfrAlert,
     args: alertArgs,
     argTypes: alertArgTypes,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-alert"),
+        },
+      },
+    },
     render: template,
   });
 

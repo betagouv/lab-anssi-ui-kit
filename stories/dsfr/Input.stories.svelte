@@ -1,6 +1,7 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   import {
     inputArgTypes,
@@ -33,6 +34,13 @@
       },
     },
     args: inputArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-input"),
+        },
+      },
+    },
     render: template,
   });
 

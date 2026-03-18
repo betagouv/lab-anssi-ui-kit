@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/toggle/template/stories/toggle-arg-types.js";
 
   import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Toggle",
     component: DsfrToggle,
     argTypes: toggleArgTypes,
     args: toggleArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-toggle"),
+        },
+      },
+    },
     render: template,
   });
 

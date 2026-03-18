@@ -6,6 +6,7 @@
   import svg from "/static/images/gouvernement.svg?raw";
 
   import DsfrContent from "$lib/dsfr/DsfrContent.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Content Media",
@@ -98,6 +99,13 @@
         },
       },
       svg: svg,
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-content"),
+        },
+      },
     },
     render: template,
   });

@@ -10,6 +10,7 @@
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
   import tableData from "../utilitaires/tableData.json";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const citiesColumns = tableData.thead[0].map((cell, i) => ({
     key: String(i),
@@ -62,6 +63,13 @@
       itemsPerPage: [5, 10, 20],
       layoutFixed: false,
       fixedFirstCellHead: false,
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-table"),
+        },
+      },
     },
     render: template,
   });

@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/sidemenu/template/stories/sidemenu-arg-types.js";
 
   import DsfrSideMenu from "$lib/dsfr/DsfrSideMenu.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const getItemArgs = (id: string | number, type = "link", isActive = false) => ({
     id: type === "link" ? `sidemenu-item-${id}` : `sidemenu-${id}`,
@@ -44,6 +45,13 @@
         },
       ],
       buttonId: "sidemenu-collapse-1",
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-side-menu"),
+        },
+      },
     },
     render: template,
   });

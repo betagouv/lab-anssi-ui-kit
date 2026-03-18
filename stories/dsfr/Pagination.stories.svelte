@@ -16,11 +16,20 @@
     }, {});
   };
 
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Pagination",
     component: DsfrPagination,
     argTypes: camelCaseProps(paginationArgTypes),
     args: camelCaseProps(paginationArgs),
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-pagination"),
+        },
+      },
+    },
     render: template,
   });
 

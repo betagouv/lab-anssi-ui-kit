@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/radio/template/stories/radio-arg-types.js";
 
   import DsfrRadio from "$lib/dsfr/DsfrRadio.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Radio",
     component: DsfrRadio,
     argTypes: radioArgTypes,
     args: radioArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-radio"),
+        },
+      },
+    },
     render: template,
   });
 

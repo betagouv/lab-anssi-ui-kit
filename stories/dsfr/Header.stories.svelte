@@ -14,6 +14,7 @@
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { toolLinks } = headerArgs;
 
@@ -33,6 +34,13 @@
         },
       ],
       brandOperatorSrc: PlaceholderPortrait,
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-header"),
+        },
+      },
     },
     render: template,
   });

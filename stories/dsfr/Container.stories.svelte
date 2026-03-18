@@ -3,10 +3,18 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Container",
     component: DsfrContainer,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-container"),
+        },
+      },
+    },
     render: template,
   });
 

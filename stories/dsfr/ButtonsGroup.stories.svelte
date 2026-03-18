@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/button/template/stories/buttons-group-arg-types.js";
 
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Buttons Group",
@@ -35,6 +36,13 @@
           icon: "checkbox-circle-line",
         },
       ],
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-buttons-group"),
+        },
+      },
     },
     render: template,
   });

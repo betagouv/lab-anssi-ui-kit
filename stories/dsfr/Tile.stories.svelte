@@ -13,12 +13,20 @@
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
   import DsfrTile from "$lib/dsfr/DsfrTile.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Tile",
     component: DsfrTile,
     argTypes: tileArgTypes,
     args: { ...tileArgs, href: "#" },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-tile"),
+        },
+      },
+    },
     render: template,
   });
 

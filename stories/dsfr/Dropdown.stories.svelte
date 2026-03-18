@@ -5,6 +5,7 @@
   import DsfrDropdown from "$lib/dsfr/DsfrDropdown.svelte";
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Dropdown",
@@ -18,6 +19,13 @@
       buttonIcon: "arrow-down-s-line",
       contentType: "custom",
       align: "left",
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-dropdown"),
+        },
+      },
     },
     render: template,
   });

@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/range/template/stories/range-arg-types.js";
 
   import DsfrRange from "$lib/dsfr/DsfrRange.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Range",
     component: DsfrRange,
     argTypes: rangeArgTypes,
     args: rangeArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-range"),
+        },
+      },
+    },
     render: template,
   });
 

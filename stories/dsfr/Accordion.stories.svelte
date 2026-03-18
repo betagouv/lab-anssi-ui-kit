@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/accordion/template/stories/accordion-arg-types.js";
 
   import DsfrAccordion from "$lib/dsfr/DsfrAccordion.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Accordion",
     component: DsfrAccordion,
     args: { ...accordionArgs, titleMarkupLevel: 4 },
     argTypes: accordionArgTypes,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-accordion"),
+        },
+      },
+    },
     render: template,
   });
 

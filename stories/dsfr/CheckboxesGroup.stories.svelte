@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/checkbox/template/stories/checkboxes-group-arg-types.js";
 
   import DsfrCheckboxesGroup from "$lib/dsfr/DsfrCheckboxesGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const args = {
     ...checkboxesGroupArgs,
@@ -36,6 +37,13 @@
     component: DsfrCheckboxesGroup,
     argTypes: checkboxesGroupArgTypes,
     args,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-checkboxes-group"),
+        },
+      },
+    },
     render: template,
   });
 

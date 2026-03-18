@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/navigation/template/stories/navigation-arg-types.js";
 
   import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Navigation",
     component: DsfrNavigation,
     argTypes: navigationArgTypes,
     args: navigationArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-navigation"),
+        },
+      },
+    },
     render: template,
   });
 

@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/skiplink/template/stories/skiplink-arg-types.js";
 
   import DsfrSkipLink from "$lib/dsfr/DsfrSkipLink.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/SkipLink",
     component: DsfrSkipLink,
     argTypes: skiplinkArgTypes,
     args: skiplinkArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-skiplink"),
+        },
+      },
+    },
     render: template,
   });
 

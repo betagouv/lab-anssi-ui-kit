@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/translate/template/stories/translate-arg-types.js";
 
   import DsfrTranslate from "$lib/dsfr/DsfrTranslate.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Translate",
     component: DsfrTranslate,
     argTypes: translateArgTypes,
     args: translateArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-translate"),
+        },
+      },
+    },
     render: template,
   });
 

@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/tag/template/stories/tags-group-arg-types.js";
 
   import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/TagsGroup",
     component: DsfrTagsGroup,
     argTypes: tagsGroupArgTypes,
     args: tagsGroupArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-tags-group"),
+        },
+      },
+    },
     render: template,
   });
 

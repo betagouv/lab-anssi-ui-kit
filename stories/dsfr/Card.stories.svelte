@@ -14,6 +14,7 @@
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Card",
@@ -42,6 +43,13 @@
           icon: "checkbox-circle-line",
         },
       ],
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-card"),
+        },
+      },
     },
     render: template,
   });

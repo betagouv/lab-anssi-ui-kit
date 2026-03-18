@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/tag/template/stories/tag-arg-types.js";
 
   import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Tag",
     component: DsfrTag,
     argTypes: tagArgTypes,
     args: tagArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-tag"),
+        },
+      },
+    },
     render: template,
   });
 

@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/badge/template/stories/badge-arg-types.js";
 
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Badge",
     component: DsfrBadge,
     argTypes: badgeArgTypes,
     args: badgeArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-badge"),
+        },
+      },
+    },
     render: template,
   });
 

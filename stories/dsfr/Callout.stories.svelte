@@ -9,12 +9,20 @@
 
   import LabAnssiBouton from "$lib/composants/Bouton.svelte";
   import DsfrCallout from "$lib/dsfr/DsfrCallout.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Callout",
     component: DsfrCallout,
     argTypes: calloutArgTypes,
     args: calloutArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-callout"),
+        },
+      },
+    },
     render: template,
   });
 

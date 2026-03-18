@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/link/template/stories/link-arg-types.js";
 
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Link",
     component: DsfrLink,
     argTypes: linkArgTypes,
     args: linkArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-link"),
+        },
+      },
+    },
     render: template,
   });
 

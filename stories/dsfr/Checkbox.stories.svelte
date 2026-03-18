@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/checkbox/template/stories/checkbox-arg-types.js";
 
   import DsfrCheckbox from "$lib/dsfr/DsfrCheckbox.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Checkbox",
     component: DsfrCheckbox,
     argTypes: checkboxArgTypes,
     args: checkboxArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-checkbox"),
+        },
+      },
+    },
     render: template,
   });
 
