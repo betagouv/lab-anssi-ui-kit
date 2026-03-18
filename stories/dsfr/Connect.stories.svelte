@@ -3,6 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrConnect from "$lib/dsfr/DsfrConnect.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Connect Button",
@@ -48,6 +49,13 @@
       disabled: false,
       id: "france-connect",
       href: "#",
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-connect"),
+        },
+      },
     },
     render: template,
   });

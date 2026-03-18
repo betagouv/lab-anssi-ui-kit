@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/footer/template/stories/footer-arg-types.js";
 
   import DsfrFooter from "$lib/dsfr/DsfrFooter.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   import PlaceholderPortrait from "@gouvfr/dsfr/example/img/placeholder.9x16.png";
   import PlaceholderPaysage from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
@@ -57,6 +58,13 @@
           style: "height: 5.625rem",
         },
       ],
+    },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-footer"),
+        },
+      },
     },
     render: template,
   });

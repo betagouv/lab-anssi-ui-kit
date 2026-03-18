@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/breadcrumb/template/stories/breadcrumb-arg-types.js";
 
   import DsfrBreadcrumb from "$lib/dsfr/DsfrBreadcrumb.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Breadcrumb",
@@ -22,6 +23,11 @@
       backgrounds: {
         options: {
           blueFranceLab: { name: "Blue France Lab", value: "#000091" },
+        },
+      },
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-breadcrumb"),
         },
       },
     },

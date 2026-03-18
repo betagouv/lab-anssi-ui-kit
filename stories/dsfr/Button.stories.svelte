@@ -1,6 +1,7 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   import {
     buttonArgs,
@@ -36,6 +37,12 @@
       backgrounds: {
         options: {
           blueFranceLab: { name: "Blue France Lab", value: "#000091" },
+        },
+      },
+      docs: {
+        codePanel: true,
+        source: {
+          transform: webComponentSourceCode("dsfr-button"),
         },
       },
     },

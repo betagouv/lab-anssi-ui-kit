@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/stepper/template/stories/stepper-arg-types.js";
 
   import DsfrStepper from "$lib/dsfr/DsfrStepper.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   delete stepperArgTypes.markup;
   delete stepperArgs.markup;
@@ -17,6 +18,13 @@
     component: DsfrStepper,
     argTypes: stepperArgTypes,
     args: stepperArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-stepper"),
+        },
+      },
+    },
     render: template,
   });
 

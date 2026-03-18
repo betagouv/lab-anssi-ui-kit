@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/input/template/stories/input-arg-types.js";
 
   import DsfrTextarea from "$lib/dsfr/DsfrTextarea.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const args = { ...inputArgs, rows: 6 };
 
@@ -35,6 +36,13 @@
       },
     },
     args,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-textarea"),
+        },
+      },
+    },
     render: template,
   });
 

@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/transcription/template/stories/transcription-arg-types.js";
 
   import DsfrTranscription from "$lib/dsfr/DsfrTranscription.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Transcription",
     component: DsfrTranscription,
     args: transcriptionArgs,
     argTypes: transcriptionArgTypes,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-transcription"),
+        },
+      },
+    },
     render: template,
   });
 

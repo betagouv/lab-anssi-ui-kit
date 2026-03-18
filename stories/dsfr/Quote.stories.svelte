@@ -9,12 +9,20 @@
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.1x1.png";
 
   import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Quote",
     component: DsfrQuote,
     args: { ...quoteArgs, src: Placeholder, sourceUrl: "www.google.com" },
     argTypes: quoteArgTypes,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-quote"),
+        },
+      },
+    },
     render: template,
   });
 

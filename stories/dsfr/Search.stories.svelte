@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/search/template/stories/search-arg-types.js";
 
   import DsfrSearch from "$lib/dsfr/DsfrSearch.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Search",
     component: DsfrSearch,
     argTypes: searchArgTypes,
     args: searchArgs,
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-search"),
+        },
+      },
+    },
     render: template,
   });
 

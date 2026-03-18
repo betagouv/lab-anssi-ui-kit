@@ -8,12 +8,20 @@
   } from "@gouvfr/dsfr/src/dsfr/component/segmented/template/stories/segmented-arg-types.js";
 
   import DsfrSegmented from "$lib/dsfr/DsfrSegmented.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Segmented",
     component: DsfrSegmented,
     argTypes: segmentedArgTypes,
     args: { ...segmentedArgs, value: 1 },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-segmented"),
+        },
+      },
+    },
     render: template,
   });
 
