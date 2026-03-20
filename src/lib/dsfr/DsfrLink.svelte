@@ -9,7 +9,7 @@
       blank: { attribute: "blank", type: "Boolean" },
       title: { attribute: "title", type: "String" },
       href: { attribute: "href", type: "String" },
-      download: { attribute: "download", type: "Boolean" },
+      download: { attribute: "download", type: "String" },
       detail: { attribute: "detail", type: "String" },
       hreflang: { attribute: "hreflang", type: "String" },
       assess: { attribute: "assess", type: "Boolean" },
@@ -57,8 +57,12 @@
     title?: string;
     /** Adresse url du lien */
     href?: string;
-    /** Si true, lien de téléchargement */
-    download?: boolean;
+    /**
+     * Si défini, active le "mode" téléchargement du navigateur (i.e. n'ouvre pas un nouvel onglet)
+     * Si chaîne vide, se base sur diverses sources pour calculer le nom du fichier (voir https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Elements/a#download)
+     * Si chaine non-vide, remplace le nom du fichier téléchargé
+     *  */
+    download?: string;
     /** Détail du lien de téléchargement */
     detail?: string;
     /** Code langue du fichier à télécharger */
@@ -89,24 +93,31 @@
     iconPlace = "left",
   }: Props = $props();
 
-  const iconClass = $derived(!download && hasIcon && icon && setIconClass(icon));
+  const modeTelechargementActif = $derived(download !== undefined);
+
+  const iconClass = $derived(!modeTelechargementActif && hasIcon && icon && setIconClass(icon));
 </script>
 
 <a
   href={!disabled ? href : undefined}
   {id}
   aria-disabled={disabled ? "true" : undefined}
-  class={["fr-link", `fr-link--${size}`, iconClass, { "fr-link--download": download }]}
+  class={[
+    "fr-link",
+    `fr-link--${size}`,
+    iconClass,
+    { "fr-link--download": modeTelechargementActif },
+  ]}
   class:fr-link--icon-left={hasIcon && iconPlace === "left"}
   class:fr-link--icon-right={hasIcon && iconPlace === "right"}
-  download={download ? "true" : undefined}
-  hreflang={download && hreflang ? hreflang : undefined}
+  {download}
+  hreflang={modeTelechargementActif && hreflang ? hreflang : undefined}
   rel={blank ? "noopener external" : undefined}
   role={disabled ? "link" : undefined}
   target={blank ? "_blank" : "_self"}
   title={blank ? title : undefined}
 >
-  {#if download && detail}
+  {#if modeTelechargementActif && detail}
     {label}<span class="fr-link__detail">{detail}</span>
   {:else}
     {label}
