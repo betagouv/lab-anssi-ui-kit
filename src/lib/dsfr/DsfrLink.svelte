@@ -137,7 +137,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/link/link.main.css";
+  @import "@gouvfr/dsfr/src/dsfr/component/link/main";
 
   @include set-shadow-host("inline");
   @include set-dsfr-sizing("link");
