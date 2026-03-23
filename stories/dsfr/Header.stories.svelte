@@ -21,7 +21,16 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Header",
     component: DsfrHeader,
-    argTypes: headerArgTypes,
+    argTypes: {
+      ...headerArgTypes,
+      fluid: {
+        control: "boolean",
+        description: "Permet de définir le conteneur comme 'fluide' ou non",
+        type: {
+          value: "boolean",
+        },
+      },
+    },
     args: {
       ...headerArgs,
       toolLinks: [
@@ -87,6 +96,7 @@
     navigation-aria-label={args.navigationAriaLabel}
     navigation-items={JSON.stringify(args.navigationItems)}
     has-header-tag={args.hasHeaderTag || undefined}
+    fluid={args.fluid || undefined}
   >
     <!-- Tool Links -->
     <dsfr-buttons-group
