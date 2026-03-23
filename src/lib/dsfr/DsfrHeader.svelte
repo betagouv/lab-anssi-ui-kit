@@ -39,6 +39,7 @@
       navigationAriaLabel: { attribute: "navigation-aria-label", type: "String" },
       navigationItems: { attribute: "navigation-items", type: "Object" },
       hasHeaderTag: { attribute: "has-header-tag", type: "Boolean" },
+      fluid: { attribute: "fluid", type: "Boolean" },
     },
   }}
 />
@@ -141,6 +142,8 @@
     navigationItems?: MenuItem[];
     /** Utiliser une balise <header> pour le composant */
     hasHeaderTag?: boolean;
+    /** Permet de définir le conteneur comme "fluide" ou non */
+    fluid?: boolean;
   }
 
   let {
@@ -181,6 +184,7 @@
     navigationAriaLabel,
     navigationItems,
     hasHeaderTag = true,
+    fluid = false,
   }: Props = $props();
 
   let openedMenuModal = $state(false);
@@ -235,7 +239,7 @@
   {id}
 >
   <div class="fr-header__body">
-    <div class="fr-container">
+    <div class={["fr-container", { "fr-header__container--fluid": fluid }]}>
       <div class="fr-header__body-row">
         <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
@@ -365,7 +369,7 @@
       aria-modal={openedMenuModal ? "true" : undefined}
       role={openedMenuModal ? "dialog" : undefined}
     >
-      <div class="fr-container">
+      <div class={["fr-container", { "fr-header__container--fluid": fluid }]}>
         {#if hasNavigation}
           <DsfrButton
             data-fr-opened={openedMenuModal}
@@ -514,6 +518,12 @@
     @media (min-width: 62em) {
       :global(.fr-modal > * > .fr-btn--close) {
         display: none;
+      }
+    }
+
+    &__container--fluid {
+      @media (min-width: 62em) {
+        max-width: none;
       }
     }
   }
