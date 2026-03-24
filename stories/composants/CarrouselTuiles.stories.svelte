@@ -54,6 +54,11 @@
           },
         },
       },
+      default: {
+        description: "Tuiles personnalisées (remplace les tuiles générées par la prop `tuiles`)",
+        control: false,
+        table: { category: "Slots" },
+      },
     },
     render: template,
   });

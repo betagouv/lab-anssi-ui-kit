@@ -10,6 +10,18 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Dropdown",
     component: DsfrDropdown,
+    argTypes: {
+      button: {
+        description: "Bouton déclencheur personnalisé (remplace le DsfrButton généré par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      default: {
+        description: "Contenu du panneau déroulant",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: {
       id: "dropdown-id",
       collapseId: "dropdown-collapse-id",

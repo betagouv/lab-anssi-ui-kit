@@ -14,7 +14,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Callout",
     component: DsfrCallout,
-    argTypes: calloutArgTypes,
+    argTypes: {
+      ...calloutArgTypes,
+      button: {
+        description: "Bouton d'action personnalisé (remplace le DsfrButton généré par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: calloutArgs,
     parameters: {
       docs: {

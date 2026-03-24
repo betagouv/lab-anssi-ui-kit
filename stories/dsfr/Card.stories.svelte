@@ -19,7 +19,39 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Card",
     component: DsfrCard,
-    argTypes: cardArgTypes,
+    argTypes: {
+      ...cardArgTypes,
+      badgesgroup: {
+        description: "Groupe de badges affiché dans le contenu de la carte",
+        control: false,
+        table: { category: "Slots" },
+      },
+      tagsgroup: {
+        description: "Groupe de tags affiché en pied de carte",
+        control: false,
+        table: { category: "Slots" },
+      },
+      contentend: {
+        description: "Contenu supplémentaire après la description",
+        control: false,
+        table: { category: "Slots" },
+      },
+      buttonsgroup: {
+        description: "Groupe de boutons d'action en pied de carte",
+        control: false,
+        table: { category: "Slots" },
+      },
+      linksgroup: {
+        description: "Groupe de liens en pied de carte",
+        control: false,
+        table: { category: "Slots" },
+      },
+      headerbadges: {
+        description: "Badges superposés à l'image d'en-tête",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: {
       ...cardArgs,
       src: Placeholder,

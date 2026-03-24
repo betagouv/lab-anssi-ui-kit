@@ -44,6 +44,21 @@
           value: "string",
         },
       },
+      image: {
+        description: "Élément image personnalisé (remplace le rendu par défaut quand `type='img'`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      svg: {
+        description: "Élément SVG personnalisé (remplace le rendu par défaut quand `type='svg'`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      video: {
+        description: "Élément vidéo personnalisé (remplace le rendu par défaut quand `type='video'`)",
+        control: false,
+        table: { category: "Slots" },
+      },
       type: {
         control: { type: "select" },
         description: "Type de contenu",

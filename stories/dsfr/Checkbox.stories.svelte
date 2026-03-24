@@ -15,7 +15,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Checkbox",
     component: DsfrCheckbox,
-    argTypes: checkboxArgTypes,
+    argTypes: {
+      ...checkboxArgTypes,
+      default: {
+        description: "Libellé personnalisé de la case à cocher (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: checkboxArgs,
     parameters: {
       docs: {
