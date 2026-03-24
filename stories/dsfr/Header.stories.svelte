@@ -23,6 +23,36 @@
     component: DsfrHeader,
     argTypes: {
       ...headerArgTypes,
+      headerbadge: {
+        description: "Badge affiché dans l'en-tête (ex : bêta, nouveau)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      toolLinks: {
+        description: "Liens d'accès rapide personnalisés (remplace la prop `toolLinks`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      translate: {
+        description: "Bouton de traduction personnalisé",
+        control: false,
+        table: { category: "Slots" },
+      },
+      searchbar: {
+        description: "Barre de recherche personnalisée (remplace le DsfrSearch par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      modalToolLinks: {
+        description: "Liens d'accès rapide dans la modale mobile",
+        control: false,
+        table: { category: "Slots" },
+      },
+      navigation: {
+        description: "Navigation principale personnalisée (remplace le DsfrNavigation par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
       fluid: {
         control: "boolean",
         description: "Permet de définir le conteneur comme 'fluide' ou non",

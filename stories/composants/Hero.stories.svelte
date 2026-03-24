@@ -7,6 +7,13 @@
   const { Story } = defineMeta({
     title: "Composants/ANSSI/Hero",
     component: Hero,
+    argTypes: {
+      actions: {
+        description: "Boutons ou liens d'action affichés sous la description du hero",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: {
       titre: "Nom du Service",
       baliseTitre: "h1",

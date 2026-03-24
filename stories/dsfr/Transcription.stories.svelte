@@ -14,7 +14,14 @@
     title: "Composants/dsfr/Transcription",
     component: DsfrTranscription,
     args: transcriptionArgs,
-    argTypes: transcriptionArgTypes,
+    argTypes: {
+      ...transcriptionArgTypes,
+      default: {
+        description: "Contenu textuel de la transcription",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     parameters: {
       docs: {
         source: {

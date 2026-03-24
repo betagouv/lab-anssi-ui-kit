@@ -13,7 +13,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Range",
     component: DsfrRange,
-    argTypes: rangeArgTypes,
+    argTypes: {
+      ...rangeArgTypes,
+      messagesgroup: {
+        description: "Messages d'aide ou d'erreur personnalisés",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: rangeArgs,
     parameters: {
       docs: {
