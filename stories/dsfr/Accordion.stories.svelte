@@ -14,7 +14,14 @@
     title: "Composants/dsfr/Accordion",
     component: DsfrAccordion,
     args: { ...accordionArgs, titleMarkupLevel: 4 },
-    argTypes: accordionArgTypes,
+    argTypes: {
+      ...accordionArgTypes,
+      default: {
+        description: "Contenu de l'accordéon (remplace la prop `content`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     parameters: {
       docs: {
         source: {

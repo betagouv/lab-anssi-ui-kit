@@ -8,6 +8,13 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Container",
     component: DsfrContainer,
+    argTypes: {
+      default: {
+        description: "Contenu principal du conteneur",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     parameters: {
       docs: {
         source: {

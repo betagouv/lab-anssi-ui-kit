@@ -16,7 +16,14 @@
     title: "Composants/dsfr/Alert",
     component: DsfrAlert,
     args: alertArgs,
-    argTypes: alertArgTypes,
+    argTypes: {
+      ...alertArgTypes,
+      description: {
+        description: "Contenu de la description (remplace la prop `text` avec du HTML riche)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     parameters: {
       docs: {
         source: {

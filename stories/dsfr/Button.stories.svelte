@@ -31,6 +31,11 @@
           "inverted-secondary",
         ],
       },
+      default: {
+        description: "Contenu personnalisé du bouton (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
+      },
     },
     args: buttonArgs,
     parameters: {

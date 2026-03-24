@@ -18,7 +18,29 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Tile",
     component: DsfrTile,
-    argTypes: tileArgTypes,
+    argTypes: {
+      ...tileArgTypes,
+      description: {
+        description: "Description personnalisée de la tuile (remplace la prop `description`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      badge: {
+        description: "Badge personnalisé dans la tuile",
+        control: false,
+        table: { category: "Slots" },
+      },
+      tag: {
+        description: "Tag personnalisé dans la tuile",
+        control: false,
+        table: { category: "Slots" },
+      },
+      pictogram: {
+        description: "Pictogramme SVG personnalisé (remplace la prop `pictogramName`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: { ...tileArgs, href: "#" },
     parameters: {
       docs: {
