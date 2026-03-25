@@ -16,6 +16,16 @@
       infoMessage: { attribute: "info-message", type: "String" },
       rows: { attribute: "rows", type: "String" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -53,6 +63,8 @@
     rows?: number;
     /** Texte du message d'information */
     infoMessage?: string;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -70,13 +82,22 @@
     validMessage,
     infoMessage,
     rows,
+    internals,
   }: Props = $props();
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
+    value = target.value;
+
     dispatch("valuechanged", target.value);
   }
   const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div

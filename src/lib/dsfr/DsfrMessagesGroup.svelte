@@ -116,8 +116,8 @@
 {/if}
 
 <style lang="scss">
-  @use "src/lib/styles/mixins-dsfr.scss" as *;
   // DSFR Core styles
+  @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   // DSFR Component styles
