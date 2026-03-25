@@ -20,6 +20,16 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+      };
+    },
   }}
 />
 
@@ -75,6 +85,8 @@
     required?: boolean;
     /** Callback appelé lors du changement de valeur */
     onvaluechanged?: (value: string) => void;
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const dispatch = createEventDispatcher();
@@ -97,6 +109,7 @@
     form,
     required,
     onvaluechanged,
+    internals,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -109,6 +122,12 @@
     dispatch("valuechanged", target.value);
     onvaluechanged?.(target.value);
   }
+
+  $effect(() => {
+    if (!internals) return;
+
+    internals.setFormValue(value ?? "");
+  });
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
