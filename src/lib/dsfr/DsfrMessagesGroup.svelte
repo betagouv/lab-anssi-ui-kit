@@ -3,11 +3,12 @@
     tag: "dsfr-messages-group",
     props: {
       id: { attribute: "id", type: "String" },
-      messages: { attribute: "messages", type: "Object" },
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
       infoMessage: { attribute: "info-message", type: "String" },
+      warningMessage: { attribute: "warning-message", type: "String" },
+      messages: { attribute: "messages", type: "Object" },
       context: { attribute: "context", type: "String" },
     },
   }}
@@ -32,16 +33,18 @@
   interface Props {
     /** Attribut id du champ parent, utilisé pour générer les IDs des messages */
     id: string;
-    /** API avancée : messages structurés (erreurs et succès sont mutuellement exclusifs) */
-    messages?: MessagesGroup;
     /** Statut du message (API simplifiée) */
-    status?: "default" | "valid" | "error" | "info";
+    status?: "default" | "valid" | "error" | "info" | "warning";
     /** Texte du message d'erreur (API simplifiée) */
     errorMessage?: string;
     /** Texte du message de succès (API simplifiée) */
     validMessage?: string;
     /** Texte du message d'information (API simplifiée) */
     infoMessage?: string;
+    /** Texte du message d'avertissement (API simplifiée) */
+    warningMessage?: string;
+    /** API avancée : messages structurés (erreurs et succès sont mutuellement exclusifs) */
+    messages?: MessagesGroup;
     /**
      * Contexte d'affichage du composant.
      * - "field" (défaut) : le premier message reçoit une marge supérieure (input, select, checkbox, toggle…)
@@ -52,11 +55,12 @@
 
   const {
     id,
-    messages,
     status = "default",
     errorMessage,
     validMessage,
     infoMessage,
+    warningMessage,
+    messages,
     context = "field",
   }: Props = $props();
 
@@ -76,7 +80,7 @@
 
     if (status === "default") return [];
 
-    const text = validMessage || errorMessage || infoMessage;
+    const text = validMessage || errorMessage || infoMessage || warningMessage;
     if (!text) return [];
 
     return [{ type: status as ResolvedMessage["type"], text }];
@@ -84,9 +88,12 @@
 
   const messageIds = $derived.by(() => {
     const counts: Partial<Record<ResolvedMessage["type"], number>> = {};
+
     return resolvedMessages.map(({ type }) => {
       const count = counts[type] ?? 0;
+
       counts[type] = count + 1;
+
       return `${id}-message-${type}${count > 0 ? `-${count}` : ""}`;
     });
   });

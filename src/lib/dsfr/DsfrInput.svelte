@@ -31,7 +31,8 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -179,16 +180,9 @@
     />
   {/if}
 
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage || infoMessage}
-      </p>
-    </div>
-  {/if}
+  <slot name="messages-group">
+    <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} {infoMessage} />
+  </slot>
 </div>
 
 <style lang="scss">

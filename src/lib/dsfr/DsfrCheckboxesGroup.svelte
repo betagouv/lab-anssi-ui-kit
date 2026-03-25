@@ -19,6 +19,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -117,16 +118,10 @@
       </div>
     </div>
   {/each}
-  {#if status !== "default" && (errorMessage || validMessage)}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} context="fieldset" />
+  </slot>
 </fieldset>
 
 <style lang="scss">

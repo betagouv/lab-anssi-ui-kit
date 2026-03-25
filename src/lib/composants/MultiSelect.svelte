@@ -24,6 +24,8 @@
     trapFocus,
   } from "$lib/directives/actions.svelte.ts";
 
+  import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+
   type Option = {
     id: string;
     value: string;
@@ -150,16 +152,10 @@
       {/each}
     </div>
   </details>
-  {#if status !== "default" && (validMessage || errorMessage)}
-    <div class="fr-messages-group" id={status ? `${id}-messages` : undefined} aria-live="polite">
-      <p
-        class={["fr-message", `fr-message--${status}`]}
-        id={status ? `${id}-message-${status}` : undefined}
-      >
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} />
+  </slot>
 </div>
 
 <style lang="scss">

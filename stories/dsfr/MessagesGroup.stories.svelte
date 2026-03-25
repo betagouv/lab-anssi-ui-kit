@@ -3,6 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
+  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Messages Group",
@@ -53,6 +54,13 @@
       id: "champ-exemple",
       status: "default",
     },
+    parameters: {
+      docs: {
+        source: {
+          transform: webComponentSourceCode("dsfr-messages-group"),
+        },
+      },
+    },
     render: template,
   });
 
@@ -66,6 +74,7 @@
     errorMessage={args.errorMessage}
     validMessage={args.validMessage}
     infoMessage={args.infoMessage}
+    warningMessage={args.warningMessage}
     messages={args.messages}
   ></dsfr-messages-group>
 {/snippet}
@@ -81,7 +90,7 @@
 
 <Story
   name="Avertissement"
-  args={{ id: "champ-avertissement", messages: { warnings: ["200 caractères maximum."] } }}
+  args={{ status: "warning", warningMessage: "200 caractères maximum." }}
 />
 
 <Story

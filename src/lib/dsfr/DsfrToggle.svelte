@@ -22,6 +22,7 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
+  import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
 
@@ -77,12 +78,11 @@
     ...restProps
   }: Props = $props();
 
-  const messagesGroupId = $derived(`${id}-messages`);
   const ariaDescribedBy = $derived.by(() => {
     const ids = [];
 
     if (hint) ids.push(hintId);
-    if (status === "error" || status === "valid") ids.push(messagesGroupId);
+    if (status === "error" || status === "valid") ids.push(`${id}-messages`);
 
     return ids.join(" ") || undefined;
   });
@@ -124,13 +124,10 @@
       {hint}
     </p>
   {/if}
-  {#if status !== "default"}
-    <div class="fr-messages-group" id={messagesGroupId} aria-live="polite">
-      <p class={["fr-message", `fr-message--${status}`]} id={`${messagesGroupId}-${status}`}>
-        {validMessage || errorMessage}
-      </p>
-    </div>
-  {/if}
+
+  <slot name="messages-group">
+    <DsfrMessagesGroup {id} {status} {errorMessage} {validMessage} />
+  </slot>
 </div>
 
 <style lang="scss">
@@ -196,6 +193,4 @@
       }
     }
   }
-
-  //
 </style>
