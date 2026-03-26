@@ -150,5 +150,6 @@
   @include set-dsfr-sizing("fieldset");
   @include set-dsfr-sizing("checkbox-group") {
     @include set-themeable-checkbox();
+    @include set-themeable-checkbox-sm();
   }
 </style>

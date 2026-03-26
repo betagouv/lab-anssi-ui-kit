@@ -1,6 +1,9 @@
 @use "src/module/color";
 @use "@gouvfr/dsfr/src/dsfr/core/index" as *;
 
+$checkmark-scale: var(--checkmark-scale, 0.7) !default;
+$checkmark-size: var(--checkmark-size, 24px) !default;
+
 /// Ajoute un style `display` au composant hôte dans le Shadow DOM.
 /// Permet également d'injecter du contenu CSS supplémentaire via `@content`.
 ///
@@ -47,13 +50,12 @@
 ///
 /// @param {Color} $color [var(--border-action-high-blue-france)] - Couleur de la coche.
 @mixin set-icon-check($icon-color: var(--border-action-high-blue-france)) {
-  border-left: 2px solid $icon-color;
-  border-bottom: 2px solid $icon-color;
   content: "";
   display: inline-block;
-  height: 10px;
-  transform: rotate(-45deg) translate(1px, -1px) scale(0.7);
-  width: 16px;
+  width: $checkmark-size;
+  height: $checkmark-size;
+  background-color: $icon-color;
+  clip-path: polygon(41.7% 63.2%, 80% 24.9%, 85.8% 30.8%, 41.7% 75%, 15.2% 48.5%, 21% 42.6%);
 
   @content;
 }
@@ -71,9 +73,11 @@
 
     &::after {
       @include set-icon-check(var(--text-inverted-blue-france)) {
-        left: calc(-2rem + 4px);
+        left: var(--checkbox-gap, -2rem);
         position: absolute;
-        top: 6px;
+        top: calc((#{$checkmark-size} * #{$checkmark-scale}) / 2);
+        transform: translateY(-50%);
+        scale: $checkmark-scale;
         z-index: 1;
       }
     }
@@ -82,6 +86,23 @@
   .fr-label {
     &::before {
       --data-uri-svg: none;
+    }
+  }
+}
+
+/// Applique les styles pour les cases à cocher en taille "small" (sm)
+///
+/// Cette mixin ajuste les variables CSS pour
+/// réduire l'écart entre les éléments, la taille de la coche et le positionnement vertical du label.
+///
+@mixin set-themeable-checkbox-sm() {
+  &--sm {
+    --checkbox-gap: -1.5rem;
+    --checkmark-size: 1rem;
+    --checkmark-scale: 1;
+
+    label::after {
+      margin-top: 0.25rem;
     }
   }
 }
