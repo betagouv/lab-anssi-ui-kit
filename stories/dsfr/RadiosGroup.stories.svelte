@@ -11,11 +11,13 @@
   import DsfrRadiosGroup from "$lib/dsfr/DsfrRadiosGroup.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
+  delete radiosGroupArgs.elements;
+
   const { Story } = defineMeta({
     title: "Composants/dsfr/Radios Group",
     component: DsfrRadiosGroup,
     argTypes: radiosGroupArgTypes,
-    args: { ...radiosGroupArgs, radios: getRadiosGroupData() },
+    args: { radios: getRadiosGroupData(), ...radiosGroupArgs },
     parameters: {
       docs: {
         source: {
