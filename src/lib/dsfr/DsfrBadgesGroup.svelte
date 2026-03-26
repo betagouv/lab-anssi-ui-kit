@@ -6,27 +6,13 @@
       size: { attribute: "size", type: "String" },
       groupMarkup: { attribute: "group-markup", type: "String" },
     },
-    extend: (CustomElementClass) => {
-      return class extends CustomElementClass {
-        connectedCallback() {
-          super.connectedCallback();
-
-          const iconsStyleSheet = getIconsStyleSheet();
-          const shadow = this.shadowRoot;
-
-          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
-            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
-          }
-        }
-      };
-    },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
-  import { getIconsStyleSheet } from "$lib/utilitaires";
   import type { Accent, Size } from "$lib/types";
-  import { setIconClass } from "$lib/utilitaires";
+  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
 
   type BadgesGroupSize = Extract<Size, "sm" | "md">;
   type GroupMarkup = "div" | "ul";

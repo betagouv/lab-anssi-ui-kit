@@ -8,26 +8,13 @@
       groupMarkup: { attribute: "group-markup", type: "String" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
     },
-    extend: (CustomElementClass) => {
-      return class extends CustomElementClass {
-        connectedCallback() {
-          super.connectedCallback();
-
-          const iconsStyleSheet = getIconsStyleSheet();
-          const shadow = this.shadowRoot;
-
-          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
-            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
-          }
-        }
-      };
-    },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { getIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
 
   setThemeable($host());

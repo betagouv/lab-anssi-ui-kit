@@ -13,26 +13,13 @@
       buttonLabel: { attribute: "button-label", type: "String" },
       accent: { attribute: "accent", type: "String" },
     },
-    extend: (CustomElementClass) => {
-      return class extends CustomElementClass {
-        connectedCallback() {
-          super.connectedCallback();
-
-          const iconsStyleSheet = getIconsStyleSheet();
-          const shadow = this.shadowRoot;
-
-          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
-            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
-          }
-        }
-      };
-    },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
   import type { Accent } from "$lib/types";
-  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 
