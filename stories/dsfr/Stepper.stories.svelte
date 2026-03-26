@@ -17,7 +17,7 @@
     title: "Composants/dsfr/Stepper",
     component: DsfrStepper,
     argTypes: stepperArgTypes,
-    args: stepperArgs,
+    args: { ...stepperArgs, hideDetails: false },
     parameters: {
       docs: {
         source: {
@@ -38,6 +38,7 @@
     current-step={args.currentStep}
     step-count={args.stepCount}
     level={args.level}
+    hide-details={args.hideDetails || undefined}
   ></dsfr-stepper>
 {/snippet}
 
