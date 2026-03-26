@@ -34,6 +34,7 @@
     form?: string;
     required?: boolean;
   };
+
   interface Props {
     /** Attribut id du formulaire */
     id: string;
@@ -41,7 +42,7 @@
     legend: string;
     /** Liste de radio */
     radios: Radio[];
-    /** Texte additionnel sous la légende */
+    /** Texte additionnel sous la légende principale du composant */
     hint?: string;
     /** Taille des checkboxes */
     size?: RadiosSize;
@@ -101,7 +102,7 @@
     {/if}
   </legend>
 
-  {#each radios as { id, name, value, disabled, label, form, required } (id)}
+  {#each radios as { label, id, name, value, hint, disabled, form, required } (id)}
     <div class={["fr-fieldset__element", inline && "fr-fieldset__element--inline"]}>
       <div class={["fr-radio-group", `fr-radio-group--${size}`]}>
         <input
@@ -113,6 +114,7 @@
           onchange={handleChange}
           {form}
           {required}
+          {disabled}
         />
         <label class="fr-label" for={id}>
           {label}
