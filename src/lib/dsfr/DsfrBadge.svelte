@@ -11,26 +11,13 @@
       status: { attribute: "status", type: "String" },
       type: { attribute: "type", type: "String" },
     },
-    extend: (CustomElementClass) => {
-      return class extends CustomElementClass {
-        connectedCallback() {
-          super.connectedCallback();
-
-          const iconsStyleSheet = getIconsStyleSheet();
-          const shadow = this.shadowRoot;
-
-          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
-            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
-          }
-        }
-      };
-    },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { getIconsStyleSheet, setIconClass } from "$lib/utilitaires";
+  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
 
   type BadgeSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";

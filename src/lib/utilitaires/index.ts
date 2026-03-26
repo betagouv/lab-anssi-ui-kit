@@ -1,4 +1,4 @@
-export { getIconsStyleSheet } from "./icons-stylesheet";
+export { getIconsStyleSheet, withIconsStyleSheet } from "./icons-stylesheet";
 
 /**
  * Génère une classe d'icône FR avec validation

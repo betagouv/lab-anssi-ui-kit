@@ -13,13 +13,14 @@
       contentType: { attribute: "content-type", type: "String" },
       align: { attribute: "align", type: "String" },
     },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
   import { clickOutside } from "$lib/directives/actions.svelte.ts";
   import type { Kind, Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
   import DsfrButton from "./DsfrButton.svelte";
 
   setThemeable($host());
