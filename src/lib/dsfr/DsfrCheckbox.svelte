@@ -139,5 +139,6 @@
   @include set-shadow-host();
   @include set-dsfr-sizing("checkbox-group") {
     @include set-themeable-checkbox();
+    @include set-themeable-checkbox-sm();
   }
 </style>
