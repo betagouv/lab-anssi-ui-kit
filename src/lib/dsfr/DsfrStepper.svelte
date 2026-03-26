@@ -7,6 +7,7 @@
       currentStep: { attribute: "current-step", type: "Number" },
       stepCount: { attribute: "step-count", type: "Number" },
       level: { attribute: "level", type: "Number" },
+      hideDetails: { attribute: "hide-details", type: "Boolean" },
     },
   }}
 />
@@ -29,9 +30,11 @@
     stepCount: number;
     /** Niveau du titre (défaut: 2) */
     level?: Level;
+    /** Si true, masque les textes de détail en lien avec l'étape suivante  */
+    hideDetails?: boolean;
   }
 
-  let { title, nextStep, currentStep, stepCount, level = 2 }: Props = $props();
+  let { title, nextStep, currentStep, stepCount, level = 2, hideDetails = false }: Props = $props();
   let markup: Markup = $derived.by(
     () => ([2, 3, 4, 5].includes(level) ? `h${level}` : `h2`) as Markup,
   );
@@ -43,10 +46,12 @@
     <span class="fr-stepper__state">Étape {currentStep} sur {stepCount}</span>
   </svelte:element>
   <div class="fr-stepper__steps" data-fr-current-step={currentStep} data-fr-steps={stepCount}></div>
-  <p class="fr-stepper__details">
-    <span class="fr-text--bold">Étape suivante :</span>
-    {nextStep}
-  </p>
+  {#if !hideDetails}
+    <p class="fr-stepper__details">
+      <span class="fr-text--bold">Étape suivante :</span>
+      {nextStep}
+    </p>
+  {/if}
 </div>
 
 <style lang="scss">
