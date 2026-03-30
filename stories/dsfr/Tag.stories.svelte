@@ -53,6 +53,8 @@
     has-icon={args.hasIcon || undefined}
     icon={args.icon}
     accent={args.accent}
+    onselected={args.onselected}
+    onunselected={args.onunselected}
   ></dsfr-tag>
 {/snippet}
 

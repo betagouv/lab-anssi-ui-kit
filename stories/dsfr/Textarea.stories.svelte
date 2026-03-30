@@ -69,6 +69,7 @@
     valid-message={args.validMessage}
     rows={args.rows}
     info-message={args.infoMessage}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-textarea>
 {/snippet}
 

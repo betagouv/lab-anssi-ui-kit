@@ -52,6 +52,7 @@
     pattern={args.pattern}
     readonly={args.readonly || undefined}
     required={args.required || undefined}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-search>
 {/snippet}
 

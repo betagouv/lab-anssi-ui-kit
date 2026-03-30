@@ -56,6 +56,7 @@
     prev-and-next-displayed-lg={args.prevAndNextDisplayedLg || undefined}
     prev-and-next-has-lg-label={args.prevAndNextHasLgLabel || undefined}
     current-page-index={args.currentPageIndex}
+    onpagechange={args.onpagechange}
   ></dsfr-pagination>
 {/snippet}
 

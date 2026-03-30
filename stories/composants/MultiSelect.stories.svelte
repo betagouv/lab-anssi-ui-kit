@@ -50,6 +50,7 @@
     status={args.status}
     error-message={args.errorMessage}
     valid-message={args.validMessage}
+    onvalueschanged={args.onvalueschanged}
   ></lab-anssi-multi-select>
 {/snippet}
 

@@ -44,6 +44,8 @@
     variant={args.variant}
     tooltip-texte={args.tooltipTexte}
     tooltip-id={args.tooltipId}
+    onajouteReaction={args.onajouteReaction}
+    onsupprimeReaction={args.onsupprimeReaction}
   ></lab-anssi-reactions>
 {/snippet}
 

@@ -162,6 +162,8 @@
     columns={args.columns}
     rows={args.rows}
     items-per-page={JSON.stringify(args.itemsPerPage)}
+    onpagechange={args.onpagechange}
+    onrowsperpagechange={args.onrowsperpagechange}
   >
     <dsfr-buttons-group slot="footerbuttons" buttons={args.buttons} inline="true"
     ></dsfr-buttons-group>

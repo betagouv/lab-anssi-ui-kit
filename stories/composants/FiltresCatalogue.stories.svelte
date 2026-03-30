@@ -36,6 +36,7 @@
     filtres={args.filtres}
     horizontal={args.horizontal || undefined}
     valeur={args.valeur}
+    onvaleurachangee={args.onvaleurachangee}
   ></lab-anssi-filtres>
 {/snippet}
 

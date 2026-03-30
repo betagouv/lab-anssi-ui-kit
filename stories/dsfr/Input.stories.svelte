@@ -77,6 +77,7 @@
     readonly={args.readonly || undefined}
     required={args.required || undefined}
     step={args.step}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-input>
 {/snippet}
 

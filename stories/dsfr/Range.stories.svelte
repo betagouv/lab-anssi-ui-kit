@@ -68,6 +68,8 @@
     status={args.status}
     error-message={args.errorMessage}
     hide-output-label={args.hideOutputLabel || undefined}
+    onvaluechanged={args.onvaluechanged}
+    onvalue2changed={args.onvalue2changed}
   ></dsfr-range>
 {/snippet}
 

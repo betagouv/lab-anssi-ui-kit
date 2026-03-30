@@ -70,6 +70,7 @@
     status={args.status}
     error-message={args.errorMessage}
     valid-message={args.validMessage}
+    onvalueschanged={args.onvalueschanged}
   ></dsfr-checkboxes-group>
 {/snippet}
 

@@ -45,6 +45,7 @@
     has-icon={args.hasIcon || undefined}
     elements={args.elements}
     value={args.value}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-segmented>
 {/snippet}
 

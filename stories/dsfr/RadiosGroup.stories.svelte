@@ -51,6 +51,7 @@
     status={args.status}
     error-message={args.errorMessage}
     valid-message={args.validMessage}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-radios-group>
 {/snippet}
 

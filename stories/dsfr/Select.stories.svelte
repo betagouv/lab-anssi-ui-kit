@@ -75,6 +75,7 @@
     info-message={args.infoMessage}
     form={args.form}
     required={args.required || undefined}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-select>
 {/snippet}
 

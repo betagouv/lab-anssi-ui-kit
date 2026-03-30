@@ -47,6 +47,8 @@
     size={args.size}
     group-markup={args.groupMarkup}
     has-icon={args.hasIcon || undefined}
+    onselected={args.onselected}
+    onunselected={args.onunselected}
   ></dsfr-tags-group>
 {/snippet}
 

@@ -50,6 +50,7 @@
     disabled={args.disabled || undefined}
     form={args.form}
     required={args.required || undefined}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-radio>
 {/snippet}
 

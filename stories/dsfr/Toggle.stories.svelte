@@ -51,6 +51,7 @@
     valid-message={args.validMessage}
     form={args.form}
     required={args.required || undefined}
+    onvaluechanged={args.onvaluechanged}
   ></dsfr-toggle>
 {/snippet}
 
