@@ -56,6 +56,8 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Callback appelé quand les valeurs sélectionnées changent */
+    onvalueschanged?: (values: string[]) => void;
   }
 
   let {
@@ -70,11 +72,13 @@
     status,
     errorMessage,
     validMessage,
+    onvalueschanged,
   }: Props = $props();
 
   type SelectedValues = string[];
 
   function handleChange(event: Event) {
+    onvalueschanged?.(values);
     $host().dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
   }
 </script>

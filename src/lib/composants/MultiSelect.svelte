@@ -50,7 +50,8 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
-    /** Taille de checkbox */
+    /** Callback appelé quand les valeurs sélectionnées changent */
+    onvalueschanged?: (values: string[]) => void;
   }
   const {
     id = "",
@@ -63,6 +64,7 @@
     status,
     errorMessage,
     validMessage,
+    onvalueschanged,
   }: Props = $props();
 
   const statusClass = $derived.by(() => {
@@ -75,6 +77,7 @@
 
   let currentValues: string[] = $state(values || []);
   function handleChange(event: Event) {
+    onvalueschanged?.(currentValues);
     // REVIEW deprecate this event in favor of valueschanged
     $host().dispatchEvent(new CustomEvent<string[]>("valuechanged", { detail: currentValues }));
     $host().dispatchEvent(new CustomEvent<string[]>("valueschanged", { detail: currentValues }));

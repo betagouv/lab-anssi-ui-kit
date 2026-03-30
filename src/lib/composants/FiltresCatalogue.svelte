@@ -16,13 +16,16 @@
     filtres: Filtre[];
     horizontal?: boolean;
     valeur?: string;
+    /** Callback appelé quand le filtre actif change */
+    onvaleurachangee?: (valeur: string) => void;
   }
 
-  let { filtres, horizontal = false, valeur = "" }: Props = $props();
+  let { filtres, horizontal = false, valeur = "", onvaleurachangee }: Props = $props();
 
   function handleFilterClick(nouvelleValeur: string) {
     if (valeur === nouvelleValeur) return;
     valeur = nouvelleValeur;
+    onvaleurachangee?.(nouvelleValeur);
     $host().dispatchEvent(new CustomEvent("valeurachangee", { detail: nouvelleValeur }));
   }
 </script>

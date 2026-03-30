@@ -61,6 +61,8 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
+    /** Callback appelé quand la valeur sélectionnée change */
+    onvaluechanged?: (value: string) => void;
   }
 
   const {
@@ -77,11 +79,13 @@
     status = "default",
     errorMessage,
     validMessage,
+    onvaluechanged,
   }: Props = $props();
 
   let currentValue = $derived(value);
 
   function handleChange(event: Event) {
+    onvaluechanged?.(currentValue);
     $host().dispatchEvent(new CustomEvent("valuechanged", { detail: currentValue }));
   }
 </script>
