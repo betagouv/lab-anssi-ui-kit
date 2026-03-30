@@ -157,7 +157,6 @@
     index: number | null | undefined,
     position?: PagePosition,
   ) {
-    if (!onpagechange) return;
     e.preventDefault();
 
     if ((position === "first" || position === "prev") && disabledFirst) return;
@@ -170,7 +169,8 @@
     else if (position === "last") targetPage = pages.length;
     else targetPage = (index ?? 0) + 1;
 
-    onpagechange(targetPage);
+    onpagechange?.(targetPage);
+    $host().dispatchEvent(new CustomEvent("pagechange", { detail: targetPage }));
   }
 </script>
 

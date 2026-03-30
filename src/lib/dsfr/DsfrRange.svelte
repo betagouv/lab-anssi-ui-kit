@@ -29,7 +29,6 @@
 
 <script lang="ts">
   import { untrack } from "svelte";
-  import { createEventDispatcher } from "svelte";
   import type { Size, Status } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
@@ -81,6 +80,10 @@
     errorMessage?: string;
     /** Permet de masquer le texte de l'élément 'output' */
     hideOutputLabel?: boolean;
+    /** Callback appelé lors du changement de la valeur du curseur principal */
+    onvaluechanged?: (value: number) => void;
+    /** Callback appelé lors du changement de la valeur du second curseur (mode double) */
+    onvalue2changed?: (value: number) => void;
   }
 
   let {
@@ -105,9 +108,9 @@
     status = "default",
     errorMessage,
     hideOutputLabel = false,
+    onvaluechanged,
+    onvalue2changed,
   }: Props = $props();
-
-  const dispatch = createEventDispatcher();
 
   const decorate = (val: number | string) => `${prefix ?? ""}${val}${suffix ?? ""}`;
 
@@ -183,11 +186,13 @@
     const newVal = parseFloat((e.target as HTMLInputElement).value);
     value = newVal;
 
-    dispatch("valuechanged", newVal);
+    onvaluechanged?.(newVal);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: newVal }));
 
     if (isDouble && value2 < newVal) {
       untrack(() => (value2 = newVal));
-      dispatch("value2changed", newVal);
+      onvalue2changed?.(newVal);
+      $host().dispatchEvent(new CustomEvent("value2changed", { detail: newVal }));
     }
   }
 
@@ -196,11 +201,13 @@
     const newVal = parseFloat((e.target as HTMLInputElement).value);
     value2 = newVal;
 
-    dispatch("value2changed", newVal);
+    onvalue2changed?.(newVal);
+    $host().dispatchEvent(new CustomEvent("value2changed", { detail: newVal }));
 
     if (isDouble && value > newVal) {
       untrack(() => (value = newVal));
-      dispatch("valuechanged", newVal);
+      onvaluechanged?.(newVal);
+      $host().dispatchEvent(new CustomEvent("valuechanged", { detail: newVal }));
     }
   }
 </script>

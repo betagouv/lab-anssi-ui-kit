@@ -315,11 +315,13 @@
     rowsPerPage = newValue;
     currentPage = 1;
     onrowsperpagechange?.(newValue);
+    $host().dispatchEvent(new CustomEvent("rowsperpagechange", { detail: newValue }));
   }
 
   function handlePageChange(page: number) {
     currentPage = page;
     onpagechange?.(page);
+    $host().dispatchEvent(new CustomEvent("pagechange", { detail: page }));
   }
 
   /**

@@ -43,7 +43,6 @@
 />
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
@@ -95,9 +94,9 @@
     required?: boolean;
     /** Valeur de l'attribut step du champs de saisie _(valable uniquement dans ce composant pour les champs de type "date" et "number")_  */
     step?: number;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -122,6 +121,7 @@
     readonly,
     required,
     step,
+    onvaluechanged,
   }: Props = $props();
 
   const disabledClass = $derived.by(() => {
@@ -133,7 +133,8 @@
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.value }));
   }
 </script>
 

@@ -22,8 +22,6 @@
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type RadioSize = Extract<Size, "sm" | "md">;
@@ -54,9 +52,9 @@
     form?: string;
     /** Attribut required du composant */
     required?: boolean;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -72,6 +70,7 @@
     disabled,
     form,
     required,
+    onvaluechanged,
   }: Props = $props();
 
   const richClass = $derived.by(() => {
@@ -81,7 +80,8 @@
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.value }));
   }
 </script>
 

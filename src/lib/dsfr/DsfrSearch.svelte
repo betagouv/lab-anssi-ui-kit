@@ -24,8 +24,6 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type SearchSize = Extract<Size, "md" | "lg">;
@@ -60,9 +58,9 @@
     readonly?: boolean;
     /** Rend le champ de saisie obligatoire */
     required?: boolean;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     inputId,
@@ -80,13 +78,15 @@
     pattern,
     readonly,
     required,
+    onvaluechanged,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-search-bar--${size}`);
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.value }));
   }
 </script>
 

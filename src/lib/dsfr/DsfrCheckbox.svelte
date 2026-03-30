@@ -22,8 +22,6 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type ChecboxSize = Extract<Size, "sm" | "md">;
@@ -54,9 +52,9 @@
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: boolean) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -72,13 +70,15 @@
     validMessage,
     form,
     required,
+    onvaluechanged,
   }: Props = $props();
 
   const sizeClass = $derived(`fr-checkbox-group--${size}`);
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.checked);
+    onvaluechanged?.(target.checked);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.checked }));
   }
 </script>
 

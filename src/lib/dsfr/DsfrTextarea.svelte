@@ -21,8 +21,6 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   interface Props {
@@ -52,9 +50,9 @@
     rows?: number;
     /** Texte du message d'information */
     infoMessage?: string;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -69,11 +67,13 @@
     validMessage,
     infoMessage,
     rows,
+    onvaluechanged,
   }: Props = $props();
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.value }));
   }
   const statusClass = $derived(status !== "info" && `fr-input-group--${status}`);
 </script>

@@ -21,8 +21,6 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type Status = "default" | "valid" | "error";
@@ -55,9 +53,9 @@
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: boolean) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -74,6 +72,7 @@
     validMessage,
     form,
     required,
+    onvaluechanged,
     ...restProps
   }: Props = $props();
 
@@ -89,7 +88,8 @@
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.checked);
+    onvaluechanged?.(target.checked);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.checked }));
   }
 </script>
 

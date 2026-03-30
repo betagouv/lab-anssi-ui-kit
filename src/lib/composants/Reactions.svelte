@@ -11,8 +11,6 @@
 />
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-
   type Reaction = {
     id: string;
     emoji: string;
@@ -28,6 +26,10 @@
     tooltipTexte?: string;
     /** Identifiant de l'infobulle */
     tooltipId?: string;
+    /** Callback appelé quand une réaction est ajoutée */
+    onajouteReaction?: (id: string) => void;
+    /** Callback appelé quand une réaction est supprimée */
+    onsupprimeReaction?: (id: string) => void;
   }
 
   let {
@@ -35,6 +37,8 @@
     variant = "tertiaire-sans-bordure",
     tooltipTexte,
     tooltipId,
+    onajouteReaction,
+    onsupprimeReaction,
   }: Props = $props();
 
   let tooltipShown = $state(false);
@@ -43,8 +47,6 @@
   let popoverElement: HTMLElement | null = null;
   let tooltipElement: HTMLElement | null = null;
   let triggerButton: HTMLElement | null = null;
-
-  let dispatch = createEventDispatcher<{ ajouteReaction: string; supprimeReaction: string }>();
 
   /**
    * Positionne dynamiquement le popover au-dessus du bouton déclencheur.
@@ -157,9 +159,11 @@
 
     // Émet un événement en fonction de l'état de la réaction
     if (estActif) {
-      dispatch("supprimeReaction", id);
+      onsupprimeReaction?.(id);
+      $host().dispatchEvent(new CustomEvent("supprimeReaction", { detail: id }));
     } else {
-      dispatch("ajouteReaction", id);
+      onajouteReaction?.(id);
+      $host().dispatchEvent(new CustomEvent("ajouteReaction", { detail: id }));
     }
 
     popoverElement.hidePopover();

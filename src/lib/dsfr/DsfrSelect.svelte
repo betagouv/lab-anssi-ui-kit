@@ -25,8 +25,6 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type Option = {
@@ -76,8 +74,6 @@
     onvaluechanged?: (value: string) => void;
   }
 
-  const dispatch = createEventDispatcher();
-
   let {
     id,
     label,
@@ -105,8 +101,8 @@
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.value);
     onvaluechanged?.(target.value);
+    $host().dispatchEvent(new CustomEvent("valuechanged", { detail: target.value }));
   }
 </script>
 

@@ -28,8 +28,6 @@
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
   import { getIconsStyleSheet, setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type TagsGroupSize = Extract<Size, "sm" | "md">;
@@ -60,9 +58,13 @@
     groupMarkup?: GroupMarkup;
     /** Si true, ajoute une icone dans le titre des onglets */
     hasIcon?: boolean;
+    /** Callback appelé quand un tag sélectionnable est activé */
+    onselected?: (id: string) => void;
+    /** Callback appelé quand un tag sélectionnable est désactivé */
+    onunselected?: (id: string) => void;
   }
 
-  let { tags, type = "default", size = "md", groupMarkup, hasIcon }: Props = $props();
+  let { tags, type = "default", size = "md", groupMarkup, hasIcon, onselected, onunselected }: Props = $props();
 
   const dissmissClass = $derived.by(() => type === "dismissible" && "fr-tag--dismiss");
   const sizeClass = $derived(`fr-tags-group--${size}`);
@@ -79,17 +81,17 @@
     }
   });
 
-  let dispatch = createEventDispatcher<{ selected: string; unselected: string }>();
-
   const onpressed = (event: MouseEvent) => {
     let button = event.target as HTMLButtonElement;
     let ariaPressed = button.ariaPressed;
     const isPressed = ariaPressed === "true";
     button.ariaPressed = (!isPressed).toString();
     if (isPressed) {
-      dispatch("unselected", button.id);
+      onunselected?.(button.id);
+      $host().dispatchEvent(new CustomEvent("unselected", { detail: button.id }));
     } else {
-      dispatch("selected", button.id);
+      onselected?.(button.id);
+      $host().dispatchEvent(new CustomEvent("selected", { detail: button.id }));
     }
   };
 </script>
