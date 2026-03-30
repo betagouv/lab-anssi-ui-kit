@@ -21,7 +21,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Pagination",
     component: DsfrPagination,
-    argTypes: camelCaseProps(paginationArgTypes),
+    argTypes: {
+      ...camelCaseProps(paginationArgTypes),
+      onpagechange: {
+        description: "Callback appelé lors du changement de page",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: camelCaseProps(paginationArgs),
     parameters: {
       docs: {

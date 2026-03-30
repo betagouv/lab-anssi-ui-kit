@@ -35,7 +35,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Checkboxes Group",
     component: DsfrCheckboxesGroup,
-    argTypes: checkboxesGroupArgTypes,
+    argTypes: {
+      ...checkboxesGroupArgTypes,
+      onvalueschanged: {
+        description: "Callback appelé quand les valeurs sélectionnées changent",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args,
     parameters: {
       docs: {

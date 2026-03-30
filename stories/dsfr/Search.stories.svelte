@@ -13,7 +13,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Search",
     component: DsfrSearch,
-    argTypes: searchArgTypes,
+    argTypes: {
+      ...searchArgTypes,
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de valeur",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: searchArgs,
     parameters: {
       docs: {

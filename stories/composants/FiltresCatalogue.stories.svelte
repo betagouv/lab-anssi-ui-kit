@@ -18,6 +18,13 @@
         { libelle: "Explorer les formations", valeur: "category5", icone: Success },
       ],
     },
+    argTypes: {
+      onvaleurachangee: {
+        description: "Callback appelé quand le filtre actif change",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     render: template,
   });
 

@@ -13,7 +13,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Segmented",
     component: DsfrSegmented,
-    argTypes: segmentedArgTypes,
+    argTypes: {
+      ...segmentedArgTypes,
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de valeur",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: { ...segmentedArgs, value: 1 },
     parameters: {
       docs: {

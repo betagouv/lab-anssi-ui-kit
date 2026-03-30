@@ -17,6 +17,18 @@
       tooltipTexte: "Ajouter une réaction",
       tooltipId: "tooltipReactions",
     },
+    argTypes: {
+      onajouteReaction: {
+        description: "Callback appelé quand une réaction est ajoutée",
+        control: false,
+        table: { category: "Événements" },
+      },
+      onsupprimeReaction: {
+        description: "Callback appelé quand une réaction est supprimée",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     parameters: {
       layout: "centered",
     },

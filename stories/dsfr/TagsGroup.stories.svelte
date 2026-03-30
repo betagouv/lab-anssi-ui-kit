@@ -13,7 +13,19 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/TagsGroup",
     component: DsfrTagsGroup,
-    argTypes: tagsGroupArgTypes,
+    argTypes: {
+      ...tagsGroupArgTypes,
+      onselected: {
+        description: "Callback appelé quand un tag sélectionnable est activé",
+        control: false,
+        table: { category: "Événements" },
+      },
+      onunselected: {
+        description: "Callback appelé quand un tag sélectionnable est désactivé",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: tagsGroupArgs,
     parameters: {
       docs: {

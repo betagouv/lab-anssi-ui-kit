@@ -26,6 +26,11 @@
       values: {
         control: { type: "array" },
       },
+      onvalueschanged: {
+        description: "Callback appelé quand les valeurs sélectionnées changent",
+        control: false,
+        table: { category: "Événements" },
+      },
     },
     render: template,
   });

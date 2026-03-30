@@ -32,6 +32,11 @@
         },
         table: { category: "message" },
       },
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de valeur",
+        control: false,
+        table: { category: "Événements" },
+      },
     },
     args: inputArgs,
     parameters: {

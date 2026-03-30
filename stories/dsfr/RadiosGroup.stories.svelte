@@ -14,7 +14,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Radios Group",
     component: DsfrRadiosGroup,
-    argTypes: radiosGroupArgTypes,
+    argTypes: {
+      ...radiosGroupArgTypes,
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de valeur",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: { ...radiosGroupArgs, radios: getRadiosGroupData() },
     parameters: {
       docs: {

@@ -13,7 +13,14 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Toggle",
     component: DsfrToggle,
-    argTypes: toggleArgTypes,
+    argTypes: {
+      ...toggleArgTypes,
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de valeur",
+        control: false,
+        table: { category: "Événements" },
+      },
+    },
     args: toggleArgs,
     parameters: {
       docs: {

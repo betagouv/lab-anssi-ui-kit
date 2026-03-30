@@ -86,6 +86,16 @@
         control: false,
         table: { category: "Slots" },
       },
+      onpagechange: {
+        description: "Callback appelé lors du changement de page",
+        control: false,
+        table: { category: "Événements" },
+      },
+      onrowsperpagechange: {
+        description: "Callback appelé lors du changement du nombre de lignes par page",
+        control: false,
+        table: { category: "Événements" },
+      },
     },
     args: {
       ...tableArgs,

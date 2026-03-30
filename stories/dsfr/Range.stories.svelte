@@ -20,6 +20,16 @@
         control: false,
         table: { category: "Slots" },
       },
+      onvaluechanged: {
+        description: "Callback appelé lors du changement de la valeur du curseur principal",
+        control: false,
+        table: { category: "Événements" },
+      },
+      onvalue2changed: {
+        description: "Callback appelé lors du changement de la valeur du second curseur (mode double)",
+        control: false,
+        table: { category: "Événements" },
+      },
     },
     args: rangeArgs,
     parameters: {
