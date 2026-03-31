@@ -9,11 +9,11 @@
       size: { attribute: "size", type: "String" },
       placeholder: { attribute: "placeholder", type: "String" },
       value: { attribute: "value", type: "String", reflect: true },
-      disabled: { attribute: "disabled", type: "Boolean" },
-      form: { attribute: "form", type: "String" },
+      disabled: { attribute: "disabled", type: "Boolean", reflect: true },
+      form: { attribute: "form", type: "String", reflect: true },
       maxlength: { attribute: "maxlength", type: "Number" },
       minlength: { attribute: "minlength", type: "Number" },
-      name: { attribute: "name", type: "String" },
+      name: { attribute: "name", type: "String", reflect: true },
       pattern: { attribute: "pattern", type: "String" },
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
@@ -34,6 +34,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
+  import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import { createEventDispatcher } from "svelte";
 
   setThemeable($host());
@@ -95,17 +96,34 @@
     internals,
   }: Props = $props();
 
+  let formControlElement: HTMLInputElement;
+  let host = $host();
+
+  const formValidation = createFormValidation();
   const sizeClass = $derived(`fr-search-bar--${size}`);
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
+    value = target.value;
     dispatch("valuechanged", target.value);
   }
 
-  $effect(() => {
-    if (!internals) return;
+  export function setCustomValidity(message: string) {
+    formValidation.setCustomValidity(message);
+  }
 
-    internals.setFormValue(value ?? "");
+  $effect(() => {
+    formValidation.setup(internals, formControlElement, host, () => {
+      value = "";
+    });
+  });
+
+  $effect(() => {
+    formValidation.syncFormValue(value);
+  });
+
+  $effect(() => {
+    return formValidation.attachListeners();
   });
 </script>
 
@@ -114,12 +132,15 @@
     <label class="fr-label" for={inputId}> {inputLabel} </label>
   {/if}
   <input
+    bind:this={formControlElement}
     type="search"
     id={inputId}
     class="fr-input"
     bind:value
     {placeholder}
     oninput={handleInput}
+    onblur={formValidation.handleBlur}
+    oninvalid={formValidation.handleInvalid}
     {disabled}
     {form}
     {maxlength}
