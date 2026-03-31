@@ -20,5 +20,11 @@ export function setIconClass(icon: string): string | undefined {
  * @param {HTMLElement | undefined} host - L'élément host du Web Component ($host)
  */
 export function setThemeable(host: HTMLElement | undefined): void {
+  if (host?.hasAttribute("data-themeable") && host.getAttribute("data-themeable") === "false") {
+    host.removeAttribute("data-themeable");
+
+    return;
+  }
+
   host?.setAttribute("data-themeable", "true");
 }
