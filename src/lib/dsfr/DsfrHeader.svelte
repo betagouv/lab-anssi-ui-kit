@@ -336,6 +336,7 @@
                     id={`${searchId}-close`}
                     preset="close"
                     onclick={(event) => handleOpenMenu(event, "search")}
+                    data-themeable="false"
                   >
                     Fermer
                   </DsfrButton>
@@ -373,6 +374,7 @@
             id={`${menuId}-close`}
             preset="close"
             onclick={(event) => handleOpenMenu(event, "menu")}
+            data-themeable="false"
           >
             Fermer
           </DsfrButton>

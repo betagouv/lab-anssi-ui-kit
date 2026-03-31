@@ -110,6 +110,7 @@
         },
       ]}
       inline="true"
+      data-themeable="false"
     ></dsfr-buttons-group>
 
     <!-- Tool Links (modal) -->
@@ -132,6 +133,7 @@
           href: "#",
         },
       ]}
+      data-themeable="false"
     ></dsfr-buttons-group>
   </dsfr-header>
 {/snippet}
