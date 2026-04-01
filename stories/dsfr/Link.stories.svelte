@@ -13,7 +13,16 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Link",
     component: DsfrLink,
-    argTypes: linkArgTypes,
+    argTypes: {
+      ...linkArgTypes,
+      neutral: {
+        control: "boolean",
+        description: "Affiche le lien dans une teinte neutre",
+        type: {
+          value: "boolean",
+        },
+      },
+    },
     args: linkArgs,
     parameters: {
       docs: {
@@ -44,9 +53,12 @@
     has-icon={args.hasIcon || undefined}
     icon={args.icon}
     icon-place={args.iconPlace}
+    neutral={args.neutral || undefined}
   ></dsfr-link>
 {/snippet}
 
 <Story name="Défaut" />
 
 <Story name="Ouverture dans un nouvel onglet" args={{ ...linkArgs, blank: true }} />
+
+<Story name="Neutre" args={{ ...linkArgs, neutral: true }} />
