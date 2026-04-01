@@ -16,6 +16,7 @@
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
       iconPlace: { attribute: "icon-place", type: "String" },
+      neutral: { attribute: "neutral", type: "Boolean" },
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
@@ -75,6 +76,8 @@
     icon?: string;
     /** Emplacement de l'icône<br>Si non défini alors que le paramètre icon est défini, lien avec icône seule, sans label<br>valeurs :<br>- left : icône à gauche du label<br>- right : icône à droite du label */
     iconPlace?: IconPlace;
+    /** Si true, affiche le lien dans une teinte neutre */
+    neutral?: boolean;
   }
 
   let {
@@ -91,6 +94,7 @@
     hasIcon,
     icon,
     iconPlace = "left",
+    neutral,
   }: Props = $props();
 
   const modeTelechargementActif = $derived(download !== undefined);
@@ -106,7 +110,7 @@
     "fr-link",
     `fr-link--${size}`,
     iconClass,
-    { "fr-link--download": modeTelechargementActif },
+    { "fr-link--download": modeTelechargementActif, "fr-link--neutral": neutral },
   ]}
   class:fr-link--icon-left={hasIcon && iconPlace === "left"}
   class:fr-link--icon-right={hasIcon && iconPlace === "right"}
@@ -140,5 +144,10 @@
   @import "@gouvfr/dsfr/dist/component/link/link.main.css";
 
   @include set-shadow-host("inline");
-  @include set-dsfr-sizing("link");
+  @include set-dsfr-sizing("link") {
+    &--neutral {
+      color: currentColor;
+      font-size: inherit;
+    }
+  }
 </style>
