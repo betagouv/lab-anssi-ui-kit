@@ -81,3 +81,35 @@ export const trapFocus: Action<HTMLElement> = (element: HTMLElement) => {
     };
   });
 };
+
+/**
+ * Action Svelte : crée par programmation un élément <slot name="..."> à l'intérieur de l'élément.
+ *
+ * Cette action contourne la restriction de Svelte concernant les noms de slot dynamiques.
+ * Ne fait rien si slotName est nul.
+ */
+export function createSlot(node: HTMLElement, slotName: string | null) {
+  if (!slotName) return;
+
+  const slot = document.createElement("slot");
+  slot.name = slotName;
+
+  // Déplace le contenu existant dans le slot comme contenu de secours
+  while (node.firstChild) {
+    slot.appendChild(node.firstChild);
+  }
+  node.appendChild(slot);
+
+  return {
+    update(newSlotName: string | null) {
+      if (newSlotName) slot.name = newSlotName;
+    },
+    destroy() {
+      // Restaurer le contenu avant de supprimer l'élément slot
+      while (slot.firstChild) {
+        node.insertBefore(slot.firstChild, slot);
+      }
+      slot.remove();
+    },
+  };
+}
