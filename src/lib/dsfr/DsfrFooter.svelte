@@ -186,9 +186,13 @@
         </div>
         <div class="fr-footer__content">
           {#if hasDescription && contentDescription}
-            <p class="fr-footer__content-desc">
-              {@html contentDescription}
-            </p>
+            {#if $$slots.description}
+              <slot name="description"></slot>
+            {:else}
+              <p class="fr-footer__content-desc">
+                {@html contentDescription}
+              </p>
+            {/if}
           {/if}
           {#if contentLinks.length > 0}
             <ul class="fr-footer__content-list">
@@ -303,6 +307,11 @@
 
     &__logo {
       --border-default-grey: transparent;
+    }
+
+    :global(::slotted([slot="description"])) {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
     }
   }
 </style>

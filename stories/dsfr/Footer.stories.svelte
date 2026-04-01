@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/footer/template/stories/footer-arg-types.js";
 
   import DsfrFooter from "$lib/dsfr/DsfrFooter.svelte";
+  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   import PlaceholderPortrait from "@gouvfr/dsfr/example/img/placeholder.9x16.png";
@@ -100,3 +101,53 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Description avec lien" args={{ ...footerArgs }}>
+  {#snippet template(args: Args)}
+    <dsfr-footer
+      id={args.id}
+      is-mourning={args.isMourning || undefined}
+      brand-logo-title={args.brandLogoTitle}
+      brand-link-title={args.brandLinkTitle}
+      brand-link-href={args.brandLinkHref}
+      brand-link-id={args.brandLinkId}
+      has-brand-operator={args.hasBrandOperator || undefined}
+      brand-operator-alt={args.brandOperatorAlt}
+      brand-operator-src={args.brandOperatorSrc}
+      brand-operator-style={args.brandOperatorStyle}
+      has-description={args.hasDescription || undefined}
+      content-description={args.contentDescription}
+      has-partners={args.hasPartners || undefined}
+      partner-title={args.partnerTitle}
+      main-partner-src={args.mainPartnerSrc}
+      main-partner-href={args.mainPartnerHref}
+      main-partner-alt={args.mainPartnerAlt}
+      main-partner-style={args.mainPartnerStyle}
+      sub-partners={JSON.stringify(args.subPartners)}
+      bottom-links={JSON.stringify(args.bottomLinks)}
+      bottom-copyright={args.bottomCopyright}
+      compact={args.compact || undefined}
+    >
+      <div slot="description">
+        <p>
+          <strong>MesServicesCyber</strong> est la plateforme pour faciliter l'accès de tous aux services
+          et ressources de l'ANSSI et de ses partenaires.
+        </p>
+        <p>
+          Il est développé par l'<DsfrLink
+            label="Agence nationale de la sécurité des systèmes d'information"
+            href="https://cyber.gouv.fr/"
+            blank
+            neutral
+          />, en lien avec <DsfrLink label="BetaGouv" href="https://beta.gouv.fr/" blank neutral /> et
+          la <DsfrLink
+            label="Direction interministérielle du numérique"
+            href="https://www.numerique.gouv.fr/dinum/"
+            blank
+            neutral
+          />
+        </p>
+      </div>
+    </dsfr-footer>
+  {/snippet}
+</Story>
