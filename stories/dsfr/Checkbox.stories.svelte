@@ -8,6 +8,8 @@
   } from "@gouvfr/dsfr/src/dsfr/component/checkbox/template/stories/checkbox-arg-types.js";
 
   import DsfrCheckbox from "$lib/dsfr/DsfrCheckbox.svelte";
+  // @ts-ignore: Required Import to use this component as webcomponent
+  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
@@ -52,6 +54,37 @@
   {#snippet template(args: Args)}
     <dsfr-checkbox {...args}>
       Un label avec un&nbsp;<a href="https://google.fr" target="_blank">lien</a>
+    </dsfr-checkbox>
+  {/snippet}
+</Story>
+
+<Story name="Hint simple" args={{ ...checkboxArgs, hint: "Texte de description additionnel" }} />
+
+<Story name="Hint avec un DsfrLink" args={{ ...checkboxArgs }}>
+  {#snippet template(args: Args)}
+    <dsfr-checkbox
+      id={args.id}
+      label={args.label}
+      name={args.name}
+      size={args.size}
+      hint={args.hint}
+      disabled={args.disabled || undefined}
+      checked={args.checked || undefined}
+      value={args.value}
+      status={args.status}
+      error-message={args.errorMessage}
+      valid-message={args.validMessage}
+      form={args.form}
+      required={args.required || undefined}
+    >
+      <span slot="hint">
+        Texte de description avec un&nbsp;<dsfr-link
+          href="https://cyber.gouv.fr/"
+          blank
+          label="lien vers plus d'informations"
+          neutral
+        ></dsfr-link>
+      </span>
     </dsfr-checkbox>
   {/snippet}
 </Story>

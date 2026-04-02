@@ -102,8 +102,12 @@
       <slot></slot>
     {/if}
 
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
+    {#if hint || $$slots.hint}
+      <span class="fr-hint-text">
+        <slot name="hint">
+          {hint}
+        </slot>
+      </span>
     {/if}
   </label>
 
