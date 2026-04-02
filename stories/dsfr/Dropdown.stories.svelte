@@ -11,6 +11,11 @@
     title: "Composants/dsfr/Dropdown",
     component: DsfrDropdown,
     argTypes: {
+      buttonSize: {
+        control: { type: "select" },
+        description: "Taille du bouton",
+        options: ["sm", "md", "lg"],
+      },
       button: {
         description: "Bouton déclencheur personnalisé (remplace le DsfrButton généré par défaut)",
         control: false,
@@ -31,6 +36,15 @@
       buttonIcon: "arrow-down-s-line",
       contentType: "custom",
       align: "left",
+      items: [
+        {
+          label: "Libellé du bouton",
+          icon: "checkbox-line",
+          iconPlace: "left",
+        },
+        { label: "Libellé du bouton", disabled: true },
+        { label: "Libellé du bouton" },
+      ],
     },
     parameters: {
       docs: {
@@ -46,20 +60,71 @@
 </script>
 
 {#snippet template(args: Args)}
-  <dsfr-dropdown
-    id={args.id}
-    collapse-id={args.collapseId}
-    button-id={args.buttonId}
-    button-title={args.buttonTitle}
-    button-kind={args.buttonKind}
-    button-size={args.buttonSize}
-    button-icon={args.buttonIcon}
-    button-icon-place={args.buttonIconPlace}
-    content-type={args.contentType}
-    align={args.align}
-  >
-    <dsfr-toggle left label="Masquer de la vitrine des jeux" id="toggleExemple"></dsfr-toggle>
-  </dsfr-dropdown>
+  <div class="dropdown-wrapper">
+    <dsfr-dropdown
+      id={args.id}
+      collapse-id={args.collapseId}
+      button-id={args.buttonId}
+      button-title={args.buttonTitle}
+      button-kind={args.buttonKind}
+      button-size={args.buttonSize}
+      button-icon={args.buttonIcon}
+      button-icon-place={args.buttonIconPlace}
+      content-type={args.contentType}
+      align={args.align}
+      items={args.items}
+    >
+    </dsfr-dropdown>
+  </div>
 {/snippet}
 
-<Story name="Défaut" />
+<Story name="Buttons List" args={{ contentType: "buttons" }} />
+
+<Story
+  name="Links List"
+  args={{
+    id: "dropdown-links-id",
+    collapseId: "dropdown-links-collapse-id",
+    contentType: "links",
+    items: [
+      {
+        label: "Lien externe",
+        href: "https://www.gouvernement.fr",
+        target: "_blank",
+        icon: "external-link-line",
+        iconPlace: "right",
+      },
+      {
+        label: "Lien interne",
+        href: "/",
+        target: "_self",
+      },
+      {
+        label: "Lien désactivé",
+        href: "/",
+        disabled: true,
+      },
+    ],
+  }}
+/>
+
+<Story name="Custom">
+  {#snippet template(args: Args)}
+    <div class="dropdown-wrapper">
+      <dsfr-dropdown
+        id={args.id}
+        collapse-id={args.collapseId}
+        button-id={args.buttonId}
+        button-title={args.buttonTitle}
+        button-kind={args.buttonKind}
+        button-size={args.buttonSize}
+        button-icon={args.buttonIcon}
+        button-icon-place={args.buttonIconPlace}
+        content-type={args.contentType}
+        align={args.align}
+      >
+        <dsfr-toggle left label="Masquer de la vitrine des jeux" id="toggleExemple"></dsfr-toggle>
+      </dsfr-dropdown>
+    </div>
+  {/snippet}
+</Story>
