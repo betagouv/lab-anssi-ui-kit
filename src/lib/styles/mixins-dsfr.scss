@@ -10,11 +10,13 @@ $checkmark-size: var(--checkmark-size, 24px) !default;
 /// @param {String} $display [block] - La valeur de la propriété CSS `display` à appliquer au `:host`.
 /// @content - Contenu CSS additionnel à insérer dans le bloc `:host`.
 ///
-@mixin set-shadow-host($display: "block") {
+@mixin set-shadow-host($display: "block", $font-size: true) {
   :host {
     display: #{$display};
     @include text-adjustments();
-    @include text-style(md);
+    @if $font-size {
+      @include text-style(md);
+    }
     @include color.background(
       default grey,
       (

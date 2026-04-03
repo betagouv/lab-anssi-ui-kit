@@ -130,7 +130,7 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/src/dsfr/component/link/main";
 
-  @include set-shadow-host("inline");
+  @include set-shadow-host("inline", false);
   @include set-dsfr-sizing("link") {
     &--neutral {
       color: currentColor;
