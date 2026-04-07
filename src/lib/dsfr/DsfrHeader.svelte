@@ -41,6 +41,7 @@
       hasHeaderTag: { attribute: "has-header-tag", type: "Boolean" },
       fluid: { attribute: "fluid", type: "Boolean" },
     },
+    extend: withIconsStyleSheet,
   }}
 />
 
@@ -49,11 +50,23 @@
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
+  import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
 
   type ButtonKind = Extract<Kind, "tertiary" | "tertiary-no-outline">;
+  type ToolLinkPreset =
+    | "close"
+    | "tooltip"
+    | "fullscreen"
+    | "display"
+    | "account"
+    | "team"
+    | "briefcase"
+    | "sort";
   type ToolLink = {
     label: string;
     url: string;
+    icon?: string;
+    preset?: ToolLinkPreset;
     classes?: string[];
     markup?: "a" | "button";
   };
@@ -190,6 +203,12 @@
   let openedMenuModal = $state(false);
   let openedSearchModal = $state(false);
 
+  function handleToolLinkClick(link: ToolLink) {
+    ($host() as HTMLElement).dispatchEvent(
+      new CustomEvent("toolLinkClick", { detail: link, bubbles: true, composed: true }),
+    );
+  }
+
   /**
    * Gère l'ouverture et la fermeture des modales du menu ou de la recherche dans le Header.
    *
@@ -231,6 +250,33 @@
     }
   });
 </script>
+
+{#snippet toolLinksRendered()}
+  {#if toolLinks?.length}
+    <ul class="fr-btns-group">
+      {#each toolLinks as link}
+        {@const { label, url, icon, preset, classes = [], markup = "a" } = link}
+        <li>
+          <svelte:element
+            this={markup}
+            href={markup === "a" ? url : undefined}
+            type={markup === "button" ? "button" : undefined}
+            role={markup === "button" ? "button" : undefined}
+            class={[
+              "fr-btn",
+              icon && setIconClass(icon),
+              preset && `fr-btn--${preset}`,
+              ...classes,
+            ]}
+            onclick={markup === "button" ? () => handleToolLinkClick(link) : undefined}
+          >
+            {label}
+          </svelte:element>
+        </li>
+      {/each}
+    </ul>
+  {/if}
+{/snippet}
 
 <svelte:element
   this={hasHeaderTag ? "header" : "div"}
@@ -318,7 +364,9 @@
             {#if hasToolLinks || hasTranslate}
               <div class="fr-header__tools-links">
                 <!-- Tool Links -->
-                <slot name="toolLinks"></slot>
+                <slot name="toolLinks">
+                  {@render toolLinksRendered()}
+                </slot>
 
                 <!-- Translate -->
                 <slot name="translate"></slot>
@@ -386,7 +434,9 @@
 
         {#if hasToolLinks}
           <div class="fr-header__menu-links">
-            <slot name="modalToolLinks"></slot>
+            <slot name="modalToolLinks">
+              {@render toolLinksRendered()}
+            </slot>
           </div>
         {/if}
 
@@ -411,6 +461,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
@@ -422,6 +473,7 @@
   @import "@gouvfr/dsfr/dist/component/logo/logo.main.min.css";
   @import "@gouvfr/dsfr/dist/component/header/header.main.css";
   @import "@gouvfr/dsfr/dist/component/modal/modal.main.min.css";
+  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("header") {
