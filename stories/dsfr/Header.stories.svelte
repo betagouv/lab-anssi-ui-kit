@@ -71,6 +71,12 @@
           label: "Paramètres d'affichage",
           markup: "button",
         },
+        {
+          url: "#",
+          label: "Mon compte",
+          markup: "button",
+          icon: "account-circle-line",
+        },
       ],
       brandOperatorSrc: PlaceholderPortrait,
     },
@@ -94,7 +100,7 @@
     menu-id={args.menuId}
     menu-modal-id={args.menuModalId}
     has-tool-links={args.hasToolLinks || undefined}
-    tool-links={args.toolLinks}
+    tool-links={JSON.stringify(args.toolLinks)}
     duplicate-tool-links={args.duplicateToolLinks || undefined}
     has-translate={args.hasTranslate || undefined}
     translate-id={args.translateId}
@@ -128,59 +134,14 @@
     has-header-tag={args.hasHeaderTag || undefined}
     fluid={args.fluid || undefined}
   >
-    <!-- Tool Links -->
-    <dsfr-buttons-group
-      size="sm"
-      slot="toolLinks"
-      buttons={[
-        {
-          label: "Contact",
-          preset: "team",
-          href: "#",
-        },
-        {
-          label: "Espace recruteur",
-          preset: "briefcase",
-          href: "#",
-        },
-        {
-          label: "Espace compte",
-          preset: "account",
-          href: "#",
-        },
-      ]}
-      inline="true"
-      data-themeable="false"
-    ></dsfr-buttons-group>
-
-    <!-- Tool Links (modal) -->
-    <dsfr-buttons-group
-      slot="modalToolLinks"
-      buttons={[
-        {
-          label: "Contact",
-          preset: "team",
-          href: "#",
-        },
-        {
-          label: "Espace recruteur",
-          preset: "briefcase",
-          href: "#",
-        },
-        {
-          label: "Espace compte",
-          preset: "account",
-          href: "#",
-        },
-      ]}
-      data-themeable="false"
-    ></dsfr-buttons-group>
   </dsfr-header>
 {/snippet}
 
-<Story name="Défaut" args={{ hasToolLinks: undefined, hasTranslate: undefined }} />
+<Story name="Défaut" />
 
-<Story name="Avec Tool Links" args={{ hasSearch: undefined }} />
+<Story name="Avec Tool Links" args={{ hasSearch: undefined, hasToolLinks: true }} />
+<!-- <Story name="Défaut" args={{ hasToolLinks: undefined, hasTranslate: undefined }} />
+
 
 <Story name="Exemple - Header MQC">
   {#snippet template()}
@@ -197,4 +158,4 @@
       ></dsfr-badge>
     </dsfr-header>
   {/snippet}
-</Story>
+</Story> -->
