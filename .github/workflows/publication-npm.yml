@@ -5,6 +5,12 @@ permissions:
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      npm_tag:
+        description: "Tag NPM à publier. Ne rien mettre pour publier en `latest`. Sinon utiliser le numéro de version, sans préfixe 'v'."
+        required: false
+        type: string
 
 jobs:
   publication:
@@ -42,7 +48,7 @@ jobs:
         run: pnpm run build:tokens && cp -r ./src/tokens/build/* ./dist/assets/
 
       - name: Publier sur NPM
-        run: pnpm publish --provenance --access public --no-git-checks
+        run: pnpm publish --provenance --access public --no-git-checks ${{ github.event_name == 'workflow_dispatch' && inputs.npm_tag != '' && format('--tag {0}', inputs.npm_tag) || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
