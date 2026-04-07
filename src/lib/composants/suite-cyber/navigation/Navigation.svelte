@@ -8,7 +8,6 @@
   const gauffre = srcAsset("/icones/bouton-gauffre.svg");
   const chevron = srcAsset("/icones/chevron-bleu.svg");
   const croix = srcAsset("/icones/croix-bleu.svg");
-  const nis2 = srcAsset("/icones/NIS2.svg");
   const certFr = srcAsset("/icones/CERT-FR.svg");
   const mac = srcAsset("/icones/MAC.svg");
   const mss = srcAsset("/icones/MSS.svg");
@@ -45,17 +44,6 @@
       </button>
       <AccueilMsc />
       <div class="services-anssi">
-        <BlocLiens
-          titre="Embarquer dans NIS2"
-          services={[
-            {
-              nom: "MonEspaceNIS2",
-              lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
-              icone: nis2,
-              classeTracking: "nis2",
-            },
-          ]}
-        />
         <BlocLiens
           titre="S'informer"
           services={[
