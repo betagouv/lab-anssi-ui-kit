@@ -46,17 +46,6 @@
       <AccueilMsc />
       <div class="services-anssi">
         <BlocLiens
-          titre="Embarquer dans NIS2"
-          services={[
-            {
-              nom: "MonEspaceNIS2",
-              lien: `https://monespacenis2.cyber.gouv.fr?utm_campaign=suite-cyber&utm_source=${sourceUtm}`,
-              icone: nis2,
-              classeTracking: "nis2",
-            },
-          ]}
-        />
-        <BlocLiens
           titre="S'informer"
           services={[
             {
