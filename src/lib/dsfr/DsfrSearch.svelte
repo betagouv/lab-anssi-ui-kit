@@ -133,6 +133,6 @@
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/dist/component/search/search.main.css";
 
-  @include set-shadow-host();
+  @include set-shadow-host($tag: "dsfr-search");
   @include set-dsfr-sizing("search-bar");
 </style>

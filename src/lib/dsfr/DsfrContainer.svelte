@@ -27,7 +27,7 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module/container";
   @include grid($grid-settings);
 
-  @include set-shadow-host();
+  @include set-shadow-host($tag: "dsfr-container");
   @include set-dsfr-sizing("container");
   @include set-dsfr-sizing("container-fluid");
 </style>

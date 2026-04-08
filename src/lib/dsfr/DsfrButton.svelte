@@ -153,7 +153,7 @@
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
-  @include set-shadow-host("inline-flex") {
+  @include set-shadow-host("inline-flex", $tag: "dsfr-button") {
     &:has(.fr-btn--centered) {
       --component-width: 100%;
       justify-content: center;

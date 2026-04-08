@@ -170,7 +170,7 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
-  @include set-shadow-host();
+  @include set-shadow-host($tag: "dsfr-select");
   @include set-dsfr-sizing("select-group") {
     &:has(.fr-sr-only) .fr-select {
       margin-top: 0;
