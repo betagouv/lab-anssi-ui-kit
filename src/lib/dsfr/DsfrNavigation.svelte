@@ -128,7 +128,7 @@
   @import "@gouvfr/dsfr/src/dsfr/component/navigation/style/scheme";
   @include _navigation-scheme;
 
-  @include set-shadow-host("block");
+  @include set-shadow-host("block", $tag: "dsfr-navigation");
   @include set-dsfr-sizing("nav") {
     position: relative;
   }
