@@ -13,6 +13,7 @@
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
       accent: { attribute: "accent", type: "String" },
+      id: { attribute: "id", type: "String" },
     },
     extend: withIconsStyleSheet,
   }}
@@ -50,6 +51,8 @@
     icon?: string;
     /** Couleur du tag cliquable */
     accent?: Accent;
+    /** Attribut id du tag */
+    id?: string;
   }
 
   const {
@@ -64,6 +67,7 @@
     hasIcon,
     icon,
     accent,
+    id,
   }: Props = $props();
 
   const markup: Markup = $derived.by(() => {
@@ -112,6 +116,7 @@
   aria-pressed={type === "pressable" ? (pressed ? "true" : "false") : undefined}
   onclick={type === "pressable" ? onpressed : undefined}
   target={type === "clickable" && blank ? "_blank" : undefined}
+  {id}
 >
   {label}
 </svelte:element>
