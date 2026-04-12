@@ -33,7 +33,8 @@
         table: { category: "message" },
       },
       default: {
-        description: "Options `<option>` personnalisées (remplace les options générées par la prop `options`)",
+        description:
+          "Options `<option>` personnalisées (remplace les options générées par la prop `options`)",
         control: false,
         table: { category: "Slots" },
       },

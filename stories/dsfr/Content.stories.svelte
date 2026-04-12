@@ -55,7 +55,8 @@
         table: { category: "Slots" },
       },
       video: {
-        description: "Élément vidéo personnalisé (remplace le rendu par défaut quand `type='video'`)",
+        description:
+          "Élément vidéo personnalisé (remplace le rendu par défaut quand `type='video'`)",
         control: false,
         table: { category: "Slots" },
       },
