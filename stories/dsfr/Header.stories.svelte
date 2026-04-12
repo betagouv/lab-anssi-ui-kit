@@ -94,7 +94,7 @@
     menu-id={args.menuId}
     menu-modal-id={args.menuModalId}
     has-tool-links={args.hasToolLinks || undefined}
-    tool-links={args.toolLinks}
+    tool-links={JSON.stringify(args.toolLinks)}
     duplicate-tool-links={args.duplicateToolLinks || undefined}
     has-translate={args.hasTranslate || undefined}
     translate-id={args.translateId}
