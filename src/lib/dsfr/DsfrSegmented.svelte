@@ -65,14 +65,87 @@
     value,
   }: Props = $props();
 
-  let currentValue = $state(value);
+  // `checked` sert de fallback si `value` n'est pas fourni
+  let currentValue = $state(value ?? elements.find((e) => e.checked)?.value?.toString());
 
+  $effect(() => {
+    currentValue = value;
+  });
+
+  let fieldsetEl: HTMLFieldSetElement | undefined = $state();
+  let elementsEl: HTMLDivElement | undefined = $state();
+
+  /**
+   * Redimensionne le composant en fonction de l'espace disponible (reproduit le comportement du JS DSFR).
+   *
+   * Vérifie la largeur du parent et bascule automatiquement le composant en mode vertical
+   * si la largeur totale des éléments dépasse la largeur disponible.
+   *
+   * @function resize
+   * @returns {void}
+   */
+  function resize() {
+    if (!elementsEl || !fieldsetEl) return;
+
+    const host = $host() as HTMLElement;
+    const parentWidth = host.parentElement?.offsetWidth ?? 0;
+
+    fieldsetEl.classList.remove("fr-segmented--vertical");
+
+    if (elementsEl.offsetWidth > parentWidth || elementsEl.scrollWidth > parentWidth) {
+      fieldsetEl.classList.add("fr-segmented--vertical");
+    }
+  }
+
+  /**
+   * Effectue le redimensionnement réactif du composant
+   *
+   * Observe les changements de largeur de l'élément parent
+   * et déclenche une fonction de redimensionnement lorsque la largeur change.
+   *
+   * Utilise ResizeObserver pour déterminer si la largeur de l'élément parent
+   * a changé et ne relance le redimensionnement que si nécessaire.
+   *
+   */
+  $effect(() => {
+    const host = $host() as HTMLElement;
+    const parent = host.parentElement;
+
+    if (!parent) return;
+
+    let previousWidth = parent.offsetWidth;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = Math.round(entry.contentRect.width);
+
+        if (width !== previousWidth) {
+          previousWidth = width;
+          resize();
+        }
+      }
+    });
+
+    observer.observe(parent);
+
+    resize();
+
+    return () => observer.disconnect();
+  });
+
+  /**
+   * Gère le changement de valeur du composant.
+   * Émet un événement 'valuechanged' avec la valeur actuelle sélectionnée.
+   *
+   * @param {Event} event - L'événement de changement déclenché par l'élément DOM
+   */
   function handleChange(event: Event) {
     dispatch("valuechanged", currentValue);
   }
 </script>
 
 <fieldset
+  bind:this={fieldsetEl}
   class={["fr-segmented", `fr-segmented--${size}`]}
   class:fr-segmented--no-legend={noLegend}
 >
@@ -82,7 +155,7 @@
       <span class="fr-hint-text">{hint}</span>
     {/if}
   </legend>
-  <div class="fr-segmented__elements">
+  <div class="fr-segmented__elements" bind:this={elementsEl}>
     {#each elements as segmented (segmented.id)}
       <div class="fr-segmented__element">
         <input
@@ -90,6 +163,7 @@
           id={segmented.id}
           value={segmented.value}
           name={segmented.name}
+          disabled={segmented.disabled}
           bind:group={currentValue}
           onchange={handleChange}
         />
