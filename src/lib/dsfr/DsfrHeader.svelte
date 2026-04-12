@@ -306,6 +306,8 @@
             {/if}
             {#if hasNavigation || hasSearch}
               <div class="fr-header__navbar">
+                <slot name="beforenavbarbuttons"></slot>
+
                 {#if hasSearch}
                   <button
                     data-fr-opened={openedSearchModal}
@@ -363,6 +365,8 @@
           <div class="fr-header__tools">
             {#if hasToolLinks || hasTranslate}
               <div class="fr-header__tools-links">
+                <slot name="beforetoolslinks"></slot>
+
                 <!-- Tool Links -->
                 <slot name="toolLinks">
                   {@render toolLinksRendered()}
@@ -565,6 +569,10 @@
         padding-left: 0;
         padding-right: 0;
       }
+    }
+
+    &__tools-links {
+      align-items: center;
     }
 
     @media (min-width: 62em) {

@@ -23,8 +23,19 @@
     component: DsfrHeader,
     argTypes: {
       ...headerArgTypes,
+      beforenavbarbuttons: {
+        description:
+          "Contenu inséré avant les boutons de la barre de navigation mobile (recherche, menu)",
+        control: false,
+        table: { category: "Slots" },
+      },
       headerbadge: {
         description: "Badge affiché dans l'en-tête (ex : bêta, nouveau)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      beforetoolslinks: {
+        description: "Contenu inséré avant les liens d'accès rapide dans la barre d'outils",
         control: false,
         table: { category: "Slots" },
       },
