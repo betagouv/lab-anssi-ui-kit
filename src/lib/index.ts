@@ -62,6 +62,7 @@ export { default as DsfrSideMenu } from "./dsfr/DsfrSideMenu.svelte";
 export { default as DsfrSkipLink } from "./dsfr/DsfrSkipLink.svelte";
 export { default as DsfrStepper } from "./dsfr/DsfrStepper.svelte";
 export { default as DsfrTable } from "./dsfr/DsfrTable.svelte";
+export { default as DsfrTabnav } from "./dsfr/DsfrTabnav.svelte";
 export { default as DsfrTabs } from "./dsfr/DsfrTabs.svelte";
 export { default as DsfrTag } from "./dsfr/DsfrTag.svelte";
 export { default as DsfrTextarea } from "./dsfr/DsfrTextarea.svelte";
