@@ -137,6 +137,7 @@
           background: none;
           margin: 0;
           padding: 0;
+          font-family: inherit;
         }
 
         button,

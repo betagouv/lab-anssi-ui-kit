@@ -51,6 +51,7 @@
       line-height: 1.5rem;
       background: #eeeeee;
       max-width: 100%;
+      font-family: inherit;
 
       &:hover {
         background: $background-default-grey-hover;
