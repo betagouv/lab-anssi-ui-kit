@@ -116,6 +116,7 @@
     padding: 10px 24px 10px 18px;
     cursor: pointer;
     z-index: 1000;
+    font-family: inherit;
 
     &:hover {
       background: $centre-aide-background-hover-declencheur;

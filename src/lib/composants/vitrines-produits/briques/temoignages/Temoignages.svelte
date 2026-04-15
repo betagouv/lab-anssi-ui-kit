@@ -192,6 +192,7 @@
           display: flex;
           align-items: center;
           gap: 8px;
+          font-family: inherit;
 
           &:hover {
             &:after {

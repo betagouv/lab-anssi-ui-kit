@@ -95,6 +95,8 @@
     text-wrap: auto;
     text-align: left;
     cursor: pointer;
+    font-family: inherit;
+
     &:hover {
       background-color: $tag-selectionnable-couleur-fond-survol;
     }
