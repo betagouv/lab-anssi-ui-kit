@@ -10,6 +10,8 @@
 
   import DsfrTabs from "$lib/dsfr/DsfrTabs.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
@@ -90,12 +92,43 @@
           </span>
         </span>
         <div slot={`panel-${i + 1}`}>
-          <p>
-            <strong>
-              Contenu de l'onglet <dsfr-badge label={i + 1} type="accent" accent="green-archipel"
-              ></dsfr-badge>
-            </strong>
-          </p>
+          <div class="container-avec-cadre">
+            <p>
+              <strong>
+                Contenu de l'onglet <dsfr-badge label={i + 1} type="accent" accent="green-archipel"
+                ></dsfr-badge>
+              </strong>
+            </p>
+            {#if i === 0}
+              <div class="card-container">
+                {#each Array(10) as _, j}
+                  <dsfr-card
+                    title={`Intitulé de la carte ${j + 1}`}
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et"
+                    detail-start="détail (optionnel)"
+                    detail-start-icon="warning-fill"
+                    detail-end="détail (optionnel)"
+                    detail-end-icon="warning-fill"
+                    markup="h3"
+                    action-markup="a"
+                    href="[URL - à modifier]"
+                    size="md"
+                    src="https://betagouv.github.io/lab-anssi-ui-kit/assets/placeholder.16x9-BgJU1mfU.png"
+                    alt="[À MODIFIER - vide ou texte alternatif de l’image]"
+                    image-ratio="default"
+                    variations="none"
+                    has-description
+                    enlarge
+                    horizontal
+                  ></dsfr-card>
+                {/each}
+              </div>
+            {/if}
+
+            <dsfr-button class="fr-mt-2w" size="sm" variant="secondary">
+              Action de l'onglet {i + 1}
+            </dsfr-button>
+          </div>
         </div>
       {/each}
     </dsfr-tabs>
@@ -121,6 +154,12 @@
           background-color: var(--border-active-blue-france);
           color: white;
         }
+      }
+
+      .card-container {
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
       }
     </style>
   {/snippet}
