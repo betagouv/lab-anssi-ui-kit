@@ -82,9 +82,16 @@
     const panel = panelEls[activeIndex];
     if (!tabsElement || !panel || !tabsListElement) return;
 
-    const panelHeight = panel.offsetHeight;
-    const listHeight = tabsListElement.offsetHeight;
-    tabsElement.style.setProperty("--tabs-height", `${panelHeight + listHeight - 4}px`);
+    const updateHeight = () => {
+      const panelHeight = panel.offsetHeight;
+      const listHeight = tabsListElement!.offsetHeight;
+      tabsElement!.style.setProperty("--tabs-height", `${panelHeight + listHeight - 4}px`);
+    };
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(panel);
+
+    return () => observer.disconnect();
   });
 
   /**
