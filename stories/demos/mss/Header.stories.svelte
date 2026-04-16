@@ -37,293 +37,53 @@
     argTypes: headerArgTypes,
     args: {
       ...headerArgs,
+      brandService: "MonServiceSécurisé",
+      hasBrandTagline: true,
+      brandTagline: "Innovation ANSSI",
+      brandLogoTitle: "République<br>Française",
+      brandLinkId: "mss-brand-link",
+      hasBrandOperator: true,
+      brandOperatorAlt: "Logo ANSSI",
+      brandOperatorSrc: "https://upload.wikimedia.org/wikipedia/fr/3/31/Anssi.png",
+      brandOperatorStyle: "width: 64px",
+      brandLinkTitle: "Retour à l'accueil du site - MonServiceSécurisé - République Française",
+      hasToolLinks: true,
       toolLinks: [
-        ...toolLinks.buttons,
         {
-          classes: ["fr-btn--display"],
-          url: "#",
-          label: "Paramètres d'affichage",
+          label: "S'inscrire",
           markup: "button",
         },
         {
-          url: "#",
           label: "Mon compte",
           markup: "button",
           icon: "account-circle-line",
         },
       ],
-      brandOperatorSrc: PlaceholderPortrait,
-      navItems: [
+      navigationItems: [
+        { id: 'menu-1', label: "Accueil", href: "#", type: "link" },
         {
-          id: "navigation-01",
+          id: 'menu-2',
+          label: "Promouvoir",
           type: "menu",
-          active: true,
           collapsable: true,
-          collapseId: "navigation-01",
-          label: "Intitulé menu",
+          collapseId: 'menu-2',
           items: [
-            {
-              id: "navigation-item-01-1",
-              type: "link",
-              active: false,
-              collapsable: false,
-              label: "Intitulé lien",
-              href: "#",
-            },
-            {
-              id: "navigation-item-01-2",
-              type: "link",
-              active: true,
-              collapsable: false,
-              label: "Intitulé lien",
-              href: "#",
-            },
-            {
-              id: "navigation-item-01-3",
-              type: "link",
-              active: false,
-              collapsable: false,
-              label: "Intitulé lien",
-              href: "#",
-            },
+            { id: "menu-1-1", label: "Promouvoir MonServiceSécurisé", href: "#", type: "link" },
+            { id: "menu-1-2", label: "Devenir Ambassadeur/rice", href: "#", type: "link" },
           ],
         },
-        {
-          id: "navigation-item-02",
-          type: "link",
-          active: false,
-          collapsable: false,
-          label: "Intitulé lien",
-          href: "#",
-        },
-        {
-          id: "navigation-03",
-          type: "menu",
-          active: false,
-          collapsable: true,
-          collapseId: "navigation-03",
-          label: "Intitulé menu",
-          items: [
-            {
-              id: "navigation-item-03-1",
-              type: "link",
-              active: false,
-              collapsable: false,
-              label: "Intitulé lien",
-              href: "#",
-            },
-            {
-              id: "navigation-03-2",
-              type: "menu",
-              active: false,
-              collapsable: true,
-              collapseId: "navigation-03-2",
-              label: "Intitulé menu",
-              items: [
-                {
-                  id: "navigation-item-03-2-1",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-03-2-2",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-03-2-3",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-              ],
-            },
-            {
-              id: "navigation-item-03-3",
-              type: "link",
-              active: false,
-              collapsable: false,
-              label: "Intitulé lien",
-              href: "#",
-            },
-          ],
-        },
-        {
-          id: "navigation-04",
-          type: "mega-menu",
-          active: false,
-          collapsable: true,
-          collapseId: "navigation-04",
-          label: "Intitulé mega menu",
-          close: "Fermer le menu",
-          leader: {
-            title: "Titre éditorialisé",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-            link: {
-              id: "link-leader-04",
-              label: "Voir toute la rubrique",
-              iconPlace: "right",
-              icon: "arrow-right-line",
-            },
-          },
-          categories: [
-            {
-              label: "Catégorie 1",
-              href: "#",
-              items: [
-                {
-                  id: "navigation-item-04-1-1",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-1-2",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-1-3",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-              ],
-            },
-            {
-              label: "Catégorie 2",
-              href: "#",
-              items: [
-                {
-                  id: "navigation-item-04-2-1",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-2-2",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-2-3",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-              ],
-            },
-            {
-              label: "Catégorie 3",
-              href: "#",
-              items: [
-                {
-                  id: "navigation-item-04-3-1",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-3-2",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-3-3",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-              ],
-            },
-            {
-              label: "Catégorie 4",
-              href: "#",
-              items: [
-                {
-                  id: "navigation-item-04-4-1",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-4-2",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-                {
-                  id: "navigation-item-04-4-3",
-                  type: "link",
-                  active: false,
-                  collapsable: false,
-                  label: "Intitulé lien",
-                  href: "#",
-                },
-              ],
-            },
-          ],
-        },
-      ],
+        { id: 'menu-3', label: "Co-construire MonServiceSécurisé", href: "#", type: "link" },
+        { id: 'menu-4', label: "Conseils Cyber", href: "#", type: "link" },
+        { id: 'menu-5', label: "L'homologation simplifiée", href: "#", type: "link" },
+      ]
     },
+    tags: ["!autodocs"],
   });
 
   type Args = ComponentProps<DsfrHeader>;
 </script>
 
-<Story
-  name="Header MSS"
-  args={{
-    brandService: "",
-    hasBrandTagline: true,
-    brandTagline: "",
-    brandLogoTitle: "République<br>Française",
-    brandLinkId: "mss-brand-link",
-    hasBrandOperator: true,
-    brandOperatorAlt: "Logo ANSSI",
-    brandOperatorSrc: "https://upload.wikimedia.org/wikipedia/fr/3/31/Anssi.png",
-    brandOperatorStyle: "width: 64px",
-    hasToolLinks: true,
-    toolLinks: [
-      { label: "Inscription", url: "/" },
-      { label: "Connexion", url: "/", preset: "account" },
-    ],
-    hasNavigation: false,
-  }}
->
+<Story name="Header MSS (non connecté)">
   {#snippet template(args: Args)}
     <div class="mss-header-container">
       <dsfr-header
@@ -366,86 +126,19 @@
         has-header-tag={args.hasHeaderTag || undefined}
         fluid={args.fluid || undefined}
       >
-        <!-- Brand Operator -->
-        <div class="mss-brand-operator">
-          <a class="logo-anssi" href="https://cyber.gouv.fr" title="ANSSI"></a>
-          <a class="logo-mss" href="/" title="MonServiceSécurisé"></a>
-        </div>
+        <!-- (Mobile) Le bouton "Suite Cyber" se place avant le burger menu -->
+        <lab-anssi-bouton-suite-cyber-navigation
+          source-utm="mon-service-lab-anssi"
+          slot="beforenavbarbuttons"
+          class="suite-cyber-mobile"
+        ></lab-anssi-bouton-suite-cyber-navigation>
 
-        <!-- A côté des tools links -->
+        <!-- (Desktop) Le bouton "Suite Cyber" se place avant les "tools links" -->
         <lab-anssi-bouton-suite-cyber-navigation
           source-utm="mon-service-lab-anssi"
           slot="beforetoolslinks"
         ></lab-anssi-bouton-suite-cyber-navigation>
-
-        <!-- A côté du burger menu -->
-        <lab-anssi-bouton-suite-cyber-navigation
-          source-utm="mon-service-lab-anssi"
-          slot="beforenavbarbuttons"
-        ></lab-anssi-bouton-suite-cyber-navigation>
       </dsfr-header>
-
-      <!-- Bandeau MSS -->
-      <lab-anssi-mes-services-cyber-bandeau affichage="visible"
-      ></lab-anssi-mes-services-cyber-bandeau>
-
-      <!-- Navigation DSFR -->
-      <dsfr-container>
-        <dsfr-navigation
-          id="navigation-mss"
-          aria-label="Navigation principale"
-          items={args.navItems}
-        ></dsfr-navigation>
-      </dsfr-container>
     </div>
-
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      .mss-header-container {
-        background-color: var(--background-raised-grey);
-      }
-
-      :is(header nav a:not(.bouton), .logo-anssi, .logo-mss):hover {
-        background-color: var(--systeme-design-etat-gris-survol);
-      }
-
-      :is(header nav a, .logo-anssi, .logo-mss):active {
-        background-color: var(--systeme-design-etat-gris-actif);
-      }
-
-      .mss-brand-operator {
-        display: flex;
-        align-items: center;
-      }
-
-      .logo-anssi {
-        width: 4.05em;
-        height: 4.05em;
-        margin: 0 0.4em;
-        padding: 0.3em 0.85em;
-        background-image: url("https://s3.eu-west-par.io.cloud.ovh.net/sf-cyber/sf-cyber/images/20230704_np_anssi_logotype_500x500.original.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=f56b12dc7d9741d6bb98766a26a6adca%2F20260413%2Feu-west-par%2Fs3%2Faws4_request&X-Amz-Date=20260413T064022Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e53259c5cfc7cda504db53b175cbc7efd7f540b936c92cd98fa3e9f1df90aac5");
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-      }
-
-      .logo-mss {
-        width: 10.49em;
-        height: 3.7em;
-        margin-right: auto;
-        padding: 0.3em 0.85em;
-        background-image: url("https://raw.githubusercontent.com/betagouv/mon-service-securise/refs/heads/master/public/assets/images/logo_mss.svg");
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-      }
-    </style>
   {/snippet}
 </Story>
