@@ -338,28 +338,30 @@
               </div>
             {/if}
           </div>
-          <div class="fr-header__service">
-            {#if hasBrandOperator}
-              <p class="fr-header__service-title">
-                {brandService}
-
-                <slot name="headerbadge"></slot>
-              </p>
-            {:else}
-              <a href={brandLinkHref} title={brandLinkTitle} id={brandLinkId}>
+          {#if brandService}
+            <div class="fr-header__service">
+              {#if hasBrandOperator}
                 <p class="fr-header__service-title">
                   {brandService}
 
                   <slot name="headerbadge"></slot>
                 </p>
-              </a>
-            {/if}
-            {#if hasBrandTagline && brandTagline}
-              <p class="fr-header__service-tagline">
-                {brandTagline}
-              </p>
-            {/if}
-          </div>
+              {:else}
+                <a href={brandLinkHref} title={brandLinkTitle} id={brandLinkId}>
+                  <p class="fr-header__service-title">
+                    {brandService}
+
+                    <slot name="headerbadge"></slot>
+                  </p>
+                </a>
+              {/if}
+              {#if hasBrandTagline && brandTagline}
+                <p class="fr-header__service-tagline">
+                  {brandTagline}
+                </p>
+              {/if}
+            </div>
+          {/if}
         </div>
         {#if hasToolLinks || hasTranslate || hasSearch}
           <div class="fr-header__tools">
