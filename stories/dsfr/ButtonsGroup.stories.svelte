@@ -56,7 +56,7 @@
     has-icon={args.hasIcon}
     icon-place={args.iconPlace}
     group-markup={args.groupMarkup}
-    inline={args.inline}
+    inline={`${args.inline}`}
     equisized={args.equisized || undefined}
     align={args.align}
     reverse={args.reverse || undefined}
