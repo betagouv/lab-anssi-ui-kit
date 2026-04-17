@@ -11,10 +11,11 @@
 />
 
 <script lang="ts">
-  import type { Accent, Size } from "$lib/types";
+  import type { Accent, Size, Status } from "$lib/types";
   import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
 
   type BadgesGroupSize = Extract<Size, "sm" | "md">;
+  type BadgeType = "default" | "accent" | "status";
   type GroupMarkup = "div" | "ul";
   type Badge = {
     label: string;
@@ -23,6 +24,8 @@
     hasNoIcon?: boolean;
     ellipsis?: boolean;
     icon?: string;
+    status?: Status;
+    type?: BadgeType;
   };
   interface Props {
     /** Liste des badges à afficher dans le groupe */
@@ -39,9 +42,12 @@
 </script>
 
 {#snippet badgeItem(badge: Badge)}
+  {@const accentClass = badge.accent && `fr-badge--${badge.accent}`}
   {@const iconClass =
     badge.hasIcon && badge.icon && `fr-badge--icon-left ${setIconClass(badge.icon)}`}
-  <p class={["fr-badge", `fr-badge--${badge.accent}`, iconClass]}>
+  {@const statusClass = badge.type === "status" && badge.status && `fr-badge--${badge.status}`}
+
+  <p class={["fr-badge", accentClass, iconClass, statusClass]}>
     {#if badge.ellipsis}
       <span class="fr-ellipsis">{badge.label}</span>
     {:else}
