@@ -31,7 +31,7 @@
   type ButtonSize = Extract<Size, "sm" | "md" | "lg">;
   interface Props {
     /** Libellé du bouton */
-    label: string;
+    label?: string;
     /** Type du bouton */
     kind?: Kind;
     /** Taille du bouton */
