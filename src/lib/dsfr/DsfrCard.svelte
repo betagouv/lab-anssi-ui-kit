@@ -53,7 +53,7 @@
     /** Source de l'image */
     src?: string;
     /** L'alternative de l'image */
-    alt?: "string";
+    alt?: string;
     /** Attribut 'id' de la carte */
     id?: string;
     /** Titre de la carte */
@@ -126,7 +126,7 @@
     id,
     actionTitle,
     title,
-    hasDescription = true,
+    hasDescription,
     description,
     hasDetailStart = false,
     detailStart,
@@ -139,7 +139,7 @@
     markup = "h3",
     hasBadge = false,
     hasTag = false,
-    enlarge = true,
+    enlarge,
     actionMarkup = "a",
     href,
     blank = false,
