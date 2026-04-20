@@ -10,7 +10,6 @@
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
 
-
   const { Story } = defineMeta({
     title: "Exemples/MQC",
     component: DsfrHeader,
