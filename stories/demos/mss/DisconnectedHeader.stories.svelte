@@ -54,28 +54,28 @@
           markup: "button",
         },
         {
-          label: "Mon compte",
+          label: "Me connecter",
           markup: "button",
-          icon: "account-circle-line",
+          icon: "account-circle-fill",
         },
       ],
       navigationItems: [
-        { id: 'menu-1', label: "Accueil", href: "#", type: "link" },
+        { id: "menu-1", label: "Accueil", href: "#", type: "link" },
         {
-          id: 'menu-2',
+          id: "menu-2",
           label: "Promouvoir",
           type: "menu",
           collapsable: true,
-          collapseId: 'menu-2',
+          collapseId: "menu-2",
           items: [
             { id: "menu-1-1", label: "Promouvoir MonServiceSécurisé", href: "#", type: "link" },
             { id: "menu-1-2", label: "Devenir Ambassadeur/rice", href: "#", type: "link" },
           ],
         },
-        { id: 'menu-3', label: "Co-construire MonServiceSécurisé", href: "#", type: "link" },
-        { id: 'menu-4', label: "Conseils Cyber", href: "#", type: "link" },
-        { id: 'menu-5', label: "L'homologation simplifiée", href: "#", type: "link" },
-      ]
+        { id: "menu-3", label: "Co-construire MonServiceSécurisé", href: "#", type: "link" },
+        { id: "menu-4", label: "Conseils Cyber", href: "#", type: "link" },
+        { id: "menu-5", label: "L'homologation simplifiée", href: "#", type: "link" },
+      ],
     },
     tags: ["!autodocs"],
   });
