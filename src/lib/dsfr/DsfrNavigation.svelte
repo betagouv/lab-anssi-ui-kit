@@ -89,7 +89,16 @@
                 <ul class="fr-menu__list">
                   {#each item.items as subItem, subIndex (subItem.id)}
                     <li>
-                      <a id={subItem.id} href={subItem.href} class="fr-nav__link">
+                      <a
+                        id={subItem.id}
+                        href={subItem.href}
+                        class="fr-nav__link"
+                        aria-current={subItem.active
+                          ? isLink(subItem)
+                            ? "page"
+                            : true
+                          : undefined}
+                      >
                         {subItem.label}
                       </a>
                     </li>
