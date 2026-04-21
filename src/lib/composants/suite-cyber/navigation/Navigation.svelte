@@ -124,7 +124,7 @@
           background: rgba(0, 0, 0, 0.04);
         }
 
-        @include a-partir-de(desktop) {
+        @include a-partir-de(desktop-dsfr) {
           img {
             width: 16px;
             height: 16px;
@@ -137,7 +137,7 @@
           > span {
             font-family: Marianne;
           }
-          @include a-partir-de(desktop) {
+          @include a-partir-de(desktop-dsfr) {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -174,7 +174,7 @@
       overflow-x: hidden;
       z-index: $z-index-au-dessus;
 
-      @include a-partir-de(tablette) {
+      @include a-partir-de(desktop-dsfr) {
         position: absolute;
         top: 40px;
         right: 0;
@@ -185,6 +185,7 @@
       }
 
       button.fermer {
+        font-family: Marianne;
         border: none;
         background: none;
         color: $texte-dsfr;
