@@ -13,3 +13,11 @@
 
   --text-decoration: none;
 }
+
+dsfr-container:not(:defined) {
+  display: block;
+  margin: 0 auto;
+  max-width: 78rem;
+  padding-inline: 1rem;
+  width: 100%;
+}
