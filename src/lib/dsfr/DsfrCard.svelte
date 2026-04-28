@@ -252,10 +252,12 @@
       </div>
     {/if}
   </div>
-  {#if src}
+  {#if src || $$slots.image}
     <div class="fr-card__header">
       <div class="fr-card__img">
-        <img class={["fr-responsive-img", imageRatioClass]} {src} {alt} />
+        <slot name="image">
+          <img class={["fr-responsive-img", imageRatioClass]} {src} {alt} />
+        </slot>
       </div>
       {#if hasHeaderBadge}
         <slot name="headerbadges" />
