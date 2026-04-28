@@ -234,10 +234,11 @@
       {/if}
       {#if hasDetailEnd}
         <div class="fr-card__end">
+          <slot name="contentend" />
+
           {#if detailEnd}
             <p class={["fr-card__detail", detailEndIconClass]}>{detailEnd}</p>
           {/if}
-          <slot name="contentend" />
         </div>
       {/if}
     </div>
