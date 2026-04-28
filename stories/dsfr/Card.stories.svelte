@@ -7,6 +7,8 @@
     cardArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/card/template/stories/card-arg-types.js";
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
+  import Placeholder1x1 from "@gouvfr/dsfr/example/img/placeholder.1x1.png";
+  import Placeholder3x4 from "@gouvfr/dsfr/example/img/placeholder.3x4.png";
 
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
   // @ts-ignore: Required Import to use this component as webcomponent
@@ -48,6 +50,12 @@
       },
       headerbadges: {
         description: "Badges superposés à l'image d'en-tête",
+        control: false,
+        table: { category: "Slots" },
+      },
+      image: {
+        description:
+          "Permet d'utiliser une image personnalisée (ex. <picture>, <svg>, ou <img>) en remplacement de l'image par défaut et des styles associées",
         control: false,
         table: { category: "Slots" },
       },
@@ -176,3 +184,30 @@
     size: "sm",
   }}
 />
+
+<Story name="Avec slot image personnalisé">
+  {#snippet template(args: Args)}
+    <dsfr-card
+      title={args.title}
+      has-description={args.hasDescription || undefined}
+      description={args.description}
+      action-title={args.actionTitle}
+      href={args.href}
+      size={args.size}
+    >
+      <picture slot="image">
+        <source media="(min-width: 48em)" srcset={Placeholder} />
+        <source media="(min-width: 36em)" srcset={Placeholder3x4} />
+        <img class="custom-image" src={Placeholder1x1} alt="Illustration personnalisée" />
+      </picture>
+    </dsfr-card>
+
+    <style>
+      .custom-image {
+        max-width: 100%;
+        object-fit: cover;
+        height: auto;
+      }
+    </style>
+  {/snippet}
+</Story>
