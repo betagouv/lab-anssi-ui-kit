@@ -18,13 +18,33 @@
       centered: { attribute: "centered", type: "Boolean" },
       expandable: { attribute: "expandable", type: "Boolean" },
     },
-    extend: withIconsStyleSheet,
+    extend: (CustomElementClass) => {
+      return class extends CustomElementClass {
+        static formAssociated = true;
+
+        constructor() {
+          super();
+          this.internals = this.attachInternals();
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+
+          const iconsStyleSheet = getIconsStyleSheet();
+          const shadow = this.shadowRoot;
+
+          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
+            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
+          }
+        }
+      };
+    },
   }}
 />
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 
@@ -72,6 +92,8 @@
       | "team"
       | "briefcase"
       | "sort";
+    /** `ElementInternals` interface pour l'association du composant aux formulaires */
+    internals?: ElementInternals;
   }
 
   const {
@@ -92,12 +114,20 @@
     expandable = false,
     class: className = "",
     preset,
+    internals,
     ...restProps
   }: Props = $props();
 
   function setButtonType(markup: string) {
     if (markup === "button" || markup === "input") return type;
     return undefined;
+  }
+
+  function handleSubmit(event: MouseEvent) {
+    if (type === "submit" && internals?.form) {
+      event.preventDefault();
+      internals.form.requestSubmit();
+    }
   }
 
   const iconClass = $derived<boolean | string>(hasIcon && icon && setIconClass(icon));
@@ -123,6 +153,7 @@
   type={setButtonType(markup)}
   href={markup === "a" ? href : undefined}
   target={markup === "a" ? target : undefined}
+  onclick={markup === "button" && type === "submit" ? handleSubmit : undefined}
   {disabled}
   {title}
   class={["fr-btn", iconClass, kindClass, utilityClass, sizeClass, className]}
