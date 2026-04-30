@@ -185,10 +185,10 @@
           {/if}
         </div>
         <div class="fr-footer__content">
-          {#if hasDescription && contentDescription}
+          {#if hasDescription}
             {#if $$slots.description}
               <slot name="description"></slot>
-            {:else}
+            {:else if contentDescription}
               <p class="fr-footer__content-desc">
                 {@html contentDescription}
               </p>
