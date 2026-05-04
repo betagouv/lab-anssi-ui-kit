@@ -47,10 +47,10 @@
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
+  import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
-  import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
 
   type ButtonKind = Extract<Kind, "tertiary" | "tertiary-no-outline">;
   type ToolLinkPreset =
@@ -443,6 +443,7 @@
             <slot name="modalToolLinks">
               {@render toolLinksRendered()}
             </slot>
+            <slot name="aftermodaltoollinks"></slot>
           </div>
         {/if}
 
