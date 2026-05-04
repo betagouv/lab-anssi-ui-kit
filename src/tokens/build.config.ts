@@ -67,8 +67,8 @@ function estThemable(token: TransformedToken): boolean {
 }
 
 /**
- * Format CSS avec sélecteur :root et [data-themeable] (pour consommateurs finaux)
- * Les tokens avec $themeable: true vont dans [data-themeable]
+ * Format CSS avec sélecteur :root et [data-themeable="true"] (pour consommateurs finaux)
+ * Les tokens avec $themeable: true vont dans [data-themeable="true"]
  * Les autres tokens vont dans :root
  */
 StyleDictionary.registerFormat({
@@ -105,7 +105,7 @@ StyleDictionary.registerFormat({
     }
 
     if (variablesThemables.length > 0) {
-      contenuCss += `\n[data-themeable] {\n${variablesThemables.join("\n")}\n}\n`;
+      contenuCss += `\n[data-themeable="true"] {\n${variablesThemables.join("\n")}\n}\n`;
     }
 
     return contenuCss;
@@ -114,7 +114,7 @@ StyleDictionary.registerFormat({
 
 /**
  * Action qui s'exécute après la génération des fichiers
- * Lit le fichier généré, remplace :root par .theme-{nom} et [data-themeable] par .theme-{nom} [data-themeable],
+ * Lit le fichier généré, remplace :root par .theme-{nom} et [data-themeable="true"] par .theme-{nom} [data-themeable="true"],
  * puis l'ajoute au fichier contenant l'ensemble des thèmes
  */
 StyleDictionary.registerAction({
@@ -126,11 +126,11 @@ StyleDictionary.registerAction({
     const fichierTheme = join(config.buildPath ?? "", `lab-anssi-theme.${nomTheme}.css`);
     const contenu = readFileSync(fichierTheme, "utf-8") + "\n";
 
-    // Remplacer :root par .theme-{nom}, [data-themeable] par .theme-{nom} [data-themeable], et retirer le header
+    // Remplacer :root par .theme-{nom}, [data-themeable="true"] par .theme-{nom} [data-themeable="true"], et retirer le header
     const contenuTheme = contenu
       .replace(/\/\*\*[\s\S]*?\*\/\s*/, "") // Retirer le header
       .replace(":root {", `.theme-${nomTheme} {`)
-      .replace("[data-themeable] {", `.theme-${nomTheme} [data-themeable] {`);
+      .replace(`[data-themeable="true"] {`, `.theme-${nomTheme} [data-themeable="true"] {`);
 
     appendFileSync(FICHIER_TOUS_THEMES, contenuTheme);
   },

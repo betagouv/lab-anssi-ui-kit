@@ -31,7 +31,7 @@ Chaque produit du Lab ANSSI dispose de son propre thème :
 
 Le principe est le suivant :
 
-1. Les composants s'appuient sur des variables CSS.\*\*\*\*
+1. Les composants s'appuient sur des variables CSS.
 2. Ces variables CSS sont disponibles dans des fichiers `.css` générés à partir de fichiers `.json` de **design tokens**.
 3. Le système de thématisation **surcharge ces variables** avec les couleurs propres à chaque produit, permettant ainsi aux composants de changer d'apparence sans modifier leur code source.
 
@@ -69,7 +69,7 @@ Le workflow global est le suivant :
 flowchart TD
   A["Tokens JSON <br/> (primitives + thèmes)"] --> B["Style Dictionary <br/> (build.config.ts)"]
   B --> C["Fichiers CSS générés <br/> par thème"]
-  C --> D["Composants Svelte thémé à l'aide de l'attribut [data-themeable]"]
+  C --> D["Composants personnalisés à l'aide de l'attribut [data-themeable='true']"]
   D --> E["Rendu visuel thématisé"]
 ```
 
@@ -112,9 +112,9 @@ Ce sont des tokens propres à chaque produit. Ils sont générés dans le sélec
 }
 ```
 
-#### 2. Tokens DSFR thématisables (`[data-themeable]`)
+#### 2. Tokens DSFR thématisables (`[data-themeable="true"]`)
 
-Ces tokens surchargent les variables CSS du DSFR.<br/> Ils sont identifiés par la propriété `"$themeable": true` et sont générés dans le sélecteur `[data-themeable]`.
+Ces tokens surchargent les variables CSS du DSFR.<br/> Ils sont identifiés par la propriété `"$themeable": true` et sont générés dans le sélecteur `[data-themeable"true"]`.
 
 ```json
 {
@@ -137,7 +137,7 @@ Ces tokens surchargent les variables CSS du DSFR.<br/> Ils sont identifiés par 
 }
 ```
 
-Les catégories de variables DSFR surchargées sont :
+##### Les catégories de variables DSFR surchargées sont :
 
 | Catégorie    | Variables concernées                                                                                                                   |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -159,7 +159,7 @@ La transformation des tokens JSON en variables CSS est assurée par [Style Dicti
 Ce format sépare les tokens générés en deux blocs CSS :
 
 - Les tokens **sans** `$themeable` sont placés dans le sélecteur `:root`
-- Les tokens **avec** `$themeable: true` sont placés dans le sélecteur `[data-themeable]`
+- Les tokens **avec** `$themeable: true` sont placés dans le sélecteur `[data-themeable="true"]`
 
 ```css
 /* Exemple de sortie pour le thème MSC */
@@ -168,7 +168,7 @@ Ce format sépare les tokens générés en deux blocs CSS :
   --bouton-primaire-couleur-fond: var(--yellow-msc-200);
 }
 
-[data-themeable] {
+[data-themeable="true"] {
   --background-action-high-blue-france: var(--yellow-msc-200);
   --text-action-high-blue-france: var(--midnight-blue-msc-950);
 }
@@ -181,7 +181,7 @@ Les références internes au thème sont préservées sous forme de `var(...)` (
 Après la génération de chaque fichier de thème individuel, cette action :
 
 1. Remplace `:root` par `.theme-{CIGLE-DU-THEME}` (ex. `.theme-msc`)
-2. Remplace `[data-themeable]` par `.theme-{CIGLE-DU-THEME} [data-themeable]`
+2. Remplace `[data-themeable="true"]` par `.theme-{CIGLE-DU-THEME} [data-themeable="true"]`
 3. Concatène le résultat dans `.storybook/lab-anssi-themes.css`
 
 Ce fichier combiné permet le basculement de thèmes dans Storybook via des classes CSS.
@@ -204,7 +204,7 @@ Ce fichier combiné permet le basculement de thèmes dans Storybook via des clas
 
 Définie dans `src/lib/utilitaires/index.ts`, cette fonction marque un Web Component comme thématisable.
 
-Elle ajoute l'attribut `data-themeable="true"` sur l'élément hôte du Web Component.<br/> Cet attribut est clé dans ce système : les variables CSS thématisées ne s'appliquent qu'aux éléments portant cet attribut (via le sélecteur `[data-themeable]`).
+Elle ajoute l'attribut `data-themeable="true"` sur l'élément hôte du Web Component.<br/> Cet attribut est clé dans ce système : les variables CSS thématisées ne s'appliquent qu'aux éléments portant cet attribut (via le sélecteur `[data-themeable="true"]`).
 
 ### Usage dans un composant
 
@@ -301,7 +301,7 @@ decorators: [
 1. L'utilisateur sélectionne un thème dans la barre d'outils Storybook
 2. L'addon applique la classe correspondante (ex. `theme-msc`) sur le conteneur
 3. Les variables CSS du thème sélectionné sont appliquées en cascade
-4. Les composants avec `[data-themeable]` reçoivent les surcharges DSFR
+4. Les composants avec `[data-themeable="true"]` reçoivent les surcharges DSFR
 
 ---
 
