@@ -148,7 +148,7 @@
   --lab-border-radius: var(--bouton-arrondi);
 }
 
-.theme-msc [data-themeable] {
+.theme-msc [data-themeable="true"] {
   --background-alt-blue-france: var(--yellow-msc-50);
   --background-action-high-blue-france: var(--yellow-msc-200);
   --background-action-high-blue-france-hover: var(--yellow-msc-250);
@@ -256,7 +256,7 @@
   --lab-border-radius: var(--bouton-arrondi);
 }
 
-.theme-mss [data-themeable] {
+.theme-mss [data-themeable="true"] {
   --background-alt-blue-france: var(--blue-mss-50);
   --background-action-high-blue-france: var(--blue-mss-600);
   --background-action-high-blue-france-hover: var(--blue-mss-700);
