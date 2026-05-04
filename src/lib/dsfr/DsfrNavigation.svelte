@@ -109,6 +109,11 @@
           {/if}
         </li>
       {/each}
+      {#if $$slots.afternavigation}
+        <li class="fr-nav__item">
+          <slot name="afternavigation"></slot>
+        </li>
+      {/if}
     </ul>
   {/if}
 </nav>
