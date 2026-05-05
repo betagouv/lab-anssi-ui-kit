@@ -8,6 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/header/template/stories/header-arg-types";
 
   import PlaceholderPortrait from "@gouvfr/dsfr/example/img/placeholder.9x16.png";
+  import PlaceholderPaysage from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
 
@@ -23,6 +24,18 @@
     label: "Intitulé lien",
     href: "#",
   });
+
+  const toolLinksAccueil: ComponentProps<DsfrHeader>["toolLinks"] = [
+    { classes: ["fr-btn--team"], url: "#", label: "Contact", markup: "a" },
+    { classes: ["fr-btn--briefcase"], url: "#", label: "Espace recruteur", markup: "a" },
+    { classes: ["fr-btn--account"], url: "#", label: "Espace particulier", markup: "a" },
+  ];
+
+  const navigationItemsMinimaux = [
+    navLink("navigation-item-01"),
+    navLink("navigation-item-02"),
+    navLink("navigation-item-03"),
+  ];
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Header",
@@ -176,9 +189,88 @@
 </script>
 
 {#snippet template(args: Args)}
-  <DsfrHeader {...args} />
+  <dsfr-header
+    id={args.id}
+    is-mourning={args.isMourning || undefined}
+    menu-id={args.menuId}
+    menu-modal-id={args.menuModalId}
+    has-tool-links={args.hasToolLinks || undefined}
+    tool-links={JSON.stringify(args.toolLinks)}
+    duplicate-tool-links={args.duplicateToolLinks || undefined}
+    has-translate={args.hasTranslate || undefined}
+    translate-id={args.translateId}
+    translate-collapse-id={args.translateCollapseId}
+    translate-button-title={args.translateButtonTitle}
+    translate-button-kind={args.translateButtonKind}
+    translate-languages={args.translateLanguages}
+    has-search={args.hasSearch || undefined}
+    search-id={args.searchId}
+    search-modal-id={args.searchModalId}
+    search-btn-id={args.searchBtnId}
+    search-input-id={args.searchInputId}
+    search-label={args.searchLabel}
+    search-placeholder={args.searchPlaceholder}
+    search-title={args.searchTitle}
+    brand-logo-title={args.brandLogoTitle}
+    brand-service={args.brandService}
+    has-brand-tagline={args.hasBrandTagline || undefined}
+    brand-tagline={args.brandTagline}
+    brand-link-id={args.brandLinkId}
+    brand-link-title={args.brandLinkTitle}
+    brand-link-href={args.brandLinkHref}
+    has-brand-operator={args.hasBrandOperator || undefined}
+    brand-operator-alt={args.brandOperatorAlt}
+    brand-operator-src={args.brandOperatorSrc}
+    brand-operator-style={args.brandOperatorStyle}
+    has-navigation={args.hasNavigation || undefined}
+    navigation-id={args.navigationId}
+    navigation-aria-label={args.navigationAriaLabel}
+    navigation-items={JSON.stringify(args.navigationItems)}
+    has-header-tag={args.hasHeaderTag || undefined}
+    fluid={args.fluid || undefined}
+  ></dsfr-header>
 {/snippet}
 
 <Story name="Défaut" />
 
-<Story name="Avec Tool Links" args={{ hasSearch: undefined, hasToolLinks: true }} />
+<Story name="Avec navigation" />
+
+<Story
+  name="Minimal"
+  args={{
+    brandService: "",
+    brandTagline: "",
+    navigationItems: navigationItemsMinimaux,
+  }}
+/>
+
+<Story name="Service" args={{ hasNavigation: false }} />
+
+<Story
+  name="Avec liens d'accès rapide"
+  args={{ hasNavigation: false, hasToolLinks: true, toolLinks: toolLinksAccueil }}
+/>
+
+<Story name="Avec recherche" args={{ hasNavigation: false, hasSearch: true }} />
+
+<Story
+  name="Avec liens d'accès rapide et recherche"
+  args={{
+    hasNavigation: false,
+    hasToolLinks: true,
+    hasSearch: true,
+    toolLinks: toolLinksAccueil,
+  }}
+/>
+
+<Story name="Avec opérateur (vertical)" args={{ hasNavigation: false, hasBrandOperator: true }} />
+
+<Story
+  name="Avec opérateur (horizontal)"
+  args={{
+    hasNavigation: false,
+    hasBrandOperator: true,
+    brandOperatorSrc: PlaceholderPaysage,
+    brandOperatorStyle: "max-width: 9.0625rem;",
+  }}
+/>
