@@ -205,7 +205,7 @@
           onblur={formValidation.handleBlur}
           oninvalid={formValidation.handleInvalid}
           use:captureFirstRadio
-          {disabled}
+          disabled={radio.disabled}
           {form}
           {required}
         />
