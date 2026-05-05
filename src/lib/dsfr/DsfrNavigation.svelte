@@ -15,12 +15,12 @@
   setThemeable($host());
 
   type MenuItem = {
-    id: string;
+    label: string;
+    id?: string;
     type?: "link" | "menu" | "mega-menu";
     active?: boolean;
     collapsable?: boolean;
     collapseId?: string;
-    label: string;
     href?: string;
     items?: MenuItem[];
   };
@@ -37,7 +37,8 @@
   let { id, ariaLabel, items = [] }: Props = $props();
 
   const COLLAPSE_ID_PREFIX = "navigation-collapse";
-  const isLink = (item) => item.type === "link" || (item.type === "menu" && !item.collapsable);
+  const isLink = (item) =>
+    !item.type || item.type === "link" || (item.type === "menu" && !item.collapsable);
   const getMarkup = (item: MenuItem) => (isLink(item) ? "a" : "button");
 
   function setCollapseId(collapseId: string | undefined, index: number): string {
