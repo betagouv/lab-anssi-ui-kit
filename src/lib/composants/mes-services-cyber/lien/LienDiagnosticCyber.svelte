@@ -1,22 +1,32 @@
-<svelte:options customElement="lab-anssi-mes-services-cyber-lien-diagnostic-cyber" />
+<svelte:options
+  customElement={{
+    tag: "lab-anssi-mes-services-cyber-lien-diagnostic-cyber",
+    props: {
+      label: { attribute: "label", type: "String" },
+      lien: { attribute: "lien", type: "String" },
+      versExterne: { attribute: "vers-externe", type: "Boolean" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { srcAsset } from "$lib/assets/assets";
 
   interface Props {
-    lien: any;
+    label: string;
+    lien?: any;
     versExterne?: boolean;
   }
 
-  let { lien, versExterne = false }: Props = $props();
-  let target = versExterne ? "_blank" : "_self";
-  let rel = versExterne ? "noreferrer" : undefined;
-  let icone = versExterne ? "lien-externe" : "lien-interne";
+  let { label = "Votre diagnostic cyber gratuit", lien, versExterne = false }: Props = $props();
+  let target = $derived(versExterne ? "_blank" : "_self");
+  let rel = $derived(versExterne ? "noreferrer" : undefined);
+  let icone = $derived(versExterne ? "lien-externe" : "lien-interne");
 </script>
 
 <div class="racine">
   <a href={lien} {target} class="lien-diagnostic-cyber" {rel}>
-    Votre diagnostic cyber gratuit
+    {label}
     <img
       src={srcAsset(`/icones/${icone}.svg`)}
       alt={`lien-${versExterne ? "externe" : "interne"}`}

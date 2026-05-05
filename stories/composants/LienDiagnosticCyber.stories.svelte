@@ -9,6 +9,7 @@
     title: "Composants/ANSSI/Lien Diagnostic Cyber",
     component: LienDiagnosticCyber,
     args: {
+      label: "Votre diagnostic cyber gratuit",
       lien: "#",
       versExterne: false,
     },
@@ -21,6 +22,7 @@
 {#snippet template(args: Args)}
   <ConteneurStory alignement="droite">
     <lab-anssi-mes-services-cyber-lien-diagnostic-cyber
+      label={args.label}
       lien={args.lien}
       vers-externe={args.versExterne || undefined}
     ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
