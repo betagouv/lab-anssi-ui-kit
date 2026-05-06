@@ -88,6 +88,8 @@
     tbodies: TbodyCell[][][];
   }
 
+  type Row = Record<string, unknown>;
+
   interface Column {
     key: string;
     label: string;
@@ -99,20 +101,12 @@
     inline?: boolean;
     multiline?: boolean;
     /**
-     * Si true, le contenu de chaque cellule est rendu comme du HTML brut via {@html}.
-     * Fonctionne avec l'API columns/rows, y compris en tant que web component.
-     * ⚠️ Ne pas utiliser avec des données non maîtrisées (risque XSS).
-     */
-    html?: boolean;
-    /**
      * Snippet de rendu personnalisé pour les cellules de cette colonne (Svelte uniquement).
      * Reçoit la valeur brute de la cellule et la ligne d'origine complète.
      * Non sérialisable en JSON : incompatible avec le passage via attribut HTML.
      */
     render?: Snippet<[value: unknown, row: Row]>;
   }
-
-  type Row = Record<string, unknown>;
 
   export interface Props {
     /** Id du tableau */
@@ -176,9 +170,15 @@
     /** Callback appelé lors d'un changement du nombre de lignes par page */
     onrowsperpagechange?: (rowsPerPage: number) => void;
     /**
-     * Bascule le rendu interne en divs avec rôles ARIA.
-     * Permet aux consommateurs d'injecter du contenu riche dans les cellules via des slots nommés
-     * (ex: slot="cell:maColonne:0"), sans contrainte sur le format table HTML.
+     * Active les slots nommés `cell:<colKey>:<rowIndex>` sur chaque cellule du tableau,
+     * permettant d'injecter du contenu personnalisé via le light DOM
+     * (ex: `<div slot="cell:maColonne:0">…</div>`).
+     *
+     * Utile principalement en contexte web component, où `Column.render` (Svelte uniquement)
+     * n'est pas disponible. Le rendu standard sert de fallback si aucun slot n'est fourni.
+     *
+     * ⚠️ Coût non-négligeable sur les gros tableaux : un `<slot>` est créé par cellule.
+     * À n'activer que si la fonctionnalité est utilisée.
      */
     rich?: boolean;
   }
@@ -215,27 +215,6 @@
     rich = false,
   }: Props = $props();
 
-  let captionEl: HTMLElement | undefined = $state();
-  let tableOffset = $state("0px");
-
-  $effect(() => {
-    if (!captionEl || noCaption) {
-      tableOffset = "0px";
-      return;
-    }
-
-    const updateOffset = () => {
-      const captionHeight = captionEl.getBoundingClientRect().captionHeight;
-      tableOffset = `calc(${captionHeight}px + 1rem)`;
-    };
-
-    const observer = new ResizeObserver(updateOffset);
-    observer.observe(captionEl);
-    updateOffset();
-
-    return () => observer.disconnect();
-  });
-
   let computedThead = $derived(
     columns
       ? [
@@ -270,17 +249,12 @@
       : (table?.tbodies ?? []),
   );
 
-  // En mode serveur _(présence de `totalRows`)_, le parent gère le découpage : on affiche toutes les rows reçues.
+  // En mode serveur (présence de `totalRows`), le parent gère le découpage : on affiche toutes les rows reçues.
   // En mode client, le composant calcule lui-même le nombre total depuis les données.
   let isServerSide = $derived(totalRows !== undefined);
   let nbRows = $derived(isServerSide ? (totalRows ?? 0) : (computedTbodies[0]?.length ?? 0));
 
   let rowsPerPage = $state(itemsPerPage[0]);
-
-  $effect(() => {
-    rowsPerPage = itemsPerPage[0];
-  });
-
   let currentPage = $state(1);
 
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
@@ -323,14 +297,6 @@
   }
 
   /**
-   * Génère les classes CSS applicables à une cellule de tableau en fonction de ses propriétés.
-   *
-   * @param {TheadCell | TbodyCell} cell - La cellule dont les classes doivent être générées
-   * @param {boolean} [isHeader=false] - Indique si la cellule est un en-tête de colonne
-   * @param {boolean} [forceFixed=false] - Force l'application de la classe de cellule fixe
-   * @returns {string[]} Un tableau contenant les classes CSS à appliquer à la cellule
-   */
-  /**
    * Action Svelte : crée un `<slot name="...">` programmatiquement dans le `<td>`,
    * en déplaçant le contenu Svelte existant comme fallback du slot.
    * Contourne la restriction compile-time de Svelte sur les noms de slot dynamiques.
@@ -360,6 +326,14 @@
     };
   }
 
+  /**
+   * Génère les classes CSS applicables à une cellule de tableau en fonction de ses propriétés.
+   *
+   * @param cell La cellule dont les classes doivent être générées
+   * @param isHeader Indique si la cellule est un en-tête de colonne
+   * @param forceFixed Force l'application de la classe de cellule fixe
+   * @returns Les classes CSS à appliquer à la cellule
+   */
   function getCellClasses(
     cell: TheadCell | TbodyCell,
     isHeader = false,
@@ -417,7 +391,7 @@
     </div>
   {/if}
 
-  <div class="fr-table__wrapper" style={`--table-offset: ${tableOffset};`}>
+  <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
         <slot name="tablecontent">
@@ -429,7 +403,7 @@
               {/if}
             </caption>
 
-            {#if computedThead?.length}
+            {#if computedThead.length}
               <thead>
                 {#each computedThead as row, rowIndex (rowIndex)}
                   <tr>
@@ -464,7 +438,10 @@
                   {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
                     {@const globalIndex =
                       tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
-                    <tr id={`${id}-row-key-${globalIndex}`} data-row-key={globalIndex}>
+                    <tr
+                      id={id ? `${id}-row-key-${globalIndex}` : undefined}
+                      data-row-key={globalIndex}
+                    >
                       {#each row as cell, cellIndex (cellIndex)}
                         {@const col = columns?.[cellIndex]}
                         <td
@@ -476,8 +453,6 @@
                               displayedOriginalRows[index][col.key],
                               displayedOriginalRows[index],
                             )}
-                          {:else if col?.html}
-                            {@html cell.content}
                           {:else}
                             {cell.content}
                           {/if}
