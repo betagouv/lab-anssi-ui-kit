@@ -7,6 +7,7 @@
 - [Définition des tokens](#définition-des-tokens)
 - [Génération des styles avec Style Dictionary](#génération-des-styles-avec-style-dictionary)
 - [Intégration dans les composants Svelte](#intégration-dans-les-composants-svelte)
+- [Désactiver la thématisation d'un composant](#désactiver-la-thématisation-dun-composant)
 - [Mixins SCSS](#mixins-scss)
 - [Visualisation dans Storybook](#visualisation-dans-storybook)
 - [Scripts de build](#scripts-de-build)
@@ -218,6 +219,45 @@ Elle ajoute l'attribut `data-themeable="true"` sur l'élément hôte du Web Comp
 
 L'appel à `setThemeable($host())` se fait dans la section `<script>` du composant.<br/>
 `$host()` est [une API Svelte](https://svelte.dev/docs/svelte/host) qui retourne l'élément hôte du Custom Element.
+
+---
+
+## Désactiver la thématisation d'un composant
+
+Certains composants doivent conserver l'identité visuelle native du DSFR sans être surchargés par les thèmes du Lab. C'est notamment le cas du `DsfrHeader` et du `DsfrFooter`, dont l'apparence institutionnelle ne doit pas varier d'un produit à l'autre.
+
+Le système de thématisation prévoit deux mécanismes complémentaires pour exclure un élément de la thématisation, tous deux basés sur l'attribut `data-themeable="false"`.
+
+### 1. Au niveau du composant (Svelte)
+
+La fonction `setThemeable` accepte un second paramètre `active` _(par défaut `true`)_.<br/>
+En passant `false`, le composant déclare explicitement qu'il ne doit pas être thématisé :
+
+```svelte
+<script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host(), false);
+</script>
+```
+
+L'élément hôte du Web Component reçoit alors l'attribut `data-themeable="false"`, et les surcharges issues du thème actif ne s'y appliquent pas.
+
+C'est l'approche utilisée par défaut pour les composants `DsfrHeader` ou `DsfrFooter` par exemple.
+
+### 2. Au niveau du consommateur (HTML)
+
+Une application qui consomme la librairie peut également désactiver la thématisation d'un composant en plaçant l'attribut `data-themeable="false"` directement sur l'élément :
+
+```html
+<dsfr-button data-themeable="false">Bouton institutionnel</dsfr-button>
+```
+
+Lorsque `setThemeable` est appelée par le composant, elle détecte la présence de `data-themeable="false"` sur l'hôte et **ne modifie pas la valeur**. Le choix du consommateur est donc prioritaire sur la valeur par défaut du composant : un composant déclaré thématisable peut être désactivé localement sans modification du code source.
+
+### Restitution des couleurs DSFR
+
+Pour qu'un composant non thématisable affiche les couleurs natives du DSFR — et non celles d'un thème actif sur un conteneur parent — le fichier [`src/lib/styles/dsfr-variables.scss`](../src/lib/styles/dsfr-variables.scss) ajoute le selecteur `[data-themeable="false"]` au sélecteur `:root` initial qui définit l'ensemble des variables de couleurs DSFR.
 
 ---
 
