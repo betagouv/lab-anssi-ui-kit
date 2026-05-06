@@ -16,7 +16,7 @@
 
 <div class="racine">
   <a href={lien} {target} class="lien-diagnostic-cyber" {rel}>
-    Votre diagnostic cyber gratuit
+    Diagnostic cyber gratuit
     <img
       src={srcAsset(`/icones/${icone}.svg`)}
       alt={`lien-${versExterne ? "externe" : "interne"}`}
