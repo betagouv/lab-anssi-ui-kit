@@ -18,13 +18,14 @@ export function setIconClass(icon: string): string | undefined {
  * Marque un Web Component comme thématisable via l'attribut data-themeable
  * Permet d'appliquer des styles conditionnels basés sur cet attribut
  * @param {HTMLElement | undefined} host - L'élément host du Web Component ($host)
+ * @param {boolean} [active=true] - Indique si le thème est actif ou non
  */
-export function setThemeable(host: HTMLElement | undefined): void {
-  if (host?.hasAttribute("data-themeable") && host.getAttribute("data-themeable") === "false") {
-    host.removeAttribute("data-themeable");
 
+export function setThemeable(host: HTMLElement | undefined, active: boolean = true): void {
+  if (!host) return;
+
+  if (host.hasAttribute("data-themeable") && host.getAttribute("data-themeable") === "false")
     return;
-  }
 
-  host?.setAttribute("data-themeable", "true");
+  host.setAttribute("data-themeable", active ? "true" : "false");
 }
