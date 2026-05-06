@@ -1,16 +1,9 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-  import { type ComponentProps } from "svelte";
-
-  import {
-    tableArgTypes,
-    tableArgs,
-  } from "@gouvfr/dsfr/src/dsfr/component/table/template/stories/table-arg-types.js";
 
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   type Nis2Correspondance = "ÉLEVÉE" | "MOYENNE" | "FAIBLE / NULLE";
@@ -148,37 +141,6 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Table",
     component: DsfrTable,
-    argTypes: {
-      ...tableArgTypes,
-      layoutFixed: {
-        control: "boolean",
-        description: "Fixe la mise en page du tableau (table-layout: fixed)",
-      },
-      fixedFirstCellHead: {
-        control: "boolean",
-        description: "Fixe la première cellule de l'en-tête (sticky)",
-      },
-    },
-    args: {
-      ...tableArgs,
-      buttons: [
-        {
-          label: "Action tableau",
-          kind: "primary",
-          disabled: false,
-          icon: "checkbox-circle-line",
-        },
-        {
-          label: "Action tableau",
-          kind: "secondary",
-          disabled: false,
-          icon: "checkbox-circle-line",
-        },
-      ],
-      itemsPerPage: [5, 10, 20],
-      layoutFixed: false,
-      fixedFirstCellHead: false,
-    },
     parameters: {
       docs: {
         source: {
@@ -186,46 +148,11 @@
         },
       },
     },
-    render: template,
   });
-
-  type Args = ComponentProps<DsfrTable>;
 </script>
 
-{#snippet template(args: Args)}
-  <dsfr-table
-    id={args.id}
-    caption={args.caption}
-    caption-detail={args.captionDetail}
-    no-caption={args.noCaption || undefined}
-    caption-bottom={args.captionBottom || undefined}
-    bordered={args.bordered || undefined}
-    no-scroll={args.noScroll || undefined}
-    multiline={args.multiline || undefined}
-    layout-fixed={args.layoutFixed || undefined}
-    size={args.size}
-    fixed-first-cell-head={args.fixedFirstCellHead || undefined}
-    has-header={args.hasHeader || undefined}
-    has-header-segmented={args.hasHeaderSegmented || undefined}
-    has-header-search={args.hasHeaderSearch || undefined}
-    has-header-details={args.hasHeaderDetails || undefined}
-    header-details={args.headerDetails}
-    has-header-buttons={args.hasHeaderButtons || undefined}
-    has-footer={args.hasFooter || undefined}
-    has-footer-select={args.hasFooterSelect || undefined}
-    has-footer-pagination={args.hasFooterPagination || undefined}
-    has-footer-buttons={args.hasFooterButtons || undefined}
-    columns={args.columns}
-    rows={args.rows}
-    items-per-page={JSON.stringify(args.itemsPerPage)}
-  >
-    <dsfr-buttons-group slot="footerbuttons" buttons={args.buttons} inline="true"
-    ></dsfr-buttons-group>
-  </dsfr-table>
-{/snippet}
-
 <Story name="Avec contenu riche (Maquette NIS2)">
-  {#snippet template(_args: Args)}
+  {#snippet template()}
     <dsfr-table
       id="table-nis2"
       caption="Liste des exigences NIS 2"
