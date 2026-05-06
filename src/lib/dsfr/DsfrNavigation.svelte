@@ -37,6 +37,9 @@
   let { id, ariaLabel, items = [] }: Props = $props();
 
   const COLLAPSE_ID_PREFIX = "navigation-collapse";
+  let openedIndex: number = $state(-1);
+  let navElement: HTMLElement;
+
   const isLink = (item) =>
     !item.type || item.type === "link" || (item.type === "menu" && !item.collapsable);
   const getMarkup = (item: MenuItem) => (isLink(item) ? "a" : "button");
@@ -45,27 +48,21 @@
     return collapseId ? `${collapseId}-${index}` : `${COLLAPSE_ID_PREFIX}-${index}`;
   }
 
-  function handleClickNode(event: MouseEvent) {
-    const button = event.target as HTMLButtonElement;
-    const ariaExpanded = button.ariaExpanded;
-    const ariaControls = button.getAttribute("aria-controls");
-    const isExpanded = ariaExpanded === "true";
-    button.ariaExpanded = (!isExpanded).toString();
-
-    const collapseElement = ariaControls
-      ? button.parentElement.querySelector(`#${ariaControls}`)
-      : null;
-    if (collapseElement) {
-      if (isExpanded) {
-        collapseElement.classList.remove("fr-collapse--expanded");
-      } else {
-        collapseElement.classList.add("fr-collapse--expanded");
-      }
-    }
+  function toggleSubMenu(index: number) {
+    openedIndex = openedIndex === index ? -1 : index;
   }
+
+  $effect(() => {
+    function closeOnClickOutside(event: MouseEvent) {
+      if (openedIndex === -1) return;
+      if (!event.composedPath().includes(navElement)) openedIndex = -1;
+    }
+    document.addEventListener("mousedown", closeOnClickOutside);
+    return () => document.removeEventListener("mousedown", closeOnClickOutside);
+  });
 </script>
 
-<nav {id} class="fr-nav" role="navigation" aria-label={ariaLabel}>
+<nav bind:this={navElement} {id} class="fr-nav" role="navigation" aria-label={ariaLabel}>
   {#if items && items.length > 0}
     <ul class="fr-nav__list">
       {#each items as item, index}
@@ -76,16 +73,21 @@
             href={isLink(item) ? item.href : undefined}
             id={item.id}
             type={!isLink(item) ? "button" : undefined}
-            aria-expanded={!isLink(item) && item.collapsable ? "false" : undefined}
+            aria-expanded={!isLink(item) && item.collapsable
+              ? (openedIndex === index).toString()
+              : undefined}
             aria-controls={!isLink(item) ? setCollapseId(item.collapseId, index) : undefined}
             aria-current={item.active ? (isLink(item) ? "page" : true) : undefined}
             role={!isLink(item) ? "button" : undefined}
-            onclick={item.collapsable ? handleClickNode : undefined}
+            onclick={item.collapsable ? () => toggleSubMenu(index) : undefined}
           >
             {item.label}
           </svelte:element>
           {#if item.type === "menu" && item.collapsable && item.collapseId}
-            <div id={setCollapseId(item.collapseId, index)} class="fr-collapse fr-menu">
+            <div
+              id={setCollapseId(item.collapseId, index)}
+              class={["fr-collapse fr-menu", openedIndex === index && "fr-collapse--expanded"]}
+            >
               {#if item.items && item.items.length > 0}
                 <ul class="fr-menu__list">
                   {#each item.items as subItem, subIndex (subItem.id)}
