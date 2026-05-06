@@ -29,6 +29,10 @@
 />
 
 <script lang="ts">
+  import { setThemeable } from "$lib/utilitaires";
+
+  setThemeable($host(), false);
+
   type ContentLink = {
     label: string;
     href: string;

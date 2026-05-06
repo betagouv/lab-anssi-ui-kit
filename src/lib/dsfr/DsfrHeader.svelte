@@ -47,10 +47,12 @@
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
-  import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
+  import { setIconClass, withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
+
+  setThemeable($host(), false);
 
   type ButtonKind = Extract<Kind, "tertiary" | "tertiary-no-outline">;
   type ToolLinkPreset =
