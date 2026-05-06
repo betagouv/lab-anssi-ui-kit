@@ -29,7 +29,7 @@
   import Icone from "$lib/composants/Icone.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemple/ANSSI/Carte Jeu",
+    title: "Exemples/Carte Jeu",
     component: Reactions,
     args: {
       reactions: [
