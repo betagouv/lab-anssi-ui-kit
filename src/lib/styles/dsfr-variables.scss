@@ -1,3 +1,4 @@
+@use "@gouvfr/dsfr/src/module/color";
 @import "@gouvfr/dsfr/src/dsfr/core/index";
 @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/no-scroll";
 @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
@@ -12,6 +13,10 @@
   @include enable-external;
 
   --text-decoration: none;
+}
+
+[data-themeable="false"] {
+  @include color.define();
 }
 
 dsfr-container:not(:defined) {
