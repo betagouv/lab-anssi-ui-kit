@@ -122,10 +122,6 @@
   type Args = ComponentProps<DsfrTable>;
 </script>
 
-{#snippet contenuCellulePopulation(value: unknown, _row: Record<string, unknown>)}
-  <strong>{value as string} hab.</strong>
-{/snippet}
-
 {#snippet template(args: Args)}
   <dsfr-table
     id={args.id}
@@ -201,23 +197,6 @@
         serverPerPage = perPage;
         serverPage = 1;
       }}
-    />
-  {/snippet}
-</Story>
-
-<Story name="Avec contenu riche (snippet)">
-  {#snippet template(_args: Args)}
-    <DsfrTable
-      id="table-rich-snippet"
-      caption="Grandes villes de France"
-      columns={[
-        { key: "0", label: "Ville" },
-        { key: "1", label: "Département" },
-        { key: "2", label: "Région" },
-        { key: "3", label: "Population (2020)", render: contenuCellulePopulation },
-        { key: "4", label: "Superficie (km²)" },
-      ]}
-      rows={citiesRows.slice(0, 10)}
     />
   {/snippet}
 </Story>
