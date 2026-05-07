@@ -6,6 +6,7 @@
       inputLabel: { attribute: "input-label", type: "String" },
       buttonLabel: { attribute: "button-label", type: "String" },
       buttonTitle: { attribute: "button-title", type: "String" },
+      buttonType: { attribute: "button-type", type: "String" },
       size: { attribute: "size", type: "String" },
       placeholder: { attribute: "placeholder", type: "String" },
       value: { attribute: "value", type: "String", reflect: true },
@@ -49,6 +50,8 @@
     buttonLabel: string;
     /** Titre du bouton */
     buttonTitle: string;
+    /** Type du bouton */
+    buttonType: "button" | "submit";
     /** Taille de la barre de recherche (défaut: md) */
     size?: SearchSize;
     /** Placeholder de l'input */
@@ -82,6 +85,7 @@
     inputLabel,
     buttonLabel,
     buttonTitle,
+    buttonType = "submit",
     size = "md",
     placeholder,
     value = $bindable(),
@@ -102,10 +106,48 @@
   const formValidation = createFormValidation();
   const sizeClass = $derived(`fr-search-bar--${size}`);
 
+  /**
+   * Gère le changement de valeur de l'input de recherche.
+   * Met à jour la valeur et déclenche l'événement 'valuechanged'.
+   *
+   * @param {Event} event - L'événement input
+   */
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
+
     value = target.value;
+
     dispatch("valuechanged", target.value);
+  }
+
+  /**
+   * Gère le clic sur le bouton de recherche.
+   * Si le bouton est de type "submit" et associé à un formulaire, on soumet le formulaire.
+   * Sinon, déclenche l'événement de recherche personnalisé.
+   *
+   * @param {MouseEvent | KeyboardEvent} event - L'événement souris ou clavier
+   */
+  function handleButtonClick(event: MouseEvent | KeyboardEvent) {
+    if (buttonType === "submit" && internals?.form) {
+      event.preventDefault();
+      internals.form.requestSubmit();
+
+      return;
+    }
+
+    dispatch("search", value);
+  }
+
+  /**
+   * Déclenche la recherche si la touche Entrée est pressée.
+   * Le comportement par défaut de la touche Entrée dans un champ de recherche est de soumettre le formulaire. Cependant, si le bouton de recherche n'est pas de type "submit", nous voulons déclencher l'événement de recherche personnalisé.
+   *
+   * @param {KeyboardEvent} event - L'événement clavier
+   */
+  function handleInputKeydown(event: KeyboardEvent) {
+    if (event.key !== "Enter") return;
+
+    handleButtonClick(event);
   }
 
   export function setCustomValidity(message: string) {
@@ -139,6 +181,7 @@
     bind:value
     {placeholder}
     oninput={handleInput}
+    onkeydown={handleInputKeydown}
     onblur={formValidation.handleBlur}
     oninvalid={formValidation.handleInvalid}
     {disabled}
@@ -151,7 +194,13 @@
     {required}
   />
 
-  <button title={buttonTitle} type="button" class="fr-btn" {disabled}>
+  <button
+    title={buttonTitle}
+    type={buttonType}
+    class="fr-btn"
+    {disabled}
+    onclick={handleButtonClick}
+  >
     {buttonLabel}
   </button>
 </div>
