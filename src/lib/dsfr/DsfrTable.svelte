@@ -29,6 +29,9 @@
       itemsPerPage: { attribute: "items-per-page", type: "Array" },
       totalRows: { attribute: "total-rows", type: "Number" },
       rich: { attribute: "rich", type: "Boolean" },
+      selectable: { attribute: "selectable", type: "Boolean" },
+      rowKey: { attribute: "row-key", type: "String" },
+      selectedRowKeys: { attribute: "selected-row-keys", type: "Array" },
     },
   }}
 />
@@ -191,6 +194,23 @@
      * utiliser plutôt `Column.rich` au cas par cas.
      */
     rich?: boolean;
+    /**
+     * Active la variation sélectionnable : ajoute une colonne de cases à cocher en début de chaque ligne.
+     * Conforme au pattern DSFR (`data-fr-row-select`, `aria-selected`).
+     */
+    selectable?: boolean;
+    /**
+     * Nom de la clé dans les objets `Row` à utiliser comme identifiant unique pour la sélection.
+     * Si absent, l'index de la ligne est utilisé.
+     */
+    rowKey?: string;
+    /**
+     * Clés des lignes sélectionnées (mode contrôlé).
+     * Si fourni, le composant utilise cette valeur ; sinon, il gère sa propre sélection en interne.
+     */
+    selectedRowKeys?: (string | number)[];
+    /** Callback appelé lorsque la sélection change */
+    onselectionchange?: (selectedKeys: (string | number)[], selectedRows: Row[]) => void;
   }
 
   let {
@@ -223,6 +243,10 @@
     onpagechange,
     onrowsperpagechange,
     rich = false,
+    selectable = false,
+    rowKey,
+    selectedRowKeys,
+    onselectionchange,
   }: Props = $props();
 
   let computedThead = $derived(
@@ -259,14 +283,13 @@
       : (table?.tbodies ?? []),
   );
 
-  // En mode serveur (présence de `totalRows`), le parent gère le découpage : on affiche toutes les rows reçues.
-  // En mode client, le composant calcule lui-même le nombre total depuis les données.
+  // En mode serveur (présence de `totalRows`), le consommateur final gère le découpage, le composant lui affiche toutes les rows reçues.
+  // En mode client (mode par défaut), le composant calcule lui-même le nombre total depuis les données.
   let isServerSide = $derived(totalRows !== undefined);
   let nbRows = $derived(isServerSide ? (totalRows ?? 0) : (computedTbodies[0]?.length ?? 0));
 
   let rowsPerPage = $state(itemsPerPage[0]);
   let currentPage = $state(1);
-
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
 
   let displayedRows = $derived.by(() => {
@@ -298,6 +321,70 @@
     currentPage = page;
     onpagechange?.(page);
     $host()?.dispatchEvent(new CustomEvent("pagechange", { detail: page }));
+  }
+
+  /**
+   * Récupère la clé d'une ligne.
+   * En l'absence de `rowKey`, l'index de la ligne sert d'identifiant.
+   *
+   * @param row - La ligne dont on veut obtenir la clé
+   * @param rowIndex - L'index de la ligne
+   *
+   * @returns La clé de la ligne (propriété `rowKey` ou index)
+   */
+  function getRowKey(row: Row, rowIndex: number): string | number {
+    if (rowKey && row[rowKey] != null) return row[rowKey] as string | number;
+
+    return rowIndex;
+  }
+
+  let internalSelectedKeys = $state<(string | number)[]>([]);
+
+  let isSelectionControlled = $derived(selectedRowKeys !== undefined);
+  let activeSelectedKeys = $derived(
+    isSelectionControlled ? (selectedRowKeys ?? []) : internalSelectedKeys,
+  );
+  let selectedKeysSet = $derived(new Set<string | number>(activeSelectedKeys));
+
+  /**
+   * Vérifie si une ligne est actuellement sélectionnée.
+   *
+   * @param row - La ligne à vérifier
+   * @param rowIndex - L'index de la ligne
+   *
+   * @returns `true` si la ligne est sélectionnée, `false` sinon
+   */
+  function isRowSelected(row: Row, rowIndex: number): boolean {
+    return selectedKeysSet.has(getRowKey(row, rowIndex));
+  }
+
+  /**
+   * Gère la sélection ou la désélection d'une ligne du tableau.
+   *
+   * Met à jour l'état interne de sélection (ou contrôlé de l'extérieur) et déclenche
+   * les callbacks et événements appropriés avec la liste mise à jour des clés sélectionnées
+   * et des lignes correspondantes.
+   *
+   * @param row - La ligne à sélectionner ou désélectionner
+   * @param rowIndex - L'index de la ligne dans le tableau
+   * @param checked - Indique si la ligne doit être sélectionnée (`true`) ou désélectionnée (`false`)
+   */
+  function handleRowSelection(row: Row, rowIndex: number, checked: boolean) {
+    const key = getRowKey(row, rowIndex);
+    const updatedSelection = new Set(activeSelectedKeys);
+
+    if (checked) updatedSelection.add(key);
+    else updatedSelection.delete(key);
+
+    const updatedKeys = Array.from(updatedSelection);
+    const updatedRows = (rows ?? []).filter((r, i) => updatedSelection.has(getRowKey(r, i)));
+
+    if (!isSelectionControlled) internalSelectedKeys = updatedKeys;
+
+    onselectionchange?.(updatedKeys, updatedRows);
+    $host()?.dispatchEvent(
+      new CustomEvent("selectionchange", { detail: { keys: updatedKeys, rows: updatedRows } }),
+    );
   }
 
   /**
@@ -409,15 +496,20 @@
 
             {#if computedThead.length}
               <thead>
-                {#each computedThead as row, rowIndex (rowIndex)}
+                {#each computedThead as row, headerRowIndex (headerRowIndex)}
                   <tr>
+                    {#if selectable && headerRowIndex === 0}
+                      <th class="fr-cell--fixed" role="columnheader">
+                        <span class="fr-sr-only">Sélectionner</span>
+                      </th>
+                    {/if}
                     {#each row as cell, colIndex (colIndex)}
                       <th
                         scope="col"
                         class={getCellClasses(
                           cell,
                           true,
-                          fixedFirstCellHead && rowIndex === 0 && colIndex === 0,
+                          fixedFirstCellHead && headerRowIndex === 0 && colIndex === 0,
                         )}
                       >
                         {cell.content}
@@ -431,7 +523,7 @@
             {#if nbRows === 0}
               <tbody>
                 <tr>
-                  <td colspan={computedThead[0]?.length ?? 1}>
+                  <td colspan={(computedThead[0]?.length ?? 1) + (selectable ? 1 : 0)}>
                     <slot name="empty"></slot>
                   </td>
                 </tr>
@@ -440,18 +532,52 @@
               {#each computedTbodies as tbody, tIndex (tIndex)}
                 <tbody>
                   {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
-                    {@const globalIndex =
-                      tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
+                    {@const rowIndex = tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
+                    <!--
+                      Lookup d'`originalRow` :
+                      - mode serveur : `rows` est la slice de la page → indexer par `index` (local)
+                      - sinon : `rows` contient tout → indexer par `rowIndex` (global)
+                      - mode `table` (`rows` non fourni) : on retombe sur `{}` pour que la sélection
+                        continue de fonctionner (la clé est alors l'index, pas une valeur métier).
+                    -->
+                    {@const originalRow =
+                      tIndex === 0 ? (rows?.[isServerSide ? index : rowIndex] ?? {}) : undefined}
+                    {@const selected = selectable && originalRow ? isRowSelected(originalRow, rowIndex) : undefined}
+
                     <tr
-                      id={id ? `${id}-row-key-${globalIndex}` : undefined}
-                      data-row-key={globalIndex}
+                      id={id ? `${id}-row-key-${rowIndex}` : undefined}
+                      data-row-key={rowIndex}
+                      aria-selected={selected}
                     >
+                      {#if selectable && tIndex === 0 && originalRow}
+                        {@const checkboxId = `${id ?? "table"}-select-checkbox-${rowIndex}`}
+
+                        <th class="fr-cell--fixed" scope="row">
+                          <div class="fr-checkbox-group fr-checkbox-group--sm">
+                            <input
+                              type="checkbox"
+                              data-fr-row-select="true"
+                              id={checkboxId}
+                              checked={selected}
+                              onchange={(event) =>
+                                handleRowSelection(
+                                  originalRow,
+                                  rowIndex,
+                                  (event.currentTarget as HTMLInputElement).checked,
+                                )}
+                            />
+                            <label class="fr-label" for={checkboxId}>
+                              Sélectionner la ligne {rowIndex + 1}
+                            </label>
+                          </div>
+                        </th>
+                      {/if}
                       {#each row as cell, cellIndex (cellIndex)}
                         {@const col = columns?.[cellIndex]}
                         <td
                           class={getCellClasses(cell)}
                           use:cellSlot={col && (rich || col.rich)
-                            ? `cell:${col.key}:${globalIndex}`
+                            ? `cell:${col.key}:${rowIndex}`
                             : null}
                         >
                           {cell.content}
@@ -528,7 +654,12 @@
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/table/table.main.min.css";
+  @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("table");
+
+  .fr-sr-only {
+    @include visually-hidden();
+  }
 </style>
