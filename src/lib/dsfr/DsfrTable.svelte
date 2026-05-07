@@ -256,6 +256,7 @@
     rich = false,
   }: Props = $props();
 
+  // Génère l'en-tête du tableau à partir de `columns` si fournies _(custom API)_, sinon à partir de `table` _(API DSFR)_.
   let computedThead = $derived(
     columns
       ? [
@@ -273,6 +274,7 @@
       : (table?.thead ?? []),
   );
 
+  // Génère le corps du tableau à partir de `rows` et `columns` si fournies _(custom API)_, sinon à partir de `table` _(API DSFR)_.
   let computedTbodies = $derived(
     rows && columns
       ? [
@@ -300,11 +302,17 @@
 
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
 
+  // Calcule les lignes à afficher en fonction du mode (serveur/client) et de la pagination
   let displayedRows = $derived.by(() => {
     const allRows = computedTbodies[0] ?? [];
+
+    // En mode serveur, toutes les lignes reçues sont déjà filtrées par le parent
     if (isServerSide) return allRows;
+
+    // Sans pagination ni sélection, afficher toutes les lignes
     if (!hasFooterSelect && !hasFooterPagination) return allRows;
 
+    // Découper les lignes selon la page courante et le nombre de lignes par page
     return allRows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
   });
 
@@ -317,16 +325,31 @@
     })),
   );
 
+  /**
+   * Gère le changement du nombre de lignes à afficher par page.
+   * Réinitialise la page courante à 1 et émet l'événement associé.
+   *
+   * @param {string} value - La nouvelle valeur du nombre de lignes par page (sous forme de chaîne)
+   */
   function handleRowsPerPageChange(value: string) {
     const newValue = parseInt(value, 10);
+
     rowsPerPage = newValue;
     currentPage = 1;
+
     onrowsperpagechanged?.(newValue);
     $host()?.dispatchEvent(new CustomEvent("rowsperpagechanged", { detail: newValue }));
   }
 
+  /**
+   * Gère le changement de page.
+   * Met à jour la page courante et émet l'événement associé.
+   *
+   * @param {number} page - La nouvelle page courante
+   */
   function handlePageChange(page: number) {
     currentPage = page;
+
     onpagechanged?.(page);
     $host()?.dispatchEvent(new CustomEvent("pagechanged", { detail: page }));
   }
