@@ -166,9 +166,17 @@
      * et délègue la gestion des données au parent via `onpagechange` / `onrowsperpagechange`.
      */
     totalRows?: number;
-    /** Callback appelé lors d'un changement de page */
+    /**
+     * Callback appelé lors d'un changement de page.
+     * En mode web component, un `CustomEvent<number>` `pagechange` est également dispatché
+     * sur l'élément (utilisable via `<dsfr-table onpagechange={(e) => …}>`).
+     */
     onpagechange?: (page: number) => void;
-    /** Callback appelé lors d'un changement du nombre de lignes par page */
+    /**
+     * Callback appelé lors d'un changement du nombre de lignes par page.
+     * En mode web component, un `CustomEvent<number>` `rowsperpagechange` est également dispatché
+     * sur l'élément (utilisable via `<dsfr-table onrowsperpagechange={(e) => …}>`).
+     */
     onrowsperpagechange?: (rowsPerPage: number) => void;
     /**
      * Active les slots nommés `cell:<colKey>:<rowIndex>` sur **toutes** les cellules du tableau,
@@ -283,11 +291,13 @@
     rowsPerPage = newValue;
     currentPage = 1;
     onrowsperpagechange?.(newValue);
+    $host()?.dispatchEvent(new CustomEvent("rowsperpagechange", { detail: newValue }));
   }
 
   function handlePageChange(page: number) {
     currentPage = page;
     onpagechange?.(page);
+    $host()?.dispatchEvent(new CustomEvent("pagechange", { detail: page }));
   }
 
   /**
