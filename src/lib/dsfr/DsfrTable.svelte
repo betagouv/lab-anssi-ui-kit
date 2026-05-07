@@ -99,6 +99,14 @@
     sort?: boolean;
     inline?: boolean;
     multiline?: boolean;
+    /**
+     * Active le slot nommé `cell:<key>:<rowIndex>` uniquement sur les cellules de cette colonne.
+     * Permet une activation granulaire de la personnalisation par light DOM, sans payer le coût
+     * d'un `<slot>` par cellule sur les colonnes qui n'en ont pas besoin.
+     *
+     * Cumulatif avec la prop globale `rich` : si l'une des deux est `true`, le slot est activé.
+     */
+    rich?: boolean;
   }
 
   export interface Props {
@@ -163,7 +171,7 @@
     /** Callback appelé lors d'un changement du nombre de lignes par page */
     onrowsperpagechange?: (rowsPerPage: number) => void;
     /**
-     * Active les slots nommés `cell:<colKey>:<rowIndex>` sur chaque cellule du tableau,
+     * Active les slots nommés `cell:<colKey>:<rowIndex>` sur **toutes** les cellules du tableau,
      * permettant d'injecter du contenu personnalisé via le light DOM
      * (ex: `<div slot="cell:maColonne:0">…</div>`).
      *
@@ -171,7 +179,8 @@
      * Le rendu standard sert de fallback si aucun slot n'est fourni.
      *
      * ⚠️ Coût non-négligeable sur les gros tableaux : un `<slot>` est créé par cellule.
-     * À n'activer que si la fonctionnalité est utilisée.
+     * Pour une activation ciblée par colonne (sans payer le coût sur les autres),
+     * utiliser plutôt `Column.rich` au cas par cas.
      */
     rich?: boolean;
   }
@@ -431,7 +440,9 @@
                         {@const col = columns?.[cellIndex]}
                         <td
                           class={getCellClasses(cell)}
-                          use:cellSlot={rich && col ? `cell:${col.key}:${globalIndex}` : null}
+                          use:cellSlot={col && (rich || col.rich)
+                            ? `cell:${col.key}:${globalIndex}`
+                            : null}
                         >
                           {cell.content}
                         </td>
