@@ -5,28 +5,28 @@
   import {
     tableArgTypes,
     tableArgs,
+    getColSizeTableArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/table/template/stories/table-arg-types.js";
 
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
-  import tableData from "../utilitaires/tableData.json";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
-  const citiesColumns = tableData.thead[0].map((cell, i) => ({
-    key: String(i),
-    label: cell.content,
-  }));
+  type CellSize = "xs" | "sm" | "md" | "lg";
+  type DsfrCell = { content: string };
+  type DsfrTableArgs = { thead: DsfrCell[][]; tbodies: DsfrCell[][][] };
 
-  const citiesRows = tableData.tbodies[0].map((row) =>
-    Object.fromEntries(row.map((cell, i) => [String(i), cell.content])),
-  );
-
-  // État local pour la story "pagination côté serveur"
-  let serverPage = $state(1);
-  let serverPerPage = $state(5);
-  let serverRows = $derived(
-    citiesRows.slice((serverPage - 1) * serverPerPage, serverPage * serverPerPage),
-  );
+  // Le helper DSFR `getColSizeTableArgs` exprime la taille de colonne via `attributes.class`
+  // (ex: `fr-col--xs`). Le composant DsfrTable lit `cell.size` directement, on adapte donc
+  // la structure pour que la classe soit appliquée par le composant.
+  function adaptColSize(table: DsfrTableArgs) {
+    const sizes: CellSize[] = ["xs", "sm", "md", "lg"];
+    return {
+      thead: table.thead.map((row) =>
+        row.map((cell, i) => ({ content: cell.content, size: sizes[i] })),
+      ),
+      tbodies: table.tbodies,
+    };
+  }
 
   const { Story } = defineMeta({
     title: "Composants/dsfr/Table",
@@ -87,28 +87,7 @@
         table: { category: "Slots" },
       },
     },
-    args: {
-      ...tableArgs,
-      columns: citiesColumns,
-      rows: citiesRows,
-      buttons: [
-        {
-          label: "Action tableau",
-          kind: "primary",
-          disabled: false,
-          icon: "checkbox-circle-line",
-        },
-        {
-          label: "Action tableau",
-          kind: "secondary",
-          disabled: false,
-          icon: "checkbox-circle-line",
-        },
-      ],
-      itemsPerPage: [5, 10, 20],
-      layoutFixed: false,
-      fixedFirstCellHead: false,
-    },
+    args: tableArgs,
     parameters: {
       docs: {
         source: {
@@ -145,58 +124,84 @@
     has-footer-select={args.hasFooterSelect || undefined}
     has-footer-pagination={args.hasFooterPagination || undefined}
     has-footer-buttons={args.hasFooterButtons || undefined}
-    columns={args.columns}
-    rows={args.rows}
-    items-per-page={JSON.stringify(args.itemsPerPage)}
-  >
-    <dsfr-buttons-group slot="footerbuttons" buttons={args.buttons} inline="true"
-    ></dsfr-buttons-group>
-  </dsfr-table>
+    table={args.table}
+  ></dsfr-table>
 {/snippet}
 
 <Story name="Defaut" />
 
+<Story name="Taille small" args={{ size: "sm" }} />
+
+<Story name="Taille medium" args={{ size: "md" }} />
+
+<Story name="Taille large" args={{ size: "lg" }} />
+
+<Story name="Avec bordure" args={{ bordered: true }} />
+
+<Story name="Sans scroll" args={{ noScroll: true }} />
+
+<Story name="Multiligne" args={{ multiline: true }} />
+
 <Story
-  name="Avec pagination"
-  args={{
-    hasFooter: true,
-    hasFooterSelect: true,
-    hasFooterPagination: true,
-  }}
+  name="Multiligne avec taille de colonnes minimale"
+  args={{ multiline: true, table: adaptColSize(getColSizeTableArgs()) }}
 />
 
-<Story name="Tableau vide avec slot personnalisé">
-  {#snippet template(_args: Args)}
-    <DsfrTable
-      id="table-empty-custom"
-      caption="Grandes villes de France"
-      columns={citiesColumns}
-      rows={[]}
-    >
-      <p slot="empty" class="fr-text--sm">Aucune ville ne correspond à votre recherche.</p>
-    </DsfrTable>
-  {/snippet}
-</Story>
+<!--
+  Stories DSFR ci-dessous masquées : elles nécessitent des fonctionnalités absentes
+  du composant DsfrTable actuel. À décommenter au fur et à mesure de leur implémentation.
+-->
 
-<Story name="Avec pagination côté serveur">
-  {#snippet template(_args: Args)}
-    <DsfrTable
-      id="table-server"
-      caption="Grandes villes de France (pagination côté serveur)"
-      columns={citiesColumns}
-      rows={serverRows}
-      totalRows={citiesRows.length}
-      hasFooter
-      hasFooterSelect
-      hasFooterPagination
-      itemsPerPage={[5, 10, 20]}
-      onpagechange={(page) => {
-        serverPage = page;
-      }}
-      onrowsperpagechange={(perPage) => {
-        serverPerPage = perPage;
-        serverPage = 1;
-      }}
-    />
-  {/snippet}
-</Story>
+<!--
+  TODO: nécessite un row header (<th scope="row">) sur la 1ère colonne, non géré par
+  le composant qui rend systématiquement des <td>.
+<Story
+  name="Avec une colonne fixe"
+  args={{ table: getFixedColTableArgs() }}
+/>
+-->
+
+<!--
+  TODO: idem "Avec une colonne fixe" + breakpoint sur la cellule fixée.
+<Story
+  name="Avec une colonne fixe à partir du breakpoint md"
+  args={{ table: getFixedColTableArgs("md") }}
+/>
+-->
+
+<!--
+  TODO: nécessite un row header avec checkbox, non géré par le composant.
+<Story
+  name="Sélectionnable"
+  args={{ table: getSelectableTableArgs() }}
+/>
+-->
+
+<!--
+  TODO: idem "Sélectionnable" + état "ligne sélectionnée".
+<Story
+  name="Sélectionnable avec ligne sélectionnée"
+  args={{ table: getSelectableTableSelectedLineArgs() }}
+/>
+-->
+
+<!--
+  TODO: nécessite la prise en charge de rowspan / colspan / headers, non géré par le composant.
+<Story
+  name="Complexe"
+  args={{
+    bordered: true,
+    captionDetail: getComplexTableCaptionDetails(),
+    table: getComplexTableArgs(),
+  }}
+/>
+-->
+
+<!--
+  TODO: nécessite un row header + des contenus HTML riches injectables, non géré par
+  le composant en l'état (la prop `rich` ne couvre pas les cellules d'en-tête de ligne).
+<Story
+  name="Divers"
+  args={{ table: getMiscellaneousTableArgs() }}
+/>
+-->
