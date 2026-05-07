@@ -34,7 +34,6 @@
 />
 
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
@@ -100,12 +99,6 @@
     sort?: boolean;
     inline?: boolean;
     multiline?: boolean;
-    /**
-     * Snippet de rendu personnalisé pour les cellules de cette colonne (Svelte uniquement).
-     * Reçoit la valeur brute de la cellule et la ligne d'origine complète.
-     * Non sérialisable en JSON : incompatible avec le passage via attribut HTML.
-     */
-    render?: Snippet<[value: unknown, row: Row]>;
   }
 
   export interface Props {
@@ -174,8 +167,8 @@
      * permettant d'injecter du contenu personnalisé via le light DOM
      * (ex: `<div slot="cell:maColonne:0">…</div>`).
      *
-     * Utile principalement en contexte web component, où `Column.render` (Svelte uniquement)
-     * n'est pas disponible. Le rendu standard sert de fallback si aucun slot n'est fourni.
+     * Utile principalement en contexte web component.
+     * Le rendu standard sert de fallback si aucun slot n'est fourni.
      *
      * ⚠️ Coût non-négligeable sur les gros tableaux : un `<slot>` est créé par cellule.
      * À n'activer que si la fonctionnalité est utilisée.
@@ -258,14 +251,6 @@
   let currentPage = $state(1);
 
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
-
-  // Lignes d'origine (Row[]) alignées sur displayedRows, pour les render snippets par colonne.
-  let displayedOriginalRows = $derived.by((): Row[] => {
-    if (!rows) return [];
-    if (isServerSide) return rows;
-    if (!hasFooterSelect && !hasFooterPagination) return rows;
-    return rows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-  });
 
   let displayedRows = $derived.by(() => {
     const allRows = computedTbodies[0] ?? [];
@@ -448,14 +433,7 @@
                           class={getCellClasses(cell)}
                           use:cellSlot={rich && col ? `cell:${col.key}:${globalIndex}` : null}
                         >
-                          {#if col?.render && tIndex === 0}
-                            {@render col.render(
-                              displayedOriginalRows[index][col.key],
-                              displayedOriginalRows[index],
-                            )}
-                          {:else}
-                            {cell.content}
-                          {/if}
+                          {cell.content}
                         </td>
                       {/each}
                     </tr>
