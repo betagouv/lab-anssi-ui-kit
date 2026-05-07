@@ -157,11 +157,10 @@
       id="table-nis2"
       caption="Liste des exigences NIS 2"
       multiline
-      rich
       columns={[
-        { key: "exigence", label: "Exigence NIS 2", multiline: true },
-        { key: "correspondance", label: "Correspondance" },
-        { key: "isoRefs", label: "Référence ISO 27001/27002", multiline: true },
+        { key: "exigence", label: "Exigence NIS 2", multiline: true, rich: true },
+        { key: "correspondance", label: "Correspondance", rich: true },
+        { key: "isoRefs", label: "Référence ISO 27001/27002", multiline: true, rich: true },
         { key: "observation", label: "Observations", multiline: true },
       ]}
       rows={nisRows}
