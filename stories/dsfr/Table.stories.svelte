@@ -111,14 +111,11 @@
     bordered={args.bordered || undefined}
     no-scroll={args.noScroll || undefined}
     multiline={args.multiline || undefined}
-    layout-fixed={args.layoutFixed || undefined}
     size={args.size}
-    fixed-first-cell-head={args.fixedFirstCellHead || undefined}
     has-header={args.hasHeader || undefined}
     has-header-segmented={args.hasHeaderSegmented || undefined}
     has-header-search={args.hasHeaderSearch || undefined}
     has-header-details={args.hasHeaderDetails || undefined}
-    header-details={args.headerDetails}
     has-header-buttons={args.hasHeaderButtons || undefined}
     has-footer={args.hasFooter || undefined}
     has-footer-select={args.hasFooterSelect || undefined}
