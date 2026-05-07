@@ -128,6 +128,8 @@
     has-footer-pagination={args.hasFooterPagination || undefined}
     has-footer-buttons={args.hasFooterButtons || undefined}
     table={args.table}
+    selectable={args.selectable || undefined}
+    selected-row-keys={args.selectedRowKeys ? JSON.stringify(args.selectedRowKeys) : undefined}
   ></dsfr-table>
 {/snippet}
 
@@ -173,20 +175,17 @@
 -->
 
 <!--
-  TODO: nécessite un row header avec checkbox, non géré par le composant.
-<Story
-  name="Sélectionnable"
-  args={{ table: getSelectableTableArgs() }}
-/>
+  Note : les helpers DSFR `getSelectableTableArgs` / `getSelectableTableSelectedLineArgs`
+  préfixent eux-mêmes une colonne checkbox dans le tableau. Notre `DsfrTable` la génère
+  automatiquement via la prop `selectable`, on part donc de la table simple et on délègue
+  l'ajout de la colonne au composant.
 -->
+<Story name="Sélectionnable" args={{ selectable: true }} />
 
-<!--
-  TODO: idem "Sélectionnable" + état "ligne sélectionnée".
 <Story
   name="Sélectionnable avec ligne sélectionnée"
-  args={{ table: getSelectableTableSelectedLineArgs() }}
+  args={{ selectable: true, selectedRowKeys: [1] }}
 />
--->
 
 <!--
   TODO: nécessite la prise en charge de rowspan / colspan / headers, non géré par le composant.

@@ -142,7 +142,7 @@ $dash-height: var(--dash-height, 2px) !default;
 ///
 @mixin set-themeable-checkbox-sm() {
   &--sm {
-    --checkbox-gap: -1.5rem;
+    --checkbox-gap: var(--checkbox-gap-sm, -1.5rem);
     --checkmark-size: 1rem;
     --checkmark-scale: 1;
 
