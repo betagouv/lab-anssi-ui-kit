@@ -123,6 +123,7 @@
     has-footer-buttons={args.hasFooterButtons || undefined}
     table={args.table}
     selectable={args.selectable || undefined}
+    select-all={args.selectAll || undefined}
     selected-row-keys={args.selectedRowKeys ? JSON.stringify(args.selectedRowKeys) : undefined}
   ></dsfr-table>
 {/snippet}
@@ -179,6 +180,11 @@
 <Story
   name="Sélectionnable avec ligne sélectionnée"
   args={{ selectable: true, selectedRowKeys: [1] }}
+/>
+
+<Story
+  name="Sélectionnable avec tout sélectionner"
+  args={{ selectable: true, selectAll: true }}
 />
 
 <!--

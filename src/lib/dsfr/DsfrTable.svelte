@@ -30,6 +30,7 @@
       totalRows: { attribute: "total-rows", type: "Number" },
       rich: { attribute: "rich", type: "Boolean" },
       selectable: { attribute: "selectable", type: "Boolean" },
+      selectAll: { attribute: "select-all", type: "Boolean" },
       rowKey: { attribute: "row-key", type: "String" },
       selectedRowKeys: { attribute: "selected-row-keys", type: "Array" },
     },
@@ -200,6 +201,13 @@
      */
     selectable?: boolean;
     /**
+     * Affiche une case à cocher « tout sélectionner » dans l'en-tête du tableau.
+     * Permet de sélectionner/désélectionner toutes les lignes de la page courante.
+     * L'état indéterminé s'active automatiquement quand une partie des lignes est sélectionnée.
+     * Nécessite `selectable` pour être actif.
+     */
+    selectAll?: boolean;
+    /**
      * Nom de la clé dans les objets `Row` à utiliser comme identifiant unique pour la sélection.
      * Si absent, l'index de la ligne est utilisé.
      */
@@ -244,6 +252,7 @@
     onrowsperpagechange,
     rich = false,
     selectable = false,
+    selectAll = false,
     rowKey,
     selectedRowKeys,
     onselectionchange,
@@ -346,6 +355,24 @@
   );
   let selectedKeysSet = $derived(new Set<string | number>(activeSelectedKeys));
 
+  let displayedRowKeys = $derived.by(() => {
+    if (!selectable || !selectAll) return [];
+
+    return displayedRows.map((_, index) => {
+      const rowIndex = (currentPage - 1) * rowsPerPage + index;
+      const originalRow = rows?.[isServerSide ? index : rowIndex] ?? {};
+
+      return getRowKey(originalRow, rowIndex);
+    });
+  });
+
+  let allRowsSelected = $derived(
+    displayedRowKeys.length > 0 && displayedRowKeys.every((key) => selectedKeysSet.has(key)),
+  );
+  let someRowsSelected = $derived(
+    displayedRowKeys.some((key) => selectedKeysSet.has(key)) && !allRowsSelected,
+  );
+
   /**
    * Vérifie si une ligne est actuellement sélectionnée.
    *
@@ -375,6 +402,48 @@
 
     if (checked) updatedSelection.add(key);
     else updatedSelection.delete(key);
+
+    const updatedKeys = Array.from(updatedSelection);
+    const updatedRows = (rows ?? []).filter((r, i) => updatedSelection.has(getRowKey(r, i)));
+
+    if (!isSelectionControlled) internalSelectedKeys = updatedKeys;
+
+    onselectionchange?.(updatedKeys, updatedRows);
+    $host()?.dispatchEvent(
+      new CustomEvent("selectionchange", { detail: { keys: updatedKeys, rows: updatedRows } }),
+    );
+  }
+
+  /**
+   * Action Svelte qui applique l'état `indeterminate` à une case à cocher.
+   *
+   * @param node - L'élément input de type checkbox à mettre à jour.
+   * @param value - L'état initial indéterminé à appliquer.
+   * @returns Un objet avec une méthode `update` pour synchroniser les changements de valeur.
+   */
+  function setIndeterminate(node: HTMLInputElement, value: boolean) {
+    node.indeterminate = value;
+
+    return {
+      update(newValue: boolean) {
+        node.indeterminate = newValue;
+      },
+    };
+  }
+
+  /**
+   * Sélectionne ou désélectionne toutes les lignes actuellement affichées,
+   * puis émet l'événement de changement de sélection.
+   *
+   * @param checked - Indique si toutes les lignes visibles doivent être sélectionnées (`true`) ou désélectionnées (`false`).
+   */
+  function handleSelectAll(checked: boolean) {
+    const updatedSelection = new Set(activeSelectedKeys);
+
+    for (const key of displayedRowKeys) {
+      if (checked) updatedSelection.add(key);
+      else updatedSelection.delete(key);
+    }
 
     const updatedKeys = Array.from(updatedSelection);
     const updatedRows = (rows ?? []).filter((r, i) => updatedSelection.has(getRowKey(r, i)));
@@ -500,7 +569,23 @@
                   <tr>
                     {#if selectable && headerRowIndex === 0}
                       <th class="fr-cell--fixed" role="columnheader">
-                        <span class="fr-sr-only">Sélectionner</span>
+                        {#if selectAll}
+                          {@const selectAllId = `${id ?? "table"}-select-all`}
+                          
+                          <div class="fr-checkbox-group fr-checkbox-group--sm">
+                            <input
+                              type="checkbox"
+                              id={selectAllId}
+                              checked={allRowsSelected}
+                              use:setIndeterminate={someRowsSelected}
+                              onchange={(event) =>
+                                handleSelectAll((event.currentTarget as HTMLInputElement).checked)}
+                            />
+                            <label class="fr-label" for={selectAllId}> Sélectionner tout </label>
+                          </div>
+                        {:else}
+                          <span class="fr-sr-only">Sélectionner</span>
+                        {/if}
                       </th>
                     {/if}
                     {#each row as cell, colIndex (colIndex)}
@@ -532,7 +617,8 @@
               {#each computedTbodies as tbody, tIndex (tIndex)}
                 <tbody>
                   {#each tIndex === 0 ? displayedRows : tbody as row, index (index)}
-                    {@const rowIndex = tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
+                    {@const rowIndex =
+                      tIndex === 0 ? (currentPage - 1) * rowsPerPage + index : index}
                     <!--
                       Lookup d'`originalRow` :
                       - mode serveur : `rows` est la slice de la page → indexer par `index` (local)
@@ -542,7 +628,8 @@
                     -->
                     {@const originalRow =
                       tIndex === 0 ? (rows?.[isServerSide ? index : rowIndex] ?? {}) : undefined}
-                    {@const selected = selectable && originalRow ? isRowSelected(originalRow, rowIndex) : undefined}
+                    {@const selected =
+                      selectable && originalRow ? isRowSelected(originalRow, rowIndex) : undefined}
 
                     <tr
                       id={id ? `${id}-row-key-${rowIndex}` : undefined}

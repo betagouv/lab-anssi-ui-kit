@@ -98,6 +98,20 @@
       selectable={true}
       columns={citiesColumns}
       rows={citiesRows.slice(0, 5)}
+      select-all={_args.selectAll || undefined}
+    ></dsfr-table>
+  {/snippet}
+</Story>
+
+<Story name="Sélectionnable avec tout sélectionner">
+  {#snippet template(_args: Args)}
+    <dsfr-table
+      id="table-selectable-all"
+      caption="Grandes villes de France"
+      selectable={true}
+      select-all={true}
+      columns={citiesColumns}
+      rows={citiesRows.slice(0, 8)}
     ></dsfr-table>
   {/snippet}
 </Story>
@@ -111,6 +125,7 @@
       row-key="id"
       selected-row-keys={JSON.stringify(["ville-0", "ville-1", "ville-5"])}
       columns={citiesColumns}
+      select-all={_args.selectAll || undefined}
       rows={villesAvecId}
     ></dsfr-table>
   {/snippet}
@@ -133,6 +148,7 @@
       columns={citiesColumns}
       rows={villesAvecId}
       selected-row-keys={JSON.stringify(selectedKeys)}
+      select-all={_args.selectAll || undefined}
       onselectionchange={(
         event: CustomEvent<{
           keys: (string | number)[];
