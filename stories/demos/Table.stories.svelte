@@ -172,6 +172,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       selectable={true}
       columns={citiesColumns}
       rows={citiesRows.slice(0, 5)}
+      select-all={_args.selectAll || undefined}
     ></dsfr-table>
   {/snippet}
 </Story>
@@ -185,6 +186,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       row-key="id"
       selected-row-keys={JSON.stringify(["ville-0", "ville-1", "ville-5"])}
       columns={citiesColumns}
+      select-all={_args.selectAll || undefined}
       rows={villesAvecId}
     ></dsfr-table>
   {/snippet}
@@ -205,6 +207,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       selectable={true}
       row-key="id"
       columns={citiesColumns}
+      select-all={_args.selectAll || undefined}
       rows={villesAvecId}
       selected-row-keys={JSON.stringify(selectedKeys)}
       onselectionchanged={(
@@ -216,6 +219,19 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
         selectedKeys = event.detail.keys;
         selectedRowsCount = event.detail.rows.length;
       }}
+    ></dsfr-table>
+  {/snippet}
+</Story>
+
+<Story name="Sélectionnable avec checkbox 'Tout sélectionner'">
+  {#snippet template(_args: Args)}
+    <dsfr-table
+      id="table-selectable-all"
+      caption="Grandes villes de France"
+      selectable={true}
+      select-all={true}
+      columns={citiesColumns}
+      rows={citiesRows.slice(0, 8)}
     ></dsfr-table>
   {/snippet}
 </Story>
