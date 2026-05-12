@@ -3,6 +3,7 @@
 
 $checkmark-scale: var(--checkmark-scale, 0.7) !default;
 $checkmark-size: var(--checkmark-size, 24px) !default;
+$dash-height: var(--dash-height, 2px) !default;
 
 /// Ajoute un style `display` au composant hôte dans le Shadow DOM.
 /// Permet également d'injecter du contenu CSS supplémentaire via `@content`.
@@ -57,6 +58,7 @@ $checkmark-size: var(--checkmark-size, 24px) !default;
 /// Reproduis une coche (checkmark) en pure CSS via des bordures.
 ///
 /// @param {Color} $color [var(--border-action-high-blue-france)] - Couleur de la coche.
+///
 @mixin set-icon-check($icon-color: var(--border-action-high-blue-france)) {
   content: "";
   display: inline-block;
@@ -68,25 +70,60 @@ $checkmark-size: var(--checkmark-size, 24px) !default;
   @content;
 }
 
+/// Reproduis un tiret (indéterminé) en pure CSS via un arrière-plan.
+///
+/// @param {Color} $icon-color [var(--border-action-high-blue-france)] - Couleur du tiret.
+///
+@mixin set-icon-indeterminate($icon-color: var(--border-action-high-blue-france)) {
+  content: "";
+  display: inline-block;
+  background-color: $icon-color;
+  width: calc($checkmark-size - 8px);
+  height: $dash-height;
+
+  @content;
+}
+
 /// Applique des styles personnalisés à une case à cocher en affichant une coche personnalisée.
 ///
 /// Cette mixin masque l'icône par défaut de la case à cocher et ajoute une coche stylisée
 /// en pure CSS lorsque la case est cochée.
 ///
 @mixin set-themeable-checkbox() {
-  input[type="checkbox"]:checked + label {
-    &::before {
-      --data-uri-svg: none;
+  input[type="checkbox"] {
+    &:checked + label,
+    &:indeterminate + label {
+      &::before {
+        --data-uri-svg: none;
+      }
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+      }
     }
 
-    &::after {
-      @include set-icon-check(var(--text-inverted-blue-france)) {
-        left: var(--checkbox-gap, -2rem);
-        position: absolute;
-        top: calc((#{$checkmark-size} * #{$checkmark-scale}) / 2);
-        transform: translateY(-50%);
-        scale: $checkmark-scale;
-        z-index: 1;
+    &:checked + label {
+      &::after {
+        @include set-icon-check(var(--text-inverted-blue-france)) {
+          left: var(--checkbox-gap, -2rem);
+          top: calc((#{$checkmark-size} * #{$checkmark-scale}) / 2);
+          transform: translateY(-50%);
+          scale: $checkmark-scale;
+        }
+      }
+    }
+
+    &:indeterminate + label {
+      &::before {
+        background-color: var(--background-active-blue-france);
+      }
+
+      &::after {
+        @include set-icon-indeterminate(var(--text-inverted-blue-france)) {
+          top: calc(($checkmark-size - $dash-height) / 2);
+          left: calc(var(--checkbox-gap, -2rem) + 4px);
+        }
       }
     }
   }

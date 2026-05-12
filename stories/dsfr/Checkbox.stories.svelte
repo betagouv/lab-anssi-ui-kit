@@ -22,6 +22,10 @@
         control: false,
         table: { category: "Slots" },
       },
+      indeterminate: {
+        control: "boolean",
+        description: "Attribut indeterminate de la checkbox",
+      },
     },
     args: checkboxArgs,
     parameters: {
@@ -52,6 +56,7 @@
     valid-message={args.validMessage}
     form={args.form}
     required={args.required || undefined}
+    indeterminate={args.indeterminate || undefined}
   ></dsfr-checkbox>
 {/snippet}
 
@@ -83,6 +88,7 @@
       valid-message={args.validMessage}
       form={args.form}
       required={args.required || undefined}
+      indeterminate={args.indeterminate || undefined}
     >
       <span slot="hint">
         Texte de description avec un&nbsp;<dsfr-link
@@ -95,3 +101,5 @@
     </dsfr-checkbox>
   {/snippet}
 </Story>
+
+<Story name="Etat indéterminé" args={{ ...checkboxArgs, indeterminate: true }} />

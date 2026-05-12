@@ -113,3 +113,20 @@ export function createSlot(node: HTMLElement, slotName: string | null) {
     },
   };
 }
+
+/**
+ * Action Svelte qui applique l'état `indeterminate` à une case à cocher.
+ *
+ * @param node - L'élément input de type checkbox à mettre à jour.
+ * @param value - L'état initial indéterminé à appliquer.
+ * @returns Un objet avec une méthode `update` pour synchroniser les changements de valeur.
+ */
+export function setIndeterminate(node: HTMLInputElement, value: boolean) {
+  node.indeterminate = value;
+
+  return {
+    update(newValue: boolean) {
+      node.indeterminate = newValue;
+    },
+  };
+}

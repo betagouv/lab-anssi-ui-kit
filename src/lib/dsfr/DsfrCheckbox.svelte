@@ -15,6 +15,7 @@
       validMessage: { attribute: "valid-message", type: "String" },
       form: { attribute: "form", type: "String", reflect: true },
       required: { attribute: "required", type: "Boolean" },
+      indeterminate: { attribute: "indeterminate", type: "Boolean", reflect: true },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -34,6 +35,8 @@
   import { setThemeable } from "$lib/utilitaires";
   import { createEventDispatcher } from "svelte";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
+  import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
+
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -68,6 +71,8 @@
     required?: boolean;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Attribut indeterminate de la checkbox */
+    indeterminate?: boolean;
   }
 
   const dispatch = createEventDispatcher();
@@ -87,6 +92,7 @@
     form,
     required,
     internals,
+    indeterminate,
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
@@ -178,6 +184,7 @@
     oninvalid={formValidation.handleInvalid}
     {form}
     {required}
+    use:setIndeterminate={indeterminate}
   />
   <label class="fr-label" for={id}>
     {#if label}
