@@ -190,10 +190,10 @@
       hasFooterSelect
       hasFooterPagination
       itemsPerPage={[5, 10, 20]}
-      onpagechange={(page) => {
+      onpagechanged={(page) => {
         serverPage = page;
       }}
-      onrowsperpagechange={(perPage) => {
+      onrowsperpagechanged={(perPage) => {
         serverPerPage = perPage;
         serverPage = 1;
       }}

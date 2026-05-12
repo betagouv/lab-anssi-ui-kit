@@ -163,21 +163,21 @@
     /**
      * Nombre total de lignes (mode pagination serveur).
      * Si fourni, désactive le slicing interne : le composant affiche les `rows` telles quelles
-     * et délègue la gestion des données au parent via `onpagechange` / `onrowsperpagechange`.
+     * et délègue la gestion des données au parent via `onpagechanged` / `onrowsperpagechanged`.
      */
     totalRows?: number;
     /**
      * Callback appelé lors d'un changement de page.
-     * En mode web component, un `CustomEvent<number>` `pagechange` est également dispatché
-     * sur l'élément (utilisable via `<dsfr-table onpagechange={(e) => …}>`).
+     * En mode web component, un `CustomEvent<number>` `pagechanged` est également dispatché
+     * sur l'élément (utilisable via `<dsfr-table onpagechanged={(e) => …}>`).
      */
-    onpagechange?: (page: number) => void;
+    onpagechanged?: (page: number) => void;
     /**
      * Callback appelé lors d'un changement du nombre de lignes par page.
-     * En mode web component, un `CustomEvent<number>` `rowsperpagechange` est également dispatché
-     * sur l'élément (utilisable via `<dsfr-table onrowsperpagechange={(e) => …}>`).
+     * En mode web component, un `CustomEvent<number>` `rowsperpagechanged` est également dispatché
+     * sur l'élément (utilisable via `<dsfr-table onrowsperpagechanged={(e) => …}>`).
      */
-    onrowsperpagechange?: (rowsPerPage: number) => void;
+    onrowsperpagechanged?: (rowsPerPage: number) => void;
     /**
      * Active les slots nommés `cell:<colKey>:<rowIndex>` sur **toutes** les cellules du tableau,
      * permettant d'injecter du contenu personnalisé via le light DOM
@@ -220,8 +220,8 @@
     rows,
     itemsPerPage = [5, 10, 20],
     totalRows,
-    onpagechange,
-    onrowsperpagechange,
+    onpagechanged,
+    onrowsperpagechanged,
     rich = false,
   }: Props = $props();
 
@@ -290,14 +290,14 @@
     const newValue = parseInt(value, 10);
     rowsPerPage = newValue;
     currentPage = 1;
-    onrowsperpagechange?.(newValue);
-    $host()?.dispatchEvent(new CustomEvent("rowsperpagechange", { detail: newValue }));
+    onrowsperpagechanged?.(newValue);
+    $host()?.dispatchEvent(new CustomEvent("rowsperpagechanged", { detail: newValue }));
   }
 
   function handlePageChange(page: number) {
     currentPage = page;
-    onpagechange?.(page);
-    $host()?.dispatchEvent(new CustomEvent("pagechange", { detail: page }));
+    onpagechanged?.(page);
+    $host()?.dispatchEvent(new CustomEvent("pagechanged", { detail: page }));
   }
 
   /**
