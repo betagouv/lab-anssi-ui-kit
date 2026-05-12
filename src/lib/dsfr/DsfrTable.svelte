@@ -110,10 +110,10 @@
   }
 
   export interface Props {
-    /** Id du tableau */
-    id?: string;
     /** Titre du tableau */
     caption: string;
+    /** Id du tableau */
+    id?: string;
     /** Description précise du tableau */
     captionDetail?: string;
     /** Cache le texte de la caption (reste présent pour l'accessibilité) */
@@ -192,6 +192,37 @@
      */
     rich?: boolean;
   }
+
+  let wrapperEl: HTMLDivElement | undefined = $state();
+  let captionEl: HTMLTableCaptionElement | undefined = $state();
+
+  /**
+   * Observateur de redimensionnement qui met à jour le décalage du tableau en fonction de la hauteur de la légende.
+   * Calcule la hauteur de la légende et définit la variable CSS `--table-offset` pour ajuster l'espacement du wrapper.
+   * Le callback `update` est appelé chaque fois que la légende change de taille.
+   */
+  $effect(() => {
+    if (noCaption || !wrapperEl || !captionEl) {
+      wrapperEl?.style.removeProperty("--table-offset");
+
+      return;
+    }
+
+    const update = () => {
+      wrapperEl!.style.removeProperty("--table-offset");
+
+      const height = captionEl!.getBoundingClientRect().height;
+
+      wrapperEl!.style.setProperty("--table-offset", `calc(${height}px + 1rem)`);
+    };
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(captionEl);
+
+    return () => observer.disconnect();
+  });
 
   let {
     id,
@@ -395,12 +426,12 @@
     </div>
   {/if}
 
-  <div class="fr-table__wrapper">
+  <div bind:this={wrapperEl} class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
         <slot name="tablecontent">
           <table {id}>
-            <caption>
+            <caption bind:this={captionEl}>
               {caption}
               {#if captionDetail}
                 <div class="fr-table__caption__desc">{captionDetail}</div>
