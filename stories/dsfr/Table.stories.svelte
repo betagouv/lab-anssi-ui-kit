@@ -86,9 +86,37 @@
         control: false,
         table: { category: "Slots" },
       },
+      onpagechanged: {
+        description: "Déclenché lors du changement de page.<br>" + "`detail: number`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<number>" },
+        },
+        control: false,
+      },
+      onrowsperpagechanged: {
+        description:
+          "Déclenché lors du changement du nombre de lignes par page.<br>" + "`detail: number`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<number>" },
+        },
+        control: false,
+      },
+      onselectionchanged: {
+        description:
+          "Déclenché lors du changement de la sélection des lignes.<br>" +
+          "`detail: { keys: (string | number)[], rows: Row[] }`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<{ keys: (string | number)[], rows: Row[] }>" },
+        },
+        control: false,
+      },
     },
     args: tableArgs,
     parameters: {
+      actions: { handles: ["pagechanged", "rowsperpagechanged", "selectionchanged"] },
       docs: {
         description: {
           component: `Les stories présentes dans cette page sont issues de la documentation du DSFR.<br/> Elles ne couvrent que les cas d'usage de base du composant **Table** tel que présentés dans le DSFR, et ne mettent pas en avant les fonctionnalités plus avancées du composant _(ex: cellules avec contenus riches, en-têtes de ligne, etc)_.<br/> D'autres stories d'exemples plus spécifiques sur des usages avancées du composant sont présentes dans le menu **"Exemples"**.`,

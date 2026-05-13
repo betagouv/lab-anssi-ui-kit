@@ -26,6 +26,29 @@
       values: {
         control: { type: "array" },
       },
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de la dernière valeur sélectionnée ou désélectionnée.<br>" +
+          "`detail: string[]`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string[]>" },
+        },
+        control: false,
+      },
+      onvalueschanged: {
+        description:
+          "Déclenché lors du changement de l'ensemble des valeurs sélectionnées.<br>" +
+          "`detail: string[]`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string[]>" },
+        },
+        control: false,
+      },
+    },
+    parameters: {
+      actions: { handles: ["valuechanged", "valueschanged"] },
     },
     render: template,
   });

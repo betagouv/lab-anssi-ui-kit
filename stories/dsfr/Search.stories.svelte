@@ -13,9 +13,29 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Search",
     component: DsfrSearch,
-    argTypes: searchArgTypes,
+    argTypes: {
+      ...searchArgTypes,
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de valeur du champ de recherche.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+      onsearch: {
+        description: "Déclenché lors de la soumission de la recherche.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+    },
     args: searchArgs,
     parameters: {
+      actions: { handles: ["valuechanged", "search"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-search"),

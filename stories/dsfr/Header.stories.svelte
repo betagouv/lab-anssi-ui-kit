@@ -83,6 +83,14 @@
         control: false,
         table: { category: "Slots" },
       },
+      ontoolLinkClick: {
+        description: "Déclenché au clic sur un lien d'accès rapide.<br>" + "`detail: ToolLink`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<ToolLink>" },
+        },
+        control: false,
+      },
       fluid: {
         control: "boolean",
         description: "Permet de définir le conteneur comme 'fluide' ou non",
@@ -176,6 +184,7 @@
       ],
     },
     parameters: {
+      actions: { handles: ["toolLinkClick"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-header"),

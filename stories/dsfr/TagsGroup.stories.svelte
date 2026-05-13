@@ -13,9 +13,28 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/TagsGroup",
     component: DsfrTagsGroup,
-    argTypes: tagsGroupArgTypes,
+    argTypes: {
+      ...tagsGroupArgTypes,
+      onselected: {
+        description: "Déclenché lorsqu'un tag est sélectionné.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+      onunselected: {
+        description: "Déclenché lorsqu'un tag est désélectionné.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+    },
     args: tagsGroupArgs,
     parameters: {
+      actions: { handles: ["selected", "unselected"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-tags-group"),

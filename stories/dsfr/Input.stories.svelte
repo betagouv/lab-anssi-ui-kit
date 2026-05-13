@@ -32,9 +32,19 @@
         },
         table: { category: "message" },
       },
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de valeur du champ de saisie.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
     },
     args: inputArgs,
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-input"),
