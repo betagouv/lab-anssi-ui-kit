@@ -17,7 +17,26 @@
       tooltipTexte: "Ajouter une réaction",
       tooltipId: "tooltipReactions",
     },
+    argTypes: {
+      onajouteReaction: {
+        description: "Déclenché lorsqu'une réaction est ajoutée.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+      onsupprimeReaction: {
+        description: "Déclenché lorsqu'une réaction est retirée.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+    },
     parameters: {
+      actions: { handles: ["ajouteReaction", "supprimeReaction"] },
       layout: "centered",
     },
     render: template,

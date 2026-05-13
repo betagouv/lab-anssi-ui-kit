@@ -32,6 +32,24 @@
         control: false,
         table: { category: "Slots" },
       },
+      onlogout: {
+        description: "Déclenché lors du clic sur le bouton de déconnexion.",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<void>" },
+        },
+        control: false,
+      },
+      onlinkclicked: {
+        description:
+          "Déclenché au clic sur un lien du menu utilisateur.<br>" +
+          "`detail: { link: UserLink, index: number }`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<{ link: UserLink, index: number }>" },
+        },
+        control: false,
+      },
     },
     args: {
       id: "user-menu",
@@ -47,6 +65,7 @@
       logoutLabel: "Se déconnecter",
     },
     parameters: {
+      actions: { handles: ["logout", "linkclicked"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-user"),

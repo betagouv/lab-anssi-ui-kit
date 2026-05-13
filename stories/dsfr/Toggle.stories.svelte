@@ -13,9 +13,21 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Toggle",
     component: DsfrToggle,
-    argTypes: toggleArgTypes,
+    argTypes: {
+      ...toggleArgTypes,
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement d'état de l'interrupteur.<br>" + "`detail: boolean`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<boolean>" },
+        },
+        control: false,
+      },
+    },
     args: toggleArgs,
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-toggle"),

@@ -26,6 +26,16 @@
         control: false,
         table: { category: "Slots" },
       },
+      onitemclicked: {
+        description:
+          "Déclenché au clic sur un élément du menu déroulant.<br>" +
+          "`detail: { item: DropdownItem, index: number }`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<{ item: DropdownItem, index: number }>" },
+        },
+        control: false,
+      },
     },
     args: {
       id: "dropdown-id",
@@ -47,6 +57,7 @@
       ],
     },
     parameters: {
+      actions: { handles: ["itemclicked"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-dropdown"),

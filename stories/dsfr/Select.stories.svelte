@@ -38,9 +38,19 @@
         control: false,
         table: { category: "Slots" },
       },
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de valeur de la liste déroulante.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
     },
     args: selectArgs,
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-select"),

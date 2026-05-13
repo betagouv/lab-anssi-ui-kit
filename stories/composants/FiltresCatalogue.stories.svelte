@@ -18,6 +18,19 @@
         { libelle: "Explorer les formations", valeur: "category5", icone: Success },
       ],
     },
+    argTypes: {
+      onvaleurachangee: {
+        description: "Déclenché lors du changement de filtre sélectionné.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+    },
+    parameters: {
+      actions: { handles: ["valeurachangee"] },
+    },
     render: template,
   });
 

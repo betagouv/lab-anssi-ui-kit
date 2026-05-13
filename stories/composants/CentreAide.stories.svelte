@@ -26,6 +26,21 @@
         },
       ]),
     },
+    argTypes: {
+      onlienclique: {
+        description:
+          "Déclenché au clic sur un lien du centre d'aide.<br>" +
+          "`detail: { target: HTMLAnchorElement }`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<{ target: HTMLAnchorElement }>" },
+        },
+        control: false,
+      },
+    },
+    parameters: {
+      actions: { handles: ["lienclique"] },
+    },
     render: template,
   });
 

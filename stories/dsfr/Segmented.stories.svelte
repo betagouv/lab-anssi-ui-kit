@@ -13,9 +13,21 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Segmented",
     component: DsfrSegmented,
-    argTypes: segmentedArgTypes,
+    argTypes: {
+      ...segmentedArgTypes,
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de segment actif.<br>" + "`detail: number | string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<number | string>" },
+        },
+        control: false,
+      },
+    },
     args: { ...segmentedArgs, value: 1 },
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-segmented"),

@@ -26,9 +26,19 @@
         control: "boolean",
         description: "Attribut indeterminate de la checkbox",
       },
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement d'état de la case à cocher.<br>" + "`detail: boolean`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<boolean>" },
+        },
+        control: false,
+      },
     },
     args: checkboxArgs,
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-checkbox"),

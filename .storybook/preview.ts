@@ -1,5 +1,6 @@
 import type { Preview, SvelteRenderer } from "@storybook/svelte";
 import { withThemeByClassName } from "@storybook/addon-themes";
+import { withActions } from "storybook/actions/decorator";
 
 import "./styles.fonts.css";
 import "./styles.scss";
@@ -7,6 +8,7 @@ import "./lab-anssi-themes.css";
 
 const preview: Preview = {
   decorators: [
+    withActions,
     withThemeByClassName<SvelteRenderer>({
       themes: {
         MonServiceSécurisé: "theme-mss",

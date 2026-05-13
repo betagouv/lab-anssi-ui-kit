@@ -13,9 +13,20 @@
   const { Story } = defineMeta({
     title: "Composants/dsfr/Radio",
     component: DsfrRadio,
-    argTypes: radioArgTypes,
+    argTypes: {
+      ...radioArgTypes,
+      onvaluechanged: {
+        description: "Déclenché lors de la sélection du bouton radio.<br>" + "`detail: string`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<string>" },
+        },
+        control: false,
+      },
+    },
     args: radioArgs,
     parameters: {
+      actions: { handles: ["valuechanged"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-radio"),

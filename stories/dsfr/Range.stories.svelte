@@ -20,9 +20,29 @@
         control: false,
         table: { category: "Slots" },
       },
+      onvaluechanged: {
+        description:
+          "Déclenché lors du changement de la valeur principale.<br>" + "`detail: number`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<number>" },
+        },
+        control: false,
+      },
+      onvalue2changed: {
+        description:
+          "Déclenché lors du changement de la seconde valeur (curseur double).<br>" +
+          "`detail: number`",
+        table: {
+          category: "Événements",
+          type: { summary: "CustomEvent<number>" },
+        },
+        control: false,
+      },
     },
     args: rangeArgs,
     parameters: {
+      actions: { handles: ["valuechanged", "value2changed"] },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-range"),
