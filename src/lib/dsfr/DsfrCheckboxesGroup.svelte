@@ -121,7 +121,7 @@
    * Met à jour les valeurs et déclenche l'événement 'valueschanged'.
    */
   function handleChange() {
-    host.dispatchEvent(new CustomEvent("valueschanged", { detail: values }));
+    host.dispatchEvent(new CustomEvent("valueschanged", { detail: values, bubbles: true }));
   }
 
   /**

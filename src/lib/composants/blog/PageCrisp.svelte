@@ -85,7 +85,7 @@
     if (contenu) scroll(window.location.hash);
   });
 
-  const ancreOuverte = (evenement: CustomEvent) => scroll(`#${evenement.detail}`);
+  const ancreOuverte = (ancre: string) => scroll(`#${ancre}`);
 
   onDestroy(() => {
     const lesSections = composant!.querySelectorAll("section");
@@ -96,10 +96,10 @@
 </script>
 
 <div bind:this={composant}>
-  <SommaireMobile {tableDesMatieres} on:ancreOuverte={ancreOuverte} />
+  <SommaireMobile {tableDesMatieres} onancreOuverte={ancreOuverte} />
 
   <article>
-    <SommaireBureau {tableDesMatieres} on:ancreOuverte={ancreOuverte} />
+    <SommaireBureau {tableDesMatieres} onancreOuverte={ancreOuverte} />
     <div class="contenu">
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
       {@html contenu}

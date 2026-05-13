@@ -36,8 +36,6 @@
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type SearchSize = Extract<Size, "md" | "lg">;
@@ -76,9 +74,11 @@
     required?: boolean;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Callback appelé lors du changement de valeur du champ de recherche */
+    onvaluechanged?: (value: string) => void;
+    /** Callback appelé lors de la soumission de la recherche */
+    onsearch?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     inputId,
@@ -98,6 +98,8 @@
     readonly,
     required,
     internals,
+    onvaluechanged,
+    onsearch,
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
@@ -117,7 +119,10 @@
 
     value = target.value;
 
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
+    );
   }
 
   /**
@@ -135,7 +140,8 @@
       return;
     }
 
-    dispatch("search", value);
+    onsearch?.(value);
+    $host()?.dispatchEvent(new CustomEvent("search", { detail: value, bubbles: true }));
   }
 
   /**

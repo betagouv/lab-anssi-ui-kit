@@ -21,7 +21,6 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -56,9 +55,9 @@
     form?: string;
     /** Attribut required de la checkbox */
     required?: boolean;
+    /** Callback appelé lors du changement d'état de l'interrupteur */
+    onvaluechanged?: (checked: boolean) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -75,6 +74,7 @@
     validMessage,
     form,
     required,
+    onvaluechanged,
     ...restProps
   }: Props = $props();
 
@@ -89,7 +89,10 @@
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    dispatch("valuechanged", target.checked);
+    onvaluechanged?.(target.checked);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.checked, bubbles: true }),
+    );
   }
 </script>
 

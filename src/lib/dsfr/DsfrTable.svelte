@@ -370,7 +370,9 @@
     currentPage = 1;
 
     onrowsperpagechanged?.(newValue);
-    $host()?.dispatchEvent(new CustomEvent("rowsperpagechanged", { detail: newValue }));
+    $host()?.dispatchEvent(
+      new CustomEvent("rowsperpagechanged", { detail: newValue, bubbles: true }),
+    );
   }
 
   /**
@@ -383,7 +385,7 @@
     currentPage = page;
 
     onpagechanged?.(page);
-    $host()?.dispatchEvent(new CustomEvent("pagechanged", { detail: page }));
+    $host()?.dispatchEvent(new CustomEvent("pagechanged", { detail: page, bubbles: true }));
   }
 
   /**
@@ -464,7 +466,10 @@
 
     onselectionchanged?.(updatedKeys, updatedRows);
     $host()?.dispatchEvent(
-      new CustomEvent("selectionchanged", { detail: { keys: updatedKeys, rows: updatedRows } }),
+      new CustomEvent("selectionchanged", {
+        detail: { keys: updatedKeys, rows: updatedRows },
+        bubbles: true,
+      }),
     );
   }
 
@@ -489,7 +494,10 @@
 
     onselectionchanged?.(updatedKeys, updatedRows);
     $host()?.dispatchEvent(
-      new CustomEvent("selectionchanged", { detail: { keys: updatedKeys, rows: updatedRows } }),
+      new CustomEvent("selectionchanged", {
+        detail: { keys: updatedKeys, rows: updatedRows },
+        bubbles: true,
+      }),
     );
   }
 

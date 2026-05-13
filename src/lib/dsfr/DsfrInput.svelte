@@ -51,7 +51,6 @@
 />
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
@@ -109,9 +108,9 @@
     step?: number;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Callback appelé lors du changement de valeur du champ de saisie */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -139,6 +138,7 @@
     required,
     step,
     internals,
+    onvaluechanged,
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
@@ -179,7 +179,10 @@
     const target = event.target as HTMLInputElement;
     value = target.value;
 
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
+    );
   }
 
   /**
