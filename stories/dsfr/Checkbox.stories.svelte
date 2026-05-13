@@ -102,4 +102,10 @@
   {/snippet}
 </Story>
 
-<Story name="Etat indéterminé" args={{ ...checkboxArgs, indeterminate: true }} />
+<Story name="Etat 'indeterminate'" args={{ ...checkboxArgs, indeterminate: true }} />
+
+<!-- Dans le cas d'une checkbox qui serait `checked` et `indeterminate`, le style `indeterminate` prend le dessus -->
+<Story
+  name="Etat 'checked & indeterminate'"
+  args={{ ...checkboxArgs, checked: true, indeterminate: true }}
+/>

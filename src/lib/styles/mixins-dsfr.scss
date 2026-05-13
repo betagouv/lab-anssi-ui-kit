@@ -78,7 +78,7 @@ $dash-height: var(--dash-height, 2px) !default;
   content: "";
   display: inline-block;
   background-color: $icon-color;
-  width: calc($checkmark-size - 8px);
+  width: calc($checkmark-size * 0.38);
   height: $dash-height;
 
   @content;
@@ -103,7 +103,7 @@ $dash-height: var(--dash-height, 2px) !default;
       }
     }
 
-    &:checked + label {
+    &:checked:not(:indeterminate) + label {
       &::after {
         @include set-icon-check(var(--text-inverted-blue-france)) {
           left: var(--checkbox-gap, -2rem);
@@ -122,7 +122,8 @@ $dash-height: var(--dash-height, 2px) !default;
       &::after {
         @include set-icon-indeterminate(var(--text-inverted-blue-france)) {
           top: calc(($checkmark-size - $dash-height) / 2);
-          left: calc(var(--checkbox-gap, -2rem) + 4px);
+          left: calc(var(--checkbox-gap, -2rem) + (#{$checkmark-size} / 2));
+          transform: translateX(-50%);
         }
       }
     }
