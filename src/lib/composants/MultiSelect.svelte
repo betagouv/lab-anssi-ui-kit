@@ -78,8 +78,12 @@
   let currentValues: string[] = $state(values || []);
   function handleChange(event: Event) {
     // REVIEW deprecate this event in favor of valueschanged
-    $host().dispatchEvent(new CustomEvent<string[]>("valuechanged", { detail: currentValues }));
-    $host().dispatchEvent(new CustomEvent<string[]>("valueschanged", { detail: currentValues }));
+    $host().dispatchEvent(
+      new CustomEvent<string[]>("valuechanged", { detail: currentValues, bubbles: true }),
+    );
+    $host().dispatchEvent(
+      new CustomEvent<string[]>("valueschanged", { detail: currentValues, bubbles: true }),
+    );
   }
 
   let summary = $state<HTMLElement>(undefined);

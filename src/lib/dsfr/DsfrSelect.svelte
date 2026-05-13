@@ -36,7 +36,6 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
@@ -92,8 +91,6 @@
     /** Attribut name du champs de saisie */
     name?: string;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -151,8 +148,10 @@
     const target = event.target as HTMLSelectElement;
     value = target.value;
 
-    dispatch("valuechanged", target.value);
     onvaluechanged?.(target.value);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
+    );
   }
 
   /**

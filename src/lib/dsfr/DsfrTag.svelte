@@ -22,8 +22,6 @@
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
   import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type TagSize = Extract<Size, "sm" | "md">;
@@ -53,6 +51,10 @@
     accent?: Accent;
     /** Attribut id du tag */
     id?: string;
+    /** Callback appelé lorsque le tag est sélectionné */
+    onselected?: (id: string) => void;
+    /** Callback appelé lorsque le tag est désélectionné */
+    onunselected?: (id: string) => void;
   }
 
   const {
@@ -68,6 +70,8 @@
     icon,
     accent,
     id,
+    onselected,
+    onunselected,
   }: Props = $props();
 
   const markup: Markup = $derived.by(() => {
@@ -91,16 +95,17 @@
   });
   const sizeClass = $derived(`fr-tag--${size}`);
 
-  let dispatch = createEventDispatcher<{ selected: string; unselected: string }>();
   const onpressed = (event: MouseEvent) => {
     let button = event.target as HTMLButtonElement;
     let ariaPressed = button.ariaPressed;
     const isPressed = ariaPressed === "true";
     button.ariaPressed = (!isPressed).toString();
     if (isPressed) {
-      dispatch("unselected", button.id);
+      onunselected?.(button.id);
+      $host()?.dispatchEvent(new CustomEvent("unselected", { detail: button.id, bubbles: true }));
     } else {
-      dispatch("selected", button.id);
+      onselected?.(button.id);
+      $host()?.dispatchEvent(new CustomEvent("selected", { detail: button.id, bubbles: true }));
     }
   };
 </script>

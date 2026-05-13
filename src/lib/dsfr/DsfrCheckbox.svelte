@@ -33,7 +33,6 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
 
@@ -73,9 +72,9 @@
     internals?: ElementInternals;
     /** Attribut indeterminate de la checkbox */
     indeterminate?: boolean;
+    /** Callback appelé lors du changement d'état de la case à cocher */
+    onvaluechanged?: (checked: boolean) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -93,6 +92,7 @@
     required,
     internals,
     indeterminate,
+    onvaluechanged,
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
@@ -125,7 +125,8 @@
     const target = event.target as HTMLInputElement;
     checked = target.checked;
 
-    dispatch("valuechanged", checked);
+    onvaluechanged?.(checked);
+    $host()?.dispatchEvent(new CustomEvent("valuechanged", { detail: checked, bubbles: true }));
   }
 
   /**

@@ -4,19 +4,16 @@
   import { run } from "svelte/legacy";
 
   import { fly } from "svelte/transition";
-  import { createEventDispatcher } from "svelte";
   import { srcAsset } from "$lib/assets/assets";
 
   interface Props {
     nomService: string;
     liens: string;
+    /** Callback appelé lorsqu'un lien est cliqué */
+    onlienclique?: (detail: { target: EventTarget & HTMLAnchorElement }) => void;
   }
 
-  let { nomService, liens }: Props = $props();
-
-  const emetEvenement = createEventDispatcher<{
-    lienclique: { target: EventTarget & HTMLAnchorElement };
-  }>();
+  let { nomService, liens, onlienclique }: Props = $props();
 
   let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] =
     $state([]);
@@ -75,7 +72,9 @@
             id={lien.id}
             onclick={(e) => {
               if (lien.preventDefault) e.preventDefault();
-              emetEvenement("lienclique", { target: e.currentTarget });
+              const detail = { target: e.currentTarget as EventTarget & HTMLAnchorElement };
+              onlienclique?.(detail);
+              $host()?.dispatchEvent(new CustomEvent("lienclique", { detail, bubbles: true }));
             }}>{lien.texte}</a
           >
         {/each}

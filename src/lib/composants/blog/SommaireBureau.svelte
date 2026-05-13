@@ -1,19 +1,16 @@
 <script lang="ts">
   import type { TableDesMatieres } from "$lib/types";
-  import { createEventDispatcher } from "svelte";
 
   interface Props {
     tableDesMatieres: TableDesMatieres;
+    /** Callback appelé lorsqu'une ancre est ouverte */
+    onancreOuverte?: (ancre: string) => void;
   }
 
-  let { tableDesMatieres }: Props = $props();
-
-  const emets = createEventDispatcher<{
-    ancreOuverte: string;
-  }>();
+  let { tableDesMatieres, onancreOuverte }: Props = $props();
 
   const ouvreEntree = (ancre: string) => {
-    emets("ancreOuverte", ancre);
+    onancreOuverte?.(ancre);
   };
 </script>
 

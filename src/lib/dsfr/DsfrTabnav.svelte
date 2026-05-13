@@ -71,7 +71,9 @@
 
     event.preventDefault();
 
-    $host().dispatchEvent(new CustomEvent("linkclicked", { detail: { index, link } }));
+    $host().dispatchEvent(
+      new CustomEvent("linkclicked", { detail: { index, link }, bubbles: true }),
+    );
   }
 </script>
 

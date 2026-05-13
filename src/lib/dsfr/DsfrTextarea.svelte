@@ -39,7 +39,6 @@
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
-  import { createEventDispatcher } from "svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -85,9 +84,9 @@
     required?: boolean;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Callback appelé lors du changement de valeur du champ de saisie */
+    onvaluechanged?: (value: string) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     id,
@@ -110,6 +109,7 @@
     readonly,
     required,
     internals,
+    onvaluechanged,
   }: Props = $props();
 
   let formControlElement: HTMLTextAreaElement;
@@ -137,7 +137,10 @@
     const target = event.target as HTMLTextAreaElement;
     value = target.value;
 
-    dispatch("valuechanged", target.value);
+    onvaluechanged?.(target.value);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
+    );
   }
 
   /**

@@ -1,24 +1,21 @@
 <script lang="ts">
   import type { TableDesMatieres } from "$lib/types";
-  import { createEventDispatcher } from "svelte";
   import IconeMenuLateral from "$lib/composants/blog/IconeMenuLateral.svelte";
   import IconeChevronBas from "$lib/composants/blog/IconeChevronBas.svelte";
 
   interface Props {
     tableDesMatieres: TableDesMatieres;
+    /** Callback appelé lorsqu'une ancre est ouverte */
+    onancreOuverte?: (ancre: string) => void;
   }
 
-  let { tableDesMatieres }: Props = $props();
+  let { tableDesMatieres, onancreOuverte }: Props = $props();
 
   let detailsElement: HTMLDetailsElement = $state();
 
-  const emets = createEventDispatcher<{
-    ancreOuverte: string;
-  }>();
-
   const ouvreEntree = (ancre: string) => {
     detailsElement.open = false;
-    emets("ancreOuverte", ancre);
+    onancreOuverte?.(ancre);
   };
 </script>
 

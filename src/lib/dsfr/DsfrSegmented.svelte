@@ -18,8 +18,6 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
-  import { createEventDispatcher } from "svelte";
-
   setThemeable($host());
 
   type SegmentedSize = Extract<Size, "sm" | "md">;
@@ -50,9 +48,9 @@
     elements: Segmented[];
     /** Valeur des segments */
     value?: string | number;
+    /** Callback appelé lors du changement de segment actif */
+    onvaluechanged?: (value: string | number) => void;
   }
-
-  const dispatch = createEventDispatcher();
 
   let {
     size = "md",
@@ -63,6 +61,7 @@
     hasIcon = false,
     elements = [],
     value,
+    onvaluechanged,
   }: Props = $props();
 
   // `checked` sert de fallback si `value` n'est pas fourni
@@ -140,7 +139,10 @@
    * @param {Event} event - L'événement de changement déclenché par l'élément DOM
    */
   function handleChange(event: Event) {
-    dispatch("valuechanged", currentValue);
+    onvaluechanged?.(currentValue);
+    $host()?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: currentValue, bubbles: true }),
+    );
   }
 </script>
 

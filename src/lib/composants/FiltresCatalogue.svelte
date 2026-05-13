@@ -23,7 +23,9 @@
   function handleFilterClick(nouvelleValeur: string) {
     if (valeur === nouvelleValeur) return;
     valeur = nouvelleValeur;
-    $host().dispatchEvent(new CustomEvent("valeurachangee", { detail: nouvelleValeur }));
+    $host().dispatchEvent(
+      new CustomEvent("valeurachangee", { detail: nouvelleValeur, bubbles: true }),
+    );
   }
 </script>
 
