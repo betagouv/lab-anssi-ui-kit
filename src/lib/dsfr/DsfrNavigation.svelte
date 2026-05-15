@@ -51,6 +51,16 @@
     close?: string;
     leader?: Leader;
     categories?: Category[];
+    /**
+     * Active les slots nommés à l'intérieur des "mega menu".
+     * Ces slots sont nommés au format suivant `<collapseId>-<index>`
+     * où `collapseId` est la valeur de l'attribut `collapseId` de l'item<MenuItem> de type "mega-menu"
+     * et `index` est l'index de cet item dans le tableau des items<MenuItem[]>.
+     *
+     * Par exemple, pour un item de type "mega-menu" avec `collapseId` égal à "menu-info" et situé à l'index 2 du tableau des items,
+     * le slot correspondant serait nommé "menu-info-2".
+     */
+    rich?: boolean;
   };
 
   interface Props {
@@ -169,53 +179,60 @@
                     />
                   </div>
 
-                  {#if item.leader}
-                    <div class="fr-col-12 fr-col-lg-8 fr-col-offset-lg-4--right">
-                      <div class="fr-mega-menu__leader">
-                        {#if item.leader.title}
-                          <h4 class="fr-h4 fr-mb-2v">{item.leader.title}</h4>
-                        {/if}
-                        <p>{item.leader.text}</p>
-                        {#if item.leader.link}
-                          <DsfrLink
-                            id={item.leader.link.id}
-                            href={item.leader.link.href ?? "#"}
-                            label={item.leader.link.label}
-                            hasIcon={!!item.leader.link.icon}
-                            icon={item.leader.link.icon}
-                            iconPlace={item.leader.link.iconPlace}
-                            size="sm"
-                          />
-                        {/if}
+                  {#if !item.rich}
+                    {#if item.leader}
+                      <div class="fr-col-12 fr-col-lg-8 fr-col-offset-lg-4--right">
+                        <div class="fr-mega-menu__leader">
+                          {#if item.leader.title}
+                            <h4 class="fr-h4 fr-mb-2v">{item.leader.title}</h4>
+                          {/if}
+                          <p>{item.leader.text}</p>
+                          {#if item.leader.link}
+                            <DsfrLink
+                              id={item.leader.link.id}
+                              href={item.leader.link.href ?? "#"}
+                              label={item.leader.link.label}
+                              hasIcon={!!item.leader.link.icon}
+                              icon={item.leader.link.icon}
+                              iconPlace={item.leader.link.iconPlace}
+                              size="sm"
+                            />
+                          {/if}
+                        </div>
                       </div>
-                    </div>
-                  {/if}
-                  {#if item.categories}
-                    {#each item.categories as category}
-                      <div class="fr-col-12 fr-col-lg-3">
-                        <h5 class="fr-mega-menu__category">
-                          <a href={category.href ?? "#"} class="fr-nav__link">
-                            {category.label}
-                          </a>
-                        </h5>
-                        {#if category.items && category.items.length > 0}
-                          <ul class="fr-mega-menu__list">
-                            {#each category.items as catItem}
-                              <li>
-                                <a
-                                  id={catItem.id}
-                                  href={catItem.href}
-                                  class="fr-nav__link"
-                                  aria-current={catItem.active ? "page" : undefined}
-                                >
-                                  {catItem.label}
-                                </a>
-                              </li>
-                            {/each}
-                          </ul>
-                        {/if}
-                      </div>
-                    {/each}
+                    {/if}
+                    {#if item.categories}
+                      {#each item.categories as category}
+                        <div class="fr-col-12 fr-col-lg-3">
+                          <h5 class="fr-mega-menu__category">
+                            <a href={category.href ?? "#"} class="fr-nav__link">
+                              {category.label}
+                            </a>
+                          </h5>
+                          {#if category.items && category.items.length > 0}
+                            <ul class="fr-mega-menu__list">
+                              {#each category.items as catItem}
+                                <li>
+                                  <a
+                                    id={catItem.id}
+                                    href={catItem.href}
+                                    class="fr-nav__link"
+                                    aria-current={catItem.active ? "page" : undefined}
+                                  >
+                                    {catItem.label}
+                                  </a>
+                                </li>
+                              {/each}
+                            </ul>
+                          {/if}
+                        </div>
+                      {/each}
+                    {/if}
+                  {:else}
+                    <div
+                      class="fr-col-12"
+                      use:createSlot={setCollapseId(item.collapseId, index)}
+                    ></div>
                   {/if}
                 </div>
               </div>
