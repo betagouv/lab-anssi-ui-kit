@@ -456,6 +456,7 @@
               id={navigationId}
               ariaLabel={navigationAriaLabel}
               items={navigationItems}
+              --dsfr-nav-position="static"
             />
           </slot>
         {/if}
