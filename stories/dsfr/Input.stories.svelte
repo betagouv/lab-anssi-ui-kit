@@ -51,6 +51,7 @@
   <dsfr-input
     id={args.id}
     label={args.label}
+    hide-label={args.hideLabel || undefined}
     hint={args.hint}
     type={args.type}
     icon={args.icon}
