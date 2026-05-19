@@ -38,6 +38,11 @@
       ],
     },
     parameters: {
+      backgrounds: {
+        options: {
+          blueFranceLab: { name: "Blue France Lab", value: "#000091" },
+        },
+      },
       docs: {
         source: {
           transform: webComponentSourceCode("dsfr-buttons-group"),
@@ -65,3 +70,27 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story
+  name="Inverse"
+  args={{
+    ...buttonsGroupArgs,
+    buttons: [
+      {
+        label: "libellé du bouton 1",
+        kind: "inverted-primary",
+        disabled: false,
+        icon: "checkbox-circle-line",
+      },
+      {
+        label: "libellé du bouton 2",
+        kind: "inverted-secondary",
+        disabled: false,
+        icon: "checkbox-circle-line",
+      },
+    ],
+  }}
+  globals={{
+    backgrounds: { value: "blueFranceLab" },
+  }}
+/>

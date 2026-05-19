@@ -177,5 +177,6 @@
   @include set-dsfr-sizing("btns-group");
   @include set-dsfr-sizing("btn") {
     @include set-border-radius();
+    @include set-custom-button-kind();
   }
 </style>
