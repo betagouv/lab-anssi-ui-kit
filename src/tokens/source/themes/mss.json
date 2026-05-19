@@ -128,7 +128,8 @@
   },
   "lab-border-radius": {
     "$type": "dimension",
-    "$value": "{bouton.arrondi}"
+    "$value": "{bouton.arrondi}",
+    "$themeable": true
   },
   "artwork": {
     "$dsfr": true,
