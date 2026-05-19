@@ -53,6 +53,7 @@
   <dsfr-textarea
     id={args.id}
     label={args.label}
+    hide-label={args.hideLabel || undefined}
     hint={args.hint}
     value={args.value}
     placeholder={args.placeholder}
