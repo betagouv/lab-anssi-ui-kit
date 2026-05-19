@@ -4,6 +4,7 @@
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
+      hideLabel: { attribute: "hide-label", type: "Boolean" },
       hint: { attribute: "hint", type: "String" },
       value: { attribute: "value", type: "String", reflect: true },
       placeholder: { attribute: "placeholder", type: "String" },
@@ -48,6 +49,8 @@
     id: string;
     /** Libellé du champs de saisie */
     label?: string;
+    /** Permet de masquer le label */
+    hideLabel?: boolean;
     /** Texte additionnel sous le libellé du champs de saisie */
     hint?: string;
     /** Valeur initiale du champs de saisie */
@@ -89,6 +92,7 @@
   let {
     id,
     label,
+    hideLabel = false,
     hint,
     value = $bindable(),
     placeholder,
@@ -175,21 +179,20 @@
       computedStatus !== "default" &&
       `fr-input-group--${computedStatus}`,
   );
+  const isLabelEmpty = $derived(label === "");
 </script>
 
 <div
   class={["fr-input-group", statusClass, { "fr-input-group--disabled": disabled }]}
   id={`input-group-${id}`}
 >
-  {#if label}
-    <label class="fr-label" for={id}>
-      {label}
+  <label class="fr-label" class:fr-sr-only={hideLabel || isLabelEmpty} for={id}>
+    {label}
 
-      {#if hint}
-        <span class="fr-hint-text">{hint}</span>
-      {/if}
-    </label>
-  {/if}
+    {#if hint}
+      <span class="fr-hint-text">{hint}</span>
+    {/if}
+  </label>
   <textarea
     bind:this={formControlElement}
     {id}
@@ -235,5 +238,13 @@
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("input-group");
+  @include set-dsfr-sizing("input-group") {
+    &:has(.fr-sr-only) .fr-input {
+      margin-top: 0;
+    }
+  }
+
+  .fr-sr-only {
+    @include visually-hidden();
+  }
 </style>
