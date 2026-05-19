@@ -23,7 +23,7 @@ export { default as Lien } from "./composants/Lien.svelte";
 export { default as Tag } from "./composants/Tag.svelte";
 export { default as AncresParcours } from "./composants/AncresParcours.svelte";
 export { default as FiltresCatalogue } from "./composants/FiltresCatalogue.svelte";
-export { default as Hero } from "./composants/Hero.svelte";
+export { default as BandeauPage } from "./composants/BandeauPage.svelte";
 export { default as MultiSelect } from "./composants/MultiSelect.svelte";
 export { default as Reactions } from "./composants/Reactions.svelte";
 
