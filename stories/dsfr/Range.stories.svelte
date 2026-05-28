@@ -39,6 +39,7 @@
   <dsfr-range
     id={args.id}
     label={args.label}
+    hide-label={args.hideLabel || undefined}
     name={args.name}
     hint={args.hint}
     size={args.size}
