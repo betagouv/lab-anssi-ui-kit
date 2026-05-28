@@ -16,6 +16,7 @@
     "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
+    "build:manifest": "node scripts/generate-ui-manifest.mjs",
     "prepare": "husky",
     "prepack": "npm run build:webcomponents && npm run copy:icons && publint",
     "test": "vitest run",
