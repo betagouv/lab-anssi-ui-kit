@@ -42,6 +42,9 @@ jobs:
       - name: Construit le Storybook
         run: pnpm run storybook:build
 
+      - name: Génère le manifest UI Kit (Utile pour exposer aux agents les contrats des composants)
+        run: node scripts/generate-ui-manifest.mjs storybook-static/ui-kit-components.json
+
       - name: Téléverser les fichiers
         id: deployment
         uses: actions/upload-pages-artifact@v3
