@@ -72,7 +72,7 @@
     "http-server": "~14.1.1",
     "husky": "~9.1.7",
     "lint-staged": "~16.4.0",
-    "playwright": "~1.59.1",
+    "playwright": "~1.60.0",
     "postcss": "~8.5.14",
     "postcss-discard-empty": "~7.0.3",
     "postcss-root-to-host": "~0.0.0",
