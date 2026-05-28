@@ -46,6 +46,7 @@ function parseStory(file) {
 
   const argTypesBlock = src.match(/argTypes:\s*\{([\s\S]*?)\n\s{4}\}/)?.[1] ?? "";
   const argMeta = {};
+  const slots = [];
   const argRe = /(\w+):\s*\{([\s\S]*?)\n\s{6}\}/g;
   let a;
   while ((a = argRe.exec(argTypesBlock))) {
@@ -54,6 +55,11 @@ function parseStory(file) {
       .match(/description:\s*["'`]([\s\S]*?)["'`]\s*,/)?.[1]
       ?.replace(/<br>/g, " ")
       .trim();
+    const isSlot = /table:\s*\{[^}]*category:\s*["'`]Slots["'`]/.test(body);
+    if (isSlot) {
+      slots.push({ name, ...(description && { description }) });
+      continue;
+    }
     const optionsRaw = body.match(/options:\s*\[([\s\S]*?)\]/)?.[1];
     const options = optionsRaw
       ? optionsRaw
@@ -64,7 +70,7 @@ function parseStory(file) {
     argMeta[name] = { ...(description && { description }), ...(options && { options }) };
   }
 
-  return { title, component, tagInTemplate, snippet, argMeta };
+  return { title, component, tagInTemplate, snippet, argMeta, slots };
 }
 
 const components = globSync(COMPONENTS_GLOB).map(parseComponent).filter(Boolean);
@@ -107,6 +113,7 @@ const merged = components.map((c) => {
     title: story?.title ?? null,
     source: c.source,
     props,
+    slots: story?.slots ?? [],
     example: story?.snippet ?? null,
   };
 });
