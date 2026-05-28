@@ -4,6 +4,7 @@
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
+      hideLabel: { attribute: "hide-label", type: "Boolean" },
       name: { attribute: "name", type: "String" },
       hint: { attribute: "hint", type: "String" },
       size: { attribute: "size", type: "String" },
@@ -43,6 +44,8 @@
     id: string;
     /** Libellé du curseur */
     label?: string;
+    /** Permet de masquer le libellé du curseur */
+    hideLabel?: boolean;
     /** Attribut name du curseur */
     name?: string;
     /** Texte additionnel du curseur */
@@ -86,6 +89,7 @@
   let {
     id,
     label,
+    hideLabel = false,
     name,
     hint,
     size = "md",
@@ -129,6 +133,8 @@
 
     return () => observer.disconnect();
   });
+
+  const isLabelEmpty = $derived(label === "");
 
   // Espace total réservé aux thumbs aux extrémités du rail (1 thumb en simple, 2 en double)
   const thumbDiameter = $derived(size === "sm" ? THUMB_SM : THUMB_MD);
@@ -213,7 +219,7 @@
   ]}
   id="{id}-group"
 >
-  <label class="fr-label" id="{id}-label" for={id}>
+  <label class="fr-label" class:fr-sr-only={hideLabel || isLabelEmpty} id="{id}-label" for={id}>
     {label}
     {#if hint}
       <span class="fr-hint-text">
@@ -308,5 +314,9 @@
         visibility: hidden;
       }
     }
+  }
+
+  .fr-sr-only {
+    @include visually-hidden();
   }
 </style>
