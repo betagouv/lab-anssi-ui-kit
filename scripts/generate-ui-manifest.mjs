@@ -68,7 +68,7 @@ function parseScript(svelteSrc) {
 
   const ifaceBody = script.match(/interface\s+Props\s*\{([\s\S]*?)\n\s*\}/)?.[1];
   const props = {};
-  if (!ifaceBody) return { localTypes, props };
+  if (!ifaceBody) return { localTypes, props, script };
 
   const re = /(?:\/\*\*\s*([\s\S]*?)\s*\*\/\s*\n\s*)?(\w+)\??:\s*([^;\n]+);?/g;
   let m;
@@ -77,7 +77,35 @@ function parseScript(svelteSrc) {
     const description = doc?.replace(/^\s*\*\s?/gm, "").trim();
     props[name] = { typeExpr: typeExpr.trim(), ...(description && { description }) };
   }
-  return { localTypes, props };
+  return { localTypes, props, script };
+}
+
+function parseEvents(script) {
+  const found = new Map();
+
+  const customRe =
+    /new\s+CustomEvent\s*(?:<[^>]+>)?\s*\(\s*["']([^"']+)["'](?:\s*,\s*\{([\s\S]*?)\}\s*\))?/g;
+  let c;
+  while ((c = customRe.exec(script))) {
+    const name = c[1];
+    const detail = c[2]?.match(/detail\s*:\s*(\{[^{}]*\}|[^,}\n]+)/)?.[1]?.trim();
+    if (!found.has(name) || (detail && !found.get(name).detail)) {
+      found.set(name, { name, ...(detail && { detail }) });
+    }
+  }
+
+  const dispatcherVar = script.match(
+    /(?:export\s+)?const\s+(\w+)\s*=\s*createEventDispatcher\b/,
+  )?.[1];
+  if (dispatcherVar) {
+    const callRe = new RegExp(`\\b${dispatcherVar}\\s*\\(\\s*["']([^"']+)["']`, "g");
+    let d;
+    while ((d = callRe.exec(script))) {
+      if (!found.has(d[1])) found.set(d[1], { name: d[1] });
+    }
+  }
+
+  return [...found.values()];
 }
 
 function parseComponent(file) {
@@ -91,7 +119,8 @@ function parseComponent(file) {
 
   const componentName = basename(file, ".svelte");
 
-  const { localTypes, props: tsProps } = parseScript(src);
+  const { localTypes, props: tsProps, script } = parseScript(src);
+  const events = parseEvents(script);
 
   const propsBlock = block.match(/props:\s*\{([\s\S]*?)\n\s*\}/)?.[1] ?? "";
   const props = [];
@@ -110,7 +139,7 @@ function parseComponent(file) {
       ...(resolved?.options && { options: resolved.options }),
     });
   }
-  return { tagName: tag, componentName, source: file, props };
+  return { tagName: tag, componentName, source: file, props, events };
 }
 
 function parseStory(file) {
@@ -195,6 +224,7 @@ const merged = components.map((c) => {
     title: story?.title ?? null,
     source: c.source,
     props,
+    events: c.events,
     slots: story?.slots ?? [],
     example: story?.snippet ?? null,
   };
