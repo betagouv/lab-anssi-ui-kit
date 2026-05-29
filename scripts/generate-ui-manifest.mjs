@@ -5,7 +5,80 @@ import { dirname, basename } from "node:path";
 
 const COMPONENTS_GLOB = "src/lib/**/*.svelte";
 const STORIES_GLOB = "stories/**/*.stories.svelte";
+const SHARED_TYPES_GLOB = "src/lib/types/*.ts";
 const OUT = process.argv[2] ?? "dist/ui-kit-components.json";
+
+function extractTypeAliases(src) {
+  const out = {};
+  const re =
+    /(?:export\s+)?type\s+(\w+)\s*=\s*([\s\S]*?);\s*(?=\n\s*(?:export|type|import|interface|\/\*|\/\/|function|const|let|var|$))/g;
+  let m;
+  while ((m = re.exec(src + "\n"))) out[m[1]] = m[2].trim();
+  return out;
+}
+
+const sharedTypes = {};
+for (const f of globSync(SHARED_TYPES_GLOB)) {
+  Object.assign(sharedTypes, extractTypeAliases(readFileSync(f, "utf8")));
+}
+
+function resolveType(expr, localTypes, depth = 0) {
+  if (!expr || depth > 6) return null;
+  expr = expr.trim().replace(/;$/, "");
+
+  if (/^(string|number|boolean)$/.test(expr)) return { primitive: expr };
+
+  if (/^\|?\s*(["'][^"']*["'])(\s*\|\s*["'][^"']*["'])*$/.test(expr)) {
+    return { options: [...expr.matchAll(/["']([^"']*)["']/g)].map((x) => x[1]) };
+  }
+
+  const ext = expr.match(/^Extract<\s*(\w+)\s*,\s*([\s\S]+)\s*>$/);
+  if (ext) {
+    const base = resolveType(ext[1], localTypes, depth + 1);
+    const subset = resolveType(ext[2], localTypes, depth + 1);
+    if (base?.options && subset?.options)
+      return { options: base.options.filter((x) => subset.options.includes(x)) };
+    return null;
+  }
+
+  const exc = expr.match(/^Exclude<\s*(\w+)\s*,\s*([\s\S]+)\s*>$/);
+  if (exc) {
+    const base = resolveType(exc[1], localTypes, depth + 1);
+    const subset = resolveType(exc[2], localTypes, depth + 1);
+    if (base?.options && subset?.options)
+      return { options: base.options.filter((x) => !subset.options.includes(x)) };
+    return null;
+  }
+
+  if (/^\w+$/.test(expr)) {
+    const def = localTypes[expr] ?? sharedTypes[expr];
+    if (def) {
+      const resolved = resolveType(def, localTypes, depth + 1);
+      if (resolved) return resolved;
+    }
+    return { ref: expr };
+  }
+
+  return null;
+}
+
+function parseScript(svelteSrc) {
+  const script = svelteSrc.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? "";
+  const localTypes = extractTypeAliases(script);
+
+  const ifaceBody = script.match(/interface\s+Props\s*\{([\s\S]*?)\n\s*\}/)?.[1];
+  const props = {};
+  if (!ifaceBody) return { localTypes, props };
+
+  const re = /(?:\/\*\*\s*([\s\S]*?)\s*\*\/\s*\n\s*)?(\w+)\??:\s*([^;\n]+);?/g;
+  let m;
+  while ((m = re.exec(ifaceBody))) {
+    const [, doc, name, typeExpr] = m;
+    const description = doc?.replace(/^\s*\*\s?/gm, "").trim();
+    props[name] = { typeExpr: typeExpr.trim(), ...(description && { description }) };
+  }
+  return { localTypes, props };
+}
 
 function parseComponent(file) {
   const src = readFileSync(file, "utf8");
@@ -18,16 +91,23 @@ function parseComponent(file) {
 
   const componentName = basename(file, ".svelte");
 
+  const { localTypes, props: tsProps } = parseScript(src);
+
   const propsBlock = block.match(/props:\s*\{([\s\S]*?)\n\s*\}/)?.[1] ?? "";
   const props = [];
   const re = /(\w+):\s*\{([^}]*)\}/g;
   let m;
   while ((m = re.exec(propsBlock))) {
     const [, name, body] = m;
+    const tsInfo = tsProps[name];
+    const resolved = tsInfo ? resolveType(tsInfo.typeExpr, localTypes) : null;
     props.push({
       name,
       attribute: body.match(/attribute:\s*["'`]([^"'`]+)["'`]/)?.[1] ?? name,
       type: body.match(/type:\s*["'`]?(\w+)["'`]?/)?.[1] ?? "String",
+      ...(tsInfo?.typeExpr && { tsType: tsInfo.typeExpr }),
+      ...(tsInfo?.description && { description: tsInfo.description }),
+      ...(resolved?.options && { options: resolved.options }),
     });
   }
   return { tagName: tag, componentName, source: file, props };
@@ -101,13 +181,15 @@ function pickStory(componentName, candidates) {
 
 const merged = components.map((c) => {
   const story = pickStory(c.componentName, storiesByComponent.get(c.componentName));
-  const props = c.props.map((p) => ({
-    ...p,
-    ...(story?.argMeta?.[p.name]?.description && {
-      description: story.argMeta[p.name].description,
-    }),
-    ...(story?.argMeta?.[p.name]?.options && { options: story.argMeta[p.name].options }),
-  }));
+  const props = c.props.map((p) => {
+    const storyDesc = story?.argMeta?.[p.name]?.description;
+    const storyOpts = story?.argMeta?.[p.name]?.options;
+    return {
+      ...p,
+      ...(!p.description && storyDesc && { description: storyDesc }),
+      ...(!p.options && storyOpts && { options: storyOpts }),
+    };
+  });
   return {
     tagName: c.tagName,
     title: story?.title ?? null,
