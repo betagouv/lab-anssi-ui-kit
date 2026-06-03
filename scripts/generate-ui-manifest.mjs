@@ -260,17 +260,30 @@ function attrType(p) {
 
 function buildWebTypes(components) {
   const elements = components.map((c) => {
-    const attributes = c.props.map((p) => ({
-      name: p.attribute,
-      ...(p.description && { description: p.description }),
-      value: { type: attrType(p) },
+    const eventHandlerType = "(event: CustomEvent) => void";
+
+    const eventHandlerEntries = (c.events ?? []).map((e) => ({
+      name: `on${e.name}`,
+      ...(e.detail && { description: `detail: ${e.detail}` }),
     }));
 
-    const properties = c.props.map((p) => ({
-      name: p.name,
-      ...(p.description && { description: p.description }),
-      type: attrType(p),
-    }));
+    const attributes = [
+      ...c.props.map((p) => ({
+        name: p.attribute,
+        ...(p.description && { description: p.description }),
+        value: { type: attrType(p) },
+      })),
+      ...eventHandlerEntries.map((h) => ({ ...h, value: { type: eventHandlerType } })),
+    ];
+
+    const properties = [
+      ...c.props.map((p) => ({
+        name: p.name,
+        ...(p.description && { description: p.description }),
+        type: attrType(p),
+      })),
+      ...eventHandlerEntries.map((h) => ({ ...h, type: eventHandlerType })),
+    ];
 
     const events = (c.events ?? []).map((e) => ({
       name: e.name,
