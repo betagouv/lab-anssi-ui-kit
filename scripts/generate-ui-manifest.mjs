@@ -321,5 +321,6 @@ function buildWebTypes(components) {
   };
 }
 
+mkdirSync(dirname(WEB_TYPES_OUT), { recursive: true });
 writeFileSync(WEB_TYPES_OUT, JSON.stringify(buildWebTypes(merged), null, 2));
 console.log(`✓ web-types → ${WEB_TYPES_OUT}`);
