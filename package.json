@@ -12,7 +12,7 @@
   "homepage": "https://github.com/betagouv/lab-anssi-ui-kit#readme",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
-    "build": "vite build && npm run prepack",
+    "build": "vite build && npm run build:manifest && npm run prepack",
     "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
@@ -38,8 +38,10 @@
     "./dist/webcomponents": {
       "types": "./dist/webcomponents/lab-anssi-ui-kit.jsx.d.ts",
       "import": "./dist/webcomponents/lab-anssi-ui-kit.iife.js"
-    }
+    },
+    "./web-types.json": "./dist/web-types.json"
   },
+  "web-types": "./dist/web-types.json",
   "peerDependencies": {
     "svelte": "~5.38.8"
   },

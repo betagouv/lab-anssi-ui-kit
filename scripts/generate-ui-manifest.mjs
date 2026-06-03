@@ -7,6 +7,9 @@ const COMPONENTS_GLOB = "src/lib/**/*.svelte";
 const STORIES_GLOB = "stories/**/*.stories.svelte";
 const SHARED_TYPES_GLOB = "src/lib/types/*.ts";
 const OUT = process.argv[2] ?? "dist/ui-kit-components.json";
+const WEB_TYPES_OUT = "dist/web-types.json";
+
+const pkg = JSON.parse(readFileSync("package.json", "utf8"));
 
 function extractTypeAliases(src) {
   const out = {};
@@ -237,3 +240,59 @@ writeFileSync(OUT, JSON.stringify({ schemaVersion: 1, components: merged }, null
 
 const withStory = merged.filter((c) => c.example).length;
 console.log(`✓ ${merged.length} composants (${withStory} avec exemple) → ${OUT}`);
+
+function attrType(p) {
+  if (p.options?.length) return p.options.map((o) => `'${o}'`).join(" | ");
+  if (p.type === "Boolean") return "boolean";
+  if (p.type === "Number") return "number";
+  return "string";
+}
+
+function buildWebTypes(components) {
+  const elements = components.map((c) => {
+    const attributes = c.props.map((p) => ({
+      name: p.attribute,
+      ...(p.description && { description: p.description }),
+      value: { type: attrType(p) },
+    }));
+
+    const properties = c.props.map((p) => ({
+      name: p.name,
+      ...(p.description && { description: p.description }),
+      type: attrType(p),
+    }));
+
+    const js = { properties };
+    if (c.events?.length) {
+      js.events = c.events.map((e) => ({
+        name: e.name,
+        ...(e.detail && { description: `detail: ${e.detail}` }),
+      }));
+    }
+
+    const element = { name: c.tagName, attributes, js };
+
+    if (c.slots?.length) {
+      element.slots = c.slots.map((s) => ({
+        name: s.name,
+        ...(s.description && { description: s.description }),
+      }));
+    }
+
+    return element;
+  });
+
+  return {
+    $schema: "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+    name: pkg.name,
+    version: pkg.version,
+    "framework-config": {
+      "enable-when": { "file-extensions": ["svelte", "html", "pug"] },
+    },
+    "description-markup": "markdown",
+    contributions: { html: { elements } },
+  };
+}
+
+writeFileSync(WEB_TYPES_OUT, JSON.stringify(buildWebTypes(merged), null, 2));
+console.log(`✓ web-types → ${WEB_TYPES_OUT}`);
