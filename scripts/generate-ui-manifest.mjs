@@ -262,15 +262,16 @@ function buildWebTypes(components) {
       type: attrType(p),
     }));
 
+    const events = (c.events ?? []).map((e) => ({
+      name: e.name,
+      ...(e.detail && { description: `detail: ${e.detail}` }),
+    }));
+
     const js = { properties };
-    if (c.events?.length) {
-      js.events = c.events.map((e) => ({
-        name: e.name,
-        ...(e.detail && { description: `detail: ${e.detail}` }),
-      }));
-    }
+    if (events.length) js.events = events;
 
     const element = { name: c.tagName, attributes, js };
+    if (events.length) element.events = events;
 
     if (c.slots?.length) {
       element.slots = c.slots.map((s) => ({
