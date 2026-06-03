@@ -241,6 +241,16 @@ writeFileSync(OUT, JSON.stringify({ schemaVersion: 1, components: merged }, null
 const withStory = merged.filter((c) => c.example).length;
 console.log(`✓ ${merged.length} composants (${withStory} avec exemple) → ${OUT}`);
 
+const STORYBOOK_BASE = "https://betagouv.github.io/lab-anssi-ui-kit/?path=/docs";
+
+function storybookId(title) {
+  return title
+    .toLowerCase()
+    .replace(/[ ’–—―′¿'`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function attrType(p) {
   if (p.options?.length) return p.options.map((o) => `'${o}'`).join(" | ");
   if (p.type === "Boolean") return "boolean";
@@ -271,6 +281,9 @@ function buildWebTypes(components) {
     if (events.length) js.events = events;
 
     const element = { name: c.tagName, attributes, js };
+    if (c.title) {
+      element["doc-url"] = `${STORYBOOK_BASE}/${storybookId(c.title)}--docs`;
+    }
     if (events.length) element.events = events;
 
     if (c.slots?.length) {
