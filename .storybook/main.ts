@@ -10,6 +10,7 @@ const __dirname = dirname(__filename);
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 const config: StorybookConfig = {
+  staticDirs: ["../static"],
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|ts|svelte)"],
   addons: [
     "@storybook/addon-svelte-csf",
