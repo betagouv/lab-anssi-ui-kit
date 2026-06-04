@@ -23,7 +23,7 @@
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt felis in velit semper euismod.",
       inverse: false,
-      urlImage: "/static/images/hero-placeholder.jpg",
+      urlImage: "/images/hero-placeholder.jpg",
       sansImage: false,
       boutons: [
         {
