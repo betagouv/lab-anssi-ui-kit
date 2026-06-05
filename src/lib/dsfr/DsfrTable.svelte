@@ -33,6 +33,7 @@
       selectAll: { attribute: "select-all", type: "Boolean" },
       rowKey: { attribute: "row-key", type: "String" },
       selectedRowKeys: { attribute: "selected-row-keys", type: "Array" },
+      disabledRowKeys: { attribute: "disabled-row-keys", type: "Array" },
     },
   }}
 />
@@ -217,6 +218,12 @@
      * Si fourni, le composant utilise cette valeur ; sinon, il gère sa propre sélection en interne.
      */
     selectedRowKeys?: (string | number)[];
+    /**
+     * Clés des lignes désactivées.
+     * Les lignes désactivées ont leur case à cocher `disabled` et sont ignorées
+     * par la case « tout sélectionner ».
+     */
+    disabledRowKeys?: (string | number)[];
     /** Callback appelé lorsque la sélection change */
     onselectionchanged?: (selectedKeys: (string | number)[], selectedRows: Row[]) => void;
   }
@@ -286,6 +293,7 @@
     selectAll = false,
     rowKey,
     selectedRowKeys,
+    disabledRowKeys,
     onselectionchanged,
   }: Props = $props();
 
@@ -410,16 +418,19 @@
     isSelectionControlled ? (selectedRowKeys ?? []) : internalSelectedKeys,
   );
   let selectedKeysSet = $derived(new Set<string | number>(activeSelectedKeys));
+  let disabledKeysSet = $derived(new Set<string | number>(disabledRowKeys ?? []));
 
   let displayedRowKeys = $derived.by(() => {
     if (!selectable || !selectAll) return [];
 
-    return displayedRows.map((_, index) => {
-      const rowIndex = (currentPage - 1) * rowsPerPage + index;
-      const originalRow = rows?.[isServerSide ? index : rowIndex] ?? {};
+    return displayedRows
+      .map((_, index) => {
+        const rowIndex = (currentPage - 1) * rowsPerPage + index;
+        const originalRow = rows?.[isServerSide ? index : rowIndex] ?? {};
 
-      return getRowKey(originalRow, rowIndex);
-    });
+        return getRowKey(originalRow, rowIndex);
+      })
+      .filter((key) => !disabledKeysSet.has(key));
   });
 
   let allRowsSelected = $derived(
@@ -439,6 +450,18 @@
    */
   function isRowSelected(row: Row, rowIndex: number): boolean {
     return selectedKeysSet.has(getRowKey(row, rowIndex));
+  }
+
+  /**
+   * Vérifie si une ligne est actuellement désactivée.
+   *
+   * @param row - La ligne à vérifier
+   * @param rowIndex - L'index de la ligne
+   *
+   * @returns `true` si la ligne est désactivée, `false` sinon
+   */
+  function isRowDisabled(row: Row, rowIndex: number): boolean {
+    return disabledKeysSet.has(getRowKey(row, rowIndex));
   }
 
   /**
@@ -668,6 +691,8 @@
                       tIndex === 0 ? (rows?.[isServerSide ? index : rowIndex] ?? {}) : undefined}
                     {@const selected =
                       selectable && originalRow ? isRowSelected(originalRow, rowIndex) : undefined}
+                    {@const disabled =
+                      selectable && originalRow ? isRowDisabled(originalRow, rowIndex) : undefined}
 
                     <tr
                       id={id ? `${id}-row-key-${rowIndex}` : undefined}
@@ -684,6 +709,7 @@
                               data-fr-row-select="true"
                               id={checkboxId}
                               checked={selected}
+                              {disabled}
                               onchange={(event) =>
                                 handleRowSelection(
                                   originalRow,
