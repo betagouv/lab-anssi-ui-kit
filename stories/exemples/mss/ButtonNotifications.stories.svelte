@@ -5,7 +5,7 @@
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemples/MSS",
+    title: "Exemples/LAB - MSS",
     component: DsfrButton,
     args: {
       label: "Notifications",

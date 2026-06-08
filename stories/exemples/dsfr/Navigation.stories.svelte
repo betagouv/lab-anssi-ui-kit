@@ -13,10 +13,10 @@
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
 
-  import webComponentSourceCode from "../utilitaires/webComponentSource.js";
+  import webComponentSourceCode from "../../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Exemples/DSFR - Navigation Mega Menu",
+    title: "Exemples/DSFR",
     component: DsfrNavigation,
     argTypes: navigationArgTypes,
     args: {
@@ -133,7 +133,7 @@
 {/snippet}
 
 <Story
-  name="Mega Menus avec slot"
+  name="Navigation - Mega Menus avec slot"
   args={{
     id: "navigation-mega-menus",
   }}

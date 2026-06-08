@@ -24,7 +24,7 @@
   import DsfrCheckboxesGroup from "$lib/dsfr/DsfrCheckboxesGroup.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemple/Validation Formulaire",
+    title: "Exemples/DSFR",
     component: DsfrInput,
     args: {
       civilite: [
@@ -63,7 +63,7 @@
   type Args = ComponentProps<DsfrInput>;
 </script>
 
-<Story name="Défaut">
+<Story name="Validation HTML des formulaires">
   {#snippet template(args: Args)}
     <div class="fr-container">
       <link
