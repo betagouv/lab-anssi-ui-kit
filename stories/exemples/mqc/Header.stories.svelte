@@ -11,7 +11,7 @@
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemples/MQC",
+    title: "Exemples/LAB - MQC",
     component: DsfrHeader,
     argTypes: headerArgTypes,
     args: headerArgs,

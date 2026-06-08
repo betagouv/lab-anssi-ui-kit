@@ -38,7 +38,7 @@
   const { toolLinks } = headerArgs;
 
   const { Story } = defineMeta({
-    title: "Exemples/MSS",
+    title: "Exemples/LAB - MSS",
     component: DsfrHeader,
     argTypes: headerArgTypes,
     args: {

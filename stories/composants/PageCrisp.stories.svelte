@@ -3,7 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
-  import exempleContenu from "../lab/blog/exemple-page-crisp.html?raw";
+  import exempleContenu from "../exemples/lab/exemple-page-crisp.html?raw";
 
   import PageCrisp from "$lib/composants/blog/PageCrisp.svelte";
 

@@ -29,7 +29,7 @@
   import Icone from "$lib/composants/Icone.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemples/Carte Jeu",
+    title: "Exemples/LAB",
     component: Reactions,
     args: {
       reactions: [
@@ -60,7 +60,7 @@
   type Args = ComponentProps<Reactions>;
 </script>
 
-<Story name="Défaut">
+<Story name="Carte Jeu">
   {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
@@ -179,7 +179,7 @@
 </Story>
 
 <Story
-  name="Cas Intermédiaire"
+  name="Carte Jeu - Cas Intermédiaire"
   args={{
     reactions: [
       { id: "1", emoji: "🔥", compteur: 9 },
@@ -306,7 +306,7 @@
 </Story>
 
 <Story
-  name="Cas Intermédiaire (actif)"
+  name="Carte Jeu - Cas Intermédiaire (actif)"
   args={{
     reactions: [
       { id: "1", emoji: "🔥", compteur: 9 },
@@ -433,7 +433,7 @@
 </Story>
 
 <Story
-  name="Cas Max"
+  name="Carte Jeu - Cas Max"
   args={{
     reactions: [
       { id: "1", emoji: "🔥", compteur: 9 },
@@ -559,7 +559,7 @@
   {/snippet}
 </Story>
 
-<Story name="Masqué" args={{ masque: true }}>
+<Story name="Carte Jeu - Etat Masqué" args={{ masque: true }}>
   {#snippet template(args: Args)}
     <div style="width: 300px;">
       <!-- CarteJeu exemple -->
