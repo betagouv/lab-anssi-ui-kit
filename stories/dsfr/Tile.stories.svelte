@@ -40,6 +40,11 @@
         control: false,
         table: { category: "Slots" },
       },
+      noIcon: {
+        control: "boolean",
+        description:
+          "Si true, ajoute la classe fr-tile--no-icon pour désactiver l'icône associée au lien",
+      },
     },
     args: { ...tileArgs, href: "#" },
     parameters: {
@@ -81,6 +86,7 @@
     horizontal={args.horizontal || undefined}
     vertical-breakpoint={args.verticalBreakpoint}
     variations={args.variations}
+    no-icon={args.noIcon || undefined}
   >
     <dsfr-badge
       slot="badge"
