@@ -64,7 +64,7 @@ $dash-height: var(--dash-height, 2px) !default;
   display: inline-block;
   width: $checkmark-size;
   height: $checkmark-size;
-  background-color: $icon-color;
+  background-color: var(--icon-check-color, $icon-color);
   clip-path: polygon(41.7% 63.2%, 80% 24.9%, 85.8% 30.8%, 41.7% 75%, 15.2% 48.5%, 21% 42.6%);
 
   @content;
@@ -92,6 +92,7 @@ $dash-height: var(--dash-height, 2px) !default;
 @mixin set-themeable-checkbox() {
   input[type="checkbox"] {
     &:checked + label,
+    &:disabled + label,
     &:indeterminate + label {
       &::before {
         --data-uri-svg: none;
@@ -111,6 +112,12 @@ $dash-height: var(--dash-height, 2px) !default;
           transform: translateY(-50%);
           scale: $checkmark-scale;
         }
+      }
+    }
+
+    &:disabled + label {
+      &::after {
+        --icon-check-color: currentColor;
       }
     }
 
