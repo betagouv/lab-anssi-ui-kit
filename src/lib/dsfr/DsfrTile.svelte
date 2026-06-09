@@ -27,6 +27,7 @@
       verticalBreakpoint: { attribute: "vertical-breakpoint", type: "String" },
       variations: { attribute: "variations", type: "String" },
       markupLevel: { attribute: "markup-level", type: "Number" },
+      noIcon: { attribute: "no-icon", type: "Boolean" },
     },
   }}
 />
@@ -88,6 +89,8 @@
     verticalBreakpoint?: "false" | "md" | "lg";
     /** Variations esthétiques de la carte */
     variations?: "none" | "grey" | "no-border" | "no-background" | "shadow";
+    /** Si true, ajoute la classe fr-tile--no-icon pour désactiver l'icône associée au lien */
+    noIcon?: boolean;
   }
 
   let {
@@ -115,6 +118,7 @@
     horizontal = false,
     verticalBreakpoint = "false",
     variations = "none",
+    noIcon = false,
   }: Props = $props();
 
   const actionMarkupTag = $derived.by(() => {
@@ -146,6 +150,7 @@
   class={["fr-tile", classEnlarge, classVertical, classVariation, `fr-tile--${size}`]}
   class:fr-tile--download={download}
   class:fr-tile--horizontal={horizontal}
+  class:fr-tile--no-icon={noIcon}
 >
   <div class="fr-tile__body">
     <div class="fr-tile__content">
