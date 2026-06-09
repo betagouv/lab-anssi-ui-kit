@@ -555,6 +555,56 @@
   }
 
   /**
+   * Action Svelte : observe la hauteur du `<tr>` et synchronise la CSS custom property `--row-height`,
+   * reproduisant le comportement de `table-row.js` du DSFR.
+   */
+  function rowHeight(node: HTMLTableRowElement, enabled: boolean) {
+    const ROW_HEIGHT_OFFSET_PX = 2;
+
+    let height = 0;
+    let observer: ResizeObserver | undefined;
+
+    const update = () => {
+      const newHeight = node.getBoundingClientRect().height + ROW_HEIGHT_OFFSET_PX;
+
+      if (height === newHeight) return;
+
+      height = newHeight;
+      node.style.setProperty("--row-height", `${height}px`);
+    };
+
+    const start = () => {
+      if (observer) return;
+
+      update();
+
+      observer = new ResizeObserver(update);
+      observer.observe(node);
+    };
+
+    const stop = () => {
+      observer?.disconnect();
+      observer = undefined;
+
+      height = 0;
+
+      node.style.removeProperty("--row-height");
+    };
+
+    if (enabled) start();
+
+    return {
+      update(newEnabled: boolean) {
+        if (newEnabled) start();
+        else stop();
+      },
+      destroy() {
+        stop();
+      },
+    };
+  }
+
+  /**
    * Génère les classes CSS applicables à une cellule de tableau en fonction de ses propriétés.
    *
    * @param cell La cellule dont les classes doivent être générées
@@ -695,6 +745,7 @@
                       selectable && originalRow ? isRowDisabled(originalRow, rowIndex) : undefined}
 
                     <tr
+                      use:rowHeight={selectable && tIndex === 0}
                       id={id ? `${id}-row-key-${rowIndex}` : undefined}
                       data-row-key={rowIndex}
                       aria-selected={selected}
