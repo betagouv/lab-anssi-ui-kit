@@ -235,3 +235,19 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
     ></dsfr-table>
   {/snippet}
 </Story>
+
+<Story name="Sélectionnable avec lignes désactivées">
+  {#snippet template(_args: Args)}
+    <dsfr-table
+      id="table-selectable-disabled"
+      caption="Grandes villes de France (lignes désactivées)"
+      selectable={true}
+      select-all={true}
+      row-key="id"
+      columns={citiesColumns}
+      rows={villesAvecId}
+      selected-row-keys={JSON.stringify(["ville-1"])}
+      disabled-row-keys={JSON.stringify(["ville-1", "ville-3", "ville-5"])}
+    ></dsfr-table>
+  {/snippet}
+</Story>
