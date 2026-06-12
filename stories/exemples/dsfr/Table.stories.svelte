@@ -3,7 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
-  import tableData from "../utilitaires/tableData.json";
+  import tableData from "../../utilitaires/tableData.json";
 
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
@@ -39,7 +39,7 @@
   let selectedRowsCount = $state(0);
 
   const { Story } = defineMeta({
-    title: "Exemples/DSFR - Tableau",
+    title: "Exemples/DSFR",
     component: DsfrTable,
     args: {
       columns: citiesColumns,
@@ -51,7 +51,7 @@
   type Args = ComponentProps<DsfrTable>;
 </script>
 
-<Story name="Tableau vide avec slot personnalisé">
+<Story name="Tableau - vide avec slot personnalisé">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-empty-custom"
@@ -64,7 +64,7 @@
   {/snippet}
 </Story>
 
-<Story name="Avec pagination">
+<Story name="Tableau - avec pagination">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-pagination"
@@ -79,7 +79,7 @@
   {/snippet}
 </Story>
 
-<Story name="Avec pagination côté serveur">
+<Story name="Tableau - avec pagination côté serveur">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-server"
@@ -108,7 +108,7 @@ L'attribut `rich` permet d'utiliser des slots pour personnaliser le rendu de cha
 Attention : l'attribut `rich` appliqué au global peut engendrer des problèmes de performance sur les tableaux volumineux, car il rend chaque cellule personnalisable. Il est recommandé de l'utiliser uniquement pour des tableaux de petite taille ou uniquement lorsque la personnalisation est nécessaire pour toutes les cellules.
 En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement)_, il est préférable d'utiliser la clé `rich` au niveau des colonnes spécifiques.
 -->
-<Story name="Avec toutes les cellules personnalisées via slot">
+<Story name="Tableau - avec toutes les cellules personnalisées via slot">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-rich-global"
@@ -143,7 +143,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
   {/snippet}
 </Story>
 
-<Story name="Avec uniquement deux colonnes personnalisées via slot">
+<Story name="Tableau - avec uniquement deux colonnes personnalisées via slot">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-rich-partial"
@@ -164,7 +164,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
   {/snippet}
 </Story>
 
-<Story name="Sélectionnable (mode columns/rows)">
+<Story name="Tableau - sélectionnable (mode columns/rows)">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-selectable-rows"
@@ -177,7 +177,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
   {/snippet}
 </Story>
 
-<Story name="Sélectionnable avec rowKey et pré-sélection">
+<Story name="Tableau - sélectionnable avec rowKey et pré-sélection">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-selectable-rowkey"
@@ -192,7 +192,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
   {/snippet}
 </Story>
 
-<Story name="Sélectionnable contrôlée avec callback">
+<Story name="Tableau - sélectionnable contrôlée avec callback">
   {#snippet template(_args: Args)}
     <p class="fr-text--sm">
       Sélection : {selectedKeys.length === 0 ? "aucune" : selectedKeys.join(", ")}
@@ -223,7 +223,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
   {/snippet}
 </Story>
 
-<Story name="Sélectionnable avec checkbox 'Tout sélectionner'">
+<Story name="Tableau - sélectionnable avec checkbox 'Tout sélectionner'">
   {#snippet template(_args: Args)}
     <dsfr-table
       id="table-selectable-all"

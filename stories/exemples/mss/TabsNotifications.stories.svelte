@@ -12,7 +12,7 @@
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
-    title: "Exemples/MSS",
+    title: "Exemples/LAB - MSS",
     component: DsfrTabs,
     args: {
       ...tabsArgs,
