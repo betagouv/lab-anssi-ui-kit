@@ -156,6 +156,8 @@
   --background-action-low-blue-france-hover: var(--yellow-msc-75);
   --background-action-low-blue-france-active: var(--yellow-msc-100);
   --background-active-blue-france: var(--yellow-msc-200);
+  --background-active-blue-france-hover: var(--yellow-msc-250);
+  --background-active-blue-france-active: var(--yellow-msc-275);
   --background-open-blue-france: var(--yellow-msc-50);
   --background-open-blue-france-hover: var(--yellow-msc-75);
   --background-open-blue-france-active: var(--yellow-msc-100);
