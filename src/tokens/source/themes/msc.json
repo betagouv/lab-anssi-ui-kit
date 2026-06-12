@@ -200,6 +200,16 @@
       "$value": "{yellow-msc.200}",
       "$themeable": true
     },
+    "active-blue-france-hover": {
+      "$type": "color",
+      "$value": "{yellow-msc.250}",
+      "$themeable": true
+    },
+    "active-blue-france-active": {
+      "$type": "color",
+      "$value": "{yellow-msc.275}",
+      "$themeable": true
+    },
     "open": {
       "blue-france": {
         "$type": "color",
