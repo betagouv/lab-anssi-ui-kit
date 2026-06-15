@@ -1,157 +1,167 @@
 <svelte:options
   customElement={{
     tag: "lab-anssi-presentation-anssi",
+    props: {
+      titre: { attribute: "titre", type: "String" },
+      labelBouton: { attribute: "label-bouton", type: "String" },
+    },
   }}
 />
 
 <script lang="ts">
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import { srcAsset } from "$lib/assets/assets.js";
-  import LienExterne from "$lib/composants/icones/LienExterne.svelte";
+  import { setThemeable } from "$lib/utilitaires";
+
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
+
+  interface Props {
+    /** Titre de la section */
+    titre?: string;
+    /** Libellé du bouton */
+    labelBouton?: string;
+  }
+
+  const { titre = "Qu'est-ce que l'ANSSI ?", labelBouton = "En savoir plus" }: Props = $props();
+
+  setThemeable($host());
 </script>
 
-<Brique variation="transparent">
-  <div class="presentation-anssi">
-    <div class="logo-anssi">
-      <img src={srcAsset("/illustrations/logo-anssi.svg")} alt="Logo de l'ANSSI" />
+<section class="presentation-anssi">
+  <DsfrContainer>
+    <div class="presentation-anssi__conteneur">
+      <figure class="presentation-anssi__visuel">
+        <img
+          src={srcAsset("/illustrations/logo-anssi.svg")}
+          alt="Logo de l'ANSSI"
+          class="presentation-anssi__logo"
+        />
+      </figure>
+
+      <div class="presentation-anssi__contenu">
+        <h2 class="presentation-anssi__titre">{titre}</h2>
+        <div class="presentation-anssi__description">
+          <slot>
+            <p>
+              Créée en 2009, l'Agence nationale de la sécurité des systèmes d'information (<abbr
+                >ANSSI</abbr
+              >) est l'autorité nationale en matière de cybersécurité et de cyberdéfense.
+            </p>
+            <p>
+              <strong>
+                Son action pour la protection de la Nation face aux cyberattaques se traduit en cinq
+                grandes missions : défendre, connaître, partager, accompagner, réguler.
+              </strong>
+            </p>
+          </slot>
+        </div>
+        <DsfrButton
+          class="presentation-anssi__bouton"
+          label={labelBouton}
+          kind="secondary"
+          markup="a"
+          href="https://cyber.gouv.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      </div>
     </div>
-    <div class="contenu">
-      <h2>Qu'est ce que l'ANSSI ?</h2>
-      <p>
-        Créée en 2009, l’Agence nationale de la sécurité des systèmes d’information (ANSSI) est
-        l’autorité nationale en matière de cybersécurité et de cyberdéfense.
-        <br />
-        <br />
-        <b>
-          Son action pour la protection de la Nation face aux cyberattaques se traduit en cinq
-          grandes missions : défendre, connaître, partager, accompagner, réguler.
-        </b>
-      </p>
-    </div>
-    <div class="encart-action">
-      <a class="action" role="button" href="https://cyber.gouv.fr/" target="_blank">
-        En savoir plus
-        <LienExterne />
-      </a>
-    </div>
-  </div>
-</Brique>
+  </DsfrContainer>
+</section>
 
 <style lang="scss">
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   .presentation-anssi {
-    color: $texte-secondaire;
+    color: var(--text-default-grey);
+    padding: var(--padding-section, 4.5rem 0);
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "logo-anssi"
-      "contenu"
-      "encart-action";
-    row-gap: 24px;
-    padding: 16px 16px;
+    &__conteneur {
+      --colonnes-gap: 1.5rem;
 
-    @include a-partir-de(desktop) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "contenu logo-anssi"
-        "encart-action logo-anssi";
-    }
-
-    .logo-anssi {
-      grid-area: logo-anssi;
-      display: flex;
-      justify-content: center;
-
-      @include a-partir-de(desktop) {
-        align-items: center;
-      }
-
-      img {
-        max-width: 140px;
-        max-height: 140px;
-      }
-    }
-
-    .contenu {
-      text-align: center;
-
-      grid-area: contenu;
       display: flex;
       flex-direction: column;
-      gap: 8px;
       align-items: center;
+      gap: var(--colonnes-gap);
 
-      @include a-partir-de(desktop) {
-        text-align: start;
-        align-items: start;
-      }
+      @include a-partir-de(desktop-dsfr) {
+        --colonnes-gap: 0;
 
-      h2 {
-        color: $brique-presentation-anssi-titre-couleur;
-        font-size: 1.75rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 2.25rem;
-        margin: 0;
-      }
-
-      p {
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.5rem;
-        margin: 0;
+        flex-direction: row;
+        align-items: center;
       }
     }
 
-    .encart-action {
-      grid-area: encart-action;
+    &__visuel,
+    &__contenu {
+      @include a-partir-de(desktop-dsfr) {
+        flex: 0 0 var(--colonne-taille);
+        max-width: var(--colonne-taille);
+        width: var(--colonne-taille);
+      }
+    }
 
-      width: 100%;
-      display: flex;
-      justify-content: center;
+    &__contenu {
+      --colonne-taille: calc(800% / 12);
 
-      @include a-partir-de(desktop) {
-        justify-content: start;
+      padding-block-end: 1rem;
+      text-align: center;
+
+      @include a-partir-de(desktop-dsfr) {
+        text-align: left;
+      }
+    }
+
+    &__titre {
+      color: var(--presentation-anssi-couleur-titre, var(--text-title-grey));
+
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 2.5rem;
+    }
+
+    &__description {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-block-end: 1.5rem;
+    }
+
+    abbr {
+      text-decoration: none;
+    }
+
+    p {
+      &:first-of-type {
+        margin-block-start: 0;
       }
 
-      a[role="button"] {
-        width: 100%;
-
-        text-decoration: none;
-        padding: 8px 16px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-
-        text-align: center;
-        font-weight: 500;
-        font-size: 1rem;
-        line-height: 24px;
-
-        border-radius: 4px;
-
-        @include a-partir-de(tablette) {
-          width: fit-content;
-        }
-
-        &.action {
-          background-color: $brique-presentation-anssi-bouton-background;
-          color: $brique-presentation-anssi-bouton-texte;
-          border: 1px solid $brique-presentation-anssi-bouton-texte;
-          cursor: pointer;
-
-          &:active {
-            background-color: $brique-presentation-anssi-bouton-background-active;
-          }
-
-          &:hover {
-            background-color: $brique-presentation-anssi-bouton-background-hover;
-          }
-        }
+      &:last-of-type {
+        margin-block-end: 0;
       }
+    }
+
+    &__visuel {
+      --colonne-taille: calc(400% / 12);
+
+      @include a-partir-de(desktop-dsfr) {
+        order: 1;
+      }
+    }
+
+    &__visuel,
+    &__logo {
+      margin: 0 auto;
+    }
+
+    &__logo {
+      display: block;
+      height: auto;
+      width: 140px;
     }
   }
 </style>
