@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Cloner le dépôt Git
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Utiliser la version Node.js 24
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 24
 
@@ -30,7 +30,7 @@ jobs:
         run: pnpm run storybook:build-dev
 
       - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@v1.10.0
+        uses: s3-actions/s3cmd@c74c5c40ca017039558a716060ecca2047cf7856 # v1.10.0
         with:
           provider: clevercloud
           access_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_ACCESS_KEY }}
