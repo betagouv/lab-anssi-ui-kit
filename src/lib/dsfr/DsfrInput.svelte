@@ -26,6 +26,7 @@
       required: { attribute: "required", type: "Boolean" },
       step: { attribute: "step", type: "Number" },
       icon: { attribute: "icon", type: "String" },
+      addon: { attribute: "addon", type: "Boolean" },
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
@@ -72,6 +73,8 @@
     type?: "date" | "email" | "password" | "number" | "search" | "tel" | "text" | "url";
     /** Ajoute une icône dans le champs de saisie */
     icon?: string;
+    /** Associe un bouton d'envoi à l'input (variation addon) */
+    addon?: boolean;
     /** Valeur initiale du champs de saisie */
     value?: string;
     /** Texte avant saisie dans le champs de saisie */
@@ -121,6 +124,7 @@
     hint,
     type = "text",
     icon,
+    addon,
     value = $bindable(),
     placeholder,
     name,
@@ -159,6 +163,12 @@
 
   const disabledClass = $derived(disabled && "fr-input-group--disabled");
   const iconClass = $derived(setIconClass(icon));
+  const hasWrap = $derived(!!icon || !!addon);
+  const wrapClasses = $derived([
+    "fr-input-wrap",
+    iconClass,
+    addon && "fr-input-wrap--addon",
+  ]);
   const statusClass = $derived(
     computedStatus !== "info" &&
       computedStatus !== "default" &&
@@ -251,9 +261,12 @@
     />
   {/snippet}
 
-  {#if icon}
-    <div class={["fr-input-wrap", iconClass]}>
+  {#if hasWrap}
+    <div class={wrapClasses}>
       {@render inputField()}
+      {#if addon}
+        <slot name="button"></slot>
+      {/if}
     </div>
   {:else}
     {@render inputField()}
@@ -288,6 +301,8 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
+  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
+
   @include set-shadow-host();
   @include set-dsfr-sizing("input-group") {
     &:has(.fr-sr-only) .fr-input {
@@ -301,5 +316,15 @@
 
   .fr-sr-only {
     @include visually-hidden();
+  }
+
+  .fr-input-wrap--addon {
+    :global(::slotted([slot="button"])) {
+      border-radius: 0 0.25rem 0 0;
+    }
+
+    .fr-input {
+      border-radius: 0.25rem 0 0 0;
+    }
   }
 </style>
