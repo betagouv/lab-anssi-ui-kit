@@ -8,6 +8,7 @@
     inputArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/input/template/stories/input-arg-types.js";
 
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
 
   const { Story } = defineMeta({
@@ -88,7 +89,87 @@
 
 <Story name="Défaut" />
 
+<Story name="Erreur" args={{ status: "error" }} />
+
+<Story name="Succès" args={{ status: "valid" }} />
+
+<Story name="Désactivé" args={{ disabled: true }} />
+
+<Story name="Avec icône" args={{ label: "Champ avec une icône", icon: "warning-line" }} />
+
 <Story
-  name="Message d'information"
-  args={{ status: "info", infoMessage: "200 caractères maximum." }}
+  name="Téléphone"
+  args={{
+    label: "Numéro de téléphone",
+    hint: "Exemple: 0123456789",
+    type: "tel",
+  }}
 />
+
+<Story
+  name="Nombre"
+  args={{
+    label: "Champ de saisie de nombre",
+    hint: "Saisissez un nombre entier",
+    type: "number",
+  }}
+/>
+
+<Story
+  name="Mot de passe"
+  args={{
+    label: "Champ type mot de passe",
+    type: "password",
+  }}
+/>
+
+<Story
+  name="Recherche"
+  args={{
+    label: "Champ type recherche",
+    type: "search",
+  }}
+/>
+
+<Story
+  name="Avec description et icône"
+  args={{
+    icon: "alert-line",
+    hint: "Texte de description additionnel",
+  }}
+/>
+
+<Story
+  name="Date"
+  args={{
+    label: "Date simple",
+    type: "date",
+  }}
+/>
+
+<Story
+  name="URL"
+  args={{
+    label: "Adresse du site",
+    placeholder: "https://",
+    hint: "Saisissez une url valide, commençant par https://",
+  }}
+/>
+
+<Story
+  name="Avec bouton d'envoi (addon)"
+  args={{ label: "Champ avec bouton d'envoi associé", addon: true }}
+>
+  {#snippet template(args: Args)}
+    <dsfr-input
+      id={args.id}
+      label={args.label}
+      addon={args.addon || undefined}
+      status={args.status}
+      error-message={args.errorMessage}
+      valid-message={args.validMessage}
+    >
+      <dsfr-button slot="button" label="Envoyer" type="submit"></dsfr-button>
+    </dsfr-input>
+  {/snippet}
+</Story>
