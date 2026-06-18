@@ -13,6 +13,7 @@
       contentType: { attribute: "content-type", type: "String" },
       align: { attribute: "align", type: "String" },
       items: { attribute: "items", type: "Array" },
+      disabled: { attribute: "disabled", type: "Boolean", reflect: true },
     },
     extend: withIconsStyleSheet,
   }}
@@ -63,6 +64,8 @@
     align?: "left" | "right";
     /** Items du menu */
     items?: ButtonItem[];
+    /** Désactive le bouton d'ouverture du dropdown */
+    disabled?: boolean;
   }
 
   let {
@@ -77,6 +80,7 @@
     contentType = "custom",
     align = "left",
     items = [],
+    disabled,
   }: Props = $props();
   let dropdown: HTMLElement;
   let effectiveAlign = $state<"left" | "right">(align);
@@ -253,6 +257,7 @@
         aria-expanded="false"
         aria-controls={collapseId}
         onclick={handleClick}
+        {disabled}
       />
     </slot>
     <div
