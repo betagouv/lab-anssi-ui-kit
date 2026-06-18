@@ -18,6 +18,11 @@
     args: alertArgs,
     argTypes: {
       ...alertArgTypes,
+      titleTag: {
+        control: { type: "select" },
+        description: "Balise HTML du titre",
+        options: ["h1", "h2", "h3", "h4", "h5", "h6", "p"],
+      },
       description: {
         description: "Contenu de la description (remplace la prop `text` avec du HTML riche)",
         control: false,
@@ -49,6 +54,7 @@
     id={args.id}
     dismissible={args.dismissible || undefined}
     icon={args.icon}
+    title-tag={args.titleTag}
   ></dsfr-alert>
 {/snippet}
 

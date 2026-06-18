@@ -12,6 +12,7 @@
       id: { attribute: "id", type: "String" },
       dismissible: { attribute: "dismissible", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
+      titleTag: { attribute: "title-tag", type: "String" },
     },
     extend: withIconsStyleSheet,
   }}
@@ -35,6 +36,7 @@
     id?: string;
     dismissible?: boolean;
     icon?: string;
+    titleTag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   }
 
   let {
@@ -48,6 +50,7 @@
     icon,
     dismissible = false,
     buttonCloseLabel,
+    titleTag = "h3",
   }: Props = $props();
 
   let displayAlert = $state(true);
@@ -59,7 +62,7 @@
 {#if displayAlert}
   <div {id} class={["fr-alert", `fr-alert--${type}`, `fr-alert--${size}`, iconClass]}>
     {#if showTitle || size === "md"}
-      <h3 class="fr-alert__title">{title}</h3>
+      <svelte:element this={titleTag} class="fr-alert__title">{title}</svelte:element>
     {/if}
     {#if showDescription || size === "sm"}
       <slot name="description">
