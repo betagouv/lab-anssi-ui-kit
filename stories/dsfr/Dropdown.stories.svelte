@@ -36,6 +36,10 @@
         },
         control: false,
       },
+      disabled: {
+        control: "boolean",
+        description: "Désactive le bouton d'ouverture du dropdown",
+      },
     },
     args: {
       id: "dropdown-id",
@@ -84,6 +88,7 @@
       content-type={args.contentType}
       align={args.align}
       items={args.items}
+      disabled={args.disabled || undefined}
     >
     </dsfr-dropdown>
   </div>
