@@ -164,11 +164,7 @@
   const disabledClass = $derived(disabled && "fr-input-group--disabled");
   const iconClass = $derived(setIconClass(icon));
   const hasWrap = $derived(!!icon || !!addon);
-  const wrapClasses = $derived([
-    "fr-input-wrap",
-    iconClass,
-    addon && "fr-input-wrap--addon",
-  ]);
+  const wrapClasses = $derived(["fr-input-wrap", iconClass, addon && "fr-input-wrap--addon"]);
   const statusClass = $derived(
     computedStatus !== "info" &&
       computedStatus !== "default" &&
@@ -301,8 +297,6 @@
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
-  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("input-group") {
     &:has(.fr-sr-only) .fr-input {
@@ -321,10 +315,7 @@
   .fr-input-wrap--addon {
     :global(::slotted([slot="button"])) {
       border-radius: 0 0.25rem 0 0;
-    }
-
-    .fr-input {
-      border-radius: 0.25rem 0 0 0;
+      overflow: hidden;
     }
   }
 </style>
