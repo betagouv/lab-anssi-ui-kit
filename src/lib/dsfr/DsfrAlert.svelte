@@ -55,16 +55,18 @@
 
   let displayAlert = $state(true);
   let iconClass = $derived(icon && setIconClass(icon));
-  let showTitle = $derived(hasTitle !== "false" && hasTitle !== false);
-  let showDescription = $derived(hasDescription !== "false" && hasDescription !== false);
+  let showTitle = $derived(size === "md" || (hasTitle !== "false" && hasTitle !== false));
+  let showDescription = $derived(
+    size === "sm" || (hasDescription !== "false" && hasDescription !== false),
+  );
 </script>
 
 {#if displayAlert}
   <div {id} class={["fr-alert", `fr-alert--${type}`, `fr-alert--${size}`, iconClass]}>
-    {#if showTitle || size === "md"}
+    {#if showTitle}
       <svelte:element this={titleTag} class="fr-alert__title">{title}</svelte:element>
     {/if}
-    {#if showDescription || size === "sm"}
+    {#if showDescription}
       <slot name="description">
         <p>{text}</p>
       </slot>
