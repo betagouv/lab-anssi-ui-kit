@@ -3,9 +3,9 @@
     tag: "dsfr-alert",
     props: {
       buttonCloseLabel: { attribute: "button-close-label", type: "String" },
-      hasTitle: { attribute: "has-title", type: "Boolean" },
+      hasTitle: { attribute: "has-title", type: "String" },
       title: { attribute: "title", type: "String" },
-      hasDescription: { attribute: "has-description", type: "Boolean" },
+      hasDescription: { attribute: "has-description", type: "String" },
       text: { attribute: "text", type: "String" },
       type: { attribute: "type", type: "String" },
       size: { attribute: "size", type: "String" },
@@ -26,9 +26,9 @@
   type AlertSize = Extract<Size, "sm" | "md">;
   interface Props {
     buttonCloseLabel?: string;
-    hasTitle?: boolean;
+    hasTitle?: boolean | string;
     title?: string;
-    hasDescription?: boolean;
+    hasDescription?: boolean | string;
     text?: string;
     type?: "default" | "success" | "error" | "info" | "warning";
     size?: AlertSize;
@@ -52,14 +52,16 @@
 
   let displayAlert = $state(true);
   let iconClass = $derived(icon && setIconClass(icon));
+  let showTitle = $derived(hasTitle !== "false" && hasTitle !== false);
+  let showDescription = $derived(hasDescription !== "false" && hasDescription !== false);
 </script>
 
 {#if displayAlert}
   <div {id} class={["fr-alert", `fr-alert--${type}`, `fr-alert--${size}`, iconClass]}>
-    {#if hasTitle || size === "md"}
+    {#if showTitle || size === "md"}
       <h3 class="fr-alert__title">{title}</h3>
     {/if}
-    {#if hasDescription || size === "sm"}
+    {#if showDescription || size === "sm"}
       <slot name="description">
         <p>{text}</p>
       </slot>

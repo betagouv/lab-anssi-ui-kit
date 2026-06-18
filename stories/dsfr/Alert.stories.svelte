@@ -40,9 +40,9 @@
 {#snippet template(args: Args)}
   <dsfr-alert
     button-close-label={args.buttonCloseLabel}
-    has-title={args.hasTitle || undefined}
+    has-title={args.hasTitle}
     title={args.title}
-    has-description={args.hasDescription || undefined}
+    has-description={args.hasDescription}
     text={args.text}
     type={args.type}
     size={args.size}
