@@ -25,6 +25,7 @@
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
       step: { attribute: "step", type: "Number" },
+      icon: { attribute: "icon", type: "String" },
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
@@ -55,7 +56,8 @@
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  setThemeable($host());
+  let host = $host();
+  setThemeable(host);
 
   interface Props {
     /** Attribut id du champs de saisie */
@@ -142,7 +144,6 @@
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -156,9 +157,7 @@
     isUserControlled ? errorMessage : formValidation.localErrorMessage,
   );
 
-  const disabledClass = $derived.by(() => {
-    return disabled && "fr-input-group--disabled";
-  });
+  const disabledClass = $derived(disabled && "fr-input-group--disabled");
   const iconClass = $derived(setIconClass(icon));
   const statusClass = $derived(
     computedStatus !== "info" &&
@@ -177,12 +176,9 @@
    */
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    value = target.value;
 
     onvaluechanged?.(target.value);
-    $host()?.dispatchEvent(
-      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
-    );
+    host?.dispatchEvent(new CustomEvent("valuechanged", { detail: target.value, bubbles: true }));
   }
 
   /**
@@ -228,34 +224,7 @@
       <span class="fr-hint-text">{hint}</span>
     {/if}
   </label>
-  {#if icon}
-    <div class={["fr-input-wrap", iconClass]}>
-      <input
-        bind:this={formControlElement}
-        {type}
-        {id}
-        class="fr-input"
-        {name}
-        bind:value
-        {placeholder}
-        {disabled}
-        aria-describedby={computedStatus !== "default" ? `${id}-messages` : undefined}
-        {autocomplete}
-        oninput={handleInput}
-        onblur={formValidation.handleBlur}
-        oninvalid={formValidation.handleInvalid}
-        {form}
-        {readonly}
-        {required}
-        max={isTypeDateOrNumber ? max : undefined}
-        maxlength={!isTypeDateOrNumber ? maxlength : undefined}
-        min={isTypeDateOrNumber ? min : undefined}
-        minlength={!isTypeDateOrNumber ? minlength : undefined}
-        pattern={!isTypeDateOrNumber ? pattern : undefined}
-        step={isTypeDateOrNumber ? step : undefined}
-      />
-    </div>
-  {:else}
+  {#snippet inputField()}
     <input
       bind:this={formControlElement}
       {type}
@@ -280,6 +249,14 @@
       pattern={!isTypeDateOrNumber ? pattern : undefined}
       step={isTypeDateOrNumber ? step : undefined}
     />
+  {/snippet}
+
+  {#if icon}
+    <div class={["fr-input-wrap", iconClass]}>
+      {@render inputField()}
+    </div>
+  {:else}
+    {@render inputField()}
   {/if}
 
   <slot name="messages-group">
@@ -287,7 +264,7 @@
       <DsfrMessagesGroup
         {id}
         status={computedStatus}
-        errorMessage={isUserControlled ? errorMessage : computedErrorMessage}
+        errorMessage={computedErrorMessage}
         {validMessage}
         {infoMessage}
       />
