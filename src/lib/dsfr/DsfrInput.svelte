@@ -27,6 +27,7 @@
       step: { attribute: "step", type: "Number" },
       icon: { attribute: "icon", type: "String" },
       addon: { attribute: "addon", type: "Boolean" },
+      action: { attribute: "action", type: "Boolean" },
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
@@ -75,6 +76,8 @@
     icon?: string;
     /** Associe un bouton d'envoi à l'input (variation addon) */
     addon?: boolean;
+    /** Associe un bouton d'action à l'input (variation action) */
+    action?: boolean;
     /** Valeur initiale du champs de saisie */
     value?: string;
     /** Texte avant saisie dans le champs de saisie */
@@ -125,6 +128,7 @@
     type = "text",
     icon,
     addon,
+    action,
     value = $bindable(),
     placeholder,
     name,
@@ -163,8 +167,13 @@
 
   const disabledClass = $derived(disabled && "fr-input-group--disabled");
   const iconClass = $derived(setIconClass(icon));
-  const hasWrap = $derived(!!icon || !!addon);
-  const wrapClasses = $derived(["fr-input-wrap", iconClass, addon && "fr-input-wrap--addon"]);
+  const hasWrap = $derived(!!icon || !!addon || !!action);
+  const wrapClasses = $derived([
+    "fr-input-wrap",
+    iconClass,
+    addon && "fr-input-wrap--addon",
+    action && "fr-input-wrap--action",
+  ]);
   const statusClass = $derived(
     computedStatus !== "info" &&
       computedStatus !== "default" &&
@@ -260,7 +269,7 @@
   {#if hasWrap}
     <div class={wrapClasses}>
       {@render inputField()}
-      {#if addon}
+      {#if addon || action}
         <slot name="button"></slot>
       {/if}
     </div>
@@ -316,6 +325,12 @@
     :global(::slotted([slot="button"])) {
       border-radius: 0 0.25rem 0 0;
       overflow: hidden;
+    }
+  }
+
+  .fr-input-wrap--action {
+    :global(::slotted([slot="button"])) {
+      margin-left: 1rem;
     }
   }
 </style>

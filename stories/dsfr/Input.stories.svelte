@@ -173,3 +173,29 @@
     </dsfr-input>
   {/snippet}
 </Story>
+
+<Story
+  name="Avec bouton d'action (action)"
+  args={{ label: "Champ avec bouton d'action associé", action: true }}
+>
+  {#snippet template(args: Args)}
+    <dsfr-input
+      id={args.id}
+      label={args.label}
+      action={args.action || undefined}
+      status={args.status}
+      error-message={args.errorMessage}
+      valid-message={args.validMessage}
+    >
+      <dsfr-button
+        slot="button"
+        label="Supprimer le champ"
+        kind="secondary"
+        has-icon
+        icon="delete-line"
+        type="button"
+        icon-place="only"
+      ></dsfr-button>
+    </dsfr-input>
+  {/snippet}
+</Story>
