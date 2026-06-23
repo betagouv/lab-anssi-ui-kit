@@ -56,6 +56,7 @@
     valid-message={args.validMessage}
     form={args.form}
     required={args.required || undefined}
+    hide-label={args.hideLabel || undefined}
   ></dsfr-toggle>
 {/snippet}
 

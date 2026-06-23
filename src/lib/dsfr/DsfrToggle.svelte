@@ -4,6 +4,7 @@
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
+      hideLabel: { attribute: "hide-label", type: "Boolean" },
       hint: { attribute: "hint", type: "String" },
       hintId: { attribute: "hint-id", type: "String" },
       disabled: { attribute: "disabled", type: "Boolean" },
@@ -31,6 +32,8 @@
     id: string;
     /** Libellé de l'interrupteur */
     label?: string;
+    /** Permet de masquer le label */
+    hideLabel?: boolean;
     /** Texte additionnel de l'interrupteur */
     hint?: string;
     /** ID du texte additionnel de l'interrupteur */
@@ -62,6 +65,7 @@
   let {
     id,
     label,
+    hideLabel = false,
     hint,
     hintId,
     disabled = false,
@@ -87,6 +91,8 @@
     return ids.join(" ") || undefined;
   });
 
+  const isLabelEmpty = $derived(label === "");
+
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
     onvaluechanged?.(target.checked);
@@ -100,6 +106,7 @@
   class={["fr-toggle", `fr-toggle--${status}`]}
   class:fr-toggle--border-bottom={border}
   class:fr-toggle--label-left={left}
+  class:fr-toggle--hide-label={(hideLabel || isLabelEmpty) && !left}
 >
   <input
     type="checkbox"
@@ -120,7 +127,7 @@
     data-fr-unchecked-label={state ? "Désactivé" : undefined}
     style={state ? "--toggle-status-width: 2.5rem;" : undefined}
   >
-    <span>{label}</span>
+    <span><span class:fr-sr-only={(hideLabel || isLabelEmpty) && !left}>{label}</span></span>
   </label>
   {#if hint}
     <p id={hintId} class="fr-hint-text">
@@ -151,7 +158,6 @@
   @include set-shadow-host();
   @include set-dsfr-sizing("toggle") {
     $toggle-width: 40px;
-    $toggle-grip-size: 24px;
     $half-grip: 12px;
 
     input[type="checkbox"] {
@@ -202,5 +208,15 @@
         left: calc(100% - $half-grip);
       }
     }
+
+    &--hide-label {
+      label::before {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .fr-sr-only {
+    @include visually-hidden();
   }
 </style>
