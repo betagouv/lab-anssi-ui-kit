@@ -150,6 +150,10 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("toggle") {
+    $toggle-width: 40px;
+    $toggle-grip-size: 24px;
+    $half-grip: 12px;
+
     input[type="checkbox"] {
       &:checked ~ .fr-toggle__label {
         &::after,
@@ -165,9 +169,12 @@
           --color-icon-check: var(--border-action-high-blue-france);
 
           @include set-icon-check(var(--color-icon-check)) {
-            left: calc(40px - 20px);
+            --checkmark-size: 16px;
+
             position: absolute;
-            top: 6px;
+            left: calc($toggle-width - $half-grip);
+            top: $half-grip;
+            transform: translate(-50%, -50%);
             z-index: 1;
           }
         }
@@ -192,7 +199,7 @@
 
     &--label-left input[type="checkbox"]:checked ~ .fr-toggle__label {
       span::after {
-        left: calc(100% - 20px);
+        left: calc(100% - $half-grip);
       }
     }
   }
