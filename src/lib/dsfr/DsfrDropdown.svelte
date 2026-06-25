@@ -342,6 +342,7 @@
       z-index: calc(var(--ground) + 1000);
 
       &--right {
+        left: auto;
         right: 0;
       }
     }
