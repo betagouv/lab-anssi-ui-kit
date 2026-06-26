@@ -47,6 +47,7 @@ export { default as DsfrFooter } from "./dsfr/DsfrFooter.svelte";
 export { default as DsfrHeader } from "./dsfr/DsfrHeader.svelte";
 export { default as DsfrHighlight } from "./dsfr/DsfrHighlight.svelte";
 export { default as DsfrInput } from "./dsfr/DsfrInput.svelte";
+export { default as DsfrLabel } from "./dsfr/DsfrLabel.svelte";
 export { default as DsfrLink } from "./dsfr/DsfrLink.svelte";
 export { default as DsfrLogo } from "./dsfr/DsfrLogo.svelte";
 export { default as DsfrMessagesGroup } from "./dsfr/DsfrMessagesGroup.svelte";
