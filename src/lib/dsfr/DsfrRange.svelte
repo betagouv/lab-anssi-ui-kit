@@ -24,13 +24,15 @@
       status: { attribute: "status", type: "String" },
       errorMessage: { attribute: "error-message", type: "String" },
       hideOutputLabel: { attribute: "hide-output-label", type: "Boolean" },
+      labelSize: { attribute: "label-size", type: "String" },
+      labelWeight: { attribute: "label-weight", type: "String" },
     },
   }}
 />
 
 <script lang="ts">
   import { untrack } from "svelte";
-  import type { Size, Status } from "$lib/types";
+  import type { Size, Status, TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
@@ -89,6 +91,10 @@
     onvaluechanged?: (value: number) => void;
     /** Callback appelé lors du changement de la seconde valeur (curseur double) */
     onvalue2changed?: (value: number) => void;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label */
+    labelSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label */
+    labelWeight?: TextWeight;
   }
 
   let {
@@ -116,6 +122,8 @@
     hideOutputLabel = false,
     onvaluechanged,
     onvalue2changed,
+    labelSize,
+    labelWeight,
   }: Props = $props();
 
   const decorate = (val: number | string) => `${prefix ?? ""}${val}${suffix ?? ""}`;
@@ -236,6 +244,8 @@
     {status}
     {disabled}
     hidden={hideLabel || isLabelEmpty}
+    {labelSize}
+    {labelWeight}
   />
 
   <div

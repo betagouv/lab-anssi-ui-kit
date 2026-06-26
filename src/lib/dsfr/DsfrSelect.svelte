@@ -20,6 +20,8 @@
       form: { attribute: "form", type: "String", reflect: true },
       required: { attribute: "required", type: "Boolean" },
       name: { attribute: "name", type: "String", reflect: true },
+      labelSize: { attribute: "label-size", type: "String" },
+      labelWeight: { attribute: "label-weight", type: "String" },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -35,6 +37,7 @@
 />
 
 <script lang="ts">
+  import type { TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
@@ -92,6 +95,10 @@
     internals?: ElementInternals;
     /** Attribut name du champs de saisie */
     name?: string;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label */
+    labelSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label */
+    labelWeight?: TextWeight;
   }
 
   let {
@@ -114,6 +121,8 @@
     onvaluechanged,
     internals,
     name,
+    labelSize,
+    labelWeight,
   }: Props = $props();
 
   let formControlElement: HTMLSelectElement;
@@ -192,7 +201,17 @@
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
-  <DsfrLabel for={id} {label} {hint} hidden={hideLabel} context="field" {status} {disabled} />
+  <DsfrLabel
+    for={id}
+    {label}
+    {hint}
+    hidden={hideLabel}
+    context="field"
+    {status}
+    {disabled}
+    {labelSize}
+    {labelWeight}
+  />
   <select
     bind:this={formControlElement}
     class="fr-select"

@@ -38,6 +38,18 @@
         control: false,
         table: { category: "Slots" },
       },
+      labelSize: {
+        control: "select",
+        options: [undefined, "xs", "sm", "md", "lg", "xl", "lead"],
+        description:
+          "Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label",
+      },
+      labelWeight: {
+        control: "select",
+        options: [undefined, "light", "regular", "bold", "heavy"],
+        description:
+          "Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label",
+      },
       onvaluechanged: {
         description:
           "Déclenché lors du changement de valeur de la liste déroulante.<br>" + "`detail: string`",
@@ -81,6 +93,8 @@
     info-message={args.infoMessage}
     form={args.form}
     required={args.required || undefined}
+    label-size={args.labelSize}
+    label-weight={args.labelWeight}
   ></dsfr-select>
 {/snippet}
 

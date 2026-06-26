@@ -18,6 +18,8 @@
       pattern: { attribute: "pattern", type: "String" },
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
+      labelSize: { attribute: "label-size", type: "String" },
+      labelWeight: { attribute: "label-weight", type: "String" },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -33,7 +35,7 @@
 />
 
 <script lang="ts">
-  import type { Size } from "$lib/types";
+  import type { Size, TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
@@ -81,6 +83,10 @@
     onvaluechanged?: (value: string) => void;
     /** Callback appelé lors de la soumission de la recherche */
     onsearch?: (value: string) => void;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label */
+    labelSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label */
+    labelWeight?: TextWeight;
   }
 
   let {
@@ -103,6 +109,8 @@
     internals,
     onvaluechanged,
     onsearch,
+    labelSize,
+    labelWeight,
   }: Props = $props();
 
   let formControlElement: HTMLInputElement;
@@ -179,7 +187,7 @@
 </script>
 
 <div class={["fr-search-bar", sizeClass]} role="search">
-  <DsfrLabel for={inputId} label={inputLabel} hidden />
+  <DsfrLabel for={inputId} label={inputLabel} hidden {labelSize} {labelWeight} />
   <input
     bind:this={formControlElement}
     type="search"
