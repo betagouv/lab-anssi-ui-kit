@@ -29,6 +29,8 @@ export type Accent =
 export type iconPlace = "only" | "left" | "right";
 export type Size = "sm" | "md" | "lg" | "xl";
 export type Status = "success" | "warning" | "error" | "info" | "new";
+export type TextSize = "xs" | "sm" | "md" | "lg" | "xl" | "lead";
+export type TextWeight = "light" | "regular" | "bold" | "heavy";
 export type Target = "self" | "blank";
 
 export type Image = {

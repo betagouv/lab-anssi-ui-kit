@@ -24,6 +24,18 @@
         },
         control: false,
       },
+      labelSize: {
+        control: "select",
+        options: [undefined, "xs", "sm", "md", "lg", "xl", "lead"],
+        description:
+          "Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label",
+      },
+      labelWeight: {
+        control: "select",
+        options: [undefined, "light", "regular", "bold", "heavy"],
+        description:
+          "Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label",
+      },
       onsearch: {
         description: "Déclenché lors de la soumission de la recherche.<br>" + "`detail: string`",
         table: {
@@ -65,6 +77,8 @@
     pattern={args.pattern}
     readonly={args.readonly || undefined}
     required={args.required || undefined}
+    label-size={args.labelSize}
+    label-weight={args.labelWeight}
   ></dsfr-search>
 {/snippet}
 

@@ -21,6 +21,8 @@
       minlength: { attribute: "minlength", type: "Number" },
       readonly: { attribute: "readonly", type: "Boolean" },
       required: { attribute: "required", type: "Boolean" },
+      labelSize: { attribute: "label-size", type: "String" },
+      labelWeight: { attribute: "label-weight", type: "String" },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -37,6 +39,7 @@
 
 <script lang="ts">
   import type { HTMLTextareaAttributes } from "svelte/elements";
+  import type { TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
@@ -88,6 +91,10 @@
     internals?: ElementInternals;
     /** Callback appelé lors du changement de valeur du champ de saisie */
     onvaluechanged?: (value: string) => void;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur le label */
+    labelSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur le label */
+    labelWeight?: TextWeight;
   }
 
   let {
@@ -112,6 +119,8 @@
     required,
     internals,
     onvaluechanged,
+    labelSize,
+    labelWeight,
   }: Props = $props();
 
   let formControlElement: HTMLTextAreaElement;
@@ -199,6 +208,8 @@
     {status}
     {disabled}
     hidden={hideLabel || isLabelEmpty}
+    {labelSize}
+    {labelWeight}
   />
   <textarea
     bind:this={formControlElement}

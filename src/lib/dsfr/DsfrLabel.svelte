@@ -12,11 +12,15 @@
       inline: { attribute: "inline", type: "Boolean" },
       status: { attribute: "status", type: "String" },
       disabled: { attribute: "disabled", type: "Boolean" },
+      labelSize: { attribute: "label-size", type: "String" },
+      labelWeight: { attribute: "label-weight", type: "String" },
     },
   }}
 />
 
 <script lang="ts">
+  import type { TextSize, TextWeight } from "$lib/types";
+
   interface Props {
     /** Attribut for du label (id du champ associé) */
     for: string;
@@ -47,6 +51,10 @@
     status?: "default" | "valid" | "error" | "info";
     /** Désactive le label (applique la couleur désactivée) */
     disabled?: boolean;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) */
+    labelSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) */
+    labelWeight?: TextWeight;
   }
 
   const {
@@ -60,6 +68,8 @@
     inline = false,
     status = "default",
     disabled = false,
+    labelSize,
+    labelWeight,
   }: Props = $props();
 </script>
 
@@ -80,8 +90,9 @@
   for={forAttr}
   {id}
 >
-  <slot>{label}</slot>
-
+  <span class={[labelSize && `fr-text--${labelSize}`, labelWeight && `fr-text--${labelWeight}`]}>
+    <slot>{label}</slot>
+  </span>
   {#if hint || $$slots.hint}
     <span class="fr-hint-text">
       <slot name="hint">
@@ -97,6 +108,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/typography";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/font-weight";
   // DSFR Component styles
   @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/hint-text";
   @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
@@ -105,6 +118,8 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("label") {
+    --text-spacing: 0;
+
     &--field {
       margin-bottom: 0.5rem;
 
