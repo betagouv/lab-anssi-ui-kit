@@ -39,6 +39,8 @@
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
+
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -189,13 +191,15 @@
   class={["fr-input-group", statusClass, { "fr-input-group--disabled": disabled }]}
   id={`input-group-${id}`}
 >
-  <label class="fr-label" class:fr-sr-only={hideLabel || isLabelEmpty} for={id}>
+  <DsfrLabel
+    for={id}
     {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+    {hint}
+    context="field"
+    {status}
+    {disabled}
+    hidden={hideLabel || isLabelEmpty}
+  />
   <textarea
     bind:this={formControlElement}
     {id}
@@ -241,13 +245,5 @@
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("input-group") {
-    &:has(.fr-sr-only) .fr-input {
-      margin-top: 0;
-    }
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
-  }
+  @include set-dsfr-sizing("input-group");
 </style>

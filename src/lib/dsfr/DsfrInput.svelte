@@ -56,6 +56,8 @@
 <script lang="ts">
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
+
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   let host = $host();
@@ -232,13 +234,15 @@
 </script>
 
 <div class={["fr-input-group", disabledClass, statusClass]}>
-  <label class="fr-label" class:fr-sr-only={hideLabel || isLabelEmpty} for={id}>
+  <DsfrLabel
+    for={id}
     {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+    {hint}
+    context="field"
+    {status}
+    {disabled}
+    hidden={hideLabel || isLabelEmpty}
+  />
   {#snippet inputField()}
     <input
       bind:this={formControlElement}
@@ -307,18 +311,10 @@
   @import "@gouvfr/dsfr/dist/component/input/input.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("input-group") {
-    &:has(.fr-sr-only) .fr-input {
-      margin-top: 0;
-    }
-  }
+  @include set-dsfr-sizing("input-group");
 
   .fr-input-group:not(:last-child) {
     margin-bottom: 0;
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
   }
 
   .fr-input-wrap--addon {
