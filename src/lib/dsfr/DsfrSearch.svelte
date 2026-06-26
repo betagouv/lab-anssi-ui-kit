@@ -36,6 +36,9 @@
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
+
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+
   setThemeable($host());
 
   type SearchSize = Extract<Size, "md" | "lg">;
@@ -176,9 +179,7 @@
 </script>
 
 <div class={["fr-search-bar", sizeClass]} role="search">
-  {#if inputLabel}
-    <label class="fr-label" for={inputId}> {inputLabel} </label>
-  {/if}
+  <DsfrLabel for={inputId} label={inputLabel} hidden />
   <input
     bind:this={formControlElement}
     type="search"

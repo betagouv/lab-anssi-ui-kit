@@ -33,6 +33,8 @@
   import type { Size, Status } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
+
   setThemeable($host());
 
   type RangeSize = Extract<Size, "sm" | "md">;
@@ -226,14 +228,15 @@
   ]}
   id="{id}-group"
 >
-  <label class="fr-label" class:fr-sr-only={hideLabel || isLabelEmpty} id="{id}-label" for={id}>
+  <DsfrLabel
+    for={id}
     {label}
-    {#if hint}
-      <span class="fr-hint-text">
-        {hint}
-      </span>
-    {/if}
-  </label>
+    {hint}
+    id="{id}-label"
+    {status}
+    {disabled}
+    hidden={hideLabel || isLabelEmpty}
+  />
 
   <div
     bind:this={rangeEl}
@@ -321,9 +324,5 @@
         visibility: hidden;
       }
     }
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
   }
 </style>

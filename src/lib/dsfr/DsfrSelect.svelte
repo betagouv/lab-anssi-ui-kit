@@ -37,6 +37,8 @@
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
+
+  import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());
@@ -190,13 +192,7 @@
 </script>
 
 <div class={["fr-select-group", statusClass, disabledClass]}>
-  <label class="fr-label" class:fr-sr-only={hideLabel} for={id}>
-    {label}
-
-    {#if hint}
-      <span class="fr-hint-text">{hint}</span>
-    {/if}
-  </label>
+  <DsfrLabel for={id} {label} {hint} hidden={hideLabel} context="field" {status} {disabled} />
   <select
     bind:this={formControlElement}
     class="fr-select"
@@ -255,17 +251,9 @@
   @import "@gouvfr/dsfr/dist/component/select/select.main.css";
 
   @include set-shadow-host($tag: "dsfr-select");
-  @include set-dsfr-sizing("select-group") {
-    &:has(.fr-sr-only) .fr-select {
-      margin-top: 0;
-    }
-  }
+  @include set-dsfr-sizing("select-group");
 
   .fr-select-group:not(:last-child) {
     margin-bottom: 0;
-  }
-
-  .fr-sr-only {
-    @include visually-hidden();
   }
 </style>
