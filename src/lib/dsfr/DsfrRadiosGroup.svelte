@@ -16,6 +16,8 @@
       validMessage: { attribute: "valid-message", type: "String" },
       form: { attribute: "form", type: "String", reflect: true },
       required: { attribute: "required", type: "Boolean" },
+      legendSize: { attribute: "legend-size", type: "String" },
+      legendWeight: { attribute: "legend-weight", type: "String" },
     },
     extend: (customElementConstructor) => {
       return class extends customElementConstructor {
@@ -31,7 +33,7 @@
 />
 
 <script lang="ts">
-  import type { Size } from "$lib/types";
+  import type { Size, TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
@@ -85,6 +87,10 @@
     required?: boolean;
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    /** Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur la légende */
+    legendSize?: TextSize;
+    /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur la légende */
+    legendWeight?: TextWeight;
   }
 
   let {
@@ -105,6 +111,8 @@
     form,
     required,
     internals,
+    legendSize,
+    legendWeight,
   }: Props = $props();
 
   let firstRadioElement: HTMLInputElement;
@@ -185,7 +193,11 @@
   {form}
 >
   <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id={`${id}-legend`}>
-    {legend}
+    <span
+      class={[legendSize && `fr-text--${legendSize}`, legendWeight && `fr-text--${legendWeight}`]}
+    >
+      {legend}
+    </span>
 
     {#if hint}
       <span class="fr-hint-text">{hint}</span>
@@ -236,6 +248,8 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/typography";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/font-weight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";

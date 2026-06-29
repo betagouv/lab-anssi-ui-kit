@@ -37,6 +37,18 @@
     component: DsfrCheckboxesGroup,
     argTypes: {
       ...checkboxesGroupArgTypes,
+      legendSize: {
+        control: "select",
+        options: [undefined, "xs", "sm", "md", "lg", "xl", "lead"],
+        description:
+          "Applique une classe utilitaire de taille de texte DSFR (fr-text--xs à fr-text--xl, fr-text--lead) sur la légende",
+      },
+      legendWeight: {
+        control: "select",
+        options: [undefined, "light", "regular", "bold", "heavy"],
+        description:
+          "Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur la légende",
+      },
       onvalueschanged: {
         description:
           "Déclenché lors du changement des valeurs sélectionnées.<br>" + "`detail: string[]`",
@@ -75,6 +87,8 @@
     status={args.status}
     error-message={args.errorMessage}
     valid-message={args.validMessage}
+    legend-size={args.legendSize}
+    legend-weight={args.legendWeight}
   ></dsfr-checkboxes-group>
 {/snippet}
 
