@@ -3,6 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrTabnav from "$lib/dsfr/DsfrTabnav.svelte";
+  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const defaultLinks = [
@@ -62,6 +63,17 @@
         table: {
           category: "Événements",
           type: { summary: "CustomEvent<{ index: number, link: TabnavLink }>" },
+        },
+        control: false,
+      },
+      "link-n": {
+        name: "link-{n}",
+        description:
+          "Slot dynamique pour personnaliser le contenu du lien n (ex&nbsp;: `link-1`, `link-2`…). " +
+          "Remplace le `label` par défaut pour ce lien.",
+        table: {
+          category: "Slots",
+          type: { summary: "HTMLElement" },
         },
         control: false,
       },
@@ -144,5 +156,37 @@
         {args.links.find((l) => l.current)?.label} - {args.links.find((l) => l.current)?.href}
       </strong>
     </p>
+  {/snippet}
+</Story>
+
+<Story name="Avec Slots">
+  {#snippet template(args: Args)}
+    <dsfr-tabnav
+      links={args.links}
+      aria-label={args.ariaLabel}
+      router-mode
+      onlinkclicked={(e) => {
+        args.links.forEach((l) => (l.current = false));
+        args.links[e.detail.index].current = true;
+      }}
+    >
+      <span slot="link-2" class="custom-link">
+        Design
+        <dsfr-badge label="3" type="status" status="error" size="sm"></dsfr-badge>
+      </span>
+
+      <span slot="link-3" class="custom-link">
+        Code
+        <dsfr-badge label="Nouveau" type="accent" accent="green-archipel" size="sm"></dsfr-badge>
+      </span>
+    </dsfr-tabnav>
+
+    <style>
+      .custom-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
   {/snippet}
 </Story>

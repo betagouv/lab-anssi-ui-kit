@@ -13,6 +13,7 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
+  import { createSlot } from "$lib/directives/actions.svelte.ts";
 
   setThemeable($host());
 
@@ -94,13 +95,18 @@
           {#each links as link, i}
             <li>
               {#if i === resolvedIndex}
-                <span class="fr-tabnav__link" aria-current="page">{link.label}</span>
+                <span class="fr-tabnav__link" aria-current="page" use:createSlot={`link-${i + 1}`}>
+                  {link.label}
+                </span>
               {:else}
                 <a
                   class="fr-tabnav__link"
                   href={link.href}
-                  onclick={(e) => handleLinkClick(e, link, i)}>{link.label}</a
+                  onclick={(e) => handleLinkClick(e, link, i)}
+                  use:createSlot={`link-${i + 1}`}
                 >
+                  {link.label}
+                </a>
               {/if}
             </li>
           {/each}
