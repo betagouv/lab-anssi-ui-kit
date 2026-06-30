@@ -326,7 +326,13 @@
   @import "@gouvfr/dsfr/dist/component/range/range.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("range-group");
+  @include set-dsfr-sizing("range-group") {
+    *,
+    *::after,
+    *::before {
+      box-sizing: inherit;
+    }
+  }
 
   .fr-range[data-fr-js-range] {
     .fr-range__output {
