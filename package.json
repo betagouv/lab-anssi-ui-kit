@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "~5.2.1",
-    "@eslint/compat": "~2.0.5",
+    "@eslint/compat": "~2.1.0",
     "@eslint/js": "~10.0.1",
     "@fullhuman/postcss-purgecss": "~8.0.0",
     "@gouvfr/dsfr": "1.14.4",
