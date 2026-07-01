@@ -30,7 +30,7 @@ jobs:
         run: pnpm run storybook:build-dev
 
       - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@c74c5c40ca017039558a716060ecca2047cf7856 # v1.10.0
+        uses: s3-actions/s3cmd@91996c659532eb71d2503212d0630587b347d50e # v1.10.1
         with:
           provider: clevercloud
           access_key: ${{ secrets.CLEVER_S3_PUBLICATION_DEV_ACCESS_KEY }}
