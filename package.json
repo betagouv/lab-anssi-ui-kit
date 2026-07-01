@@ -59,7 +59,7 @@
     "@storybook/svelte-vite": "~10.4.4",
     "@sveltejs/vite-plugin-svelte": "~6.2.4",
     "@testing-library/jest-dom": "~6.9.1",
-    "@testing-library/svelte": "~5.3.1",
+    "@testing-library/svelte": "~5.4.0",
     "@types/node": "~24.12.4",
     "@vitest/browser": "~4.1.8",
     "@vitest/browser-playwright": "~4.1.8",
