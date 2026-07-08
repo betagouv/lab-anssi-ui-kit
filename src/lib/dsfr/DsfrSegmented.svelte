@@ -115,14 +115,16 @@
     let previousWidth = parent.offsetWidth;
 
     const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const width = Math.round(entry.contentRect.width);
+      requestAnimationFrame(() => {
+        for (const entry of entries) {
+          const width = Math.round(entry.contentRect.width);
 
-        if (width !== previousWidth) {
-          previousWidth = width;
-          resize();
+          if (width !== previousWidth) {
+            previousWidth = width;
+            resize();
+          }
         }
-      }
+      });
     });
 
     observer.observe(parent);
