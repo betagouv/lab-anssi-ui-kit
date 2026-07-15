@@ -1,0 +1,13 @@
+{
+  "templateFile": "./DsfrCheckbox.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=14795-206250",
+      "name": "Thème clair / Case à cocher - Item de Niveau 1"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=12080-100205",
+      "name": "Thème clair / Case à cocher - Item de Niveau 2 LAB"
+    }
+  ]
+}
