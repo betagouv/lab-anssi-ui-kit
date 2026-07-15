@@ -14,7 +14,7 @@
 
   interface Props {
     index: number;
-    etapeMarelle: EtapeMarelle;
+    etapeMarelle?: EtapeMarelle;
   }
 
   let { index, etapeMarelle }: Props = $props();
@@ -24,7 +24,11 @@
 
 <div class="marelle-etape" class:marelle-etape--pair={pair} class:marelle-etape--impair={!pair}>
   <div class="illustration">
-    <img src={etapeMarelle.illustration.lien} alt={etapeMarelle.illustration.alt} />
+    <slot name="etape-illustration">
+      {#if etapeMarelle?.illustration}
+        <img src={etapeMarelle.illustration.lien} alt={etapeMarelle.illustration.alt} />
+      {/if}
+    </slot>
   </div>
   <div class="numero-etape">
     <div class="encart-rond">
@@ -33,21 +37,25 @@
   </div>
   <div class="contenu">
     <slot name="etape-titre">
-      <h4>{etapeMarelle.titre}</h4>
+      {#if etapeMarelle?.titre}
+        <h4>{etapeMarelle.titre}</h4>
+      {/if}
     </slot>
     <slot name="etape-description">
-      <p>{etapeMarelle.description}</p>
+      {#if etapeMarelle?.description}
+        <p>{etapeMarelle.description}</p>
+      {/if}
     </slot>
-    {#if etapeMarelle.lien}
-      <slot name="etape-lien">
+    <slot name="etape-lien">
+      {#if etapeMarelle?.lien}
         <a href={etapeMarelle.lien.href} target={etapeMarelle.lien.target}>
           {etapeMarelle.lien.texte}
           {#if etapeMarelle.lien.target === "_blank"}
             <LienExterne />
           {/if}
         </a>
-      </slot>
-    {/if}
+      {/if}
+    </slot>
   </div>
 </div>
 
