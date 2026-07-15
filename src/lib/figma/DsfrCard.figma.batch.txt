@@ -1,0 +1,309 @@
+import figma from "figma";
+
+const instance = figma.selectedInstance;
+
+const border = instance.getBoolean("Bordure");
+const showMedia = instance.getBoolean("Voir Média");
+
+const disabled = instance.getEnum("Désactivé", {
+  False: "false",
+  True: "true",
+});
+
+const clickable = instance.getEnum("Cliquable", {
+  False: "false",
+  True: "true",
+});
+
+// Instance : "Média"
+const mediaInstance = instance.findInstance("⚙️ Média", {
+  traverseInstances: true,
+});
+let mediaSwapName: string | null = null;
+let mediaBadgeOrTag = false;
+let mediaBadgeType = "";
+let mediaBadgeLabel = "";
+let mediaBadgeColor = "";
+if (mediaInstance && mediaInstance.type === "INSTANCE") {
+  const mediaSwap = mediaInstance.getInstanceSwap("Instance");
+  if (mediaSwap && mediaSwap.type === "INSTANCE") {
+    mediaSwapName = mediaSwap.name;
+  }
+  mediaBadgeOrTag = mediaInstance.getBoolean("Badge ou tag");
+
+  const badgeOrTagInstance = mediaInstance.findInstance("Badge ou Tag", {
+    traverseInstances: true,
+  });
+  if (badgeOrTagInstance && badgeOrTagInstance.type === "INSTANCE") {
+    mediaBadgeType = badgeOrTagInstance.getEnum("Type", { Badge: "badge" }) || "";
+
+    const badge1 = badgeOrTagInstance.findInstance("⚙️ Badge 1", {
+      traverseInstances: true,
+    });
+    if (badge1 && badge1.type === "INSTANCE") {
+      const customBadge = badge1.findInstance("Personnalisable", {
+        traverseInstances: true,
+      });
+      if (customBadge && customBadge.type === "INSTANCE") {
+        mediaBadgeLabel = customBadge.getString("Libellé") || "";
+        mediaBadgeColor =
+          customBadge.getEnum("Couleur", {
+            "Purple Glycine": "purple-glycine",
+          }) || "";
+      }
+    }
+  }
+}
+
+// Instance : "Contenu"
+const contentInstance = instance.findInstance("⚙️ Contenu", {
+  traverseInstances: true,
+});
+let contentSwapName: string | null = null;
+let showCustomZone = false;
+let showActionZone = false;
+let showPrecisionZone = false;
+let contentAction = "";
+
+// Corps
+let title = "";
+let description = "";
+let showDescription = false;
+let maxHeight = "";
+
+// Zone de précision
+let showDetail = false;
+let showBadgeOrTag = false;
+let badgeOrTagType = "";
+let tag1Label = "";
+let tag1ShowIcon = false;
+let tag1IconName: string | null = null;
+let tag2Label = "";
+let tag3Label = "";
+let tag4Label = "";
+let tag5Label = "";
+let showTag2 = false;
+let showTag3 = false;
+let showTag4 = false;
+let showTag5 = false;
+let detailText = "";
+let detailShowIcon = false;
+let detailIconSwapName: string | null = null;
+let detailIconDirection = "";
+
+// Zone d'action
+let actionContent = "";
+let actionIconSwapName: string | null = null;
+let actionIconDirection = "";
+let actionDetailText = "";
+let actionDetailShowIcon = false;
+let actionDetailIconSwapName: string | null = null;
+let actionDetailIconDirection = "";
+
+if (contentInstance && contentInstance.type === "INSTANCE") {
+  const contentSwap = contentInstance.getInstanceSwap("Contenu personnalisable");
+  if (contentSwap && contentSwap.type === "INSTANCE") {
+    contentSwapName = contentSwap.name;
+  }
+  showCustomZone = contentInstance.getBoolean("Zone personnalisable");
+  showActionZone = contentInstance.getBoolean("Zone d'action");
+  showPrecisionZone = contentInstance.getBoolean("Zone de précision");
+  contentAction = contentInstance.getEnum("Action", { False: "false" }) || "";
+
+  // --- Corps ---
+  const bodyInstance = contentInstance.findInstance("⚙️ Corps", {
+    traverseInstances: true,
+  });
+  if (bodyInstance && bodyInstance.type === "INSTANCE") {
+    title = bodyInstance.getString("Titre") || "";
+    description = bodyInstance.getString("Texte") || "";
+    showDescription = bodyInstance.getBoolean("Voir Description");
+    maxHeight = bodyInstance.getEnum("Hauteur max (5 lignes)", { True: "true" }) || "";
+  }
+
+  // --- Zone de précision ---
+  const precisionZone = contentInstance.findInstance("⚙️ Zone de précision", {
+    traverseInstances: true,
+  });
+  if (precisionZone && precisionZone.type === "INSTANCE") {
+    showDetail = precisionZone.getBoolean("Détail");
+    showBadgeOrTag = precisionZone.getBoolean("Badge ou tag");
+
+    // Badge ou tag container
+    const badgeOrTagContainer = precisionZone.findInstance("⚙️ Badge ou tag", {
+      traverseInstances: true,
+    });
+    if (badgeOrTagContainer && badgeOrTagContainer.type === "INSTANCE") {
+      badgeOrTagType = badgeOrTagContainer.getEnum("Type", { Tags: "tags" }) || "";
+      showTag2 = badgeOrTagContainer.getBoolean("Item 2");
+      showTag3 = badgeOrTagContainer.getBoolean("Item 3");
+      showTag4 = badgeOrTagContainer.getBoolean("Item 4");
+      showTag5 = badgeOrTagContainer.getBoolean("Item 5");
+
+      const tag1 = badgeOrTagContainer.findInstance("⚙️ Tag 1", {
+        traverseInstances: true,
+      });
+      if (tag1 && tag1.type === "INSTANCE") {
+        tag1Label = tag1.getString("Libellé") || "";
+        tag1ShowIcon = tag1.getBoolean("Voir icône");
+        const tag1Icon = tag1.getInstanceSwap("Icône");
+        if (tag1Icon && tag1Icon.type === "INSTANCE") {
+          tag1IconName = tag1Icon.name;
+        }
+      }
+
+      const tag2 = badgeOrTagContainer.findInstance("⚙️ Tag 2", {
+        traverseInstances: true,
+      });
+      if (tag2 && tag2.type === "INSTANCE") {
+        tag2Label = tag2.getString("Libellé") || "";
+      }
+
+      const tag3 = badgeOrTagContainer.findInstance("⚙️ Tag 3", {
+        traverseInstances: true,
+      });
+      if (tag3 && tag3.type === "INSTANCE") {
+        tag3Label = tag3.getString("Libellé") || "";
+      }
+
+      const tag4 = badgeOrTagContainer.findInstance("⚙️ Tag 4", {
+        traverseInstances: true,
+      });
+      if (tag4 && tag4.type === "INSTANCE") {
+        tag4Label = tag4.getString("Libellé") || "";
+      }
+
+      const tag5 = badgeOrTagContainer.findInstance("⚙️ Tag 5", {
+        traverseInstances: true,
+      });
+      if (tag5 && tag5.type === "INSTANCE") {
+        tag5Label = tag5.getString("Libellé") || "";
+      }
+    }
+
+    // Détail (zone de précision)
+    const detailInstance = precisionZone.findInstance("⚙️ Détail", {
+      traverseInstances: true,
+    });
+    if (detailInstance && detailInstance.type === "INSTANCE") {
+      detailText = detailInstance.getString("Texte") || "";
+      detailShowIcon = detailInstance.getBoolean("Icône");
+
+      const detailIconSwap = detailInstance.getInstanceSwap("🔄 Icône");
+      if (detailIconSwap && detailIconSwap.type === "INSTANCE") {
+        detailIconSwapName = detailIconSwap.name;
+        detailIconDirection =
+          detailIconSwap.getEnum("Direction", {
+            Haut: "up",
+            Bas: "down",
+            Gauche: "left",
+            Droite: "right",
+          }) || "";
+      }
+    }
+  }
+
+  // --- Zone d'action ---
+  const actionZone = contentInstance.findInstance("⚙️ Zone d'action", {
+    traverseInstances: true,
+  });
+  if (actionZone && actionZone.type === "INSTANCE") {
+    actionContent =
+      actionZone.getEnum("Contenu", {
+        "Détail + Icône": "detail-icon",
+      }) || "";
+
+    const actionIconSwap = actionZone.getInstanceSwap("Icône");
+    if (actionIconSwap && actionIconSwap.type === "INSTANCE") {
+      actionIconSwapName = actionIconSwap.name;
+
+      const actionIcon = actionZone.findInstance("⚙️ Icône", {
+        traverseInstances: true,
+      });
+      if (actionIcon && actionIcon.type === "INSTANCE") {
+        actionIconDirection =
+          actionIcon.getEnum("Direction", {
+            Haut: "up",
+            Bas: "down",
+            Gauche: "left",
+            Droite: "right",
+          }) || "";
+      }
+    }
+
+    const actionDetailInstance = actionZone.findInstance("⚙️ Détail", {
+      traverseInstances: true,
+    });
+    if (actionDetailInstance && actionDetailInstance.type === "INSTANCE") {
+      actionDetailText = actionDetailInstance.getString("Texte") || "";
+      actionDetailShowIcon = actionDetailInstance.getBoolean("Icône");
+
+      const actionDetailIconSwap = actionDetailInstance.getInstanceSwap("🔄 Icône");
+      if (actionDetailIconSwap && actionDetailIconSwap.type === "INSTANCE") {
+        actionDetailIconSwapName = actionDetailIconSwap.name;
+        actionDetailIconDirection =
+          actionDetailIconSwap.getEnum("Direction", {
+            Haut: "up",
+            Bas: "down",
+            Gauche: "left",
+            Droite: "right",
+          }) || "";
+      }
+    }
+  }
+}
+
+const isDisabled = disabled === "true";
+const isClickable = clickable === "true";
+const isTag = badgeOrTagType === "tags";
+// const noLink = !isClickable;
+
+export default {
+  example: figma.code`<dsfr-card
+  title="${title}"
+  size="sm"
+  ${showDescription ? `has-description\n  description="${description}"` : ""}
+  ${isClickable ? "enlarge" : "no-link"}
+  ${isDisabled ? "disabled" : ""}
+  ${!border ? 'variations="no-border"' : ""}
+  ${showMedia && mediaBadgeOrTag ? "has-header-badge" : ""}
+  ${showPrecisionZone && showDetail ? `has-detail-start\n  detail-start="${detailText}"` : ""}
+  ${showPrecisionZone && showDetail && detailShowIcon ? `has-detail-start-icon\n  detail-start-icon="${detailIconSwapName}"` : ""}
+  ${showPrecisionZone && showBadgeOrTag && isTag ? "has-tag" : ""}
+  ${showPrecisionZone && showBadgeOrTag && !isTag ? "has-badge" : ""}
+  ${showActionZone ? `has-detail-end\n  detail-end="${actionDetailText}"` : ""}
+  ${showActionZone && actionDetailShowIcon ? `has-detail-end-icon\n  detail-end-icon="${actionDetailIconSwapName}"` : ""}
+></dsfr-card>
+<!-- Propriétés Figma sans équivalent code :
+  - Focus: ${focus}
+  - Cliquable: ${clickable}
+  - Média > Instance (swap): ${mediaSwapName}
+  - Média > Badge ou tag: ${mediaBadgeOrTag}
+  - Média > Badge > Type: ${mediaBadgeType}
+  - Média > Badge > Libellé: ${mediaBadgeLabel}
+  - Média > Badge > Couleur: ${mediaBadgeColor}
+  - Contenu > Contenu personnalisable (swap): ${contentSwapName}
+  - Contenu > Zone personnalisable: ${showCustomZone}
+  - Contenu > Action: ${contentAction}
+  - Corps > Hauteur max (5 lignes): ${maxHeight}
+  - Zone de précision > Badge ou tag > Type: ${badgeOrTagType}
+  - Zone de précision > Tag 1 > Libellé: ${tag1Label}
+  - Zone de précision > Tag 1 > Voir icône: ${tag1ShowIcon}
+  - Zone de précision > Tag 1 > Icône: ${tag1IconName}
+  - Zone de précision > Tag 2 > Libellé: ${tag2Label} (visible: ${showTag2})
+  - Zone de précision > Tag 3 > Libellé: ${tag3Label} (visible: ${showTag3})
+  - Zone de précision > Tag 4 > Libellé: ${tag4Label} (visible: ${showTag4})
+  - Zone de précision > Tag 5 > Libellé: ${tag5Label} (visible: ${showTag5})
+  - Zone de précision > Détail > 🔄 Icône: ${detailIconSwapName}
+  - Zone de précision > Détail > Icône > Direction: ${detailIconDirection}
+  - Zone d'action > Contenu: ${actionContent}
+  - Zone d'action > Icône (swap): ${actionIconSwapName}
+  - Zone d'action > Icône > Direction: ${actionIconDirection}
+  - Zone d'action > Détail > 🔄 Icône: ${actionDetailIconSwapName}
+  - Zone d'action > Détail > Icône > Direction: ${actionDetailIconDirection}
+-->`,
+  id: "dsfr-card",
+  metadata: {
+    nestable: true,
+  },
+};
