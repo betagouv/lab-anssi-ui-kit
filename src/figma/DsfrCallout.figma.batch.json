@@ -1,0 +1,13 @@
+{
+  "templateFile": "./DsfrCallout.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=338-7145&m=dev",
+      "name": "Mise en avant"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16017-206065&m=dev",
+      "name": "Mise en avant - Accentuation"
+    }
+  ]
+}
