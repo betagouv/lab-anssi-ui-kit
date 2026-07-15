@@ -1,0 +1,55 @@
+{
+  "templateFile": "./DsfrCard.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202092",
+      "name": "Thème clair / Verticale / SM",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202061",
+      "name": "Thème clair / Verticale / MD",
+      "size": "md"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202030",
+      "name": "Thème clair / Verticale / LG",
+      "size": "lg"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202261",
+      "name": "Thème clair / Horizontale / SM / Avec média",
+      "size": "sm",
+      "horizontal": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202192",
+      "name": "Thème clair / Horizontale / MD / Avec média",
+      "size": "md",
+      "horizontal": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202123",
+      "name": "Thème clair / Horizontale / LG / Avec média",
+      "size": "lg",
+      "horizontal": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202316",
+      "name": "Thème clair / Horizontale / SM / Sans média",
+      "size": "sm",
+      "horizontal": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202247",
+      "name": "Thème clair / Horizontale / MD / Sans média",
+      "size": "md",
+      "horizontal": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=21809-202178",
+      "name": "Thème clair / Horizontale / LG / Sans média",
+      "size": "lg"
+    }
+  ]
+}
