@@ -1,0 +1,65 @@
+{
+  "templateFile": "./DsfrTag.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482894",
+      "name": "Thème clair / Non-cliquable / SM",
+      "type": "default",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482709",
+      "name": "Thème clair / Cliquable / Défaut / SM",
+      "type": "clickable",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482783",
+      "name": "Thème clair / Sélectionné / SM",
+      "type": "pressable",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482861",
+      "name": "Thème clair / Supprimable / SM",
+      "type": "dismissible",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19386-359246",
+      "name": "Thème clair / Cliquable / Personnalisable / SM",
+      "type": "clickable",
+      "size": "sm"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482890",
+      "name": "Thème clair / Cliquable / Défaut / MD",
+      "type": "default",
+      "size": "md"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482688",
+      "name": "Thème clair / Cliquable / Défaut / MD",
+      "type": "clickable",
+      "size": "md"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482726",
+      "name": "Thème clair / Sélectionné / MD",
+      "type": "pressable",
+      "size": "md"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19121-482832",
+      "name": "Thème clair / Supprimable / MD",
+      "type": "dismissible",
+      "size": "md"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=19386-359002",
+      "name": "Thème clair / Cliquable / Personnalisable / MD",
+      "type": "clickable",
+      "size": "md"
+    }
+  ]
+}
