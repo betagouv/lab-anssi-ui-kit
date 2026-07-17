@@ -6,7 +6,7 @@
   import Alerte from "$lib/composants/Alerte.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Alerte",
+    title: "Composants/Lab ANSSI/Legacy/Alerte",
     component: Alerte,
     args: {
       description: "Une alerte d'information",

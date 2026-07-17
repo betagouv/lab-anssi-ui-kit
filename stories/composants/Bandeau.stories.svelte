@@ -6,7 +6,7 @@
   import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Bandeau",
+    title: "Composants/Lab ANSSI/Legacy/Bandeau",
     component: Bandeau,
     play: async ({ canvas, canvasElement }) => {
       const button = canvasElement

@@ -5,7 +5,7 @@
   import Tag from "$lib/composants/Tag.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Tag",
+    title: "Composants/Lab ANSSI/Legacy/Tag",
     component: Tag,
     args: {
       couleurFond: undefined,

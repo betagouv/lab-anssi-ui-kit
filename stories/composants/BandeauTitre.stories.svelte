@@ -5,7 +5,7 @@
   import BandeauTitre from "$lib/composants/blog/BandeauTitre.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/BandeauTitre",
+    title: "Composants/Lab ANSSI/Legacy/BandeauTitre",
     component: BandeauTitre,
     args: {
       titre: "Titre de la page",

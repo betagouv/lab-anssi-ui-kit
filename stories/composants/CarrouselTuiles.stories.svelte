@@ -7,7 +7,7 @@
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Carrousel de tuiles",
+    title: "Composants/Lab ANSSI/Legacy/Carrousel de tuiles",
     component: CarrouselTuiles,
     args: {
       tuiles: [

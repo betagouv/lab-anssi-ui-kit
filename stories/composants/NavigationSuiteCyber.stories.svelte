@@ -6,7 +6,7 @@
   import Navigation from "$lib/composants/suite-cyber/navigation/Navigation.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Navigation Suite Cyber",
+    title: "Composants/Lab ANSSI/Legacy/Navigation Suite Cyber",
     component: Navigation,
     args: {
       sourceUtm: "mon-service-lab-anssi",

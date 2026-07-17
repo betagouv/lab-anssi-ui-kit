@@ -5,7 +5,7 @@
   import AncresParcours from "$lib/composants/AncresParcours.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Ancres Parcours",
+    title: "Composants/Lab ANSSI/Ancres parcours",
     component: AncresParcours,
     args: {
       ancres: [

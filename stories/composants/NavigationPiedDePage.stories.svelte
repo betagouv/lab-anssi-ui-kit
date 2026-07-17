@@ -5,7 +5,7 @@
   import NavigationPiedDePage from "$lib/composants/pied-de-page/NavigationPiedDePage.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/NavigationPiedDePage",
+    title: "Composants/Lab ANSSI/Legacy/NavigationPiedDePage",
     component: NavigationPiedDePage,
     args: {
       conforme: false,

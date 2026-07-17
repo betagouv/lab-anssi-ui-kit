@@ -5,7 +5,7 @@
   import Bouton from "$lib/composants/Bouton.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Bouton",
+    title: "Composants/Lab ANSSI/Legacy/Bouton",
     component: Bouton,
     args: {
       titre: "Libellé",

@@ -5,7 +5,7 @@
   import Reactions from "$lib/composants/Reactions.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Reactions",
+    title: "Composants/Lab ANSSI/Reactions",
     component: Reactions,
     args: {
       reactions: [

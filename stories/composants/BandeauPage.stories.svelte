@@ -8,7 +8,7 @@
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Bandeau page",
+    title: "Composants/Lab ANSSI/Bandeau page",
     component: BandeauPage,
     argTypes: {
       actions: {

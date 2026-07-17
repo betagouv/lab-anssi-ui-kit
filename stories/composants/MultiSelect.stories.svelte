@@ -5,7 +5,7 @@
   import MultiSelect from "$lib/composants/MultiSelect.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/MultiSelect",
+    title: "Composants/Lab ANSSI/MultiSelect",
     component: MultiSelect,
     args: {
       id: "multi-select-1",

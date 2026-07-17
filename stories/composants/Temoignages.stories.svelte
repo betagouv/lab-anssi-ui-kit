@@ -5,7 +5,7 @@
   import Temoignages from "$lib/composants/vitrines-produits/briques/temoignages/Temoignages.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Temoignages",
+    title: "Composants/Lab ANSSI/Legacy/Temoignages",
     component: Temoignages,
     args: {
       titre: "Titre",

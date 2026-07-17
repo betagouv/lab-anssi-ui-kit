@@ -13,7 +13,7 @@
   const couverture = genereImageDePlaceholder(792, 446, "Vidéo d'exemple");
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Brique Titre Multimedia",
+    title: "Composants/Lab ANSSI/Legacy/Brique Titre Multimedia",
     component: BriqueTitreMultimedia,
     args: {
       titre: "Titre pour MSS",
