@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Search",
+    title: "Composants/DSFR/Search",
     component: DsfrSearch,
     argTypes: {
       ...searchArgTypes,

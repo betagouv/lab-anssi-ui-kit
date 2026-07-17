@@ -11,7 +11,7 @@
   import DsfrSelect from "$lib/dsfr/DsfrSelect.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Select",
+    title: "Composants/DSFR/Select",
     component: DsfrSelect,
     argTypes: {
       ...selectArgTypes,

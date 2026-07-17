@@ -14,7 +14,7 @@
   delete stepperArgs.markup;
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Stepper",
+    title: "Composants/DSFR/Stepper",
     component: DsfrStepper,
     argTypes: stepperArgTypes,
     args: { ...stepperArgs, hideDetails: false },

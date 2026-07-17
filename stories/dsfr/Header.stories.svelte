@@ -38,7 +38,7 @@
   ];
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Header",
+    title: "Composants/DSFR/Header",
     component: DsfrHeader,
     argTypes: {
       ...headerArgTypes,

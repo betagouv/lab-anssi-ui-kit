@@ -6,7 +6,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Messages Group",
+    title: "Composants/DSFR/Messages Group",
     component: DsfrMessagesGroup,
     argTypes: {
       id: {

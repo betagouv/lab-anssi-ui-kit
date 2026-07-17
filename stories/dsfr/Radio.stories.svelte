@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Radio",
+    title: "Composants/DSFR/Radio",
     component: DsfrRadio,
     argTypes: {
       ...radioArgTypes,

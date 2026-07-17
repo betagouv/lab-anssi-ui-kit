@@ -13,7 +13,7 @@
   ];
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/User",
+    title: "Composants/DSFR/User",
     component: DsfrUser,
     argTypes: {
       buttonKind: {

@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Translate",
+    title: "Composants/DSFR/Translate",
     component: DsfrTranslate,
     argTypes: translateArgTypes,
     args: translateArgs,

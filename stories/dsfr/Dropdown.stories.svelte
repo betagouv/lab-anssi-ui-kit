@@ -8,7 +8,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Dropdown",
+    title: "Composants/DSFR/Dropdown",
     component: DsfrDropdown,
     argTypes: {
       buttonSize: {

@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Tag",
+    title: "Composants/DSFR/Tag",
     component: DsfrTag,
     argTypes: {
       ...tagArgTypes,

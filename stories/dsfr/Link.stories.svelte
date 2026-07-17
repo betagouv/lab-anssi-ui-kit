@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Link",
+    title: "Composants/DSFR/Link",
     component: DsfrLink,
     argTypes: {
       ...linkArgTypes,

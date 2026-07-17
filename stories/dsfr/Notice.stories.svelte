@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Notice",
+    title: "Composants/DSFR/Notice",
     component: DsfrNotice,
     args: noticeArgs,
     argTypes: noticeArgTypes,

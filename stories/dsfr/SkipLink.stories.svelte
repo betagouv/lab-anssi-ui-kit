@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/SkipLink",
+    title: "Composants/DSFR/SkipLink",
     component: DsfrSkipLink,
     argTypes: skiplinkArgTypes,
     args: skiplinkArgs,

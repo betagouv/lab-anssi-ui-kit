@@ -11,7 +11,7 @@
   import DsfrHighlight from "$lib/dsfr/DsfrHighlight.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Highlight",
+    title: "Composants/DSFR/Highlight",
     component: DsfrHighlight,
     argTypes: {
       ...highlightArgTypes,

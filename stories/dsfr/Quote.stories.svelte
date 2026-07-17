@@ -12,7 +12,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Quote",
+    title: "Composants/DSFR/Quote",
     component: DsfrQuote,
     args: { ...quoteArgs, src: Placeholder, sourceUrl: "www.google.com" },
     argTypes: quoteArgTypes,

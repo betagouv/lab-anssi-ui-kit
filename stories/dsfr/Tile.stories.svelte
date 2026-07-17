@@ -16,7 +16,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Tile",
+    title: "Composants/DSFR/Tile",
     component: DsfrTile,
     argTypes: {
       ...tileArgTypes,

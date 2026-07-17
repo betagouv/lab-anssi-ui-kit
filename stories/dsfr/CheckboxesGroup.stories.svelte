@@ -33,7 +33,7 @@
   };
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Checkboxes Group",
+    title: "Composants/DSFR/Checkboxes Group",
     component: DsfrCheckboxesGroup,
     argTypes: {
       ...checkboxesGroupArgTypes,

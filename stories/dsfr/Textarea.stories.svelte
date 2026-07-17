@@ -13,7 +13,7 @@
   const args = { ...inputArgs, rows: 6 };
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Textarea",
+    title: "Composants/DSFR/Textarea",
     component: DsfrTextarea,
     argTypes: {
       ...inputArgTypes,

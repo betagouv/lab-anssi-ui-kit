@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Toggle",
+    title: "Composants/DSFR/Toggle",
     component: DsfrToggle,
     argTypes: {
       ...toggleArgTypes,

@@ -9,7 +9,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Content Media",
+    title: "Composants/DSFR/Content Media",
     component: DsfrContent,
     argTypes: {
       size: {
