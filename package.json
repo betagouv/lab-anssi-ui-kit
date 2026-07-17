@@ -10,7 +10,7 @@
     "url": "https://github.com/betagouv/lab-anssi-ui-kit/issues"
   },
   "homepage": "https://github.com/betagouv/lab-anssi-ui-kit#readme",
-  "packageManager": "pnpm@10.34.4",
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "build": "vite build && npm run build:manifest && npm run prepack",
     "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
