@@ -5,7 +5,7 @@
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Label",
+    title: "Composants/DSFR/Label",
     component: DsfrLabel,
     argTypes: {
       for: {

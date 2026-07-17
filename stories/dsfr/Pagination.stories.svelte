@@ -19,7 +19,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Pagination",
+    title: "Composants/DSFR/Pagination",
     component: DsfrPagination,
     argTypes: {
       ...camelCaseProps(paginationArgTypes),

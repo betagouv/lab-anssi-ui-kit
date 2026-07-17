@@ -14,7 +14,7 @@
   delete radiosGroupArgs.elements;
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Radios Group",
+    title: "Composants/DSFR/Radios Group",
     component: DsfrRadiosGroup,
     argTypes: {
       ...radiosGroupArgTypes,

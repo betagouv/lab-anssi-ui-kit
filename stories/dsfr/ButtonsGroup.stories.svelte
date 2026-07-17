@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Buttons Group",
+    title: "Composants/DSFR/Buttons Group",
     component: DsfrButtonsGroup,
     argTypes: buttonsGroupArgTypes,
     args: {

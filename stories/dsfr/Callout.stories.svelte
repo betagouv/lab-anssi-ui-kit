@@ -12,7 +12,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Callout",
+    title: "Composants/DSFR/Callout",
     component: DsfrCallout,
     argTypes: {
       ...calloutArgTypes,

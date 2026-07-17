@@ -13,7 +13,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Checkbox",
+    title: "Composants/DSFR/Checkbox",
     component: DsfrCheckbox,
     argTypes: {
       ...checkboxArgTypes,

@@ -12,7 +12,7 @@
   import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Input",
+    title: "Composants/DSFR/Input",
     component: DsfrInput,
     argTypes: {
       ...inputArgTypes,

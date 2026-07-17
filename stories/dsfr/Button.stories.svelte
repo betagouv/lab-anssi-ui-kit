@@ -11,7 +11,7 @@
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Button",
+    title: "Composants/DSFR/Button",
     component: DsfrButton,
     argTypes: {
       ...buttonArgTypes,

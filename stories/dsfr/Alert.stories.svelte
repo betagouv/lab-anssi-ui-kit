@@ -13,7 +13,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Alert",
+    title: "Composants/DSFR/Alert",
     component: DsfrAlert,
     args: alertArgs,
     argTypes: {

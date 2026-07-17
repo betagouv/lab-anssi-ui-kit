@@ -29,7 +29,7 @@
   }
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Table",
+    title: "Composants/DSFR/Table",
     component: DsfrTable,
     argTypes: {
       ...tableArgTypes,

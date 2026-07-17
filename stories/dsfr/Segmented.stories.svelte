@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Segmented",
+    title: "Composants/DSFR/Segmented",
     component: DsfrSegmented,
     argTypes: {
       ...segmentedArgTypes,

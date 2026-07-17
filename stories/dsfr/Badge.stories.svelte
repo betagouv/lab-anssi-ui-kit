@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Badge",
+    title: "Composants/DSFR/Badge",
     component: DsfrBadge,
     argTypes: badgeArgTypes,
     args: badgeArgs,

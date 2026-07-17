@@ -22,7 +22,7 @@
   delete footerArgs.isMourning;
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Footer",
+    title: "Composants/DSFR/Footer",
     component: DsfrFooter,
     argTypes: {
       ...footerArgTypes,

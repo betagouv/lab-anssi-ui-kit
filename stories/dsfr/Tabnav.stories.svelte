@@ -14,7 +14,7 @@
   ];
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Tabnav",
+    title: "Composants/DSFR/Tabnav",
     component: DsfrTabnav,
     args: {
       links: defaultLinks,

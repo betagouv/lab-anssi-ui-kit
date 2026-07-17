@@ -21,7 +21,7 @@
   });
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Side Menu",
+    title: "Composants/DSFR/Side Menu",
     component: DsfrSideMenu,
     argTypes: sidemenuArgTypes,
     args: {

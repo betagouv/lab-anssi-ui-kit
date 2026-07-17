@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Breadcrumb",
+    title: "Composants/DSFR/Breadcrumb",
     component: DsfrBreadcrumb,
     argTypes: breadcrumbArgTypes,
     args: {

@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Accordion",
+    title: "Composants/DSFR/Accordion",
     component: DsfrAccordion,
     args: { ...accordionArgs, titleMarkupLevel: 4 },
     argTypes: {

@@ -11,7 +11,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Range",
+    title: "Composants/DSFR/Range",
     component: DsfrRange,
     argTypes: {
       ...rangeArgTypes,

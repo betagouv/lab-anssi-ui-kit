@@ -12,7 +12,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Navigation",
+    title: "Composants/DSFR/Navigation",
     component: DsfrNavigation,
     argTypes: navigationArgTypes,
     args: navigationArgs,

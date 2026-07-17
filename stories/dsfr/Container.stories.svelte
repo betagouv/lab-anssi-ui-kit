@@ -6,7 +6,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Container",
+    title: "Composants/DSFR/Container",
     component: DsfrContainer,
     argTypes: {
       default: {

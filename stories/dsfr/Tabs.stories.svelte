@@ -15,7 +15,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Tabs",
+    title: "Composants/DSFR/Tabs",
     component: DsfrTabs,
     args: tabsArgs,
     argTypes: {

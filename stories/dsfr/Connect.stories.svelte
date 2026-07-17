@@ -6,7 +6,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/dsfr/Connect Button",
+    title: "Composants/DSFR/Connect Button",
     component: DsfrConnect,
     argTypes: {
       id: {
