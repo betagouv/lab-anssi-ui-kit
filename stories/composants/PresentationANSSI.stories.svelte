@@ -5,7 +5,7 @@
   import PresentationANSSI from "$lib/composants/vitrines-produits/briques/PresentationANSSI.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Presentation ANSSI",
+    title: "Composants/Lab ANSSI/Presentation ANSSI",
     component: PresentationANSSI,
     render: template,
   });

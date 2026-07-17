@@ -5,7 +5,7 @@
   import Lien from "$lib/composants/Lien.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Lien",
+    title: "Composants/Lab ANSSI/Legacy/Lien",
     component: Lien,
     args: {
       titre: "Libellé",

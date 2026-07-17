@@ -5,7 +5,7 @@
   import ListeArticles from "$lib/composants/blog/ListeArticles.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/ListeArticles",
+    title: "Composants/Lab ANSSI/Legacy/ListeArticles",
     component: ListeArticles,
     args: {
       articles: [

@@ -6,7 +6,7 @@
   import ConteneurStory from "./ConteneurStory.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/CentreAide",
+    title: "Composants/Lab ANSSI/Centre d'aide",
     component: CentreAide,
     args: {
       nomService: "MonServiceSécurisé",

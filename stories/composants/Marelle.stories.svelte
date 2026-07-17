@@ -7,7 +7,7 @@
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Marelle",
+    title: "Composants/Lab ANSSI/Marelle",
     component: Marelle,
     args: {
       titre: "Titre",

@@ -5,7 +5,7 @@
   import ResumePssi from "$lib/composants/ResumePssi.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/ResumePssi",
+    title: "Composants/Lab ANSSI/Legacy/ResumePssi",
     component: ResumePssi,
     args: {
       nomService: "MonService",

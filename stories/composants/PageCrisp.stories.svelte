@@ -13,7 +13,7 @@
   );
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/PageCrisp",
+    title: "Composants/Lab ANSSI/Legacy/PageCrisp",
     component: PageCrisp,
     args: {
       contenu,

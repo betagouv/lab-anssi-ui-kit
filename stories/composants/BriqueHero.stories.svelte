@@ -7,7 +7,7 @@
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Brique Hero",
+    title: "Composants/Lab ANSSI/Legacy/Brique Hero",
     component: BriqueHero,
     args: {
       badge: true,

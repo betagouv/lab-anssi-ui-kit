@@ -7,7 +7,7 @@
   import Success from "@gouvfr/dsfr/dist/artwork/pictograms/system/success.svg?raw";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Filtres Catalogue",
+    title: "Composants/Lab ANSSI/Filtres catalogue",
     component: FiltresCatalogue,
     args: {
       filtres: [

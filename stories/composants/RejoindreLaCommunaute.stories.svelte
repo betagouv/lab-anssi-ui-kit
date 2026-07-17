@@ -7,7 +7,7 @@
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/ANSSI/Brique Rejoindre La Communauté",
+    title: "Composants/Lab ANSSI/Legacy/Brique Rejoindre La Communauté",
     component: RejoindreLaCommunaute,
     args: {
       titre: "Rejoindre la communauté",
