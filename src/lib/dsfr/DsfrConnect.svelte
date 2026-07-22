@@ -66,10 +66,11 @@
   <p>
     <DsfrLink
       href={brand.href}
-      label="Qu’est-ce que {brand.name} ?"
+      label={`Qu’est-ce que ${brand.name} ?`}
       blank={true}
-      title="Qu’est-ce que {brand.name} ? - nouvelle fenêtre"
+      title={`Qu’est-ce que ${brand.name} ? - nouvelle fenêtre`}
       size="sm"
+      {disabled}
     />
   </p>
 </div>
