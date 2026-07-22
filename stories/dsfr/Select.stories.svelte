@@ -95,6 +95,7 @@
     required={args.required || undefined}
     label-size={args.labelSize}
     label-weight={args.labelWeight}
+    hide-label={args.hideLabel || undefined}
   ></dsfr-select>
 {/snippet}
 
