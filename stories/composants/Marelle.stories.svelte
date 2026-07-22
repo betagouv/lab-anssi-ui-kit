@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import Marelle from "$lib/composants/vitrines-produits/briques/marelle/Marelle.svelte";
+  import Marelle from "$lib/composants/marelle/Marelle.svelte";
 
   import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
 
@@ -31,10 +31,6 @@
           titre: "Deuxième étape",
         },
       ],
-      action: {
-        titre: "Action",
-        lien: "#",
-      },
     },
     argTypes: {
       titre: {
@@ -107,4 +103,14 @@
   ></lab-anssi-marelle>
 {/snippet}
 
-<Story name="Defaut" />
+<Story name="Par défaut" />
+
+<Story
+  name="Avec bouton d'action"
+  args={{
+    action: {
+      titre: "Action",
+      lien: "#",
+    },
+  }}
+/>
