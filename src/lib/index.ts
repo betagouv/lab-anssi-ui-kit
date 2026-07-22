@@ -8,8 +8,8 @@ export { default as LienDiagnosticCyber } from "./composants/mes-services-cyber/
 export { default as NavigationPiedDePage } from "./composants/pied-de-page/NavigationPiedDePage.svelte";
 export { default as SuiteCyberNavigation } from "./composants/suite-cyber/navigation/Navigation.svelte";
 export { default as BriqueTitreMultimedia } from "./composants/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
-export { default as Marelle } from "./composants/vitrines-produits/briques/marelle/Marelle.svelte";
-export { default as Etape } from "./composants/vitrines-produits/briques/marelle/Etape.svelte";
+export { default as Marelle } from "./composants/marelle/Marelle.svelte";
+export { default as Etape } from "./composants/marelle/Etape.svelte";
 export { default as Temoignages } from "./composants/vitrines-produits/briques/temoignages/Temoignages.svelte";
 export { default as BriqueContenuADeuxColonnes } from "./composants/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
 export { default as PresentationANSSI } from "./composants/vitrines-produits/briques/PresentationANSSI.svelte";
