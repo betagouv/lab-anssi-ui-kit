@@ -55,7 +55,7 @@
     tags,
     type = "default",
     size = "md",
-    groupMarkup,
+    groupMarkup = "ul",
     hasIcon,
     onselected,
     onunselected,
