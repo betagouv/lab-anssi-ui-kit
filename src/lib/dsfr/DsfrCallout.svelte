@@ -44,7 +44,7 @@
     /** Affiche un bouton */
     hasButton?: boolean;
     /** Libellé du bouton */
-    buttonLabel: string;
+    buttonLabel?: string;
     /** Couleur d'accentuation */
     accent?: Accent;
   }
@@ -58,7 +58,7 @@
     icon,
     titleMarkup = "h3",
     hasButton = false,
-    buttonLabel = "Libellé du bouton",
+    buttonLabel,
     accent,
   }: Props = $props();
 
@@ -73,7 +73,9 @@
   <p class="fr-callout__text">{text}</p>
   {#if hasButton}
     <slot name="button">
-      <DsfrButton label={buttonLabel} />
+      {#if buttonLabel}
+        <DsfrButton label={buttonLabel} />
+      {/if}
     </slot>
   {/if}
 </div>
