@@ -51,6 +51,7 @@ export { default as DsfrLabel } from "./dsfr/DsfrLabel.svelte";
 export { default as DsfrLink } from "./dsfr/DsfrLink.svelte";
 export { default as DsfrLogo } from "./dsfr/DsfrLogo.svelte";
 export { default as DsfrMessagesGroup } from "./dsfr/DsfrMessagesGroup.svelte";
+export { default as DsfrModal } from "./dsfr/DsfrModal.svelte";
 export { default as DsfrNavigation } from "./dsfr/DsfrNavigation.svelte";
 export { default as DsfrNotice } from "./dsfr/DsfrNotice.svelte";
 export { default as DsfrPagination } from "./dsfr/DsfrPagination.svelte";
