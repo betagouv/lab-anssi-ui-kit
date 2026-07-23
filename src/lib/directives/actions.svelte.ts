@@ -49,27 +49,96 @@ export const stopPropagation: Action<HTMLElement> = (element: HTMLElement) => {
   });
 };
 
-export const trapFocus: Action<HTMLElement> = (element: HTMLElement) => {
-  const allFocusableElements = element.querySelectorAll<HTMLElement>(
-    "input,button,textarea,a,[tabindex]:not([tabindex='-1'])",
-  );
-  const firstFocusableElement = allFocusableElements[0];
-  const lastFocusableElement = allFocusableElements[allFocusableElements.length - 1];
+const FOCUSABLE_ELEMENTS = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "audio[controls]",
+  "video[controls]",
+  '[contenteditable]:not([contenteditable="false"])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
 
+/**
+ * Collecte récursivement tous les éléments focusables dans un conteneur,
+ * y compris ceux dans les slots et les Shadow DOM.
+ *
+ * @param root - L'élément racine ou la Shadow Root à analyser.
+ * @param result - Le tableau où stocker les éléments focusables trouvés.
+ */
+function collectFocusables(root: HTMLElement | ShadowRoot, result: HTMLElement[]) {
+  root.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS).forEach((el) => {
+    result.push(el);
+  });
+
+  root.querySelectorAll("slot").forEach((slot) => {
+    slot.assignedElements({ flatten: true }).forEach((el) => {
+      if (el instanceof HTMLElement) {
+        if (el.matches(FOCUSABLE_ELEMENTS)) result.push(el);
+
+        result.push(...el.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS));
+
+        if (el.shadowRoot) collectFocusables(el.shadowRoot, result);
+      }
+    });
+  });
+
+  root.querySelectorAll<HTMLElement>("*").forEach((el) => {
+    if (el.shadowRoot && !el.matches(FOCUSABLE_ELEMENTS)) {
+      collectFocusables(el.shadowRoot, result);
+    }
+  });
+}
+
+/**
+ * Récupère tous les éléments focusables contenus dans un élément donné.
+ * Parcourt l'élément et tous ses descendants pour collecter les éléments focusables.
+ *
+ * @param element - L'élément conteneur à analyser.
+ *
+ * @returns Un tableau contenant tous les éléments focusables trouvés.
+ */
+function getFocusableElements(element: HTMLElement): HTMLElement[] {
+  const elements: HTMLElement[] = [];
+
+  collectFocusables(element, elements);
+
+  return elements;
+}
+
+/**
+ * Action Svelte qui restreint le focus à l'intérieur d'un élément.
+ * Empêche la navigation au clavier (Tab) de sortir du conteneur en boucle le focus
+ * entre le premier et le dernier élément focusable.
+ *
+ * @param element - L'élément conteneur dans lequel piéger le focus.
+ */
+export const trapFocus: Action<HTMLElement> = (element: HTMLElement) => {
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.code === "Tab") {
-      if (event.shiftKey) {
-        // Shift + Tab
-        if (event.target === firstFocusableElement) {
-          event.preventDefault();
-          lastFocusableElement.focus();
-        }
-      } else {
-        // Tab
-        if (event.target === lastFocusableElement) {
-          event.preventDefault();
-          firstFocusableElement.focus();
-        }
+    if (event.key !== "Tab") return;
+
+    const focusables = getFocusableElements(element);
+    if (focusables.length === 0) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    let active: Element | null = document.activeElement;
+    while (active?.shadowRoot?.activeElement) {
+      active = active.shadowRoot.activeElement;
+    }
+
+    if (event.shiftKey) {
+      if (active === first || !focusables.includes(active as HTMLElement)) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (active === last || !focusables.includes(active as HTMLElement)) {
+        event.preventDefault();
+        first.focus();
       }
     }
   };
