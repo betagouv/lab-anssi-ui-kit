@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /// Ajoute un style d'outline personnalisé lors du focus clavier (`:focus-visible`).
 @mixin set-focus() {
   outline: {
@@ -37,4 +39,13 @@
 ///
 @mixin set-border-radius($radius: 0) {
   border-radius: var(--lab-border-radius, #{$radius});
+}
+
+/// Convertit une valeur en pixels en unité rem.
+///
+/// @param {Number} $size - La valeur en pixels à convertir en rem.
+/// @return {Number} La valeur convertie en rem (basée sur une taille de base de 16px).
+///
+@function rem($size) {
+  @return math.div($size, 16px) * 1rem;
 }
