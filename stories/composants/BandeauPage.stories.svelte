@@ -72,6 +72,17 @@
   });
 
   type Args = ComponentProps<BandeauPage>;
+
+  const boutonsInverse = [
+    {
+      label: "Libellé",
+      kind: "primary",
+    },
+    {
+      label: "Libellé",
+      kind: "secondary",
+    },
+  ];
 </script>
 
 {#snippet template(args: Args)}
@@ -91,6 +102,7 @@
     {#if args.avecBadges}
       <dsfr-badges-group slot="badgesgroup" badges={args.badges} size="md"></dsfr-badges-group>
     {/if}
+
     <dsfr-buttons-group
       slot="buttonsgroup"
       buttons={args.boutons}
@@ -111,9 +123,12 @@
 
 <Story name="Avec un groupe de badges" args={{ avecBadges: true }} />
 
-<Story name="Inverse" args={{ inverse: true }} />
+<Story name="Inverse" args={{ inverse: true, boutons: boutonsInverse }} />
 
-<Story name="Inverse (avec Fil d'Ariane)" args={{ inverse: true, avecFilAriane: true }} />
+<Story
+  name="Inverse (avec Fil d'Ariane)"
+  args={{ inverse: true, avecFilAriane: true, boutons: boutonsInverse }}
+/>
 
 <Story name="Simple" args={{ simple: true }} />
 
