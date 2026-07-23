@@ -18,6 +18,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import { trapFocus } from "$lib/directives/actions.svelte";
 
   setThemeable($host());
 
@@ -155,6 +156,7 @@
   onkeydown={handleKeydown}
   role={markup === "div" ? "dialog" : undefined}
   tabindex={markup === "div" ? 0 : undefined}
+  use:trapFocus
 >
   <div class="fr-container fr-container--fluid fr-container-md">
     <div class="fr-grid-row fr-grid-row--center">
