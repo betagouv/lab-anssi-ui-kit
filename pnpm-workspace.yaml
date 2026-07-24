@@ -2,3 +2,12 @@
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
+
+overrides:
+  rollup: ">=4.30.0"
+  flatted: ">=3.4.2"
+  lodash: ">=4.18.0"
+  minimatch: ">=10.2.3"
+  picomatch: ">=4.0.4"
+  axios: ">=1.15.2"
+  follow-redirects: ">=1.16.0"
