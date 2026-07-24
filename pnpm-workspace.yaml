@@ -11,3 +11,7 @@ overrides:
   picomatch: ">=4.0.4"
   axios: ">=1.15.2"
   follow-redirects: ">=1.16.0"
+
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true
