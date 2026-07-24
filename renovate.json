@@ -1,4 +1,96 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"]
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "semanticCommits": "disabled",
+  "commitMessagePrefix": "[RENOVATE]",
+  "labels": ["dependencies"],
+  "schedule": ["before 9am on friday"],
+  "timezone": "Europe/Paris",
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "description": "Auto-merge les mises à jour patch des devDependencies",
+      "matchUpdateTypes": ["patch"],
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Mises à jour mineures et majeures — revue manuelle obligatoire",
+      "matchUpdateTypes": ["major", "minor"],
+      "automerge": false
+    },
+    {
+      "description": "Groupe les dépendances Storybook",
+      "groupName": "Storybook",
+      "matchPackageNames": ["storybook", "@storybook/**", "@chromatic-com/**"]
+    },
+    {
+      "description": "Groupe les dépendances Vitest",
+      "groupName": "Vitest",
+      "matchPackageNames": ["vitest", "@vitest/**"]
+    },
+    {
+      "description": "Groupe les bibliothèques de test",
+      "groupName": "Testing Libraries",
+      "matchPackageNames": ["@testing-library/**", "playwright"]
+    },
+    {
+      "description": "Groupe les dépendances ESLint",
+      "groupName": "ESLint",
+      "matchPackageNames": ["eslint", "eslint-*", "@eslint/**", "typescript-eslint", "globals"]
+    },
+    {
+      "description": "Groupe les dépendances Prettier",
+      "groupName": "Prettier",
+      "matchPackageNames": ["prettier", "prettier-plugin-*"]
+    },
+    {
+      "description": "Groupe les dépendances Svelte — revue manuelle obligatoire",
+      "groupName": "Svelte",
+      "matchPackageNames": ["svelte", "svelte-check", "@sveltejs/**", "prettier-plugin-svelte"],
+      "automerge": false
+    },
+    {
+      "description": "DSFR — mise à jour sensible, revue manuelle obligatoire",
+      "groupName": "DSFR",
+      "matchPackageNames": ["@gouvfr/dsfr"],
+      "automerge": false,
+      "prPriority": 10
+    },
+    {
+      "description": "Groupe les outils de build",
+      "groupName": "Build Tools",
+      "matchPackageNames": [
+        "vite",
+        "typescript",
+        "postcss",
+        "postcss-*",
+        "@fullhuman/postcss-purgecss",
+        "cssnano",
+        "sass",
+        "publint",
+        "concurrently",
+        "dotenv",
+        "style-dictionary"
+      ]
+    },
+    {
+      "description": "GitHub Actions — préfixe sécurité, auto-merge après CI",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "commitMessagePrefix": "[SECURITE]",
+      "labels": ["securite", "github-actions"],
+      "automerge": true,
+      "automergeType": "pr",
+      "schedule": ["at any time"]
+    },
+    {
+      "description": "Gestionnaire de paquets (pnpm) — préfixe sécurité",
+      "matchDepTypes": ["packageManager"],
+      "commitMessagePrefix": "[SECURITE]",
+      "labels": ["securite"],
+      "automerge": false
+    }
+  ]
 }
