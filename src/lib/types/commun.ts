@@ -68,7 +68,9 @@ export type Kind =
   | "tertiary"
   | "tertiary-no-outline"
   | "inverted-primary"
-  | "inverted-secondary";
+  | "inverted-secondary"
+  | "inverted-tertiary"
+  | "inverted-tertiary-no-outline";
 
 export type TranslateLanguage = {
   active: boolean;
