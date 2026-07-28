@@ -26,9 +26,10 @@
           "secondary",
           "tertiary",
           "tertiary-no-outline",
-          "inverted",
           "inverted-primary",
           "inverted-secondary",
+          "inverted-tertiary",
+          "inverted-tertiary-no-outline",
         ],
       },
       default: {
@@ -37,7 +38,7 @@
         table: { category: "Slots" },
       },
     },
-    args: buttonArgs,
+    args: { ...buttonArgs, kind: "primary" },
     parameters: {
       backgrounds: {
         options: {
@@ -80,10 +81,184 @@
 
 <Story name="Défaut" />
 
+<Story name="Primaire" args={{ kind: "primary", label: "Primaire" }} />
+
+<Story name="Secondaire" args={{ kind: "secondary", label: "Secondaire" }} />
+
+<Story name="Tertiaire">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-button label="Tertiaire" kind="tertiary"></dsfr-button>
+      <dsfr-button label="Tertiaire sans bordure" kind="tertiary-no-outline"></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Désactivé">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-button label="Primaire" kind="primary" disabled={true}></dsfr-button>
+      <dsfr-button label="Secondaire" kind="secondary" disabled={true}></dsfr-button>
+      <dsfr-button label="Tertiaire" kind="tertiary" disabled={true}></dsfr-button>
+      <dsfr-button label="Tertiaire sans bordure" kind="tertiary-no-outline" disabled={true}
+      ></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Icône à gauche">
+  {#snippet template(args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-button
+        label={args.label}
+        kind="primary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="left"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="secondary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="left"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="left"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary-no-outline"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="left"
+      ></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Icône à droite">
+  {#snippet template(args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-button
+        label={args.label}
+        kind="primary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="right"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="secondary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="right"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="right"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary-no-outline"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="right"
+      ></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Icône seule">
+  {#snippet template(args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-button
+        label={args.label}
+        kind="primary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="only"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="secondary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="only"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="only"
+      ></dsfr-button>
+      <dsfr-button
+        label={args.label}
+        kind="tertiary-no-outline"
+        has-icon={true}
+        icon="checkbox-line"
+        icon-place="only"
+      ></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Tailles">
+  {#snippet template(args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <dsfr-button label={args.label} size="sm"></dsfr-button>
+      <dsfr-button label={args.label} size="md"></dsfr-button>
+      <dsfr-button label={args.label} size="lg"></dsfr-button>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Fermer" args={{ label: "Fermer", preset: "close" }} />
+
+<Story name="Affichage" args={{ label: "Paramètres d'affichage", preset: "display" }} />
+
+<Story
+  name="Contact"
+  args={{
+    label: "Contact",
+    markup: "a",
+    href: "[URL - à modifier]",
+    preset: "team",
+  }}
+/>
+
+<Story
+  name="Espace recruteur"
+  args={{
+    label: "Espace recruteur",
+    markup: "a",
+    href: "[URL - à modifier]",
+    preset: "briefcase",
+  }}
+/>
+
+<Story
+  name="Espace particulier"
+  args={{
+    label: "Espace particulier",
+    markup: "a",
+    href: "[URL - à modifier]",
+    preset: "account",
+  }}
+/>
+
 <Story name="Centered" args={{ centered: true }} />
 
 <Story
-  name="Inverted Primary"
+  name="Inversé (Primaire)"
   args={{ ...buttonArgs, kind: "inverted-primary" }}
   globals={{
     backgrounds: { value: "blueFranceLab" },
@@ -91,8 +266,24 @@
 />
 
 <Story
-  name="Inverted Secondary"
+  name="Inversé (Secondaire)"
   args={{ ...buttonArgs, kind: "inverted-secondary" }}
+  globals={{
+    backgrounds: { value: "blueFranceLab" },
+  }}
+/>
+
+<Story
+  name="Inversé (Tertiaire)"
+  args={{ ...buttonArgs, kind: "inverted-tertiary" }}
+  globals={{
+    backgrounds: { value: "blueFranceLab" },
+  }}
+/>
+
+<Story
+  name="Inversé (Tertiaire sans bordure)"
+  args={{ ...buttonArgs, kind: "inverted-tertiary-no-outline" }}
   globals={{
     backgrounds: { value: "blueFranceLab" },
   }}
