@@ -16,8 +16,8 @@
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
-  import IconeFlecheGauche from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheGauche.svelte";
-  import IconeFlecheDroite from "$lib/composants/vitrines-produits/briques/CarrouselTuiles/IconeFlecheDroite.svelte";
+  import IconeFlecheGauche from "$lib/composants/carrousel-tuiles/IconeFlecheGauche.svelte";
+  import IconeFlecheDroite from "$lib/composants/carrousel-tuiles/IconeFlecheDroite.svelte";
 
   setThemeable($host());
 
