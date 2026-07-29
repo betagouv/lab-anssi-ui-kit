@@ -1,0 +1,43 @@
+{
+  "templateFile": "./BandeauPage.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11851-144377&m=dev",
+      "name": "Thème clair / Hero / Desktop"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=12967-1439&m=dev",
+      "name": "Thème clair / Hero / Mobile"
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=13744-6908&m=dev",
+      "name": "Thème clair / Fiche catalogue / Desktop",
+      "breadcrumb": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=13744-6963&m=dev",
+      "name": "Thème clair / Fiche catalogue / Mobile",
+      "breadcrumb": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=12967-1500&m=dev",
+      "name": "Thème clair / Hero secondaire / Desktop",
+      "breadcrumb": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11851-144726&m=dev",
+      "name": "Thème clair / Hero secondaire / Mobile",
+      "breadcrumb": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=13901-132410&m=dev",
+      "name": "Desktop / Barre de navigation / Dépliant complet",
+      "simple": true
+    },
+    {
+      "url": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=13901-132461&m=dev",
+      "name": "Thème clair / Bannière / Mobile",
+      "simple": true
+    }
+  ]
+}
