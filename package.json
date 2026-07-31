@@ -53,7 +53,7 @@
     "@eslint/compat": "~2.1.0",
     "@eslint/js": "~10.0.1",
     "@fullhuman/postcss-purgecss": "~8.0.0",
-    "@gouvfr/dsfr": "1.14.4",
+    "@gouvfr/dsfr": "1.15.1",
     "@storybook/addon-a11y": "~10.5.2",
     "@storybook/addon-docs": "~10.5.2",
     "@storybook/addon-svelte-csf": "~5.1.2",
