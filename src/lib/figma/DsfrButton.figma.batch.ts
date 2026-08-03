@@ -20,7 +20,7 @@ switch (instance.getString("Icône")) {
 const disabled = instance.getBoolean("Désactivé");
 
 let iconName: string | null = null;
-let iconVersion = "line-tii";
+let iconVersion = "line";
 
 const iconInstance = instance.getInstanceSwap("🔄 Icône");
 if (iconInstance && iconInstance.type === "INSTANCE") {
