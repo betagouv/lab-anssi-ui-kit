@@ -5,13 +5,14 @@
       titre: { attribute: "titre", type: "String" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
       description: { attribute: "description", type: "String" },
-      actions: { attribute: "actions", type: "Object" },
       mention: { attribute: "mention", type: "String" },
-      inverse: { attribute: "inverse", type: "Boolean" },
       urlImage: { attribute: "url-image", type: "String" },
       sansImage: { attribute: "sans-image", type: "Boolean" },
       avecFilAriane: { attribute: "avec-fil-ariane", type: "Boolean" },
       liensFilAriane: { attribute: "liens-fil-ariane", type: "Array" },
+      type: { attribute: "type", type: "String" },
+      theme: { attribute: "theme", type: "String" },
+      inverse: { attribute: "inverse", type: "Boolean" },
       simple: { attribute: "simple", type: "Boolean" },
       ficheCatalogue: { attribute: "fiche-catalogue", type: "Boolean" },
     },
@@ -29,16 +30,31 @@
   };
 
   interface Props {
+    /** Titre du bandeau */
     titre: string;
+    /** Balise HTML (Hn) du titre */
     baliseTitre: string;
+    /** Description du bandeau */
     description: string;
+    /** Mention du bandeau */
     mention: string;
-    inverse?: boolean;
+    /** Url de l'image */
     urlImage?: string | undefined;
+    /** Si "vrai", l'image n'est pas affichée */
     sansImage?: boolean;
+    /** Si "vrai", le fil d'Ariane est affiché */
     avecFilAriane?: boolean;
+    /** Segments du fil d'Ariane */
     liensFilAriane?: BreadcrumbSegment[];
+    /** Type du bandeau */
+    type?: "default" | "fiche" | "simple";
+    /** Thème du bandeau */
+    theme?: "clair" | "sombre";
+    /** Inversion du thème _(déprécié - préférer l'utilisation de la prop ``theme="inverse"``)_ */
+    inverse?: boolean;
+    /** Variation "Simple" _(déprécié - préférer l'utilisation de la prop ``type="simple"``)_ */
     simple?: boolean;
+    /** Variation "Fiche Catalogue" _(déprécié - préférer l'utilisation de la prop ``type="fiche"``)_ */
     ficheCatalogue?: boolean;
   }
 
@@ -47,25 +63,31 @@
     baliseTitre = "h1",
     description,
     mention,
-    inverse = false,
     urlImage,
     sansImage = false,
     avecFilAriane = false,
     liensFilAriane = [],
+    type = "default",
+    theme,
+    inverse = false,
     simple = false,
     ficheCatalogue = false,
   }: Props = $props();
+
+  const variationSimple = $derived(type === "simple" || simple);
+  const variationFiche = $derived(type === "fiche" || ficheCatalogue);
+  const themeClair = $derived(theme === "clair" || inverse);
 </script>
 
 <section
   class={[
     "lab-anssi-bandeau-page",
     {
-      "lab-anssi-bandeau-page--inverse": inverse,
+      "lab-anssi-bandeau-page--clair": themeClair,
       "lab-anssi-bandeau-page--sans-image": sansImage,
       "lab-anssi-bandeau-page--avec-filariane": avecFilAriane,
-      "lab-anssi-bandeau-page--simple": simple,
-      "lab-anssi-bandeau-page--fiche-catalogue": ficheCatalogue,
+      "lab-anssi-bandeau-page--simple": variationSimple,
+      "lab-anssi-bandeau-page--fiche-catalogue": variationFiche,
     },
   ]}
 >
@@ -76,7 +98,7 @@
         segments={liensFilAriane}
         buttonAriaLabel="vous êtes ici :"
         buttonLabel="Voir le fil d'Ariane"
-        inverse={!inverse}
+        inverse={!themeClair}
         hasMarginVariant
       />
     {/if}
@@ -93,7 +115,7 @@
 
         <p class="lab-anssi-bandeau-page__description">{description}</p>
 
-        {#if $$slots.buttonsgroup && !simple}
+        {#if $$slots.buttonsgroup && !variationSimple}
           <div class="lab-anssi-bandeau-page__actions">
             <slot name="buttonsgroup" />
           </div>
@@ -104,11 +126,13 @@
         {/if}
       </div>
 
-      {#if !sansImage && !simple}
+      {#if !sansImage && !variationSimple}
         <div class="lab-anssi-bandeau-page__secondaire">
-          <figure class="lab-anssi-bandeau-page__illustration">
-            <img src={urlImage} class="lab-anssi-bandeau-page__image" alt="" />
-          </figure>
+          <slot name="media">
+            <figure class="lab-anssi-bandeau-page__illustration">
+              <img src={urlImage} class="lab-anssi-bandeau-page__image" alt="" />
+            </figure>
+          </slot>
         </div>
       {/if}
     </div>
@@ -138,13 +162,13 @@
     }
 
     &__conteneur {
-      padding-block: 48px;
+      padding-block: rem(48px);
 
       @include respond-from("md") {
         display: flex;
         align-items: center;
-        margin: -0.75rem;
-        padding-block: 36px;
+        margin-inline: rem(-12px);
+        padding-block: rem(36px);
       }
     }
 
@@ -154,44 +178,44 @@
         flex: 0 0 50%;
         max-width: 50%;
         width: 50%;
-        padding: 0.75rem;
+        padding: rem(12px);
       }
     }
 
     &__principal {
       @include respond-to("sm") {
-        margin-block-end: 40px;
+        margin-block-end: rem(40px);
       }
     }
 
     &__titre {
       color: var(--text-color-titre);
       font-weight: 700;
-      font-size: 40px;
-      line-height: 48px;
-      margin-block: 0 12px;
+      font-size: rem(40px);
+      line-height: rem(48px);
+      margin-block: 0 rem(12px);
 
       @include respond-from("md") {
-        font-size: 48px;
-        line-height: 56px;
+        font-size: rem(48px);
+        line-height: rem(56px);
       }
     }
 
     &__description {
       color: var(--text-color-description);
-      font-size: 18px;
-      line-height: 28px;
+      font-size: rem(18px);
+      line-height: rem(28px);
       margin-block: 0;
 
       &:not(:last-child) {
-        margin-block-end: 24px;
+        margin-block-end: rem(24px);
       }
     }
 
     &__actions {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: rem(16px);
 
       @include respond-from("md") {
         flex-direction: row;
@@ -200,8 +224,8 @@
 
     &__mention {
       color: var(--text-color-description);
-      font-size: 14px;
-      line-height: 24px;
+      font-size: rem(14px);
+      line-height: rem(24px);
       margin-block: 0;
     }
 
@@ -214,8 +238,8 @@
       max-width: 100%;
     }
 
-    // Variation "Inversé"
-    &--inverse {
+    // Variation "Clair"
+    &--clair {
       --background-color: var(--background-alt-blue-france);
       --text-color-titre: var(--text-title-grey);
       --text-color-description: var(--text-default-grey);
@@ -223,9 +247,9 @@
 
     // Variation "Avec Fil d'Ariane"
     &--avec-filariane {
-      --dsfr-breadcrumb-margin: 0 0 24px 0;
+      --dsfr-breadcrumb-margin: 0 0 rem(24px) 0;
 
-      padding-block-start: 16px;
+      padding-block-start: rem(16px);
 
       .lab-anssi-bandeau-page {
         &__conteneur {
@@ -241,16 +265,20 @@
         &__secondaire {
           padding-block-end: 0;
         }
+
+        &__secondaire {
+          align-self: flex-end;
+        }
       }
     }
 
     // Variation "Simple"
     &--simple {
-      --dsfr-breadcrumb-margin: 0 0 16px 0;
+      --dsfr-breadcrumb-margin: 0 0 rem(16px) 0;
 
       .lab-anssi-bandeau-page {
         &__conteneur {
-          padding-block-end: 12px;
+          padding-block-end: rem(12px);
         }
 
         &__principal {
