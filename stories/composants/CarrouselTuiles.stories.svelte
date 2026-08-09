@@ -9,39 +9,43 @@
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 
+  const tuiles = [
+    {
+      titre: "Un dispositif étatique",
+      contenu:
+        "MonAideCyber est proposé par l'Agence nationale de la sécurité des systèmes d'information.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
+    },
+    {
+      titre: "Une communauté de confiance",
+      contenu:
+        "Les Aidants cyber sont issus de la sphère publique ou sont membres d'associations œuvrant pour un numérique de confiance.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
+    },
+    {
+      titre: "Au service de l'intérêt général",
+      contenu:
+        "Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l'action.",
+      illustration: {
+        lien: genereImageDePlaceholder(96, 97),
+        alt: "",
+      },
+    },
+  ];
+  const tuilesSansImage = tuiles.map(({ titre, contenu }) => ({ titre, contenu }));
+  const tuilesSansImageNiContenu = tuiles.map(({ titre }) => ({ titre }));
+
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Carrousel Tuiles",
     component: CarrouselTuiles,
     args: {
-      tuiles: [
-        {
-          titre: "Un dispositif étatique",
-          contenu:
-            "MonAideCyber est proposé par l'Agence nationale de la sécurité des systèmes d'information.",
-          illustration: {
-            lien: genereImageDePlaceholder(96, 97),
-            alt: "",
-          },
-        },
-        {
-          titre: "Une communauté de confiance",
-          contenu:
-            "Les Aidants cyber sont issus de la sphère publique ou sont membres d'associations œuvrant pour un numérique de confiance.",
-          illustration: {
-            lien: genereImageDePlaceholder(96, 97),
-            alt: "",
-          },
-        },
-        {
-          titre: "Au service de l'intérêt général",
-          contenu:
-            "Le diagnostic MonAideCyber aide les entités qui souhaitent se protéger contre les cyberattaques et passer à l'action.",
-          illustration: {
-            lien: genereImageDePlaceholder(96, 97),
-            alt: "",
-          },
-        },
-      ],
+      tuiles: tuiles,
       fond: "clair",
     },
     argTypes: {
@@ -54,7 +58,7 @@
           type: {
             summary: "Array",
             detail:
-              "{ titre: string; illustration: { lien: string; alt: string }; contenu: string }[]",
+              "{ titre: string; illustration?: { lien: string; alt: string }; contenu?: string }[]",
           },
         },
       },
@@ -89,6 +93,10 @@
 {/snippet}
 
 <Story name="Par défaut" />
+
+<Story name="Avec tuiles sans image" args={{ tuiles: tuilesSansImage }} />
+
+<Story name="Avec tuiles sans image, ni contenu" args={{ tuiles: tuilesSansImageNiContenu }} />
 
 <Story name="Avec fond de couleur clair (personnalisé)">
   {#snippet template(args: Args)}

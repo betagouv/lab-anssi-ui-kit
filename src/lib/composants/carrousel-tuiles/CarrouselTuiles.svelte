@@ -94,12 +94,16 @@
           <div class="lab-anssi-carrousel-tuiles__element">
             <DsfrTile
               title={tuile.titre}
-              hasDescription
+              hasDescription={!!tuile.contenu}
               description={tuile.contenu}
               actionMarkup="false"
               noLink
             >
-              <img src={tuile.illustration.lien} alt={tuile.illustration.alt} slot="pictogram" />
+              {#if tuile.illustration?.lien}
+                {#snippet pictogram()}
+                  <img src={tuile.illustration.lien} alt={tuile.illustration.alt} />
+                {/snippet}
+              {/if}
             </DsfrTile>
           </div>
         {/each}
@@ -178,6 +182,10 @@
 
     &__element {
       display: flex;
+
+      & > :global(*) {
+        width: 100%;
+      }
     }
 
     &__actions {
