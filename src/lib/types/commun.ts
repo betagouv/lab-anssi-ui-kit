@@ -12,8 +12,8 @@ export type Action = {
 
 export type Tuiles = {
   titre: string;
-  illustration: Image;
-  contenu: string;
+  contenu?: string;
+  illustration?: Image;
 }[];
 
 export type EtapeMarelle = {
