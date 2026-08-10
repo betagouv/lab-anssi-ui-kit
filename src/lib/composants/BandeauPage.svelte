@@ -150,11 +150,7 @@
   }
 
   .lab-anssi-bandeau-page {
-    --background-color: var(--artwork-major-blue-france);
-    --text-color-titre: var(--text-inverted-grey);
-    --text-color-description: var(--text-inverted-grey);
-
-    background-color: var(--background-color);
+    background-color: var(--background-color, var(--artwork-major-blue-france));
 
     &,
     & * {
@@ -189,7 +185,7 @@
     }
 
     &__titre {
-      color: var(--text-color-titre);
+      color: var(--text-color-titre, var(--text-inverted-grey));
       font-weight: 700;
       font-size: rem(40px);
       line-height: rem(48px);
@@ -201,8 +197,12 @@
       }
     }
 
+    &__description,
+    &__mention {
+      color: var(--text-color-description, var(--text-inverted-grey));
+    }
+
     &__description {
-      color: var(--text-color-description);
       font-size: rem(18px);
       line-height: rem(28px);
       margin-block: 0;
@@ -223,7 +223,6 @@
     }
 
     &__mention {
-      color: var(--text-color-description);
       font-size: rem(14px);
       line-height: rem(24px);
       margin-block: 0;
@@ -240,9 +239,18 @@
 
     // Variation "Clair"
     &--clair {
-      --background-color: var(--background-alt-blue-france);
-      --text-color-titre: var(--text-title-grey);
-      --text-color-description: var(--text-default-grey);
+      background-color: var(--background-color, var(--background-alt-blue-france));
+
+      .lab-anssi-bandeau-page {
+        &__titre {
+          color: var(--text-color-titre, var(--text-title-grey));
+        }
+
+        &__description,
+        &__mention {
+          color: var(--text-color-description, var(--text-default-grey));
+        }
+      }
     }
 
     // Variation "Avec Fil d'Ariane"
