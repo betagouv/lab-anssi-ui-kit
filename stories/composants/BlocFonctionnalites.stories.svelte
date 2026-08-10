@@ -163,7 +163,7 @@
         balise-titre={args.baliseTitre}
         avec-controle-segmente={args.avecControleSegmente || undefined}
         elements-du-controle-segmente={JSON.stringify(args.elementsDuControleSegmente)}
-        fonctionnalites={args.fonctionnalites}
+        fonctionnalites={JSON.stringify(args.fonctionnalites)}
         balise-des-sous-titres={args.baliseDesSousTitres}
         cliquable={args.cliquable || undefined}
         avec-cta={args.avecCTA || undefined}

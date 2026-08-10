@@ -129,6 +129,18 @@
 
   let indexActif = $state(0);
 
+  function parseJSON<T>(value: T | string): T {
+    return typeof value === "string" ? JSON.parse(value) : value;
+  }
+
+  const fonctionnalitesNormalisees: Fonctionnalite[] | Fonctionnalite[][] = $derived(
+    parseJSON(fonctionnalites),
+  );
+
+  const elementsDuControleSegmenteNormalises: Segmented[] = $derived(
+    parseJSON(elementsDuControleSegmente),
+  );
+
   /**
    * Vérifie si le tableau de fonctionnalités est un tableau multidimensionnel (tableau de tableaux)
    *
@@ -141,11 +153,13 @@
   }
 
   const tableauDeFonctionnalites = $derived(
-    estUnTableauImbrique(fonctionnalites) ? fonctionnalites : [fonctionnalites],
+    estUnTableauImbrique(fonctionnalitesNormalisees)
+      ? fonctionnalitesNormalisees
+      : [fonctionnalitesNormalisees],
   );
 
   const elementsModifiesDuControleSegmente = $derived(
-    elementsDuControleSegmente.map((element, index) => ({
+    elementsDuControleSegmenteNormalises.map((element, index) => ({
       ...element,
       value: element.value ? `liste-${element.value}` : `liste-${index + 1}`,
     })),
