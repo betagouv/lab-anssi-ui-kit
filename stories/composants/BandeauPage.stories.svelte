@@ -169,3 +169,37 @@
 <Story name="Simple (avec Fil d'Ariane)" args={{ type: "simple", avecFilAriane: true }} />
 
 <Story name="Fiche catalogue (avec Fil d'Ariane)" args={{ type: "fiche", avecFilAriane: true }} />
+
+<Story name="Thème Clair avec une couleur de fond personnalisée" args={{ theme: "clair" }}>
+  {#snippet template(args: Args)}
+    <lab-anssi-bandeau-page
+      titre={args.titre}
+      balise-titre={args.baliseTitre}
+      description={args.description}
+      mention={args.mention}
+      url-image={args.urlImage}
+      sans-image={args.sansImage || undefined}
+      avec-fil-ariane={args.avecFilAriane || undefined}
+      liens-fil-ariane={JSON.stringify(args.liensFilAriane)}
+      type={args.type}
+      theme={args.theme}
+    >
+      {#if args.avecBadges}
+        <dsfr-badges-group slot="badgesgroup" badges={args.badges} size="md"></dsfr-badges-group>
+      {/if}
+
+      <dsfr-buttons-group
+        slot="buttonsgroup"
+        buttons={args.theme === "clair" ? boutonsThemeClair : args.boutons || []}
+        inline="md"
+        data-themeable="false"
+      ></dsfr-buttons-group>
+    </lab-anssi-bandeau-page>
+
+    <style lang="scss">
+      lab-anssi-bandeau-page {
+        --background-color: var(--yellow-moutarde-975-75);
+      }
+    </style>
+  {/snippet}
+</Story>
