@@ -35,6 +35,7 @@
       hasLinks: { attribute: "has-links", type: "Boolean" },
       variations: { attribute: "variations", type: "String" },
       download: { attribute: "download", type: "Boolean" },
+      noIcon: { attribute: "no-icon", type: "Boolean" },
       lang: { attribute: "lang", type: "String" },
     },
     extend: withIconsStyleSheet,
@@ -116,6 +117,8 @@
     variations?: "none" | "grey" | "no-border" | "no-background" | "shadow";
     /** Si true, passe la carte en mode téléchargement */
     download?: boolean;
+    /** Si true, masque l'icône de l'actionneur (flèche, téléchargement…) */
+    noIcon?: boolean;
     /** Si true, ajoute une icône de téléchargement à côté du titre */
     hasDownloadIcon?: boolean;
     /** Ajoute l'attribut hreflang au lien, pour définir la langue du document lié (Ex: 'fr') */
@@ -156,6 +159,7 @@
     hasLinks = false,
     variations = "none",
     download = false,
+    noIcon = false,
     lang,
     hasDownloadIcon = false,
   }: Props = $props();
@@ -179,6 +183,7 @@
   const imageRatioClass = $derived(`fr-ratio-${imageRatio}`);
   const variationsClass = $derived(`fr-card--${variations}`);
   const downloadClass = $derived.by(() => download && "fr-card--download");
+  const noIconClass = $derived.by(() => noIcon && "fr-card--no-icon");
   const downloadIconClass = $derived.by(() => hasDownloadIcon && "fr-card--download-icon");
 </script>
 
@@ -188,6 +193,7 @@
     "fr-card",
     enlargeClass,
     downloadClass,
+    noIconClass,
     horizontalClass,
     horizontalProportionClass,
     sizeClass,
