@@ -139,7 +139,10 @@
     }
 
     &__rond {
-      background-color: $brique-marelle-etapes-numero-etape-couleur;
+      background-color: var(
+        --brique-marelle-etapes-numero-etape-couleur,
+        var(--blue-france-main-525, #6a6af4)
+      );
       border-radius: 50%;
       color: var(--text-inverted-grey, #ffffff);
       display: inline-flex;
