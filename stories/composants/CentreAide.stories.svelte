@@ -3,7 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import CentreAide from "$lib/composants/CentreAide.svelte";
-  import ConteneurStory from "./ConteneurStory.svelte";
+  import ConteneurStory from "./legacy/ConteneurStory.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Centre d'aide",
