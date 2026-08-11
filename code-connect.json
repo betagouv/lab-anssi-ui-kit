@@ -1,0 +1,326 @@
+[
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16461-202690&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16461-202690&m=dev\",\"name\":\"Thème clair / Primaire / LG\",\"kind\":\"primary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16476-239295&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16476-239295&m=dev\",\"name\":\"Thème clair / Secondaire / LG\",\"kind\":\"secondary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16483-192402&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16483-192402&m=dev\",\"name\":\"Thème clair / Tertiaire / LG\",\"kind\":\"tertiary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=120-4762&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=120-4762&m=dev\",\"name\":\"Thème clair / Primaire / MD\",\"kind\":\"primary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16476-239293&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16476-239293&m=dev\",\"name\":\"Thème clair / Secondaire / MD\",\"kind\":\"secondary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11119-73323&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11119-73323&m=dev\",\"name\":\"Thème clair / Tertiaire / MD\",\"kind\":\"tertiary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16461-202688&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16461-202688&m=dev\",\"name\":\"Thème clair / Primaire / SM\",\"kind\":\"primary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16478-193853&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16478-193853&m=dev\",\"name\":\"Thème clair / Secondaire / SM\",\"kind\":\"secondary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16483-192400&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=16483-192400&m=dev\",\"name\":\"Thème clair / Tertiaire / SM\",\"kind\":\"tertiary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7969&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7969&m=dev\",\"name\":\"Thème clair inversé / Primaire / LG\",\"kind\":\"inverted-primary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8083&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8083&m=dev\",\"name\":\"Thème clair inversé / Secondaire / LG\",\"kind\":\"inverted-secondary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8415&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8415&m=dev\",\"name\":\"Thème clair inversé / Tertiaire / LG\",\"kind\":\"inverted-tertiary\",\"size\":\"lg\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7855&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7855&m=dev\",\"name\":\"Thème clair inversé / Primaire / MD\",\"kind\":\"inverted-primary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8026&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8026&m=dev\",\"name\":\"Thème clair inversé / Secondaire / MD\",\"kind\":\"inverted-secondary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8269&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8269&m=dev\",\"name\":\"Thème clair inversé / Tertiaire / MD\",\"kind\":\"inverted-tertiary\",\"size\":\"md\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7912&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-7912&m=dev\",\"name\":\"Thème clair inversé / Primaire / SM\",\"kind\":\"inverted-primary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8140&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8140&m=dev\",\"name\":\"Thème clair inversé / Secondaire / SM\",\"kind\":\"inverted-secondary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  },
+  {
+    "figmaNode": "https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8342&m=dev",
+    "template": "globalThis['__FIGMA_BATCH'] = {\"url\":\"https://www.figma.com/design/6zxupO1ivYTw5qxzAyB0XZ/DSFR---Composants---LAB?node-id=11517-8342&m=dev\",\"name\":\"Thème clair inversé / Tertiaire / SM\",\"kind\":\"inverted-tertiary\",\"size\":\"sm\"}\nconst figma = require('figma');\nconst instance = figma.selectedInstance;\nlet iconPlace;\nswitch (instance.getString(\"Icône\")) {\n    case \"Droite\":\n        iconPlace = \"right\";\n        break;\n    case \"Gauche\":\n        iconPlace = \"left\";\n        break;\n    case \"Seule\":\n        iconPlace = \"only\";\n        break;\n    default:\n        break;\n}\nconst disabled = instance.getBoolean(\"Désactivé\");\nlet iconName = null;\nlet iconVersion = \"line\";\nconst iconInstance = instance.getInstanceSwap(\"🔄 Icône\");\nif (iconInstance && iconInstance.type === \"INSTANCE\") {\n    iconName = iconInstance.name;\n    const version = iconInstance.getEnum(\"Version\", {\n        Contour: \"line\",\n        Pleine: \"fill\",\n    });\n    if (version) {\n        iconVersion = version;\n    }\n}\nconst hasIcon = !!iconInstance;\nconst computedIconName = iconName ? `${iconName}-${iconVersion}` : null;\nconst label = instance.getString(\"Libellé\");\nconst codeExample = figma.code `<dsfr-button\n  label=\"${label}\"\n  kind=\"${figma.batch.kind}\"\n  size=\"${figma.batch.size}\"\n  ${disabled ? \"disabled\" : \"\"}\n  ${hasIcon ? \"has-icon\" : \"\"}\n  ${hasIcon ? `icon=\"${computedIconName}\"` : \"\"}\n  ${hasIcon && iconPlace ? `icon-place=\"${iconPlace}\"` : \"\"}\n></dsfr-button>`;\nexport default {\n    example: codeExample,\n    id: figma.batch.id,\n    metadata: {\n        nestable: true,\n    },\n};\n",
+    "templateData": {
+      "nestable": true,
+      "isParserless": true
+    },
+    "language": "html",
+    "label": "Web Components",
+    "source": "",
+    "sourceLocation": {
+      "line": -1
+    },
+    "metadata": {
+      "cliVersion": "1.5.0"
+    },
+    "_codeConnectFilePath": "/home/tiloyi/clients/betagouv/anssi/lab-anssi-ui-kit/src/lib/figma/DsfrButton.figma.batch.json"
+  }
+]
