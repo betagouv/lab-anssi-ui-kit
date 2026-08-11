@@ -1,24 +1,36 @@
-<svelte:options customElement="lab-anssi-centre-aide" />
+<svelte:options customElement={{ tag: "lab-anssi-centre-aide", extend: withIconsStyleSheet }} />
 
 <script lang="ts">
   import { run } from "svelte/legacy";
-
   import { fly } from "svelte/transition";
-  import { srcAsset } from "$lib/assets/assets";
+
+  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+
+  interface Lien {
+    texte: string;
+    href?: string;
+    preventDefault?: boolean;
+    id?: string;
+  }
 
   interface Props {
     nomService: string;
-    liens: string;
+    liens: string | Lien[];
     /** Callback appelé lorsqu'un lien est cliqué */
     onlienclique?: (detail: { target: EventTarget & HTMLAnchorElement }) => void;
   }
 
   let { nomService, liens, onlienclique }: Props = $props();
 
+  setThemeable($host());
+
   let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] =
     $state([]);
   run(() => {
-    liensMisEnForme = JSON.parse(liens);
+    liensMisEnForme = typeof liens === "string" ? JSON.parse(liens) : liens;
+
     if (!Array.isArray(liensMisEnForme) || liensMisEnForme.some((l) => !l.texte)) {
       throw new Error(
         "Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]",
@@ -30,278 +42,148 @@
 </script>
 
 {#if !ouvert}
-  <button
-    class="declencheur-centre-aide"
-    onclick={() => (ouvert = true)}
-    transition:fly={{ y: 300 }}
-  >
-    <img src={srcAsset("/icones/centre-aide.svg")} alt="Icône du centre d'aide" />
-    Centre d'aide
-  </button>
+  <div class="declencheur-centre-aide" transition:fly={{ y: 300 }}>
+    <DsfrButton
+      label="Centre d'aide"
+      hasIcon
+      iconPlace="left"
+      icon="question-line"
+      onclick={() => (ouvert = true)}
+    />
+  </div>
 {/if}
 
 {#if ouvert}
   <div class="centre-aide" transition:fly={{ y: 300 }}>
     <div class="entete">
-      <div>
-        <img
-          class="icone-centre-aide"
-          src={srcAsset("/icones/centre-aide.svg")}
-          alt="Icône du centre d'aide"
-        />
-        <h4>Centre d'aide</h4>
-      </div>
-      <button onclick={() => (ouvert = false)}>
-        <span>Fermer</span>
-        <img
-          src={srcAsset("/icones/croix-blanche.svg")}
-          alt="Icône de fermeture du centre d'aider"
-        />
-      </button>
+      <span class="fr-icon fr-icon-question-line"></span>
+      <p class="titre">Centre d'aide</p>
+      <DsfrButton label="Fermer" preset="close" onclick={() => (ouvert = false)} />
     </div>
+
     <div class="contenu">
-      <div class="message">
-        <span>Bonjour et bienvenue sur <b>{nomService}</b>. Comment pouvons-nous vous aider ?</span>
-      </div>
-      {#if liensMisEnForme}
-        {#each liensMisEnForme as lien, id (id)}
-          <a
-            class="lien lien-principal"
-            href={lien.href}
-            target="_blank"
-            id={lien.id}
-            onclick={(e) => {
-              if (lien.preventDefault) e.preventDefault();
-              const detail = { target: e.currentTarget as EventTarget & HTMLAnchorElement };
-              onlienclique?.(detail);
-              $host()?.dispatchEvent(new CustomEvent("lienclique", { detail, bubbles: true }));
-            }}>{lien.texte}</a
-          >
-        {/each}
-      {/if}
-      <div class="message marge-haute">
-        <span>Vous souhaitez faire une autre demande à l'ANSSI ?</span>
-      </div>
-      <a
-        class="lien secondaire centre-aide-signaler-incident"
-        href="https://club.ssi.gouv.fr/#/declarations"
-        target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a
-      >
-      <a
-        class="lien secondaire centre-aide-contacter-anssi"
-        href="https://cyber.gouv.fr/contacter-lanssi"
-        target="_blank">️📩 Contacter d’autres services de l’ANSSI</a
-      >
+      <slot>
+        <p class="message">
+          Bonjour et bienvenue sur <b>{nomService}</b>. Comment pouvons-nous vous aider ?
+        </p>
+
+        {#if liensMisEnForme}
+          {#each liensMisEnForme as lien, id (id)}
+            <DsfrButton
+              label={lien.texte}
+              id={lien.id}
+              markup={lien.preventDefault ? "button" : "a"}
+              href={lien.href}
+              target="_blank"
+              onclick={(e: Event) => {
+                if (lien.preventDefault) e.preventDefault();
+                const detail = { target: e.currentTarget as EventTarget & HTMLAnchorElement };
+                onlienclique?.(detail);
+                $host()?.dispatchEvent(new CustomEvent("lienclique", { detail, bubbles: true }));
+              }}
+            />
+          {/each}
+        {/if}
+
+        <p class="message marge-haute">Vous souhaitez faire une autre demande à l'ANSSI ?</p>
+
+        <DsfrButton
+          label="️⚠️ Signaler un incident ou une vulnérabilité"
+          class="lien secondaire centre-aide-signaler-incident"
+          kind="secondary"
+          markup="a"
+          href="https://club.ssi.gouv.fr/#/declarations"
+          target="_blank"
+        />
+        <DsfrButton
+          label="️️📩 Contacter d’autres services de l’ANSSI"
+          class="lien secondaire centre-aide-contacter-anssi"
+          kind="secondary"
+          markup="a"
+          href="https://cyber.gouv.fr/contacter-lanssi"
+          target="_blank"
+        />
+      </slot>
     </div>
   </div>
 {/if}
 
 <style lang="scss">
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
+
   .declencheur-centre-aide {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    border-radius: 100px;
-    border: 1px solid #fff;
-    background: $centre-aide-background-entete;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
-    color: #f5f5fe;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 28px;
-    display: flex;
-    gap: 8px;
-    padding: 10px 24px 10px 18px;
-    cursor: pointer;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid var(--background-default-grey);
+    box-shadow: 0 0.25rem 0.75rem 0 rgba(0, 0, 18, 0.16);
+    overflow: hidden;
     z-index: 1000;
-    font-family: inherit;
-
-    &:hover {
-      background: $centre-aide-background-hover-declencheur;
-    }
 
     @include a-partir-de(tablette) {
-      bottom: 48px;
-      right: 48px;
+      bottom: 3rem;
+      right: 3rem;
     }
   }
 
   .centre-aide {
+    background-color: var(--background-default-grey);
+    height: 100%;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: white;
     z-index: 9;
     overflow-y: scroll;
 
     @include a-partir-de(tablette) {
-      width: 520px;
-      height: 576px;
+      border: 1px solid var(--background-default-grey);
+      border-radius: 0.5rem;
+      box-shadow: 0 0.375rem 1.125rem 0 rgba(0, 0, 18, 0.16);
+      max-width: 508px;
+      height: 578px;
       top: unset;
       left: unset;
-      bottom: 48px;
-      right: 48px;
+      bottom: 3rem;
+      right: 3rem;
+    }
+  }
 
-      border-radius: 8px;
-      border: 1px solid #fff;
-      box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+  .entete {
+    align-items: center;
+    background-color: var(--background-contrast-blue-france);
+    color: var(--text-title-blue-france);
+    display: flex;
+    padding: 1.5rem 2rem;
+    gap: 0.5rem;
+    position: relative;
+  }
+
+  .titre {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem;
+    margin-block: 0;
+  }
+
+  .contenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 1rem;
+
+    @include a-partir-de(tablette) {
+      padding-inline: 2rem;
     }
 
-    .entete {
-      padding: 24px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: $centre-aide-background-entete;
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    p {
+      margin-block: 1rem 0.5rem;
 
-      @include a-partir-de(tablette) {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-      }
-
-      .icone-centre-aide {
-        width: 24px;
-        height: 24px;
-
-        @include a-partir-de(tablette) {
-          width: 30px;
-          height: 30px;
-        }
-      }
-
-      h4 {
-        color: white;
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 28px;
-        margin: 0;
-
-        @include a-partir-de(tablette) {
-          font-size: 24px;
-          line-height: 32px;
-        }
-      }
-
-      div {
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
-      }
-
-      button {
-        border: none;
-        background: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-
-        span {
-          display: none;
-          font-size: 14px;
-          line-height: 24px;
-          font-weight: 500;
-          margin-right: 8px;
-          color: white;
-
-          @include a-partir-de(tablette) {
-            display: inline-block;
-          }
-        }
-      }
-    }
-
-    .contenu {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      @include a-partir-de(tablette) {
-        padding: 32px;
-      }
-
-      .message {
-        display: flex;
-        padding: 16px;
-        border-radius: 8px;
-        background: #ededed;
-
-        color: #161616;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 24px;
-
-        @include a-partir-de(tablette) {
-          width: fit-content;
-        }
-
-        &.marge-haute {
-          margin-top: 16px;
-        }
-      }
-
-      a.lien {
-        box-sizing: border-box;
-        text-decoration: none;
-        padding: 8px 12px 8px 16px;
-        background: $centre-aide-background-bouton;
-        color: $centre-aide-font-color-bouton;
-        border-radius: 8px;
-
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 24px;
-        display: flex;
-        flex-direction: row;
-        text-align: left;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-
-        gap: 8px;
-
-        &[href]:after {
-          content: "";
-          mask-image: url-asset("/icones/lien-externe.svg");
-          -webkit-mask-image: url-asset("/icones/lien-externe.svg");
-          display: flex;
-          background-color: $centre-aide-font-color-bouton;
-          width: 16px;
-          height: 16px;
-          mask-size: 16px;
-          min-width: 16px;
-        }
-
-        &:hover {
-          background-color: $centre-aide-background-hover-lien;
-        }
-
-        @include a-partir-de(tablette) {
-          width: fit-content;
-        }
-
-        &.secondaire {
-          background: none;
-          border: 1px solid $centre-aide-border-lien-secondaire;
-          color: $centre-aide-font-color-lien-secondaire;
-
-          &:after {
-            background-color: $centre-aide-font-color-lien-secondaire;
-          }
-
-          &:hover {
-            background-color: $centre-aide-background-hover-lien-secondaire;
-          }
-        }
+      &:first-of-type {
+        margin-block-start: 0;
       }
     }
   }
