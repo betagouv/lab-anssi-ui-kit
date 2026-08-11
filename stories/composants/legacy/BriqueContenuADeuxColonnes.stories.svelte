@@ -2,32 +2,31 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import RejoindreLaCommunaute from "$lib/composants/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
+  import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
-  import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
+  import BriqueContenuADeuxColonnes from "$lib/composants/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Brique Rejoindre La Communauté",
-    component: RejoindreLaCommunaute,
+    title: "Composants/Lab ANSSI/Legacy/Brique Contenu A Deux Colonnes",
+    component: BriqueContenuADeuxColonnes,
     args: {
-      titre: "Rejoindre la communauté",
-      raisons: ["Échanger directement avec les membres."],
+      titre: "MonServiceSécurisé",
+      paragraphe:
+        "L'outil pour piloter en équipe la sécurité de tous vos services numériques et les homologuer rapidement",
       illustration: {
         lien: genereImageDePlaceholder(600, 400, "Placeholder"),
         alt: "Logo placeholder",
       },
+      ordre: "texte-gauche",
     },
     argTypes: {
       titre: {
         control: "text",
-        description: "Titre principal affiché dans la brique",
+        description: "Titre affiché dans la brique",
       },
-      raisons: {
-        control: "object",
-        description: "Liste des raisons pour rejoindre la communauté",
-        table: {
-          type: { summary: "string[]" },
-        },
+      paragraphe: {
+        control: "text",
+        description: "Texte descriptif affiché sous le titre",
       },
       action: {
         control: "object",
@@ -35,6 +34,11 @@
         table: {
           type: { summary: "{ titre: string, lien: string, target?: string }" },
         },
+      },
+      ordre: {
+        control: "select",
+        options: ["texte-gauche", "texte-droite"],
+        description: "Ordre d'affichage du texte et de l'illustration",
       },
       illustration: {
         control: "object",
@@ -47,11 +51,11 @@
     render: template,
   });
 
-  type Args = ComponentProps<RejoindreLaCommunaute>;
+  type Args = ComponentProps<BriqueContenuADeuxColonnes>;
 </script>
 
 {#snippet template(args: Args)}
-  <lab-anssi-brique-rejoindre-la-communaute {...args}></lab-anssi-brique-rejoindre-la-communaute>
+  <lab-anssi-brique-contenu-a-deux-colonnes {...args}></lab-anssi-brique-contenu-a-deux-colonnes>
 {/snippet}
 
 <Story name="Defaut" />

@@ -4,7 +4,7 @@
 
   import BriqueHero from "$lib/composants/vitrines-produits/briques/BriqueHero.svelte";
 
-  import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
+  import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Brique Hero",

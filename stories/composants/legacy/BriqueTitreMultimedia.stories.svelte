@@ -4,7 +4,7 @@
 
   import BriqueTitreMultimedia from "$lib/composants/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
 
-  import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
+  import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
   const source =
     "https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MonServiceSecurise_Thumbnail.mp4";
