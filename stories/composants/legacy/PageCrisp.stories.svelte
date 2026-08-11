@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import { genereImageDePlaceholder } from "../utilitaires/generateurImagesPlaceholders.js";
+  import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
   import exempleContenu from "../../exemples/lab/exemple-page-crisp.html?raw";
 
   import PageCrisp from "$lib/composants/blog/PageCrisp.svelte";
