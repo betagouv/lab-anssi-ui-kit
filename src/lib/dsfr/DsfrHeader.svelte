@@ -35,6 +35,7 @@
       brandOperatorSrc: { attribute: "brand-operator-src", type: "String" },
       brandOperatorStyle: { attribute: "brand-operator-style", type: "String" },
       hasNavigation: { attribute: "has-navigation", type: "Boolean" },
+      hasSlotAfterNavigation: { attribute: "has-slot-after-navigation", type: "Boolean" },
       navigationId: { attribute: "navigation-id", type: "String" },
       navigationAriaLabel: { attribute: "navigation-aria-label", type: "String" },
       navigationItems: { attribute: "navigation-items", type: "Object" },
@@ -48,6 +49,7 @@
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
   import { setIconClass, withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import { createSlot } from "$lib/directives/actions.svelte.ts";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
@@ -149,6 +151,8 @@
     brandOperatorStyle?: string;
     /** Ajoute une navigation principale */
     hasNavigation?: boolean;
+    /** Ajoute un slot "afternavigation" dans la navigation principale */
+    hasSlotAfterNavigation?: boolean;
     /** Attribut id de la navigation principale */
     navigationId?: string;
     /** Attribut aria-label de la navigation principale */
@@ -195,6 +199,7 @@
     brandOperatorSrc,
     brandOperatorStyle,
     hasNavigation,
+    hasSlotAfterNavigation,
     navigationId,
     navigationAriaLabel,
     navigationItems,
@@ -452,12 +457,23 @@
         <!-- Navigation -->
         {#if hasNavigation}
           <slot name="navigation">
-            <DsfrNavigation
-              id={navigationId}
-              ariaLabel={navigationAriaLabel}
-              items={navigationItems}
-              --dsfr-nav-position="static"
-            />
+            {#if hasSlotAfterNavigation}
+              <DsfrNavigation
+                id={navigationId}
+                ariaLabel={navigationAriaLabel}
+                items={navigationItems}
+                --dsfr-nav-position="static"
+              >
+                <div slot="afternavigation" use:createSlot={`afternavigation`}></div>
+              </DsfrNavigation>
+            {:else}
+              <DsfrNavigation
+                id={navigationId}
+                ariaLabel={navigationAriaLabel}
+                items={navigationItems}
+                --dsfr-nav-position="static"
+              />
+            {/if}
           </slot>
         {/if}
       </div>
