@@ -183,6 +183,7 @@
       liens-fil-ariane={JSON.stringify(args.liensFilAriane)}
       type={args.type}
       theme={args.theme}
+      class="bandeau-fond-personnalise"
     >
       {#if args.avecBadges}
         <dsfr-badges-group slot="badgesgroup" badges={args.badges} size="md"></dsfr-badges-group>
@@ -197,7 +198,7 @@
     </lab-anssi-bandeau-page>
 
     <style lang="scss">
-      lab-anssi-bandeau-page {
+      .bandeau-fond-personnalise {
         --background-color: var(--yellow-moutarde-975-75);
       }
     </style>
