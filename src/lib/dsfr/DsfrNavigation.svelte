@@ -241,7 +241,7 @@
         </li>
       {/each}
       {#if $$slots.afternavigation}
-        <li class="fr-nav__item">
+        <li class="fr-nav__item fr-nav__item--last">
           <slot name="afternavigation"></slot>
         </li>
       {/if}
@@ -280,5 +280,13 @@
   @include set-shadow-host("block", $tag: "dsfr-navigation");
   @include set-dsfr-sizing("nav") {
     position: var(--dsfr-nav-position, relative);
+
+    .fr-nav__list {
+      > .fr-nav__item {
+        &--last {
+          margin-left: auto;
+        }
+      }
+    }
   }
 </style>
