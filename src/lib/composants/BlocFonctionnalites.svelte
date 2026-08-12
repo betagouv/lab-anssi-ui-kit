@@ -448,13 +448,10 @@
       margin-block: 0;
     }
 
-    &__description {
-      font-size: rem(18px);
-      line-height: rem(28px);
-    }
-
     &__description,
     &__chapeau {
+      font-size: rem(18px);
+      line-height: rem(28px);
       margin-block: 0;
     }
 
@@ -552,7 +549,7 @@
     }
 
     &__description {
-      color: var(--text-title-grey);
+      color: var(--text-default-grey);
       margin-block: 0;
       font-size: rem(16px);
       line-height: rem(24px);
@@ -573,6 +570,7 @@
       cursor: pointer;
       font: inherit;
       padding-inline: 0;
+      text-align: left;
 
       &::after {
         content: "";
