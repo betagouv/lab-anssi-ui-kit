@@ -192,7 +192,7 @@
 
     &__element,
     :global(::slotted(*)) {
-      @include respond-to("md") {
+      @include respond-to("sm") {
         min-width: calc(100% - (var(--espacement) * 2));
         scroll-snap-align: center;
       }
