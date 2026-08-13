@@ -21,7 +21,7 @@
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   // @ts-ignore: Required Import to use this component as webcomponent
-  import Navigation from "$lib/composants/suite-cyber/navigation/Navigation.svelte";
+  import Navigation from "$lib/composants/suite-cyber/SuiteCyber.svelte";
 
   // @ts-ignore: Required Import to use this component as webcomponent
   import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
