@@ -6,7 +6,7 @@ export { default as CarrouselTuiles } from "./composants/carrousel-tuiles/Carrou
 export { default as MesServicesCyberBandeau } from "./composants/mes-services-cyber/bandeau/Bandeau.svelte";
 export { default as LienDiagnosticCyber } from "./composants/mes-services-cyber/lien/LienDiagnosticCyber.svelte";
 export { default as NavigationPiedDePage } from "./composants/pied-de-page/NavigationPiedDePage.svelte";
-export { default as SuiteCyberNavigation } from "./composants/suite-cyber/navigation/Navigation.svelte";
+export { default as SuiteCyberNavigation } from "./composants/suite-cyber/SuiteCyber.svelte";
 export { default as BriqueTitreMultimedia } from "./composants/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
 export { default as Marelle } from "./composants/marelle/Marelle.svelte";
 export { default as Etape } from "./composants/marelle/Etape.svelte";
