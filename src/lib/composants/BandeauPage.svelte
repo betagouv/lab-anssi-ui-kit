@@ -160,7 +160,7 @@
     &__conteneur {
       padding-block: rem(48px);
 
-      @include respond-from("md") {
+      @include respond-from("lg") {
         display: flex;
         align-items: center;
         margin-inline: rem(-12px);
@@ -170,7 +170,7 @@
 
     &__principal,
     &__secondaire {
-      @include respond-from("md") {
+      @include respond-from("lg") {
         flex: 0 0 50%;
         max-width: 50%;
         width: 50%;
@@ -179,7 +179,7 @@
     }
 
     &__principal {
-      @include respond-to("sm") {
+      @include respond-to("md") {
         margin-block-end: rem(40px);
       }
     }
@@ -191,7 +191,7 @@
       line-height: rem(48px);
       margin-block: 0 rem(12px);
 
-      @include respond-from("md") {
+      @include respond-from("lg") {
         font-size: rem(48px);
         line-height: rem(56px);
       }
@@ -217,7 +217,7 @@
       flex-direction: column;
       gap: rem(16px);
 
-      @include respond-from("md") {
+      @include respond-from("lg") {
         flex-direction: row;
       }
     }
