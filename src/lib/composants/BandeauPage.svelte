@@ -234,7 +234,7 @@
 
     // Variation "Clair"
     &--clair {
-      background-color: var(--background-color, var(--background-alt-blue-france));
+      background-color: var(--background-color, var(--background-contrast-blue-france));
 
       .lab-anssi-bandeau-page {
         &__titre {
