@@ -190,11 +190,6 @@
       font-size: rem(40px);
       line-height: rem(48px);
       margin-block: 0 rem(12px);
-
-      @include respond-from("lg") {
-        font-size: rem(48px);
-        line-height: rem(56px);
-      }
     }
 
     &__description,
