@@ -216,7 +216,7 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("modal") {
-    :global(::slotted([slot="footer"])) {
+    :global(::slotted([slot="footer"]:where(dsfr-buttons-group, .fr-btns-group))) {
       margin-bottom: -1rem;
       width: calc(100% + 1rem);
     }
