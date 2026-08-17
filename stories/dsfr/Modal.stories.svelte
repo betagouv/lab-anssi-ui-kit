@@ -105,8 +105,14 @@
       {@html body}
 
       {#if args.footer}
-        <dsfr-buttons-group slot="footer" {buttons} size="md" inline="lg" align="center"
-        ></dsfr-buttons-group>
+        {#if args.footerType === "buttonsgroup"}
+          <dsfr-buttons-group slot="footer" {buttons} size="md" inline="lg" align="center"
+          ></dsfr-buttons-group>
+        {/if}
+
+        {#if args.footerType === "button"}
+          <dsfr-button slot="footer" label="Bouton simple"></dsfr-button>
+        {/if}
       {/if}
     </dsfr-modal>
   </div>
@@ -121,11 +127,22 @@
 <Story name="Size LG" args={{ id: "modal-lg", size: "lg" }} />
 
 <Story
-  name="Footer"
+  name="Footer (avec DsfrButtonsGroup)"
   args={{
-    id: "modal-footer",
+    id: "modal-buttons-group",
     size: "md",
     footer: true,
+    footerType: "buttonsgroup",
+  }}
+/>
+
+<Story
+  name="Footer (avec DsfrButton)"
+  args={{
+    id: "modal-button",
+    size: "md",
+    footer: true,
+    footerType: "button",
   }}
 />
 
