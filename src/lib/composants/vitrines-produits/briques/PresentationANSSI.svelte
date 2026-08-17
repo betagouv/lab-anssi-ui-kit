@@ -123,6 +123,11 @@
       font-size: 2rem;
       font-weight: 700;
       line-height: 2.5rem;
+
+      @include a-partir-de(desktop-dsfr) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
     }
 
     &__description {
