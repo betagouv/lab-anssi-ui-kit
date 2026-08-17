@@ -182,6 +182,8 @@
   }
 
   let enPause = $state(false);
+  let mediaCloneContainer: HTMLDivElement;
+  let defaultMediaFigure: HTMLElement;
 
   $effect(() => {
     if (!cliquable || !activeDefilement || !delaiDefilement || delaiDefilement <= 0) return;
@@ -197,6 +199,34 @@
     return () => clearInterval(interval);
   });
 
+  $effect(() => {
+    const host = $host();
+    const activeId = fonctionnaliteActive?.id;
+
+    if (activeId) {
+      host.dataset.activeItem = activeId;
+    } else {
+      delete host.dataset.activeItem;
+    }
+
+    if (!mediaCloneContainer || !defaultMediaFigure) return;
+
+    mediaCloneContainer.innerHTML = "";
+
+    if (activeId) {
+      const source = host.querySelector(`[slot="media-${activeId}"]`);
+      if (source) {
+        const clone = source.cloneNode(true) as HTMLElement;
+        clone.removeAttribute("slot");
+        mediaCloneContainer.appendChild(clone);
+        defaultMediaFigure.style.display = "none";
+        return;
+      }
+    }
+
+    defaultMediaFigure.style.display = "";
+  });
+
   function pauseDefilement() {
     enPause = true;
   }
@@ -205,6 +235,16 @@
     enPause = false;
   }
 </script>
+
+{#snippet illustrationFonctionnalite(fonctionnalite: Fonctionnalite, hasSlot: boolean)}
+  <figure
+    class={[
+      hasSlot ? "lab-anssi-fonctionnalites__visuel" : "lab-anssi-fonctionnalites__illustration",
+    ]}
+  >
+    <img src={fonctionnalite.illustration} class="lab-anssi-fonctionnalites__image" alt="" />
+  </figure>
+{/snippet}
 
 {#snippet unElementFonctionnalite(fonctionnalite: Fonctionnalite, index: number)}
   <article
@@ -305,9 +345,18 @@
     </div>
 
     {#if cliquable}
-      <figure class="lab-anssi-fonctionnalites__illustration">
-        <img src={fonctionnalite.illustration} class="lab-anssi-fonctionnalites__image" alt="" />
-      </figure>
+      {#if fonctionnalite.rich && fonctionnalite.id}
+        <div
+          use:createSlot={`media-${fonctionnalite.id}`}
+          class="lab-anssi-fonctionnalites__illustration"
+        >
+          {#if fonctionnalite.illustration}
+            {@render illustrationFonctionnalite(fonctionnalite, true)}
+          {/if}
+        </div>
+      {:else if fonctionnalite.illustration}
+        {@render illustrationFonctionnalite(fonctionnalite, false)}
+      {/if}
     {/if}
   </article>
 {/snippet}
@@ -383,17 +432,20 @@
       {/if}
 
       <div class="lab-anssi-fonctionnalites__media">
-        <figure class="lab-anssi-fonctionnalites__visuel">
-          <img
-            src={srcImageFonctionnaliteActive}
-            class="lab-anssi-fonctionnalites__image"
-            id="activeImage"
-            alt=""
-          />
-          {#if cliquable && legendeImageFonctionnaliteActive}
-            <figcaption class="fr-sr-only">{legendeImageFonctionnaliteActive}</figcaption>
-          {/if}
-        </figure>
+        <slot name="media">
+          <div bind:this={mediaCloneContainer}></div>
+          <figure bind:this={defaultMediaFigure} class="lab-anssi-fonctionnalites__visuel">
+            <img
+              src={srcImageFonctionnaliteActive}
+              class="lab-anssi-fonctionnalites__image"
+              id="activeImage"
+              alt=""
+            />
+            {#if cliquable && legendeImageFonctionnaliteActive}
+              <figcaption class="fr-sr-only">{legendeImageFonctionnaliteActive}</figcaption>
+            {/if}
+          </figure>
+        </slot>
       </div>
     </div>
 
@@ -471,6 +523,12 @@
     &__liste,
     &__media {
       flex: 1;
+    }
+
+    &__media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     [role="tabpanel"]:not(.actif) {
