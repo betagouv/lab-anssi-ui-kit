@@ -63,18 +63,6 @@
     &:active {
       background-color: var(--background-default-grey-active);
     }
-
-    &.msc {
-      .icone {
-        background-color: var(--yellow-msc-75, #fff0cf);
-      }
-    }
-
-    &.mss {
-      .icone {
-        background-color: var(--blue-mss-75, #dbeeff);
-      }
-    }
   }
 
   .icone {
@@ -109,5 +97,19 @@
     font-style: normal;
     font-weight: 400;
     line-height: rem(20px);
+  }
+
+  :global(:has([data-themeable="true"])) .accueil-suite-cyber {
+    &.msc {
+      .icone {
+        background-color: var(--yellow-msc-75, #fff0cf);
+      }
+    }
+
+    &.mss {
+      .icone {
+        background-color: var(--blue-mss-75, #dbeeff);
+      }
+    }
   }
 </style>
