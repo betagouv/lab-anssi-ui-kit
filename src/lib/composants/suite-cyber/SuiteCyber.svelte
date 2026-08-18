@@ -18,6 +18,7 @@
   import AccueilSuiteCyber from "./AccueilSuiteCyber.svelte";
   import LiensSuiteCyber from "./LiensSuiteCyber.svelte";
 
+  const gauffre = srcAsset("/icones/bouton-gauffre.svg");
   const logoCERTFR = srcAsset("/icones/CERT-FR.svg");
   const logoMSS = srcAsset("/icones/MSS.svg");
   const logoMAC = srcAsset("/icones/MAC.svg");
@@ -32,8 +33,20 @@
 
 <div class="suite-cyber">
   <div class="navigation">
+    <button
+      class={["bouton-suite-cyber-mobile", { active: estOuvert }]}
+      aria-expanded={estOuvert}
+      onclick={() => {
+        estOuvert = !estOuvert;
+      }}
+    >
+      <img src={gauffre} alt="La Suite cyber" />
+      <span class="sr-only">La Suite cyber</span>
+    </button>
+
     <DsfrButton
       kind="tertiary-no-outline"
+      class="bouton-suite-cyber-desktop"
       size="sm"
       expandable
       onclick={() => {
@@ -56,7 +69,7 @@
             fill="currentColor"
           />
         </svg>
-        <span>La Suite cyber</span>
+        <span class="texte-bouton">La Suite cyber</span>
         <span
           class={["fr-icon", estOuvert ? "fr-icon-arrow-up-s-line" : "fr-icon-arrow-down-s-line"]}
           aria-hidden="true"
@@ -127,7 +140,9 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
 
   .suite-cyber {
-    position: relative;
+    @include a-partir-de(desktop-dsfr) {
+      position: relative;
+    }
   }
 
   .contenu-bouton {
@@ -192,5 +207,51 @@
     line-height: rem(20px);
     color: var(--text-mention-grey);
     padding: 1rem;
+  }
+
+  .bouton-suite-cyber-mobile {
+    display: flex;
+    border: none;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    color: $texte-dsfr;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    cursor: pointer;
+    gap: 8px;
+    background: white;
+
+    &:active,
+    &.active {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    @include a-partir-de(desktop-dsfr) {
+      display: none;
+    }
+  }
+
+  :global(.bouton-suite-cyber-desktop) {
+    @media (max-width: 991px) {
+      display: none !important;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>
