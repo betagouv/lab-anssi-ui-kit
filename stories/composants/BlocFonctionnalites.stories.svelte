@@ -299,7 +299,7 @@
             class="slot-media-id-demo"
             style="background:linear-gradient(135deg,#e8edff,#cacafb)"
           >
-            <svg viewBox="0 0 200 200" width="240" height="240" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <style>
                 @keyframes radar-pulse {
                   0% {
