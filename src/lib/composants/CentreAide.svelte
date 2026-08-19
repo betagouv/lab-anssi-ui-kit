@@ -44,6 +44,8 @@
   $effect(() => {
     $host()?.toggleAttribute("data-open", ouvert);
   });
+
+  const desktop = new MediaQuery("min-width: 992px");
 </script>
 
 {#if !ouvert}
@@ -54,6 +56,7 @@
       iconPlace="left"
       icon="question-line"
       onclick={() => (ouvert = true)}
+      size={desktop.current ? "lg" : "md"}
     />
   </div>
 {/if}
