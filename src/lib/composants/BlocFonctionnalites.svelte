@@ -395,7 +395,14 @@
       ></dsfr-segmented>
     {/if}
 
-    <div class="lab-anssi-fonctionnalites__corps">
+    <div
+      class="lab-anssi-fonctionnalites__corps"
+      role="group"
+      onmouseenter={pauseDefilement}
+      onmouseleave={reprendDefilement}
+      onfocusin={pauseDefilement}
+      onfocusout={reprendDefilement}
+    >
       {#if tableauDeFonctionnalites.length > 1}
         {#each elementsModifiesDuControleSegmente as element, i}
           <div
@@ -407,10 +414,6 @@
             aria-labelledby={element.id}
             role="tabpanel"
             tabindex="0"
-            onmouseenter={pauseDefilement}
-            onmouseleave={reprendDefilement}
-            onfocusin={pauseDefilement}
-            onfocusout={reprendDefilement}
           >
             {#each tableauDeFonctionnalites[i] ?? [] as fonctionnalite, j}
               {@render unElementFonctionnalite(fonctionnalite, j)}
@@ -418,14 +421,7 @@
           </div>
         {/each}
       {:else}
-        <div
-          class="lab-anssi-fonctionnalites__liste"
-          role="group"
-          onmouseenter={pauseDefilement}
-          onmouseleave={reprendDefilement}
-          onfocusin={pauseDefilement}
-          onfocusout={reprendDefilement}
-        >
+        <div class="lab-anssi-fonctionnalites__liste" role="group">
           {#each tableauDeFonctionnalites[0] ?? [] as fonctionnalite, k}
             {@render unElementFonctionnalite(fonctionnalite, k)}
           {/each}
