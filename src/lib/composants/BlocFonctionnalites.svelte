@@ -182,8 +182,12 @@
   }
 
   let enPause = $state(false);
-  let mediaCloneContainer: HTMLDivElement;
-  let defaultMediaFigure: HTMLElement;
+  let mediaCloneContainer = $state<HTMLDivElement>();
+
+  const hasMediaSlotContent = $derived(
+    !!fonctionnaliteActive?.id &&
+      !!$host().querySelector(`[slot="media-${fonctionnaliteActive.id}"]`),
+  );
 
   $effect(() => {
     if (!cliquable || !activeDefilement || !delaiDefilement || delaiDefilement <= 0) return;
@@ -209,7 +213,7 @@
       delete host.dataset.activeItem;
     }
 
-    if (!mediaCloneContainer || !defaultMediaFigure) return;
+    if (!mediaCloneContainer) return;
 
     mediaCloneContainer.innerHTML = "";
 
@@ -219,12 +223,8 @@
         const clone = source.cloneNode(true) as HTMLElement;
         clone.removeAttribute("slot");
         mediaCloneContainer.appendChild(clone);
-        defaultMediaFigure.style.display = "none";
-        return;
       }
     }
-
-    defaultMediaFigure.style.display = "";
   });
 
   function pauseDefilement() {
@@ -433,18 +433,24 @@
 
       <div class="lab-anssi-fonctionnalites__media">
         <slot name="media">
-          <div bind:this={mediaCloneContainer}></div>
-          <figure bind:this={defaultMediaFigure} class="lab-anssi-fonctionnalites__visuel">
-            <img
-              src={srcImageFonctionnaliteActive}
-              class="lab-anssi-fonctionnalites__image"
-              id="activeImage"
-              alt=""
-            />
-            {#if cliquable && legendeImageFonctionnaliteActive}
-              <figcaption class="fr-sr-only">{legendeImageFonctionnaliteActive}</figcaption>
-            {/if}
-          </figure>
+          {#if hasMediaSlotContent}
+            <div
+              bind:this={mediaCloneContainer}
+              class="lab-anssi-fonctionnalites__media-wrapper"
+            ></div>
+          {:else}
+            <figure class="lab-anssi-fonctionnalites__visuel">
+              <img
+                src={srcImageFonctionnaliteActive}
+                class="lab-anssi-fonctionnalites__image"
+                id="activeImage"
+                alt=""
+              />
+              {#if cliquable && legendeImageFonctionnaliteActive}
+                <figcaption class="fr-sr-only">{legendeImageFonctionnaliteActive}</figcaption>
+              {/if}
+            </figure>
+          {/if}
         </slot>
       </div>
     </div>
@@ -529,6 +535,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      &-wrapper {
+        width: 100%;
+      }
     }
 
     [role="tabpanel"]:not(.actif) {
