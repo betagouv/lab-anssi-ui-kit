@@ -3,6 +3,7 @@
 <script lang="ts">
   import { run } from "svelte/legacy";
   import { fly } from "svelte/transition";
+  import { MediaQuery } from "svelte/reactivity";
 
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
 
@@ -166,11 +167,16 @@
   }
 
   .titre {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 2rem;
+    line-height: 1.75rem;
     margin-block: 0;
+
+    @include a-partir-de(tablette) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
   }
 
   .contenu {
