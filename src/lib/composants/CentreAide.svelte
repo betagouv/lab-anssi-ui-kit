@@ -39,6 +39,10 @@
   });
 
   let ouvert: boolean = $state(false);
+
+  $effect(() => {
+    $host()?.toggleAttribute("data-open", ouvert);
+  });
 </script>
 
 {#if !ouvert}
