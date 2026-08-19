@@ -185,7 +185,8 @@
   let mediaCloneContainer = $state<HTMLDivElement>();
 
   const hasMediaSlotContent = $derived(
-    !!fonctionnaliteActive?.id &&
+    !$host().querySelector('[slot="media"]') &&
+      !!fonctionnaliteActive?.id &&
       !!$host().querySelector(`[slot="media-${fonctionnaliteActive.id}"]`),
   );
 
@@ -291,7 +292,7 @@
             type="button"
             role="tab"
             aria-selected={indexActif === index}
-            aria-controls="activeImage"
+            aria-controls={hasMediaSlotContent ? undefined : "activeImage"}
             tabindex={indexActif === index ? 0 : -1}
             class="lab-anssi-fonctionnalites__bouton"
             onclick={() => (indexActif = index)}
