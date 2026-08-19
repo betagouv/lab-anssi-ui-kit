@@ -29,6 +29,10 @@
 
   let { sourceUtm }: Props = $props();
   let estOuvert: boolean = $state(false);
+
+  $effect(() => {
+    $host()?.toggleAttribute("data-open", estOuvert);
+  });
 </script>
 
 <div class="suite-cyber">
