@@ -21,15 +21,15 @@ mime_type() {
            ;;
     woff)  echo font/woff
            ;;
-    woff2) echo font/woff
+    woff2) echo font/woff2
            ;;
-    scg)   echo image/svg+xml
+    svg)   echo image/svg+xml
            ;;
-    *)     file --mime-type $file | cut -d: -f2 | tr -d ' '
+    *)     file --mime-type "$file" | cut -d: -f2 | tr -d ' '
   esac
 }
 
-for file in $(find storybook-static -type f)
+find storybook-static -type f | while IFS= read -r file
 do
   mime="$(mime_type "$file")"
   target="$(echo "$file" | sed -e s:^storybook-static/::)"
