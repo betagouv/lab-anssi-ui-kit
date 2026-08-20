@@ -16,14 +16,16 @@
       activeDefilement: { attribute: "active-defilement", type: "Boolean" },
       delaiDefilement: { attribute: "delai-defilement", type: "Number" },
     },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte.ts";
 
+  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import DsfrSegmented from "$lib/dsfr/DsfrSegmented.svelte";
@@ -181,7 +183,9 @@
     valeurListeActive = controleSelectionne.detail.toString();
   }
 
-  let enPause = $state(false);
+  let enPauseSurvol = $state(false);
+  let enPauseManuelle = $state(false);
+  let prefereMouvementReduit = $state(false);
   let mediaCloneContainer = $state<HTMLDivElement>();
 
   const hasMediaSlotContent = $derived(
@@ -191,8 +195,21 @@
   );
 
   $effect(() => {
+    const mediaQueryReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    prefereMouvementReduit = mediaQueryReducedMotion.matches;
+
+    const gereLaPreferenceMouvementReduit = (e: MediaQueryListEvent) => {
+      prefereMouvementReduit = e.matches;
+    };
+    mediaQueryReducedMotion.addEventListener("change", gereLaPreferenceMouvementReduit);
+
+    return () =>
+      mediaQueryReducedMotion.removeEventListener("change", gereLaPreferenceMouvementReduit);
+  });
+
+  $effect(() => {
     if (!cliquable || !activeDefilement || !delaiDefilement || delaiDefilement <= 0) return;
-    if (enPause) return;
+    if (enPauseSurvol || enPauseManuelle || prefereMouvementReduit) return;
 
     const nombreElements = (tableauDeFonctionnalites[indexListeActive] ?? []).length;
     if (nombreElements <= 1) return;
@@ -229,11 +246,11 @@
   });
 
   function pauseDefilement() {
-    enPause = true;
+    enPauseSurvol = true;
   }
 
   function reprendDefilement() {
-    enPause = false;
+    enPauseSurvol = false;
   }
 </script>
 
@@ -449,6 +466,29 @@
             </figure>
           {/if}
         </slot>
+
+        {#if activeDefilement && cliquable}
+          <dsfr-button
+            label={enPauseManuelle
+              ? "Lancer le défilement automatique"
+              : "Mettre en pause le défilement automatique"}
+            class="lab-anssi-fonctionnalites__bouton-defilement"
+            kind="secondary"
+            size="sm"
+            has-icon
+            icon-place="only"
+            icon={enPauseManuelle ? "play-circle-line" : "pause-circle-line"}
+            onclick={() => (enPauseManuelle = !enPauseManuelle)}
+            onkeydown={(event: KeyboardEvent) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                enPauseManuelle = !enPauseManuelle;
+              }
+            }}
+            role="button"
+            tabindex="0"
+          ></dsfr-button>
+        {/if}
       </div>
     </div>
 
@@ -531,6 +571,7 @@
     &__media {
       display: flex;
       align-items: center;
+      flex-direction: column;
       justify-content: center;
 
       &-wrapper {
@@ -660,6 +701,24 @@
       justify-content: center;
     }
 
+    &__bouton-defilement {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      @include respond-from("md") {
+        position: static;
+        align-self: flex-end;
+      }
+    }
+
+    &:has(.lab-anssi-fonctionnalites__bouton-defilement) {
+      @include respond-to("md") {
+        padding-block-end: rem(72px);
+        position: relative;
+      }
+    }
+
     &--media-gauche {
       .lab-anssi-fonctionnalites__corps {
         @include respond-from("md") {
@@ -677,8 +736,11 @@
         }
 
         &__media {
-          @include respond-to("md") {
-            display: none;
+          .lab-anssi-fonctionnalites__visuel,
+          .lab-anssi-fonctionnalites__media-wrapper {
+            @include respond-to("md") {
+              display: none;
+            }
           }
         }
       }
