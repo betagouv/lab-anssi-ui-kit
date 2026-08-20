@@ -569,12 +569,12 @@
               top: rem(24px);
               bottom: rem(24px);
               width: rem(4px);
-              background-color: #000091;
+              background-color: var(--border-active-alt-blue-france-lab, #000091);
             }
           }
 
           &__sous-titre {
-            color: #000091;
+            color: var(--text-active-blue-france, #000091);
           }
         }
       }
