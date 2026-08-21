@@ -608,6 +608,10 @@
         max-width: none;
       }
     }
+
+    &__brand-top {
+      overflow: var(--brand-top-overflow, hidden);
+    }
   }
 
   .fr-header :global(.fr-nav__list) {
