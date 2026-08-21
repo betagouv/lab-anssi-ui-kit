@@ -203,6 +203,7 @@
         description={args.description}
         balise-titre={args.baliseTitre}
         avec-controle-segmente={args.avecControleSegmente || undefined}
+        taille-controle-segmente={args.tailleControleSegmente || undefined}
         elements-du-controle-segmente={JSON.stringify(args.elementsDuControleSegmente)}
         fonctionnalites={args.fonctionnalites}
         balise-des-sous-titres={args.baliseDesSousTitres}

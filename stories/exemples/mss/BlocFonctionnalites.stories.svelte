@@ -81,6 +81,7 @@
           value: "fssi-rssi",
         },
       ],
+      tailleControleSegmente: "sm",
       avecControleSegmente: true,
       cliquable: true,
       activeDefilement: true,
@@ -99,6 +100,7 @@
     balise-titre={args.baliseTitre}
     avec-controle-segmente={args.avecControleSegmente || undefined}
     elements-du-controle-segmente={JSON.stringify(args.elementsDuControleSegmente)}
+    taille-controle-segmente={args.tailleControleSegmente || undefined}
     fonctionnalites={args.fonctionnalites}
     balise-sous-titre={args.balisesDesSousTitres}
     cliquable={args.cliquable || undefined}

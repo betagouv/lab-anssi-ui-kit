@@ -6,6 +6,7 @@
       description: { attribute: "description", type: "String" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
       avecControleSegmente: { attribute: "avec-controle-segmente", type: "Boolean" },
+      tailleControleSegmente: { attribute: "taille-controle-segmente", type: "String" },
       elementsDuControleSegmente: { attribute: "elements-du-controle-segmente", type: "Array" },
       fonctionnalites: { attribute: "fonctionnalites", type: "Array" },
       baliseDesSousTitres: { attribute: "balise-des-sous-titres", type: "String" },
@@ -91,6 +92,8 @@
     baliseTitre?: "h2" | "h3" | "h4";
     /** Permet d'afficher un contrôle segmenté pour filtrer les fonctionnalités */
     avecControleSegmente?: boolean;
+    /** Taille du contrôle segmenté (default: md) */
+    tailleControleSegmente?: Extract<Size, "sm" | "md">;
     /** Les éléments du contrôle segmenté */
     elementsDuControleSegmente?: Segmented[];
     /** Fonctionnalités de la carte */
@@ -116,6 +119,7 @@
     description,
     baliseTitre = "h2",
     avecControleSegmente = false,
+    tailleControleSegmente = "md",
     elementsDuControleSegmente = [],
     fonctionnalites,
     balisesDesSousTitres = "h3",
@@ -408,6 +412,7 @@
         elements={elementsModifiesDuControleSegmente}
         no-legend
         onvaluechanged={selectionneUnControleSegmente}
+        size={tailleControleSegmente}
         value={valeurListeActive}
       ></dsfr-segmented>
     {/if}
