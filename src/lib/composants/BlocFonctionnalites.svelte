@@ -6,8 +6,8 @@
       description: { attribute: "description", type: "String" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
       avecControleSegmente: { attribute: "avec-controle-segmente", type: "Boolean" },
-      tailleControleSegmente: { attribute: "taille-controle-segmente", type: "String" },
       elementsDuControleSegmente: { attribute: "elements-du-controle-segmente", type: "Array" },
+      tailleControleSegmente: { attribute: "taille-controle-segmente", type: "String" },
       fonctionnalites: { attribute: "fonctionnalites", type: "Array" },
       baliseDesSousTitres: { attribute: "balise-des-sous-titres", type: "String" },
       cliquable: { attribute: "cliquable", type: "Boolean" },
@@ -99,7 +99,7 @@
     /** Fonctionnalités de la carte */
     fonctionnalites: Fonctionnalite[] | Fonctionnalite[][];
     /** Balise Hn des sous-titres du composant (default: h3) */
-    balisesDesSousTitres?: "h3" | "h4" | "h5";
+    baliseDesSousTitres?: "h3" | "h4" | "h5";
     /** Permet de définir les items du composant comme "cliquable" ou non */
     cliquable?: boolean;
     /** Permet d'afficher un bouton dans le pied de page du composant */
@@ -122,7 +122,7 @@
     tailleControleSegmente = "md",
     elementsDuControleSegmente = [],
     fonctionnalites,
-    balisesDesSousTitres = "h3",
+    baliseDesSousTitres = "h3",
     cliquable = false,
     avecCTA = false,
     orientationMedia = "droite",
@@ -307,7 +307,7 @@
         />
       {/if}
 
-      <svelte:element this={balisesDesSousTitres} class="lab-anssi-fonctionnalites__sous-titre">
+      <svelte:element this={baliseDesSousTitres} class="lab-anssi-fonctionnalites__sous-titre">
         {#if cliquable}
           <button
             type="button"

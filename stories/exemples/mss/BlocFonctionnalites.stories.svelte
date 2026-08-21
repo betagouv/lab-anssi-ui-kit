@@ -10,7 +10,7 @@
     args: {
       titre: "Fonctionnalités clés",
       baliseTitre: "h2",
-      balisesDesSousTitres: "h3",
+      baliseDesSousTitres: "h3",
       description:
         "Une plateforme pensée pour les équipes DSI, RSSI, DPO, chefs de projet avec les mesures ANSSI et CNIL intégrées d'emblée.",
       imagePlaceholder: "/images/bloc-fonctionnalites-placeholder.png",
@@ -102,7 +102,7 @@
     elements-du-controle-segmente={JSON.stringify(args.elementsDuControleSegmente)}
     taille-controle-segmente={args.tailleControleSegmente || undefined}
     fonctionnalites={args.fonctionnalites}
-    balise-sous-titre={args.balisesDesSousTitres}
+    balise-des-sous-titres={args.baliseDesSousTitres}
     cliquable={args.cliquable || undefined}
     avec-cta={args.avecCTA || undefined}
     orientation-media={args.orientationMedia}

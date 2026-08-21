@@ -183,7 +183,7 @@
     args: {
       titre: "Titre lorem ipsum",
       baliseTitre: "h2",
-      balisesDesSousTitres: "h3",
+      baliseDesSousTitres: "h3",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue interdum erat, non porta nibh. Suspendisse facilisis, nibh ac dignissim malesuada, tellus ante rhoncus nulla, a efficitur nisi quam vel orci.",
       imagePlaceholder: "/images/bloc-fonctionnalites-placeholder.png",
