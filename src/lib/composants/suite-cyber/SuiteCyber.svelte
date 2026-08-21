@@ -178,7 +178,7 @@
     left: 0;
     overflow-y: scroll !important; // On force le scroll pour éviter qu'il soit masqué durant l'animation
     overflow-x: hidden;
-    z-index: $z-index-au-dessus;
+    z-index: var(--suite-cyber-z-index, $z-index-au-dessus);
     text-align: left;
 
     @include a-partir-de(desktop-dsfr) {
