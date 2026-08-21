@@ -128,7 +128,7 @@
     border: 1px solid var(--background-default-grey);
     box-shadow: 0 0.25rem 0.75rem 0 rgba(0, 0, 18, 0.16);
     overflow: hidden;
-    z-index: var(--z-index, 1000);
+    z-index: var(--centre-aide-z-index, 950);
 
     @include a-partir-de(tablette) {
       bottom: 3rem;
@@ -143,7 +143,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: var(--z-index, 1000);
+    z-index: var(--centre-aide-z-index, 950);
     overflow-y: scroll;
 
     @include a-partir-de(tablette) {
