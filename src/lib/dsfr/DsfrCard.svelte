@@ -311,5 +311,14 @@
         }
       }
     }
+
+    &--no-icon {
+      .fr-card__title {
+        a::after,
+        button::after {
+          display: none;
+        }
+      }
+    }
   }
 </style>
