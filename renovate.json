@@ -1,12 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard",
+    "helpers:pinGitHubActionDigests"
+  ],
   "semanticCommits": "disabled",
   "commitMessagePrefix": "[RENOVATE]",
   "labels": ["dependencies"],
-  "schedule": ["before 9am on friday"],
-  "timezone": "Europe/Paris",
   "prConcurrentLimit": 5,
+  "prHourlyLimit": 10,
   "packageRules": [
     {
       "description": "Auto-merge les mises à jour patch des devDependencies",
@@ -33,7 +36,7 @@
     {
       "description": "Groupe les bibliothèques de test",
       "groupName": "Testing Libraries",
-      "matchPackageNames": ["@testing-library/**", "playwright"]
+      "matchPackageNames": ["@testing-library/**"]
     },
     {
       "description": "Groupe les dépendances ESLint",
@@ -55,25 +58,7 @@
       "description": "DSFR — mise à jour sensible, revue manuelle obligatoire",
       "groupName": "DSFR",
       "matchPackageNames": ["@gouvfr/dsfr"],
-      "automerge": false,
-      "prPriority": 10
-    },
-    {
-      "description": "Groupe les outils de build",
-      "groupName": "Build Tools",
-      "matchPackageNames": [
-        "vite",
-        "typescript",
-        "postcss",
-        "postcss-*",
-        "@fullhuman/postcss-purgecss",
-        "cssnano",
-        "sass",
-        "publint",
-        "concurrently",
-        "dotenv",
-        "style-dictionary"
-      ]
+      "automerge": false
     },
     {
       "description": "GitHub Actions — préfixe sécurité, auto-merge après CI",
@@ -82,8 +67,7 @@
       "commitMessagePrefix": "[SECURITE]",
       "labels": ["securite", "github-actions"],
       "automerge": true,
-      "automergeType": "pr",
-      "schedule": ["at any time"]
+      "automergeType": "pr"
     },
     {
       "description": "Gestionnaire de paquets (pnpm) — préfixe sécurité",
