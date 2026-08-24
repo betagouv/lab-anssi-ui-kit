@@ -58,14 +58,7 @@
 
   type ButtonKind = Extract<Kind, "tertiary" | "tertiary-no-outline">;
   type ToolLinkPreset =
-    | "close"
-    | "tooltip"
-    | "fullscreen"
-    | "display"
-    | "account"
-    | "team"
-    | "briefcase"
-    | "sort";
+    "close" | "tooltip" | "fullscreen" | "display" | "account" | "team" | "briefcase" | "sort";
   type ToolLink = {
     label: string;
     url: string;

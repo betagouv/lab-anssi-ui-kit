@@ -84,14 +84,7 @@
     class?: string;
     /** Type d'icône utilitaire */
     preset?:
-      | "close"
-      | "tooltip"
-      | "fullscreen"
-      | "display"
-      | "account"
-      | "team"
-      | "briefcase"
-      | "sort";
+      "close" | "tooltip" | "fullscreen" | "display" | "account" | "team" | "briefcase" | "sort";
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
   }
