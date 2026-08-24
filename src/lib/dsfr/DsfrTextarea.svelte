@@ -229,8 +229,7 @@
     {required}
     oninput={handleInput}
     onblur={formValidation.handleBlur}
-    oninvalid={formValidation.handleInvalid}
-  ></textarea>
+    oninvalid={formValidation.handleInvalid}></textarea>
 
   <slot name="messages-group">
     {#if computedStatus !== "default"}
