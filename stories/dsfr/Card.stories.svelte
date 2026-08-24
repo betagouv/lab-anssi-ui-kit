@@ -133,6 +133,7 @@
     variations={args.variations}
     download={args.download || undefined}
     has-download-icon={args.hasDownloadIcon || undefined}
+    no-icon={args.noIcon || undefined}
     lang={args.lang}
   >
     <!-- Badges Group (slot: badgesgroup) -->
