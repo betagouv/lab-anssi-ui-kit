@@ -10,6 +10,7 @@
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 10,
+  "minimumReleaseAge": "7 days",
   "packageRules": [
     {
       "description": "Auto-merge les mises à jour patch des devDependencies",
