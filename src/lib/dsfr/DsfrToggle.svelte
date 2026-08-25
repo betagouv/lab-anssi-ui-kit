@@ -131,7 +131,9 @@
   </label>
   {#if hint}
     <p id={hintId} class="fr-hint-text">
-      {hint}
+      <slot name="hint">
+        {hint}
+      </slot>
     </p>
   {/if}
 

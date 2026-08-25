@@ -15,6 +15,11 @@
     component: DsfrToggle,
     argTypes: {
       ...toggleArgTypes,
+      hint: {
+        description: "Contenu du texte additionnel (remplace la prop `hint` avec du HTML riche)",
+        control: false,
+        table: { category: "Slots" },
+      },
       onvaluechanged: {
         description:
           "Déclenché lors du changement d'état de l'interrupteur.<br>" + "`detail: boolean`",
