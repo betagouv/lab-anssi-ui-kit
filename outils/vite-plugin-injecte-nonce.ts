@@ -1,5 +1,5 @@
 import type { Plugin } from "vite";
-import { injecteNonceWebcomponents } from "./injection-nonce";
+import { injecteNonceWebcomponents } from "./injection-nonce.ts";
 
 export default function injecteNonce(): Plugin {
   return {

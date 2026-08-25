@@ -1,10 +1,10 @@
 import { loadEnv } from "vite";
 
-export { default as extractDataUriSvg } from "./postcss-extract-data-uri-svg";
-export { default as replaceIconPaths } from "./postcss-replace-icon-paths";
-export { default as genereJSX } from "./vite-plugin-genere-jsx";
-export { default as injecteNonce } from "./vite-plugin-injecte-nonce";
-export { default as viteScssPreprocessorOptions } from "./vite-preprocessor-options";
+export { default as extractDataUriSvg } from "./postcss-extract-data-uri-svg.ts";
+export { default as replaceIconPaths } from "./postcss-replace-icon-paths.ts";
+export { default as genereJSX } from "./vite-plugin-genere-jsx.ts";
+export { default as injecteNonce } from "./vite-plugin-injecte-nonce.ts";
+export { default as viteScssPreprocessorOptions } from "./vite-preprocessor-options.ts";
 
 // Variables d'environnement chargées selon le contexte d'exécution.
 // Charge le bon environnement pour faire fonctionner la fonction SCSS `url-asset()`

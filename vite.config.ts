@@ -1,14 +1,15 @@
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
-import { fileURLToPath } from "node:url";
 import path from "path";
 import { defineConfig } from "vitest/config";
 import { playwright } from "@vitest/browser-playwright";
-import { assetsPath, replaceIconPaths, varEnv, viteScssPreprocessorOptions } from "./outils";
-
-const dirname =
-  typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+import {
+  assetsPath,
+  replaceIconPaths,
+  varEnv,
+  viteScssPreprocessorOptions,
+} from "./outils/index.ts";
 
 // On charge manuellement les valeurs d'environnement de la production, car pour une raison qu'on ignore
 // c'est la seule façon de charger Storybook avec nos valeurs
@@ -19,7 +20,7 @@ if (process.env.STORYBOOK_ENV === "production")
 export default defineConfig({
   resolve: {
     alias: {
-      src: path.resolve(__dirname, "src"),
+      src: path.resolve(import.meta.dirname, "src"),
     },
   },
   plugins: [svelte()],
@@ -47,7 +48,7 @@ export default defineConfig({
           // Le plugin exécutera des tests pour les histoires définies dans la configuration de votre Storybook.
           // Voir les options sur le site: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
-            configDir: path.join(dirname, ".storybook"),
+            configDir: path.join(import.meta.dirname, ".storybook"),
           }),
         ],
         test: {

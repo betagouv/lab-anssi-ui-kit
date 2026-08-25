@@ -11,7 +11,7 @@ import {
   replaceIconPaths,
   varEnv,
   viteScssPreprocessorOptions,
-} from "./outils";
+} from "./outils/index.ts";
 
 // Ce fichier permet de build la librairie en mode "WebComponents"
 // En suivant cette issue : https://github.com/sveltejs/kit/issues/10320
@@ -19,7 +19,7 @@ import {
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/lib/index.ts"),
+      entry: path.resolve(import.meta.dirname, "src/lib/index.ts"),
       name: "WebComponents",
       fileName: "lab-anssi-ui-kit",
       formats: ["iife"],
@@ -28,8 +28,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      src: path.resolve(__dirname, "src"),
-      $lib: path.resolve(__dirname, "src/lib"),
+      src: path.resolve(import.meta.dirname, "src"),
+      $lib: path.resolve(import.meta.dirname, "src/lib"),
     },
   },
   css: {
