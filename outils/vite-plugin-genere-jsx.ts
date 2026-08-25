@@ -4,7 +4,7 @@ import type { Plugin } from "vite";
 import * as ts from "typescript";
 import * as prettier from "prettier";
 import { parse } from "svelte/compiler";
-import { extraitPropsComposant } from "./extraction-props-composant";
+import { extraitPropsComposant } from "./extraction-props-composant.ts";
 
 /**
  * Extrait le contenu de la balise <script> d'un composant Svelte

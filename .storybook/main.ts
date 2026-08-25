@@ -1,11 +1,7 @@
-import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/svelte-vite";
-import path, { dirname } from "path";
+import path from "path";
 import { loadEnv } from "vite";
 import viteScssPreprocessorOptions from "../outils/vite-preprocessor-options.ts";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
@@ -40,8 +36,8 @@ const config: StorybookConfig = {
     };
     config.resolve = {
       alias: {
-        src: path.resolve(__dirname, "../src"),
-        $lib: path.resolve(__dirname, "../src/lib"),
+        src: path.resolve(import.meta.dirname, "../src"),
+        $lib: path.resolve(import.meta.dirname, "../src/lib"),
       },
     };
     config.css = {
