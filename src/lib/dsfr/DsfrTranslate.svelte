@@ -47,7 +47,7 @@
   let expanded = $state(false);
 
   // Récupère l'itam dans le tableau `languages` qui est actif
-  const activeLanguage = languages.find((language) => language.active) ?? languages[0];
+  const activeLanguage = $derived(languages.find((language) => language.active) ?? languages[0]);
 </script>
 
 <div {id} class="fr-translate fr-nav">
