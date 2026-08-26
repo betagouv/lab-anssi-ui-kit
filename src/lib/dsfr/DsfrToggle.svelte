@@ -129,7 +129,7 @@
   >
     <span><span class:fr-sr-only={(hideLabel || isLabelEmpty) && !left}>{label}</span></span>
   </label>
-  {#if hint}
+  {#if hint || $$slots.hint}
     <p id={hintId} class="fr-hint-text">
       <slot name="hint">
         {hint}
