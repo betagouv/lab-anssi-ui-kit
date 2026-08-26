@@ -22,13 +22,13 @@
 
   let { articles, categories, idCategorieChoisie = $bindable("tous") }: Props = $props();
 
-  const optionsFiltrage = [
+  const optionsFiltrage = $derived([
     { label: "Tous les articles", valeur: "tous" },
     ...Object.entries(categories).map(([idCategorie, donnees]) => ({
       label: donnees.label,
       valeur: idCategorie,
     })),
-  ];
+  ]);
 
   let articlesVisibles = $derived(
     idCategorieChoisie === "tous"
