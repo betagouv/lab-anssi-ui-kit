@@ -477,6 +477,11 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/logo/logo.main.min.css";
+  @use "@gouvfr/dsfr/dist/component/header/header.main.css";
+  @use "@gouvfr/dsfr/dist/component/modal/modal.main.min.css";
+  @use "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
@@ -488,12 +493,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/collapse/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme();
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/logo/logo.main.min.css";
-  @import "@gouvfr/dsfr/dist/component/header/header.main.css";
-  @import "@gouvfr/dsfr/dist/component/modal/modal.main.min.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("header") {
     &__service-title {

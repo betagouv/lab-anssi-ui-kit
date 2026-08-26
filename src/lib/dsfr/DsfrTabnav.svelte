@@ -119,14 +119,13 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/collapse/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/sidemenu/sidemenu.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("tabnav");
 

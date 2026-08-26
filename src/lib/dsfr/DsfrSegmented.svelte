@@ -182,6 +182,8 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/segmented/segmented.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
@@ -194,9 +196,6 @@
   // DSFR Form
   @import "@gouvfr/dsfr/src/dsfr/component/form/index";
   @import "@gouvfr/dsfr/src/dsfr/component/form/style/module/label";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/segmented/segmented.main.min.css";
-
   @include set-shadow-host("inline-flex");
   @include set-dsfr-sizing("segmented");
 </style>

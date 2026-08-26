@@ -205,12 +205,11 @@
 
 <style lang="scss">
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/dist/component/tooltip/tooltip.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/placement/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme;
-
-  @import "@gouvfr/dsfr/dist/component/tooltip/tooltip.main.css";
 
   @include set-shadow-host("inline-flex");
   @include set-dsfr-sizing("tooltip");

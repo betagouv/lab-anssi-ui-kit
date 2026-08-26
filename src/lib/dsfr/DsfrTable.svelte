@@ -855,8 +855,8 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/table/table.main.min.css";
-  @import "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
+  @use "@gouvfr/dsfr/dist/component/table/table.main.min.css";
+  @use "@gouvfr/dsfr/dist/component/checkbox/checkbox.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("table");

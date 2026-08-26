@@ -87,6 +87,9 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/alert/alert.main.css";
+  @use "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -99,10 +102,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme();
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/alert/alert.main.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("alert");
 </style>

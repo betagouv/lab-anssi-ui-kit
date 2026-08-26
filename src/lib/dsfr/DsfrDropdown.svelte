@@ -301,6 +301,8 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/dist/core/core.min.css";
+  @use "@gouvfr/dsfr/dist/component/navigation/navigation.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   // @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   // @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -319,9 +321,6 @@
   // @import "@gouvfr/dsfr/src/dsfr/component/navigation/style/module/menu";
   // @import "@gouvfr/dsfr/src/dsfr/component/navigation/style/scheme";
   // @include _navigation-scheme;
-
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
-  @import "@gouvfr/dsfr/dist/component/navigation/navigation.main.min.css";
 
   // DSFR Dropdown
   @include set-shadow-host("inline-flex");

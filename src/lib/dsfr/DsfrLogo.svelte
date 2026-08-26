@@ -29,12 +29,11 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/logo/logo.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/logo/logo.main.css";
-
   @include set-shadow-host("inline-block");
   @include set-dsfr-sizing("logo");
 </style>

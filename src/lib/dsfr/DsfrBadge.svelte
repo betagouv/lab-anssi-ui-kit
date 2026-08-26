@@ -70,12 +70,11 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/badge/badge.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/display/module/ellipsis";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/badge/badge.main.css";
-
   @include set-shadow-host("inline-flex");
   @include set-dsfr-sizing("badge");
 </style>

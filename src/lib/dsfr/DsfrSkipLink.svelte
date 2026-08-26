@@ -43,13 +43,12 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/skiplink/skiplink.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module/container";
   @include grid($grid-settings);
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/skiplink/skiplink.main.min.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("skiplinks");
 </style>

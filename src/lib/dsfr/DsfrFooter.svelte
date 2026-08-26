@@ -282,6 +282,9 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/logo/logo.main.css";
+  @use "@gouvfr/dsfr/dist/component/footer/footer.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
@@ -294,10 +297,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/outdated";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/logo/logo.main.css";
-  @import "@gouvfr/dsfr/dist/component/footer/footer.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("footer") {
     &--compact {

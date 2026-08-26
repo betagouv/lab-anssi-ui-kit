@@ -207,6 +207,8 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Tile
+  @use "@gouvfr/dsfr/dist/component/tile/tile.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -224,9 +226,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/margin";
   @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
-  // DSFR Tile
-  @import "@gouvfr/dsfr/dist/component/tile/tile.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("tile") {
     height: 100%;

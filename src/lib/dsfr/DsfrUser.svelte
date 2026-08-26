@@ -340,16 +340,15 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/dist/core/core.min.css";
+  // DSFR Navigation
+  @use "@gouvfr/dsfr/dist/component/navigation/navigation.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
   // DSFR Button
   @import "@gouvfr/dsfr/src/dsfr/component/button/index";
   @import "@gouvfr/dsfr/src/dsfr/component/button/style/module/default";
   @import "@gouvfr/dsfr/src/dsfr/component/button/style/scheme";
   @include _button-scheme;
-  // DSFR Navigation
-  @import "@gouvfr/dsfr/dist/component/navigation/navigation.main.min.css";
-
   @include set-dsfr-sizing("user") {
     position: relative;
 

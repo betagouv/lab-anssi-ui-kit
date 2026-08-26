@@ -93,6 +93,8 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Translate
+  @use "@gouvfr/dsfr/dist/component/translate/translate.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -116,9 +118,6 @@
   @import "@gouvfr/dsfr/src/dsfr/component/navigation/style/module/menu";
   @import "@gouvfr/dsfr/src/dsfr/component/navigation/style/scheme";
   @include _navigation-scheme;
-  // DSFR Translate
-  @import "@gouvfr/dsfr/dist/component/translate/translate.main.css";
-
   @include set-shadow-host("block");
   @include set-dsfr-sizing("translate");
 </style>

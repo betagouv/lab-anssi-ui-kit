@@ -108,6 +108,9 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/content/content.main.css";
+  @use "@gouvfr/dsfr/dist/component/link/link.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
@@ -118,10 +121,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/media/module/iframe";
   @import "@gouvfr/dsfr/src/dsfr/core/style/media/module/ratio";
   @import "@gouvfr/dsfr/src/dsfr/core/style/media/module/responsive";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/content/content.main.css";
-  @import "@gouvfr/dsfr/dist/component/link/link.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("content-media");
 </style>

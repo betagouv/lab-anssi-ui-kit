@@ -83,13 +83,12 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/callout/callout.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/callout/callout.main.min.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("callout") {
     &__text:not(:last-child) {

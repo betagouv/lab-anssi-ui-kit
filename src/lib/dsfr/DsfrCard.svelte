@@ -279,7 +279,7 @@
   @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
   // DSFR Component styles
   @use "@gouvfr/dsfr/dist/component/link/link.main.css";
-  @import "@gouvfr/dsfr/dist/component/card/card.main.css";
+  @use "@gouvfr/dsfr/dist/component/card/card.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("card") {

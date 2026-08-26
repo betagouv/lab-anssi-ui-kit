@@ -163,6 +163,8 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @use "src/module/color";
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -174,9 +176,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
   @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
-
   @include set-shadow-host("inline-flex", $tag: "dsfr-button") {
     &:has(.fr-btn--centered) {
       --component-width: 100%;

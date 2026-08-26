@@ -310,9 +310,9 @@
 </div>
 
 <style lang="scss">
+  @use "@gouvfr/dsfr/dist/component/tooltip/tooltip.main.min.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/placement/module";
-  @import "@gouvfr/dsfr/dist/component/tooltip/tooltip.main.min.css";
 
   .lab-anssi-reactions {
     box-sizing: border-box;

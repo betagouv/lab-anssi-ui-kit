@@ -113,6 +113,9 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  // DSFR Component styles
+  @use "@gouvfr/dsfr/dist/component/form/form.main.css";
+  @use "@gouvfr/dsfr/dist/component/radio/radio.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/input";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
@@ -121,10 +124,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
-  // DSFR Component styles
-  @import "@gouvfr/dsfr/dist/component/form/form.main.css";
-  @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
-
   @include set-shadow-host();
   @include set-dsfr-sizing("radio-group");
 </style>

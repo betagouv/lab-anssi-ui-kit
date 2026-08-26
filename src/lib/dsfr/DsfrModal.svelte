@@ -200,6 +200,8 @@
 
 <style lang="scss">
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/dist/component/modal/modal.main.css";
+  @use "@gouvfr/dsfr/dist/component/button/button.main.css";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
@@ -211,8 +213,6 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/grid/module";
   @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
   @include _core-scheme();
-  @import "@gouvfr/dsfr/dist/component/modal/modal.main.css";
-  @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
   @include set-shadow-host();
   @include set-dsfr-sizing("modal") {
