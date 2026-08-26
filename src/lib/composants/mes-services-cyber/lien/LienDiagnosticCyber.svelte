@@ -9,9 +9,9 @@
   }
 
   let { lien, versExterne = false }: Props = $props();
-  let target = versExterne ? "_blank" : "_self";
-  let rel = versExterne ? "noreferrer" : undefined;
-  let icone = versExterne ? "lien-externe" : "lien-interne";
+  let target = $derived(versExterne ? "_blank" : "_self");
+  let rel = $derived(versExterne ? "noreferrer" : undefined);
+  let icone = $derived(versExterne ? "lien-externe" : "lien-interne");
 </script>
 
 <div class="racine">
