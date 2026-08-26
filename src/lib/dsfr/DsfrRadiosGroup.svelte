@@ -187,7 +187,6 @@
 <fieldset
   class={["fr-fieldset", `fr-fieldset--${computedStatus}`]}
   aria-labelledby={`${id}-legend ${id}-messages`}
-  role="group"
   {id}
   {disabled}
   {form}
