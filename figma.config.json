@@ -1,6 +1,6 @@
 {
   "codeConnect": {
-    "include": ["src/lib/**/*.figma.ts", "src/lib/**/*.figma.batch.json"],
+    "include": ["src/**/*.figma.ts", "src/**/*.figma.batch.json"],
     "parser": "html",
     "label": "Web Components",
     "language": "html",

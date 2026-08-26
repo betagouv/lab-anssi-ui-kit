@@ -58,6 +58,7 @@
     "@chromatic-com/storybook": "~5.3.1",
     "@eslint/compat": "~2.1.1",
     "@eslint/js": "~10.0.1",
+    "@figma/code-connect": "^2.0.0",
     "@fullhuman/postcss-purgecss": "~8.0.0",
     "@gouvfr/dsfr": "1.14.4",
     "@storybook/addon-a11y": "~10.6.0",
