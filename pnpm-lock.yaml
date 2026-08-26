@@ -88,7 +88,7 @@ importers:
         version: 10.1.8(eslint@10.8.1(supports-color@10.2.2))
       eslint-plugin-storybook:
         specifier: ~10.5.8
-        version: 10.5.8(eslint@10.8.1(supports-color@10.2.2))(storybook@10.5.9(@types/react@19.2.15)(prettier@3.9.6)(react@19.2.8))(supports-color@10.2.2)(typescript@6.0.3)
+        version: 10.5.9(eslint@10.8.1(supports-color@10.2.2))(storybook@10.5.9(@types/react@19.2.15)(prettier@3.9.6)(react@19.2.8))(supports-color@10.2.2)(typescript@6.0.3)
       eslint-plugin-svelte:
         specifier: ~3.23.0
         version: 3.23.0(eslint@10.8.1(supports-color@10.2.2))(svelte@5.56.9(@typescript-eslint/types@8.67.0))
@@ -1881,11 +1881,11 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-storybook@10.5.8:
-    resolution: {integrity: sha512-bf9W5nZyWdIaCUZf4aEZnEeD1mn+csNYX8dYUQjAo6L7/DkSLtr65R4zFZ1xeS4m6dOXO6UtUySesCSw4e8w1g==}
+  eslint-plugin-storybook@10.5.9:
+    resolution: {integrity: sha512-4Hrqccy/zttV0S/32TSUbqtizzj4sbkgYvv7UzHveH58v96PhrO+fSpOFAqYvzNDzdOU6smKwObFtzX+RZqj4w==}
     peerDependencies:
       eslint: '>=8'
-      storybook: ^10.5.8
+      storybook: ^10.5.9
 
   eslint-plugin-svelte@3.23.0:
     resolution: {integrity: sha512-n9jRklDqy0+W834568a4ZIZTK7DHXxvvHHxxGP8nNq7N//pOZMubttskHOquyGgfTR4Z05q2NdGNlsTpIEA48w==}
@@ -4909,7 +4909,7 @@ snapshots:
     dependencies:
       eslint: 10.8.1(supports-color@10.2.2)
 
-  eslint-plugin-storybook@10.5.8(eslint@10.8.1(supports-color@10.2.2))(storybook@10.5.9(@types/react@19.2.15)(prettier@3.9.6)(react@19.2.8))(supports-color@10.2.2)(typescript@6.0.3):
+  eslint-plugin-storybook@10.5.9(eslint@10.8.1(supports-color@10.2.2))(storybook@10.5.9(@types/react@19.2.15)(prettier@3.9.6)(react@19.2.8))(supports-color@10.2.2)(typescript@6.0.3):
     dependencies:
       '@typescript-eslint/types': 8.67.0
       '@typescript-eslint/utils': 8.67.0(eslint@10.8.1(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
