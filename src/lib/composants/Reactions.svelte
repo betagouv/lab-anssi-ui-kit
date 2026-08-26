@@ -45,7 +45,7 @@
   let popoverShown = $state(false);
 
   let popoverElement: HTMLElement | null = null;
-  let tooltipElement: HTMLElement | null = null;
+  let tooltipElement = $state<HTMLElement | null>(null);
   let triggerButton: HTMLElement | null = null;
 
   /**
