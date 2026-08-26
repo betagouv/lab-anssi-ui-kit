@@ -92,6 +92,7 @@
 </script>
 
 {#snippet tagItem(tag: Tag)}
+  <!-- svelte-ignore a11y_no_static_element_interactions (pressable tags render as native buttons) -->
   <svelte:element
     this={markup}
     class={[
