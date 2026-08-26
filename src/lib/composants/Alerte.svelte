@@ -29,6 +29,7 @@
       {#if fermable}
         <button
           class="fermer"
+          aria-label="Fermer l’alerte"
           onclick={() => {
             estOuvert = false;
           }}
