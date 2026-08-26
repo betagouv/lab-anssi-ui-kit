@@ -83,7 +83,7 @@
   }: Props = $props();
 
   let container: HTMLElement;
-  let effectiveAlign = $state<"left" | "right">(align);
+  let effectiveAlign = $derived<"left" | "right">(align);
   let expanded = $state(false);
   const iconClass = $derived<boolean | string>(
     buttonIcon && `fr-btn--icon-left ${setIconClass(buttonIcon)}`,
