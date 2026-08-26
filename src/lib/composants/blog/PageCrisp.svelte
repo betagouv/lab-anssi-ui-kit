@@ -9,8 +9,6 @@
 />
 
 <script lang="ts">
-  import { run } from "svelte/legacy";
-
   import type { TableDesMatieres } from "$lib/types";
   import SommaireMobile from "$lib/composants/blog/SommaireMobile.svelte";
   import { onDestroy, tick } from "svelte";
@@ -52,7 +50,7 @@
     lesSections.forEach((s) => observateurDIntersection.observe(s));
   };
 
-  run(() => {
+  $effect(() => {
     if (contenu) tick().then(observeLesSections);
   });
 
@@ -81,7 +79,7 @@
     }
   };
 
-  run(() => {
+  $effect(() => {
     if (contenu) scroll(window.location.hash);
   });
 
