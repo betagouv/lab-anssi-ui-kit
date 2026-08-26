@@ -338,7 +338,7 @@
   let isServerSide = $derived(totalRows !== undefined);
   let nbRows = $derived(isServerSide ? (totalRows ?? 0) : (computedTbodies[0]?.length ?? 0));
 
-  let rowsPerPage = $state(itemsPerPage[0]);
+  let rowsPerPage = $derived(itemsPerPage[0]);
   let currentPage = $state(1);
   let totalPages = $derived(Math.ceil(nbRows / rowsPerPage));
 
