@@ -1,7 +1,6 @@
 <svelte:options customElement={{ tag: "lab-anssi-centre-aide", extend: withIconsStyleSheet }} />
 
 <script lang="ts">
-  import { run } from "svelte/legacy";
   import { fly } from "svelte/transition";
   import { MediaQuery } from "svelte/reactivity";
 
@@ -27,16 +26,16 @@
 
   setThemeable($host());
 
-  let liensMisEnForme: { texte: string; href?: string; preventDefault?: boolean; id?: string }[] =
-    $state([]);
-  run(() => {
-    liensMisEnForme = typeof liens === "string" ? JSON.parse(liens) : liens;
+  let liensMisEnForme: Lien[] = $derived.by(() => {
+    const liensFormates = typeof liens === "string" ? JSON.parse(liens) : liens;
 
-    if (!Array.isArray(liensMisEnForme) || liensMisEnForme.some((l) => !l.texte)) {
+    if (!Array.isArray(liensFormates) || liensFormates.some((l) => !l.texte)) {
       throw new Error(
         "Les liens doivent respecter le type : { texte: string; href?: string; preventDefault?: boolean; id?: string }[]",
       );
     }
+
+    return liensFormates;
   });
 
   let ouvert: boolean = $state(false);
