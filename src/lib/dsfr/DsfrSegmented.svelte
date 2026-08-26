@@ -65,11 +65,7 @@
   }: Props = $props();
 
   // `checked` sert de fallback si `value` n'est pas fourni
-  let currentValue = $state(value ?? elements.find((e) => e.checked)?.value?.toString());
-
-  $effect(() => {
-    currentValue = value;
-  });
+  let currentValue = $derived(value ?? elements.find((e) => e.checked)?.value?.toString());
 
   let fieldsetEl: HTMLFieldSetElement | undefined = $state();
   let elementsEl: HTMLDivElement | undefined = $state();
