@@ -83,7 +83,7 @@
     disabled,
   }: Props = $props();
   let dropdown: HTMLElement;
-  let effectiveAlign = $state<"left" | "right">(align);
+  let effectiveAlign = $derived<"left" | "right">(align);
 
   const isLinks = $derived(contentType === "links");
   const isButtons = $derived(contentType === "buttons");
