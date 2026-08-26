@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
@@ -63,7 +62,6 @@ export default defineConfig({
               },
             ],
           },
-          setupFiles: [".storybook/vitest.setup.ts"],
         },
       },
     ],
