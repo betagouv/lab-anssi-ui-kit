@@ -62,3 +62,5 @@
 <Story name="Ouverture dans un nouvel onglet" args={{ ...linkArgs, blank: true }} />
 
 <Story name="Neutre" args={{ ...linkArgs, neutral: true }} />
+
+<Story name="Neutre (nouvel onglet)" args={{ ...linkArgs, neutral: true, blank: true }} />

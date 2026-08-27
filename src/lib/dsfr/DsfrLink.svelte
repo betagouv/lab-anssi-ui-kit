@@ -135,6 +135,10 @@
     &--neutral {
       color: currentColor;
       font-size: inherit;
+
+      &[target="_blank"]::after {
+        --icon-size: 1em;
+      }
     }
   }
 </style>
