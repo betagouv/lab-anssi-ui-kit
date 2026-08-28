@@ -158,6 +158,7 @@
       display: flex;
       overflow-x: auto;
       gap: var(--espacement);
+      padding: 2px 0;
 
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
