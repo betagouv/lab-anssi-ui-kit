@@ -1,18 +1,11 @@
 import figma from "figma";
-import { safeGet, slugify } from "./helpers/index.ts";
+import { BOOLEAN_ENUM, safeGet, slugify } from "./helpers/index.ts";
 
 // Instance principale du composant
 const instance = figma.selectedInstance;
 
 // Mapping des propriétés entre le code et Figma
-const isExpanded = safeGet(
-  () =>
-    instance.getEnum("Ouvert", {
-      True: true,
-      False: false,
-    }),
-  false,
-);
+const isExpanded = safeGet(() => instance.getEnum("Ouvert", BOOLEAN_ENUM), false);
 
 // Instance imbriquée : "Haut"
 const instanceHaut =

@@ -2,6 +2,7 @@
 // source=src/lib/dsfr/DsfrAlert.svelte
 // component=DsfrAlert
 import figma from "figma";
+import { BOOLEAN_ENUM } from "./helpers/index.ts";
 
 // Instance principale du composant
 const instance = figma.selectedInstance;
@@ -25,10 +26,7 @@ const state = instance.getEnum("État", {
   Défaut: "default",
 });
 
-const closeable = instance.getEnum("Fermeture", {
-  True: true,
-  False: false,
-});
+const closeable = instance.getEnum("Fermeture", BOOLEAN_ENUM);
 
 // Propriétés calculées
 const isDismissible = closeable === true;
