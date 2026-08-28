@@ -1,3 +1,8 @@
+const BOOLEAN_ENUM: Record<string, boolean> = {
+  True: true,
+  False: false,
+};
+
 const COLOR_MAP: Record<string, string> = {
   "Purple Glycine": "purple-glycine",
   "Beige Gris Galet": "beige-gris-galet",
@@ -35,4 +40,4 @@ const TYPE_ENUM: Record<string, string> = {
   Nouveau: "Nouveau",
 };
 
-export { COLOR_MAP, STATUS_MAP, TYPE_ENUM };
+export { BOOLEAN_ENUM, COLOR_MAP, STATUS_MAP, TYPE_ENUM };
