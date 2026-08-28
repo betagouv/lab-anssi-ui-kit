@@ -1,5 +1,5 @@
 import figma from "figma";
-import { getIconName, safeGet, slugify } from "./helpers/index.ts";
+import { BOOLEAN_ENUM, getIconName, safeGet, slugify } from "./helpers/index.ts";
 
 // Instance principale du composant
 const instance = figma.selectedInstance;
@@ -12,10 +12,7 @@ const iconPlace = instance.getEnum("Icône", {
   Seule: "only",
 });
 
-const disabled = instance.getEnum("Désactivé", {
-  False: false,
-  True: true,
-});
+const disabled = instance.getEnum("Désactivé", BOOLEAN_ENUM);
 
 const label = instance.getString("Libellé");
 

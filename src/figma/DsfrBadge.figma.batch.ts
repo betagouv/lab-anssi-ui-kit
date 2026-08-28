@@ -1,5 +1,12 @@
 import figma from "figma";
-import { COLOR_MAP, STATUS_MAP, TYPE_ENUM, safeGet, slugify } from "./helpers/index.ts";
+import {
+  BOOLEAN_ENUM,
+  COLOR_MAP,
+  STATUS_MAP,
+  TYPE_ENUM,
+  safeGet,
+  slugify,
+} from "./helpers/index.ts";
 
 // Instance principale du composant
 const instance = figma.selectedInstance;
@@ -15,14 +22,7 @@ const computedInstance = typeInstance
 // Mapping des propriétés entre le code et Figma
 const label = computedInstance.getString("Libellé");
 
-const hasIcon = safeGet(
-  () =>
-    computedInstance.getEnum("Icône", {
-      True: true,
-      False: false,
-    }),
-  null,
-);
+const hasIcon = safeGet(() => computedInstance.getEnum("Icône", BOOLEAN_ENUM), null);
 
 const accent = safeGet(() => computedInstance.getEnum("Couleur", COLOR_MAP));
 
