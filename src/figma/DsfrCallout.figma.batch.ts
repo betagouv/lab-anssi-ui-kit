@@ -1,5 +1,5 @@
 import figma from "figma";
-import { BOOLEAN_ENUM, getIconName, safeGet, slugify } from "./helpers/index.ts";
+import { BOOLEAN_ENUM, getIconName, isInstance, safeGet, slugify } from "./helpers/index.ts";
 
 const ACCENT_MAP: Record<string, string> = {
   "Beige Gris Galet": "beige-gris-galet",
@@ -29,8 +29,7 @@ const calloutInstance = safeGet(() =>
   instance.findInstance("Mise en avant", { traverseInstances: true }),
 );
 
-const currentInstance =
-  calloutInstance && calloutInstance.type === "INSTANCE" ? calloutInstance : instance;
+const currentInstance = isInstance(calloutInstance) ? calloutInstance : instance;
 
 // Mapping des propriétés entre le code et Figma
 const showIcon = currentInstance.getEnum("Icône", BOOLEAN_ENUM);
@@ -46,7 +45,7 @@ let hasTitle = false;
 let title = "";
 let description = "";
 
-if (containerInstance && containerInstance.type === "INSTANCE") {
+if (isInstance(containerInstance)) {
   hasTitle = containerInstance.getBoolean("Voir Titre");
   title = containerInstance.getString("Titre") || "";
   description = containerInstance.getString("Description") || "";
@@ -54,7 +53,7 @@ if (containerInstance && containerInstance.type === "INSTANCE") {
 
 // --- Props "Icône" (descendant dans le container) ---
 let iconName: string | null = null;
-if (containerInstance && containerInstance.type === "INSTANCE") {
+if (isInstance(containerInstance)) {
   const iconChild = containerInstance.findInstance("Icône");
   iconName = getIconName(iconChild);
 }
@@ -62,12 +61,11 @@ if (containerInstance && containerInstance.type === "INSTANCE") {
 // --- Props du bouton (descendant dans le container) ---
 let buttonLabel = "";
 
-if (containerInstance && containerInstance.type === "INSTANCE") {
+if (isInstance(containerInstance)) {
   const lightButton = safeGet(() => containerInstance.findInstance("Thème clair / Primaire / MD"));
   const darkButton = safeGet(() => containerInstance.findInstance("Thème sombre / Primaire / MD"));
   const buttonInstance =
-    (lightButton && lightButton.type === "INSTANCE" ? lightButton : null) ??
-    (darkButton && darkButton.type === "INSTANCE" ? darkButton : null);
+    (isInstance(lightButton) ? lightButton : null) ?? (isInstance(darkButton) ? darkButton : null);
 
   if (buttonInstance) {
     buttonLabel = buttonInstance.getString("Libellé") || "";
