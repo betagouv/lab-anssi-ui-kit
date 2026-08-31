@@ -890,6 +890,16 @@
   mask-image: url-asset("/icones/dsfr/device/device-line.svg");
 }
 
+.fr-icon-gamepad-fill:before {
+  -webkit-mask-image: url-asset("/icones/dsfr/device/gamepad-fill.svg");
+  mask-image: url-asset("/icones/dsfr/device/gamepad-fill.svg");
+}
+
+.fr-icon-gamepad-line:before {
+  -webkit-mask-image: url-asset("/icones/dsfr/device/gamepad-line.svg");
+  mask-image: url-asset("/icones/dsfr/device/gamepad-line.svg");
+}
+
 .fr-icon-hard-drive-2-fill:before {
   -webkit-mask-image: url-asset("/icones/dsfr/device/hard-drive-2-fill.svg");
   mask-image: url-asset("/icones/dsfr/device/hard-drive-2-fill.svg");
