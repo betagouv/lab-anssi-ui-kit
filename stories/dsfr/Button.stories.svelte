@@ -46,6 +46,10 @@
         },
       },
       docs: {
+        description: {
+          component:
+            "Le bouton est un élément d’interaction avec l’interface permettant à l’utilisateur d’effectuer une action.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bouton)",
+        },
         codePanel: true,
         source: {
           transform: webComponentSourceCode("dsfr-button"),

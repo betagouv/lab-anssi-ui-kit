@@ -17,6 +17,10 @@
     args: translateArgs,
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le sélecteur de langue permet à l’utilisateur de choisir la langue dans laquelle est affiché le contenu du site, si celui-ci est disponible en plusieurs langues.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/selecteur-de-langue)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-translate"),
         },
@@ -41,3 +45,7 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Bouton tertiaire" args={{ buttonKind: "tertiary" }} />
+
+<Story name="Bouton tertiaire sans bordure" args={{ buttonKind: "tertiary-no-outline" }} />

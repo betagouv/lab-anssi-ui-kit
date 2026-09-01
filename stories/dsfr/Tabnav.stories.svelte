@@ -81,6 +81,10 @@
     parameters: {
       actions: { handles: ["linkclicked"] },
       docs: {
+        description: {
+          component:
+            "Le composant onglet permet aux utilisateurs de naviguer dans différentes sections de contenu au sein d’une même page.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/onglet)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-tabnav"),
         },

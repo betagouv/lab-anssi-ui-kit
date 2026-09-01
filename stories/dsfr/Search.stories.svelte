@@ -49,6 +49,10 @@
     parameters: {
       actions: { handles: ["valuechanged", "search"] },
       docs: {
+        description: {
+          component:
+            "La barre de recherche est un système de navigation qui permet à l'utilisateur d’accéder rapidement à un contenu en lançant une recherche sur un mot clé ou une expression.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/barre-de-recherche)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-search"),
         },
@@ -83,3 +87,10 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story
+  name="Taille LG"
+  args={{
+    size: "lg",
+  }}
+/>

@@ -118,6 +118,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "Les médias désignent vos contenus photos et vidéos. Lorsqu’ils sont intégré à une page de contenu, il est recommandé de suivre les règles décrites dans la documentation.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/contenu-medias)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-content"),
         },
@@ -146,3 +150,9 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Taille SM" args={{ size: "sm" }} />
+
+<Story name="Taille MD" args={{ size: "md" }} />
+
+<Story name="Taille LG" args={{ size: "lg" }} />

@@ -24,6 +24,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "L'accordéon permet aux utilisateurs d'afficher et de masquer des sections de contenu présentés dans une page.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/accordeon)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-accordion"),
         },

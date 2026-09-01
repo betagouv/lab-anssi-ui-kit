@@ -18,6 +18,10 @@
     args: navigationArgs,
     parameters: {
       docs: {
+        description: {
+          component:
+            "La navigation principale est l'élément central de la navigation au sein du site, il oriente l’utilisateur à travers les grandes sections du site et sur éventuellement plusieurs niveaux de profondeur.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/navigation-principale)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-navigation"),
         },

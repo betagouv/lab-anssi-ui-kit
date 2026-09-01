@@ -26,6 +26,10 @@
     args: linkArgs,
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le lien permet la navigation entre une page et un autre contenu au sein de la même page, du même site ou externe. Pour les actions d’un autre type - comme la soumission d’un formulaire - il faut utiliser le composant bouton.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/lien)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-link"),
         },
@@ -59,8 +63,69 @@
 
 <Story name="Défaut" />
 
-<Story name="Ouverture dans un nouvel onglet" args={{ ...linkArgs, blank: true }} />
+<Story name="Lien texte (neutre)">
+  {#snippet template(_args: Args)}
+    <p>
+      Lorem [...] elit, <dsfr-link label="lien interne" href="#" neutral></dsfr-link> incididunt [...]
+      morbi.
+    </p>
+  {/snippet}
+</Story>
 
-<Story name="Neutre" args={{ ...linkArgs, neutral: true }} />
+<Story name="Icône">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-link
+        label={linkArgs.label}
+        href={linkArgs.href}
+        has-icon
+        icon="arrow-left-line"
+        icon-place="left"
+      ></dsfr-link>
+      <dsfr-link
+        label={linkArgs.label}
+        href={linkArgs.href}
+        has-icon
+        icon="arrow-right-line"
+        icon-place="right"
+      ></dsfr-link>
+    </div>
+  {/snippet}
+</Story>
 
-<Story name="Neutre (nouvel onglet)" args={{ ...linkArgs, neutral: true, blank: true }} />
+<Story name="Tailles">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <dsfr-link label={linkArgs.label} href={linkArgs.href} size="sm"></dsfr-link>
+      <dsfr-link label={linkArgs.label} href={linkArgs.href} size="md"></dsfr-link>
+      <dsfr-link label={linkArgs.label} href={linkArgs.href} size="lg"></dsfr-link>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Désactivé" args={{ ...linkArgs, disabled: true }} />
+
+<Story
+  name="Téléchargement"
+  args={{
+    ...linkArgs,
+    label: "Télécharger le document lorem ipsum sit dolores amet",
+    href: "img/image.jpg",
+    download: true,
+    detail: "JPG – 61,88 ko",
+  }}
+/>
+
+<Story name="Externe" args={{ ...linkArgs, blank: true }} />
+
+<Story
+  name="Retour en haut"
+  args={{
+    ...linkArgs,
+    label: "Haut de page",
+    href: "#top",
+    hasIcon: true,
+    icon: "arrow-up-fill",
+    iconPlace: "left",
+  }}
+/>

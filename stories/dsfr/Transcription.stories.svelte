@@ -24,6 +24,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "[Voir la documentation du composant](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/transcription)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-transcription"),
         },
@@ -63,4 +67,4 @@
   </dsfr-transcription>
 {/snippet}
 
-<Story name="Defaut" />
+<Story name="Défaut" />

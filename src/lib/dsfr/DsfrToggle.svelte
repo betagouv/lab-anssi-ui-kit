@@ -153,6 +153,8 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
+  @include _core-scheme;
   // DSFR Components
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/toggle/toggle.main.css";

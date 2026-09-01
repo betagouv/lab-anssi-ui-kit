@@ -18,6 +18,10 @@
     argTypes: quoteArgTypes,
     parameters: {
       docs: {
+        description: {
+          component:
+            "La citation permet de citer un texte dans une page éditoriale. La citation peut provenir d'un extrait d’un discours oral formulé par une tierce personne ou d’un texte écrit.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/citation)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-quote"),
         },
@@ -46,3 +50,31 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story
+  name="Sans auteur"
+  args={{
+    hasAuthor: false,
+  }}
+/>
+
+<Story
+  name="Sans source"
+  args={{
+    sources: [],
+  }}
+/>
+
+<Story
+  name="Sans image"
+  args={{
+    hasImage: false,
+  }}
+/>
+
+<Story
+  name="Accent"
+  args={{
+    accent: "green-menthe",
+  }}
+/>

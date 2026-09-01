@@ -42,6 +42,14 @@
       type: "hover",
       id: "tooltip-1",
     },
+    parameters: {
+      docs: {
+        description: {
+          component:
+            "[Voir la documentation du composant](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/infobulle)",
+        },
+      },
+    },
     render: template,
   });
 

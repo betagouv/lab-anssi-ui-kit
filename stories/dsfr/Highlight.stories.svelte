@@ -29,6 +29,10 @@
     args: highlightArgs,
     parameters: {
       docs: {
+        description: {
+          component:
+            "La mise en exergue permet à l'utilisateur de distinguer et repérer une information facilement.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/mise-en-exergue)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-highlight"),
         },
@@ -45,3 +49,9 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Taille SM" args={{ size: "sm" }} />
+
+<Story name="Taille LG" args={{ size: "lg" }} />
+
+<Story name="Accent" args={{ accent: "green-menthe" }} />

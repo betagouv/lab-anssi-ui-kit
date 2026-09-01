@@ -40,6 +40,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "La case à cocher permet à l’utilisateur de sélectionner une ou plusieurs options dans une liste. Elle est utilisée pour effectuer des sélections multiples (de 0 à N éléments), ou bien pour permettre un choix binaire, lorsque l’utilisateur peut sélectionner ou désélectionner une seule option.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/case-a-cocher)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-checkbox"),
         },
@@ -72,47 +76,9 @@
 
 <Story name="Défaut" />
 
-<Story name="Un label avec un lien" args={{ ...checkboxArgs, label: undefined }}>
-  {#snippet template(args: Args)}
-    <dsfr-checkbox {...args}>
-      Un label avec un&nbsp;<a href="https://google.fr" target="_blank">lien</a>
-    </dsfr-checkbox>
-  {/snippet}
-</Story>
-
-<Story name="Hint simple" args={{ ...checkboxArgs, hint: "Texte de description additionnel" }} />
-
-<Story name="Hint avec un DsfrLink" args={{ ...checkboxArgs }}>
-  {#snippet template(args: Args)}
-    <dsfr-checkbox
-      id={args.id}
-      label={args.label}
-      name={args.name}
-      size={args.size}
-      hint={args.hint}
-      disabled={args.disabled || undefined}
-      checked={args.checked || undefined}
-      value={args.value}
-      status={args.status}
-      error-message={args.errorMessage}
-      valid-message={args.validMessage}
-      form={args.form}
-      required={args.required || undefined}
-      indeterminate={args.indeterminate || undefined}
-    >
-      <span slot="hint">
-        Texte de description avec un&nbsp;<dsfr-link
-          href="https://cyber.gouv.fr/"
-          blank
-          label="lien vers plus d'informations"
-          neutral
-        ></dsfr-link>
-      </span>
-    </dsfr-checkbox>
-  {/snippet}
-</Story>
-
 <Story name="Etat 'indeterminate'" args={{ ...checkboxArgs, indeterminate: true }} />
+
+<Story name="Taille SM" args={{ ...checkboxArgs, size: "sm" }} />
 
 <!-- Dans le cas d'une checkbox qui serait `checked` et `indeterminate`, le style `indeterminate` prend le dessus -->
 <Story

@@ -20,6 +20,10 @@
     args: { ...stepperArgs, hideDetails: false },
     parameters: {
       docs: {
+        description: {
+          component:
+            "L’indicateur d'étape permet d’indiquer à l’utilisateur où il se trouve dans un formulaire ou dans une démarche.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/indicateur-d-etapes)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-stepper"),
         },

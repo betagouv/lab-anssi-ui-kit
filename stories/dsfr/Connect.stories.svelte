@@ -52,6 +52,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "[Voir la documentation du composant](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bouton-franceconnect)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-connect"),
         },
@@ -73,4 +77,8 @@
   ></dsfr-connect>
 {/snippet}
 
-<Story name="Défaut" />
+<Story name="Défaut (Pro Connect)" />
+
+<Story name="France Connect" args={{ id: "france-connect", variant: "default" }} />
+
+<Story name="France Connect Plus" args={{ id: "france-connect-plus", variant: "plus" }} />
