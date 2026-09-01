@@ -15,7 +15,7 @@
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({
-    title: "Composants/DSFR/Tabs",
+    title: "Composants/DSFR/Tab",
     component: DsfrTabs,
     args: tabsArgs,
     argTypes: {
@@ -45,6 +45,10 @@
     parameters: {
       actions: { handles: ["tabchanged"] },
       docs: {
+        description: {
+          component:
+            "Le composant onglet permet aux utilisateurs de naviguer dans différentes sections de contenu au sein d’une même page.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/onglet)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-tabs"),
         },
@@ -82,9 +86,9 @@
       has-icon={args.hasIcon || undefined}
       ontabchanged={(e) => (selectedTab = e.detail.index)}
     >
-      {#each args.tabs as tab, i}
+      {#each args.tabs as tab, i (tab.id ?? i)}
         <span slot={`tab-${i + 1}`} class="custom-tab">
-          Libellé de l'onglet
+          {tab.label}
           <span class={["custom-tag", selectedTab === i ? "selected" : ""]}>
             {i + 1}
           </span>
@@ -99,9 +103,9 @@
             </p>
             {#if i === 0}
               <div class="card-container">
-                {#each Array(10) as _, j}
+                {#each Array.from({ length: 10 }, (_, index) => index + 1) as cardNumber (cardNumber)}
                   <dsfr-card
-                    title={`Intitulé de la carte ${j + 1}`}
+                    title={`Intitulé de la carte ${cardNumber}`}
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et"
                     detail-start="détail (optionnel)"
                     detail-start-icon="warning-fill"

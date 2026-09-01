@@ -31,6 +31,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "L'alerte permet d'attirer l'attention de l'utilisateur sur une information sans interrompre sa tâche.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/alerte)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-alert"),
         },
@@ -80,7 +84,7 @@
 />
 
 <Story
-  name="Success"
+  name="Succès"
   args={{
     type: "success",
     hasTitle: true,
@@ -90,7 +94,7 @@
 />
 
 <Story
-  name="Error"
+  name="Erreur"
   args={{
     type: "error",
     hasTitle: true,
@@ -110,7 +114,7 @@
 />
 
 <Story
-  name="Warning"
+  name="Avertissement"
   args={{
     type: "warning",
     hasTitle: true,
@@ -119,16 +123,44 @@
   }}
 />
 
-<Story
-  name="SizeSm"
-  args={{
-    size: "sm",
-    type: "success",
-    hasTitle: false,
-    hasDescription: true,
-    text: "Succès : Description détaillée du message...",
-  }}
-/>
+<Story name="Taille SM">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <dsfr-alert type="success" size="sm" text="Succès : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert type="error" size="sm" text="Erreur : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert type="info" size="sm" text="Information : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert type="warning" size="sm" text="Attention : Description détaillée du message..."
+      ></dsfr-alert>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Taille MD">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <dsfr-alert
+        type="success"
+        has-title={true}
+        title="Succès : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert type="error" has-title={true} title="Erreur : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert
+        type="info"
+        has-title={true}
+        title="Information : Description détaillée du message..."
+      ></dsfr-alert>
+      <dsfr-alert
+        type="warning"
+        has-title={true}
+        title="Attention : Description détaillée du message..."
+      ></dsfr-alert>
+    </div>
+  {/snippet}
+</Story>
 
 <Story
   name="Dismissible"
@@ -142,7 +174,16 @@
 />
 
 <Story
-  name="With Slot Description"
+  name="Icône personnalisée"
+  args={{
+    type: "default",
+    hasTitle: true,
+    icon: "lock-fill",
+  }}
+/>
+
+<Story
+  name="Avec slot Description"
   args={{
     title: "Titre de l'alerte",
     hasTitle: true,

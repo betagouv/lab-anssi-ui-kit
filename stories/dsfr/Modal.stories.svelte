@@ -60,6 +60,10 @@
     parameters: {
       actions: { handles: ["open", "close"] },
       docs: {
+        description: {
+          component:
+            "La modale permet de concentrer l’attention de l’utilisateur exclusivement sur une tâche ou un élément d’information, sans perdre le contexte de la page en cours. Ce composant nécessite une action de l’utilisateur afin d’être fermée.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/modale)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-modal"),
         },
@@ -127,22 +131,13 @@
 <Story name="Size LG" args={{ id: "modal-lg", size: "lg" }} />
 
 <Story
-  name="Footer (avec DsfrButtonsGroup)"
+  name="Pied de page"
   args={{
-    id: "modal-buttons-group",
+    id: "modal-footer",
     size: "md",
+    icon: "info-line",
     footer: true,
     footerType: "buttonsgroup",
-  }}
-/>
-
-<Story
-  name="Footer (avec DsfrButton)"
-  args={{
-    id: "modal-button",
-    size: "md",
-    footer: true,
-    footerType: "button",
   }}
 />
 

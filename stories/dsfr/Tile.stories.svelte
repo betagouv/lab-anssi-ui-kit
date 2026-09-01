@@ -49,6 +49,10 @@
     args: { ...tileArgs, href: "#" },
     parameters: {
       docs: {
+        description: {
+          component:
+            "[Voir la documentation du composant](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/tuile)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-tile"),
         },
@@ -106,16 +110,55 @@
 
 <Story name="Défaut" />
 
-<Story name="Size Small" args={{ size: "sm" }} />
+<Story name="Taille SM" args={{ size: "sm" }} />
+
+<Story name="Avec Tag" args={{ enlarge: true, hasTag: true }} />
+
+<Story name="Avec Badge" args={{ enlarge: true, hasBadge: true }} />
 
 <Story
-  name="Exemple Tuile DSC"
+  name="Horizontale"
+  args={{ enlarge: true, hasDescription: true, horizontal: true, hasDetails: true }}
+/>
+
+<Story
+  name="Horizontale taille SM"
+  args={{ enlarge: true, size: "sm", horizontal: true, hasDetails: true }}
+/>
+
+<Story
+  name="Téléchargement"
   args={{
-    title: "Pour tous les enseignements",
-    hasDescription: true,
-    description:
-      "CyberEnJeux est un outil pédagogique développé pour le monde éducatif, pouvant être organisé dans tout type de disciplines.",
-    hasDetails: false,
-    hasTag: undefined,
+    enlarge: true,
+    title: "Télécharger le document XX",
+    download: true,
+    hasDetails: true,
+    details: "Détail obligatoire (Extension - Poids - Langue)",
   }}
+/>
+
+<Story
+  name="Téléchargement bouton"
+  args={{
+    enlarge: true,
+    title: "Télécharger le document XX",
+    actionMarkup: "button",
+    download: true,
+    hasDescription: true,
+    description: "Description (optionnelle)",
+    hasDetails: true,
+    details: "Détail obligatoire (Extension - Poids - Langue)",
+  }}
+/>
+
+<Story
+  name="Horizontale verticale à partir de MD"
+  args={{ enlarge: true, horizontal: true, verticalBreakpoint: "md", hasDescription: true }}
+/>
+
+<Story name="Sans lien" args={{ actionMarkup: false, noLink: true }} />
+
+<Story
+  name="Horizontale sans lien"
+  args={{ actionMarkup: false, noLink: true, horizontal: true }}
 />

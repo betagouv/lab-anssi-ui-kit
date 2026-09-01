@@ -17,6 +17,10 @@
     argTypes: noticeArgTypes,
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le bandeau d’information importante permet aux utilisateurs de voir ou d’accéder à une information importante et temporaire.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bandeau-d-information-importante)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-notice"),
         },
@@ -51,116 +55,97 @@
 <Story name="Défaut" />
 
 <Story
-  name="Avec description"
+  name="Information"
   args={{
     type: "info",
-    title: "Titre du bandeau",
-    hasDescription: true,
-    desc: "Texte de description du bandeau d'information.",
+    title: "Titre du bandeau d'information importante",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />
 
 <Story
-  name="Info"
-  args={{
-    type: "info",
-    title: "Titre du bandeau d'information",
-  }}
-/>
-
-<Story
-  name="Warning"
+  name="Avertissement"
   args={{
     type: "warning",
     title: "Titre du bandeau d'avertissement",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />
 
 <Story
-  name="Alert"
+  name="Alerte"
   args={{
     type: "alert",
     title: "Titre du bandeau d'alerte",
-  }}
-/>
-
-<Story
-  name="Avec lien"
-  args={{
-    type: "info",
-    title: "Titre du bandeau",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
     hasLink: true,
-    linkLabel: "Lien de consultation",
-    linkHref: "#",
-    linkTitle: "Consulter - nouvelle fenêtre",
-    linkBlank: true,
-  }}
-/>
-
-<Story
-  name="Dismissible"
-  args={{
-    type: "info",
-    title: "Titre du bandeau",
+    blank: true,
     dismissible: true,
-    buttonCloseLabel: "Masquer le message",
   }}
 />
 
 <Story
-  name="Sans icône"
-  args={{
-    type: "info",
-    title: "Titre du bandeau sans icône",
-    hasIcon: false,
-  }}
-/>
-
-<Story
-  name="Vigilance météo orange"
+  name="Météo orange"
   args={{
     type: "weather-orange",
     title: "Vigilance météo orange",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
   }}
 />
 
 <Story
-  name="Vigilance météo rouge"
+  name="Météo rouge"
   args={{
     type: "weather-red",
     title: "Vigilance météo rouge",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />
 
 <Story
-  name="Vigilance météo violette"
+  name="Météo violet"
   args={{
     type: "weather-purple",
     title: "Vigilance météo violette",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />
 
 <Story
-  name="Appel à témoins"
-  args={{
-    type: "witness",
-    title: "Appel à témoins",
-  }}
-/>
-
-<Story
-  name="Enlèvement"
-  args={{
-    type: "kidnapping",
-    title: "Alerte enlèvement",
-  }}
-/>
-
-<Story
-  name="Attentat"
+  name="Attaque"
   args={{
     type: "attack",
     title: "Attentat en cours",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
+  }}
+/>
+
+<Story
+  name="Témoin"
+  args={{
+    type: "witness",
+    title: "Appel à témoins",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />
 
@@ -168,6 +153,10 @@
   name="Cyberattaque"
   args={{
     type: "cyberattack",
-    title: "Cyberattaque en cours",
+    title: "Cyber-attaque",
+    desc: "Texte de description lorem ipsum sit consectetur adipiscing elit.",
+    hasLink: true,
+    blank: true,
+    dismissible: true,
   }}
 />

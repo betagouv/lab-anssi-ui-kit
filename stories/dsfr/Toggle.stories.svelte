@@ -34,6 +34,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Le composant “Interrupteur” permet à l’utilisateur de faire un choix entre deux états opposés (activé / désactivé).<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/interrupteur)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-toggle"),
         },
@@ -66,3 +70,13 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Description" args={{ hint: "Texte additionnel de l'interrupteur" }} />
+
+<Story name="État" args={{ state: true }} />
+
+<Story name="Erreur" args={{ status: "error" }} />
+
+<Story name="Valide" args={{ status: "valid" }} />
+
+<Story name="Désactivé" args={{ disabled: true }} />

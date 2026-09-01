@@ -186,6 +186,10 @@
     parameters: {
       actions: { handles: ["toolLinkClick"] },
       docs: {
+        description: {
+          component:
+            "L’en-tête permet aux utilisateurs d’identifier sur quel site ils se trouvent. Il peut donner accès à la recherche et à certaines pages ou fonctionnalités clés.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/en-tete)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-header"),
         },

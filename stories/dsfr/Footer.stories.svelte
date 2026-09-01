@@ -62,6 +62,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le pied de page propose des éléments d’information sur le site et une navigation secondaire pour l’utilisateur afin qu’il poursuive son parcours. Il est modulable selon les besoins et les exigences du site.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/pied-de-page)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-footer"),
         },
@@ -101,53 +105,3 @@
 {/snippet}
 
 <Story name="Défaut" />
-
-<Story name="Description avec lien" args={{ ...footerArgs }}>
-  {#snippet template(args: Args)}
-    <dsfr-footer
-      id={args.id}
-      is-mourning={args.isMourning || undefined}
-      brand-logo-title={args.brandLogoTitle}
-      brand-link-title={args.brandLinkTitle}
-      brand-link-href={args.brandLinkHref}
-      brand-link-id={args.brandLinkId}
-      has-brand-operator={args.hasBrandOperator || undefined}
-      brand-operator-alt={args.brandOperatorAlt}
-      brand-operator-src={args.brandOperatorSrc}
-      brand-operator-style={args.brandOperatorStyle}
-      has-description={args.hasDescription || undefined}
-      content-description={args.contentDescription}
-      has-partners={args.hasPartners || undefined}
-      partner-title={args.partnerTitle}
-      main-partner-src={args.mainPartnerSrc}
-      main-partner-href={args.mainPartnerHref}
-      main-partner-alt={args.mainPartnerAlt}
-      main-partner-style={args.mainPartnerStyle}
-      sub-partners={JSON.stringify(args.subPartners)}
-      bottom-links={JSON.stringify(args.bottomLinks)}
-      bottom-copyright={args.bottomCopyright}
-      compact={args.compact || undefined}
-    >
-      <div slot="description">
-        <p>
-          <strong>MesServicesCyber</strong> est la plateforme pour faciliter l'accès de tous aux services
-          et ressources de l'ANSSI et de ses partenaires.
-        </p>
-        <p>
-          Il est développé par l'<DsfrLink
-            label="Agence nationale de la sécurité des systèmes d'information"
-            href="https://cyber.gouv.fr/"
-            blank
-            neutral
-          />, en lien avec <DsfrLink label="BetaGouv" href="https://beta.gouv.fr/" blank neutral /> et
-          la <DsfrLink
-            label="Direction interministérielle du numérique"
-            href="https://www.numerique.gouv.fr/dinum/"
-            blank
-            neutral
-          />
-        </p>
-      </div>
-    </dsfr-footer>
-  {/snippet}
-</Story>

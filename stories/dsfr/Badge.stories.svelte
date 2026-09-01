@@ -17,6 +17,10 @@
     args: badgeArgs,
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le composant badge permet de mettre en avant une information de type “statut” ou “état” sur un élément du site.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/badge)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-badge"),
         },
@@ -45,11 +49,35 @@
 <Story name="Défaut" />
 
 <Story
-  name="SizeSM"
+  name="Taille SM"
   args={{
     size: "sm",
   }}
 />
+
+<Story name="Statuts">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-badge type="status" status="success"></dsfr-badge>
+      <dsfr-badge type="status" status="warning"></dsfr-badge>
+      <dsfr-badge type="status" status="error"></dsfr-badge>
+      <dsfr-badge type="status" status="info"></dsfr-badge>
+      <dsfr-badge type="status" status="new"></dsfr-badge>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Statut sans icône">
+  {#snippet template(_args: Args)}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <dsfr-badge type="status" status="success" has-no-icon></dsfr-badge>
+      <dsfr-badge type="status" status="warning" has-no-icon></dsfr-badge>
+      <dsfr-badge type="status" status="error" has-no-icon></dsfr-badge>
+      <dsfr-badge type="status" status="info" has-no-icon></dsfr-badge>
+      <dsfr-badge type="status" status="new" has-no-icon></dsfr-badge>
+    </div>
+  {/snippet}
+</Story>
 
 <Story
   name="Accent"

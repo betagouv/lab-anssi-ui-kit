@@ -64,6 +64,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "La liste déroulante permet à un utilisateur de choisir un élément dans une liste donnée.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/liste-deroulante)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-select"),
         },
@@ -100,3 +104,5 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Texte d'aide" args={{ hint: "Texte de description additionnel" }} />

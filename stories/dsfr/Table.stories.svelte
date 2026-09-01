@@ -6,6 +6,7 @@
     tableArgTypes,
     tableArgs,
     getColSizeTableArgs,
+    getFixedColTableArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/table/template/stories/table-arg-types.js";
 
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
@@ -25,6 +26,32 @@
         row.map((cell, i) => ({ content: cell.content, size: sizes[i] })),
       ),
       tbodies: table.tbodies,
+    };
+  }
+
+  // Le helper DSFR `getFixedColTableArgs` ajoute une colonne fixe via
+  // `classes: ['fr-cell--fixed']` et `markup: 'th'` (row header). Le composant
+  // DsfrTable utilise `cell.fixed` pour le sticky et rend des `<td>` (pas de row header).
+  // On adapte la structure pour que la propriété `fixed` soit lue par le composant.
+  function adaptFixedCol(breakpoint?: "sm" | "md" | "lg") {
+    const table = getFixedColTableArgs(breakpoint) as DsfrTableArgs;
+    const fixed: boolean | string = breakpoint ?? true;
+
+    return {
+      thead: table.thead.map((row) =>
+        row.map((cell, i) => ({
+          content: cell.content || "",
+          ...(i === 0 ? { fixed } : {}),
+        })),
+      ),
+      tbodies: table.tbodies.map((tbody) =>
+        tbody.map((row) =>
+          row.map((cell, i) => ({
+            content: cell.content || "",
+            ...(i === 0 ? { fixed } : {}),
+          })),
+        ),
+      ),
     };
   }
 
@@ -119,7 +146,9 @@
       actions: { handles: ["pagechanged", "rowsperpagechanged", "selectionchanged"] },
       docs: {
         description: {
-          component: `Les stories présentes dans cette page sont issues de la documentation du DSFR.<br/> Elles ne couvrent que les cas d'usage de base du composant **Table** tel que présentés dans le DSFR, et ne mettent pas en avant les fonctionnalités plus avancées du composant _(ex: cellules avec contenus riches, en-têtes de ligne, etc)_.<br/> D'autres stories d'exemples plus spécifiques sur des usages avancées du composant sont présentes dans le menu **"Exemples"**.`,
+          component:
+            "Les tableaux sont utilisés pour organiser et afficher les informations d'un jeu de données.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/tableau)\n\n---\n\n" +
+            `Les stories présentes dans cette page sont issues de la documentation du DSFR.<br/> Elles ne couvrent que les cas d'usage de base du composant **Table** tel que présentés dans le DSFR, et ne mettent pas en avant les fonctionnalités plus avancées du composant _(ex: cellules avec contenus riches, en-têtes de ligne, etc)_.<br/> D'autres stories d'exemples plus spécifiques sur des usages avancés du composant sont présentes dans le menu **"Exemples"**.`,
         },
         source: {
           transform: webComponentSourceCode("dsfr-table"),
@@ -162,7 +191,7 @@
   ></dsfr-table>
 {/snippet}
 
-<Story name="Defaut" />
+<Story name="Défaut" />
 
 <Story name="Taille small" args={{ size: "sm" }} />
 
@@ -182,26 +211,24 @@
 />
 
 <!--
-  Stories DSFR ci-dessous masquées : elles nécessitent des fonctionnalités absentes
-  du composant DsfrTable actuel. À décommenter au fur et à mesure de leur implémentation.
+  Limitation : le DSFR utilise un <th scope="row"> pour la première colonne de données (row header).
+  Le composant DsfrTable rend systématiquement des <td>, l'information sémantique de row header
+  est donc absente. Le comportement visuel sticky est néanmoins fonctionnel via la prop `fixed`.
 -->
+<Story name="Colonne fixe" args={{ table: adaptFixedCol() }} />
 
-<!--
-  TODO: nécessite un row header (<th scope="row">) sur la 1ère colonne, non géré par
-  le composant qui rend systématiquement des <td>.
 <Story
-  name="Avec une colonne fixe"
-  args={{ table: getFixedColTableArgs() }}
+  name="Colonne fixe à partir de MD"
+  parameters={{
+    docs: {
+      description: {
+        story:
+          "La première colonne est fixe à partir du breakpoint `md`. Existe aussi avec les breakpoints `sm` et `lg`.",
+      },
+    },
+  }}
+  args={{ table: adaptFixedCol("md") }}
 />
--->
-
-<!--
-  TODO: idem "Avec une colonne fixe" + breakpoint sur la cellule fixée.
-<Story
-  name="Avec une colonne fixe à partir du breakpoint md"
-  args={{ table: getFixedColTableArgs("md") }}
-/>
--->
 
 <!--
   Note : les helpers DSFR `getSelectableTableArgs` / `getSelectableTableSelectedLineArgs`
@@ -219,22 +246,144 @@
 <Story name="Sélectionnable avec tout sélectionner" args={{ selectable: true, selectAll: true }} />
 
 <!--
-  TODO: nécessite la prise en charge de rowspan / colspan / headers, non géré par le composant.
+  Limitation : la story DSFR « ComplexTableStory » utilise rowspan, colspan, l'attribut headers
+  et des <th scope="row"> (row headers) pour décrire un emploi du temps scolaire.
+  Ces fonctionnalités ne sont pas prises en charge par DsfrTable.
+  La version ci-dessous est une approximation aplatie sans fusion de cellules.
+-->
 <Story
   name="Complexe"
   args={{
     bordered: true,
-    captionDetail: getComplexTableCaptionDetails(),
-    table: getComplexTableArgs(),
+    captionDetail:
+      "(Résumé) Emploi du temps horaire des Groupes 1 et 2, le matin des jours de la semaine ouvrée (Lundi au Vendredi)",
+    table: {
+      thead: [
+        [
+          { content: "Horaires", fixed: true },
+          { content: "Lundi (G1 & G2)" },
+          { content: "Mardi (G1 & G2)" },
+          { content: "Mercredi (G1)" },
+          { content: "Jeudi (G2)" },
+          { content: "Vendredi (G1 & G2)" },
+        ],
+      ],
+      tbodies: [
+        [
+          [
+            { content: "8h", fixed: true },
+            { content: "Français" },
+            { content: "Mathématiques" },
+            { content: "LV1" },
+            { content: "Histoire - Géographie" },
+            { content: "EPS" },
+          ],
+          [
+            { content: "9h", fixed: true },
+            { content: "Étude dirigée" },
+            { content: "Étude dirigée" },
+            { content: "Étude dirigée" },
+            { content: "Étude dirigée" },
+            { content: "Étude dirigée" },
+          ],
+          [
+            { content: "10h", fixed: true },
+            { content: "Mathématiques" },
+            { content: "Histoire - Géographie" },
+            { content: "Arts appliqués" },
+            { content: "LV2" },
+            { content: "Sciences" },
+          ],
+          [
+            { content: "11h", fixed: true },
+            { content: "Français" },
+            { content: "EPS" },
+            { content: "Arts appliqués" },
+            { content: "Histoire - Géographie" },
+            { content: "Physique - Chimie" },
+          ],
+          [
+            { content: "12h", fixed: true },
+            { content: "Sciences" },
+            { content: "LV1" },
+            { content: "EPS" },
+            { content: "EPS" },
+            { content: "LV2" },
+          ],
+        ],
+      ],
+    },
   }}
 />
--->
 
 <!--
-  TODO: nécessite un row header + des contenus HTML riches injectables, non géré par
-  le composant en l'état (la prop `rich` ne couvre pas les cellules d'en-tête de ligne).
+  Limitation : la story DSFR « MiscellaneousTableStory » montre des cellules à contenu riche
+  (badges, boutons de tri, inputs, tooltips, tags, liens de téléchargement, pictogrammes SVG)
+  et une colonne sélectionnable avec <th scope="row">.
+  Le composant DsfrTable ne prend pas en charge le rendu HTML brut dans les cellules via la
+  prop `table`. Pour du contenu riche, utiliser l'API columns/rows avec `rich` ou `Column.rich`
+  et les slots nommés `cell:<colKey>:<rowIndex>` (cf. stories dans "Exemples").
+  La version ci-dessous est une approximation textuelle des données d'origine.
+-->
 <Story
   name="Divers"
-  args={{ table: getMiscellaneousTableArgs() }}
+  args={{
+    selectable: true,
+    table: {
+      thead: [
+        [
+          { content: "Titre" },
+          { content: "Texte" },
+          { content: "Titre et description", multiline: true },
+          { content: "Badge et texte", inline: true },
+          { content: "Texte" },
+          { content: "Saisie" },
+          { content: "Montant", align: "right" },
+          { content: "Statut" },
+          { content: "Action", align: "center" },
+          { content: "Tag" },
+          { content: "Téléchargement" },
+          { content: "Pictogramme", align: "center" },
+        ],
+      ],
+      tbodies: [
+        [
+          [
+            { content: "Titre par défaut" },
+            { content: "Texte par défaut" },
+            {
+              content: "Libellé par défaut — Titre par défaut — Texte par défaut",
+              multiline: true,
+            },
+            { content: "Libellé par défaut — Texte par défaut", inline: true },
+            { content: "Texte par défaut" },
+            { content: "(champ de saisie)" },
+            { content: "30,00 €", align: "right" },
+            { content: "Libellé par défaut" },
+            { content: "Libellé bouton", align: "center" },
+            { content: "Libellé par défaut" },
+            { content: "Lien de Téléchargement — JPG 61,88 Ko" },
+            { content: "(pictogramme)", align: "center" },
+          ],
+          [
+            { content: "Titre par défaut" },
+            { content: "Texte par défaut" },
+            {
+              content: "Libellé par défaut — Titre par défaut — Texte par défaut",
+              multiline: true,
+            },
+            { content: "Libellé par défaut — Texte par défaut", inline: true },
+            { content: "Texte par défaut" },
+            { content: "(champ de saisie)" },
+            { content: "30,00 €", align: "right" },
+            { content: "Libellé par défaut" },
+            { content: "Libellé bouton", align: "center" },
+            { content: "Libellé par défaut" },
+            { content: "Lien de Téléchargement — JPG 61,88 Ko" },
+            { content: "(pictogramme)", align: "center" },
+          ],
+        ],
+      ],
+    },
+  }}
 />
--->

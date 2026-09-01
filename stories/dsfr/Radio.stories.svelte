@@ -28,6 +28,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Le bouton radio permet à l’utilisateur de sélectionner une seule option dans une liste.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bouton-radio)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-radio"),
         },

@@ -21,7 +21,7 @@
   });
 
   const { Story } = defineMeta({
-    title: "Composants/DSFR/Side Menu",
+    title: "Composants/DSFR/Sidemenu",
     component: DsfrSideMenu,
     argTypes: sidemenuArgTypes,
     args: {
@@ -48,6 +48,10 @@
     },
     parameters: {
       docs: {
+        description: {
+          component:
+            "Le menu latéral permet aux utilisateurs de naviguer entre les différentes pages d’une rubrique ou d’un même thème.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/menu-lateral)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-side-menu"),
         },
@@ -60,18 +64,37 @@
 </script>
 
 {#snippet template(args: Args)}
-  <div style="width: 300px">
-    <dsfr-side-menu
-      title={args.title}
-      items={args.items}
-      button-label={args.buttonLabel}
-      button-id={args.buttonId}
-      title-id={args.titleId}
-      has-title={args.hasTitle || undefined}
-      modifier={args.modifier}
-      active-item={args.activeItem}
-    ></dsfr-side-menu>
-  </div>
+  <dsfr-side-menu
+    title={args.title}
+    items={args.items}
+    button-label={args.buttonLabel}
+    button-id={args.buttonId}
+    title-id={args.titleId}
+    has-title={args.hasTitle || undefined}
+    modifier={args.modifier}
+    active-item={args.activeItem}
+  ></dsfr-side-menu>
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story
+  name="Lien"
+  args={{
+    items: [getItemArgs("01"), getItemArgs("02", "link", true), getItemArgs("03")],
+  }}
+/>
+
+<Story
+  name="Sous-menu"
+  args={{
+    items: [
+      {
+        ...getItemArgs("sous-niveau 01", "menu", true),
+        items: [getItemArgs("1-1"), getItemArgs("1-2", "link", true), getItemArgs("1-3")],
+      },
+      getItemArgs("sous-niveau 02"),
+      getItemArgs("sous-niveau 03"),
+    ],
+  }}
+/>

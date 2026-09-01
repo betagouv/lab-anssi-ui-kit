@@ -56,6 +56,10 @@
     parameters: {
       actions: { handles: ["valuechanged", "value2changed"] },
       docs: {
+        description: {
+          component:
+            "Les curseurs sont des entrées numériques qui permettent de voir graphiquement une sélection par rapport à une valeur minimale et maximale. Ils servent à montrer en temps réel les options choisies et à éclairer la prise de décision.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/curseur)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-range"),
         },

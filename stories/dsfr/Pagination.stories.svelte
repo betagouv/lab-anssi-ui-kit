@@ -36,6 +36,10 @@
     parameters: {
       actions: { handles: ["pagechange"] },
       docs: {
+        description: {
+          component:
+            "La pagination permet à l’utilisateur de naviguer entre les différentes pages d’une liste d'éléments.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/pagination)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-pagination"),
         },
@@ -63,4 +67,11 @@
   ></dsfr-pagination>
 {/snippet}
 
-<Story name="Defaut" />
+<Story name="Défaut" />
+
+<Story
+  name="Dernière page"
+  args={{
+    currentPageIndex: paginationArgs.pages.length,
+  }}
+/>

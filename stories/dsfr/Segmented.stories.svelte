@@ -5,6 +5,7 @@
   import {
     segmentedArgTypes,
     segmentedArgs,
+    getSegmentedData,
   } from "@gouvfr/dsfr/src/dsfr/component/segmented/template/stories/segmented-arg-types.js";
 
   import DsfrSegmented from "$lib/dsfr/DsfrSegmented.svelte";
@@ -29,6 +30,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Le composant « contrôle segmenté » incite l'utilisateur à choisir entre plusieurs options d'affichage disponibles (vues), mutuellement exclusives avec une valeur sélectionnée par défaut.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/controle-segmente)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-segmented"),
         },
@@ -54,3 +59,15 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Avec icône" args={{ hasIcon: true }} />
+
+<Story name="Taille SM" args={{ size: "sm" }} />
+
+<Story name="Légende en ligne" args={{ legendInline: true }} />
+
+<Story name="Texte d'aide" args={{ hint: "Texte de description additionnel" }} />
+
+<Story name="Sans légende" args={{ noLegend: true }} />
+
+<Story name="Désactivé" args={{ elements: getSegmentedData(3, true) }} />

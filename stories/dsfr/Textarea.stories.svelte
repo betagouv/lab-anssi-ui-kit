@@ -60,6 +60,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Les champs permettent à un utilisateur d'entrer du contenu et des données.<br/>[Voir la documentation du modèle sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/modeles/blocs-fonctionnels/adresse-electronique)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-textarea"),
         },

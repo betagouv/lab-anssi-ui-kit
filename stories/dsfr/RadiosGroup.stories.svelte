@@ -44,6 +44,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Les boutons radio permettent à l’utilisateur de sélectionner une seule option dans une liste.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bouton-radio)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-radios-group"),
         },
@@ -76,3 +80,36 @@
 {/snippet}
 
 <Story name="Défaut" />
+
+<Story name="Texte d'aide de la légende" args={{ hint: "Texte de description additionnel" }} />
+
+<Story name="Texte d'aide des radios" args={{ radios: getRadiosGroupData(3, true) }} />
+
+<Story name="Désactivé" args={{ disabled: true }} />
+
+<Story name="Valide" args={{ status: "valid" }} />
+
+<Story name="Erreur" args={{ status: "error" }} />
+
+<Story name="Taille MD" args={{ size: "md" }} />
+
+<Story name="Taille SM" args={{ size: "sm" }} />
+
+<Story name="En ligne" args={{ inline: true }} />
+
+<!--
+<Story name="Riche" args={{ rich: true }} />
+
+<Story name="Riche avec indice" args={{ rich: true, hint: "Texte de description additionnel" }} />
+
+<Story name="Riche en ligne" args={{ rich: true, inline: true }} />
+
+<Story
+  name="Riche en ligne avec indice"
+  args={{ rich: true, inline: true, hint: "Texte de description additionnel" }}
+/>
+
+<Story name="Riche sans image" args={{ rich: true, hasPictogram: false }} />
+
+<Story name="Riche sans image en ligne" args={{ rich: true, hasPictogram: false, inline: true }} />
+-->

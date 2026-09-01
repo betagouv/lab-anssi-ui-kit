@@ -59,6 +59,10 @@
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
+        description: {
+          component:
+            "Les champs permettent à un utilisateur d'entrer du contenu et des données.<br/>[Voir la documentation du modèle sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/modeles/blocs-fonctionnels/adresse-electronique)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-input"),
         },
@@ -146,7 +150,7 @@
 />
 
 <Story
-  name="Avec description et icône"
+  name="Texte d'aide et icône"
   args={{
     icon: "alert-line",
     hint: "Texte de description additionnel",
@@ -158,15 +162,6 @@
   args={{
     label: "Date simple",
     type: "date",
-  }}
-/>
-
-<Story
-  name="URL"
-  args={{
-    label: "Adresse du site",
-    placeholder: "https://",
-    hint: "Saisissez une url valide, commençant par https://",
   }}
 />
 
@@ -213,3 +208,12 @@
     </dsfr-input>
   {/snippet}
 </Story>
+
+<Story
+  name="URL"
+  args={{
+    label: "Adresse du site",
+    placeholder: "https://",
+    hint: "Saisissez une url valide, commençant par https://",
+  }}
+/>

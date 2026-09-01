@@ -26,6 +26,10 @@
         },
       },
       docs: {
+        description: {
+          component:
+            "Le fil d’Ariane est un système de navigation secondaire qui permet à l’utilisateur de se situer sur le site qu’il consulte.<br/>[Voir la documentation du composant sur le site du DSFR.](https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/fil-d-ariane)",
+        },
         source: {
           transform: webComponentSourceCode("dsfr-breadcrumb"),
         },
@@ -49,7 +53,7 @@
   ></dsfr-breadcrumb>
 {/snippet}
 
-<Story name="Defaut" />
+<Story name="Défaut" />
 
 <Story
   name="Inverse"
