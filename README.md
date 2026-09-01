@@ -93,15 +93,14 @@ Une fois cet import effectué, les WebComponents sont prêts à être consommés
 ## Release
 
 - Mettre à jour le `package.json` avec la nouvelle version
-- Exécuter `pnpm install`
 - Faire un commit et une PR `[VERSION] Passe à la version X.X.X`
 - Valider la PR puis la merger
 - Dans `GitHub > Release` cliquer sur le bouton `Draft a new release`
 - Dans le formulaire `New release` :
   - Dérouler la liste puis cliquer sur `Create new tag`
-  - Nommer le tag `v.X.X.X`
+  - Nommer le tag `vX.X.X`
   - La target reste `main`
-  - Release title : `v.X.X.X`
+  - Release title : `vX.X.X`
   - Release notes : utiliser le template ci-dessous :
 
     ```markdown
@@ -116,6 +115,4 @@ Une fois cet import effectué, les WebComponents sont prêts à être consommés
     - **LAB <NOM_COMPOSANT>** - <DESCRIPTION> – [#<ID_PR>](LIEN_PR)
     ```
 
-  - Cliquer sur `Publish release`
-
-- Aller dans les actions `GitHub > Publication du package sur NPM` et lancer la publication sur la version `vX.X.X`
+  - Cliquer sur `Publish release`, l'action `Publication du package sur NPM` se lance sur la version `vX.X.X` automatiquement.
