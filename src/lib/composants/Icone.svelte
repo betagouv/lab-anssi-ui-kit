@@ -23,9 +23,8 @@
   @use "../styles/jeu-icone.scss";
 
   .icone {
-    --icon-size: 1em;
-    line-height: var(--icon-size);
-    height: var(--icon-size);
+    line-height: var(--icon-size, 1rem);
+    height: var(--icon-size, 1rem);
 
     &:before {
       content: "";
@@ -34,9 +33,9 @@
       flex: 0 0 auto;
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
-      vertical-align: calc((0.75em - var(--icon-size)) * 0.5);
-      width: var(--icon-size);
-      height: var(--icon-size);
+      vertical-align: calc((0.75em - var(--icon-size, 1rem)) * 0.5);
+      width: var(--icon-size, 1rem);
+      height: var(--icon-size, 1rem);
     }
 
     &.sm {
