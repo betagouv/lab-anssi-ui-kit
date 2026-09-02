@@ -59,11 +59,8 @@
 </script>
 
 {#snippet template(args: Args)}
-  <dsfr-tabs
-    tabs={tabsProps(args).tabs}
-    aria-label="Exemple d'onglets"
-    has-icon={args.hasIcon || undefined}
-  >
+  {@const props = tabsProps($state.snapshot(args))}
+  <dsfr-tabs tabs={props.tabs} aria-label="Exemple d'onglets" has-icon={args.hasIcon || undefined}>
   </dsfr-tabs>
 {/snippet}
 
@@ -78,8 +75,9 @@
 
 <Story name="Avec Slots" args={{ ...tabsArgs, hasIcon: false }}>
   {#snippet template(args: Args)}
+    {@const props = tabsProps($state.snapshot(args))}
     <dsfr-tabs
-      tabs={tabsProps(args).tabs}
+      tabs={props.tabs}
       aria-label="Exemple d'onglets avec Slots"
       has-icon={args.hasIcon || undefined}
       ontabchanged={(e) => (selectedTab = e.detail.index)}
