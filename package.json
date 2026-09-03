@@ -21,13 +21,13 @@
     }
   },
   "scripts": {
-    "build": "vite build && pnpm run build:manifest && pnpm run prepack",
+    "build": "svelte-package && pnpm run build:manifest && pnpm run build:webcomponents && pnpm run copy:icons && publint",
     "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
     "build:manifest": "node scripts/generate-ui-manifest.mjs",
     "prepare": "husky",
-    "prepack": "pnpm run build:webcomponents && pnpm run copy:icons && publint",
+    "prepack": "publint",
     "test": "vitest run",
     "storybook:dev": "STORYBOOK_ENV=development storybook dev -p 6006",
     "storybook:build": "STORYBOOK_ENV=production storybook build",
@@ -41,8 +41,17 @@
     "!dist/**/*.test.*",
     "!dist/**/*.spec.*"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    },
     "./dist/webcomponents": {
       "types": "./dist/webcomponents/lab-anssi-ui-kit.jsx.d.ts",
       "import": "./dist/webcomponents/lab-anssi-ui-kit.iife.js"
@@ -65,6 +74,7 @@
     "@storybook/addon-themes": "~10.5.10",
     "@storybook/addon-vitest": "~10.5.10",
     "@storybook/svelte-vite": "~10.5.10",
+    "@sveltejs/package": "^2.5.8",
     "@sveltejs/vite-plugin-svelte": "~7.3.0",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/svelte": "~5.4.2",
