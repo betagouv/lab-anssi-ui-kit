@@ -63,6 +63,7 @@ export { default as DsfrRange } from "./dsfr/DsfrRange.svelte";
 export { default as DsfrSegmented } from "./dsfr/DsfrSegmented.svelte";
 export { default as DsfrSelect } from "./dsfr/DsfrSelect.svelte";
 export { default as DsfrSearch } from "./dsfr/DsfrSearch.svelte";
+export { default as DsfrShare } from "./dsfr/DsfrShare.svelte";
 export { default as DsfrSideMenu } from "./dsfr/DsfrSideMenu.svelte";
 export { default as DsfrSkipLink } from "./dsfr/DsfrSkipLink.svelte";
 export { default as DsfrStepper } from "./dsfr/DsfrStepper.svelte";
