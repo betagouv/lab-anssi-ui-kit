@@ -31,33 +31,13 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
-    extend: (CustomElementClass) => {
-      return class extends CustomElementClass {
-        static formAssociated = true;
-
-        constructor() {
-          super();
-          this.internals = this.attachInternals();
-        }
-
-        connectedCallback() {
-          super.connectedCallback();
-
-          const iconsStyleSheet = getIconsStyleSheet();
-          const shadow = this.shadowRoot;
-
-          if (shadow && !shadow.adoptedStyleSheets.includes(iconsStyleSheet)) {
-            shadow.adoptedStyleSheets = [iconsStyleSheet, ...shadow.adoptedStyleSheets];
-          }
-        }
-      };
-    },
+    extend: withFormAndIcons,
   }}
 />
 
 <script lang="ts">
   import type { TextSize, TextWeight } from "$lib/types";
-  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import { withFormAndIcons, setIconClass, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";

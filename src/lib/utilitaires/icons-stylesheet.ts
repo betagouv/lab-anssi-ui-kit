@@ -14,15 +14,17 @@ export function getIconsStyleSheet(): CSSStyleSheet {
   return iconsStyleSheet;
 }
 
-type CustomElementConstructor = new (
-  ...args: unknown[]
-) => HTMLElement & { connectedCallback(): void };
+export type SvelteCustomElementClass = new () => HTMLElement;
+
+type SvelteCustomElementClassWithLifecycle = new () => HTMLElement & {
+  connectedCallback(): void;
+};
 
 /**
  * Permet d'étendre la class des WebComponents afin d'injecter la feuille de style des icônes DSFR dans le Shadow DOM.
  */
-export function withIconsStyleSheet(CustomElementClass: CustomElementConstructor) {
-  return class extends CustomElementClass {
+export function withIconsStyleSheet(CustomElementClass: SvelteCustomElementClass) {
+  return class extends (CustomElementClass as SvelteCustomElementClassWithLifecycle) {
     connectedCallback() {
       super.connectedCallback();
 

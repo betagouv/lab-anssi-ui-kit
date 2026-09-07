@@ -23,22 +23,14 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
-    extend: (customElementConstructor) => {
-      return class extends customElementConstructor {
-        static formAssociated = true;
+    extend: withFormAssociated,
 
-        constructor() {
-          super();
-          this.internals = this.attachInternals();
-        }
-      };
-    },
   }}
 />
 
 <script lang="ts">
   import type { TextSize, TextWeight } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { setThemeable, withFormAssociated } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";

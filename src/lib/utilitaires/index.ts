@@ -1,4 +1,5 @@
 export { getIconsStyleSheet, withIconsStyleSheet } from "./icons-stylesheet";
+export { withFormAssociated, withFormAndIcons } from "./form-associated";
 
 /**
  * Génère une classe d'icône FR avec validation

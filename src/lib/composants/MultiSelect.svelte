@@ -22,7 +22,7 @@
     pressEscape,
     stopPropagation,
     trapFocus,
-  } from "$lib/directives/actions.svelte.ts";
+  } from "$lib/directives/actions.svelte";
 
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 

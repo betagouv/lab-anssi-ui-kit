@@ -17,24 +17,15 @@
       required: { attribute: "required", type: "Boolean" },
       indeterminate: { attribute: "indeterminate", type: "Boolean", reflect: true },
     },
-    extend: (customElementConstructor) => {
-      return class extends customElementConstructor {
-        static formAssociated = true;
-
-        constructor() {
-          super();
-          this.internals = this.attachInternals();
-        }
-      };
-    },
+    extend: withFormAssociated,
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { setThemeable, withFormAssociated } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
-  import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
+  import { setIndeterminate } from "$lib/directives/actions.svelte";
 
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 

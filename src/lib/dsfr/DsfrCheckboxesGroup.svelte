@@ -19,22 +19,14 @@
       legendSize: { attribute: "legend-size", type: "String" },
       legendWeight: { attribute: "legend-weight", type: "String" },
     },
-    extend: (customElementConstructor) => {
-      return class extends customElementConstructor {
-        static formAssociated = true;
+    extend: withFormAssociated,
 
-        constructor() {
-          super();
-          this.internals = this.attachInternals();
-        }
-      };
-    },
   }}
 />
 
 <script lang="ts">
   import type { Size, TextSize, TextWeight } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { setThemeable, withFormAssociated } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 

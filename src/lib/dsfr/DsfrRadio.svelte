@@ -16,22 +16,14 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
-    extend: (customElementConstructor) => {
-      return class extends customElementConstructor {
-        static formAssociated = true;
+    extend: withFormAssociated,
 
-        constructor() {
-          super();
-          this.internals = this.attachInternals();
-        }
-      };
-    },
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { setThemeable, withFormAssociated } from "$lib/utilitaires";
   setThemeable($host());
 
   type RadioSize = Extract<Size, "sm" | "md">;

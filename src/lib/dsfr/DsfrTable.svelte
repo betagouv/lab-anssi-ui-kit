@@ -41,7 +41,7 @@
 <script lang="ts">
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
-  import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
+  import { setIndeterminate } from "$lib/directives/actions.svelte";
 
   import DsfrPagination from "$lib/dsfr/DsfrPagination.svelte";
   import DsfrSelect from "$lib/dsfr/DsfrSelect.svelte";

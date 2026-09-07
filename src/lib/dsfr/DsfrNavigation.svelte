@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrLink from "./DsfrLink.svelte";

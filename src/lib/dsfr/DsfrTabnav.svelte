@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { setThemeable } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   setThemeable($host());
 
