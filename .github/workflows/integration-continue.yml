@@ -66,6 +66,10 @@ jobs:
       - name: Exécuter les tests
         run: pnpm run test
 
+      - name: Vérifier les types
+        continue-on-error: true
+        run: pnpm run check
+
       - name: Contrôler le format
         run: ./node_modules/.bin/prettier -c .
 
