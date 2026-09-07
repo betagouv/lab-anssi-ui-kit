@@ -28,6 +28,7 @@
     "build:manifest": "node scripts/generate-ui-manifest.mjs",
     "prepare": "husky",
     "prepack": "pnpm run build:webcomponents && pnpm run copy:icons && publint",
+    "check": "svelte-check --tsconfig ./tsconfig.check.json --threshold error",
     "test": "vitest run",
     "storybook:dev": "STORYBOOK_ENV=development storybook dev -p 6006",
     "storybook:build": "STORYBOOK_ENV=production storybook build",
