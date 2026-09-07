@@ -2,10 +2,10 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import ListeArticles from "$lib/composants/blog/ListeArticles.svelte";
+  import ListeArticles from "$lib/composants/legacy/blog/ListeArticles.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/ListeArticles",
+    title: "Composants/Lab ANSSI/Legacy/Blog/ListeArticles",
     component: ListeArticles,
     args: {
       articles: [

@@ -11,8 +11,8 @@
 <script lang="ts">
   import type { Video } from "$lib/types";
 
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
-  import LecteurVideo from "$lib/composants/vitrines-produits/briques/LecteurVideo.svelte";
+  import Brique from "$lib/composants/legacy/briques/Brique.svelte";
+  import LecteurVideo from "$lib/composants/legacy/briques/LecteurVideo.svelte";
 
   interface Props {
     titre: string;

@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import BandeauTitre from "$lib/composants/blog/BandeauTitre.svelte";
+  import BandeauTitre from "$lib/composants/legacy/BandeauTitre.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/BandeauTitre",

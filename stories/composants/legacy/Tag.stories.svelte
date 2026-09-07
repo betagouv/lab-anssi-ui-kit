@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import Tag from "$lib/composants/Tag.svelte";
+  import Tag from "$lib/composants/legacy/Tag.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Tag",

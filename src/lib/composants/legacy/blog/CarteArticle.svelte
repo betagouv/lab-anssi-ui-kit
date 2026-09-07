@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ResumeArticle, InfosTag } from "$lib/types";
-  import Tag from "$lib/composants/Tag.svelte";
-  import Fleche from "$lib/composants/icones/Fleche.svelte";
+  import Tag from "$lib/composants/legacy/Tag.svelte";
+  import Fleche from "$lib/composants/legacy/icones/Fleche.svelte";
 
   interface Props {
     article: ResumeArticle;

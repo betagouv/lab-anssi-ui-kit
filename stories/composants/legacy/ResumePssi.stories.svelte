@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import ResumePssi from "$lib/composants/ResumePssi.svelte";
+  import ResumePssi from "$lib/composants/legacy/ResumePssi.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/ResumePssi",

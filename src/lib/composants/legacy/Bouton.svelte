@@ -55,5 +55,5 @@
 </button>
 
 <style lang="scss">
-  @use "../styles/apparence-bouton.scss";
+  @use "../../styles/apparence-bouton.scss";
 </style>

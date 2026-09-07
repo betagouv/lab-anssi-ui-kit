@@ -69,7 +69,7 @@
 </a>
 
 <style lang="scss">
-  @use "../styles/apparence-bouton.scss";
+  @use "../../styles/apparence-bouton.scss";
 
   .bouton {
     text-decoration: none;

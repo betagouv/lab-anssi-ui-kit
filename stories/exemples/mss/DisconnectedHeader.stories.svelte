@@ -21,7 +21,7 @@
   import Navigation from "$lib/composants/suite-cyber/SuiteCyber.svelte";
 
   // @ts-ignore: Required Import to use this component as webcomponent
-  import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
+  import Bandeau from "$lib/composants/legacy/Bandeau.svelte";
 
   // @ts-ignore: Required Import to use this component as webcomponent
   import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";

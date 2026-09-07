@@ -11,7 +11,7 @@
 />
 
 <script lang="ts">
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import Brique from "$lib/composants/legacy/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
 
   interface Props {

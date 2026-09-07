@@ -2,12 +2,12 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import RejoindreLaCommunaute from "$lib/composants/vitrines-produits/briques/RejoindreLaCommunaute.svelte";
+  import RejoindreLaCommunaute from "$lib/composants/legacy/briques/RejoindreLaCommunaute.svelte";
 
   import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Brique Rejoindre La Communauté",
+    title: "Composants/Lab ANSSI/Legacy/Briques/Rejoindre La Communauté",
     component: RejoindreLaCommunaute,
     args: {
       titre: "Rejoindre la communauté",

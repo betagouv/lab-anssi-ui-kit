@@ -10,9 +10,9 @@
 
 <script lang="ts">
   import type { TableDesMatieres } from "$lib/types";
-  import SommaireMobile from "$lib/composants/blog/SommaireMobile.svelte";
+  import SommaireMobile from "$lib/composants/legacy/blog/SommaireMobile.svelte";
   import { onDestroy, tick } from "svelte";
-  import SommaireBureau from "$lib/composants/blog/SommaireBureau.svelte";
+  import SommaireBureau from "$lib/composants/legacy/blog/SommaireBureau.svelte";
 
   interface Props {
     contenu: string;

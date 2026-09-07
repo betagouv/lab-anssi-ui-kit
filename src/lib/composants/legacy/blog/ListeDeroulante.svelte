@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { srcAsset } from "$lib/assets/assets";
+  import { srcAsset } from "$lib/assets/assets.ts";
 
   interface Props {
     valeur: string;

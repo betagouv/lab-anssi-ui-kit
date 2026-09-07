@@ -11,8 +11,8 @@
 
 <script lang="ts">
   import type { CategoriesArticle, ResumeArticle } from "$lib/types";
-  import CarteArticle from "$lib/composants/blog/CarteArticle.svelte";
-  import ListeDeroulante from "$lib/composants/blog/ListeDeroulante.svelte";
+  import CarteArticle from "$lib/composants/legacy/blog/CarteArticle.svelte";
+  import ListeDeroulante from "$lib/composants/legacy/blog/ListeDeroulante.svelte";
 
   interface Props {
     articles: ResumeArticle[];

@@ -3,7 +3,7 @@
   import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
-  import Alerte from "$lib/composants/Alerte.svelte";
+  import Alerte from "$lib/composants/legacy/Alerte.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Alerte",

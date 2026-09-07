@@ -2,12 +2,12 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import BriqueHero from "$lib/composants/vitrines-produits/briques/BriqueHero.svelte";
+  import BriqueHero from "$lib/composants/legacy/briques/BriqueHero.svelte";
 
   import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Brique Hero",
+    title: "Composants/Lab ANSSI/Legacy/Briques/Hero",
     component: BriqueHero,
     args: {
       badge: true,
