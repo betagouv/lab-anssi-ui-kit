@@ -19,13 +19,10 @@ jobs:
         with:
           node-version: 24.20.0
 
-      - name: Installe pnpm
+      - name: Installer les dépendances pnpm
         uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
         with:
-          install: false
-
-      - name: Installer les dépendances
-        run: pnpm install --frozen-lockfile
+          require-lockfile: true
 
       - name: Installer Playwright
         run: ./node_modules/.bin/playwright install chromium --with-deps
