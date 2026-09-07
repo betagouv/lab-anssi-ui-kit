@@ -8,9 +8,13 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "types": ["@figma/code-connect/figma-types"]
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["vite/client", "@figma/code-connect/figma-types"],
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    }
   },
-  "include": ["./stories"]
+  "include": ["./stories", "./src"]
 }
