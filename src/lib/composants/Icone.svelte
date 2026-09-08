@@ -5,23 +5,25 @@
       nom: { reflect: false, type: "String", attribute: "nom" },
       taille: { reflect: false, type: "String", attribute: "taille" },
     },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
+  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
+
   interface Props {
     nom: string;
     taille?: "sm" | "md" | "lg" | undefined;
   }
 
   let { nom, taille = undefined }: Props = $props();
+  let iconClass = $derived(nom && setIconClass(nom));
 </script>
 
-<span class="icone fr-icon-{nom} {taille}"></span>
+<span class={["icone", taille, iconClass]}></span>
 
 <style lang="scss">
-  @use "../styles/jeu-icone.scss";
-
   .icone {
     line-height: var(--icon-size, 1rem);
     height: var(--icon-size, 1rem);
