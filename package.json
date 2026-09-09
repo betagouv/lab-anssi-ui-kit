@@ -36,7 +36,9 @@
     "storybook:test": "STORYBOOK_ENV=production pnpm run test-storybook",
     "test-storybook": "vitest --project=storybook",
     "copy:icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* src/lib/assets/icones/dsfr && cp -r src/lib/assets/ dist/",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "files": [
     "dist",
