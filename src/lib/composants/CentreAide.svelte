@@ -44,7 +44,7 @@
     $host()?.toggleAttribute("data-open", ouvert);
   });
 
-  const desktop = new MediaQuery("min-width: 992px");
+  const pointDeRuptureMD = new MediaQuery("min-width: 768px");
 </script>
 
 {#if !ouvert}
@@ -52,10 +52,10 @@
     <DsfrButton
       label="Centre d'aide"
       hasIcon
-      iconPlace="left"
+      iconPlace={pointDeRuptureMD.current ? "left" : "only"}
       icon="question-line"
       onclick={() => (ouvert = true)}
-      size={desktop.current ? "lg" : "md"}
+      size="lg"
     />
   </div>
 {/if}
