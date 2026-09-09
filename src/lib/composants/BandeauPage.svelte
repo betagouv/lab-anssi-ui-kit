@@ -180,7 +180,7 @@
 
     &__principal {
       @include respond-to("md") {
-        margin-block-end: rem(40px);
+        padding-block-end: var(--spacing-block-end, rem(40px));
       }
     }
 
@@ -269,6 +269,10 @@
           padding-block-end: 0;
         }
 
+        &__principal {
+          --spacing-block-end: #{rem(32px)};
+        }
+
         &__secondaire {
           align-self: flex-end;
         }
@@ -296,6 +300,11 @@
           padding-block-start: 12px;
         }
       }
+    }
+
+    // Variation "Sans image"
+    &--sans-image:not(.lab-anssi-bandeau-page--simple) {
+      --spacing-block-end: 0;
     }
   }
 </style>
