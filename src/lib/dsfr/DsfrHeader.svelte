@@ -455,7 +455,6 @@
                 id={navigationId}
                 ariaLabel={navigationAriaLabel}
                 items={navigationItems}
-                --dsfr-nav-position="static"
               >
                 <div slot="afternavigation" use:createSlot={`afternavigation`}></div>
               </DsfrNavigation>
@@ -464,7 +463,6 @@
                 id={navigationId}
                 ariaLabel={navigationAriaLabel}
                 items={navigationItems}
-                --dsfr-nav-position="static"
               />
             {/if}
           </slot>
@@ -496,6 +494,10 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("header") {
+    &__menu {
+      --dsfr-nav-position: static;
+    }
+
     &__service-title {
       display: flex;
       align-items: center;
