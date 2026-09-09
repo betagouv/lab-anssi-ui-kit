@@ -35,7 +35,8 @@
     "storybook:build-dev": "STORYBOOK_ENV=development storybook build",
     "storybook:test": "STORYBOOK_ENV=production pnpm run test-storybook",
     "test-storybook": "vitest --project=storybook",
-    "copy:icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* src/lib/assets/icones/dsfr && cp -r src/lib/assets/ dist/"
+    "copy:icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* src/lib/assets/icones/dsfr && cp -r src/lib/assets/ dist/",
+    "lint": "eslint ."
   },
   "files": [
     "dist",
@@ -103,12 +104,7 @@
     "wait-on": "~9.1.0"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,ts,css,md,yml}": "prettier --write"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
+    "*.{js,ts,svelte}": "eslint --cache --fix",
+    "*.{js,ts,svelte,css,md,yml}": "prettier --write"
   }
 }
