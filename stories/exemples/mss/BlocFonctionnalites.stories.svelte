@@ -13,31 +13,31 @@
       baliseDesSousTitres: "h3",
       description:
         "Une plateforme pensée pour les équipes DSI, RSSI, DPO, chefs de projet avec les mesures ANSSI et CNIL intégrées d'emblée.",
-      imagePlaceholder: "/images/bloc-fonctionnalites-placeholder.png",
+      imagePlaceholder: "./images/bloc-fonctionnalites-placeholder.png",
       fonctionnalites: [
         [
           {
             titre: "Plan d’action cyber collaboratif",
             description:
               "Collaborez avec vos équipes, assignez les mesures de sécurité et suivez leur avancement.",
-            illustration: "/images/plan_collaboratif.png",
+            illustration: "./images/plan_collaboratif.png",
           },
           {
             titre: "Indice cyber",
             description:
               "Obtenez une évaluation indicative du niveau de sécurisation du service et sa durée d’homologation recommandée",
-            illustration: "/images/indice_cyber.png",
+            illustration: "./images/indice_cyber.png",
           },
           {
             titre: "Tableau de bord",
             description: "Visualisez vos services, priorités et échéances en un coup d’œil.",
-            illustration: "/images/tableau_de_bord.png",
+            illustration: "./images/tableau_de_bord.png",
           },
           {
             titre: "Matrice de risques",
             description:
               "Identifiez et suivez vos risques en temps réel, au fil de la complétion de votre plan d’action cyber.",
-            illustration: "/images/risques.png",
+            illustration: "./images/risques.png",
           },
         ],
         [
@@ -45,25 +45,25 @@
             titre: "Supervision",
             description:
               "Vision globale de vos systèmes d’information avec des indicateurs clés pour piloter la sécurisation de votre entité.",
-            illustration: "/images/supervision.png",
+            illustration: "./images/supervision.png",
           },
           {
             titre: "Téléversement des systèmes d’information",
             description:
               "Importez tous vos systèmes d’information en une seule fois pour les centraliser.",
-            illustration: "/images/televersement.png",
+            illustration: "./images/televersement.png",
           },
           {
             titre: "Import des mesures",
             description:
               "Intégrez des mesures de sécurité spécifiques et réutilisez-les sur vos systèmes d’information.",
-            illustration: "/images/import_des_mesures.png",
+            illustration: "./images/import_des_mesures.png",
           },
           {
             titre: "Gestion des droits",
             description:
               "Gérez finement les accès de chaque utilisateur invité (équipes métier, prestataires, etc.)",
-            illustration: "/images/gestions_des_droits.png",
+            illustration: "./images/gestions_des_droits.png",
           },
         ],
       ],
