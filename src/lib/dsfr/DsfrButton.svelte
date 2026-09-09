@@ -7,7 +7,7 @@
       size: { attribute: "size", type: "String" },
       id: { attribute: "id", type: "String" },
       title: { attribute: "title", type: "String" },
-      disabled: { attribute: "disabled", type: "Boolean" },
+      disabled: { attribute: "disabled", type: "Boolean", reflect: true },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
       iconPlace: { attribute: "icon-place", type: "String" },
