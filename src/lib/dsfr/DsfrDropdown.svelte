@@ -184,20 +184,17 @@
 
     const button = event.currentTarget as HTMLButtonElement;
     const isExpanded = button.ariaExpanded === "true";
-    const ariaControls = button.getAttribute("aria-controls");
 
     button.ariaExpanded = (!isExpanded).toString();
 
-    const collapseElement = ariaControls
-      ? button.parentElement.querySelector(`#${ariaControls}`)
-      : null;
+    const collapseElement = dropdown.querySelector(`#${collapseId}`) as HTMLElement | null;
 
     if (collapseElement) {
       if (!isExpanded) {
-        effectiveAlign = defineAlignment(collapseElement as HTMLElement);
+        effectiveAlign = defineAlignment(collapseElement);
       }
 
-      collapsing(collapseElement as HTMLElement, !isExpanded);
+      collapsing(collapseElement, !isExpanded);
     }
   }
 
