@@ -49,7 +49,7 @@
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
   import { setIconClass, withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";

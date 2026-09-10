@@ -27,7 +27,7 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   setThemeable($host());
 
