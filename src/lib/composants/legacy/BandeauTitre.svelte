@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import type { Lien, NoeudFilAriane, InfosTag } from "$lib/types";
-  import Tag from "$lib/composants/Tag.svelte";
+  import Tag from "$lib/composants/legacy/Tag.svelte";
 
   const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 

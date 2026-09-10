@@ -3,7 +3,7 @@
   import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
-  import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
+  import Bandeau from "$lib/composants/legacy/Bandeau.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Bandeau",

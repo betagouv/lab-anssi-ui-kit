@@ -7,7 +7,6 @@
     calloutArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/callout/template/stories/callout-arg-types.js";
 
-  import LabAnssiBouton from "$lib/composants/Bouton.svelte";
   import DsfrCallout from "$lib/dsfr/DsfrCallout.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 

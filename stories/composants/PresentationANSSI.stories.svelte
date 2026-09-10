@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import PresentationANSSI from "$lib/composants/vitrines-produits/briques/PresentationANSSI.svelte";
+  import PresentationANSSI from "$lib/composants/legacy/PresentationANSSI.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Presentation ANSSI",

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { TableDesMatieres } from "$lib/types";
-  import IconeMenuLateral from "$lib/composants/blog/IconeMenuLateral.svelte";
-  import IconeChevronBas from "$lib/composants/blog/IconeChevronBas.svelte";
+  import IconeMenuLateral from "$lib/composants/legacy/blog/IconeMenuLateral.svelte";
+  import IconeChevronBas from "$lib/composants/legacy/blog/IconeChevronBas.svelte";
 
   interface Props {
     tableDesMatieres: TableDesMatieres;

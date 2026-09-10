@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import NavigationPiedDePage from "$lib/composants/pied-de-page/NavigationPiedDePage.svelte";
+  import NavigationPiedDePage from "$lib/composants/legacy/NavigationPiedDePage.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/NavigationPiedDePage",

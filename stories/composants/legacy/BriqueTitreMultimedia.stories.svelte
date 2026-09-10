@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import BriqueTitreMultimedia from "$lib/composants/vitrines-produits/briques/BriqueTitreMultimedia.svelte";
+  import BriqueTitreMultimedia from "$lib/composants/legacy/briques/BriqueTitreMultimedia.svelte";
 
   import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
@@ -13,7 +13,7 @@
   const couverture = genereImageDePlaceholder(792, 446, "Vidéo d'exemple");
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Brique Titre Multimedia",
+    title: "Composants/Lab ANSSI/Legacy/Briques/Titre Multimedia",
     component: BriqueTitreMultimedia,
     args: {
       titre: "Titre pour MSS",

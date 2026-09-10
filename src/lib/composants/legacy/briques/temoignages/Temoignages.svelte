@@ -13,7 +13,7 @@
   import type { Temoignage } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
-  import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
+  import Brique from "$lib/composants/legacy/briques/Brique.svelte";
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
   import IconeFlecheGauche from "$lib/composants/carrousel-tuiles/IconeFlecheGauche.svelte";

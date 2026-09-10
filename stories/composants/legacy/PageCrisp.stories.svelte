@@ -5,7 +5,7 @@
   import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
   import exempleContenu from "../../exemples/lab/exemple-page-crisp.html?raw";
 
-  import PageCrisp from "$lib/composants/blog/PageCrisp.svelte";
+  import PageCrisp from "$lib/composants/legacy/blog/PageCrisp.svelte";
 
   const contenu = (exempleContenu as string).replaceAll(
     "%%IMAGE_1000_800%%",
@@ -13,7 +13,7 @@
   );
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/PageCrisp",
+    title: "Composants/Lab ANSSI/Legacy/Blog/PageCrisp",
     component: PageCrisp,
     args: {
       contenu,

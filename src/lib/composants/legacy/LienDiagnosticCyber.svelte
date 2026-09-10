@@ -1,7 +1,7 @@
 <svelte:options customElement="lab-anssi-mes-services-cyber-lien-diagnostic-cyber" />
 
 <script lang="ts">
-  import { srcAsset } from "$lib/assets/assets";
+  import { srcAsset } from "$lib/assets/assets.ts";
 
   interface Props {
     lien: any;

@@ -2,7 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import Bouton from "$lib/composants/Bouton.svelte";
+  import Bouton from "$lib/composants/legacy/Bouton.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Bouton",

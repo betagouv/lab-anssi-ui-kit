@@ -2,10 +2,10 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  import Temoignages from "$lib/composants/vitrines-produits/briques/temoignages/Temoignages.svelte";
+  import Temoignages from "$lib/composants/legacy/briques/temoignages/Temoignages.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Temoignages",
+    title: "Composants/Lab ANSSI/Legacy/Briques/Temoignages",
     component: Temoignages,
     args: {
       titre: "Titre",

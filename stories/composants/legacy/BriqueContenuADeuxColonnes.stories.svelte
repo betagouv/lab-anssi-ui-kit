@@ -4,10 +4,10 @@
 
   import { genereImageDePlaceholder } from "../../utilitaires/generateurImagesPlaceholders.js";
 
-  import BriqueContenuADeuxColonnes from "$lib/composants/vitrines-produits/briques/BriqueContenuADeuxColonnes.svelte";
+  import BriqueContenuADeuxColonnes from "$lib/composants/legacy/briques/BriqueContenuADeuxColonnes.svelte";
 
   const { Story } = defineMeta({
-    title: "Composants/Lab ANSSI/Legacy/Brique Contenu A Deux Colonnes",
+    title: "Composants/Lab ANSSI/Legacy/Briques/Contenu A Deux Colonnes",
     component: BriqueContenuADeuxColonnes,
     args: {
       titre: "MonServiceSécurisé",
