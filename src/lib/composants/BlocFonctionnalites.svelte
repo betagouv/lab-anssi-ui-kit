@@ -531,13 +531,14 @@
     }
 
     &__entete {
+      display: flex;
+      flex-direction: column;
+      gap: rem(24px);
+
       @include respond-from("md") {
         flex: 0 0 calc(800% / 12);
         width: calc(800% / 12);
         max-width: calc(800% / 12);
-        display: flex;
-        flex-direction: column;
-        gap: rem(24px);
       }
     }
 
