@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
-  import { clickOutside } from "$lib/directives/actions.svelte.ts";
+  import { clickOutside } from "$lib/directives/actions.svelte";
   import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "./DsfrButton.svelte";

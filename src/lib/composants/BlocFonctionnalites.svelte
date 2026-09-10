@@ -24,7 +24,7 @@
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";

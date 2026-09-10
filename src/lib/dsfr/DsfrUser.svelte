@@ -22,7 +22,7 @@
 
 <script lang="ts">
   import type { Kind } from "$lib/types";
-  import { clickOutside } from "$lib/directives/actions.svelte.ts";
+  import { clickOutside } from "$lib/directives/actions.svelte";
   import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
 
   import DsfrButton from "./DsfrButton.svelte";

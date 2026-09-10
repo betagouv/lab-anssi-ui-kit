@@ -34,7 +34,7 @@
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
-  import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
+  import { setIndeterminate } from "$lib/directives/actions.svelte";
 
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
