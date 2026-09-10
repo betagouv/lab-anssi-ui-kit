@@ -719,7 +719,7 @@
     }
 
     &:has(.lab-anssi-fonctionnalites__bouton-defilement) {
-      @include respond-to("md") {
+      @include respond-to("sm") {
         padding-block-end: rem(72px);
         position: relative;
       }
