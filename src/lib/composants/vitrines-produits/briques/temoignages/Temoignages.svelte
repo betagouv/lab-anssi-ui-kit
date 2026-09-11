@@ -29,7 +29,7 @@
 
   let { titre = "Les avis de nos utilisateurs", temoignages = [], size = "xl" }: Props = $props();
 
-  let elementCarrousel: HTMLDivElement = $state();
+  let elementCarrousel: HTMLDivElement | undefined = $state();
 
   enum Direction {
     DROITE = 1,
@@ -37,6 +37,8 @@
   }
 
   const scrollVers = (direction: Direction) => {
+    if (!elementCarrousel) return;
+
     const declageCourant = elementCarrousel.scrollLeft;
     const largeurCarte = elementCarrousel.children[0].clientWidth;
 
@@ -74,7 +76,7 @@
             role="button"
             tabindex="0"
             onclick={() => scrollVers(Direction.GAUCHE)}
-            onkeydown={(event) => {
+            onkeydown={(event: KeyboardEvent) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 scrollVers(Direction.GAUCHE);
@@ -90,7 +92,7 @@
             role="button"
             tabindex="0"
             onclick={() => scrollVers(Direction.DROITE)}
-            onkeydown={(event) => {
+            onkeydown={(event: KeyboardEvent) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 scrollVers(Direction.DROITE);

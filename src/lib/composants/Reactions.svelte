@@ -166,7 +166,7 @@
       $host()?.dispatchEvent(new CustomEvent("ajouteReaction", { detail: id, bubbles: true }));
     }
 
-    popoverElement.hidePopover();
+    popoverElement?.hidePopover();
   }
 
   /**
@@ -176,7 +176,7 @@
    * @returns {void}
    */
   function handleTooltip(): void {
-    if (!tooltipElement || popoverShown) return;
+    if (!tooltipElement || !triggerButton || popoverShown) return;
 
     const buttonRect = triggerButton.getBoundingClientRect();
     const buttonRectCenter = buttonRect.left + buttonRect.width * 0.5;
@@ -232,7 +232,7 @@
 
 <svelte:window onscroll={handlePopoverScroll} />
 
-{#snippet boutonReaction({ id, emoji, compteur = null, actif = false })}
+{#snippet boutonReaction({ id, emoji, compteur, actif = false }: Reaction)}
   <button
     {id}
     type="button"

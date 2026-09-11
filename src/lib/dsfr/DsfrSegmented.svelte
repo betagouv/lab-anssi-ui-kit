@@ -137,10 +137,12 @@
    * @param {Event} event - L'événement de changement déclenché par l'élément DOM
    */
   function handleChange(event: Event) {
-    onvaluechanged?.(currentValue);
-    $host()?.dispatchEvent(
-      new CustomEvent("valuechanged", { detail: currentValue, bubbles: true }),
-    );
+    if (currentValue !== undefined) {
+      onvaluechanged?.(currentValue);
+      $host()?.dispatchEvent(
+        new CustomEvent("valuechanged", { detail: currentValue, bubbles: true }),
+      );
+    }
   }
 </script>
 
@@ -167,7 +169,10 @@
           bind:group={currentValue}
           onchange={handleChange}
         />
-        <label class={["fr-label", hasIcon ? setIconClass(segmented.icon) : ""]} for={segmented.id}>
+        <label
+          class={["fr-label", hasIcon && segmented.icon ? setIconClass(segmented.icon) : ""]}
+          for={segmented.id}
+        >
           {segmented.label}
         </label>
       </div>

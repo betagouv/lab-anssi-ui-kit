@@ -22,7 +22,7 @@
     pressEscape,
     stopPropagation,
     trapFocus,
-  } from "$lib/directives/actions.svelte.ts";
+  } from "$lib/directives/actions.svelte";
 
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
 
@@ -86,12 +86,12 @@
     );
   }
 
-  let summary = $state<HTMLElement>(undefined);
+  let summary = $state<HTMLElement | undefined>(undefined);
   let open = $state(false);
   function closeDropdown() {
     if (open) {
       open = false;
-      summary.focus();
+      summary?.focus();
     }
   }
 

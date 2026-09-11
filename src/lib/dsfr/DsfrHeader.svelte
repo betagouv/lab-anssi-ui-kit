@@ -49,7 +49,7 @@
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
   import { setIconClass, withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";
   import DsfrSearch from "./DsfrSearch.svelte";
@@ -223,7 +223,7 @@
     const button = event.target as HTMLButtonElement;
     const isOpened = button.getAttribute("data-fr-opened") === "true";
     const modalId = button.getAttribute("aria-controls");
-    const modal = modalId ? button.closest(".fr-header").querySelector(`#${modalId}`) : null;
+    const modal = modalId ? button.closest(".fr-header")?.querySelector(`#${modalId}`) : null;
 
     if (type === "menu") {
       openedMenuModal = !isOpened;
@@ -316,7 +316,7 @@
                     type="button"
                     id={searchId}
                     class="fr-btn--search fr-btn"
-                    onclick={(event) => handleOpenMenu(event, "search")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "search")}
                   >
                     {searchTitle}
                   </button>
@@ -330,7 +330,7 @@
                     type="button"
                     id={menuId}
                     class="fr-btn--menu fr-btn"
-                    onclick={(event) => handleOpenMenu(event, "menu")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "menu")}
                   >
                     Menu
                   </button>
@@ -393,18 +393,19 @@
                     title="Fermer"
                     id={`${searchId}-close`}
                     preset="close"
-                    onclick={(event) => handleOpenMenu(event, "search")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "search")}
                     data-themeable="false"
                   >
                     Fermer
                   </DsfrButton>
                   <slot name="searchbar">
                     <DsfrSearch
-                      inputId={searchInputId}
-                      inputLabel={searchLabel}
-                      inputPlaceholder={searchPlaceholder}
-                      buttonLabel={searchTitle}
-                      buttonTitle={searchTitle}
+                      inputId={searchInputId ?? ""}
+                      inputLabel={searchLabel ?? ""}
+                      placeholder={searchPlaceholder}
+                      buttonLabel={searchTitle ?? ""}
+                      buttonTitle={searchTitle ?? ""}
+                      buttonType="submit"
                     />
                   </slot>
                 </div>
@@ -431,7 +432,7 @@
             label="Fermer"
             id={`${menuId}-close`}
             preset="close"
-            onclick={(event) => handleOpenMenu(event, "menu")}
+            onclick={(event: MouseEvent) => handleOpenMenu(event, "menu")}
             data-themeable="false"
           >
             Fermer
@@ -452,17 +453,17 @@
           <slot name="navigation">
             {#if hasSlotAfterNavigation}
               <DsfrNavigation
-                id={navigationId}
-                ariaLabel={navigationAriaLabel}
-                items={navigationItems}
+                id={navigationId ?? ""}
+                ariaLabel={navigationAriaLabel ?? ""}
+                items={navigationItems ?? []}
               >
                 <div slot="afternavigation" use:createSlot={`afternavigation`}></div>
               </DsfrNavigation>
             {:else}
               <DsfrNavigation
-                id={navigationId}
-                ariaLabel={navigationAriaLabel}
-                items={navigationItems}
+                id={navigationId ?? ""}
+                ariaLabel={navigationAriaLabel ?? ""}
+                items={navigationItems ?? []}
               />
             {/if}
           </slot>

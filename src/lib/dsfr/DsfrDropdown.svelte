@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
-  import { clickOutside } from "$lib/directives/actions.svelte.ts";
+  import { clickOutside } from "$lib/directives/actions.svelte";
   import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "./DsfrButton.svelte";
@@ -285,7 +285,7 @@
                 href={isLinks && !item.disabled ? item.href : undefined}
                 target={isLinks && !item.disabled ? item.target : undefined}
                 {...item.attributes}
-                onclick={(event) => handleItemClick(event, item, index)}
+                onclick={(event: MouseEvent) => handleItemClick(event, item, index)}
               />
             </li>
           {/each}

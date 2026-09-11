@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrLink from "./DsfrLink.svelte";
@@ -78,7 +78,7 @@
   let openedIndex: number = $state(-1);
   let navElement: HTMLElement;
 
-  const isLink = (item) =>
+  const isLink = (item: MenuItem) =>
     !item.type || item.type === "link" || (item.type === "menu" && !item.collapsable);
   const getMarkup = (item: MenuItem) => (isLink(item) ? "a" : "button");
 
@@ -126,9 +126,7 @@
             href={isLink(item) ? item.href : undefined}
             id={item.id}
             type={!isLink(item) ? "button" : undefined}
-            aria-expanded={!isLink(item) && item.collapsable
-              ? (openedIndex === index).toString()
-              : undefined}
+            aria-expanded={!isLink(item) && item.collapsable ? openedIndex === index : undefined}
             aria-controls={!isLink(item) ? setCollapseId(item.collapseId, index) : undefined}
             aria-current={item.active ? (isLink(item) ? "page" : true) : undefined}
             role={!isLink(item) ? "button" : undefined}
