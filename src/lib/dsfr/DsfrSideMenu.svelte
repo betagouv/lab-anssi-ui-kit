@@ -90,7 +90,7 @@
     }
 
     const collapseElement = ariaControls
-      ? button.parentElement.querySelector(`#${ariaControls}`)
+      ? button.parentElement?.querySelector(`#${ariaControls}`)
       : null;
     if (collapseElement) {
       if (isExpanded) {
@@ -118,15 +118,15 @@
   }
 
   function replieAutresMenusDuMemeNiveau(button: HTMLButtonElement) {
-    const autreBoutons = button.parentElement.parentElement
-      .querySelectorAll(`:scope > * > button`)
+    const autreBoutons = button.parentElement?.parentElement
+      ?.querySelectorAll(`:scope > * > button`)
       .values()
       .filter(
         (bouton) => bouton.getAttribute("aria-controls") !== button.getAttribute("aria-controls"),
       );
-    autreBoutons.forEach((autreBouton) => {
+    autreBoutons?.forEach((autreBouton) => {
       autreBouton.ariaExpanded = "false";
-      const collapseElement = autreBouton.parentElement.querySelector(
+      const collapseElement = autreBouton.parentElement?.querySelector(
         `#${autreBouton.getAttribute("aria-controls")}`,
       );
       collapseElement?.classList.remove("fr-collapse--expanded");

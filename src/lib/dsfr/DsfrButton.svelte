@@ -124,10 +124,10 @@
     }
   }
 
-  const iconClass = $derived<boolean | string>(hasIcon && icon && setIconClass(icon));
-  const kindClass = $derived<string>(!preset && kind && `fr-btn--${kind}`);
-  const sizeClass = $derived<string>(!preset && size && `fr-btn--${size}`);
-  const utilityClass = $derived<string | boolean>(preset && `fr-btn--${preset}`);
+  const iconClass = $derived(hasIcon && icon && setIconClass(icon));
+  const kindClass = $derived(!preset && kind && `fr-btn--${kind}`);
+  const sizeClass = $derived(!preset && size && `fr-btn--${size}`);
+  const utilityClass = $derived(preset && `fr-btn--${preset}`);
   const isCentered = $derived.by(() => {
     if (hasIcon && iconPlace === "only") return false;
 

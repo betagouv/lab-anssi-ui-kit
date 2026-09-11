@@ -11,10 +11,10 @@
 
   let { tableDesMatieres, onancreOuverte }: Props = $props();
 
-  let detailsElement: HTMLDetailsElement = $state();
+  let detailsElement: HTMLDetailsElement | undefined = $state();
 
   const ouvreEntree = (ancre: string) => {
-    detailsElement.open = false;
+    if (detailsElement) detailsElement.open = false;
     onancreOuverte?.(ancre);
   };
 </script>

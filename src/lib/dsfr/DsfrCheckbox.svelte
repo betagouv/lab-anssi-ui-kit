@@ -185,7 +185,7 @@
     oninvalid={formValidation.handleInvalid}
     {form}
     {required}
-    use:setIndeterminate={indeterminate}
+    use:setIndeterminate={indeterminate ?? false}
   />
   <label class="fr-label" for={id}>
     {#if label}

@@ -214,7 +214,7 @@
             aria-disabled={actionMarkup === "a" && disabled ? "true" : undefined}
             role={actionMarkup === "a" && disabled ? "link" : undefined}
             type={actionMarkup === "button" ? "button" : undefined}
-            disabled={actionMarkup === "button" && disabled ? "true" : undefined}
+            disabled={actionMarkup === "button" && disabled ? true : undefined}
             hreflang={actionMarkup === "a" && lang ? lang : undefined}
             title={actionTitle}
           >

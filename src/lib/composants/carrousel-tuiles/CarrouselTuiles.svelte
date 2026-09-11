@@ -103,7 +103,7 @@
             >
               {#if tuile.illustration?.lien}
                 {#snippet pictogram()}
-                  <img src={tuile.illustration.lien} alt={tuile.illustration.alt} />
+                  <img src={tuile.illustration!.lien} alt={tuile.illustration!.alt} />
                 {/snippet}
               {/if}
             </DsfrTile>

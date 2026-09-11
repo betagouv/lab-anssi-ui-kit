@@ -178,7 +178,7 @@
     button.ariaExpanded = (!isExpanded).toString();
 
     const collapseElement = ariaControls
-      ? button.parentElement.querySelector(`#${ariaControls}`)
+      ? button.parentElement?.querySelector(`#${ariaControls}`)
       : null;
 
     if (collapseElement) {

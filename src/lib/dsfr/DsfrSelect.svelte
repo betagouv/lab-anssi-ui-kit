@@ -68,7 +68,7 @@
     /** Options de la liste déroulante */
     options?: Option[] | undefined;
     /** Options de la liste déroulante avec groupes */
-    optionGroups: OptionGroup | undefined;
+    optionGroups?: OptionGroup | undefined;
     /** Texte additionnel sous le label */
     hint?: string;
     /** Texte avant sélection d'une option */

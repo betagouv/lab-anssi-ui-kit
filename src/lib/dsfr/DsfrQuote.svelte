@@ -75,7 +75,7 @@
     {#if hasAuthor}
       <p class="fr-quote__author">{author}</p>
     {/if}
-    {#if hasDetails && sources.length > 0}
+    {#if hasDetails && sources && sources.length > 0}
       <ul class="fr-quote__source">
         {#each sources as source}
           <li>{@html source}</li>
