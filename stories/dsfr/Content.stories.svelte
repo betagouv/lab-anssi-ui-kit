@@ -50,9 +50,9 @@
         table: { category: "Slots" },
       },
       svg: {
-        description: "Élément SVG personnalisé (remplace le rendu par défaut quand `type='svg'`)",
-        control: false,
-        table: { category: "Slots" },
+        if: { arg: "type", eq: "svg" },
+        control: { type: "object" },
+        description: "SVG",
       },
       video: {
         description:
@@ -81,11 +81,6 @@
         if: { arg: "type", eq: "img" },
         control: { type: "object" },
         description: "Image",
-      },
-      svg: {
-        if: { arg: "type", eq: "svg" },
-        control: { type: "object" },
-        description: "SVG",
       },
       vid: {
         if: { arg: "type", eq: "video" },
