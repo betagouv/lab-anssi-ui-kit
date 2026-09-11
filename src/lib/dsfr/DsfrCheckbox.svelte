@@ -38,8 +38,6 @@
 
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  setThemeable($host());
-
   type ChecboxSize = Extract<Size, "sm" | "md">;
   interface Props {
     /** Attribut id de la checkbox */
@@ -95,8 +93,10 @@
     onvaluechanged,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let formControlElement: HTMLInputElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -126,7 +126,7 @@
     checked = target.checked;
 
     onvaluechanged?.(checked);
-    $host()?.dispatchEvent(new CustomEvent("valuechanged", { detail: checked, bubbles: true }));
+    hostElement?.dispatchEvent(new CustomEvent("valuechanged", { detail: checked, bubbles: true }));
   }
 
   /**
@@ -141,7 +141,7 @@
 
   // Configure la validation avec les références nécessaires
   $effect(() => {
-    formValidation.setup(internals, formControlElement, host, () => {
+    formValidation.setup(internals, formControlElement, hostElement, () => {
       checked = false;
     });
   });

@@ -38,8 +38,6 @@
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  setThemeable($host());
-
   type RadiosSize = Extract<Size, "sm" | "md">;
   type Radio = {
     id: string;
@@ -115,8 +113,10 @@
     legendWeight,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let firstRadioElement: HTMLInputElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -135,7 +135,7 @@
    * Met à jour la valeur et déclenche l'événement 'valuechanged'.
    */
   function handleChange() {
-    host.dispatchEvent(new CustomEvent("valuechanged", { detail: value, bubbles: true }));
+    hostElement.dispatchEvent(new CustomEvent("valuechanged", { detail: value, bubbles: true }));
   }
 
   /**
@@ -161,7 +161,7 @@
   // Pour un groupe de radios, on utilise le premier input radio comme référence
   // car c'est lui qui porte l'état de validité (required)
   $effect(() => {
-    formValidation.setup(internals, firstRadioElement, host, () => {
+    formValidation.setup(internals, firstRadioElement, hostElement, () => {
       value = "";
     });
   });
