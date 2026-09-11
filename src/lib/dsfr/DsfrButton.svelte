@@ -87,6 +87,7 @@
       "close" | "tooltip" | "fullscreen" | "display" | "account" | "team" | "briefcase" | "sort";
     /** `ElementInternals` interface pour l'association du composant aux formulaires */
     internals?: ElementInternals;
+    [key: string]: unknown;
   }
 
   const {
