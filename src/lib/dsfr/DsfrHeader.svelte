@@ -254,7 +254,7 @@
 {#snippet toolLinksRendered()}
   {#if toolLinks?.length}
     <ul class="fr-btns-group">
-      {#each toolLinks as link}
+      {#each toolLinks as link (link.url ?? link.label)}
         {@const { label, url, icon, preset, classes = [], markup = "a" } = link}
         <li>
           <svelte:element

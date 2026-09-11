@@ -113,7 +113,7 @@
   {/if}
 
   <ul class="fr-btns-group">
-    {#each buttons as button}
+    {#each buttons as button (button.type)}
       <li>
         {#if button.type === "copy"}
           <button type="button" class={`fr-btn fr-btn--${button.type}`} onclick={copyToClipboard}>

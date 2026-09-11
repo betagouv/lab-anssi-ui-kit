@@ -55,7 +55,7 @@
 
       <section class="lab-anssi-marelle__etapes">
         <slot>
-          {#each etapesmarelle as etapeMarelle, index}
+          {#each etapesmarelle as etapeMarelle, index (index)}
             <Etape {index} {etapeMarelle} baliseTitre={baliseSousTitre} />
           {/each}
         </slot>

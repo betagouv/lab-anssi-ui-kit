@@ -111,7 +111,7 @@
 
 <div class="fr-tabs" bind:this={tabsElement}>
   <ul class="fr-tabs__list" role="tablist" aria-label={ariaLabel} bind:this={tabsListElement}>
-    {#each tabs as tab, i}
+    {#each tabs as tab, i (tab.id)}
       <li role="presentation">
         <button
           type="button"
@@ -134,7 +134,7 @@
       </li>
     {/each}
   </ul>
-  {#each tabs as tab, i}
+  {#each tabs as tab, i (tab.id)}
     <div
       id={`${tab.id}-panel`}
       class={["fr-tabs__panel", activeIndex === i && "fr-tabs__panel--selected", panelDirection(i)]}
