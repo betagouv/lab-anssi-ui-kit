@@ -285,8 +285,8 @@
               size={fonctionnalite.badge.size}
               accent={fonctionnalite.badge.accent}
               status={fonctionnalite.badge.status}
-              has-icon={fonctionnalite.badge.hasIcon || undefined}
-              has-no-icon={fonctionnalite.badge.hasNoIcon || undefined}
+              hasIcon={fonctionnalite.badge.hasIcon || undefined}
+              hasNoIcon={fonctionnalite.badge.hasNoIcon || undefined}
               icon={fonctionnalite.badge.icon}
               ellipsis={fonctionnalite.badge.ellipsis || undefined}
               type={fonctionnalite.badge.type}
@@ -299,8 +299,8 @@
           size={fonctionnalite.badge.size}
           accent={fonctionnalite.badge.accent}
           status={fonctionnalite.badge.status}
-          has-icon={fonctionnalite.badge.hasIcon || undefined}
-          has-no-icon={fonctionnalite.badge.hasNoIcon || undefined}
+          hasIcon={fonctionnalite.badge.hasIcon || undefined}
+          hasNoIcon={fonctionnalite.badge.hasNoIcon || undefined}
           icon={fonctionnalite.badge.icon}
           ellipsis={fonctionnalite.badge.ellipsis || undefined}
           type={fonctionnalite.badge.type}
@@ -342,9 +342,9 @@
               blank={fonctionnalite.lien.blank || undefined}
               href={fonctionnalite.lien.href}
               download={fonctionnalite.lien.download || undefined}
-              has-icon={fonctionnalite.lien.hasIcon || undefined}
+              hasIcon={fonctionnalite.lien.hasIcon || undefined}
               icon={fonctionnalite.lien.icon}
-              icon-place={fonctionnalite.lien.iconPlace}
+              iconPlace={fonctionnalite.lien.iconPlace}
               neutral={fonctionnalite.lien.neutral || undefined}
             />
           {/if}
@@ -358,9 +358,9 @@
           blank={fonctionnalite.lien.blank || undefined}
           href={fonctionnalite.lien.href}
           download={fonctionnalite.lien.download || undefined}
-          has-icon={fonctionnalite.lien.hasIcon || undefined}
+          hasIcon={fonctionnalite.lien.hasIcon || undefined}
           icon={fonctionnalite.lien.icon}
-          icon-place={fonctionnalite.lien.iconPlace}
+          iconPlace={fonctionnalite.lien.iconPlace}
           neutral={fonctionnalite.lien.neutral || undefined}
         />
       {/if}
