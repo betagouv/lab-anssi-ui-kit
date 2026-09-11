@@ -78,7 +78,7 @@
   let openedIndex: number = $state(-1);
   let navElement: HTMLElement;
 
-  const isLink = (item) =>
+  const isLink = (item: MenuItem) =>
     !item.type || item.type === "link" || (item.type === "menu" && !item.collapsable);
   const getMarkup = (item: MenuItem) => (isLink(item) ? "a" : "button");
 

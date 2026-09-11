@@ -76,7 +76,7 @@
             role="button"
             tabindex="0"
             onclick={() => scrollVers(Direction.GAUCHE)}
-            onkeydown={(event) => {
+            onkeydown={(event: KeyboardEvent) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 scrollVers(Direction.GAUCHE);
@@ -92,7 +92,7 @@
             role="button"
             tabindex="0"
             onclick={() => scrollVers(Direction.DROITE)}
-            onkeydown={(event) => {
+            onkeydown={(event: KeyboardEvent) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 scrollVers(Direction.DROITE);

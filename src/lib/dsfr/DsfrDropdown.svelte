@@ -285,7 +285,7 @@
                 href={isLinks && !item.disabled ? item.href : undefined}
                 target={isLinks && !item.disabled ? item.target : undefined}
                 {...item.attributes}
-                onclick={(event) => handleItemClick(event, item, index)}
+                onclick={(event: MouseEvent) => handleItemClick(event, item, index)}
               />
             </li>
           {/each}
