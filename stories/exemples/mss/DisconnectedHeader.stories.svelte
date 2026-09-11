@@ -11,25 +11,25 @@
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import Navigation from "$lib/composants/suite-cyber/SuiteCyber.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
 
   const { toolLinks } = headerArgs;

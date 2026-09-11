@@ -2,25 +2,25 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrTextarea from "$lib/dsfr/DsfrTextarea.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrSelect from "$lib/dsfr/DsfrSelect.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrCheckbox from "$lib/dsfr/DsfrCheckbox.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrRadiosGroup from "$lib/dsfr/DsfrRadiosGroup.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrCheckboxesGroup from "$lib/dsfr/DsfrCheckboxesGroup.svelte";
 
   const { Story } = defineMeta({
