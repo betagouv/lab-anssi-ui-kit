@@ -426,7 +426,7 @@
       onfocusout={reprendDefilement}
     >
       {#if tableauDeFonctionnalites.length > 1}
-        {#each elementsModifiesDuControleSegmente as element, i}
+        {#each elementsModifiesDuControleSegmente as element, i (element.value)}
           <div
             id={element.value}
             class={[
@@ -437,14 +437,14 @@
             role="tabpanel"
             tabindex="0"
           >
-            {#each tableauDeFonctionnalites[i] ?? [] as fonctionnalite, j}
+            {#each tableauDeFonctionnalites[i] ?? [] as fonctionnalite, j (j)}
               {@render unElementFonctionnalite(fonctionnalite, j)}
             {/each}
           </div>
         {/each}
       {:else}
         <div class="lab-anssi-fonctionnalites__liste" role="group">
-          {#each tableauDeFonctionnalites[0] ?? [] as fonctionnalite, k}
+          {#each tableauDeFonctionnalites[0] ?? [] as fonctionnalite, k (k)}
             {@render unElementFonctionnalite(fonctionnalite, k)}
           {/each}
         </div>

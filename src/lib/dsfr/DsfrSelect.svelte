@@ -233,7 +233,7 @@
     {#if $$slots.default}
       <slot></slot>
     {:else}
-      {#each options as option}
+      {#each options as option (option.value)}
         <option value={option.value}>
           {option.label}
         </option>

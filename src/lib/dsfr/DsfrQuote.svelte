@@ -77,7 +77,7 @@
     {/if}
     {#if hasDetails && sources && sources.length > 0}
       <ul class="fr-quote__source">
-        {#each sources as source}
+        {#each sources as source, index (index)}
           <li>{@html source}</li>
         {/each}
       </ul>

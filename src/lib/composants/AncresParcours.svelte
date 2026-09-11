@@ -57,7 +57,7 @@
   class:lab-anssi-ancres--shadow-end={scrollEnd}
 >
   <div class="lab-anssi-ancres__conteneur" onscroll={handleScroll}>
-    {#each ancres as ancre, index}
+    {#each ancres as ancre, index (ancre.cible)}
       <a href={ancre.cible} class={["lab-anssi-ancres__item", { active: index === indexActif }]}>
         {ancre.label}
       </a>

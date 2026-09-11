@@ -70,7 +70,7 @@
     >
       {#if languages && languages.length > 0}
         <ul class="fr-menu__list">
-          {#each languages as language}
+          {#each languages as language (language.locale)}
             <li>
               <a
                 class="fr-translate__language fr-nav__link"
