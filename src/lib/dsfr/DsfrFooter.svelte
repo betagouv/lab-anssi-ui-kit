@@ -168,6 +168,7 @@
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
           {#if hasBrandOperator}
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             <p class="fr-logo">{@html brandLogoTitle}</p>
             <a
               id={brandLinkId}
@@ -184,6 +185,7 @@
             </a>
           {:else}
             <a id={brandLinkId} title={brandLinkTitle} href={brandLinkHref}>
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
               <p class="fr-logo">{@html brandLogoTitle}</p>
             </a>
           {/if}
@@ -194,6 +196,7 @@
               <slot name="description"></slot>
             {:else if contentDescription}
               <p class="fr-footer__content-desc">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 {@html contentDescription}
               </p>
             {/if}
@@ -272,6 +275,7 @@
       {/if}
       {#if bottomCopyright}
         <div class="fr-footer__bottom-copy">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           <p>{@html bottomCopyright}</p>
         </div>
       {/if}

@@ -106,6 +106,7 @@
       opened={openModals[args.id] || undefined}
       onclose={() => (openModals[args.id] = false)}
     >
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html body}
 
       {#if args.footer}

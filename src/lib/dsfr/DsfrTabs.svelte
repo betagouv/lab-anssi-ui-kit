@@ -144,6 +144,7 @@
       bind:this={panelEls[i]}
       use:createSlot={`panel-${i + 1}`}
     >
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html tab.content}
     </div>
   {/each}

@@ -244,6 +244,7 @@
       <span class="lab-anssi-reactions__label">Réagir avec l'emoji</span>
     {/if}
 
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <span class="lab-anssi-reactions__emoji">{@html emoji}</span>
 
     {#if compteur}

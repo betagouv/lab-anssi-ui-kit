@@ -23,6 +23,7 @@
 </script>
 
 <p class={["fr-logo", `fr-logo--${size}`]}>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html title}
 </p>
 

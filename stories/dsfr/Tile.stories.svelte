@@ -103,6 +103,7 @@
     <dsfr-tag slot="tag" label="Libellé Tag" size={args.size}></dsfr-tag>
 
     <span slot="pictogram">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html CityHall}
     </span>
   </dsfr-tile>
