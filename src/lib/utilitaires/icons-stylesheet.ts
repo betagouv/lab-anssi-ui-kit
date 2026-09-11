@@ -14,17 +14,19 @@ export function getIconsStyleSheet(): CSSStyleSheet {
   return iconsStyleSheet;
 }
 
-type CustomElementConstructor = new (
-  ...args: unknown[]
-) => HTMLElement & { connectedCallback(): void };
+type CustomElementConstructor = new (...args: unknown[]) => HTMLElement;
 
 /**
  * Permet d'étendre la class des WebComponents afin d'injecter la feuille de style des icônes DSFR dans le Shadow DOM.
  */
 export function withIconsStyleSheet(CustomElementClass: CustomElementConstructor) {
-  return class extends CustomElementClass {
+  const ParentClass = CustomElementClass as new (
+    ...args: unknown[]
+  ) => HTMLElement & { connectedCallback?(): void };
+
+  return class extends ParentClass {
     connectedCallback() {
-      super.connectedCallback();
+      super.connectedCallback?.();
 
       const iconsStyleSheet = getIconsStyleSheet();
       const shadow = this.shadowRoot;
