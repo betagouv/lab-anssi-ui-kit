@@ -28,7 +28,7 @@
     <div>
       <LecteurVideo
         source={multimedia.source}
-        sourceSousTitres={multimedia.sourcesoustitres}
+        sourceSousTitres={multimedia.sourcesoustitres ?? ""}
         imageDeCouverture={multimedia.imagedecouverture}
       />
     </div>

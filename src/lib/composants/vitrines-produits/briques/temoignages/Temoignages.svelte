@@ -29,7 +29,7 @@
 
   let { titre = "Les avis de nos utilisateurs", temoignages = [], size = "xl" }: Props = $props();
 
-  let elementCarrousel: HTMLDivElement = $state();
+  let elementCarrousel: HTMLDivElement | undefined = $state();
 
   enum Direction {
     DROITE = 1,
@@ -37,6 +37,8 @@
   }
 
   const scrollVers = (direction: Direction) => {
+    if (!elementCarrousel) return;
+
     const declageCourant = elementCarrousel.scrollLeft;
     const largeurCarte = elementCarrousel.children[0].clientWidth;
 

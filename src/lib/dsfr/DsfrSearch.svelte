@@ -151,8 +151,8 @@
       return;
     }
 
-    onsearch?.(value);
-    $host()?.dispatchEvent(new CustomEvent("search", { detail: value, bubbles: true }));
+    onsearch?.(value ?? "");
+    $host()?.dispatchEvent(new CustomEvent("search", { detail: value ?? "", bubbles: true }));
   }
 
   /**

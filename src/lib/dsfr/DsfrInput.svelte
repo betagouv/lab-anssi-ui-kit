@@ -177,7 +177,7 @@
   );
 
   const disabledClass = $derived(disabled && "fr-input-group--disabled");
-  const iconClass = $derived(setIconClass(icon));
+  const iconClass = $derived(icon ? setIconClass(icon) : "");
   const hasWrap = $derived(!!icon || !!addon || !!action);
   const wrapClasses = $derived([
     "fr-input-wrap",
@@ -265,7 +265,7 @@
       {placeholder}
       {disabled}
       aria-describedby={computedStatus !== "default" ? `${id}-messages` : undefined}
-      {autocomplete}
+      autocomplete={autocomplete as AutoFill}
       oninput={handleInput}
       onblur={formValidation.handleBlur}
       oninvalid={formValidation.handleInvalid}

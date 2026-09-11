@@ -126,9 +126,7 @@
             href={isLink(item) ? item.href : undefined}
             id={item.id}
             type={!isLink(item) ? "button" : undefined}
-            aria-expanded={!isLink(item) && item.collapsable
-              ? (openedIndex === index).toString()
-              : undefined}
+            aria-expanded={!isLink(item) && item.collapsable ? openedIndex === index : undefined}
             aria-controls={!isLink(item) ? setCollapseId(item.collapseId, index) : undefined}
             aria-current={item.active ? (isLink(item) ? "page" : true) : undefined}
             role={!isLink(item) ? "button" : undefined}

@@ -86,12 +86,12 @@
     );
   }
 
-  let summary = $state<HTMLElement>(undefined);
+  let summary = $state<HTMLElement | undefined>(undefined);
   let open = $state(false);
   function closeDropdown() {
     if (open) {
       open = false;
-      summary.focus();
+      summary?.focus();
     }
   }
 
