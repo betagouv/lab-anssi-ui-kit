@@ -21,7 +21,7 @@
   <div class="titre">{titre}</div>
 
   <div class="conteneur">
-    {#each services as { nom, lien, icone, labels, classeTracking }, i}
+    {#each services as { nom, lien, icone, labels, classeTracking }, i (nom)}
       <a href={lien} target="_blank" class={["service", classeTracking]}>
         <img class="logo-service" src={icone} alt={nom} />
 
@@ -30,7 +30,7 @@
 
           {#if labels}
             <div class="tags">
-              {#each labels as label}
+              {#each labels as label (label)}
                 <DsfrTag {label} size="sm" />
               {/each}
             </div>

@@ -107,7 +107,7 @@
     id={`${id}-messages`}
     aria-live="polite"
   >
-    {#each resolvedMessages as message, i}
+    {#each resolvedMessages as message, i (i)}
       <p class={["fr-message", `fr-message--${message.type}`]} id={messageIds[i]}>
         {message.text}
       </p>

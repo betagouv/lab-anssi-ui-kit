@@ -118,7 +118,7 @@
 <nav bind:this={navElement} {id} class="fr-nav" role="navigation" aria-label={ariaLabel}>
   {#if items && items.length > 0}
     <ul class="fr-nav__list">
-      {#each items as item, index}
+      {#each items as item, index (item.id ?? index)}
         <li class="fr-nav__item">
           <svelte:element
             this={getMarkup(item)}
@@ -202,7 +202,7 @@
                       </div>
                     {/if}
                     {#if item.categories}
-                      {#each item.categories as category}
+                      {#each item.categories as category (category.label)}
                         <div class="fr-col-12 fr-col-lg-3">
                           <h5 class="fr-mega-menu__category">
                             <a href={category.href ?? "#"} class="fr-nav__link">
@@ -211,7 +211,7 @@
                           </h5>
                           {#if category.items && category.items.length > 0}
                             <ul class="fr-mega-menu__list">
-                              {#each category.items as catItem}
+                              {#each category.items as catItem, catIndex (catItem.id ?? catIndex)}
                                 <li>
                                   <a
                                     id={catItem.id}

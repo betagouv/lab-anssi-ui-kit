@@ -73,7 +73,7 @@
 <Story name="Tailles de texte (fr-text--xs à fr-text--lead)">
   {#snippet template(args: Args)}
     <div style="display: flex; flex-direction: column; gap: 1rem;">
-      {#each ["xs", "sm", "md", "lg", "xl", "lead"] as size}
+      {#each ["xs", "sm", "md", "lg", "xl", "lead"] as size (size)}
         <dsfr-label for={args.for} label={"Label en fr-text--" + size} label-size={size}
         ></dsfr-label>
       {/each}
@@ -84,7 +84,7 @@
 <Story name="Graisses de texte (fr-text--light à fr-text--heavy)">
   {#snippet template(args: Args)}
     <div style="display: flex; flex-direction: column; gap: 1rem;">
-      {#each ["light", "regular", "bold", "heavy"] as weight}
+      {#each ["light", "regular", "bold", "heavy"] as weight (weight)}
         <dsfr-label for={args.for} label={"Label en fr-text--" + weight} label-weight={weight}
         ></dsfr-label>
       {/each}

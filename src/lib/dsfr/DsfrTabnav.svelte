@@ -92,7 +92,7 @@
       </button>
       <div class="fr-collapse" id="fr-tabnav-collapse" bind:this={collapseEl}>
         <ul>
-          {#each links as link, i}
+          {#each links as link, i (link.href)}
             <li>
               {#if i === resolvedIndex}
                 <span class="fr-tabnav__link" aria-current="page" use:createSlot={`link-${i + 1}`}>

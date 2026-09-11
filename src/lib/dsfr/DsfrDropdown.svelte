@@ -269,7 +269,7 @@
         </div>
       {:else}
         <ul class="fr-dropdown__list fr-menu__list">
-          {#each items as item, index}
+          {#each items as item, index (item.id ?? index)}
             <li class="fr-dropdown__item fr-menu__item">
               <DsfrButton
                 label={item.label}
