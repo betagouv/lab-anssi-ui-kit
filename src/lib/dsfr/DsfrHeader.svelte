@@ -316,7 +316,7 @@
                     type="button"
                     id={searchId}
                     class="fr-btn--search fr-btn"
-                    onclick={(event) => handleOpenMenu(event, "search")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "search")}
                   >
                     {searchTitle}
                   </button>
@@ -330,7 +330,7 @@
                     type="button"
                     id={menuId}
                     class="fr-btn--menu fr-btn"
-                    onclick={(event) => handleOpenMenu(event, "menu")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "menu")}
                   >
                     Menu
                   </button>
@@ -393,7 +393,7 @@
                     title="Fermer"
                     id={`${searchId}-close`}
                     preset="close"
-                    onclick={(event) => handleOpenMenu(event, "search")}
+                    onclick={(event: MouseEvent) => handleOpenMenu(event, "search")}
                     data-themeable="false"
                   >
                     Fermer
@@ -432,7 +432,7 @@
             label="Fermer"
             id={`${menuId}-close`}
             preset="close"
-            onclick={(event) => handleOpenMenu(event, "menu")}
+            onclick={(event: MouseEvent) => handleOpenMenu(event, "menu")}
             data-themeable="false"
           >
             Fermer
