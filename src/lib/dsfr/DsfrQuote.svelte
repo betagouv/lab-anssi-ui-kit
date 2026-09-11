@@ -78,6 +78,7 @@
     {#if hasDetails && sources.length > 0}
       <ul class="fr-quote__source">
         {#each sources as source, index (index)}
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           <li>{@html source}</li>
         {/each}
       </ul>

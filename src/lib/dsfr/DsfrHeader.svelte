@@ -290,6 +290,7 @@
         <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
             <div class="fr-header__logo">
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
               <p class="fr-logo">{@html brandLogoTitle}</p>
             </div>
             {#if hasBrandOperator}

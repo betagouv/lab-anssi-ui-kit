@@ -43,6 +43,7 @@
           onchange={() => handleFilterClick(id)}
         />
         <span class="lab-anssi-filtres__icone">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html icone}
         </span>
         <span class="lab-anssi-filtres__libelle">{libelle}</span>
