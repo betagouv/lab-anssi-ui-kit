@@ -44,8 +44,6 @@
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  setThemeable($host());
-
   type Option = {
     value: string;
     label: string;
@@ -54,6 +52,7 @@
     label: string;
     options: Option[];
   };
+
   interface Props {
     /** Attribut id de la liste déroulante */
     id: string;
@@ -125,8 +124,10 @@
     labelWeight,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let formControlElement: HTMLSelectElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -160,7 +161,7 @@
     value = target.value;
 
     onvaluechanged?.(target.value);
-    $host()?.dispatchEvent(
+    hostElement?.dispatchEvent(
       new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
     );
   }
@@ -177,7 +178,7 @@
 
   // Configure la validation avec les références nécessaires
   $effect(() => {
-    formValidation.setup(internals, formControlElement, host, () => {
+    formValidation.setup(internals, formControlElement, hostElement, () => {
       value = "";
     });
   });
