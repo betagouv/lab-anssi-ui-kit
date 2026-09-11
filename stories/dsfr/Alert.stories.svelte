@@ -8,7 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/alert/template/stories/alert-arg-types.js";
 
   import DsfrAlert from "$lib/dsfr/DsfrAlert.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 

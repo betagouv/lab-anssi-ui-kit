@@ -117,7 +117,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       rows={citiesRows}
       rich
     >
-      {#each citiesRows as city, rowIndex}
+      {#each citiesRows as city, rowIndex (city["ville"])}
         <div slot={`cell:ville:${rowIndex}`}>
           <strong>{city["ville"]}</strong>
         </div>
@@ -151,7 +151,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       columns={citiesColumnsRich}
       rows={citiesRows}
     >
-      {#each citiesRows as city, rowIndex}
+      {#each citiesRows as city, rowIndex (city["ville"])}
         <div slot={`cell:ville:${rowIndex}`}>
           <strong>{city["ville"]}</strong>
         </div>

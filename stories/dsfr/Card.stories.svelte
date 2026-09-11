@@ -11,12 +11,12 @@
   import Placeholder3x4 from "@gouvfr/dsfr/example/img/placeholder.3x4.png";
 
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
   import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 

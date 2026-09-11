@@ -111,7 +111,7 @@
 {/snippet}
 
 <svelte:element this={groupMarkup} class={["fr-tags-group", sizeClass]}>
-  {#each tags as tag}
+  {#each tags as tag (tag.id)}
     {#if groupMarkup === "ul"}
       <li>
         {@render tagItem(tag)}

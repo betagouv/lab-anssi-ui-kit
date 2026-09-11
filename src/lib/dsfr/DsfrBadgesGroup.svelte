@@ -57,7 +57,7 @@
 {/snippet}
 
 <svelte:element this={groupMarkup} class={["fr-badges-group", sizeClass]}>
-  {#each badges as badge}
+  {#each badges as badge, index (index)}
     {#if groupMarkup === "ul"}
       <li>
         {@render badgeItem(badge)}

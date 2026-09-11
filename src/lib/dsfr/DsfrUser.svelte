@@ -290,7 +290,7 @@
         {#if links.length > 0}
           <div class="fr-user__menu">
             <ul class=" fr-user__list">
-              {#each links as link, index}
+              {#each links as link, index (link.label)}
                 {@const markup = link.markup ?? (link.href ? "a" : "button")}
                 <li class="fr-user__list-item">
                   <svelte:element

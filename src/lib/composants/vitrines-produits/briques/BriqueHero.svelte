@@ -85,7 +85,7 @@
       <div class="partenaires">
         <p>Une innovation ANSSI conçue pour durer en collaboration avec :</p>
         <div class="liste">
-          {#each partenaires as partenaire}
+          {#each partenaires as partenaire (partenaire.lien)}
             <img src={partenaire.lien} alt={partenaire.alt} />
           {/each}
         </div>

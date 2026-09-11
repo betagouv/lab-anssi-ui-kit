@@ -31,7 +31,7 @@
 <div class="fr-skiplinks">
   <nav role="navigation" aria-label={ariaLabel} class="fr-container">
     <ul class="fr-skiplinks__list">
-      {#each items as { label, href }}
+      {#each items as { label, href } (href)}
         <li>
           <DsfrLink {href} {label} />
         </li>

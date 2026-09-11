@@ -44,7 +44,7 @@
 <Story name="Tabs notifications">
   {#snippet template(args: Args)}
     <dsfr-tabs tabs={args.tabs} aria-label="Notifications" has-icon={args.hasIcon || undefined}>
-      {#each args.tabs as tab, i}
+      {#each args.tabs as tab, i (tab.id)}
         <!-- Onglets -->
         <span slot={`tab-${i + 1}`} class="notification-tab">
           {args.tabs[i].label}
