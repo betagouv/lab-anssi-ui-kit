@@ -1,22 +1,29 @@
 import { parse } from "svelte/compiler";
 import ts, { ScriptTarget } from "typescript";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type SvelteASTNode = Record<string, any>;
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
 export const extraitPropsComposant = (
   contenuSvelteOptions: string,
   contenuSvelteScript: string,
 ) => {
   const ast = parse(contenuSvelteOptions);
-  const noeudOptions = ast.html.children?.find((noeud: any) => noeud.name === "svelte:options");
+  const noeudOptions = (ast.html.children as SvelteASTNode[] | undefined)?.find(
+    (noeud) => noeud.name === "svelte:options",
+  );
   const noeudCustomElement = noeudOptions?.attributes.find(
-    (attribut: any) => (attribut.name = "customElement"),
+    (attribut: SvelteASTNode) => (attribut.name = "customElement"),
   );
 
   const estDeclarationSimple = noeudCustomElement.value[0].type === "Text";
 
   const nomWebComponent = estDeclarationSimple
     ? noeudCustomElement.value[0].data
-    : noeudCustomElement.value[0].expression.properties.find((p: any) => p.key.name === "tag").value
-        .value;
+    : noeudCustomElement.value[0].expression.properties.find(
+        (p: SvelteASTNode) => p.key.name === "tag",
+      ).value.value;
 
   const props: { nom: string; optionnelle: boolean }[] = [];
   const source = ts.createSourceFile(
@@ -46,7 +53,7 @@ export const extraitPropsComposant = (
 
   if (!estDeclarationSimple) {
     const noeudProps = noeudCustomElement.value[0].expression.properties.find(
-      (p: any) => p.key.name === "props",
+      (p: SvelteASTNode) => p.key.name === "props",
     );
 
     if (!noeudProps)
@@ -56,9 +63,10 @@ export const extraitPropsComposant = (
       };
 
     const propsAvecAttribut: { nom: string; nomReel: string }[] = noeudProps.value.properties.map(
-      (p: any) => {
+      (p: SvelteASTNode) => {
         const nom = p.key.name;
-        const nomReel = p.value.properties.find((v: any) => v.key.name === "attribute").value.value;
+        const nomReel = p.value.properties.find((v: SvelteASTNode) => v.key.name === "attribute")
+          .value.value;
 
         if (nomReel.toLowerCase() !== nomReel)
           throw new Error(
