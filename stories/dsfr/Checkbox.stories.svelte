@@ -8,7 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/checkbox/template/stories/checkbox-arg-types.js";
 
   import DsfrCheckbox from "$lib/dsfr/DsfrCheckbox.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
+  // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
