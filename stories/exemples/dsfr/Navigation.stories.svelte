@@ -5,7 +5,6 @@
   import {
     navigationArgTypes,
     navigationArgs,
-    getItemArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/navigation/template/stories/navigation-arg-types.js";
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 

@@ -100,6 +100,7 @@
               noLink
             >
               {#if tuile.illustration?.lien}
+                <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -- snippet passed as slot to DsfrTile -->
                 {#snippet pictogram()}
                   <img src={tuile.illustration.lien} alt={tuile.illustration.alt} />
                 {/snippet}

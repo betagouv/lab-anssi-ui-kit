@@ -118,7 +118,7 @@
     isStep = false,
     indicators = true,
     status = "default",
-    errorMessage,
+    errorMessage: _errorMessage,
     hideOutputLabel = false,
     onvaluechanged,
     onvalue2changed,

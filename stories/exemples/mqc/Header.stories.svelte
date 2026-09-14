@@ -1,6 +1,5 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-  import { type ComponentProps } from "svelte";
 
   import {
     headerArgTypes,
@@ -17,8 +16,6 @@
     args: headerArgs,
     tags: ["!autodocs"],
   });
-
-  type Args = ComponentProps<DsfrHeader>;
 </script>
 
 <Story name="Header MQC">

@@ -167,15 +167,15 @@
     toolLinks,
     duplicateToolLinks,
     hasTranslate,
-    translateId,
-    translateCollapseId,
-    translateButtonTitle,
-    translateButtonKind,
-    translateLanguages,
+    translateId: _translateId,
+    translateCollapseId: _translateCollapseId,
+    translateButtonTitle: _translateButtonTitle,
+    translateButtonKind: _translateButtonKind,
+    translateLanguages: _translateLanguages,
     hasSearch,
     searchId,
     searchModalId,
-    searchBtnId,
+    searchBtnId: _searchBtnId,
     searchInputId,
     searchLabel,
     searchPlaceholder,
@@ -254,7 +254,7 @@
 {#snippet toolLinksRendered()}
   {#if toolLinks?.length}
     <ul class="fr-btns-group">
-      {#each toolLinks as link (link.url ?? link.label)}
+      {#each toolLinks as link, index (index)}
         {@const { label, url, icon, preset, classes = [], markup = "a" } = link}
         <li>
           <svelte:element
