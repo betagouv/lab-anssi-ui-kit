@@ -210,7 +210,7 @@
       {@render pageItem(prev, null, "prev")}
     {/if}
 
-    {#each pages as page, index (page.href)}
+    {#each pages as page, index (index)}
       {@render pageItem(page, index)}
     {/each}
 

@@ -63,7 +63,7 @@
     size = "md",
     href,
     blank,
-    title,
+    title: _title,
     pressed,
     disabled,
     hasIcon,

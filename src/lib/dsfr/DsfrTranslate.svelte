@@ -37,7 +37,7 @@
   let {
     id,
     collapseId,
-    noBorder,
+    noBorder: _noBorder,
     languages,
     buttonId,
     buttonTitle,

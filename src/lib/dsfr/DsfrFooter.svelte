@@ -238,7 +238,7 @@
             {#if subPartners && subPartners.length > 0}
               <div class="fr-footer__partners-sub">
                 <ul>
-                  {#each subPartners as link, index (link.href)}
+                  {#each subPartners as link, index (index)}
                     <li>
                       <a class="fr-footer__partners-link" href={link.href}>
                         <img
@@ -260,7 +260,7 @@
     <div class="fr-footer__bottom">
       {#if bottomLinks && bottomLinks.length > 0}
         <ul class="fr-footer__bottom-list">
-          {#each bottomLinks as link, index (link.href)}
+          {#each bottomLinks as link, index (index)}
             <li class="fr-footer__bottom-item">
               <a
                 id={"footer__bottom-link-" + index}

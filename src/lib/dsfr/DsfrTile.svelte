@@ -95,6 +95,7 @@
     children?: Snippet;
   }
 
+  // eslint-disable-next-line svelte/no-unused-props
   let {
     title,
     hasDescription = false,
@@ -102,7 +103,7 @@
     hasDetails = false,
     details,
     markupLevel = 3,
-    pictogramName,
+    pictogramName: _pictogramName,
     hasBadge = false,
     hasTag = false,
     enlarge = false,
@@ -114,18 +115,14 @@
     blank = false,
     download = false,
     lang,
-    assess = false,
-    assessBytes = false,
+    assess: _assess = false,
+    assessBytes: _assessBytes = false,
     size = "md",
     horizontal = false,
     verticalBreakpoint = "false",
     variations = "none",
     noIcon = false,
   }: Props = $props();
-
-  const actionMarkupTag = $derived.by(() => {
-    return actionMarkup !== "false" ? actionMarkup : "a";
-  });
 
   const classEnlarge = $derived.by(() => {
     if (actionMarkup === "a" && enlarge) return "fr-enlarge-link";
