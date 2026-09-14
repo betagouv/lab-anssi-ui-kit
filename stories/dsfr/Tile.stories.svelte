@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -108,7 +109,27 @@
   </dsfr-tile>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTile = canvasElement.querySelector("dsfr-tile");
+
+    await step("La tuile est rendue", async () => {
+      const tile = dsfrTile?.shadowRoot?.querySelector(".fr-tile");
+      await expect(tile).toBeTruthy();
+    });
+
+    await step("Le titre est affiché avec un lien", async () => {
+      const title = dsfrTile?.shadowRoot?.querySelector(".fr-tile__title");
+      await expect(title).toBeTruthy();
+      await expect(title?.textContent?.trim()).toBe("Intitulé de la tuile");
+
+      const link = title?.querySelector("a");
+      await expect(link).toBeTruthy();
+      await expect(link?.getAttribute("href")).toBe("#");
+    });
+  }}
+/>
 
 <Story name="Taille SM" args={{ size: "sm" }} />
 
@@ -119,6 +140,19 @@
 <Story
   name="Horizontale"
   args={{ enlarge: true, hasDescription: true, horizontal: true, hasDetails: true }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTile = canvasElement.querySelector("dsfr-tile");
+
+    await step("La tuile a la classe horizontale", async () => {
+      const tile = dsfrTile?.shadowRoot?.querySelector(".fr-tile");
+      await expect(tile?.classList.contains("fr-tile--horizontal")).toBe(true);
+    });
+
+    await step("La description est affichée", async () => {
+      const desc = dsfrTile?.shadowRoot?.querySelector(".fr-tile__desc");
+      await expect(desc).toBeTruthy();
+    });
+  }}
 />
 
 <Story
@@ -134,6 +168,21 @@
     download: true,
     hasDetails: true,
     details: "Détail obligatoire (Extension - Poids - Langue)",
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTile = canvasElement.querySelector("dsfr-tile");
+
+    await step("La tuile a la classe download", async () => {
+      const tile = dsfrTile?.shadowRoot?.querySelector(".fr-tile");
+      await expect(tile?.classList.contains("fr-tile--download")).toBe(true);
+    });
+
+    await step("Le détail obligatoire est affiché", async () => {
+      const detail = dsfrTile?.shadowRoot?.querySelector(".fr-tile__detail");
+      await expect(detail?.textContent?.trim()).toBe(
+        "Détail obligatoire (Extension - Poids - Langue)",
+      );
+    });
   }}
 />
 

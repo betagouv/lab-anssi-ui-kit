@@ -122,7 +122,9 @@
   </div>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"}
+/>
 
 <Story name="Size SM" args={{ id: "modal-sm", size: "sm" }} />
 
@@ -139,6 +141,7 @@
     footer: true,
     footerType: "buttonsgroup",
   }}
+}
 />
 
 <style>

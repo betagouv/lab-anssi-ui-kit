@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,7 +68,27 @@
   ></dsfr-tags-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTagsGroup = canvasElement.querySelector("dsfr-tags-group");
+
+    await step("Le groupe de tags est rendu", async () => {
+      const group = dsfrTagsGroup?.shadowRoot?.querySelector(".fr-tags-group");
+      await expect(group).toBeTruthy();
+    });
+
+    await step("Le groupe contient 3 tags", async () => {
+      const tags = dsfrTagsGroup?.shadowRoot?.querySelectorAll(".fr-tag");
+      await expect(tags?.length).toBe(3);
+    });
+
+    await step("Le groupe utilise une liste ul par défaut", async () => {
+      const ul = dsfrTagsGroup?.shadowRoot?.querySelector("ul.fr-tags-group");
+      await expect(ul).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Taille MD"
@@ -100,6 +121,21 @@
   args={{
     type: "pressable",
     tags: pressableTags,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTagsGroup = canvasElement.querySelector("dsfr-tags-group");
+
+    await step("Les tags pressables sont des boutons", async () => {
+      const buttons = dsfrTagsGroup?.shadowRoot?.querySelectorAll("button.fr-tag");
+      await expect(buttons?.length).toBe(3);
+    });
+
+    await step("Le clic bascule l'état pressé d'un tag", async () => {
+      const button = dsfrTagsGroup?.shadowRoot?.querySelector("button.fr-tag") as HTMLElement;
+      await expect(button?.getAttribute("aria-pressed")).toBe("false");
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-pressed")).toBe("true");
+    });
   }}
 />
 

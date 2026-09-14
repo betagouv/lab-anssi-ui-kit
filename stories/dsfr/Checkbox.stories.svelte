@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -74,7 +75,43 @@
   ></dsfr-checkbox>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-checkbox");
+    const shadow = el?.shadowRoot;
+
+    await step("La checkbox est rendue", async () => {
+      const group = shadow?.querySelector(".fr-checkbox-group");
+      await expect(group).toBeTruthy();
+
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      await expect(input).toBeTruthy();
+    });
+
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+      await expect(label).toBeTruthy();
+    });
+
+    await step("La checkbox n'est pas cochée par défaut", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      await expect(input.checked).toBe(false);
+    });
+
+    await step("Cliquer sur la checkbox la coche", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      await userEvent.click(input);
+      await expect(input.checked).toBe(true);
+    });
+
+    await step("Cliquer à nouveau décoche la checkbox", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      await userEvent.click(input);
+      await expect(input.checked).toBe(false);
+    });
+  }}
+/>
 
 <Story name="Etat 'indeterminate'" args={{ ...checkboxArgs, indeterminate: true }} />
 

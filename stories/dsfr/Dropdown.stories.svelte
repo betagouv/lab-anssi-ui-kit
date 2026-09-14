@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrDropdown from "$lib/dsfr/DsfrDropdown.svelte";
@@ -94,7 +95,41 @@
   </div>
 {/snippet}
 
-<Story name="Buttons List" args={{ contentType: "buttons" }} />
+<Story
+  name="Buttons List"
+  args={{ contentType: "buttons" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-dropdown");
+
+    await step("Le dropdown est rendu", async () => {
+      const dropdown = el?.shadowRoot?.querySelector(".fr-dropdown");
+      await expect(dropdown).toBeTruthy();
+    });
+
+    await step("Le bouton déclencheur est présent", async () => {
+      const button = el?.shadowRoot?.querySelector("button[aria-expanded]");
+      await expect(button).toBeTruthy();
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+    });
+
+    await step("Le panneau déroulant contient les items", async () => {
+      const items = el?.shadowRoot?.querySelectorAll(".fr-dropdown__item");
+      await expect(items?.length).toBe(3);
+    });
+
+    await step("Le clic ouvre le dropdown", async () => {
+      const button = el?.shadowRoot?.querySelector("button[aria-expanded]") as HTMLElement;
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-expanded")).toBe("true");
+    });
+
+    await step("Un second clic ferme le dropdown", async () => {
+      const button = el?.shadowRoot?.querySelector("button[aria-expanded]") as HTMLElement;
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+    });
+  }}
+/>
 
 <Story
   name="Links List"
@@ -124,7 +159,14 @@
   }}
 />
 
-<Story name="Custom">
+<Story
+  name="Custom"
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-dropdown");
+    const customContent = el?.shadowRoot?.querySelector(".fr-dropdown__content--custom");
+    await expect(customContent).toBeTruthy();
+  }}
+>
   {#snippet template(args: Args)}
     <div class="dropdown-wrapper">
       <dsfr-dropdown

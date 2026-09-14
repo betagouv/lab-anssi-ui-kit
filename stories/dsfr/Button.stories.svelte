@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -83,7 +84,28 @@
   ></dsfr-button>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-button");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton est rendu avec la classe fr-btn", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+      await expect(button).toBeTruthy();
+    });
+
+    await step("Le bouton affiche le bon libellé", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+      await expect(button?.textContent?.trim()).toBe("libellé du bouton");
+    });
+
+    await step("Le bouton a le style primaire par défaut", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+      await expect(button?.classList.contains("fr-btn--primary")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Primaire" args={{ kind: "primary", label: "Primaire" }} />
 
@@ -98,7 +120,19 @@
   {/snippet}
 </Story>
 
-<Story name="Désactivé">
+<Story
+  name="Désactivé"
+  play={async ({ canvasElement, step }) => {
+    const buttons = canvasElement.querySelectorAll("dsfr-button");
+
+    await step("Tous les boutons sont désactivés", async () => {
+      for (const el of buttons) {
+        const button = el.shadowRoot?.querySelector(".fr-btn") as HTMLButtonElement;
+        await expect(button?.disabled).toBe(true);
+      }
+    });
+  }}
+>
   {#snippet template(_args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-button label="Primaire" kind="primary" disabled={true}></dsfr-button>

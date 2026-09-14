@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -100,4 +101,41 @@
   ></dsfr-range>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-range");
+
+    await step("Le groupe de curseur est rendu", async () => {
+      const rangeGroup = el?.shadowRoot?.querySelector(".fr-range-group");
+      await expect(rangeGroup).toBeTruthy();
+    });
+
+    await step("Le curseur est présent", async () => {
+      const range = el?.shadowRoot?.querySelector(".fr-range");
+      await expect(range).toBeTruthy();
+      const input = el?.shadowRoot?.querySelector('input[type="range"]');
+      await expect(input).toBeTruthy();
+    });
+
+    await step("Le label est affiché", async () => {
+      const label = el?.shadowRoot?.querySelector("label.fr-label");
+      await expect(label).toBeTruthy();
+    });
+
+    await step("Les indicateurs min et max sont affichés", async () => {
+      const min = el?.shadowRoot?.querySelector(".fr-range__min");
+      await expect(min).toBeTruthy();
+      await expect(min?.textContent).toBe("0");
+      const max = el?.shadowRoot?.querySelector(".fr-range__max");
+      await expect(max).toBeTruthy();
+      await expect(max?.textContent).toBe("100");
+    });
+
+    await step("La valeur de sortie est affichée", async () => {
+      const output = el?.shadowRoot?.querySelector(".fr-range__output");
+      await expect(output).toBeTruthy();
+      await expect(output?.textContent).toBe("50");
+    });
+  }}
+/>

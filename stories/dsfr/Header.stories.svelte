@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -244,7 +245,33 @@
   ></dsfr-header>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+
+    await step("Le header est rendu", async () => {
+      const header = el?.shadowRoot?.querySelector("header.fr-header");
+      await expect(header).toBeTruthy();
+      await expect(header?.getAttribute("role")).toBe("banner");
+    });
+
+    await step("Le logo est présent", async () => {
+      const logo = el?.shadowRoot?.querySelector(".fr-logo");
+      await expect(logo).toBeTruthy();
+    });
+
+    await step("Le titre du service est affiché", async () => {
+      const serviceTitle = el?.shadowRoot?.querySelector(".fr-header__service-title");
+      await expect(serviceTitle).toBeTruthy();
+    });
+
+    await step("La navigation est présente", async () => {
+      const nav = el?.shadowRoot?.querySelector("nav");
+      await expect(nav).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec navigation" />
 
@@ -257,7 +284,20 @@
   }}
 />
 
-<Story name="Service" args={{ hasNavigation: false }} />
+<Story
+  name="Service"
+  args={{ hasNavigation: false }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+
+    await step("Le header est rendu sans navigation", async () => {
+      const header = el?.shadowRoot?.querySelector("header.fr-header");
+      await expect(header).toBeTruthy();
+      const nav = el?.shadowRoot?.querySelector("nav");
+      await expect(nav).toBeNull();
+    });
+  }}
+/>
 
 <Story
   name="Avec liens d'accès rapide"

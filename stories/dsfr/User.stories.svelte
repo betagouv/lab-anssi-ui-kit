@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrUser from "$lib/dsfr/DsfrUser.svelte";
@@ -96,7 +97,41 @@
   ></dsfr-user>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrUser = canvasElement.querySelector("dsfr-user");
+
+    await step("Le composant est rendu avec le bouton déclencheur", async () => {
+      const user = dsfrUser?.shadowRoot?.querySelector(".fr-user");
+      await expect(user).toBeTruthy();
+
+      const button = dsfrUser?.shadowRoot?.querySelector(".fr-user__btn");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe("Mon espace");
+    });
+
+    await step("Le clic ouvre le menu utilisateur", async () => {
+      const button = dsfrUser?.shadowRoot?.querySelector(".fr-user__btn") as HTMLElement;
+      await userEvent.click(button);
+      const collapse = dsfrUser?.shadowRoot?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+
+    await step("Le menu contient les informations utilisateur", async () => {
+      const userName = dsfrUser?.shadowRoot?.querySelector(".fr-user__name");
+      await expect(userName?.textContent?.trim()).toContain("Libellé");
+
+      const userEmail = dsfrUser?.shadowRoot?.querySelector(".fr-user__email");
+      await expect(userEmail?.textContent?.trim()).toBe("adresse-electronique@utilisateur.fr");
+    });
+
+    await step("Le menu contient 4 liens de navigation", async () => {
+      const links = dsfrUser?.shadowRoot?.querySelectorAll(".fr-user__link");
+      await expect(links?.length).toBe(4);
+    });
+  }}
+/>
 
 <Story
   name="Sans texte d'information"
@@ -123,5 +158,10 @@
     id: "user-menu-disabled",
     collapseId: "user-menu-disabled-collapse",
     disabled: true,
+  }}
+  play={async ({ canvasElement }) => {
+    const dsfrUser = canvasElement.querySelector("dsfr-user");
+    const button = dsfrUser?.shadowRoot?.querySelector(".fr-user__btn") as HTMLButtonElement;
+    await expect(button?.disabled).toBe(true);
   }}
 />

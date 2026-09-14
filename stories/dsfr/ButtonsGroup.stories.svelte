@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -73,7 +74,33 @@
   ></dsfr-buttons-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-buttons-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe de boutons est rendu", async () => {
+      const group = shadow?.querySelector(".fr-btns-group");
+      await expect(group).toBeTruthy();
+    });
+
+    await step("Le groupe contient 3 boutons", async () => {
+      const buttons = shadow?.querySelectorAll(".fr-btn");
+      await expect(buttons?.length).toBe(3);
+    });
+
+    await step("Les boutons sont dans des éléments li", async () => {
+      const items = shadow?.querySelectorAll("li");
+      await expect(items?.length).toBe(3);
+    });
+
+    await step("Le premier bouton est de type primaire", async () => {
+      const firstButton = shadow?.querySelector(".fr-btn");
+      await expect(firstButton?.classList.contains("fr-btn--primary")).toBe(true);
+    });
+  }}
+/>
 
 <Story
   name="Vertical"

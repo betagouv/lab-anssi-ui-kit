@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -51,4 +52,42 @@
   </dsfr-accordion>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-accordion");
+    const shadow = el?.shadowRoot;
+
+    await step("L'accordéon est rendu avec le bouton et le contenu", async () => {
+      const section = shadow?.querySelector("section.fr-accordion");
+      await expect(section).toBeTruthy();
+
+      const button = shadow?.querySelector("button.fr-accordion__btn");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe("Libellé accordéon");
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse).toBeTruthy();
+    });
+
+    await step("Le bouton a aria-expanded=false par défaut", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn");
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+    });
+
+    await step("Cliquer sur le bouton ouvre l'accordéon", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn") as HTMLElement;
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-expanded")).toBe("true");
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+
+    await step("Cliquer à nouveau ferme l'accordéon", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn") as HTMLElement;
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+    });
+  }}
+/>

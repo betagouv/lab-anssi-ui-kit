@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -104,4 +105,29 @@
   ></dsfr-footer>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-footer");
+
+    await step("Le pied de page est rendu", async () => {
+      const footer = el?.shadowRoot?.querySelector("footer.fr-footer");
+      await expect(footer).toBeTruthy();
+    });
+
+    await step("Le logo est présent", async () => {
+      const logo = el?.shadowRoot?.querySelector(".fr-logo");
+      await expect(logo).toBeTruthy();
+    });
+
+    await step("Les liens institutionnels sont présents", async () => {
+      const contentLinks = el?.shadowRoot?.querySelectorAll(".fr-footer__content-link");
+      await expect(contentLinks?.length).toBeGreaterThanOrEqual(4);
+    });
+
+    await step("Le bloc du bas est présent", async () => {
+      const bottom = el?.shadowRoot?.querySelector(".fr-footer__bottom");
+      await expect(bottom).toBeTruthy();
+    });
+  }}
+/>

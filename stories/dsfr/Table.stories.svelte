@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -191,7 +192,27 @@
   ></dsfr-table>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+
+    await step("Le tableau est rendu avec un caption", async () => {
+      const caption = dsfrTable?.shadowRoot?.querySelector("caption");
+      await expect(caption).toBeTruthy();
+    });
+
+    await step("Les en-têtes de colonnes sont rendus", async () => {
+      const headers = dsfrTable?.shadowRoot?.querySelectorAll("thead th");
+      await expect(headers?.length).toBeGreaterThan(0);
+    });
+
+    await step("Les lignes de données sont rendues", async () => {
+      const rows = dsfrTable?.shadowRoot?.querySelectorAll("tbody tr");
+      await expect(rows?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
 
 <Story name="Taille small" args={{ size: "sm" }} />
 
@@ -199,7 +220,15 @@
 
 <Story name="Taille large" args={{ size: "lg" }} />
 
-<Story name="Avec bordure" args={{ bordered: true }} />
+<Story
+  name="Avec bordure"
+  args={{ bordered: true }}
+  play={async ({ canvasElement }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const table = dsfrTable?.shadowRoot?.querySelector(".fr-table");
+    await expect(table?.classList.contains("fr-table--bordered")).toBe(true);
+  }}
+/>
 
 <Story name="Sans scroll" args={{ noScroll: true }} />
 
@@ -236,14 +265,66 @@
   automatiquement via la prop `selectable`, on part donc de la table simple et on délègue
   l'ajout de la colonne au composant.
 -->
-<Story name="Sélectionnable" args={{ selectable: true }} />
+<Story
+  name="Sélectionnable"
+  args={{ selectable: true }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+
+    await step("Les checkboxes de sélection sont rendues", async () => {
+      const checkboxes = dsfrTable?.shadowRoot?.querySelectorAll('tbody input[type="checkbox"]');
+      await expect(checkboxes?.length).toBeGreaterThan(0);
+    });
+
+    await step("Émet selectionchanged lors de la sélection d'une ligne", async () => {
+      const handler = fn();
+      dsfrTable?.addEventListener("selectionchanged", handler);
+      const checkbox = dsfrTable?.shadowRoot?.querySelector(
+        'tbody input[type="checkbox"]',
+      ) as HTMLInputElement;
+      await userEvent.click(checkbox);
+      await expect(handler).toHaveBeenCalled();
+      dsfrTable?.removeEventListener("selectionchanged", handler);
+    });
+  }}
+/>
 
 <Story
   name="Sélectionnable avec ligne sélectionnée"
   args={{ selectable: true, selectedRowKeys: [1] }}
 />
 
-<Story name="Sélectionnable avec tout sélectionner" args={{ selectable: true, selectAll: true }} />
+<Story
+  name="Sélectionnable avec tout sélectionner"
+  args={{ selectable: true, selectAll: true }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+
+    await step("La checkbox tout sélectionner est rendue", async () => {
+      const selectAll = dsfrTable?.shadowRoot?.querySelector('thead input[type="checkbox"]');
+      await expect(selectAll).toBeTruthy();
+    });
+
+    await step("Sélectionne toutes les lignes via la checkbox tout sélectionner", async () => {
+      const handler = fn();
+      dsfrTable?.addEventListener("selectionchanged", handler);
+      const selectAll = dsfrTable?.shadowRoot?.querySelector(
+        'thead input[type="checkbox"]',
+      ) as HTMLInputElement;
+      await userEvent.click(selectAll);
+      await expect(handler).toHaveBeenCalled();
+
+      const rowCheckboxes = dsfrTable?.shadowRoot?.querySelectorAll(
+        'tbody input[type="checkbox"]',
+      ) as NodeListOf<HTMLInputElement>;
+      for (const cb of rowCheckboxes) {
+        await expect(cb.checked).toBe(true);
+      }
+
+      dsfrTable?.removeEventListener("selectionchanged", handler);
+    });
+  }}
+/>
 
 <!--
   Limitation : la story DSFR « ComplexTableStory » utilise rowspan, colspan, l'attribut headers

@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -48,10 +49,34 @@
   <dsfr-highlight {...args}></dsfr-highlight>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-highlight");
+
+    await step("Le composant est rendu", async () => {
+      const highlight = el?.shadowRoot?.querySelector(".fr-highlight");
+      await expect(highlight).toBeTruthy();
+    });
+
+    await step("Le texte est affiché avec la taille par défaut", async () => {
+      const text = el?.shadowRoot?.querySelector("p.fr-text--md");
+      await expect(text).toBeTruthy();
+      await expect(text?.textContent).toContain("Lorem ipsum");
+    });
+  }}
+/>
 
 <Story name="Taille SM" args={{ size: "sm" }} />
 
 <Story name="Taille LG" args={{ size: "lg" }} />
 
-<Story name="Accent" args={{ accent: "green-menthe" }} />
+<Story
+  name="Accent"
+  args={{ accent: "green-menthe" }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-highlight");
+    const highlight = el?.shadowRoot?.querySelector(".fr-highlight");
+    await expect(highlight?.classList.contains("fr-highlight--green-menthe")).toBe(true);
+  }}
+/>

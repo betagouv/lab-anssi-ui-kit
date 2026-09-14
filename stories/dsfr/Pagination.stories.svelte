@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,11 +68,57 @@
   ></dsfr-pagination>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-pagination");
+
+    await step("La pagination est rendue", async () => {
+      const nav = el?.shadowRoot?.querySelector("nav.fr-pagination");
+      await expect(nav).toBeTruthy();
+      const list = el?.shadowRoot?.querySelector(".fr-pagination__list");
+      await expect(list).toBeTruthy();
+    });
+
+    await step("Les liens de pagination sont présents", async () => {
+      const links = el?.shadowRoot?.querySelectorAll(".fr-pagination__link");
+      await expect(links?.length).toBeGreaterThan(0);
+    });
+
+    await step("La page courante est marquée aria-current=page", async () => {
+      const current = el?.shadowRoot?.querySelector('.fr-pagination__link[aria-current="page"]');
+      await expect(current).toBeTruthy();
+    });
+
+    await step("Les boutons première/dernière et précédent/suivant sont présents", async () => {
+      const first = el?.shadowRoot?.querySelector(".fr-pagination__link--first");
+      await expect(first).toBeTruthy();
+      const last = el?.shadowRoot?.querySelector(".fr-pagination__link--last");
+      await expect(last).toBeTruthy();
+      const prev = el?.shadowRoot?.querySelector(".fr-pagination__link--prev");
+      await expect(prev).toBeTruthy();
+      const next = el?.shadowRoot?.querySelector(".fr-pagination__link--next");
+      await expect(next).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Dernière page"
   args={{
     currentPageIndex: paginationArgs.pages.length,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-pagination");
+
+    await step("Le bouton dernière page est désactivé", async () => {
+      const last = el?.shadowRoot?.querySelector(".fr-pagination__link--last");
+      await expect(last?.getAttribute("aria-disabled")).toBe("true");
+    });
+
+    await step("Le bouton suivant est désactivé", async () => {
+      const next = el?.shadowRoot?.querySelector(".fr-pagination__link--next");
+      await expect(next?.getAttribute("aria-disabled")).toBe("true");
+    });
   }}
 />
