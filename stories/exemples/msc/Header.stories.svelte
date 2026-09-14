@@ -33,7 +33,7 @@
 </script>
 
 <Story name="Header MSC">
-  {#snippet template(args: Args)}
+  {#snippet template(_args: Args)}
     <dsfr-header
       id="headerMSC"
       menu-id="menuMSC"
@@ -58,7 +58,7 @@
 </Story>
 
 <Story name="Header MSC - Slot après navigation">
-  {#snippet template(args: Args)}
+  {#snippet template(_args: Args)}
     <dsfr-header
       id="headerMSCAfterNav"
       menu-id="menuMSCAfterNav"

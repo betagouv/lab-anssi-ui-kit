@@ -8,7 +8,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Bandeau",
     component: Bandeau,
-    play: async ({ canvas, canvasElement }) => {
+    play: async ({ _canvas, canvasElement }) => {
       const button = canvasElement
         .querySelector("lab-anssi-mes-services-cyber-bandeau")
         ?.shadowRoot?.querySelector("button");
@@ -23,7 +23,7 @@
   type Args = ComponentProps<Bandeau>;
 </script>
 
-{#snippet template(args: Args)}
+{#snippet template(_args: Args)}
   <lab-anssi-mes-services-cyber-bandeau></lab-anssi-mes-services-cyber-bandeau>
 {/snippet}
 

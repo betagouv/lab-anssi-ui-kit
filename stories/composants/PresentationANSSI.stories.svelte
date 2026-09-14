@@ -13,7 +13,7 @@
   type Args = ComponentProps<PresentationANSSI>;
 </script>
 
-{#snippet template(args: Args)}
+{#snippet template(_args: Args)}
   <lab-anssi-presentation-anssi></lab-anssi-presentation-anssi>
 {/snippet}
 
