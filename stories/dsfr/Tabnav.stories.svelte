@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrTabnav from "$lib/dsfr/DsfrTabnav.svelte";
@@ -106,7 +107,28 @@
   ></dsfr-tabnav>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+
+    await step("Le composant est rendu avec la navigation", async () => {
+      const nav = el?.shadowRoot?.querySelector("nav.fr-tabnav");
+      await expect(nav).toBeTruthy();
+    });
+
+    await step("Les liens sont présents", async () => {
+      const links = el?.shadowRoot?.querySelectorAll(".fr-tabnav__link");
+      await expect(links?.length).toBe(args.links.length);
+    });
+
+    await step("Le premier lien est actif", async () => {
+      const activeLink = el?.shadowRoot?.querySelector(".fr-tabnav__link[aria-current='page']");
+      await expect(activeLink).toBeTruthy();
+      await expect(activeLink?.textContent?.trim()).toBe(args.links[0].label);
+    });
+  }}
+/>
 
 <Story
   name="Deuxième lien actif"
@@ -117,6 +139,12 @@
       { label: "Code", href: "#code" },
       { label: "Accessibilité", href: "#accessibilite" },
     ],
+  }}
+  play={async ({ args, canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const activeLink = el?.shadowRoot?.querySelector(".fr-tabnav__link[aria-current='page']");
+    await expect(activeLink).toBeTruthy();
+    await expect(activeLink?.textContent?.trim()).toBe(args.links[1].label);
   }}
 />
 
@@ -141,7 +169,16 @@
   }}
 />
 
-<Story name="Contrôle externe" args={{ activeIndex: 2 }} />
+<Story
+  name="Contrôle externe"
+  args={{ activeIndex: 2 }}
+  play={async ({ args, canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const activeLink = el?.shadowRoot?.querySelector(".fr-tabnav__link[aria-current='page']");
+    await expect(activeLink).toBeTruthy();
+    await expect(activeLink?.textContent?.trim()).toBe(args.links[args.activeIndex!].label);
+  }}
+/>
 
 <Story name="Mode routeur" args={{ routerMode: true }}>
   {#snippet template(args: Args)}

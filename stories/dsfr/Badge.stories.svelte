@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -53,7 +54,23 @@
   ></dsfr-badge>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-badge");
+    const shadow = el?.shadowRoot;
+
+    await step("Le badge est rendu avec la classe fr-badge", async () => {
+      const badge = shadow?.querySelector("p.fr-badge");
+      await expect(badge).toBeTruthy();
+    });
+
+    await step("Le badge affiche le bon libellé", async () => {
+      const badge = shadow?.querySelector("p.fr-badge");
+      await expect(badge?.textContent?.trim()).toBe(args.label);
+    });
+  }}
+/>
 
 <Story
   name="Taille SM"
@@ -62,7 +79,24 @@
   }}
 />
 
-<Story name="Statuts">
+<Story
+  name="Statuts"
+  play={async ({ args, canvasElement, step }) => {
+    const badges = canvasElement.querySelectorAll("dsfr-badge");
+
+    await step("Les 5 badges de statut sont rendus", async () => {
+      await expect(badges.length).toBe(5);
+    });
+
+    await step("Chaque badge a la classe de statut correspondante", async () => {
+      const statuses = ["success", "warning", "error", "info", "new"];
+      for (let i = 0; i < statuses.length; i++) {
+        const badge = badges[i]?.shadowRoot?.querySelector("p.fr-badge");
+        await expect(badge?.classList.contains(`fr-badge--${statuses[i]}`)).toBe(true);
+      }
+    });
+  }}
+>
   {#snippet template(_args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-badge type="status" status="success"></dsfr-badge>
@@ -100,6 +134,15 @@
     ellipsis: true,
     label:
       "Label très long qui sera tronqué lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus sit amet luctus",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-badge");
+    const shadow = el?.shadowRoot;
+
+    await step("Le badge contient un span avec la classe fr-ellipsis", async () => {
+      const ellipsis = shadow?.querySelector("p.fr-badge .fr-ellipsis");
+      await expect(ellipsis).toBeTruthy();
+    });
   }}
 />
 
