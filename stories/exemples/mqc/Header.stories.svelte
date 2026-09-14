@@ -8,7 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/header/template/stories/header-arg-types";
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
 
   const { Story } = defineMeta({
     title: "Exemples/LAB - MQC",

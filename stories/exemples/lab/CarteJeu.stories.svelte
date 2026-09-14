@@ -4,29 +4,22 @@
 
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
+  import "$lib/dsfr/DsfrBadgesGroup.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrDropdown from "$lib/dsfr/DsfrDropdown.svelte";
+  import "$lib/dsfr/DsfrDropdown.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
+  import "$lib/dsfr/DsfrTagsGroup.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrToggle from "$lib/dsfr/DsfrToggle.svelte";
+  import "$lib/dsfr/DsfrToggle.svelte";
 
   // @ts-expect-error: Required Import to use this component as webcomponent
   import Reactions from "$lib/composants/Reactions.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import Icone from "$lib/composants/Icone.svelte";
+  import "$lib/composants/Icone.svelte";
 
   const { Story } = defineMeta({
     title: "Exemples/LAB",

@@ -8,7 +8,7 @@
     inputArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/input/template/stories/input-arg-types.js";
 
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
   import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
 
   const { Story } = defineMeta({

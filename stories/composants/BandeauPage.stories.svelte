@@ -4,8 +4,8 @@
 
   import BandeauPage from "$lib/composants/BandeauPage.svelte";
 
-  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrBadgesGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Bandeau page",
