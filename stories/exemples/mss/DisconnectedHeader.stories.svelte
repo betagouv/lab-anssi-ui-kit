@@ -25,8 +25,6 @@
 
   import "$lib/dsfr/DsfrCard.svelte";
 
-  const { toolLinks } = headerArgs;
-
   const { Story } = defineMeta({
     title: "Exemples/LAB - MSS",
     component: DsfrHeader,

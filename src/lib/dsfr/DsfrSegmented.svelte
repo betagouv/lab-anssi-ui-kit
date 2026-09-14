@@ -136,7 +136,7 @@
    *
    * @param {Event} event - L'événement de changement déclenché par l'élément DOM
    */
-  function handleChange(event: Event) {
+  function handleChange() {
     if (currentValue !== undefined) {
       onvaluechanged?.(currentValue);
       $host()?.dispatchEvent(

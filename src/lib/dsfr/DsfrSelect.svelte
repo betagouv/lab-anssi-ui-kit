@@ -106,7 +106,7 @@
     label,
     hideLabel = false,
     value = $bindable(),
-    groupedOptions,
+    groupedOptions: _groupedOptions,
     options,
     hint,
     placeholder,

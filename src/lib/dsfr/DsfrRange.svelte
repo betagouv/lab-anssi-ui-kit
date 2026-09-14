@@ -32,7 +32,7 @@
 
 <script lang="ts">
   import { untrack } from "svelte";
-  import type { Size, Status, TextSize, TextWeight } from "$lib/types";
+  import type { Size, TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
@@ -118,7 +118,7 @@
     isStep = false,
     indicators = true,
     status = "default",
-    errorMessage,
+    errorMessage: _errorMessage,
     hideOutputLabel = false,
     onvaluechanged,
     onvalue2changed,

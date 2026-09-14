@@ -101,7 +101,7 @@
     }
   }
 
-  function handleClickLeaf(event: MouseEvent) {
+  function handleClickLeaf() {
     triggerButton.ariaExpanded = "false";
     collapseElement.ariaExpanded = "false";
     replieTousLesItems();
