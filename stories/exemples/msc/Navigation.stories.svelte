@@ -33,7 +33,7 @@
 </script>
 
 <Story name="Navigation avec slot après les liens natifs">
-  {#snippet template(args: Args)}
+  {#snippet template(_args: Args)}
     <dsfr-navigation id="navigationMSC" aria-label="Navigation principale" items={navigationMSC}>
       <button class="bouton-nis2" type="button" slot="afternavigation">
         <svg
