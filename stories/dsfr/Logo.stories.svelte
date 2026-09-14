@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -36,13 +37,45 @@
   <dsfr-logo {...args}></dsfr-logo>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
 
-<Story name="Taille SM" args={{ ...logoArgs, size: "sm" }} />
+    await step("Le logo est rendu", async () => {
+      const logo = el?.shadowRoot?.querySelector("p.fr-logo");
+      await expect(logo).toBeTruthy();
+      await expect(logo?.classList.contains("fr-logo--md")).toBe(true);
+    });
+
+    await step("Le titre du logo est affiché", async () => {
+      const logo = el?.shadowRoot?.querySelector("p.fr-logo");
+      await expect(logo?.innerHTML).toContain("INTITULÉ");
+    });
+  }}
+/>
+
+<Story
+  name="Taille SM"
+  args={{ ...logoArgs, size: "sm" }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
+    const logo = el?.shadowRoot?.querySelector("p.fr-logo");
+    await expect(logo?.classList.contains("fr-logo--sm")).toBe(true);
+  }}
+/>
 
 <Story name="Taille MD" args={{ ...logoArgs, size: "md" }} />
 
-<Story name="Taille LG" args={{ ...logoArgs, size: "lg" }} />
+<Story
+  name="Taille LG"
+  args={{ ...logoArgs, size: "lg" }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
+    const logo = el?.shadowRoot?.querySelector("p.fr-logo");
+    await expect(logo?.classList.contains("fr-logo--lg")).toBe(true);
+  }}
+/>
 
 <Story name="République Française" args={{ ...logoArgs, title: "République <br>Française" }} />
 

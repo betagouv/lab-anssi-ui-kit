@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -86,11 +87,39 @@
   ></dsfr-search>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-search");
+
+    await step("Le composant est rendu", async () => {
+      const searchBar = el?.shadowRoot?.querySelector(".fr-search-bar");
+      await expect(searchBar).toBeTruthy();
+
+      const input = el?.shadowRoot?.querySelector("input.fr-input");
+      await expect(input).toBeTruthy();
+      await expect(input?.getAttribute("type")).toBe("search");
+
+      const button = el?.shadowRoot?.querySelector("button.fr-btn");
+      await expect(button).toBeTruthy();
+    });
+
+    await step("La saisie met à jour la valeur de l'input", async () => {
+      const input = el?.shadowRoot?.querySelector("input.fr-input") as HTMLInputElement;
+      await userEvent.type(input, "test recherche");
+      await expect(input.value).toBe("test recherche");
+    });
+  }}
+/>
 
 <Story
   name="Taille LG"
   args={{
     size: "lg",
+  }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-search");
+    const searchBar = el?.shadowRoot?.querySelector(".fr-search-bar");
+    await expect(searchBar?.classList.contains("fr-search-bar--lg")).toBe(true);
   }}
 />

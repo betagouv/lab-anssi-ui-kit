@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -46,4 +47,30 @@
   ></dsfr-stepper>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-stepper");
+
+    await step("Le composant est rendu", async () => {
+      const stepper = el?.shadowRoot?.querySelector(".fr-stepper");
+      await expect(stepper).toBeTruthy();
+
+      const title = el?.shadowRoot?.querySelector(".fr-stepper__title");
+      await expect(title).toBeTruthy();
+    });
+
+    await step("L'état de l'étape est affiché", async () => {
+      const state = el?.shadowRoot?.querySelector(".fr-stepper__state");
+      await expect(state).toBeTruthy();
+      await expect(state?.textContent).toContain("Étape");
+      await expect(state?.textContent).toContain("sur");
+    });
+
+    await step("Les détails de l'étape suivante sont affichés", async () => {
+      const details = el?.shadowRoot?.querySelector(".fr-stepper__details");
+      await expect(details).toBeTruthy();
+      await expect(details?.textContent).toContain("Étape suivante");
+    });
+  }}
+/>

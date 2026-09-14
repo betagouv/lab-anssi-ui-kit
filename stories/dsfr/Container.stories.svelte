@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
@@ -51,11 +52,31 @@
   </style>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-container");
+
+    await step("Le conteneur est rendu avec la classe fr-container", async () => {
+      const container = el?.shadowRoot?.querySelector(".fr-container");
+      await expect(container).toBeTruthy();
+    });
+
+    await step("Le contenu du slot est affiché", async () => {
+      const slot = el?.shadowRoot?.querySelector("slot");
+      await expect(slot).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Fluid"
   args={{
     fluid: true,
+  }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-container");
+    const container = el?.shadowRoot?.querySelector(".fr-container--fluid");
+    await expect(container).toBeTruthy();
   }}
 />

@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -37,7 +38,28 @@
   ></dsfr-badges-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-badges-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe de badges est rendu", async () => {
+      const group = shadow?.querySelector(".fr-badges-group");
+      await expect(group).toBeTruthy();
+    });
+
+    await step("Le groupe contient le bon nombre de badges", async () => {
+      const badges = shadow?.querySelectorAll("p.fr-badge");
+      await expect(badges?.length).toBeGreaterThan(0);
+    });
+
+    await step("Les badges sont dans des éléments li", async () => {
+      const items = shadow?.querySelectorAll("li");
+      await expect(items?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
 
 <Story
   name="Taille MD"

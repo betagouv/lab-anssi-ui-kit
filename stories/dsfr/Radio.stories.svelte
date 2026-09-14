@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -61,4 +62,28 @@
   ></dsfr-radio>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radio");
+
+    await step("Le bouton radio est rendu", async () => {
+      const radioGroup = el?.shadowRoot?.querySelector(".fr-radio-group");
+      await expect(radioGroup).toBeTruthy();
+      const input = el?.shadowRoot?.querySelector('input[type="radio"]');
+      await expect(input).toBeTruthy();
+    });
+
+    await step("Le label est affiché", async () => {
+      const label = el?.shadowRoot?.querySelector("label.fr-label");
+      await expect(label).toBeTruthy();
+      await expect(label?.textContent?.trim()).toBe("libellé radio");
+    });
+
+    await step("Le bouton radio peut être coché", async () => {
+      const input = el?.shadowRoot?.querySelector('input[type="radio"]') as HTMLInputElement;
+      await userEvent.click(input);
+      await expect(input.checked).toBe(true);
+    });
+  }}
+/>

@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -61,7 +62,15 @@
   ></dsfr-alert>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+    const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+    await expect(alert).toBeTruthy();
+    await expect(alert?.classList.contains("fr-alert--default")).toBe(true);
+  }}
+/>
 
 <Story
   name="Title"
@@ -90,6 +99,17 @@
     title: "Titre du message de succès",
     text: "Texte du message",
   }}
+  play={async ({ canvasElement }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+    const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+    await expect(alert?.classList.contains("fr-alert--success")).toBe(true);
+
+    const title = dsfrAlert?.shadowRoot?.querySelector(".fr-alert__title");
+    await expect(title?.textContent).toBe("Titre du message de succès");
+
+    const text = dsfrAlert?.shadowRoot?.querySelector("p");
+    await expect(text?.textContent).toBe("Texte du message");
+  }}
 />
 
 <Story
@@ -99,6 +119,11 @@
     hasTitle: true,
     title: "Titre du message d'erreur",
     text: "Texte du message",
+  }}
+  play={async ({ canvasElement }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+    const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+    await expect(alert?.classList.contains("fr-alert--error")).toBe(true);
   }}
 />
 
@@ -169,6 +194,23 @@
     hasDescription: true,
     text: "Cliquer sur la croix pour fermer l'alerte",
     dismissible: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+
+    await step("L'alerte et le bouton de fermeture sont rendus", async () => {
+      const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+      await expect(alert).toBeTruthy();
+      const button = dsfrAlert?.shadowRoot?.querySelector("button.fr-btn--close");
+      await expect(button).toBeTruthy();
+    });
+
+    await step("L'alerte disparaît après clic sur le bouton de fermeture", async () => {
+      const button = dsfrAlert?.shadowRoot?.querySelector("button.fr-btn--close") as HTMLElement;
+      await userEvent.click(button);
+      const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+      await expect(alert).toBeNull();
+    });
   }}
 />
 

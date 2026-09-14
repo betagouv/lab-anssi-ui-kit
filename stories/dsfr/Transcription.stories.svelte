@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,4 +68,32 @@
   </dsfr-transcription>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTranscription = canvasElement.querySelector("dsfr-transcription");
+
+    await step("Le composant est rendu avec le bouton Transcription", async () => {
+      const transcription = dsfrTranscription?.shadowRoot?.querySelector(".fr-transcription");
+      await expect(transcription).toBeTruthy();
+
+      const button = dsfrTranscription?.shadowRoot?.querySelector(".fr-transcription__btn");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe("Transcription");
+    });
+
+    await step("Le contenu est fermé par défaut", async () => {
+      const collapse = dsfrTranscription?.shadowRoot?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(false);
+    });
+
+    await step("Le clic sur le bouton ouvre la transcription", async () => {
+      const button = dsfrTranscription?.shadowRoot?.querySelector(
+        ".fr-transcription__btn",
+      ) as HTMLElement;
+      await userEvent.click(button);
+      const collapse = dsfrTranscription?.shadowRoot?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+  }}
+/>

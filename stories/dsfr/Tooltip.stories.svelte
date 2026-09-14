@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrTooltip from "$lib/dsfr/DsfrTooltip.svelte";
@@ -66,7 +67,29 @@
   </dsfr-tooltip>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTooltip = canvasElement.querySelector("dsfr-tooltip");
+
+    await step("Le composant est rendu avec le wrapper et le tooltip", async () => {
+      const wrapper = dsfrTooltip?.shadowRoot?.querySelector(".fr-tooltip-wrapper");
+      await expect(wrapper).toBeTruthy();
+
+      const tooltip = dsfrTooltip?.shadowRoot?.querySelector(".fr-tooltip");
+      await expect(tooltip).toBeTruthy();
+      await expect(tooltip?.getAttribute("role")).toBe("tooltip");
+      await expect(tooltip?.textContent?.trim()).toBe(
+        "lorem ipsum dolor sit amet consectetur adipiscing elit",
+      );
+    });
+
+    await step("Le tooltip n'est pas affiché par défaut", async () => {
+      const tooltip = dsfrTooltip?.shadowRoot?.querySelector(".fr-tooltip");
+      await expect(tooltip?.classList.contains("fr-tooltip--shown")).toBe(false);
+    });
+  }}
+/>
 
 <Story name="Infobulle (clic)" args={{ type: "click", id: "tooltip-click" }}>
   {#snippet template(args: Args)}

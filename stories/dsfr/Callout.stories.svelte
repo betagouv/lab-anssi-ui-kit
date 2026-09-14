@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -55,7 +56,28 @@
   ></dsfr-callout>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("La mise en avant est rendue", async () => {
+      const callout = shadow?.querySelector("div.fr-callout");
+      await expect(callout).toBeTruthy();
+    });
+
+    await step("Le titre est affiché", async () => {
+      const title = shadow?.querySelector(".fr-callout__title");
+      await expect(title).toBeTruthy();
+    });
+
+    await step("Le texte est affiché", async () => {
+      const text = shadow?.querySelector(".fr-callout__text");
+      await expect(text).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Icône"
@@ -80,6 +102,21 @@
     icon: "info-line",
     hasButton: true,
     buttonLabel: "En savoir plus",
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("La mise en avant a la classe d'icône", async () => {
+      const callout = shadow?.querySelector("div.fr-callout");
+      await expect(callout?.className).toContain("fr-icon-");
+    });
+
+    await step("Le bouton est rendu dans la mise en avant", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe("En savoir plus");
+    });
   }}
 />
 

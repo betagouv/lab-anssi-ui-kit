@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrMessagesGroup from "$lib/dsfr/DsfrMessagesGroup.svelte";
@@ -79,11 +80,34 @@
   ></dsfr-messages-group>
 {/snippet}
 
-<Story name="Erreur" args={{ status: "error", errorMessage: "Le champ est obligatoire." }} />
+<Story
+  name="Erreur"
+  args={{ status: "error", errorMessage: "Le champ est obligatoire." }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-messages-group");
+
+    await step("Le groupe de messages est rendu avec le statut erreur", async () => {
+      const group = el?.shadowRoot?.querySelector(".fr-messages-group");
+      await expect(group).toBeTruthy();
+      const message = el?.shadowRoot?.querySelector(".fr-message--error");
+      await expect(message).toBeTruthy();
+      await expect(message?.textContent).toBe("Le champ est obligatoire.");
+    });
+  }}
+/>
 
 <Story
   name="Succès"
   args={{ status: "valid", validMessage: "La valeur a bien été enregistrée." }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-messages-group");
+
+    await step("Le groupe de messages est rendu avec le statut succès", async () => {
+      const message = el?.shadowRoot?.querySelector(".fr-message--valid");
+      await expect(message).toBeTruthy();
+      await expect(message?.textContent).toBe("La valeur a bien été enregistrée.");
+    });
+  }}
 />
 
 <Story name="Information" args={{ status: "info", infoMessage: "200 caractères maximum." }} />
@@ -101,6 +125,16 @@
       errors: ["Le champ est obligatoire.", "Le format attendu est JJ/MM/AAAA."],
     },
   }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-messages-group");
+
+    await step("Les deux messages d'erreur sont rendus", async () => {
+      const messages = el?.shadowRoot?.querySelectorAll(".fr-message--error");
+      await expect(messages?.length).toBe(2);
+      await expect(messages?.[0]?.textContent).toBe("Le champ est obligatoire.");
+      await expect(messages?.[1]?.textContent).toBe("Le format attendu est JJ/MM/AAAA.");
+    });
+  }}
 />
 
 <Story
@@ -111,6 +145,16 @@
       errors: ["La valeur saisie est invalide."],
       infos: ["Format attendu : JJ/MM/AAAA.", "La date doit être postérieure au 01/01/2020."],
     },
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-messages-group");
+
+    await step("Les messages d'erreur et d'information sont rendus", async () => {
+      const errors = el?.shadowRoot?.querySelectorAll(".fr-message--error");
+      await expect(errors?.length).toBe(1);
+      const infos = el?.shadowRoot?.querySelectorAll(".fr-message--info");
+      await expect(infos?.length).toBe(2);
+    });
   }}
 />
 

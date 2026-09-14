@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -36,4 +37,23 @@
   <dsfr-skiplink items={args.items} aria-label={args.ariaLabel}></dsfr-skiplink>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-skiplink");
+
+    await step("Le composant est rendu avec la navigation", async () => {
+      const skiplinks = el?.shadowRoot?.querySelector(".fr-skiplinks");
+      await expect(skiplinks).toBeTruthy();
+
+      const nav = el?.shadowRoot?.querySelector("nav[role='navigation']");
+      await expect(nav).toBeTruthy();
+      await expect(nav?.getAttribute("aria-label")).toBe("Accès rapide");
+    });
+
+    await step("Les liens d'évitement sont présents", async () => {
+      const items = el?.shadowRoot?.querySelectorAll(".fr-skiplinks__list li");
+      await expect(items?.length).toBeGreaterThan(0);
+    });
+  }}
+/>

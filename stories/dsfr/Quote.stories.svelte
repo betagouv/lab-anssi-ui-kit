@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -49,12 +50,54 @@
   ></dsfr-quote>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-quote");
+
+    await step("La citation est rendue", async () => {
+      const figure = el?.shadowRoot?.querySelector("figure.fr-quote");
+      await expect(figure).toBeTruthy();
+    });
+
+    await step("Le blockquote contient du texte", async () => {
+      const blockquote = el?.shadowRoot?.querySelector("blockquote");
+      await expect(blockquote).toBeTruthy();
+      await expect(blockquote?.textContent?.length).toBeGreaterThan(0);
+    });
+
+    await step("L'auteur est affiché", async () => {
+      const author = el?.shadowRoot?.querySelector(".fr-quote__author");
+      await expect(author).toBeTruthy();
+      await expect(author?.textContent).toBe("Auteur");
+    });
+
+    await step("Les sources sont affichées", async () => {
+      const sources = el?.shadowRoot?.querySelector(".fr-quote__source");
+      await expect(sources).toBeTruthy();
+      const items = sources?.querySelectorAll("li");
+      await expect(items?.length).toBeGreaterThan(0);
+    });
+
+    await step("L'image est affichée", async () => {
+      const image = el?.shadowRoot?.querySelector(".fr-quote__image img");
+      await expect(image).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Sans auteur"
   args={{
     hasAuthor: false,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-quote");
+
+    await step("L'auteur n'est pas affiché", async () => {
+      const author = el?.shadowRoot?.querySelector(".fr-quote__author");
+      await expect(author).toBeNull();
+    });
   }}
 />
 
@@ -69,6 +112,19 @@
   name="Sans image"
   args={{
     hasImage: false,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-quote");
+
+    await step("L'image n'est pas affichée", async () => {
+      const image = el?.shadowRoot?.querySelector(".fr-quote__image");
+      await expect(image).toBeNull();
+    });
+
+    await step("La classe column n'est pas appliquée", async () => {
+      const figure = el?.shadowRoot?.querySelector("figure.fr-quote");
+      await expect(figure?.classList.contains("fr-quote--column")).toBe(false);
+    });
   }}
 />
 

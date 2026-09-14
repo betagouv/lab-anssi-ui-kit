@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -68,7 +69,44 @@
   </dsfr-tabs>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabs");
+
+    await step("Le composant est rendu avec les onglets", async () => {
+      const tabs = el?.shadowRoot?.querySelector(".fr-tabs");
+      await expect(tabs).toBeTruthy();
+
+      const tabList = el?.shadowRoot?.querySelector("[role='tablist']");
+      await expect(tabList).toBeTruthy();
+
+      const tabButtons = el?.shadowRoot?.querySelectorAll("[role='tab']");
+      await expect(tabButtons?.length).toBeGreaterThan(0);
+    });
+
+    await step("Le premier onglet est sélectionné par défaut", async () => {
+      const firstTab = el?.shadowRoot?.querySelector("[role='tab']");
+      await expect(firstTab?.getAttribute("aria-selected")).toBe("true");
+
+      const firstPanel = el?.shadowRoot?.querySelector("[role='tabpanel'].fr-tabs__panel--selected");
+      await expect(firstPanel).toBeTruthy();
+    });
+
+    await step("Un clic sur le deuxième onglet change le panneau affiché", async () => {
+      const tabButtons = el?.shadowRoot?.querySelectorAll("[role='tab']");
+      const secondTab = tabButtons?.[1] as HTMLButtonElement;
+      await expect(secondTab).toBeTruthy();
+
+      await userEvent.click(secondTab);
+
+      await expect(secondTab.getAttribute("aria-selected")).toBe("true");
+
+      const firstTab = tabButtons?.[0] as HTMLButtonElement;
+      await expect(firstTab.getAttribute("aria-selected")).toBe("false");
+    });
+  }}
+/>
 
 <Story
   name="Avec Icones"
