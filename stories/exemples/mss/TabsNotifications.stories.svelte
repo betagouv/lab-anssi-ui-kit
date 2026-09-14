@@ -5,11 +5,11 @@
   import { tabsArgs } from "@gouvfr/dsfr/src/dsfr/component/tab/template/stories/tabs-arg-types.js";
 
   import DsfrTabs from "$lib/dsfr/DsfrTabs.svelte";
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
-  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrBadgesGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const { Story } = defineMeta({
     title: "Exemples/LAB - MSS",

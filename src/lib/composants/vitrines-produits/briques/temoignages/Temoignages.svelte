@@ -14,10 +14,10 @@
   import { setThemeable } from "$lib/utilitaires";
 
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
-  import DsfrQuote from "$lib/dsfr/DsfrQuote.svelte";
-  import IconeFlecheGauche from "$lib/composants/carrousel-tuiles/IconeFlecheGauche.svelte";
-  import IconeFlecheDroite from "$lib/composants/carrousel-tuiles/IconeFlecheDroite.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrQuote.svelte";
+  import "$lib/composants/carrousel-tuiles/IconeFlecheGauche.svelte";
+  import "$lib/composants/carrousel-tuiles/IconeFlecheDroite.svelte";
 
   setThemeable($host());
 

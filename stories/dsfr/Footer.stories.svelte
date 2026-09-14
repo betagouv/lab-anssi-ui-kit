@@ -8,7 +8,7 @@
   } from "@gouvfr/dsfr/src/dsfr/component/footer/template/stories/footer-arg-types.js";
 
   import DsfrFooter from "$lib/dsfr/DsfrFooter.svelte";
-  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
+  import "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   import PlaceholderPortrait from "@gouvfr/dsfr/example/img/placeholder.9x16.png";

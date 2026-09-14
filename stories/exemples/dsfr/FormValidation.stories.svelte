@@ -5,23 +5,17 @@
   // @ts-expect-error: Required Import to use this component as webcomponent
   import DsfrInput from "$lib/dsfr/DsfrInput.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrTextarea from "$lib/dsfr/DsfrTextarea.svelte";
+  import "$lib/dsfr/DsfrTextarea.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrSelect from "$lib/dsfr/DsfrSelect.svelte";
+  import "$lib/dsfr/DsfrSelect.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrCheckbox from "$lib/dsfr/DsfrCheckbox.svelte";
+  import "$lib/dsfr/DsfrCheckbox.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrRadiosGroup from "$lib/dsfr/DsfrRadiosGroup.svelte";
+  import "$lib/dsfr/DsfrRadiosGroup.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrCheckboxesGroup from "$lib/dsfr/DsfrCheckboxesGroup.svelte";
+  import "$lib/dsfr/DsfrCheckboxesGroup.svelte";
 
   const { Story } = defineMeta({
     title: "Exemples/DSFR",

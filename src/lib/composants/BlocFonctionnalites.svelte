@@ -26,10 +26,10 @@
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
-  import DsfrSegmented from "$lib/dsfr/DsfrSegmented.svelte";
+  import "$lib/dsfr/DsfrSegmented.svelte";
 
   type BadgeSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";

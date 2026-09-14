@@ -6,7 +6,7 @@
 
   import CarrouselTuiles from "$lib/composants/carrousel-tuiles/CarrouselTuiles.svelte";
 
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 
   const tuiles = [
