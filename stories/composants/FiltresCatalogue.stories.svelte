@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect, fn, userEvent } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -45,6 +46,32 @@
   ></lab-anssi-filtres>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-filtres");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-filtres");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Les cinq filtres sont affichés", async () => {
+      const elements = el?.shadowRoot?.querySelectorAll(".lab-anssi-filtres__element");
+      await expect(elements?.length).toBe(5);
+    });
+    await step("Les libellés des filtres sont visibles", async () => {
+      const labels = el?.shadowRoot?.querySelectorAll(".lab-anssi-filtres__libelle");
+      await expect(labels?.[0]?.textContent?.trim()).toBe("Tous les besoins");
+      await expect(labels?.[1]?.textContent?.trim()).toBe("Se protéger");
+    });
+    await step("Le clic sur un filtre déclenche l'événement valeurachangee", async () => {
+      const spy = fn();
+      el?.addEventListener("valeurachangee", spy);
+      const elements = el?.shadowRoot?.querySelectorAll(".lab-anssi-filtres__element");
+      await userEvent.click(elements![1]);
+      await expect(spy).toHaveBeenCalledOnce();
+      el?.removeEventListener("valeurachangee", spy);
+    });
+  }}
+/>
 
 <Story name="Horizontal" args={{ horizontal: true }} />

@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -32,7 +33,26 @@
   </span>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-icone");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".icone");
+      await expect(inner).toBeTruthy();
+    });
+    await step("La taille md est appliquée", async () => {
+      const icone = el?.shadowRoot?.querySelector(".icone");
+      await expect(icone?.classList.contains("md")).toBe(true);
+    });
+    await step("La classe de l'icône est appliquée", async () => {
+      const icone = el?.shadowRoot?.querySelector(".icone");
+      const classes = Array.from(icone?.classList ?? []);
+      const hasIconClass = classes.some((c) => c !== "icone" && c !== "md");
+      await expect(hasIconClass).toBe(true);
+    });
+  }}
+/>
 
 <!-- Les icônes sont au format SVG avec la couleur « currentColor ». Ces fichiers SVG sont utilisés
 comme image de masque et peuvent donc hériter de la couleur de leur élément parent : -->

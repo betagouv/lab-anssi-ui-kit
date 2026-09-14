@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -65,7 +66,36 @@
   ></lab-anssi-lien>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-lien");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector("a");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Le libellé est affiché", async () => {
+      const span = el?.shadowRoot?.querySelector("a span");
+      await expect(span?.textContent).toBe("Libellé");
+    });
+    await step("La variante primaire est appliquée", async () => {
+      const a = el?.shadowRoot?.querySelector("a");
+      await expect(a?.classList.contains("primaire")).toBe(true);
+    });
+    await step("La taille sm est appliquée", async () => {
+      const a = el?.shadowRoot?.querySelector("a");
+      await expect(a?.classList.contains("sm")).toBe(true);
+    });
+    await step("L'apparence lien est appliquée", async () => {
+      const a = el?.shadowRoot?.querySelector("a");
+      await expect(a?.classList.contains("lien")).toBe(true);
+    });
+    await step("La position de l'icône est correcte", async () => {
+      const a = el?.shadowRoot?.querySelector("a");
+      await expect(a?.classList.contains("icone-droite")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Taille de police 1rem">
   <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">

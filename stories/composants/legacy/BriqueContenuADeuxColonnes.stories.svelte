@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -58,7 +59,33 @@
   <lab-anssi-brique-contenu-a-deux-colonnes {...args}></lab-anssi-brique-contenu-a-deux-colonnes>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-contenu-a-deux-colonnes");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".grille-contenu");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+      await expect(h2?.textContent).toBe("MonServiceSécurisé");
+    });
+    await step("Le paragraphe est affiché", async () => {
+      const p = el?.shadowRoot?.querySelector(".contenu p");
+      await expect(p?.textContent).toContain("piloter en équipe la sécurité");
+    });
+    await step("L'ordre texte-gauche est appliqué", async () => {
+      const grille = el?.shadowRoot?.querySelector(".grille-contenu");
+      await expect(grille?.classList.contains("texte-gauche")).toBe(true);
+    });
+    await step("L'illustration est affichée", async () => {
+      const img = el?.shadowRoot?.querySelector(".illustration img") as HTMLImageElement | null;
+      await expect(img).toBeTruthy();
+      await expect(img?.alt).toBe("Logo placeholder");
+    });
+  }}
+/>
 
 <Story
   name="ComporteUneAction"

@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -79,4 +80,25 @@
   ></lab-anssi-liste-articles>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-liste-articles");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".liste-articles");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Le titre affiche 'Tous les articles' par défaut", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+      await expect(h2?.textContent).toBe("Tous les articles");
+    });
+    await step("Les 4 articles sont affichés", async () => {
+      const articles = el?.shadowRoot?.querySelectorAll(".conteneur-articles > *");
+      await expect(articles?.length).toBe(4);
+    });
+    await step("Le filtre par catégorie est présent", async () => {
+      const select = el?.shadowRoot?.querySelector("select");
+      await expect(select).toBeTruthy();
+    });
+  }}
+/>
