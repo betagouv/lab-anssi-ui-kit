@@ -7,17 +7,11 @@
     cardArgTypes,
   } from "@gouvfr/dsfr/src/dsfr/component/card/template/stories/card-arg-types.js";
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
-  import Placeholder1x1 from "@gouvfr/dsfr/example/img/placeholder.1x1.png";
-  import Placeholder3x4 from "@gouvfr/dsfr/example/img/placeholder.3x4.png";
-
   import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrBadgesGroup from "$lib/dsfr/DsfrBadgesGroup.svelte";
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
+  import "$lib/dsfr/DsfrBadgesGroup.svelte";
+  import "$lib/dsfr/DsfrTagsGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrLink.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({

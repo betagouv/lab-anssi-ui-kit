@@ -11,26 +11,19 @@
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import Navigation from "$lib/composants/suite-cyber/SuiteCyber.svelte";
+  import "$lib/composants/suite-cyber/SuiteCyber.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
+  import "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";
+  import "$lib/dsfr/DsfrNavigation.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
+  import "$lib/dsfr/DsfrContainer.svelte";
 
-  // @ts-expect-error: Required Import to use this component as webcomponent
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
 
   const { toolLinks } = headerArgs;
 

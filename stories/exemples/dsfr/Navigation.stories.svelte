@@ -10,8 +10,8 @@
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 
   import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
 
   import webComponentSourceCode from "../../utilitaires/webComponentSource.js";
 
