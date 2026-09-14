@@ -67,6 +67,7 @@
     neutral?: boolean;
   }
 
+  // eslint-disable-next-line svelte/no-unused-props -- assess est exposé via l'API Web Component
   let {
     label,
     size = "md",

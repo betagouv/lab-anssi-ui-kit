@@ -27,7 +27,6 @@
 
   let { id, content, type = "hover" }: Props = $props();
 
-  let shown = $state(false);
   let placement = $state<"top" | "bottom">("top");
   let translateX = $state(0);
   let arrowX = $state(0);
@@ -44,11 +43,7 @@
   const SAFE_AREA_MARGIN = 16; // Marge minimale entre le tooltip et les bords du viewport (en px)
   const ARROW_EDGE_MARGIN = 8; // Marge minimale entre la flèche et les bords du tooltip (en px)
 
-  const shouldShow = $derived(focusActive || hoverActive);
-
-  $effect(() => {
-    shown = shouldShow;
-  });
+  const shown = $derived(focusActive || hoverActive);
 
   $effect(() => {
     if (!shown) return;
