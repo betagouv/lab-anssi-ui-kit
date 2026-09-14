@@ -101,6 +101,7 @@
     labelWeight?: TextWeight;
   }
 
+  // eslint-disable-next-line svelte/no-unused-props -- optionGroups est exposé via l'API Web Component
   let {
     id,
     label,

@@ -477,6 +477,7 @@
    */
   function handleRowSelection(row: Row, rowIndex: number, checked: boolean) {
     const key = getRowKey(row, rowIndex);
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity
     const updatedSelection = new Set(activeSelectedKeys);
 
     if (checked) updatedSelection.add(key);
@@ -503,6 +504,7 @@
    * @param checked - Indique si toutes les lignes visibles doivent être sélectionnées (`true`) ou désélectionnées (`false`).
    */
   function handleSelectAll(checked: boolean) {
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity
     const updatedSelection = new Set(activeSelectedKeys);
 
     for (const key of displayedRowKeys) {

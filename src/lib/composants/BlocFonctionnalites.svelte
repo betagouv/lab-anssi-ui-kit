@@ -237,6 +237,7 @@
 
     if (!mediaCloneContainer) return;
 
+    // eslint-disable-next-line svelte/no-dom-manipulating
     mediaCloneContainer.innerHTML = "";
 
     if (activeId) {
@@ -244,6 +245,7 @@
       if (source) {
         const clone = source.cloneNode(true) as HTMLElement;
         clone.removeAttribute("slot");
+        // eslint-disable-next-line svelte/no-dom-manipulating
         mediaCloneContainer.appendChild(clone);
       }
     }
