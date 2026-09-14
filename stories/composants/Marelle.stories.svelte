@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -103,7 +104,16 @@
   ></lab-anssi-marelle>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-marelle");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-marelle");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Avec bouton d'action"

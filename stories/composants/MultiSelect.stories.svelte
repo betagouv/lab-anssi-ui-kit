@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -71,6 +72,15 @@
   ></lab-anssi-multi-select>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-multi-select");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".fr-select-group");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Désactivé" args={{ disabled: true }} />

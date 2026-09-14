@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -92,7 +93,16 @@
   <lab-anssi-carrousel-tuiles {...args}></lab-anssi-carrousel-tuiles>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-carrousel-tuiles");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-carrousel-tuiles");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec tuiles sans image" args={{ tuiles: tuilesSansImage }} />
 
