@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -52,4 +53,24 @@
   <lab-anssi-temoignages {...args}></lab-anssi-temoignages>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-temoignages");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const h3 = el?.shadowRoot?.querySelector("h3");
+      await expect(h3?.textContent).toBe("Titre");
+    });
+    await step("Les témoignages sont présents", async () => {
+      const quotes = el?.shadowRoot?.querySelectorAll("dsfr-quote");
+      await expect(quotes?.length).toBe(2);
+    });
+    await step("Les boutons de navigation du carrousel sont présents", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll("dsfr-button");
+      await expect(buttons?.length).toBe(2);
+    });
+  }}
+/>

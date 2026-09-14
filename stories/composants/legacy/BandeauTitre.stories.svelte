@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -50,4 +51,28 @@
   ></lab-anssi-bandeau-titre>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-titre");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const h1 = el?.shadowRoot?.querySelector("h1");
+      await expect(h1?.textContent).toBe("Titre de la page");
+    });
+    await step("La description est affichée", async () => {
+      await expect(el?.shadowRoot?.textContent).toContain(
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      );
+    });
+    await step("Le fil d'Ariane contient les liens attendus", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a");
+      await expect(links?.length).toBeGreaterThanOrEqual(1);
+      await expect(el?.shadowRoot?.textContent).toContain("Accueil");
+      await expect(el?.shadowRoot?.textContent).toContain("Page N2");
+      await expect(el?.shadowRoot?.textContent).toContain("Page N3");
+    });
+  }}
+/>

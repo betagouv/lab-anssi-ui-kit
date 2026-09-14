@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect, userEvent } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -53,4 +54,26 @@
   </ConteneurStory>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-centre-aide");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le centre d'aide s'ouvre au clic sur le déclencheur", async () => {
+      const button = el?.shadowRoot?.querySelector("button");
+      await userEvent.click(button!);
+
+      const text = el?.shadowRoot?.textContent;
+      await expect(text).toContain("Centre d'aide");
+    });
+
+    await step("Le panneau affiche le message de bienvenue", async () => {
+      const text = el?.shadowRoot?.textContent;
+      await expect(text).toContain("Bonjour");
+    });
+  }}
+/>

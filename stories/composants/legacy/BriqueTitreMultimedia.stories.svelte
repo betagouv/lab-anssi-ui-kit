@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -44,4 +45,20 @@
   <lab-anssi-titre-multimedia {...args}></lab-anssi-titre-multimedia>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-titre-multimedia");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+      await expect(h2?.textContent).toBe("Titre pour MSS");
+    });
+    await step("Le lecteur vidéo est présent", async () => {
+      const video = el?.shadowRoot?.querySelector("video");
+      await expect(video).toBeTruthy();
+    });
+  }}
+/>
