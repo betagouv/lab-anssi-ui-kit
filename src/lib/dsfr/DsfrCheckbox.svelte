@@ -34,11 +34,9 @@
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
-  import { setIndeterminate } from "$lib/directives/actions.svelte.ts";
+  import { setIndeterminate } from "$lib/directives/actions.svelte";
 
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
-
-  setThemeable($host());
 
   type ChecboxSize = Extract<Size, "sm" | "md">;
   interface Props {
@@ -95,8 +93,10 @@
     onvaluechanged,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let formControlElement: HTMLInputElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -126,7 +126,7 @@
     checked = target.checked;
 
     onvaluechanged?.(checked);
-    $host()?.dispatchEvent(new CustomEvent("valuechanged", { detail: checked, bubbles: true }));
+    hostElement?.dispatchEvent(new CustomEvent("valuechanged", { detail: checked, bubbles: true }));
   }
 
   /**
@@ -141,7 +141,7 @@
 
   // Configure la validation avec les références nécessaires
   $effect(() => {
-    formValidation.setup(internals, formControlElement, host, () => {
+    formValidation.setup(internals, formControlElement, hostElement, () => {
       checked = false;
     });
   });
@@ -185,7 +185,7 @@
     oninvalid={formValidation.handleInvalid}
     {form}
     {required}
-    use:setIndeterminate={indeterminate}
+    use:setIndeterminate={indeterminate ?? false}
   />
   <label class="fr-label" for={id}>
     {#if label}

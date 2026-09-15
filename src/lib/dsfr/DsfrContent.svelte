@@ -77,7 +77,11 @@
     <div class="fr-content-media__img">
       {#if type === "img"}
         <slot name="image">
-          <img class={["fr-responsive-img", `fr-ratio-${imgRatio}`]} src={img.src} alt={img.alt} />
+          <img
+            class={["fr-responsive-img", `fr-ratio-${imgRatio}`]}
+            src={img!.src}
+            alt={img!.alt}
+          />
         </slot>
       {:else}
         <slot name="svg">
@@ -88,11 +92,11 @@
   {:else}
     <slot name="video">
       <iframe
-        title={vid.title}
+        title={vid!.title}
         class={["fr-responsive-vid", `fr-ratio-${vidRatio}`]}
-        src={vid.src}
-        allow={vid.attributes.allow}
-        allowfullscreen={vid.attributes.allowfullscreen}
+        src={vid!.src}
+        allow={vid!.attributes.allow}
+        allowfullscreen={vid!.attributes.allowfullscreen}
       ></iframe>
     </slot>
   {/if}

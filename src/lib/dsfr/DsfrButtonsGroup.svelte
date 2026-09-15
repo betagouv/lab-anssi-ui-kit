@@ -117,7 +117,7 @@
   }
 </script>
 
-{#snippet dsfrbutton(btn)}
+{#snippet dsfrbutton(btn: Button)}
   <svelte:element
     this={btn.href ? "a" : "button"}
     type={!btn.href ? "button" : undefined}

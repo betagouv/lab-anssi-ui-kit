@@ -63,9 +63,6 @@
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  let host = $host();
-  setThemeable(host);
-
   interface Props {
     /** Attribut id du champs de saisie */
     id: string;
@@ -162,6 +159,9 @@
     labelWeight,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let formControlElement: HTMLInputElement;
 
   // Création de l'état de validation partagé
@@ -177,7 +177,7 @@
   );
 
   const disabledClass = $derived(disabled && "fr-input-group--disabled");
-  const iconClass = $derived(setIconClass(icon));
+  const iconClass = $derived(icon ? setIconClass(icon) : "");
   const hasWrap = $derived(!!icon || !!addon || !!action);
   const wrapClasses = $derived([
     "fr-input-wrap",
@@ -204,7 +204,9 @@
     const target = event.target as HTMLInputElement;
 
     onvaluechanged?.(target.value);
-    host?.dispatchEvent(new CustomEvent("valuechanged", { detail: target.value, bubbles: true }));
+    hostElement?.dispatchEvent(
+      new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
+    );
   }
 
   /**
@@ -219,7 +221,7 @@
 
   // Configure la validation avec les références nécessaires
   $effect(() => {
-    formValidation.setup(internals, formControlElement, host, () => {
+    formValidation.setup(internals, formControlElement, hostElement, () => {
       value = "";
     });
   });
@@ -265,7 +267,7 @@
       {placeholder}
       {disabled}
       aria-describedby={computedStatus !== "default" ? `${id}-messages` : undefined}
-      {autocomplete}
+      autocomplete={autocomplete as AutoFill}
       oninput={handleInput}
       onblur={formValidation.handleBlur}
       oninvalid={formValidation.handleInvalid}

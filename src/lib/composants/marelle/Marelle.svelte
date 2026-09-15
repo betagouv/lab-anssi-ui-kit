@@ -64,7 +64,12 @@
       {#if action || $$slots["marelle-action"]}
         <div class="lab-anssi-marelle__action">
           <slot name="marelle-action">
-            <DsfrButton label={action.titre} href={action.lien} target={action.target} markup="a" />
+            <DsfrButton
+              label={action!.titre}
+              href={action!.lien}
+              target={action!.target as "_self" | "_blank"}
+              markup="a"
+            />
           </slot>
         </div>
       {/if}

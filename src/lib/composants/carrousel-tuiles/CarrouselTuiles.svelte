@@ -10,6 +10,7 @@
 />
 
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { Tuiles } from "$lib/types";
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
 
@@ -19,6 +20,7 @@
   interface Props {
     tuiles?: Tuiles;
     fond?: "clair" | "sombre";
+    children?: Snippet;
   }
 
   let { tuiles = [], fond = "clair" }: Props = $props();
@@ -101,7 +103,7 @@
             >
               {#if tuile.illustration?.lien}
                 {#snippet pictogram()}
-                  <img src={tuile.illustration.lien} alt={tuile.illustration.alt} />
+                  <img src={tuile.illustration!.lien} alt={tuile.illustration!.alt} />
                 {/snippet}
               {/if}
             </DsfrTile>

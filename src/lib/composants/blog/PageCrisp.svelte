@@ -21,15 +21,17 @@
 
   let { contenu, tableDesMatieres }: Props = $props();
 
-  let composant: HTMLDivElement = $state();
+  let composant: HTMLDivElement | undefined = $state();
   let observateurDIntersection: IntersectionObserver;
 
   const observeLesSections = () => {
+    if (!composant) return;
+
     observateurDIntersection = new IntersectionObserver(
       (sections) => {
         sections.forEach((section) => {
           const titreDeLaSection = section.target.querySelector("h2");
-          const lesLiens = composant.querySelectorAll(
+          const lesLiens = composant!.querySelectorAll(
             `.sommaire ul li a[href='#${titreDeLaSection!.id}']`,
           );
 
@@ -38,7 +40,7 @@
           if (section.isIntersecting) {
             lesLiens.forEach((l) => l.parentElement!.classList.add("actif"));
 
-            const menuMobileVisible = composant.querySelector("#section-active");
+            const menuMobileVisible = composant!.querySelector("#section-active");
             if (menuMobileVisible) menuMobileVisible.textContent = titreDeLaSection!.textContent;
           } else lesLiens.forEach((l) => l.parentElement!.classList.remove("actif"));
         });
@@ -55,6 +57,8 @@
   });
 
   const attendChargementImages = async () => {
+    if (!composant) return;
+
     const images = composant.querySelectorAll("img");
     await Promise.all(
       Array.from(images).map((image) => {

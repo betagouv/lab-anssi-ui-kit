@@ -41,9 +41,8 @@
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
 
-  setThemeable($host());
-
   type SearchSize = Extract<Size, "md" | "lg">;
+
   interface Props {
     /** Attribut 'id' de l'input */
     inputId: string;
@@ -113,8 +112,10 @@
     labelWeight,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let formControlElement: HTMLInputElement;
-  let host = $host();
 
   const formValidation = createFormValidation();
   const sizeClass = $derived(`fr-search-bar--${size}`);
@@ -131,7 +132,7 @@
     value = target.value;
 
     onvaluechanged?.(target.value);
-    $host()?.dispatchEvent(
+    hostElement?.dispatchEvent(
       new CustomEvent("valuechanged", { detail: target.value, bubbles: true }),
     );
   }
@@ -151,8 +152,8 @@
       return;
     }
 
-    onsearch?.(value);
-    $host()?.dispatchEvent(new CustomEvent("search", { detail: value, bubbles: true }));
+    onsearch?.(value ?? "");
+    hostElement?.dispatchEvent(new CustomEvent("search", { detail: value ?? "", bubbles: true }));
   }
 
   /**
@@ -172,7 +173,7 @@
   }
 
   $effect(() => {
-    formValidation.setup(internals, formControlElement, host, () => {
+    formValidation.setup(internals, formControlElement, hostElement, () => {
       value = "";
     });
   });
