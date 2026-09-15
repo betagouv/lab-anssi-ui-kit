@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -65,7 +66,16 @@
   ></lab-anssi-lien>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-lien");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector("a");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Taille de police 1rem">
   <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">

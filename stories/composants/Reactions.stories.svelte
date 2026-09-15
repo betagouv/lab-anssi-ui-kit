@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -54,6 +55,15 @@
   ></lab-anssi-reactions>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-reactions");
+    await step("Les boutons de réaction sont rendus", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll("button");
+      await expect(buttons?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
 
 <Story name="Variation tertiaire" args={{ variant: "tertiaire" }} />

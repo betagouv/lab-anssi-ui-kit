@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -54,7 +55,16 @@
   <lab-anssi-brique-rejoindre-la-communaute {...args}></lab-anssi-brique-rejoindre-la-communaute>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-rejoindre-la-communaute");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".grille-contenu");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="ComporteUneAction"

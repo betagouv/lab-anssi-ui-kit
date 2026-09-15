@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -58,7 +59,16 @@
   <lab-anssi-brique-contenu-a-deux-colonnes {...args}></lab-anssi-brique-contenu-a-deux-colonnes>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-contenu-a-deux-colonnes");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".grille-contenu");
+      await expect(inner).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="ComporteUneAction"
