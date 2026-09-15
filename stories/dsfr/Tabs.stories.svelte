@@ -9,9 +9,9 @@
   } from "@gouvfr/dsfr/src/dsfr/component/tab/template/stories/tabs-arg-types.js";
 
   import DsfrTabs from "$lib/dsfr/DsfrTabs.svelte";
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const { Story } = defineMeta({

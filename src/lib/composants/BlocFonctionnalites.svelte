@@ -26,10 +26,10 @@
   import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte.ts";
 
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
   import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
-  import DsfrSegmented from "$lib/dsfr/DsfrSegmented.svelte";
+  import "$lib/dsfr/DsfrSegmented.svelte";
 
   type BadgeSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";
@@ -237,6 +237,7 @@
 
     if (!mediaCloneContainer) return;
 
+    // eslint-disable-next-line svelte/no-dom-manipulating
     mediaCloneContainer.innerHTML = "";
 
     if (activeId) {
@@ -244,6 +245,7 @@
       if (source) {
         const clone = source.cloneNode(true) as HTMLElement;
         clone.removeAttribute("slot");
+        // eslint-disable-next-line svelte/no-dom-manipulating
         mediaCloneContainer.appendChild(clone);
       }
     }
@@ -426,7 +428,7 @@
       onfocusout={reprendDefilement}
     >
       {#if tableauDeFonctionnalites.length > 1}
-        {#each elementsModifiesDuControleSegmente as element, i}
+        {#each elementsModifiesDuControleSegmente as element, i (element.value)}
           <div
             id={element.value}
             class={[
@@ -437,14 +439,14 @@
             role="tabpanel"
             tabindex="0"
           >
-            {#each tableauDeFonctionnalites[i] ?? [] as fonctionnalite, j}
+            {#each tableauDeFonctionnalites[i] ?? [] as fonctionnalite, j (j)}
               {@render unElementFonctionnalite(fonctionnalite, j)}
             {/each}
           </div>
         {/each}
       {:else}
         <div class="lab-anssi-fonctionnalites__liste" role="group">
-          {#each tableauDeFonctionnalites[0] ?? [] as fonctionnalite, k}
+          {#each tableauDeFonctionnalites[0] ?? [] as fonctionnalite, k (k)}
             {@render unElementFonctionnalite(fonctionnalite, k)}
           {/each}
         </div>

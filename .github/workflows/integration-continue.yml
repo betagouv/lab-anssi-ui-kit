@@ -63,8 +63,11 @@ jobs:
       - name: Exécuter les tests
         run: pnpm run test
 
+      - name: Contrôler le linting
+        run: pnpm run lint
+
       - name: Contrôler le format
-        run: ./node_modules/.bin/prettier -c .
+        run: pnpm run format:check
 
       - name: Construit le Storybook
         run: pnpm run storybook:build

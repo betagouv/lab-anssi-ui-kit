@@ -4,9 +4,9 @@
 
   import BlocFonctionnalites from "$lib/composants/BlocFonctionnalites.svelte";
 
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
-  import DsfrTagsGroup from "$lib/dsfr/DsfrTagsGroup.svelte";
+  import "$lib/dsfr/DsfrTagsGroup.svelte";
 
   const fonctionnalites = [
     {

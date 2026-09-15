@@ -4,7 +4,7 @@
   import { srcAsset } from "$lib/assets/assets";
 
   interface Props {
-    lien: any;
+    lien: string;
     versExterne?: boolean;
   }
 

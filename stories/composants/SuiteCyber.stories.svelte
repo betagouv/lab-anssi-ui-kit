@@ -14,7 +14,7 @@
   type Args = ComponentProps<SuiteCyber>;
 </script>
 
-{#snippet template(args: Args, context: StoryContext<Args>)}
+{#snippet template(_args: Args, context: StoryContext<Args>)}
   {console.log(JSON.stringify(context.globals))}
 
   <ConteneurStory alignement="droite">

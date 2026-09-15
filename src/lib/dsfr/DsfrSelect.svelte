@@ -101,12 +101,13 @@
     labelWeight?: TextWeight;
   }
 
+  // eslint-disable-next-line svelte/no-unused-props -- optionGroups est exposé via l'API Web Component
   let {
     id,
     label,
     hideLabel = false,
     value = $bindable(),
-    groupedOptions,
+    groupedOptions: _groupedOptions,
     options,
     hint,
     placeholder,
@@ -232,7 +233,7 @@
     {#if $$slots.default}
       <slot></slot>
     {:else}
-      {#each options as option}
+      {#each options as option (option.value)}
         <option value={option.value}>
           {option.label}
         </option>

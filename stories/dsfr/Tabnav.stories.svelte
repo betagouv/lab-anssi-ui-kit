@@ -3,7 +3,7 @@
   import { type ComponentProps } from "svelte";
 
   import DsfrTabnav from "$lib/dsfr/DsfrTabnav.svelte";
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
   const defaultLinks = [

@@ -8,10 +8,8 @@
   } from "@gouvfr/dsfr/src/dsfr/component/tile/template/stories/tile-arg-types.js";
   import CityHall from "@gouvfr/dsfr/dist/artwork/pictograms/buildings/city-hall.svg?raw";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrTag.svelte";
   import DsfrTile from "$lib/dsfr/DsfrTile.svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -103,6 +101,7 @@
     <dsfr-tag slot="tag" label="Libellé Tag" size={args.size}></dsfr-tag>
 
     <span slot="pictogram">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html CityHall}
     </span>
   </dsfr-tile>
