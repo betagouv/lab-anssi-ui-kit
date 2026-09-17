@@ -168,6 +168,7 @@
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
           {#if hasBrandOperator}
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             <p class="fr-logo">{@html brandLogoTitle}</p>
             <a
               id={brandLinkId}
@@ -184,6 +185,7 @@
             </a>
           {:else}
             <a id={brandLinkId} title={brandLinkTitle} href={brandLinkHref}>
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
               <p class="fr-logo">{@html brandLogoTitle}</p>
             </a>
           {/if}
@@ -194,13 +196,14 @@
               <slot name="description"></slot>
             {:else if contentDescription}
               <p class="fr-footer__content-desc">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 {@html contentDescription}
               </p>
             {/if}
           {/if}
           {#if contentLinks.length > 0}
             <ul class="fr-footer__content-list">
-              {#each contentLinks as link, index}
+              {#each contentLinks as link, index (link.href)}
                 <li class="fr-footer__content-item">
                   <a
                     title={link.attributes?.title}
@@ -235,7 +238,7 @@
             {#if subPartners && subPartners.length > 0}
               <div class="fr-footer__partners-sub">
                 <ul>
-                  {#each subPartners as link, index}
+                  {#each subPartners as link, index (index)}
                     <li>
                       <a class="fr-footer__partners-link" href={link.href}>
                         <img
@@ -257,7 +260,7 @@
     <div class="fr-footer__bottom">
       {#if bottomLinks && bottomLinks.length > 0}
         <ul class="fr-footer__bottom-list">
-          {#each bottomLinks as link, index}
+          {#each bottomLinks as link, index (index)}
             <li class="fr-footer__bottom-item">
               <a
                 id={"footer__bottom-link-" + index}
@@ -272,6 +275,7 @@
       {/if}
       {#if bottomCopyright}
         <div class="fr-footer__bottom-copy">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           <p>{@html bottomCopyright}</p>
         </div>
       {/if}

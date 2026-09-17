@@ -7,35 +7,25 @@
     headerArgs,
   } from "@gouvfr/dsfr/src/dsfr/component/header/template/stories/header-arg-types";
 
-  import PlaceholderPortrait from "@gouvfr/dsfr/example/img/placeholder.9x16.png";
+  import "@gouvfr/dsfr/example/img/placeholder.9x16.png";
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import Navigation from "$lib/composants/suite-cyber/SuiteCyber.svelte";
+  import "$lib/composants/suite-cyber/SuiteCyber.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import Bandeau from "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
+  import "$lib/composants/mes-services-cyber/bandeau/Bandeau.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrNavigation from "$lib/dsfr/DsfrNavigation.svelte";
+  import "$lib/dsfr/DsfrNavigation.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
+  import "$lib/dsfr/DsfrContainer.svelte";
 
-  // @ts-ignore: Required Import to use this component as webcomponent
-  import DsfrUser from "$lib/dsfr/DsfrUser.svelte";
-
-  const { toolLinks } = headerArgs;
+  import "$lib/dsfr/DsfrUser.svelte";
 
   const { Story } = defineMeta({
     title: "Exemples/LAB - MSS",

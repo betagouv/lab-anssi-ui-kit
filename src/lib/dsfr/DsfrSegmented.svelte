@@ -136,7 +136,7 @@
    *
    * @param {Event} event - L'événement de changement déclenché par l'élément DOM
    */
-  function handleChange(event: Event) {
+  function handleChange() {
     onvaluechanged?.(currentValue);
     $host()?.dispatchEvent(
       new CustomEvent("valuechanged", { detail: currentValue, bubbles: true }),

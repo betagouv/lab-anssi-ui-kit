@@ -132,12 +132,6 @@
 
     return centered;
   });
-
-  function handleClickAction(event: MouseEvent) {
-    const button = event.currentTarget as HTMLButtonElement;
-    const expanded = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!expanded));
-  }
 </script>
 
 <svelte:element

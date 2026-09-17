@@ -6,7 +6,7 @@
 
   import CarrouselTuiles from "$lib/composants/carrousel-tuiles/CarrouselTuiles.svelte";
 
-  import DsfrCard from "$lib/dsfr/DsfrCard.svelte";
+  import "$lib/dsfr/DsfrCard.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 
   const tuiles = [
@@ -160,7 +160,7 @@
     <div class="section-exemple">
       <DsfrContainer>
         <lab-anssi-carrousel-tuiles {...args}>
-          {#each { length: 4 }, index}
+          {#each { length: 4 }}
             <dsfr-card
               title="Intitulé de la carte"
               description="Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et"

@@ -11,7 +11,7 @@
   import DsfrModal from "$lib/dsfr/DsfrModal.svelte";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
-  import DsfrButtonsGroup from "$lib/dsfr/DsfrButtonsGroup.svelte";
+  import "$lib/dsfr/DsfrButtonsGroup.svelte";
 
   const body = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et. Diam maecenas sed enim ut. Accumsan lacus vel facilisis volutpat est. Ut aliquam purus sit amet luctus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et. Diam maecenas sed enim ut. Accumsan lacus vel facilisis volutpat est. Ut aliquam purus sit amet luctus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut.</p>
@@ -106,6 +106,7 @@
       opened={openModals[args.id] || undefined}
       onclose={() => (openModals[args.id] = false)}
     >
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html body}
 
       {#if args.footer}

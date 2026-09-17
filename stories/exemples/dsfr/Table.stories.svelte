@@ -5,9 +5,9 @@
   import DsfrTable from "$lib/dsfr/DsfrTable.svelte";
   import tableData from "../../utilitaires/tableData.json";
 
-  import DsfrBadge from "$lib/dsfr/DsfrBadge.svelte";
-  import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
-  import DsfrTag from "$lib/dsfr/DsfrTag.svelte";
+  import "$lib/dsfr/DsfrBadge.svelte";
+  import "$lib/dsfr/DsfrLink.svelte";
+  import "$lib/dsfr/DsfrTag.svelte";
 
   const citiesKeys = ["ville", "departement", "region", "population", "superficie"];
 
@@ -117,7 +117,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       rows={citiesRows}
       rich
     >
-      {#each citiesRows as city, rowIndex}
+      {#each citiesRows as city, rowIndex (city["ville"])}
         <div slot={`cell:ville:${rowIndex}`}>
           <strong>{city["ville"]}</strong>
         </div>
@@ -151,7 +151,7 @@ En cas de besoin de personnalisation partielle _(une ou deux colonnes uniquement
       columns={citiesColumnsRich}
       rows={citiesRows}
     >
-      {#each citiesRows as city, rowIndex}
+      {#each citiesRows as city, rowIndex (city["ville"])}
         <div slot={`cell:ville:${rowIndex}`}>
           <strong>{city["ville"]}</strong>
         </div>

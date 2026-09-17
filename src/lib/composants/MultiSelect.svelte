@@ -76,7 +76,7 @@
   const disabledClass = $derived(disabled ? "fr-select-group--disabled" : "");
 
   let currentValues: string[] = $derived(values);
-  function handleChange(event: Event) {
+  function handleChange() {
     // REVIEW deprecate this event in favor of valueschanged
     $host().dispatchEvent(
       new CustomEvent<string[]>("valuechanged", { detail: currentValues, bubbles: true }),

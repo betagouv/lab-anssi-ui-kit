@@ -47,6 +47,7 @@
     content={args.content}
     title-markup-level={args.titleMarkupLevel}
   >
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     {@html args.content}
   </dsfr-accordion>
 {/snippet}

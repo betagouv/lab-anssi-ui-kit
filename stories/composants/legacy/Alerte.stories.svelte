@@ -21,7 +21,7 @@
       },
       fermable: { control: "boolean", type: "boolean" },
     },
-    play: async ({ canvas, canvasElement }) => {
+    play: async ({ _canvas, canvasElement }) => {
       const button = canvasElement
         .querySelector("lab-anssi-alerte")
         ?.shadowRoot?.querySelector("button");

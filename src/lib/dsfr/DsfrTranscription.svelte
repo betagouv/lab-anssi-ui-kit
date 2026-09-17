@@ -33,7 +33,7 @@
     id,
     title = "Transcription",
     fullscreen = "Agrandir",
-    fullscreenAriaLabel = "Agrandir la transcription",
+    fullscreenAriaLabel: _fullscreenAriaLabel = "Agrandir la transcription",
     isExpanded = false,
   }: Props = $props();
 

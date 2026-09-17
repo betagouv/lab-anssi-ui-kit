@@ -76,13 +76,13 @@
     size,
     hint,
     rich,
-    hasPictogram,
-    pictogramName,
-    pictogramAccent,
+    hasPictogram: _hasPictogram,
+    pictogramName: _pictogramName,
+    pictogramAccent: _pictogramAccent,
     disabled,
     form,
     required,
-    internals,
+    internals: _internals,
     onvaluechanged,
   }: Props = $props();
 
