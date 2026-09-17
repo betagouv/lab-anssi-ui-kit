@@ -83,7 +83,7 @@
    * @param {Object} link - L'objet représentant le lien de pagination, contenant notamment la propriété `displayedLg`.
    * @returns {string|undefined} La classe CSS à appliquer pour masquer ou styliser le lien, ou `undefined` si aucune classe n'est nécessaire.
    */
-  function getHiddenClass(position: PagePosition, link): string {
+  function getHiddenClass(position: PagePosition, link: PageLink): string | undefined {
     const isFirstOrLast = position === "first" || position === "last";
     const isPrevOrNext = position === "prev" || position === "next";
 
@@ -96,6 +96,8 @@
     } else if (isPrevOrNext && prevAndNextHasLgLabel) {
       return "fr-pagination__link--lg-label";
     }
+
+    return undefined;
   }
 
   /**
@@ -119,8 +121,8 @@
    */
   function setHref(href: string, position: PagePosition): string | undefined {
     if (
-      (["first", "prev"].includes(position) && disabledFirst) ||
-      (["last", "next"].includes(position) && disabledLast)
+      (position && ["first", "prev"].includes(position) && disabledFirst) ||
+      (position && ["last", "next"].includes(position) && disabledLast)
     ) {
       return undefined;
     }
@@ -136,8 +138,8 @@
    */
   function setAriaDisabled(position: PagePosition): string | undefined {
     if (
-      (["first", "prev"].includes(position) && disabledFirst) ||
-      (["last", "next"].includes(position) && disabledLast)
+      (position && ["first", "prev"].includes(position) && disabledFirst) ||
+      (position && ["last", "next"].includes(position) && disabledLast)
     ) {
       return "true";
     }
@@ -182,10 +184,10 @@
         getHiddenClass(position, link),
         { [`fr-pagination__link--${position}`]: position },
       ]}
-      href={setHref(link.href, position)}
+      href={setHref(link.href ?? "", position)}
       title={link.title}
-      aria-current={setAriaCurrent(index)}
-      aria-disabled={setAriaDisabled(position)}
+      aria-current={setAriaCurrent(index ?? 0)}
+      aria-disabled={setAriaDisabled(position) as boolean | undefined}
       onclick={(e) => handlePageClick(e, index, position)}
     >
       {link.label}
@@ -200,11 +202,11 @@
   data-fr-analytics-page-total="132"
 >
   <ul class="fr-pagination__list">
-    {#if hasFirstAndLast}
+    {#if hasFirstAndLast && first}
       {@render pageItem(first, null, "first")}
     {/if}
 
-    {#if hasPrevAndNext}
+    {#if hasPrevAndNext && prev}
       {@render pageItem(prev, null, "prev")}
     {/if}
 
@@ -212,11 +214,11 @@
       {@render pageItem(page, index)}
     {/each}
 
-    {#if hasPrevAndNext}
+    {#if hasPrevAndNext && next}
       {@render pageItem(next, null, "next")}
     {/if}
 
-    {#if hasFirstAndLast}
+    {#if hasFirstAndLast && last}
       {@render pageItem(last, null, "last")}
     {/if}
   </ul>

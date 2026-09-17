@@ -38,8 +38,6 @@
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
-  setThemeable($host());
-
   type CheckboxesSize = Extract<Size, "sm" | "md">;
   type SelectedValues = string[];
   type Checkbox = {
@@ -52,6 +50,7 @@
     form?: string;
     required?: boolean;
   };
+
   interface Props {
     /** Attribut id du formulaire */
     id: string;
@@ -109,8 +108,10 @@
     legendWeight,
   }: Props = $props();
 
+  let hostElement: HTMLElement = $host();
+  setThemeable(hostElement);
+
   let validityCheckbox: HTMLInputElement;
-  let host = $host();
 
   // Création de l'état de validation partagé
   const formValidation = createFormValidation();
@@ -129,7 +130,7 @@
    * Met à jour les valeurs et déclenche l'événement 'valueschanged'.
    */
   function handleChange() {
-    host.dispatchEvent(new CustomEvent("valueschanged", { detail: values, bubbles: true }));
+    hostElement.dispatchEvent(new CustomEvent("valueschanged", { detail: values, bubbles: true }));
   }
 
   /**
@@ -154,7 +155,7 @@
   // Configure la validation avec les références nécessaires
   // Pour un groupe de checkboxes, on utilise le premier input comme référence
   $effect(() => {
-    formValidation.setup(internals, validityCheckbox, host, () => {
+    formValidation.setup(internals, validityCheckbox, hostElement, () => {
       values = [];
     });
   });

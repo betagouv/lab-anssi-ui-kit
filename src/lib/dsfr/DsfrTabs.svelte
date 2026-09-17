@@ -27,7 +27,7 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
-  import { createSlot } from "$lib/directives/actions.svelte.ts";
+  import { createSlot } from "$lib/directives/actions.svelte";
 
   setThemeable($host());
 
@@ -119,7 +119,7 @@
           class={[
             "fr-tabs__tab",
             tab.icon && `fr-icon-${tab.icon} fr-tabs__tab--icon-left`,
-            hasIcon && setIconClass(tab.icon),
+            hasIcon && tab.icon && setIconClass(tab.icon),
           ]}
           tabindex={activeIndex === i ? 0 : -1}
           role="tab"

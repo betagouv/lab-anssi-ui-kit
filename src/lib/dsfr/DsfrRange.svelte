@@ -40,7 +40,7 @@
   setThemeable($host());
 
   type RangeSize = Extract<Size, "sm" | "md">;
-  type RangeStatus = Extract<Status, "default" | "error">;
+  type RangeStatus = "default" | "error";
 
   interface Props {
     /** Attribut id de l'input */

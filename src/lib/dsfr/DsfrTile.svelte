@@ -33,6 +33,7 @@
 />
 
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { Size } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
 
@@ -91,6 +92,7 @@
     variations?: "none" | "grey" | "no-border" | "no-background" | "shadow";
     /** Si true, ajoute la classe fr-tile--no-icon pour désactiver l'icône associée au lien */
     noIcon?: boolean;
+    children?: Snippet;
   }
 
   let {
