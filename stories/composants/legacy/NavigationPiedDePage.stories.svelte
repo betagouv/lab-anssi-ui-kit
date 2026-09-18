@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -27,6 +28,28 @@
   ></lab-anssi-navigation-pied-de-page>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-navigation-pied-de-page");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".conteneur-navigation-pied-de-page");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Les 7 liens de navigation sont présents", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a");
+      await expect(links?.length).toBe(7);
+    });
+    await step("Le lien d'accessibilité indique 'non conforme' par défaut", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a");
+      const accessibilityLink = links?.[links.length - 1];
+      await expect(accessibilityLink?.textContent).toContain("non conforme");
+    });
+    await step("Les séparateurs sont présents entre les liens", async () => {
+      const separators = el?.shadowRoot?.querySelectorAll(".separateur");
+      await expect(separators?.length).toBe(6);
+    });
+  }}
+/>
 
 <Story name="Conforme" args={{ conforme: true }} />

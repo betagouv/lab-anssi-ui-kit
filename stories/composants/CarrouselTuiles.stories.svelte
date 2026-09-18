@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -92,7 +93,28 @@
   <lab-anssi-carrousel-tuiles {...args}></lab-anssi-carrousel-tuiles>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-carrousel-tuiles");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-carrousel-tuiles");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Les trois tuiles sont affichées", async () => {
+      const elements = el?.shadowRoot?.querySelectorAll(".lab-anssi-carrousel-tuiles__element");
+      await expect(elements?.length).toBe(3);
+    });
+    await step("La classe de fond 'clair' est appliquée", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-carrousel-tuiles");
+      await expect(inner?.classList.contains("lab-anssi-carrousel-tuiles--clair")).toBe(true);
+    });
+    await step("La zone de navigation est présente", async () => {
+      const actions = el?.shadowRoot?.querySelector(".lab-anssi-carrousel-tuiles__actions");
+      await expect(actions).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec tuiles sans image" args={{ tuiles: tuilesSansImage }} />
 

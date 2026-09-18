@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -103,7 +104,37 @@
   ></lab-anssi-marelle>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-marelle");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".lab-anssi-marelle");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const titre = el?.shadowRoot?.querySelector(".lab-anssi-marelle__titre");
+      await expect(titre?.textContent?.trim()).toContain("Titre");
+    });
+    await step("Les étapes sont affichées", async () => {
+      const etapes = el?.shadowRoot?.querySelectorAll(".marelle-etape");
+      await expect(etapes?.length).toBe(2);
+    });
+    await step("Les titres des étapes sont affichés", async () => {
+      const titresEtapes = el?.shadowRoot?.querySelectorAll(".lab-anssi-marelle-etape__titre");
+      await expect(titresEtapes?.[0]?.textContent?.trim()).toContain("Première étape");
+      await expect(titresEtapes?.[1]?.textContent?.trim()).toContain("Deuxième étape");
+    });
+    await step("Les liens des étapes sont présents", async () => {
+      const liens = el?.shadowRoot?.querySelectorAll(".lab-anssi-marelle-etape__contenu a");
+      await expect(liens?.length).toBe(2);
+    });
+    await step("Les illustrations des étapes sont affichées", async () => {
+      const images = el?.shadowRoot?.querySelectorAll(".lab-anssi-marelle-etape__image");
+      await expect(images?.length).toBe(2);
+    });
+  }}
+/>
 
 <Story
   name="Avec bouton d'action"

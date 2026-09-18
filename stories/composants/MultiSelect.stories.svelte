@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -71,6 +72,31 @@
   ></lab-anssi-multi-select>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-multi-select");
+    await step("Le composant est rendu", async () => {
+      const inner = el?.shadowRoot?.querySelector(".fr-select-group");
+      await expect(inner).toBeTruthy();
+    });
+    await step("Le label est affiché", async () => {
+      const label = el?.shadowRoot?.querySelector(".fr-label");
+      await expect(label?.textContent).toContain("Label du multi-select");
+    });
+    await step("Le hint est affiché", async () => {
+      const hint = el?.shadowRoot?.querySelector(".fr-hint-text");
+      await expect(hint?.textContent).toContain("Hint du multi-select");
+    });
+    await step("Le résumé indique la sélection", async () => {
+      const summary = el?.shadowRoot?.querySelector("summary");
+      await expect(summary?.textContent?.trim()).toContain("1 option sélectionnée");
+    });
+    await step("Les options sont rendues sous forme de checkboxes", async () => {
+      const checkboxes = el?.shadowRoot?.querySelectorAll('input[type="checkbox"]');
+      await expect(checkboxes?.length).toBe(3);
+    });
+  }}
+/>
 
 <Story name="Désactivé" args={{ disabled: true }} />
