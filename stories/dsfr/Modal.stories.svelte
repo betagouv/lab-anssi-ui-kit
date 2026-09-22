@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -68,6 +69,35 @@
           transform: webComponentSourceCode("dsfr-modal"),
         },
       },
+    },
+    play: async ({ args, canvasElement }) => {
+      if (args.footerType !== "buttonsgroup") return;
+
+      const openButton = canvasElement
+        .querySelector(".story-container > dsfr-button")
+        ?.shadowRoot?.querySelector<HTMLButtonElement>("button");
+      const modal = canvasElement.querySelector("dsfr-modal");
+      if (!openButton || !modal?.shadowRoot) return;
+
+      await userEvent.click(openButton);
+
+      const closeButton = modal.shadowRoot.querySelector<HTMLButtonElement>(".fr-btn--close");
+      const buttonsGroup = modal.querySelector("dsfr-buttons-group[slot='footer']");
+      const actionButtons = Array.from(
+        buttonsGroup?.shadowRoot?.querySelectorAll<HTMLButtonElement>("button") ?? [],
+      );
+      const [firstAction, lastAction] = actionButtons;
+      if (!closeButton || !firstAction || !lastAction) return;
+
+      firstAction.focus();
+      await userEvent.tab();
+      await expect(lastAction).toHaveFocus();
+
+      await userEvent.tab();
+      await expect(closeButton).toHaveFocus();
+
+      await userEvent.tab({ shift: true });
+      await expect(lastAction).toHaveFocus();
     },
     render: template,
   });
