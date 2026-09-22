@@ -13,7 +13,14 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Badge",
     component: DsfrBadge,
-    argTypes: badgeArgTypes,
+    argTypes: {
+      ...badgeArgTypes,
+      default: {
+        description: "Contenu du badge (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     args: badgeArgs,
     parameters: {
       docs: {
@@ -95,3 +102,20 @@
       "Label très long qui sera tronqué lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus sit amet luctus",
   }}
 />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <dsfr-badge
+      accent={args.accent}
+      ellipsis={args.ellipsis || undefined}
+      has-icon={args.hasIcon || undefined}
+      has-no-icon={args.hasNoIcon || undefined}
+      icon={args.icon}
+      size={args.size}
+      status={args.status}
+      type={args.type}
+    >
+      {args.label}
+    </dsfr-badge>
+  {/snippet}
+</Story>
