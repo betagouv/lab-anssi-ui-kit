@@ -22,6 +22,11 @@
         description: "Balise HTML du titre",
         options: ["h1", "h2", "h3", "h4", "h5", "h6", "p"],
       },
+      title: {
+        description: "Contenu du titre (remplace la prop `title` avec du HTML riche)",
+        control: false,
+        table: { category: "Slots" },
+      },
       description: {
         description: "Contenu de la description (remplace la prop `text` avec du HTML riche)",
         control: false,
@@ -201,6 +206,24 @@
         Ceci est une <strong>description personnalisée</strong> de l'alerte utilisant un slot avec
         un&nbsp;<dsfr-link href="https://cyber.gouv.fr/" blank label="lien"></dsfr-link>.
       </p>
+    </dsfr-alert>
+  {/snippet}
+</Story>
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <dsfr-alert
+      button-close-label={args.buttonCloseLabel}
+      has-title={args.hasTitle}
+      has-description={args.hasDescription}
+      type={args.type}
+      size={args.size}
+      id={args.id}
+      dismissible={args.dismissible || undefined}
+      icon={args.icon}
+    >
+      <h1 slot="title">{args.title}</h1>
+      <p slot="description">{args.text}</p>
     </dsfr-alert>
   {/snippet}
 </Story>
