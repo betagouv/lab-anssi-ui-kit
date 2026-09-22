@@ -61,35 +61,21 @@ const FOCUSABLE_ELEMENTS = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(",");
 
-/**
- * Collecte récursivement tous les éléments focusables dans un conteneur,
- * y compris ceux dans les slots et les Shadow DOM.
- *
- * @param root - L'élément racine ou la Shadow Root à analyser.
- * @param result - Le tableau où stocker les éléments focusables trouvés.
- */
-function collectFocusables(root: HTMLElement | ShadowRoot, result: HTMLElement[]) {
-  root.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS).forEach((el) => {
-    result.push(el);
-  });
+const isHTMLElement = (element: Element): element is HTMLElement => element instanceof HTMLElement;
 
-  root.querySelectorAll("slot").forEach((slot) => {
-    slot.assignedElements({ flatten: true }).forEach((el) => {
-      if (el instanceof HTMLElement) {
-        if (el.matches(FOCUSABLE_ELEMENTS)) result.push(el);
+function getSlotChildren(slot: HTMLSlotElement): HTMLElement[] {
+  const assignedElements = slot.assignedElements({ flatten: true });
+  const children = assignedElements.length ? assignedElements : slot.children;
 
-        result.push(...el.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS));
+  return Array.from(children).filter(isHTMLElement);
+}
 
-        if (el.shadowRoot) collectFocusables(el.shadowRoot, result);
-      }
-    });
-  });
-
-  root.querySelectorAll<HTMLElement>("*").forEach((el) => {
-    if (el.shadowRoot && !el.matches(FOCUSABLE_ELEMENTS)) {
-      collectFocusables(el.shadowRoot, result);
-    }
-  });
+function getComposedChildren(root: HTMLElement | ShadowRoot): HTMLElement[] {
+  return Array.from(root.children)
+    .filter(isHTMLElement)
+    .flatMap((element) =>
+      element instanceof HTMLSlotElement ? getSlotChildren(element) : [element],
+    );
 }
 
 /**
@@ -100,12 +86,12 @@ function collectFocusables(root: HTMLElement | ShadowRoot, result: HTMLElement[]
  *
  * @returns Un tableau contenant tous les éléments focusables trouvés.
  */
-function getFocusableElements(element: HTMLElement): HTMLElement[] {
-  const elements: HTMLElement[] = [];
+function getFocusableElements(root: HTMLElement | ShadowRoot): HTMLElement[] {
+  return getComposedChildren(root).flatMap((element) => {
+    const descendants = getFocusableElements(element.shadowRoot ?? element);
 
-  collectFocusables(element, elements);
-
-  return elements;
+    return element.matches(FOCUSABLE_ELEMENTS) ? [element, ...descendants] : descendants;
+  });
 }
 
 /**
