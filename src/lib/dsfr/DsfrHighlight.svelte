@@ -19,7 +19,7 @@
   type HighlightSize = Extract<Size, "sm" | "md" | "lg">;
   interface Props {
     /** Contenu texte de la mise en exergue */
-    text: string;
+    text?: string;
     /** Attribut id de la mise en exergue */
     id?: string;
     /** Taille du texte de la mise en exergue */
@@ -33,7 +33,7 @@
   const accentClass = $derived(accent && `fr-highlight--${accent}`);
 </script>
 
-{#if text}
+{#if text || $$slots.text}
   <div {id} class={["fr-highlight", accentClass]}>
     <slot name="title"></slot>
     <slot name="text">
@@ -54,5 +54,9 @@
   @import "@gouvfr/dsfr/dist/component/highlight/highlight.main.min.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("highlight");
+  @include set-dsfr-sizing("highlight") {
+    :global(::slotted([slot="text"])) {
+      @include text-style("md", true, true, null, true);
+    }
+  }
 </style>
