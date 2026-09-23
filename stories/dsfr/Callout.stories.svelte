@@ -22,7 +22,19 @@
         table: { category: "Slots" },
       },
     },
-    args: calloutArgs,
+    args: {
+      ...calloutArgs,
+      title: {
+        description: "Contenu du titre (remplace la prop `title`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      description: {
+        description: "Contenu de la description (remplace la prop `text`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+    },
     parameters: {
       docs: {
         description: {
@@ -89,3 +101,21 @@
     accent: "pink-macaron",
   }}
 />
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <dsfr-callout
+      has-title={args.hasTitle || undefined}
+      id={args.id}
+      has-icon={args.hasIcon || undefined}
+      icon={args.icon}
+      title-markup={args.titleMarkup}
+      has-button={args.hasButton || undefined}
+      button-label={args.buttonLabel}
+      accent={args.accent}
+    >
+      <h2 slot="title">{args.title}</h2>
+      <p slot="description">{args.text}</p>
+    </dsfr-callout>
+  {/snippet}
+</Story>

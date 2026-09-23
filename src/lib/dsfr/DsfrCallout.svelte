@@ -68,9 +68,13 @@
 
 <div {id} class={["fr-callout", accentClass, iconClass]}>
   {#if hasTitle}
-    <svelte:element this={titleMarkup} class="fr-callout__title">{title}</svelte:element>
+    <slot name="title">
+      <svelte:element this={titleMarkup} class="fr-callout__title">{title}</svelte:element>
+    </slot>
   {/if}
-  <p class="fr-callout__text">{text}</p>
+  <slot name="description">
+    <p class="fr-callout__text">{text}</p>
+  </slot>
   {#if hasButton}
     <slot name="button">
       {#if buttonLabel}
@@ -83,6 +87,7 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/src/module/color";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
   @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
@@ -94,6 +99,21 @@
   @include set-dsfr-sizing("callout") {
     &__text:not(:last-child) {
       margin-bottom: 1rem;
+    }
+
+    :global(::slotted([slot="title"])) {
+      @include title-style(h4);
+      @include margin(var(--title-spacing));
+      @include color.text(
+        title grey,
+        (
+          legacy: false,
+        )
+      );
+    }
+
+    :global(::slotted([slot="description"])) {
+      @include text-style(lg, true);
     }
   }
 </style>
