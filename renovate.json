@@ -6,6 +6,8 @@
     "helpers:pinGitHubActionDigests"
   ],
   "semanticCommits": "disabled",
+  "rangeStrategy": "bump",
+  "postUpdateOptions": ["pnpmDedupe"],
   "commitMessagePrefix": "[RENOVATE]",
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
