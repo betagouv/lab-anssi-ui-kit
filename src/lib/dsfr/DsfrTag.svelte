@@ -28,7 +28,7 @@
   type Markup = "a" | "button" | "p" | undefined;
   interface Props {
     /** Libellé du tag */
-    label: string;
+    label?: string;
     /** Type du tag<br>Valeurs :<br>- Défaut : tag non cliquable pour donner une information sur un contenu<br>- Cliquable : Le tag cliquable donne accès à une page avec des contenus associés à ce tag<br>- Sélectionnable : Le tag sélectionnable permet d’activer/désactiver un filtre<br>- Supprimable : Le tag supprimable permet de désactiver un filtre */
     type?: "default" | "clickable" | "pressable" | "dismissible";
     /** Taille du tag */
@@ -123,7 +123,9 @@
   target={type === "clickable" && blank ? "_blank" : undefined}
   {id}
 >
-  {label}
+  <slot>
+    {label}
+  </slot>
 </svelte:element>
 
 <style lang="scss">
