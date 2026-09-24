@@ -3,7 +3,7 @@ preferFrozenLockfile: true
 
 overrides:
   rollup: ">=4.30.0"
-  flatted: ">=3.4.2"
+  flatted: ">=3.4.4"
   lodash: ">=4.18.0"
   minimatch: ">=10.2.3"
   picomatch: ">=4.0.7"
