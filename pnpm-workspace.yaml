@@ -1,5 +1,3 @@
-# _c.f._ https://pnpm.io/settings
-
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
 
@@ -8,7 +6,7 @@ overrides:
   flatted: ">=3.4.2"
   lodash: ">=4.18.0"
   minimatch: ">=10.2.3"
-  picomatch: ">=4.0.4"
+  picomatch: ">=4.0.7"
   axios: ">=1.15.2"
   follow-redirects: ">=1.16.0"
 
