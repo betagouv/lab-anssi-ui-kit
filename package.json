@@ -89,7 +89,7 @@
     "lint-staged": "~17.5.1",
     "playwright": "~1.63.0",
     "postcss": "~8.5.28",
-    "postcss-discard-empty": "~9.0.2",
+    "postcss-discard-empty": "~9.0.3",
     "postcss-root-to-host": "~0.0.0",
     "prettier": "~3.9.6",
     "prettier-plugin-svelte": "~4.1.1",
