@@ -234,6 +234,30 @@
 
 <Story name="Sans description principale" args={{ description: undefined }} />
 
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <div class="conteneur-story">
+      <DsfrContainer>
+        <lab-anssi-fonctionnalites
+          description={args.description}
+          balise-titre={args.baliseTitre}
+          fonctionnalites={args.fonctionnalites}
+          balise-des-sous-titres={args.baliseDesSousTitres}
+          image-placeholder={args.imagePlaceholder}
+        >
+          <span slot="titre">Titre passé via le <strong>slot titre</strong></span>
+        </lab-anssi-fonctionnalites>
+      </DsfrContainer>
+    </div>
+
+    <style>
+      .conteneur-story {
+        padding-block: 96px;
+      }
+    </style>
+  {/snippet}
+</Story>
+
 <Story name="Avec Tags dans l'entête" args={{ afficheSlotHautEntete: true }} />
 
 <Story name="Avec média à gauche" args={{ orientationMedia: "gauche" }} />

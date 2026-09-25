@@ -56,6 +56,18 @@
 
 <Story name="Defaut" />
 
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-rejoindre-la-communaute
+      raisons={args.raisons}
+      illustration={args.illustration}
+      action={args.action}
+    >
+      <span slot="titre">Titre passé via le slot</span>
+    </lab-anssi-brique-rejoindre-la-communaute>
+  {/snippet}
+</Story>
+
 <Story
   name="ComporteUneAction"
   args={{

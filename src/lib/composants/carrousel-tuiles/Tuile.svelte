@@ -2,21 +2,21 @@
   import type { Image } from "$lib/types";
 
   interface Props {
-    titre: string;
+    titre?: string;
     illustration: Image;
-    contenu: string;
+    contenu?: string;
     position?: "premiere" | "derniere" | null;
   }
 
-  let { titre, illustration, contenu, position = null }: Props = $props();
+  let { titre = undefined, illustration, contenu = undefined, position = null }: Props = $props();
 </script>
 
 <div class="tuile {position ?? ''}">
   <div class="conteneur-image">
     <img src={illustration.lien} alt={illustration.alt} />
   </div>
-  <p>{titre}</p>
-  <span>{contenu}</span>
+  <p><slot name="titre">{titre}</slot></p>
+  <span><slot name="contenu">{contenu}</slot></span>
 </div>
 
 <style lang="scss">

@@ -60,6 +60,19 @@
 
 <Story name="Defaut" />
 
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-contenu-a-deux-colonnes
+      illustration={args.illustration}
+      ordre={args.ordre}
+      action={args.action}
+    >
+      <span slot="titre">Titre via le slot</span>
+      <span slot="paragraphe">Paragraphe passé via le <strong>slot paragraphe</strong></span>
+    </lab-anssi-brique-contenu-a-deux-colonnes>
+  {/snippet}
+</Story>
+
 <Story
   name="ComporteUneAction"
   args={{

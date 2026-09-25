@@ -31,13 +31,13 @@
 
   interface Props {
     /** Titre du bandeau */
-    titre: string;
+    titre?: string;
     /** Balise HTML (Hn) du titre */
-    baliseTitre: string;
+    baliseTitre?: string;
     /** Description du bandeau */
-    description: string;
+    description?: string;
     /** Mention du bandeau */
-    mention: string;
+    mention?: string;
     /** Url de l'image */
     urlImage?: string | undefined;
     /** Si "vrai", l'image n'est pas affichée */
@@ -59,10 +59,10 @@
   }
 
   let {
-    titre,
+    titre = undefined,
     baliseTitre = "h1",
-    description,
-    mention,
+    description = undefined,
+    mention = undefined,
     urlImage,
     sansImage = false,
     avecFilAriane = false,
@@ -110,10 +110,12 @@
         {/if}
 
         <svelte:element this={baliseTitre} class="lab-anssi-bandeau-page__titre">
-          {titre}
+          <slot name="titre">{titre}</slot>
         </svelte:element>
 
-        <p class="lab-anssi-bandeau-page__description">{description}</p>
+        <p class="lab-anssi-bandeau-page__description">
+          <slot name="description">{description}</slot>
+        </p>
 
         {#if $$slots.buttonsgroup && !variationSimple}
           <div class="lab-anssi-bandeau-page__actions">
@@ -121,8 +123,8 @@
           </div>
         {/if}
 
-        {#if mention}
-          <p class="lab-anssi-bandeau-page__mention">{mention}</p>
+        {#if mention || $$slots.mention}
+          <p class="lab-anssi-bandeau-page__mention"><slot name="mention">{mention}</slot></p>
         {/if}
       </div>
 

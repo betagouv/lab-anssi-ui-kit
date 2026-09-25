@@ -15,16 +15,16 @@
   import LecteurVideo from "$lib/composants/vitrines-produits/briques/LecteurVideo.svelte";
 
   interface Props {
-    titre: string;
+    titre?: string;
     multimedia: Video;
   }
 
-  let { titre, multimedia }: Props = $props();
+  let { titre = undefined, multimedia }: Props = $props();
 </script>
 
 <Brique variation="transparent">
   <div class="bloc-multimedia">
-    <h2>{titre}</h2>
+    <h2><slot name="titre">{titre}</slot></h2>
     <div>
       <LecteurVideo
         source={multimedia.source}

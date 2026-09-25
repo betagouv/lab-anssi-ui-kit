@@ -51,3 +51,12 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-bandeau-titre fil-ariane={JSON.stringify(args.filAriane)} infos-tag={args.infosTag}>
+      <span slot="titre">Titre via le slot</span>
+      <span slot="description">Description passée via le <strong>slot description</strong></span>
+    </lab-anssi-bandeau-titre>
+  {/snippet}
+</Story>

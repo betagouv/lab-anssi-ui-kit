@@ -48,8 +48,8 @@
 
 <Brique variation="transparent">
   <div class="brique-temoignages">
-    {#if titre}
-      <h3>{titre}</h3>
+    {#if titre || $$slots.titre}
+      <h3><slot name="titre">{titre}</slot></h3>
     {/if}
     <div class="carrousel-temoignages">
       <div class="conteneur-carrousel" bind:this={elementCarrousel}>

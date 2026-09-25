@@ -45,3 +45,17 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <lab-anssi-tag
+      couleur-texte={args.couleurTexte}
+      couleur-fond={args.couleurFond}
+      taille={args.taille}
+      type={args.type}
+      presse={args.presse || undefined}
+    >
+      Libellé via le slot
+    </lab-anssi-tag>
+  {/snippet}
+</Story>

@@ -19,8 +19,8 @@
   import LienExterne from "$lib/composants/icones/LienExterne.svelte";
 
   interface Props {
-    titre: string;
-    soustitre: string;
+    titre?: string;
+    soustitre?: string;
     illustration: Image;
     badge?: boolean;
     actiongauche: Action;
@@ -29,8 +29,8 @@
   }
 
   let {
-    titre,
-    soustitre,
+    titre = undefined,
+    soustitre = undefined,
     illustration,
     badge = false,
     actiongauche,
@@ -50,8 +50,8 @@
         </div>
       {/if}
       <div class="textes">
-        <h1>{titre}</h1>
-        <p>{soustitre}</p>
+        <h1><slot name="titre">{titre}</slot></h1>
+        <p><slot name="soustitre">{soustitre}</slot></p>
       </div>
       <div class="actions">
         <a

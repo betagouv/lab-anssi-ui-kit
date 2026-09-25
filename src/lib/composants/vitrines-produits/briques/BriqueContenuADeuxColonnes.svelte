@@ -16,16 +16,16 @@
   import type { Action, Image } from "$lib/types";
 
   interface Props {
-    titre: string;
-    paragraphe: string;
+    titre?: string;
+    paragraphe?: string;
     action?: Action | undefined;
     ordre?: "texte-gauche" | "texte-droite";
     illustration: Image;
   }
 
   let {
-    titre,
-    paragraphe,
+    titre = undefined,
+    paragraphe = undefined,
     action = undefined,
     ordre = "texte-gauche",
     illustration,
@@ -38,8 +38,8 @@
       <img src={illustration.lien} alt={illustration.alt} />
     </div>
     <div class="contenu">
-      <h2>{titre}</h2>
-      <p>{paragraphe}</p>
+      <h2><slot name="titre">{titre}</slot></h2>
+      <p><slot name="paragraphe">{paragraphe}</slot></p>
       <div class="action">
         {#if action}
           <a role="button" href={action.lien} target="_blank">

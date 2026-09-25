@@ -80,3 +80,18 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-hero
+      illustration={args.illustration}
+      badge={args.badge || undefined}
+      actiongauche={args.actiongauche}
+      actiondroite={args.actiondroite}
+      partenaires={args.partenaires}
+    >
+      <span slot="titre">Titre via le slot</span>
+      <span slot="soustitre">Sous-titre passé via le <strong>slot soustitre</strong></span>
+    </lab-anssi-brique-hero>
+  {/snippet}
+</Story>
