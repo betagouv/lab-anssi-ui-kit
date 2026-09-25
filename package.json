@@ -91,7 +91,7 @@
     "postcss": "~8.5.28",
     "postcss-discard-empty": "~9.0.3",
     "postcss-root-to-host": "~0.0.0",
-    "prettier": "~3.9.6",
+    "prettier": "~3.9.8",
     "prettier-plugin-svelte": "~4.1.1",
     "publint": "~0.3.24",
     "sass": "~1.104.1",
