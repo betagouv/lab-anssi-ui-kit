@@ -77,7 +77,7 @@
     "@vitest/browser-playwright": "~4.1.11",
     "@vitest/coverage-v8": "~4.1.11",
     "concurrently": "~10.0.5",
-    "cssnano": "~9.0.4",
+    "cssnano": "~9.0.5",
     "dotenv": "~17.4.2",
     "eslint": "~10.10.0",
     "eslint-config-prettier": "~10.1.8",
