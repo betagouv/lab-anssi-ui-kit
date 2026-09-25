@@ -96,7 +96,7 @@
     "publint": "~0.3.24",
     "sass": "~1.104.1",
     "storybook": "~10.6.0",
-    "style-dictionary": "^5.5.3",
+    "style-dictionary": "^5.5.4",
     "svelte": "~5.57.0",
     "svelte-check": "~4.7.6",
     "typescript": "~6.0.3",
