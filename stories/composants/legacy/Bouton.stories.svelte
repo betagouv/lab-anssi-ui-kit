@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -57,4 +58,20 @@
   ></lab-anssi-bouton>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bouton");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le libellé est affiché", async () => {
+      const button = el?.shadowRoot?.querySelector("button");
+      await expect(button?.textContent).toContain("Libellé");
+    });
+    await step("Le bouton est actif (non désactivé)", async () => {
+      const button = el?.shadowRoot?.querySelector("button") as HTMLButtonElement | null;
+      await expect(button?.disabled).toBe(false);
+    });
+  }}
+/>

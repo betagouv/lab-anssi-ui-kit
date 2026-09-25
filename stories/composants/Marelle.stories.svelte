@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -103,7 +104,29 @@
   ></lab-anssi-marelle>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-marelle");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      await expect(el?.shadowRoot?.textContent).toContain("Titre");
+    });
+    await step("Les titres des étapes sont visibles", async () => {
+      const titres = el?.shadowRoot?.querySelectorAll("h4");
+      await expect(titres?.length).toBeGreaterThanOrEqual(args.etapesmarelle.length);
+      for (let i = 0; i < args.etapesmarelle.length; i++) {
+        await expect(titres?.[i]?.textContent).toContain(args.etapesmarelle[i].titre);
+      }
+    });
+    await step("Les illustrations des étapes sont affichées", async () => {
+      const images = el?.shadowRoot?.querySelectorAll("img");
+      await expect(images?.length).toBeGreaterThanOrEqual(args.etapesmarelle.length);
+    });
+  }}
+/>
 
 <Story
   name="Avec bouton d'action"

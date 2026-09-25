@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -149,7 +150,30 @@
   </lab-anssi-bandeau-page>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-page");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre est affiché avec la balise h1", async () => {
+      const titre = el?.shadowRoot?.querySelector("h1");
+      await expect(titre).toBeTruthy();
+      await expect(titre?.textContent?.trim()).toBe("Titre lorem ipsum");
+    });
+
+    await step("La description est affichée", async () => {
+      const paragraphs = el?.shadowRoot?.querySelectorAll("p");
+      const description = Array.from(paragraphs ?? []).find((p) =>
+        p.textContent?.includes("Lorem ipsum dolor sit amet"),
+      );
+      await expect(description).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec Fil d'Ariane" args={{ avecFilAriane: true }} />
 

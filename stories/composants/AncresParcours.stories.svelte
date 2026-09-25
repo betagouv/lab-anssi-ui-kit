@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -25,4 +26,24 @@
   <lab-anssi-ancres ancres={args.ancres} index-actif={args.indexActif}></lab-anssi-ancres>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-ancres");
+
+    await step("Le composant est rendu", async () => {
+      const nav = el?.shadowRoot?.querySelector("nav");
+      await expect(nav).toBeTruthy();
+    });
+
+    await step("Les ancres sont affichées avec leur texte", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a");
+
+      await expect(links?.length).toBe(args.ancres.length);
+
+      for (let i = 0; i < args.ancres.length; i++) {
+        await expect(links?.[i]?.textContent?.trim()).toBe(args.ancres[i].label);
+      }
+    });
+  }}
+/>

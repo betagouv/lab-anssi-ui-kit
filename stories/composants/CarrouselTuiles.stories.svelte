@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -92,7 +93,30 @@
   <lab-anssi-carrousel-tuiles {...args}></lab-anssi-carrousel-tuiles>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-carrousel-tuiles");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Les titres des tuiles sont visibles", async () => {
+      const text = el?.shadowRoot?.textContent;
+      await expect(text).toContain("Un dispositif étatique");
+      await expect(text).toContain("Une communauté de confiance");
+      await expect(text).toContain("Au service de l'intérêt général");
+    });
+
+    await step("Les boutons de navigation sont présents", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll("button");
+      const textes = Array.from(buttons || []).map((b) => b.textContent?.trim());
+      await expect(textes).toContain("Précédent");
+      await expect(textes).toContain("Suivant");
+    });
+  }}
+/>
 
 <Story name="Avec tuiles sans image" args={{ tuiles: tuilesSansImage }} />
 

@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -65,7 +66,28 @@
   ></lab-anssi-lien>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-lien");
+    await step("Le composant est rendu", async () => {
+      const link = el?.shadowRoot?.querySelector("a");
+      await expect(link).toBeTruthy();
+    });
+    await step("Le libellé est affiché", async () => {
+      const link = el?.shadowRoot?.querySelector("a");
+      await expect(link?.textContent).toContain("Libellé");
+    });
+    await step("Le lien pointe vers la bonne cible", async () => {
+      const link = el?.shadowRoot?.querySelector("a") as HTMLAnchorElement | null;
+      await expect(link?.target).toBe("#");
+    });
+    await step("Le lien est actif (non désactivé)", async () => {
+      const link = el?.shadowRoot?.querySelector("a") as HTMLAnchorElement | null;
+      await expect(link?.getAttribute("aria-disabled")).toBe("false");
+    });
+  }}
+/>
 
 <Story name="Taille de police 1rem">
   <p style="font-size: 1rem; line-height: 1.5rem; color: #584cfc">

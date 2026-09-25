@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -79,4 +80,37 @@
   ></lab-anssi-brique-hero>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-hero");
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+    await step("Le titre est affiché", async () => {
+      const h1 = el?.shadowRoot?.querySelector("h1");
+      await expect(h1?.textContent).toBe("MonServiceSécurisé");
+    });
+    await step("Le sous-titre est affiché", async () => {
+      await expect(el?.shadowRoot?.textContent).toContain("piloter en équipe la sécurité");
+    });
+    await step("Le badge est affiché", async () => {
+      await expect(el?.shadowRoot?.textContent).toContain("Service à impact national");
+    });
+    await step("L'action gauche est affichée avec le bon texte", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a[role='button']");
+      const actionGauche = links?.[0];
+      await expect(actionGauche?.textContent?.trim()).toContain("Commencer à sécuriser");
+    });
+    await step("L'action droite est affichée avec le bon texte", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a[role='button']");
+      const actionDroite = links?.[1];
+      await expect(actionDroite?.textContent?.trim()).toContain("Être accompagné");
+    });
+    await step("L'illustration est affichée avec son texte alternatif", async () => {
+      const imgs = el?.shadowRoot?.querySelectorAll("img");
+      const illustration = Array.from(imgs ?? []).find((img) => img.alt === "Logo placeholder");
+      await expect(illustration).toBeTruthy();
+    });
+  }}
+/>

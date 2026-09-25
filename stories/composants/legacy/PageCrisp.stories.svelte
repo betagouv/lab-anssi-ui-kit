@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -49,4 +50,24 @@
   ></lab-anssi-page-crisp>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Defaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-page-crisp");
+    await step("Le composant est rendu", async () => {
+      const article = el?.shadowRoot?.querySelector("article");
+      await expect(article).toBeTruthy();
+    });
+    await step("Le contenu HTML est injecté", async () => {
+      const article = el?.shadowRoot?.querySelector("article");
+      await expect(article?.textContent?.length).toBeGreaterThan(0);
+    });
+    await step("Les liens de la table des matières sont présents", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("a");
+      const linkTexts = Array.from(links ?? []).map((l) => l.textContent?.trim());
+      await expect(linkTexts).toContain("Premier titre");
+      await expect(linkTexts).toContain("Deuxième titre");
+      await expect(linkTexts).toContain("Troisième titre");
+    });
+  }}
+/>
