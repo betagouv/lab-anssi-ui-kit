@@ -35,7 +35,7 @@
   interface Props {
     /** Taille du contenu média */
     size?: Size;
-    /** Texte de description ou source */
+    /** Texte de description ou source. Optionnel si le slot "caption" est utilisé. */
     caption?: string;
     /** Ajoute un lien à la suite du texte de description */
     hasLink?: boolean;
@@ -77,11 +77,13 @@
     <div class="fr-content-media__img">
       {#if type === "img"}
         <slot name="image">
-          <img
-            class={["fr-responsive-img", `fr-ratio-${imgRatio}`]}
-            src={img!.src}
-            alt={img!.alt}
-          />
+          {#if img}
+            <img
+              class={["fr-responsive-img", `fr-ratio-${imgRatio}`]}
+              src={img!.src}
+              alt={img!.alt}
+            />
+          {/if}
         </slot>
       {:else}
         <slot name="svg">
@@ -103,7 +105,7 @@
   {/if}
 
   <figcaption class="fr-content-media__caption">
-    {caption}
+    <slot name="caption">{caption}</slot>
     {#if hasLink}
       <a href={linkHref} class="fr-link">{linkLabel}</a>
     {/if}
@@ -128,5 +130,9 @@
   @import "@gouvfr/dsfr/dist/component/link/link.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("content-media");
+  @include set-dsfr-sizing("content-media") {
+    :global(::slotted([slot="image"])) {
+      @include size(100%, auto);
+    }
+  }
 </style>

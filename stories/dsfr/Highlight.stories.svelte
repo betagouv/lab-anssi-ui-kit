@@ -55,3 +55,11 @@
 <Story name="Taille LG" args={{ size: "lg" }} />
 
 <Story name="Accent" args={{ accent: "green-menthe" }} />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <dsfr-highlight id={args.id} size={args.size} accent={args.accent}>
+      <p slot="text">{args.text}</p>
+    </dsfr-highlight>
+  {/snippet}
+</Story>

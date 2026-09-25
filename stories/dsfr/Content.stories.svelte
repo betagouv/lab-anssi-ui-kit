@@ -49,6 +49,11 @@
         control: false,
         table: { category: "Slots" },
       },
+      "caption (slot)": {
+        description: "Contenu de la légende (remplace la prop `caption`)",
+        control: false,
+        table: { category: "Slots" },
+      },
       svg: {
         if: { arg: "type", eq: "svg" },
         control: { type: "object" },
@@ -141,6 +146,7 @@
     img={args.img}
     vid={args.vid}
     svg={args.svg}
+    role="figure"
   ></dsfr-content>
 {/snippet}
 
@@ -151,3 +157,24 @@
 <Story name="Taille MD" args={{ size: "md" }} />
 
 <Story name="Taille LG" args={{ size: "lg" }} />
+
+<Story name="Avec usage du slot caption">
+  {#snippet template(args: Args)}
+    <dsfr-content
+      size={args.size}
+      has-link={args.hasLink || undefined}
+      link-label={args.linkLabel}
+      link-href={args.linkHref}
+      type={args.type}
+      img-ratio={args.imgRatio}
+      vid-ratio={args.vidRatio}
+      vid={args.vid}
+      svg={args.svg}
+      role="figure"
+      aria-labelledby="figureLegend"
+    >
+      <img slot="image" src="https://placehold.co/1920x1080" alt="" />
+      <span slot="caption" id="figureLegend">{args.caption}</span>
+    </dsfr-content>
+  {/snippet}
+</Story>

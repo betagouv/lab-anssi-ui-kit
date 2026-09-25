@@ -24,7 +24,7 @@
     /** Libellé du bouton */
     label: string;
     /** Contenu du collapse */
-    content: string;
+    content?: string;
     /** L'accordéon est-il ouvert au départ */
     isExpanded?: boolean;
     /** Niveau de balise du titre (ex: 2 pour <h2>) */

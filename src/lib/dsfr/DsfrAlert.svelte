@@ -64,7 +64,9 @@
 {#if displayAlert}
   <div {id} class={["fr-alert", `fr-alert--${type}`, `fr-alert--${size}`, iconClass]}>
     {#if showTitle}
-      <svelte:element this={titleTag} class="fr-alert__title">{title}</svelte:element>
+      <slot name="title">
+        <svelte:element this={titleTag} class="fr-alert__title">{title}</svelte:element>
+      </slot>
     {/if}
     {#if showDescription}
       <slot name="description">
@@ -87,6 +89,7 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
+  @use "@gouvfr/dsfr/src/module/color";
   @import "@gouvfr/dsfr/src/dsfr/core/index";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
@@ -104,5 +107,19 @@
   @import "@gouvfr/dsfr/dist/component/button/button.main.css";
 
   @include set-shadow-host();
-  @include set-dsfr-sizing("alert");
+  @include set-dsfr-sizing("alert") {
+    :global(::slotted([slot="title"])) {
+      @include title-style(h6, true);
+      @include color.text(
+        title grey,
+        (
+          legacy: false,
+        )
+      );
+    }
+
+    :global(::slotted([slot="description"])) {
+      @include text-style(md, true);
+    }
+  }
 </style>

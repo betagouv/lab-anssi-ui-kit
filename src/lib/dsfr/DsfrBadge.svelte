@@ -23,7 +23,7 @@
   type BadgeType = "default" | "accent" | "status";
 
   interface Props {
-    label: string;
+    label?: string;
     accent?: Accent;
     ellipsis?: boolean;
     hasIcon?: boolean;
@@ -61,9 +61,15 @@
 
 <p class={["fr-badge", `fr-badge--${size}`, accentClass, iconClass, statusClass]}>
   {#if ellipsis}
-    <span class="fr-ellipsis">{label}</span>
+    <span class="fr-ellipsis">
+      <slot>
+        {label}
+      </slot>
+    </span>
   {:else}
-    {label}
+    <slot>
+      {label}
+    </slot>
   {/if}
 </p>
 
