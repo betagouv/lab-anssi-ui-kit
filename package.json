@@ -79,7 +79,7 @@
     "concurrently": "~10.0.5",
     "cssnano": "~9.0.5",
     "dotenv": "~18.0.0",
-    "eslint": "~10.10.0",
+    "eslint": "~10.11.0",
     "eslint-config-prettier": "~10.1.8",
     "eslint-plugin-storybook": "~10.6.0",
     "eslint-plugin-svelte": "~3.23.0",
