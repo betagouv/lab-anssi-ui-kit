@@ -17,13 +17,13 @@
   const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 
   interface Props {
-    titre: string;
+    titre?: string;
     description?: string;
     filAriane?: NoeudFilAriane[];
     infosTag?: InfosTag | null;
   }
 
-  let { titre, description = "", filAriane = [], infosTag = null }: Props = $props();
+  let { titre = undefined, description = "", filAriane = [], infosTag = null }: Props = $props();
 
   let filArianeVisible = $state(window.matchMedia("(min-width: 576px)").matches);
 </script>
@@ -56,9 +56,9 @@
         </div>
       {/if}
       <div class="conteneur-corps">
-        <h1>{titre}</h1>
-        {#if description}
-          <span>{description}</span>
+        <h1><slot name="titre">{titre}</slot></h1>
+        {#if description || $$slots.description}
+          <span><slot name="description">{description}</slot></span>
         {/if}
       </div>
     </div>

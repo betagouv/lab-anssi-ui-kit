@@ -14,7 +14,7 @@
 
 <script lang="ts">
   interface Props {
-    label: string;
+    label?: string;
     couleurTexte: string | undefined;
     couleurFond: string | undefined;
     taille?: "sm" | "md";
@@ -23,7 +23,7 @@
   }
 
   let {
-    label,
+    label = undefined,
     couleurTexte,
     couleurFond,
     taille = "sm",
@@ -39,7 +39,7 @@
 
 {#if type === "defaut"}
   <span class="tag {taille}" style:background={couleurFond} style:color={couleurTexte}>
-    {label}
+    <slot>{label}</slot>
   </span>
 {:else}
   <button
@@ -49,7 +49,7 @@
     style:color={couleurTexte}
     onclick={bascule}
   >
-    {label}
+    <slot>{label}</slot>
   </button>
 {/if}
 

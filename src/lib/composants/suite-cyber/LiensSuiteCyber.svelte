@@ -10,15 +10,15 @@
   };
 
   interface Props {
-    titre: string;
+    titre?: string;
     services: Service[];
   }
 
-  let { titre, services }: Props = $props();
+  let { titre = undefined, services }: Props = $props();
 </script>
 
 <div class="bloc">
-  <div class="titre">{titre}</div>
+  <div class="titre"><slot name="titre">{titre}</slot></div>
 
   <div class="conteneur">
     {#each services as { nom, lien, icone, labels, classeTracking }, i (nom)}

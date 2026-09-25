@@ -18,3 +18,11 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(_args: Args)}
+    <lab-anssi-presentation-anssi>
+      <span slot="titre">Titre passé via le slot</span>
+    </lab-anssi-presentation-anssi>
+  {/snippet}
+</Story>

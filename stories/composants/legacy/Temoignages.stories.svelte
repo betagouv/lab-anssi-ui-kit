@@ -53,3 +53,11 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <lab-anssi-temoignages temoignages={args.temoignages} size={args.size}>
+      <span slot="titre">Titre passé via le <strong>slot titre</strong></span>
+    </lab-anssi-temoignages>
+  {/snippet}
+</Story>

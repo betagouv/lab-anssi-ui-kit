@@ -39,7 +39,7 @@
       </figure>
 
       <div class="presentation-anssi__contenu">
-        <h2 class="presentation-anssi__titre">{titre}</h2>
+        <h2 class="presentation-anssi__titre"><slot name="titre">{titre}</slot></h2>
         <div class="presentation-anssi__description">
           <slot>
             <p>

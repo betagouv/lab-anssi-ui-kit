@@ -170,6 +170,28 @@
 
 <Story name="Fiche catalogue (avec Fil d'Ariane)" args={{ type: "fiche", avecFilAriane: true }} />
 
+<Story name="Avec usage des slots" args={{ theme: "clair" }}>
+  {#snippet template(args: Args)}
+    <lab-anssi-bandeau-page
+      balise-titre={args.baliseTitre}
+      url-image={args.urlImage}
+      sans-image={args.sansImage || undefined}
+      type={args.type}
+      theme={args.theme}
+    >
+      <span slot="titre">Titre via le slot</span>
+      <span slot="description">Description passée via le <strong>slot description</strong></span>
+      <span slot="mention">Mention via le slot</span>
+      <dsfr-buttons-group
+        slot="buttonsgroup"
+        buttons={boutonsThemeClair}
+        inline="md"
+        data-themeable="false"
+      ></dsfr-buttons-group>
+    </lab-anssi-bandeau-page>
+  {/snippet}
+</Story>
+
 <Story name="Thème Clair avec une couleur de fond personnalisée" args={{ theme: "clair" }}>
   {#snippet template(args: Args)}
     <lab-anssi-bandeau-page

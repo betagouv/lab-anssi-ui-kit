@@ -15,13 +15,13 @@
   import type { Action, Image } from "$lib/types";
 
   interface Props {
-    titre: string;
+    titre?: string;
     raisons: string[];
     action?: Action | undefined;
     illustration: Image;
   }
 
-  let { titre, raisons, action = undefined, illustration }: Props = $props();
+  let { titre = undefined, raisons, action = undefined, illustration }: Props = $props();
 </script>
 
 <Brique variation="primaire">
@@ -30,7 +30,7 @@
       <img src={illustration.lien} alt={illustration.alt} />
     </div>
     <div class="contenu">
-      <h2>{titre}</h2>
+      <h2><slot name="titre">{titre}</slot></h2>
       <p>
         En tant que <b>membre de la communauté</b>, vous pourrez :
       </p>
