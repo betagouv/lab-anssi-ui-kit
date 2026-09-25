@@ -55,7 +55,7 @@
   },
   "web-types": "./dist/web-types.json",
   "peerDependencies": {
-    "svelte": "^5.55.0"
+    "svelte": "^5.57.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "~5.3.1",
