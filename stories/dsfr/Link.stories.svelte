@@ -22,6 +22,11 @@
           value: "boolean",
         },
       },
+      default: {
+        description: "Contenu du lien (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
+      },
     },
     args: linkArgs,
     parameters: {
@@ -129,3 +134,11 @@
     iconPlace: "left",
   }}
 />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <dsfr-link size={args.size} href={args.href} blank={args.blank || undefined} title={args.title}>
+      {args.label}
+    </dsfr-link>
+  {/snippet}
+</Story>

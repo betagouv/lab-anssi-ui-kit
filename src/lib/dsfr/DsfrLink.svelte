@@ -31,8 +31,8 @@
   type LinkSize = Extract<Size, "sm" | "md" | "lg">;
   type IconPlace = "left" | "right";
   interface Props {
-    /** Libellé du lien */
-    label: string;
+    /** Libellé du lien. Optionnel si le slot par défaut est utilisé. */
+    label?: string;
     /** Taille du lien */
     size?: LinkSize;
     /** Attribut 'id' du lien */
@@ -110,9 +110,9 @@
   title={blank ? title : undefined}
 >
   {#if modeTelechargementActif && detail}
-    {label}<span class="fr-link__detail">{detail}</span>
+    <slot>{label}</slot><span class="fr-link__detail">{detail}</span>
   {:else}
-    {label}
+    <slot>{label}</slot>
   {/if}
 </a>
 
