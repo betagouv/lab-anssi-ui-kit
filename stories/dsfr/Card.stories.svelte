@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -182,7 +183,29 @@
   </dsfr-card>
 {/snippet}
 
-<Story name="Défaut" args={{ hasHeaderBadge: undefined, hasDetailEnd: undefined }} />
+<Story
+  name="Défaut"
+  args={{ hasHeaderBadge: undefined, hasDetailEnd: undefined }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-card");
+    const shadow = el?.shadowRoot;
+
+    await step("La carte est rendue", async () => {
+      const card = shadow?.querySelector("div.fr-card");
+      await expect(card).toBeTruthy();
+    });
+
+    await step("Le titre de la carte est affiché", async () => {
+      const title = shadow?.querySelector(".fr-card__title");
+      await expect(title).toBeTruthy();
+    });
+
+    await step("L'image est rendue", async () => {
+      const img = shadow?.querySelector(".fr-card__img img");
+      await expect(img).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Taille SM"
@@ -216,7 +239,19 @@
   args={{ enlarge: true, hasDescription: true, description: "Description (optionnelle)" }}
 />
 
-<Story name="Horizontale" args={{ enlarge: true, horizontal: true, hasTag: true }} />
+<Story
+  name="Horizontale"
+  args={{ enlarge: true, horizontal: true, hasTag: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-card");
+    const shadow = el?.shadowRoot;
+
+    await step("La carte a la classe horizontale", async () => {
+      const card = shadow?.querySelector("div.fr-card");
+      await expect(card?.classList.contains("fr-card--horizontal")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Horizontale SM" args={{ enlarge: true, size: "sm", horizontal: true, hasTag: true }} />
 
@@ -372,4 +407,19 @@
 <Story
   name="Désactivée"
   args={{ disabled: true, hasDescription: true, description: "Description (optionnelle)" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-card");
+    const shadow = el?.shadowRoot;
+
+    await step("Le lien de la carte est désactivé", async () => {
+      const link = shadow?.querySelector(".fr-card__title a");
+      await expect(link?.getAttribute("aria-disabled")).toBe("true");
+    });
+
+    await step("La description est affichée", async () => {
+      const desc = shadow?.querySelector(".fr-card__desc");
+      await expect(desc).toBeTruthy();
+      await expect(desc?.textContent?.trim()).toBe("Description (optionnelle)");
+    });
+  }}
 />

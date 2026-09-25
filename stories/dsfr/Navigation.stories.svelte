@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -115,7 +116,24 @@
   <dsfr-navigation id={args.id} aria-label={args.ariaLabel} items={args.items}></dsfr-navigation>
 {/snippet}
 
-<Story name="Navigation" />
+<Story
+  name="Navigation"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+
+    await step("La navigation est rendue", async () => {
+      const nav = el?.shadowRoot?.querySelector("nav.fr-nav");
+      await expect(nav).toBeTruthy();
+      const list = el?.shadowRoot?.querySelector(".fr-nav__list");
+      await expect(list).toBeTruthy();
+    });
+
+    await step("Les items de navigation sont présents", async () => {
+      const items = el?.shadowRoot?.querySelectorAll(".fr-nav__item");
+      await expect(items?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
 
 <Story
   name="Liens"
@@ -127,6 +145,19 @@
       getItemArgs("nav-links-03", "link", true),
       getItemArgs("nav-links-04"),
     ],
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+
+    await step("Les liens de navigation sont rendus", async () => {
+      const links = el?.shadowRoot?.querySelectorAll(".fr-nav__link");
+      await expect(links?.length).toBe(4);
+    });
+
+    await step("Le lien actif est marqué aria-current=page", async () => {
+      const activeLink = el?.shadowRoot?.querySelector('.fr-nav__link[aria-current="page"]');
+      await expect(activeLink).toBeTruthy();
+    });
   }}
 />
 
@@ -167,6 +198,33 @@
         ],
       },
     ],
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+
+    await step("Les boutons de menu sont rendus", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll(".fr-nav__btn");
+      await expect(buttons?.length).toBe(3);
+    });
+
+    await step("Le clic sur un bouton ouvre le sous-menu", async () => {
+      const button = el?.shadowRoot?.querySelector(".fr-nav__btn") as HTMLElement;
+      await userEvent.click(button);
+      const expanded = el?.shadowRoot?.querySelector(".fr-collapse--expanded");
+      await expect(expanded).toBeTruthy();
+    });
+
+    await step("Le sous-menu contient des liens", async () => {
+      const submenuLinks = el?.shadowRoot?.querySelectorAll(".fr-menu__list .fr-nav__link");
+      await expect(submenuLinks?.length).toBeGreaterThan(0);
+    });
+
+    await step("Un second clic ferme le sous-menu", async () => {
+      const button = el?.shadowRoot?.querySelector(".fr-nav__btn") as HTMLElement;
+      await userEvent.click(button);
+      const expanded = el?.shadowRoot?.querySelector(".fr-collapse--expanded");
+      await expect(expanded).toBeNull();
+    });
   }}
 />
 

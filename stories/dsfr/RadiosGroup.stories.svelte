@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -79,17 +80,71 @@
   ></dsfr-radios-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+
+    await step("Le fieldset est rendu", async () => {
+      const fieldset = el?.shadowRoot?.querySelector("fieldset.fr-fieldset");
+      await expect(fieldset).toBeTruthy();
+    });
+
+    await step("La légende est affichée", async () => {
+      const legend = el?.shadowRoot?.querySelector("legend");
+      await expect(legend).toBeTruthy();
+    });
+
+    await step("Les boutons radio sont rendus", async () => {
+      const radios = el?.shadowRoot?.querySelectorAll('input[type="radio"]');
+      await expect(radios?.length).toBe(3);
+    });
+
+    await step("Un clic sur un radio le sélectionne", async () => {
+      const radios = el?.shadowRoot?.querySelectorAll('input[type="radio"]');
+      const secondRadio = radios?.[1] as HTMLInputElement;
+      await userEvent.click(secondRadio);
+      await expect(secondRadio.checked).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Texte d'aide de la légende" args={{ hint: "Texte de description additionnel" }} />
 
 <Story name="Texte d'aide des radios" args={{ radios: getRadiosGroupData(3, true) }} />
 
-<Story name="Désactivé" args={{ disabled: true }} />
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+
+    await step("Le fieldset est désactivé", async () => {
+      const fieldset = el?.shadowRoot?.querySelector("fieldset") as HTMLFieldSetElement;
+      await expect(fieldset?.disabled).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Valide" args={{ status: "valid" }} />
 
-<Story name="Erreur" args={{ status: "error" }} />
+<Story
+  name="Erreur"
+  args={{ status: "error" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+
+    await step("Le fieldset a le statut erreur", async () => {
+      const fieldset = el?.shadowRoot?.querySelector("fieldset.fr-fieldset");
+      await expect(fieldset?.classList.contains("fr-fieldset--error")).toBe(true);
+    });
+
+    await step("Le message d'erreur est affiché", async () => {
+      const errorMessage = el?.shadowRoot?.querySelector(".fr-message--error");
+      await expect(errorMessage).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Taille MD" args={{ size: "md" }} />
 

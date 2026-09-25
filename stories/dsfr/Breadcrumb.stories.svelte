@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -53,7 +54,41 @@
   ></dsfr-breadcrumb>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-breadcrumb");
+    const shadow = el?.shadowRoot;
+
+    await step("Le fil d'Ariane est rendu avec le rôle navigation", async () => {
+      const nav = shadow?.querySelector("nav[role='navigation']");
+      await expect(nav).toBeTruthy();
+    });
+
+    await step("La liste des segments est rendue", async () => {
+      const list = shadow?.querySelector("ol.fr-breadcrumb__list");
+      await expect(list).toBeTruthy();
+      const items = shadow?.querySelectorAll("ol.fr-breadcrumb__list li");
+      await expect(items?.length).toBeGreaterThan(0);
+    });
+
+    await step("Le dernier segment a aria-current='page'", async () => {
+      const links = shadow?.querySelectorAll(".fr-breadcrumb__link");
+      const lastLink = links?.[links.length - 1];
+      await expect(lastLink?.getAttribute("aria-current")).toBe("page");
+    });
+
+    await step("Cliquer sur le bouton ouvre le collapse", async () => {
+      const button = shadow?.querySelector("button.fr-breadcrumb__button") as HTMLElement;
+      await expect(button).toBeTruthy();
+      await userEvent.click(button);
+      await expect(button?.getAttribute("aria-expanded")).toBe("true");
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+  }}
+/>
 
 <Story
   name="Inverse"

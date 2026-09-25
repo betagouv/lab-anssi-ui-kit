@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -105,15 +106,74 @@
   ></dsfr-input>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const input = dsfrInput?.shadowRoot?.querySelector("input");
 
-<Story name="Erreur" args={{ status: "error" }} />
+    await step("Le champ de saisie est rendu", async () => {
+      await expect(input).toBeTruthy();
+      await expect(input?.type).toBe("text");
+    });
 
-<Story name="Succès" args={{ status: "valid" }} />
+    await step("Émet l'événement valuechanged lors de la saisie", async () => {
+      const handler = fn();
+      dsfrInput?.addEventListener("valuechanged", handler);
+      await userEvent.type(input!, "test@example.com");
+      await expect(handler).toHaveBeenCalled();
+      dsfrInput?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
 
-<Story name="Désactivé" args={{ disabled: true }} />
+<Story
+  name="Erreur"
+  args={{ status: "error" }}
+  play={async ({ canvasElement }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const group = dsfrInput?.shadowRoot?.querySelector(".fr-input-group");
+    await expect(group).toBeTruthy();
+    await expect(group?.classList.contains("fr-input-group--error")).toBe(true);
 
-<Story name="Avec icône" args={{ label: "Champ avec une icône", icon: "warning-line" }} />
+    const input = dsfrInput?.shadowRoot?.querySelector("input");
+    await expect(input?.getAttribute("aria-describedby")).toBeTruthy();
+  }}
+/>
+
+<Story
+  name="Succès"
+  args={{ status: "valid" }}
+  play={async ({ canvasElement }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const group = dsfrInput?.shadowRoot?.querySelector(".fr-input-group");
+    await expect(group?.classList.contains("fr-input-group--valid")).toBe(true);
+  }}
+/>
+
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const input = dsfrInput?.shadowRoot?.querySelector("input");
+    await expect(input?.disabled).toBe(true);
+
+    const group = dsfrInput?.shadowRoot?.querySelector(".fr-input-group");
+    await expect(group?.classList.contains("fr-input-group--disabled")).toBe(true);
+  }}
+/>
+
+<Story
+  name="Avec icône"
+  args={{ label: "Champ avec une icône", icon: "warning-line" }}
+  play={async ({ canvasElement }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const wrap = dsfrInput?.shadowRoot?.querySelector(".fr-input-wrap");
+    await expect(wrap).toBeTruthy();
+    await expect(wrap?.classList.contains("fr-icon-warning-line")).toBe(true);
+  }}
+/>
 
 <Story
   name="Téléphone"
@@ -138,6 +198,11 @@
   args={{
     label: "Champ type mot de passe",
     type: "password",
+  }}
+  play={async ({ canvasElement }) => {
+    const dsfrInput = canvasElement.querySelector("dsfr-input");
+    const input = dsfrInput?.shadowRoot?.querySelector("input");
+    await expect(input?.type).toBe("password");
   }}
 />
 

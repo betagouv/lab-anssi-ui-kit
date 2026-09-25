@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -69,7 +70,33 @@
   ></dsfr-toggle>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrToggle = canvasElement.querySelector("dsfr-toggle");
+
+    await step("Le composant est rendu avec le toggle et le label", async () => {
+      const toggle = dsfrToggle?.shadowRoot?.querySelector(".fr-toggle");
+      await expect(toggle).toBeTruthy();
+
+      const input = dsfrToggle?.shadowRoot?.querySelector("input.fr-toggle__input");
+      await expect(input).toBeTruthy();
+      await expect((input as HTMLInputElement)?.type).toBe("checkbox");
+
+      const label = dsfrToggle?.shadowRoot?.querySelector("label.fr-toggle__label");
+      await expect(label).toBeTruthy();
+    });
+
+    await step("Le clic bascule l'état de l'interrupteur", async () => {
+      const input = dsfrToggle?.shadowRoot?.querySelector(
+        "input.fr-toggle__input",
+      ) as HTMLInputElement;
+      await expect(input.checked).toBe(false);
+      await userEvent.click(input);
+      await expect(input.checked).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Description" args={{ hint: "Texte additionnel de l'interrupteur" }} />
 
@@ -79,4 +106,14 @@
 
 <Story name="Valide" args={{ status: "valid" }} />
 
-<Story name="Désactivé" args={{ disabled: true }} />
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement }) => {
+    const dsfrToggle = canvasElement.querySelector("dsfr-toggle");
+    const input = dsfrToggle?.shadowRoot?.querySelector(
+      "input.fr-toggle__input",
+    ) as HTMLInputElement;
+    await expect(input?.disabled).toBe(true);
+  }}
+/>

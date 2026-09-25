@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrConnect from "$lib/dsfr/DsfrConnect.svelte";
@@ -77,8 +78,74 @@
   ></dsfr-connect>
 {/snippet}
 
-<Story name="Défaut (Pro Connect)" />
+<Story
+  name="Défaut (Pro Connect)"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-connect");
 
-<Story name="France Connect" args={{ id: "france-connect", variant: "default" }} />
+    await step("Le composant est rendu avec la classe ProConnect", async () => {
+      const connectGroup = el?.shadowRoot?.querySelector(".fr-connect-group");
+      await expect(connectGroup).toBeTruthy();
+      const button = el?.shadowRoot?.querySelector(".fr-connect");
+      await expect(button).toBeTruthy();
+      await expect(button?.classList.contains("fr-connect--pro")).toBe(true);
+    });
 
-<Story name="France Connect Plus" args={{ id: "france-connect-plus", variant: "plus" }} />
+    await step("Le texte de la marque est ProConnect", async () => {
+      const brand = el?.shadowRoot?.querySelector(".fr-connect__brand");
+      await expect(brand?.textContent).toBe("ProConnect");
+      const login = el?.shadowRoot?.querySelector(".fr-connect__login");
+      await expect(login?.textContent).toBe("S'identifier avec");
+    });
+
+    await step("Le lien d'information est présent", async () => {
+      const link = el?.shadowRoot?.querySelector("a.fr-link");
+      await expect(link).toBeTruthy();
+      await expect(link?.textContent).toContain("ProConnect");
+    });
+  }}
+/>
+
+<Story
+  name="France Connect"
+  args={{ id: "france-connect", variant: "default" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-connect");
+
+    await step("Le bouton n'a pas la classe pro ou plus", async () => {
+      const button = el?.shadowRoot?.querySelector(".fr-connect");
+      await expect(button).toBeTruthy();
+      await expect(button?.classList.contains("fr-connect--pro")).toBe(false);
+      await expect(button?.classList.contains("fr-connect--plus")).toBe(false);
+    });
+
+    await step("Le texte de la marque est FranceConnect", async () => {
+      const brand = el?.shadowRoot?.querySelector(".fr-connect__brand");
+      await expect(brand?.textContent).toBe("FranceConnect");
+    });
+  }}
+/>
+
+<Story
+  name="France Connect Plus"
+  args={{ id: "france-connect-plus", variant: "plus" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-connect");
+
+    await step("Le bouton a la classe fr-connect--plus", async () => {
+      const button = el?.shadowRoot?.querySelector(".fr-connect");
+      await expect(button).toBeTruthy();
+      await expect(button?.classList.contains("fr-connect--plus")).toBe(true);
+    });
+
+    await step("Le texte de la marque est FranceConnect", async () => {
+      const brand = el?.shadowRoot?.querySelector(".fr-connect__brand");
+      await expect(brand?.textContent).toBe("FranceConnect");
+    });
+
+    await step("Le lien mentionne FranceConnect+", async () => {
+      const link = el?.shadowRoot?.querySelector("a.fr-link");
+      await expect(link?.textContent).toContain("FranceConnect+");
+    });
+  }}
+/>

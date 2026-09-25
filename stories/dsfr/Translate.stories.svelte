@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -44,7 +45,40 @@
   ></dsfr-translate>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTranslate = canvasElement.querySelector("dsfr-translate");
+
+    await step("Le composant est rendu avec le bouton de langue active", async () => {
+      const translate = dsfrTranslate?.shadowRoot?.querySelector(".fr-translate");
+      await expect(translate).toBeTruthy();
+
+      const button = dsfrTranslate?.shadowRoot?.querySelector("button[aria-controls]");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent).toContain("FR");
+    });
+
+    await step("Le menu est fermé par défaut", async () => {
+      const collapse = dsfrTranslate?.shadowRoot?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(false);
+    });
+
+    await step("Le clic sur le bouton ouvre le menu des langues", async () => {
+      const button = dsfrTranslate?.shadowRoot?.querySelector(
+        "button[aria-controls]",
+      ) as HTMLElement;
+      await userEvent.click(button);
+      const collapse = dsfrTranslate?.shadowRoot?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+
+    await step("Le menu contient les 4 langues", async () => {
+      const links = dsfrTranslate?.shadowRoot?.querySelectorAll(".fr-translate__language");
+      await expect(links?.length).toBe(4);
+    });
+  }}
+/>
 
 <Story name="Bouton tertiaire" args={{ buttonKind: "tertiary" }} />
 

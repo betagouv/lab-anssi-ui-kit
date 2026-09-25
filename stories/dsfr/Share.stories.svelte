@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -63,12 +64,41 @@
   </dsfr-share>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-share");
+
+    await step("Le composant est rendu avec le titre et les boutons", async () => {
+      const share = el?.shadowRoot?.querySelector(".fr-share");
+      await expect(share).toBeTruthy();
+
+      const title = el?.shadowRoot?.querySelector(".fr-share__title");
+      await expect(title).toBeTruthy();
+
+      const buttons = el?.shadowRoot?.querySelectorAll(".fr-btns-group li");
+      await expect(buttons?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
 
 <Story
   name="Désactivé"
   args={{
     disabled: true,
     hasText: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-share");
+
+    await step("Le texte informatif est affiché", async () => {
+      const text = el?.shadowRoot?.querySelector(".fr-share__text");
+      await expect(text).toBeTruthy();
+    });
+
+    await step("Les boutons sociaux sont désactivés", async () => {
+      const disabledLinks = el?.shadowRoot?.querySelectorAll("a[aria-disabled='true']");
+      await expect(disabledLinks?.length).toBeGreaterThan(0);
+    });
   }}
 />

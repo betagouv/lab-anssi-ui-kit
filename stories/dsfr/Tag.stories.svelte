@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,7 +68,23 @@
   ></dsfr-tag>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const dsfrTag = canvasElement.querySelector("dsfr-tag");
+
+    await step("Le composant est rendu", async () => {
+      const tag = dsfrTag?.shadowRoot?.querySelector(".fr-tag");
+      await expect(tag).toBeTruthy();
+      await expect(tag?.textContent?.trim()).toBe("libellé tag");
+    });
+
+    await step("Le tag par défaut est un paragraphe", async () => {
+      const tag = dsfrTag?.shadowRoot?.querySelector("p.fr-tag");
+      await expect(tag).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Taille MD"
@@ -96,6 +113,15 @@
   args={{
     type: "clickable",
     size: "md",
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTag = canvasElement.querySelector("dsfr-tag");
+
+    await step("Le tag cliquable est un lien", async () => {
+      const tag = dsfrTag?.shadowRoot?.querySelector("a.fr-tag");
+      await expect(tag).toBeTruthy();
+      await expect(tag?.getAttribute("href")).toBe("[URL - à modifier]");
+    });
   }}
 />
 
@@ -138,7 +164,28 @@
   {/snippet}
 </Story>
 
-<Story name="Pressable">
+<Story
+  name="Pressable"
+  play={async ({ canvasElement, step }) => {
+    const tags = canvasElement.querySelectorAll("dsfr-tag");
+
+    await step("Les tags pressables sont des boutons", async () => {
+      const unpressedBtn = tags[0]?.shadowRoot?.querySelector("button.fr-tag");
+      await expect(unpressedBtn).toBeTruthy();
+      await expect(unpressedBtn?.getAttribute("aria-pressed")).toBe("false");
+
+      const pressedBtn = tags[1]?.shadowRoot?.querySelector("button.fr-tag");
+      await expect(pressedBtn).toBeTruthy();
+      await expect(pressedBtn?.getAttribute("aria-pressed")).toBe("true");
+    });
+
+    await step("Le clic bascule l'état pressé", async () => {
+      const unpressedBtn = tags[0]?.shadowRoot?.querySelector("button.fr-tag") as HTMLElement;
+      await userEvent.click(unpressedBtn);
+      await expect(unpressedBtn.getAttribute("aria-pressed")).toBe("true");
+    });
+  }}
+>
   {#snippet template(_args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-tag label="libellé tag" type="pressable" size="md"></dsfr-tag>
@@ -178,6 +225,15 @@
   args={{
     type: "dismissible",
     size: "md",
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTag = canvasElement.querySelector("dsfr-tag");
+
+    await step("Le tag fermable est un bouton avec la classe dismiss", async () => {
+      const tag = dsfrTag?.shadowRoot?.querySelector("button.fr-tag");
+      await expect(tag).toBeTruthy();
+      await expect(tag?.classList.contains("fr-tag--dismiss")).toBe(true);
+    });
   }}
 />
 

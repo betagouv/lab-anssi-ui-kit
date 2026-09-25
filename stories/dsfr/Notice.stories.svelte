@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -52,7 +53,24 @@
   ></dsfr-notice>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+
+    await step("Le bandeau est rendu", async () => {
+      const notice = el?.shadowRoot?.querySelector(".fr-notice");
+      await expect(notice).toBeTruthy();
+      await expect(notice?.classList.contains("fr-notice--info")).toBe(true);
+    });
+
+    await step("Le titre est affiché", async () => {
+      const title = el?.shadowRoot?.querySelector(".fr-notice__title");
+      await expect(title).toBeTruthy();
+      await expect(title?.textContent).toBe("Titre du bandeau");
+    });
+  }}
+/>
 
 <Story
   name="Information"
@@ -63,6 +81,16 @@
     hasLink: true,
     blank: true,
     dismissible: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+
+    await step("Le bandeau d'information est rendu avec un lien", async () => {
+      const notice = el?.shadowRoot?.querySelector(".fr-notice");
+      await expect(notice?.classList.contains("fr-notice--info")).toBe(true);
+      const link = el?.shadowRoot?.querySelector(".fr-notice__link");
+      await expect(link).toBeTruthy();
+    });
   }}
 />
 
@@ -75,6 +103,26 @@
     hasLink: true,
     blank: true,
     dismissible: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+
+    await step("Le bandeau d'avertissement est rendu", async () => {
+      const notice = el?.shadowRoot?.querySelector(".fr-notice");
+      await expect(notice?.classList.contains("fr-notice--warning")).toBe(true);
+    });
+
+    await step("Le bouton de fermeture est présent", async () => {
+      const closeBtn = el?.shadowRoot?.querySelector("button.fr-btn--close");
+      await expect(closeBtn).toBeTruthy();
+    });
+
+    await step("Le bandeau disparaît après clic sur le bouton de fermeture", async () => {
+      const closeBtn = el?.shadowRoot?.querySelector("button.fr-btn--close") as HTMLElement;
+      await userEvent.click(closeBtn);
+      const notice = el?.shadowRoot?.querySelector(".fr-notice");
+      await expect(notice).toBeNull();
+    });
   }}
 />
 

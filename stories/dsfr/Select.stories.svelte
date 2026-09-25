@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -103,6 +104,36 @@
   ></dsfr-select>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-select");
 
-<Story name="Texte d'aide" args={{ hint: "Texte de description additionnel" }} />
+    await step("Le composant est rendu avec le label et le select", async () => {
+      const selectGroup = el?.shadowRoot?.querySelector(".fr-select-group");
+      await expect(selectGroup).toBeTruthy();
+
+      const label = el?.shadowRoot?.querySelector("label.fr-label");
+      await expect(label).toBeTruthy();
+
+      const select = el?.shadowRoot?.querySelector("select.fr-select");
+      await expect(select).toBeTruthy();
+    });
+
+    await step("Les options sont présentes", async () => {
+      const options = el?.shadowRoot?.querySelectorAll("select.fr-select option");
+      await expect(options?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
+
+<Story
+  name="Texte d'aide"
+  args={{ hint: "Texte de description additionnel" }}
+  play={async ({ canvasElement }) => {
+    const el = canvasElement.querySelector("dsfr-select");
+    const hint = el?.shadowRoot?.querySelector(".fr-hint-text");
+    await expect(hint).toBeTruthy();
+    await expect(hint?.textContent).toBe("Texte de description additionnel");
+  }}
+/>
