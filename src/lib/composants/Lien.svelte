@@ -20,7 +20,7 @@
   import Icone from "$lib/composants/Icone.svelte";
 
   interface Props {
-    titre: string;
+    titre?: string;
     href: string;
     variante: "primaire" | "tertiaire" | "tertiaire-sans-bordure";
     taille: "sm" | "md" | "lg";
@@ -33,7 +33,7 @@
   }
 
   let {
-    titre,
+    titre = undefined,
     href,
     variante,
     taille,
@@ -58,7 +58,7 @@
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
   {/if}
   {#if positionIcone !== "seule"}
-    <span>{titre}</span>
+    <span><slot>{titre}</slot></span>
   {/if}
   {#if positionIcone === "droite" && icone}
     <Icone nom={icone} taille={taille === "lg" ? "md" : "sm"} />
