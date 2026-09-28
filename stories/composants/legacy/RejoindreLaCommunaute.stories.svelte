@@ -65,3 +65,15 @@
     },
   }}
 />
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-rejoindre-la-communaute
+      raisons={args.raisons}
+      illustration={args.illustration}
+      action={args.action}
+    >
+      <h3 slot="titre">Rejoindre la communauté (slot)</h3>
+    </lab-anssi-brique-rejoindre-la-communaute>
+  {/snippet}
+</Story>
