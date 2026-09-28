@@ -17,13 +17,13 @@
   const estLien = (noeud: NoeudFilAriane): noeud is Lien => (noeud as Lien).href !== undefined;
 
   interface Props {
-    titre: string;
+    titre?: string;
     description?: string;
     filAriane?: NoeudFilAriane[];
     infosTag?: InfosTag | null;
   }
 
-  let { titre, description = "", filAriane = [], infosTag = null }: Props = $props();
+  let { titre = undefined, description = "", filAriane = [], infosTag = null }: Props = $props();
 
   let filArianeVisible = $state(window.matchMedia("(min-width: 576px)").matches);
 </script>
@@ -31,19 +31,21 @@
 <div class="conteneur-bandeau-entete">
   <div class="contenu-bandeau-entete">
     {#if filAriane.length}
-      <div class="fil-ariane">
-        {#if !filArianeVisible}
-          <button onclick={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
-        {:else}
-          {#each filAriane as noeud, index (index)}
-            {#if estLien(noeud)}
-              <a href={noeud.href}>{noeud.label}</a>
-            {:else}
-              <span>{noeud.label}</span>
-            {/if}
-          {/each}
-        {/if}
-      </div>
+      <slot name="filariane">
+        <div class="fil-ariane">
+          {#if !filArianeVisible}
+            <button onclick={() => (filArianeVisible = true)}>Voir le fil d'Ariane</button>
+          {:else}
+            {#each filAriane as noeud, index (index)}
+              {#if estLien(noeud)}
+                <a href={noeud.href}>{noeud.label}</a>
+              {:else}
+                <span>{noeud.label}</span>
+              {/if}
+            {/each}
+          {/if}
+        </div>
+      </slot>
     {/if}
     <div class="conteneur-texte">
       {#if infosTag}
@@ -56,9 +58,13 @@
         </div>
       {/if}
       <div class="conteneur-corps">
-        <h1>{titre}</h1>
-        {#if description}
-          <span>{description}</span>
+        <slot name="titre">
+          <h1>{titre}</h1>
+        </slot>
+        {#if description || $$slots.description}
+          <slot name="description">
+            <span>{description}</span>
+          </slot>
         {/if}
       </div>
     </div>
@@ -96,7 +102,8 @@
           align-items: flex-start;
           gap: 8px;
 
-          h1 {
+          h1,
+          :global(::slotted([slot="titre"])) {
             font-size: 2rem;
             font-weight: 700;
             line-height: 2.5rem;
@@ -108,7 +115,8 @@
             }
           }
 
-          span {
+          span,
+          :global(::slotted([slot="description"])) {
             font-size: 1.125rem;
             font-weight: 400;
             line-height: 1.75rem;
