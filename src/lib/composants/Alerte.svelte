@@ -11,12 +11,12 @@
 
 <script lang="ts">
   interface Props {
-    description: string;
+    description?: string;
     type?: "information" | "erreur";
     fermable?: boolean;
   }
 
-  let { description, type = "information", fermable = true }: Props = $props();
+  let { description = undefined, type = "information", fermable = true }: Props = $props();
 
   let estOuvert = $state(true);
 </script>
@@ -25,7 +25,7 @@
   <div class="alerte {type}">
     <span class="icone"></span>
     <div class="conteneur">
-      <div class="contenu">{description}</div>
+      <div class="contenu"><slot>{description}</slot></div>
       {#if fermable}
         <button
           class="fermer"

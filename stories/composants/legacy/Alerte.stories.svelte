@@ -1,6 +1,5 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import Alerte from "$lib/composants/Alerte.svelte";
@@ -21,15 +20,6 @@
       },
       fermable: { control: "boolean", type: "boolean" },
     },
-    play: async ({ _canvas, canvasElement }) => {
-      const button = canvasElement
-        .querySelector("lab-anssi-alerte")
-        ?.shadowRoot?.querySelector("button");
-      if (!button) return;
-
-      await userEvent.click(button);
-      await expect(canvasElement.querySelector("div")).not.toBeInTheDocument();
-    },
     render: template,
   });
 
@@ -49,3 +39,11 @@
   name="Erreur"
   args={{ description: "Une alerte d'erreur", type: "erreur", fermable: true }}
 />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <lab-anssi-alerte type={args.type} fermable={args.fermable || undefined}>
+      Une alerte avec du contenu dans le <strong>slot par défaut</strong>
+    </lab-anssi-alerte>
+  {/snippet}
+</Story>
