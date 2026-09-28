@@ -45,3 +45,11 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <lab-anssi-titre-multimedia multimedia={args.multimedia}>
+      <h2 slot="titre">Titre pour MSS (passé via slot)</h2>
+    </lab-anssi-titre-multimedia>
+  {/snippet}
+</Story>
