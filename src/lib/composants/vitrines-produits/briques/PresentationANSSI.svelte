@@ -39,7 +39,7 @@
       </figure>
 
       <div class="presentation-anssi__contenu">
-        <h2 class="presentation-anssi__titre">{titre}</h2>
+        <slot name="titre"><h2 class="presentation-anssi__titre">{titre}</h2></slot>
         <div class="presentation-anssi__description">
           <slot>
             <p>
@@ -55,15 +55,17 @@
             </p>
           </slot>
         </div>
-        <DsfrButton
-          class="presentation-anssi__bouton"
-          label={labelBouton}
-          kind="secondary"
-          markup="a"
-          href="https://cyber.gouv.fr/"
-          target="_blank"
-          rel="noopener noreferrer"
-        />
+        <slot name="lien">
+          <DsfrButton
+            class="presentation-anssi__bouton"
+            label={labelBouton}
+            kind="secondary"
+            markup="a"
+            href="https://cyber.gouv.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+          />
+        </slot>
       </div>
     </div>
   </DsfrContainer>
@@ -116,7 +118,8 @@
       }
     }
 
-    &__titre {
+    &__titre,
+    :global(::slotted([slot="titre"])) {
       color: var(--presentation-anssi-couleur-titre, var(--text-title-grey));
 
       margin: 0 auto 1rem;
