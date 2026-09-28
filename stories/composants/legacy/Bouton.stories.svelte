@@ -58,3 +58,17 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <lab-anssi-bouton
+      variante={args.variante}
+      taille={args.taille}
+      icone={args.icone}
+      position-icone={args.positionIcone}
+      actif={args.actif || undefined}
+    >
+      Libellé via le slot
+    </lab-anssi-bouton>
+  {/snippet}
+</Story>
