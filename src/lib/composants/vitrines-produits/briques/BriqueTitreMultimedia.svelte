@@ -15,16 +15,16 @@
   import LecteurVideo from "$lib/composants/vitrines-produits/briques/LecteurVideo.svelte";
 
   interface Props {
-    titre: string;
+    titre?: string;
     multimedia: Video;
   }
 
-  let { titre, multimedia }: Props = $props();
+  let { titre = undefined, multimedia }: Props = $props();
 </script>
 
 <Brique variation="transparent">
   <div class="bloc-multimedia">
-    <h2>{titre}</h2>
+    <slot name="titre"><h2>{titre}</h2></slot>
     <div>
       <LecteurVideo
         source={multimedia.source}
@@ -42,12 +42,14 @@
     align-items: center;
     gap: 48px;
 
-    h2 {
+    h2,
+    :global(::slotted([slot="titre"])) {
       color: $titre-couleur-primaire;
       font-size: 28px;
       line-height: 36px;
       margin: 0;
       text-align: center;
+      font-weight: bold;
 
       @include a-partir-de(desktop) {
         font-size: 32px;
