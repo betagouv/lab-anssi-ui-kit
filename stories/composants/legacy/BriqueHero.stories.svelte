@@ -80,3 +80,21 @@
 {/snippet}
 
 <Story name="Defaut" />
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-hero
+      illustration={args.illustration}
+      badge={args.badge || undefined}
+      actiongauche={args.actiongauche}
+      actiondroite={args.actiondroite}
+      partenaires={args.partenaires}
+    >
+      <h2 slot="titre">MonServiceSécurisé</h2>
+      <p slot="soustitre">
+        L'outil pour piloter en équipe la sécurité de tous vos <strong>services numériques</strong> et
+        les homologuer rapidement
+      </p>
+    </lab-anssi-brique-hero>
+  {/snippet}
+</Story>
