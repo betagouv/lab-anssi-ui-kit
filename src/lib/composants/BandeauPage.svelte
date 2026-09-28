@@ -31,13 +31,13 @@
 
   interface Props {
     /** Titre du bandeau */
-    titre: string;
+    titre?: string;
     /** Balise HTML (Hn) du titre */
-    baliseTitre: string;
+    baliseTitre?: string;
     /** Description du bandeau */
-    description: string;
+    description?: string;
     /** Mention du bandeau */
-    mention: string;
+    mention?: string;
     /** Url de l'image */
     urlImage?: string | undefined;
     /** Si "vrai", l'image n'est pas affichée */
@@ -88,6 +88,8 @@
       "lab-anssi-bandeau-page--avec-filariane": avecFilAriane,
       "lab-anssi-bandeau-page--simple": variationSimple,
       "lab-anssi-bandeau-page--fiche-catalogue": variationFiche,
+      "lab-anssi-bandeau-page--avec-actions": $$slots.buttonsgroup,
+      "lab-anssi-bandeau-page--avec-mention": mention || $$slots.mention,
     },
   ]}
 >
@@ -109,11 +111,17 @@
           <slot name="badgesgroup" />
         {/if}
 
-        <svelte:element this={baliseTitre} class="lab-anssi-bandeau-page__titre">
-          {titre}
-        </svelte:element>
+        <slot name="titre">
+          <svelte:element this={baliseTitre} class="lab-anssi-bandeau-page__titre">
+            {titre}
+          </svelte:element>
+        </slot>
 
-        <p class="lab-anssi-bandeau-page__description">{description}</p>
+        <slot name="description">
+          <p class="lab-anssi-bandeau-page__description">
+            {description}
+          </p>
+        </slot>
 
         {#if $$slots.buttonsgroup && !variationSimple}
           <div class="lab-anssi-bandeau-page__actions">
@@ -121,8 +129,12 @@
           </div>
         {/if}
 
-        {#if mention}
-          <p class="lab-anssi-bandeau-page__mention">{mention}</p>
+        {#if mention || $$slots.mention}
+          <slot name="mention">
+            <p class="lab-anssi-bandeau-page__mention">
+              {mention}
+            </p>
+          </slot>
         {/if}
       </div>
 
@@ -184,7 +196,8 @@
       }
     }
 
-    &__titre {
+    &__titre,
+    :global(::slotted([slot="titre"])) {
       color: var(--text-color-titre, var(--text-inverted-grey));
       font-weight: 700;
       font-size: rem(40px);
@@ -193,18 +206,11 @@
     }
 
     &__description,
-    &__mention {
+    :global(::slotted([slot="description"])) {
       color: var(--text-color-description, var(--text-inverted-grey));
-    }
-
-    &__description {
       font-size: rem(18px);
       line-height: rem(28px);
-      margin-block: 0;
-
-      &:not(:last-child) {
-        margin-block-end: rem(24px);
-      }
+      margin-block: var(--description-margin-block, 0);
     }
 
     &__actions {
@@ -217,7 +223,9 @@
       }
     }
 
-    &__mention {
+    &__mention,
+    :global(::slotted([slot="mention"])) {
+      color: var(--text-color-description, var(--text-inverted-grey));
       font-size: rem(14px);
       line-height: rem(24px);
       margin-block: 0;
@@ -234,18 +242,10 @@
 
     // Variation "Clair"
     &--clair {
+      --text-color-titre: var(--text-title-grey);
+      --text-color-description: var(--text-default-grey);
+
       background-color: var(--background-color, var(--background-contrast-blue-france));
-
-      .lab-anssi-bandeau-page {
-        &__titre {
-          color: var(--text-color-titre, var(--text-title-grey));
-        }
-
-        &__description,
-        &__mention {
-          color: var(--text-color-description, var(--text-default-grey));
-        }
-      }
     }
 
     // Variation "Avec Fil d'Ariane"
@@ -305,6 +305,11 @@
     // Variation "Sans image"
     &--sans-image:not(.lab-anssi-bandeau-page--simple) {
       --spacing-block-end: 0;
+    }
+
+    &--avec-actions,
+    &--avec-mention {
+      --description-margin-block: 0 #{rem(24px)};
     }
   }
 </style>
