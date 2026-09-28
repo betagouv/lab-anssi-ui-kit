@@ -69,3 +69,20 @@
     },
   }}
 />
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-brique-contenu-a-deux-colonnes
+      illustration={args.illustration}
+      ordre={args.ordre}
+      action={args.action}
+    >
+      <h2 slot="titre">MonServiceSécurisé</h2>
+      <p slot="paragraphe">
+        L'outil pour piloter en équipe la sécurité de tous vos services numériques et les <strong>
+          homologuer rapidement
+        </strong>
+      </p>
+    </lab-anssi-brique-contenu-a-deux-colonnes>
+  {/snippet}
+</Story>
