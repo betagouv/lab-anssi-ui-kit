@@ -114,3 +114,11 @@
     },
   }}
 />
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <lab-anssi-marelle etapesmarelle={args.etapesmarelle} action={args.action}>
+      <h2 slot="marelle-titre">Titre <strong>(slot)</strong></h2>
+    </lab-anssi-marelle>
+  {/snippet}
+</Story>
