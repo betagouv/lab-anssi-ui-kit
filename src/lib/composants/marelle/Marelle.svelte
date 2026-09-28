@@ -102,7 +102,8 @@
       gap: 72px;
     }
 
-    &__titre {
+    &__titre,
+    :global(::slotted([slot="marelle-titre"])) {
       color: var(--brique-marelle-titre-couleur, var(--text-title-grey, #161616));
       font-size: 32px;
       font-weight: 700;
