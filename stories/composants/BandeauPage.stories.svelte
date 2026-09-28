@@ -204,3 +204,29 @@
     </style>
   {/snippet}
 </Story>
+
+<Story name="Avec usage des slots">
+  {#snippet template(args: Args)}
+    <lab-anssi-bandeau-page
+      balise-titre={args.baliseTitre}
+      url-image={args.urlImage}
+      sans-image={args.sansImage || undefined}
+      type={args.type}
+      theme={args.theme}
+    >
+      <h1 slot="titre">Titre lorem ipsum (slot)</h1>
+      <p slot="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt felis in velit
+        semper euismod. <strong>(slot)</strong>
+      </p>
+      <p slot="mention">Lorem ipsum dolor sit amet, consectetur adipiscing elit. (slot)</p>
+
+      <dsfr-buttons-group
+        slot="buttonsgroup"
+        buttons={args.theme === "clair" ? boutonsThemeClair : args.boutons || []}
+        inline="md"
+        data-themeable="false"
+      ></dsfr-buttons-group>
+    </lab-anssi-bandeau-page>
+  {/snippet}
+</Story>
