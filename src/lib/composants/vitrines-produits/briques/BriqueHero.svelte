@@ -19,8 +19,8 @@
   import LienExterne from "$lib/composants/icones/LienExterne.svelte";
 
   interface Props {
-    titre: string;
-    soustitre: string;
+    titre?: string;
+    soustitre?: string;
     illustration: Image;
     badge?: boolean;
     actiongauche: Action;
@@ -29,8 +29,8 @@
   }
 
   let {
-    titre,
-    soustitre,
+    titre = undefined,
+    soustitre = undefined,
     illustration,
     badge = false,
     actiongauche,
@@ -50,8 +50,8 @@
         </div>
       {/if}
       <div class="textes">
-        <h1>{titre}</h1>
-        <p>{soustitre}</p>
+        <slot name="titre"><h1>{titre}</h1></slot>
+        <slot name="soustitre"><p>{soustitre}</p></slot>
       </div>
       <div class="actions">
         <a
@@ -95,6 +95,23 @@
 </Brique>
 
 <style lang="scss">
+  @mixin titre() {
+    font-size: 40px;
+    margin: 0;
+    line-height: 48px;
+    word-break: break-word;
+
+    @include a-partir-de(tablette) {
+      font-size: 48px;
+    }
+  }
+
+  @mixin soustitre() {
+    margin: 0;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
   .hero {
     display: grid;
     grid-template-columns: 1fr;
@@ -222,15 +239,9 @@
       }
     }
 
-    h1 {
-      font-size: 40px;
-      margin: 0;
-      line-height: 48px;
-      word-break: break-word;
-
-      @include a-partir-de(tablette) {
-        font-size: 48px;
-      }
+    h1,
+    :global(::slotted([slot="titre"])) {
+      @include titre();
     }
 
     a[role="button"] {
@@ -284,10 +295,9 @@
       }
     }
 
-    p {
-      margin: 0;
-      font-size: 20px;
-      line-height: 32px;
+    p,
+    :global(::slotted([slot="soustitre"])) {
+      @include soustitre();
     }
   }
 </style>
