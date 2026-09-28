@@ -204,7 +204,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  rollup: '>=4.63.3'
+  rollup: '>=4.63.4'
   flatted: '>=3.4.4'
   lodash: '>=4.18.0'
   minimatch: '>=10.2.6'
