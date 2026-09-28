@@ -80,3 +80,20 @@
     ></lab-anssi-lien> amet.
   </p>
 </Story>
+
+<Story name="Avec usage du slot par défaut">
+  {#snippet template(args: Args)}
+    <lab-anssi-lien
+      href={args.href}
+      variante={args.variante}
+      taille={args.taille}
+      icone={args.icone}
+      apparence={args.apparence}
+      cible={args.cible}
+      position-icone={args.positionIcone}
+      actif={args.actif || undefined}
+    >
+      Libellé via le slot
+    </lab-anssi-lien>
+  {/snippet}
+</Story>
