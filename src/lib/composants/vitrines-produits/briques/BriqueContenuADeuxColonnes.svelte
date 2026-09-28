@@ -16,16 +16,16 @@
   import type { Action, Image } from "$lib/types";
 
   interface Props {
-    titre: string;
-    paragraphe: string;
+    titre?: string;
+    paragraphe?: string;
     action?: Action | undefined;
     ordre?: "texte-gauche" | "texte-droite";
     illustration: Image;
   }
 
   let {
-    titre,
-    paragraphe,
+    titre = undefined,
+    paragraphe = undefined,
     action = undefined,
     ordre = "texte-gauche",
     illustration,
@@ -38,8 +38,8 @@
       <img src={illustration.lien} alt={illustration.alt} />
     </div>
     <div class="contenu">
-      <h2>{titre}</h2>
-      <p>{paragraphe}</p>
+      <slot name="titre"><h2>{titre}</h2></slot>
+      <slot name="paragraphe"><p>{paragraphe}</p></slot>
       <div class="action">
         {#if action}
           <a role="button" href={action.lien} target="_blank">
@@ -52,6 +52,21 @@
 </Brique>
 
 <style lang="scss">
+  @mixin titre() {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    word-break: break-word;
+    margin: 0;
+  }
+
+  @mixin paragraphe() {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    margin: 0;
+  }
+
   .grille-contenu {
     display: grid;
     grid-template-columns: 1fr;
@@ -85,20 +100,11 @@
       }
 
       h2 {
-        font-size: 1.75rem;
-        line-height: 2.25rem;
-        font-weight: 700;
-        word-break: break-word;
-
-        margin: 0;
+        @include titre();
       }
 
       p {
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5rem;
-
-        margin: 0;
+        @include paragraphe();
       }
 
       .action {
@@ -157,6 +163,14 @@
           max-height: 330px;
         }
       }
+    }
+
+    :global(::slotted([slot="titre"])) {
+      @include titre();
+    }
+
+    :global(::slotted([slot="paragraphe"])) {
+      @include paragraphe();
     }
   }
 </style>
