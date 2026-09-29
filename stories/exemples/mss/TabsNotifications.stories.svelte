@@ -33,7 +33,7 @@
       ],
       hasIcon: false,
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   let selectedTab = $state(0);

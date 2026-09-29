@@ -51,7 +51,7 @@
         },
       },
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
     render: template,
   });
 

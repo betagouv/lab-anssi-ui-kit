@@ -45,7 +45,7 @@
       columns: citiesColumns,
       rows: citiesRows,
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrTable>;

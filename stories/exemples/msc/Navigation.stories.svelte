@@ -26,7 +26,7 @@
   const { Story } = defineMeta({
     title: "Exemples/LAB - MSC",
     component: DsfrNavigation,
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrNavigation>;

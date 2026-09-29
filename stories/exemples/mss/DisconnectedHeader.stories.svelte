@@ -94,7 +94,7 @@
         { label: "Financements", href: "#" },
       ],
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrHeader>;

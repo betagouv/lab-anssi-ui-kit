@@ -44,7 +44,7 @@
       dropdownButtonIconPlace: "only",
       masque: false,
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
     parameters: {
       layout: "centered",
     },

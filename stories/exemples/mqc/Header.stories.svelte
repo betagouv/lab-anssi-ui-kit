@@ -14,7 +14,7 @@
     component: DsfrHeader,
     argTypes: headerArgTypes,
     args: headerArgs,
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 </script>
 

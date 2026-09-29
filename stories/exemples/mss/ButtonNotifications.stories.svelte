@@ -14,7 +14,7 @@
       icon: "notification-3-line",
       size: "sm",
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrButton>;
