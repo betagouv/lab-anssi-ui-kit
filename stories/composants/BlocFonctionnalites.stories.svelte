@@ -620,3 +620,32 @@
     </style>
   {/snippet}
 </Story>
+
+<Story name="Avec usage du slot titre">
+  {#snippet template(args: Args)}
+    <div class="conteneur-story">
+      <DsfrContainer>
+        <lab-anssi-fonctionnalites
+          description={args.description}
+          balise-titre={args.baliseTitre}
+          fonctionnalites={args.fonctionnalites}
+          balise-des-sous-titres={args.baliseDesSousTitres}
+          image-placeholder={args.imagePlaceholder}
+        >
+          <h2 slot="titre">Titre lorem ipsum <strong>(slot)</strong></h2>
+          <p slot="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue interdum erat, non
+            porta nibh. Suspendisse facilisis, nibh ac dignissim malesuada, tellus ante rhoncus
+            nulla, a efficitur nisi quam vel orci. <strong>(slot)</strong>
+          </p>
+        </lab-anssi-fonctionnalites>
+      </DsfrContainer>
+    </div>
+
+    <style>
+      .conteneur-story {
+        padding-block: 96px;
+      }
+    </style>
+  {/snippet}
+</Story>
