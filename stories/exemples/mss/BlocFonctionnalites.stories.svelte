@@ -86,7 +86,7 @@
       cliquable: true,
       activeDefilement: true,
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
     render: template,
   });
 

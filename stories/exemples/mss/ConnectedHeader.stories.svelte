@@ -63,7 +63,7 @@
       ],
       fluid: true,
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrHeader>;

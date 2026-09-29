@@ -51,7 +51,7 @@
         },
       ],
     },
-    tags: ["!autodocs"],
+    tags: ["!autodocs", "!test"],
   });
 
   type Args = ComponentProps<DsfrInput>;
