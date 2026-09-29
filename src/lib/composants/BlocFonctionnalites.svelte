@@ -83,7 +83,7 @@
 
   interface Props {
     /** Titre principal */
-    titre: string;
+    titre?: string;
     /** Description du bloc fonctionnalités
      * _(L'absence de contenu dans cette prop masque automatiquement la zone d'affichage associée)_
      **/
@@ -115,7 +115,7 @@
   }
 
   let {
-    titre,
+    titre = undefined,
     description,
     baliseTitre = "h2",
     avecControleSegmente = false,
@@ -397,9 +397,13 @@
   <section class="lab-anssi-fonctionnalites__conteneur">
     <header class="lab-anssi-fonctionnalites__entete">
       <slot name="hautentete"></slot>
-      <svelte:element this={baliseTitre} class="lab-anssi-fonctionnalites__titre">
-        {titre}
-      </svelte:element>
+
+      <slot name="titre">
+        <svelte:element this={baliseTitre} class="lab-anssi-fonctionnalites__titre">
+          {titre}
+        </svelte:element>
+      </slot>
+
       <slot name="description">
         {#if description}
           <p class="lab-anssi-fonctionnalites__chapeau">
@@ -544,15 +548,18 @@
       }
     }
 
-    &__titre {
+    &__titre,
+    :global(::slotted([slot="titre"])) {
       color: var(--text-title-grey);
       font-size: rem(40px);
+      font-weight: bold;
       line-height: rem(48px);
       margin-block: 0;
     }
 
     &__description,
-    &__chapeau {
+    &__chapeau,
+    :global(::slotted([slot="description"])) {
       font-size: rem(18px);
       line-height: rem(28px);
       margin-block: 0;
