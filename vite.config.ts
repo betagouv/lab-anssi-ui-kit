@@ -49,6 +49,7 @@ export default defineConfig({
           // Voir les options sur le site: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
             configDir: path.join(import.meta.dirname, ".storybook"),
+            storybookScript: "pnpm storybook:dev --no-open",
           }),
         ],
         test: {
