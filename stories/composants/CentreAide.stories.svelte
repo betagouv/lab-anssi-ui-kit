@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect, userEvent } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -53,4 +54,35 @@
   </ConteneurStory>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-centre-aide");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le centre d'aide s'ouvre au clic sur le déclencheur", async () => {
+      const button = el?.shadowRoot?.querySelector("button");
+      await userEvent.click(button!);
+
+      const titre = el?.shadowRoot?.querySelector(".titre");
+      await expect(titre?.textContent?.trim()).toBe("Centre d'aide");
+    });
+
+    await step("Le centre d'aide se ferme au clic sur Fermer", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll("button");
+      const boutonFermer = Array.from(buttons ?? []).find(
+        (b) => b.textContent?.trim() === "Fermer",
+      );
+      await userEvent.click(boutonFermer!);
+
+      const allButtons = el?.shadowRoot?.querySelectorAll("button");
+      const declencheur = Array.from(allButtons ?? []).find(
+        (b) => b.textContent?.trim() === "Centre d'aide",
+      );
+      await expect(declencheur).toBeTruthy();
+    });
+  }}
+/>
