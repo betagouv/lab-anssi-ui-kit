@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -92,7 +93,39 @@
   <lab-anssi-carrousel-tuiles {...args}></lab-anssi-carrousel-tuiles>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-carrousel-tuiles");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Les titres des tuiles sont visibles", async () => {
+      const titres = el?.shadowRoot?.querySelectorAll(".fr-tile__title");
+      const tuilesArgs = args.tuiles ?? [];
+      await expect(titres?.length).toBe(tuilesArgs.length);
+
+      for (let i = 0; i < tuilesArgs.length; i++) {
+        await expect(titres?.[i]?.textContent?.trim()).toBe(tuilesArgs[i].titre);
+      }
+    });
+
+    await step("Les boutons de navigation sont présents", async () => {
+      const buttons = el?.shadowRoot?.querySelectorAll("button");
+      const boutonPrecedent = Array.from(buttons ?? []).find(
+        (b) => b.textContent?.trim() === "Précédent",
+      );
+      const boutonSuivant = Array.from(buttons ?? []).find(
+        (b) => b.textContent?.trim() === "Suivant",
+      );
+      await expect(boutonPrecedent).toBeTruthy();
+      await expect(boutonSuivant).toBeTruthy();
+      await expect(boutonPrecedent?.disabled).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Avec tuiles sans image" args={{ tuiles: tuilesSansImage }} />
 
