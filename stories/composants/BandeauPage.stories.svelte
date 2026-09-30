@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -149,18 +150,90 @@
   </lab-anssi-bandeau-page>
 {/snippet}
 
-<Story name="Par défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-page");
 
-<Story name="Avec Fil d'Ariane" args={{ avecFilAriane: true }} />
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre est affiché avec la balise h1", async () => {
+      const titre = el?.shadowRoot?.querySelector("h1");
+      await expect(titre).toBeTruthy();
+      await expect(titre?.textContent?.trim()).toBe(args.titre);
+    });
+
+    await step("La description est affichée", async () => {
+      const paragraphs = el?.shadowRoot?.querySelectorAll("p");
+      const description = Array.from(paragraphs ?? []).find((p) =>
+        p.textContent?.includes(args.description),
+      );
+      await expect(description).toBeTruthy();
+    });
+  }}
+/>
+
+<Story
+  name="Avec Fil d'Ariane"
+  args={{ avecFilAriane: true }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-page");
+
+    await step("Le fil d'Ariane est affiché", async () => {
+      const button = el?.shadowRoot?.querySelector("button");
+      await expect(button?.textContent?.trim()).toBe("Voir le fil d'Ariane");
+    });
+
+    await step("Les liens du fil d'Ariane correspondent aux args", async () => {
+      const links = el?.shadowRoot?.querySelectorAll("nav a");
+      const segments = args.liensFilAriane ?? [];
+      await expect(links?.length).toBe(segments.length);
+
+      for (let i = 0; i < segments.length; i++) {
+        await expect(links?.[i]?.textContent?.trim()).toBe(segments[i].label);
+
+        if (i < segments.length - 1) {
+          await expect(links?.[i]?.getAttribute("href")).toBe(segments[i].href);
+        } else {
+          await expect(links?.[i]?.getAttribute("aria-current")).toBe("page");
+        }
+      }
+    });
+  }}
+/>
 
 <Story
   name="Avec une mention"
   args={{ mention: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-page");
+
+    await step("La mention est affichée", async () => {
+      const paragraphs = el?.shadowRoot?.querySelectorAll("p");
+      const mention = Array.from(paragraphs ?? []).find((p) =>
+        p.textContent?.includes(args.mention),
+      );
+      await expect(mention).toBeTruthy();
+    });
+  }}
 />
 
 <Story name="Avec un groupe de badges" args={{ avecBadges: true }} />
 
-<Story name="Thème Clair" args={{ theme: "clair" }} />
+<Story
+  name="Thème Clair"
+  args={{ theme: "clair" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bandeau-page");
+
+    await step("Le thème clair est appliqué", async () => {
+      const section = el?.shadowRoot?.querySelector("section");
+      await expect(section?.classList.contains("lab-anssi-bandeau-page--clair")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Thème Clair (avec Fil d'Ariane)" args={{ theme: "clair", avecFilAriane: true }} />
 
