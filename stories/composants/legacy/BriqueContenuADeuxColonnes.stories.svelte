@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -58,7 +59,50 @@
   <lab-anssi-brique-contenu-a-deux-colonnes {...args}></lab-anssi-brique-contenu-a-deux-colonnes>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-contenu-a-deux-colonnes");
+    const typedArgs = args as Record<string, unknown>;
+    const illustrationArgs = typedArgs.illustration as { lien: string; alt: string };
+    const actionArgs = typedArgs.action as { titre: string; lien: string } | undefined;
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre est affiché", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+
+      await expect(h2?.textContent).toBe(typedArgs.titre);
+    });
+
+    await step("Le paragraphe est affiché", async () => {
+      const p = el?.shadowRoot?.querySelector("p");
+
+      await expect(p?.textContent).toContain(typedArgs.paragraphe as string);
+    });
+
+    await step("L'illustration est affichée", async () => {
+      const img = el?.shadowRoot?.querySelector("img") as HTMLImageElement | null;
+
+      await expect(img).toBeTruthy();
+      await expect(img?.alt).toBe(illustrationArgs.alt);
+      await expect(img?.src).toBeTruthy();
+    });
+
+    await step("L'action est affichée ou absente selon la prop", async () => {
+      const actionLink = el?.shadowRoot?.querySelector("a[role='button']");
+
+      if (actionArgs) {
+        await expect(actionLink).toBeTruthy();
+        await expect(actionLink?.textContent?.trim()).toBe(actionArgs.titre);
+      } else {
+        await expect(actionLink).toBeNull();
+      }
+    });
+  }}
+/>
 
 <Story
   name="ComporteUneAction"
@@ -67,6 +111,30 @@
       titre: "Commencer à sécuriser",
       lien: "#",
     },
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-contenu-a-deux-colonnes");
+    const typedArgs = args as Record<string, unknown>;
+    const actionArgs = typedArgs.action as { titre: string; lien: string };
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le lien d'action est affiché avec le bon texte", async () => {
+      const actionLink = el?.shadowRoot?.querySelector("a[role='button']");
+
+      await expect(actionLink).toBeTruthy();
+      await expect(actionLink?.textContent?.trim()).toBe(actionArgs.titre);
+    });
+
+    await step("Le lien d'action pointe vers la bonne URL", async () => {
+      const actionLink = el?.shadowRoot?.querySelector(
+        "a[role='button']",
+      ) as HTMLAnchorElement | null;
+
+      await expect(actionLink?.getAttribute("href")).toBe(actionArgs.lien);
+    });
   }}
 />
 
