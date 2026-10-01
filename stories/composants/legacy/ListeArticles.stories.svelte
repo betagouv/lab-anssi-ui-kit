@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect, userEvent } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -79,4 +80,65 @@
   ></lab-anssi-liste-articles>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-liste-articles");
+    const typedArgs = args as Record<string, unknown>;
+    const articlesArgs = (typedArgs.articles ?? []) as { titre: string; idCategorie: string }[];
+    const categoriesArgs = (typedArgs.categories ?? {}) as Record<string, { label: string }>;
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre affiche 'Tous les articles' par défaut", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+
+      await expect(h2?.textContent).toBe("Tous les articles");
+    });
+
+    await step("Le filtre contient toutes les catégories", async () => {
+      const options = el?.shadowRoot?.querySelectorAll("option");
+      const expectedCount = Object.keys(categoriesArgs).length + 1;
+
+      await expect(options?.length).toBe(expectedCount);
+    });
+
+    await step("Tous les articles sont affichés", async () => {
+      const cartes = el?.shadowRoot?.querySelectorAll(".carte-article");
+
+      await expect(cartes?.length).toBe(articlesArgs.length);
+    });
+
+    await step(
+      "Le filtre par catégorie affiche uniquement les articles correspondants",
+      async () => {
+        const select = el?.shadowRoot?.querySelector("select") as HTMLSelectElement;
+        const premiereCategorieId = Object.keys(categoriesArgs)[0];
+        const categorieLabel = categoriesArgs[premiereCategorieId].label;
+        const articlesAttendus = articlesArgs.filter((a) => a.idCategorie === premiereCategorieId);
+
+        await userEvent.selectOptions(select, premiereCategorieId);
+
+        const h2 = el?.shadowRoot?.querySelector("h2");
+        await expect(h2?.textContent).toBe(categorieLabel);
+
+        const cartes = el?.shadowRoot?.querySelectorAll(".carte-article");
+        await expect(cartes?.length).toBe(articlesAttendus.length);
+      },
+    );
+
+    await step("Le filtre 'Tous les articles' réaffiche tous les articles", async () => {
+      const select = el?.shadowRoot?.querySelector("select") as HTMLSelectElement;
+
+      await userEvent.selectOptions(select, "tous");
+
+      const h2 = el?.shadowRoot?.querySelector("h2");
+      await expect(h2?.textContent).toBe("Tous les articles");
+
+      const cartes = el?.shadowRoot?.querySelectorAll(".carte-article");
+      await expect(cartes?.length).toBe(articlesArgs.length);
+    });
+  }}
+/>
