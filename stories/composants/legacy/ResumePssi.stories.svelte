@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -23,4 +24,21 @@
   <lab-anssi-resume-pssi nom-service={args.nomService}></lab-anssi-resume-pssi>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-resume-pssi");
+
+    await step("Le composant est rendu", async () => {
+      const paragraph = el?.shadowRoot?.querySelector("p");
+
+      await expect(paragraph).toBeTruthy();
+    });
+
+    await step("Le composant contient du contenu textuel", async () => {
+      const paragraphs = el?.shadowRoot?.querySelectorAll("p");
+
+      await expect(paragraphs?.length).toBeGreaterThan(0);
+    });
+  }}
+/>
