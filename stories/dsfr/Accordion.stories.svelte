@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -53,4 +54,63 @@
   </dsfr-accordion>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-accordion");
+    const shadow = el?.shadowRoot;
+
+    await step("L'accordéon est rendu avec le bouton et le contenu", async () => {
+      const section = shadow?.querySelector("section.fr-accordion");
+      await expect(section).toBeTruthy();
+
+      const button = shadow?.querySelector("button.fr-accordion__btn");
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe(args.label);
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse).toBeTruthy();
+    });
+
+    await step("L'état initial de aria-expanded correspond à la prop", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn");
+      const expectedExpanded = args.isExpanded ? "true" : "false";
+
+      await expect(button?.getAttribute("aria-expanded")).toBe(expectedExpanded);
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(
+        args.isExpanded ?? false,
+      );
+    });
+
+    await step("Cliquer sur le bouton bascule l'état de l'accordéon", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn") as HTMLElement;
+      const expandedBefore = button?.getAttribute("aria-expanded");
+
+      await userEvent.click(button);
+
+      const expectedAfterClick = expandedBefore === "true" ? "false" : "true";
+      await expect(button?.getAttribute("aria-expanded")).toBe(expectedAfterClick);
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(
+        expectedAfterClick === "true",
+      );
+    });
+
+    await step("Cliquer à nouveau rétablit l'état initial", async () => {
+      const button = shadow?.querySelector("button.fr-accordion__btn") as HTMLElement;
+
+      await userEvent.click(button);
+
+      const expectedExpanded = args.isExpanded ? "true" : "false";
+      await expect(button?.getAttribute("aria-expanded")).toBe(expectedExpanded);
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(
+        args.isExpanded ?? false,
+      );
+    });
+  }}
+/>
