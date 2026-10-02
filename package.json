@@ -63,7 +63,7 @@
   },
   "web-types": "./dist/web-types.json",
   "peerDependencies": {
-    "svelte": "^5.57.0"
+    "svelte": "^5.57.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "~5.3.1",
@@ -78,7 +78,7 @@
     "@storybook/addon-vitest": "~10.6.0",
     "@storybook/svelte-vite": "~10.6.0",
     "@sveltejs/package": "^2.5.8",
-    "@sveltejs/vite-plugin-svelte": "~7.3.0",
+    "@sveltejs/vite-plugin-svelte": "~7.3.1",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/svelte": "~5.4.2",
     "@types/node": "~24.13.6",
@@ -104,7 +104,7 @@
     "sass": "~1.105.0",
     "storybook": "~10.6.0",
     "style-dictionary": "^5.5.5",
-    "svelte": "~5.57.0",
+    "svelte": "~5.57.1",
     "svelte-check": "~4.7.6",
     "typescript": "~6.0.3",
     "typescript-eslint": "~8.70.1",
