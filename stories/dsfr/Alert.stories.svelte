@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -68,7 +69,46 @@
   ></dsfr-alert>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+    const shadow = dsfrAlert?.shadowRoot;
+
+    await step("L'alerte est rendue avec le bon type", async () => {
+      const alert = shadow?.querySelector(".fr-alert");
+
+      await expect(alert).toBeTruthy();
+      await expect(alert?.classList.contains(`fr-alert--${args.type ?? "default"}`)).toBe(true);
+    });
+
+    await step("Le titre est affiché selon la prop hasTitle", async () => {
+      const title = shadow?.querySelector(".fr-alert__title");
+
+      if (args.hasTitle !== false && args.hasTitle !== "false") {
+        await expect(title).toBeTruthy();
+        if (args.title) {
+          await expect(title?.textContent?.trim()).toBe(args.title);
+        }
+      } else {
+        await expect(title).toBeNull();
+      }
+    });
+
+    await step("La description est affichée selon la prop hasDescription", async () => {
+      const description = shadow?.querySelector("p");
+
+      if (args.hasDescription !== false && args.hasDescription !== "false") {
+        await expect(description).toBeTruthy();
+        if (args.text) {
+          await expect(description?.textContent?.trim()).toBe(args.text);
+        }
+      } else {
+        await expect(description).toBeNull();
+      }
+    });
+  }}
+/>
 
 <Story
   name="Title"
@@ -180,11 +220,53 @@
 />
 
 <Story
+  name="Dismissible (état fermé)"
+  args={{
+    title: "Titre du message",
+    hasTitle: true,
+    hasDescription: true,
+    text: "Cliquer sur la croix pour fermer l'alerte",
+    dismissible: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+
+    await step("L'alerte et le bouton de fermeture sont rendus", async () => {
+      const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+      await expect(alert).toBeTruthy();
+
+      const button = dsfrAlert?.shadowRoot?.querySelector("button.fr-btn--close");
+      await expect(button).toBeTruthy();
+    });
+
+    await step("L'alerte disparaît après clic sur le bouton de fermeture", async () => {
+      const button = dsfrAlert?.shadowRoot?.querySelector("button.fr-btn--close") as HTMLElement;
+
+      await userEvent.click(button);
+
+      const alert = dsfrAlert?.shadowRoot?.querySelector(".fr-alert");
+      await expect(alert).toBeNull();
+    });
+  }}
+/>
+
+<Story
   name="Icône personnalisée"
   args={{
     type: "default",
     hasTitle: true,
     icon: "lock-fill",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const dsfrAlert = canvasElement.querySelector("dsfr-alert");
+    const shadow = dsfrAlert?.shadowRoot;
+
+    await step("L'icône personnalisée est appliquée sur l'alerte", async () => {
+      const alert = shadow?.querySelector(".fr-alert");
+
+      await expect(alert).toBeTruthy();
+      await expect(alert?.classList.contains(`fr-icon-${args.icon}`)).toBe(true);
+    });
   }}
 />
 
