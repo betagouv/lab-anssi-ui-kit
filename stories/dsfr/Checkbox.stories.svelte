@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -74,7 +75,57 @@
   ></dsfr-checkbox>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-checkbox");
+    const shadow = el?.shadowRoot;
+
+    await step("Le label est affiché avec le bon texte", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label).toBeTruthy();
+      await expect(label?.textContent?.trim()).toContain(args.label);
+    });
+
+    await step("L'état initial de la checkbox correspond à la prop", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+
+      await expect(input).toBeTruthy();
+      await expect(input.checked).toBe(args.checked ?? false);
+    });
+
+    await step("Cliquer sur la checkbox bascule l'état", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      const checkedBefore = input.checked;
+
+      await userEvent.click(input);
+
+      await expect(input.checked).toBe(!checkedBefore);
+    });
+
+    await step("Cliquer à nouveau rétablit l'état initial", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+
+      await userEvent.click(input);
+
+      await expect(input.checked).toBe(args.checked ?? false);
+    });
+
+    await step("L'événement valuechanged est émis avec la bonne valeur", async () => {
+      const input = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      await userEvent.click(input);
+
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls[0][0].detail).toBe(true);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
 
 <Story name="Etat 'indeterminate'" args={{ ...checkboxArgs, indeterminate: true }} />
 
