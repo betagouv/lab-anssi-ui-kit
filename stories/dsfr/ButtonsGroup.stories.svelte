@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -73,7 +74,39 @@
   ></dsfr-buttons-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-buttons-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe contient le bon nombre de boutons avec les bons labels", async () => {
+      const buttonsData =
+        (args as unknown as { buttons: { label: string; kind?: string }[] }).buttons ?? [];
+      const buttons = shadow?.querySelectorAll(".fr-btn");
+
+      await expect(buttons?.length).toBe(buttonsData.length);
+
+      for (let i = 0; i < buttonsData.length; i++) {
+        await expect(buttons?.[i]?.textContent?.trim()).toBe(buttonsData[i].label);
+      }
+    });
+
+    await step("Chaque bouton a le bon style", async () => {
+      const buttonsData =
+        (args as unknown as { buttons: { label: string; kind?: string }[] }).buttons ?? [];
+      const buttons = shadow?.querySelectorAll(".fr-btn");
+
+      for (let i = 0; i < buttonsData.length; i++) {
+        if (buttonsData[i].kind) {
+          await expect(buttons?.[i]?.classList.contains(`fr-btn--${buttonsData[i].kind}`)).toBe(
+            true,
+          );
+        }
+      }
+    });
+  }}
+/>
 
 <Story
   name="Vertical"
