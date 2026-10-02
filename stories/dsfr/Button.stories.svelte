@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -84,7 +85,34 @@
   ></dsfr-button>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-button");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton affiche le bon libellé", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+
+      await expect(button?.textContent?.trim()).toBe(args.label);
+    });
+
+    await step("Le bouton a le bon 'style'", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+
+      await expect(button?.classList.contains(`fr-btn--${args.kind ?? "primary"}`)).toBe(true);
+    });
+
+    await step("L'icône est présente ou absente selon les props", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+      if (args.hasIcon && args.icon) {
+        await expect(button?.classList.contains(`fr-icon-${args.icon}`)).toBe(true);
+      } else {
+        await expect(button?.className).not.toContain("fr-icon-");
+      }
+    });
+  }}
+/>
 
 <Story name="Primaire" args={{ kind: "primary", label: "Primaire" }} />
 
@@ -99,7 +127,20 @@
   {/snippet}
 </Story>
 
-<Story name="Désactivé">
+<Story
+  name="Désactivé"
+  play={async ({ canvasElement, step }) => {
+    const buttons = canvasElement.querySelectorAll("dsfr-button");
+
+    await step("Tous les boutons sont désactivés", async () => {
+      for (const el of buttons) {
+        const button = el.shadowRoot?.querySelector(".fr-btn") as HTMLButtonElement;
+
+        await expect(button?.disabled).toBe(true);
+      }
+    });
+  }}
+>
   {#snippet template(_args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-button label="Primaire" kind="primary" disabled={true}></dsfr-button>
@@ -111,7 +152,21 @@
   {/snippet}
 </Story>
 
-<Story name="Icône à gauche">
+<Story
+  name="Icône à gauche"
+  play={async ({ canvasElement, step }) => {
+    const buttons = canvasElement.querySelectorAll("dsfr-button");
+
+    await step("Chaque bouton a l'icône et la position gauche", async () => {
+      for (const el of buttons) {
+        const button = el.shadowRoot?.querySelector(".fr-btn");
+
+        await expect(button?.classList.contains("fr-icon-checkbox-line")).toBe(true);
+        await expect(button?.classList.contains("fr-btn--icon-left")).toBe(true);
+      }
+    });
+  }}
+>
   {#snippet template(args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-button
@@ -146,7 +201,21 @@
   {/snippet}
 </Story>
 
-<Story name="Icône à droite">
+<Story
+  name="Icône à droite"
+  play={async ({ canvasElement, step }) => {
+    const buttons = canvasElement.querySelectorAll("dsfr-button");
+
+    await step("Chaque bouton a l'icône et la position droite", async () => {
+      for (const el of buttons) {
+        const button = el.shadowRoot?.querySelector(".fr-btn");
+
+        await expect(button?.classList.contains("fr-icon-checkbox-line")).toBe(true);
+        await expect(button?.classList.contains("fr-btn--icon-right")).toBe(true);
+      }
+    });
+  }}
+>
   {#snippet template(args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-button
@@ -181,7 +250,22 @@
   {/snippet}
 </Story>
 
-<Story name="Icône seule">
+<Story
+  name="Icône seule"
+  play={async ({ canvasElement, step }) => {
+    const buttons = canvasElement.querySelectorAll("dsfr-button");
+
+    await step("Chaque bouton a l'icône sans position gauche ni droite", async () => {
+      for (const el of buttons) {
+        const button = el.shadowRoot?.querySelector(".fr-btn");
+
+        await expect(button?.classList.contains("fr-icon-checkbox-line")).toBe(true);
+        await expect(button?.classList.contains("fr-btn--icon-left")).toBe(false);
+        await expect(button?.classList.contains("fr-btn--icon-right")).toBe(false);
+      }
+    });
+  }}
+>
   {#snippet template(args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <dsfr-button
