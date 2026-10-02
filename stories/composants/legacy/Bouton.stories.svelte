@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -57,7 +58,33 @@
   ></lab-anssi-bouton>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-bouton");
+    const typedArgs = args as Record<string, unknown>;
+    const button = el?.shadowRoot?.querySelector("button") as HTMLButtonElement | null;
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le libellé est affiché", async () => {
+      await expect(button?.textContent).toContain(typedArgs.titre);
+    });
+
+    await step("Le bouton est actif (non désactivé)", async () => {
+      await expect(button?.disabled).toBe(!typedArgs.actif);
+    });
+
+    await step("L'élément icône est présent avec la bonne classe", async () => {
+      const icone = el?.shadowRoot?.querySelector(".icone");
+
+      await expect(icone).toBeTruthy();
+      await expect(icone?.classList.contains(`fr-icon-${typedArgs.icone}`)).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Avec usage du slot par défaut">
   {#snippet template(args: Args)}

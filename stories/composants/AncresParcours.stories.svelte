@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -25,4 +26,35 @@
   <lab-anssi-ancres ancres={args.ancres} index-actif={args.indexActif}></lab-anssi-ancres>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-ancres");
+
+    await step("Le composant est rendu", async () => {
+      const navEl = el?.shadowRoot?.querySelector("nav");
+      await expect(navEl).toBeTruthy();
+    });
+
+    const links = el?.shadowRoot?.querySelectorAll("a");
+
+    await step("Les ancres sont affichées avec leur texte et leur href", async () => {
+      await expect(links?.length).toBe(args.ancres.length);
+
+      for (let i = 0; i < args.ancres.length; i++) {
+        await expect(links?.[i]?.textContent?.trim()).toBe(args.ancres[i].label);
+        await expect(links?.[i]?.getAttribute("href")).toBe(args.ancres[i].cible);
+      }
+    });
+
+    await step("L'ancre correspondant à indexActif possède la classe 'active'", async () => {
+      for (let i = 0; i < (links?.length ?? 0); i++) {
+        if (i === args.indexActif) {
+          await expect(links?.[i]?.classList.contains("active")).toBe(true);
+        } else {
+          await expect(links?.[i]?.classList.contains("active")).toBe(false);
+        }
+      }
+    });
+  }}
+/>

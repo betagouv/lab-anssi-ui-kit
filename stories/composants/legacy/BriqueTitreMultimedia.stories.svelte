@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -44,7 +45,31 @@
   <lab-anssi-titre-multimedia {...args}></lab-anssi-titre-multimedia>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-titre-multimedia");
+    const typedArgs = args as Record<string, unknown>;
+    const multimediaArgs = typedArgs.multimedia as { source: string };
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre est affiché", async () => {
+      const h2 = el?.shadowRoot?.querySelector("h2");
+
+      await expect(h2?.textContent).toBe(typedArgs.titre);
+    });
+
+    await step("Le lecteur vidéo est présent avec la bonne source", async () => {
+      const video = el?.shadowRoot?.querySelector("video") as HTMLVideoElement | null;
+
+      await expect(video).toBeTruthy();
+      await expect(video?.src).toContain(multimediaArgs.source);
+    });
+  }}
+/>
 
 <Story name="Avec usage du slot titre">
   {#snippet template(args: Args)}

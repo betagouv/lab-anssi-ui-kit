@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect, userEvent } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -44,7 +45,60 @@
   ></lab-anssi-tag>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-tag");
+    const typedArgs = args as Record<string, unknown>;
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    if (typedArgs.type === "selectionnable") {
+      const button = el?.shadowRoot?.querySelector("button") as HTMLButtonElement | null;
+
+      await step("Le tag sélectionnable est rendu comme un bouton", async () => {
+        await expect(button).toBeTruthy();
+      });
+
+      await step("Le libellé est affiché", async () => {
+        await expect(button?.textContent?.trim()).toContain(typedArgs.label as string);
+      });
+
+      await step("L'état aria-pressed initial correspond à la prop", async () => {
+        const expectedPressed = typedArgs.presse ? "true" : "false";
+
+        await expect(button?.getAttribute("aria-pressed")).toBe(expectedPressed);
+      });
+
+      await step("Le clic bascule l'état aria-pressed", async () => {
+        const pressedBefore = button?.getAttribute("aria-pressed");
+        await userEvent.click(button!);
+
+        const expectedAfterClick = pressedBefore === "true" ? "false" : "true";
+        await expect(button?.getAttribute("aria-pressed")).toBe(expectedAfterClick);
+      });
+
+      await step("Le re-clic rétablit l'état aria-pressed initial", async () => {
+        const expectedPressed = typedArgs.presse ? "true" : "false";
+        await userEvent.click(button!);
+
+        await expect(button?.getAttribute("aria-pressed")).toBe(expectedPressed);
+      });
+    } else {
+      const span = el?.shadowRoot?.querySelector("span.tag");
+
+      await step("Le tag par défaut est rendu comme un span", async () => {
+        await expect(span).toBeTruthy();
+      });
+
+      await step("Le libellé est affiché", async () => {
+        await expect(span?.textContent?.trim()).toContain(typedArgs.label as string);
+      });
+    }
+  }}
+/>
 
 <Story name="Avec usage du slot par défaut">
   {#snippet template(args: Args)}

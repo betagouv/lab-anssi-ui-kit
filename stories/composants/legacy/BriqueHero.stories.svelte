@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { expect } from "storybook/test";
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { type ComponentProps } from "svelte";
 
@@ -79,7 +80,60 @@
   ></lab-anssi-brique-hero>
 {/snippet}
 
-<Story name="Defaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("lab-anssi-brique-hero");
+    const typedArgs = args as Record<string, unknown>;
+    const actionGaucheArgs = typedArgs.actiongauche as { titre: string };
+    const actionDroiteArgs = typedArgs.actiondroite as { titre: string };
+    const illustrationArgs = typedArgs.illustration as { alt: string };
+    const actions = el?.shadowRoot?.querySelectorAll("a[role='button']");
+
+    await step("Le composant est rendu", async () => {
+      await expect(el?.shadowRoot).toBeTruthy();
+    });
+
+    await step("Le titre est affiché", async () => {
+      const h1 = el?.shadowRoot?.querySelector("h1");
+
+      await expect(h1?.textContent).toBe(typedArgs.titre);
+    });
+
+    await step("Le sous-titre est affiché", async () => {
+      const paragraphs = el?.shadowRoot?.querySelectorAll("p");
+      const soustitre = Array.from(paragraphs ?? []).find((p) =>
+        p.textContent?.includes(typedArgs.soustitre as string),
+      );
+
+      await expect(soustitre).toBeTruthy();
+    });
+
+    await step("Le badge est affiché ou masqué selon la prop", async () => {
+      const badge = el?.shadowRoot?.querySelector(".badge");
+
+      if (typedArgs.badge) {
+        await expect(badge?.textContent?.trim()).toBe("Service à impact national");
+      } else {
+        await expect(badge).toBeNull();
+      }
+    });
+
+    await step("L'action gauche est affichée avec le bon texte", async () => {
+      await expect(actions?.[0]?.textContent?.trim()).toContain(actionGaucheArgs.titre);
+    });
+
+    await step("L'action droite est affichée avec le bon texte", async () => {
+      await expect(actions?.[1]?.textContent?.trim()).toContain(actionDroiteArgs.titre);
+    });
+
+    await step("L'illustration est affichée avec son texte alternatif", async () => {
+      const illustration = el?.shadowRoot?.querySelector(`img[alt="${illustrationArgs.alt}"]`);
+
+      await expect(illustration).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec usage des slots">
   {#snippet template(args: Args)}
