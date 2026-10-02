@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -68,13 +69,52 @@
   ></dsfr-callout>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("Le titre est affiché selon la prop hasTitle", async () => {
+      const title = shadow?.querySelector(".fr-callout__title");
+
+      if (args.hasTitle !== false) {
+        await expect(title).toBeTruthy();
+        if (args.title) {
+          await expect(title?.textContent?.trim()).toBe(args.title);
+        }
+      } else {
+        await expect(title).toBeNull();
+      }
+    });
+
+    await step("Le texte est affiché", async () => {
+      const text = shadow?.querySelector(".fr-callout__text");
+
+      await expect(text).toBeTruthy();
+      await expect(text?.textContent?.trim()).toBe(args.text);
+    });
+  }}
+/>
 
 <Story
   name="Icône"
   args={{
     hasIcon: true,
     icon: "info-line",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("L'icône est présente ou absente selon la prop hasIcon", async () => {
+      const callout = shadow?.querySelector("div.fr-callout");
+      if (args.hasIcon && args.icon) {
+        await expect(callout?.classList.contains(`fr-icon-${args.icon}`)).toBe(true);
+      } else {
+        await expect(callout?.className).not.toContain("fr-icon-");
+      }
+    });
   }}
 />
 
@@ -83,6 +123,17 @@
   args={{
     hasButton: true,
     buttonLabel: "En savoir plus",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton est rendu avec le bon label", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe(args.buttonLabel);
+    });
   }}
 />
 
@@ -94,12 +145,39 @@
     hasButton: true,
     buttonLabel: "En savoir plus",
   }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("La mise en avant a la bonne icône", async () => {
+      const callout = shadow?.querySelector("div.fr-callout");
+
+      await expect(callout?.classList.contains(`fr-icon-${args.icon}`)).toBe(true);
+    });
+
+    await step("Le bouton est rendu dans la mise en avant", async () => {
+      const button = shadow?.querySelector(".fr-btn");
+
+      await expect(button).toBeTruthy();
+      await expect(button?.textContent?.trim()).toBe(args.buttonLabel);
+    });
+  }}
 />
 
 <Story
   name="Accent"
   args={{
     accent: "pink-macaron",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-callout");
+    const shadow = el?.shadowRoot;
+
+    await step("La mise en avant a la bonne couleur d'accent", async () => {
+      const callout = shadow?.querySelector("div.fr-callout");
+
+      await expect(callout?.classList.contains(`fr-callout--${args.accent}`)).toBe(true);
+    });
   }}
 />
 
