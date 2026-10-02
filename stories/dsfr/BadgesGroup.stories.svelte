@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -37,7 +38,47 @@
   ></dsfr-badges-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-badges-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe est rendu avec le bon nombre de badges", async () => {
+      const group = shadow?.querySelector(".fr-badges-group");
+      await expect(group).toBeTruthy();
+
+      const badgesData =
+        (args as unknown as { badges: { label: string; accent?: string }[] }).badges ?? [];
+      const badges = shadow?.querySelectorAll("p.fr-badge");
+      await expect(badges?.length).toBe(badgesData.length);
+    });
+
+    await step("Chaque badge affiche le bon label", async () => {
+      const badgesData =
+        (args as unknown as { badges: { label: string; accent?: string }[] }).badges ?? [];
+      const badges = shadow?.querySelectorAll("p.fr-badge");
+
+      for (let i = 0; i < badgesData.length; i++) {
+        await expect(badges?.[i]?.textContent?.trim()).toBe(badgesData[i].label);
+      }
+    });
+
+    await step("Chaque badge avec un accent a la classe correspondante", async () => {
+      const badgesData =
+        (args as unknown as { badges: { label: string; accent?: string }[] }).badges ?? [];
+      const badges = shadow?.querySelectorAll("p.fr-badge");
+
+      for (let i = 0; i < badgesData.length; i++) {
+        if (badgesData[i].accent) {
+          await expect(badges?.[i]?.classList.contains(`fr-badge--${badgesData[i].accent}`)).toBe(
+            true,
+          );
+        }
+      }
+    });
+  }}
+/>
 
 <Story
   name="Taille MD"
