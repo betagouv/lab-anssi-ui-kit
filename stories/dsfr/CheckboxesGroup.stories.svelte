@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -113,7 +114,50 @@
   ></dsfr-checkboxes-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-checkboxes-group");
+    const shadow = el?.shadowRoot;
+
+    await step("La légende est affichée avec le bon texte", async () => {
+      const legend = shadow?.querySelector("legend.fr-fieldset__legend");
+
+      await expect(legend).toBeTruthy();
+      await expect(legend?.textContent?.trim()).toContain(args.legend);
+    });
+
+    await step("Le bon nombre de checkboxes est rendu avec les bons labels", async () => {
+      const checkboxesData =
+        (args as unknown as { checkboxes: { label: string }[] }).checkboxes ?? [];
+      const inputs = shadow?.querySelectorAll("input[type='checkbox']");
+
+      await expect(inputs?.length).toBe(checkboxesData.length);
+
+      const labels = shadow?.querySelectorAll("label.fr-label");
+
+      for (let i = 0; i < checkboxesData.length; i++) {
+        await expect(labels?.[i]?.textContent?.trim()).toContain(checkboxesData[i].label);
+      }
+    });
+
+    await step("Cocher une checkbox met à jour son état", async () => {
+      const firstCheckbox = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+
+      await userEvent.click(firstCheckbox);
+
+      await expect(firstCheckbox.checked).toBe(true);
+    });
+
+    await step("Cliquer à nouveau décoche la checkbox", async () => {
+      const firstCheckbox = shadow?.querySelector("input[type='checkbox']") as HTMLInputElement;
+
+      await userEvent.click(firstCheckbox);
+
+      await expect(firstCheckbox.checked).toBe(false);
+    });
+  }}
+/>
 
 <Story
   name="Texte d'aide de la légende"
@@ -128,8 +172,40 @@
 
 <Story name="Taille SM" args={{ ...args, size: "sm", checkboxes: checkboxes3 }} />
 
-<Story name="Désactivé" args={{ ...args, disabled: true, checkboxes: checkboxes3 }} />
+<Story
+  name="Désactivé"
+  args={{ ...args, disabled: true, checkboxes: checkboxes3 }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-checkboxes-group");
+    const shadow = el?.shadowRoot;
 
-<Story name="Erreur" args={{ ...args, status: "error", checkboxes: checkboxes3 }} />
+    await step("Le fieldset est désactivé", async () => {
+      const fieldset = shadow?.querySelector("fieldset.fr-fieldset") as HTMLFieldSetElement;
+
+      await expect(fieldset?.disabled).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Erreur"
+  args={{ ...args, status: "error", checkboxes: checkboxes3 }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-checkboxes-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le fieldset a la classe de statut correspondante", async () => {
+      const fieldset = shadow?.querySelector("fieldset.fr-fieldset");
+
+      await expect(fieldset?.classList.contains(`fr-fieldset--${args.status}`)).toBe(true);
+    });
+
+    await step("Le message d'erreur est affiché", async () => {
+      const message = shadow?.querySelector(`.fr-message--${args.status}`);
+
+      await expect(message).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Succès" args={{ ...args, status: "valid", checkboxes: checkboxes3 }} />
