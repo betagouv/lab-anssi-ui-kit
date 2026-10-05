@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import Placeholder from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
@@ -153,7 +154,32 @@
   ></dsfr-content>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-content");
+    const shadow = el?.shadowRoot;
+
+    await step("Le composant a la classe de taille correspondante", async () => {
+      const figure = shadow?.querySelector("figure.fr-content-media");
+
+      await expect(figure?.classList.contains(`fr-content-media--${args.size ?? "md"}`)).toBe(true);
+    });
+
+    await step("L'image est présente avec le bon ratio", async () => {
+      const img = shadow?.querySelector(".fr-content-media__img img.fr-responsive-img");
+
+      await expect(img).toBeTruthy();
+      await expect(img?.classList.contains(`fr-ratio-${args.imgRatio ?? "16x9"}`)).toBe(true);
+    });
+
+    await step("La légende est affichée", async () => {
+      const caption = shadow?.querySelector("figcaption.fr-content-media__caption");
+
+      await expect(caption?.textContent?.trim()).toContain(args.caption);
+    });
+  }}
+/>
 
 <Story name="Taille SM" args={{ size: "sm" }} />
 
