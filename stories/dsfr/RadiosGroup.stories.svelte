@@ -40,7 +40,7 @@
         control: false,
       },
     },
-    args: { radios: getRadiosGroupData(), ...radiosGroupArgs },
+    args: { radios: getRadiosGroupData(), ...radiosGroupArgs, name: "radios-group" },
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
@@ -69,6 +69,7 @@
     rich={args.rich || undefined}
     has-pictogram={args.hasPictogram || undefined}
     inline={args.inline || undefined}
+    name={args.name}
     disabled={args.disabled || undefined}
     value={args.value || ""}
     status={args.status}
