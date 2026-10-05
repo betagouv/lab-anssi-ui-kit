@@ -16,11 +16,6 @@
     component: DsfrCheckbox,
     argTypes: {
       ...checkboxArgTypes,
-      default: {
-        description: "Libellé personnalisé de la case à cocher (remplace la prop `label`)",
-        control: false,
-        table: { category: "Slots" },
-      },
       indeterminate: {
         control: "boolean",
         description: "Attribut indeterminate de la checkbox",
@@ -33,6 +28,12 @@
           type: { summary: "CustomEvent<boolean>" },
         },
         control: false,
+      },
+      slotDefault: {
+        name: "default",
+        description: "Libellé personnalisé de la case à cocher (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: checkboxArgs,

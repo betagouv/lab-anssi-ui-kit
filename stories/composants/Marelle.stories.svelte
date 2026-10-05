@@ -63,31 +63,36 @@
           },
         },
       },
-      "marelle-titre": {
-        description: "Titre personnalisé de la marelle (remplace la prop `titre`)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      default: {
+      slotDefault: {
+        name: "default",
         description:
           "Étapes personnalisées (remplace les étapes générées par la prop `etapesmarelle`)",
         control: false,
         table: { category: "Slots" },
       },
-      "etape-titre": {
-        description: "Titre personnalisé de chaque étape (remplace la prop `titre` de l'étape)",
+      slotMarelleTitre: {
+        name: "marelle-titre",
+        description: "Titre personnalisé de la marelle (remplace la prop `titre`)",
         control: false,
-        table: { category: "Slots (Etape)" },
+        table: { category: "Slots" },
       },
-      "etape-description": {
+      slotEtapeDescription: {
+        name: "etape-description",
         description:
           "Description personnalisée de chaque étape (remplace la prop `description` de l'étape)",
         control: false,
         table: { category: "Slots (Etape)" },
       },
-      "etape-lien": {
+      slotEtapeLien: {
+        name: "etape-lien",
         description:
           "Lien personnalisé de chaque étape (remplace le lien généré par la prop `lien` de l'étape)",
+        control: false,
+        table: { category: "Slots (Etape)" },
+      },
+      slotEtapeTitre: {
+        name: "etape-titre",
+        description: "Titre personnalisé de chaque étape (remplace la prop `titre` de l'étape)",
         control: false,
         table: { category: "Slots (Etape)" },
       },

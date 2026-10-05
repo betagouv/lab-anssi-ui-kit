@@ -15,11 +15,6 @@
     component: DsfrRange,
     argTypes: {
       ...rangeArgTypes,
-      messagesgroup: {
-        description: "Messages d'aide ou d'erreur personnalisés",
-        control: false,
-        table: { category: "Slots" },
-      },
       labelSize: {
         control: "select",
         options: [undefined, "xs", "sm", "md", "lg", "xl", "lead"],
@@ -50,6 +45,12 @@
           type: { summary: "CustomEvent<number>" },
         },
         control: false,
+      },
+      slotMessagesgroup: {
+        name: "messagesgroup",
+        description: "Messages d'aide ou d'erreur personnalisés",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: rangeArgs,

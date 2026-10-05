@@ -32,12 +32,6 @@
         },
         table: { category: "message" },
       },
-      default: {
-        description:
-          "Options `<option>` personnalisées (remplace les options générées par la prop `options`)",
-        control: false,
-        table: { category: "Slots" },
-      },
       labelSize: {
         control: "select",
         options: [undefined, "xs", "sm", "md", "lg", "xl", "lead"],
@@ -58,6 +52,13 @@
           type: { summary: "CustomEvent<string>" },
         },
         control: false,
+      },
+      slotDefault: {
+        name: "default",
+        description:
+          "Options `<option>` personnalisées (remplace les options générées par la prop `options`)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: selectArgs,

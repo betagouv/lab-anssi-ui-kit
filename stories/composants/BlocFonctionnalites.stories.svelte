@@ -167,13 +167,15 @@
     title: "Composants/Lab ANSSI/Bloc fonctionnalités",
     component: BlocFonctionnalites,
     argTypes: {
-      media: {
+      slotMedia: {
+        name: "media",
         description:
           "Remplace tout le contenu de la zone média. L'attribut `data-active-item` sur le host reflète l'`id` de la fonctionnalité active.",
         control: false,
         table: { category: "Slots" },
       },
-      "media-{id}": {
+      slotMediaId: {
+        name: "media-{id}",
         description:
           "Contenu personnalisé cloné dans la zone média quand la fonctionnalité correspondante est active. Nécessite `rich: true` et un `id` sur la fonctionnalité.",
         control: false,

@@ -42,46 +42,12 @@
     component: DsfrHeader,
     argTypes: {
       ...headerArgTypes,
-      beforenavbarbuttons: {
-        description:
-          "Contenu inséré avant les boutons de la barre de navigation mobile (recherche, menu)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      headerbadge: {
-        description: "Badge affiché dans l'en-tête (ex : bêta, nouveau)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      beforetoolslinks: {
-        description: "Contenu inséré avant les liens d'accès rapide dans la barre d'outils",
-        control: false,
-        table: { category: "Slots" },
-      },
-      toolLinks: {
-        description: "Liens d'accès rapide personnalisés (remplace la prop `toolLinks`)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      translate: {
-        description: "Bouton de traduction personnalisé",
-        control: false,
-        table: { category: "Slots" },
-      },
-      searchbar: {
-        description: "Barre de recherche personnalisée (remplace le DsfrSearch par défaut)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      modalToolLinks: {
-        description: "Liens d'accès rapide dans la modale mobile",
-        control: false,
-        table: { category: "Slots" },
-      },
-      navigation: {
-        description: "Navigation principale personnalisée (remplace le DsfrNavigation par défaut)",
-        control: false,
-        table: { category: "Slots" },
+      fluid: {
+        control: "boolean",
+        description: "Permet de définir le conteneur comme 'fluide' ou non",
+        type: {
+          value: "boolean",
+        },
       },
       ontoolLinkClick: {
         description: "Déclenché au clic sur un lien d'accès rapide.<br>" + "`detail: ToolLink`",
@@ -91,12 +57,54 @@
         },
         control: false,
       },
-      fluid: {
-        control: "boolean",
-        description: "Permet de définir le conteneur comme 'fluide' ou non",
-        type: {
-          value: "boolean",
-        },
+      slotBeforenavbarbuttons: {
+        name: "beforenavbarbuttons",
+        description:
+          "Contenu inséré avant les boutons de la barre de navigation mobile (recherche, menu)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotBeforetoolslinks: {
+        name: "beforetoolslinks",
+        description: "Contenu inséré avant les liens d'accès rapide dans la barre d'outils",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotHeaderbadge: {
+        name: "headerbadge",
+        description: "Badge affiché dans l'en-tête (ex : bêta, nouveau)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotSearchbar: {
+        name: "searchbar",
+        description: "Barre de recherche personnalisée (remplace le DsfrSearch par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotModalToolLinks: {
+        name: "modalToolLinks",
+        description: "Liens d'accès rapide dans la modale mobile",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotNavigation: {
+        name: "navigation",
+        description: "Navigation principale personnalisée (remplace le DsfrNavigation par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotToolLinks: {
+        name: "toolLinks",
+        description: "Liens d'accès rapide personnalisés (remplace la prop `toolLinks`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotTranslate: {
+        name: "translate",
+        description: "Bouton de traduction personnalisé",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: {

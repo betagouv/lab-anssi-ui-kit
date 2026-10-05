@@ -9,7 +9,8 @@
     title: "Composants/DSFR/Container",
     component: DsfrContainer,
     argTypes: {
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu principal du conteneur",
         control: false,
         table: { category: "Slots" },

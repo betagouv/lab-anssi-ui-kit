@@ -22,12 +22,14 @@
         description: "Balise HTML du titre",
         options: ["h1", "h2", "h3", "h4", "h5", "h6", "p"],
       },
-      title: {
+      slotTitle: {
+        name: "title",
         description: "Contenu du titre (remplace la prop `title` avec du HTML riche)",
         control: false,
         table: { category: "Slots" },
       },
-      description: {
+      slotDescription: {
+        name: "description",
         description: "Contenu de la description (remplace la prop `text` avec du HTML riche)",
         control: false,
         table: { category: "Slots" },

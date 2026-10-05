@@ -32,7 +32,8 @@
           "inverted-tertiary-no-outline",
         ],
       },
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu personnalisé du bouton (remplace la prop `label`)",
         control: false,
         table: { category: "Slots" },

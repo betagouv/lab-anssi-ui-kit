@@ -16,25 +16,26 @@
     component: DsfrCallout,
     argTypes: {
       ...calloutArgTypes,
-      button: {
+      slotButton: {
+        name: "button",
         description: "Bouton d'action personnalisé (remplace le DsfrButton généré par défaut)",
         control: false,
         table: { category: "Slots" },
       },
-    },
-    args: {
-      ...calloutArgs,
-      title: {
-        description: "Contenu du titre (remplace la prop `title`)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      description: {
+      slotDescription: {
+        name: "description",
         description: "Contenu de la description (remplace la prop `text`)",
         control: false,
         table: { category: "Slots" },
       },
+      slotTitle: {
+        name: "title",
+        description: "Contenu du titre (remplace la prop `title`)",
+        control: false,
+        table: { category: "Slots" },
+      },
     },
+    args: calloutArgs,
     parameters: {
       docs: {
         description: {
