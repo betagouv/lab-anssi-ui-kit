@@ -26,12 +26,6 @@
         description: "Alignement du menu déroulant",
         options: ["left", "right"],
       },
-      logout: {
-        description:
-          "Contenu personnalisé du bouton de déconnexion — remplace le `DsfrButton` généré par défaut lorsque `hasLogout` est `true`.",
-        control: false,
-        table: { category: "Slots" },
-      },
       onlogout: {
         description: "Déclenché lors du clic sur le bouton de déconnexion.",
         table: {
@@ -49,6 +43,13 @@
           type: { summary: "CustomEvent<{ link: UserLink, index: number }>" },
         },
         control: false,
+      },
+      slotLogout: {
+        name: "logout",
+        description:
+          "Contenu personnalisé du bouton de déconnexion — remplace le `DsfrButton` généré par défaut lorsque `hasLogout` est `true`.",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: {

@@ -16,7 +16,8 @@
     args: transcriptionArgs,
     argTypes: {
       ...transcriptionArgTypes,
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu textuel de la transcription",
         control: false,
         table: { category: "Slots" },

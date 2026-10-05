@@ -19,39 +19,46 @@
     component: DsfrCard,
     argTypes: {
       ...cardArgTypes,
-      badgesgroup: {
+      slotBadgesgroup: {
+        name: "badgesgroup",
         description: "Groupe de badges affiché dans le contenu de la carte",
         control: false,
         table: { category: "Slots" },
       },
-      tagsgroup: {
-        description: "Groupe de tags affiché en pied de carte",
-        control: false,
-        table: { category: "Slots" },
-      },
-      contentend: {
-        description: "Contenu supplémentaire après la description",
-        control: false,
-        table: { category: "Slots" },
-      },
-      buttonsgroup: {
+      slotButtonsgroup: {
+        name: "buttonsgroup",
         description: "Groupe de boutons d'action en pied de carte",
         control: false,
         table: { category: "Slots" },
       },
-      linksgroup: {
-        description: "Groupe de liens en pied de carte",
+      slotContentend: {
+        name: "contentend",
+        description: "Contenu supplémentaire après la description",
         control: false,
         table: { category: "Slots" },
       },
-      headerbadges: {
+      slotHeaderbadges: {
+        name: "headerbadges",
         description: "Badges superposés à l'image d'en-tête",
         control: false,
         table: { category: "Slots" },
       },
-      image: {
+      slotImage: {
+        name: "image",
         description:
           "Permet d'utiliser une image personnalisée (ex. <picture>, <svg>, ou <img>) en remplacement de l'image par défaut et des styles associées",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotLinksgroup: {
+        name: "linksgroup",
+        description: "Groupe de liens en pied de carte",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotTagsgroup: {
+        name: "tagsgroup",
+        description: "Groupe de tags affiché en pied de carte",
         control: false,
         table: { category: "Slots" },
       },

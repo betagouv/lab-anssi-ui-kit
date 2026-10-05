@@ -15,13 +15,15 @@
     component: DsfrHighlight,
     argTypes: {
       ...highlightArgTypes,
-      title: {
-        description: "Titre personnalisé de la mise en avant",
+      slotText: {
+        name: "text",
+        description: "Texte personnalisé de la mise en avant (remplace la prop `text`)",
         control: false,
         table: { category: "Slots" },
       },
-      text: {
-        description: "Texte personnalisé de la mise en avant (remplace la prop `text`)",
+      slotTitle: {
+        name: "title",
+        description: "Titre personnalisé de la mise en avant",
         control: false,
         table: { category: "Slots" },
       },

@@ -31,7 +31,8 @@
           "Type de déclenchement<br>Valeurs :<br>- hover : Information contextuelle (survol/focus)<br>- click : Infobulle (clic/focus)",
         options: ["hover", "click"],
       },
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Élément déclencheur de l'infobulle (élément focusable)",
         control: false,
         table: { category: "Slots" },
