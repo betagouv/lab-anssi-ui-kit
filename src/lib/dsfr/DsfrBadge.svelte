@@ -6,6 +6,7 @@
       accent: { attribute: "accent", type: "String" },
       ellipsis: { attribute: "ellipsis", type: "Boolean" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
+      hasNoIcon: { attribute: "has-no-icon", type: "Boolean" },
       icon: { attribute: "icon", type: "String" },
       size: { attribute: "size", type: "String" },
       status: { attribute: "status", type: "String" },
@@ -59,17 +60,19 @@
   });
 </script>
 
+{#snippet labelBadge()}
+  <slot>
+    {label}
+  </slot>
+{/snippet}
+
 <p class={["fr-badge", `fr-badge--${size}`, accentClass, iconClass, statusClass]}>
   {#if ellipsis}
     <span class="fr-ellipsis">
-      <slot>
-        {label}
-      </slot>
+      {@render labelBadge()}
     </span>
   {:else}
-    <slot>
-      {label}
-    </slot>
+    {@render labelBadge()}
   {/if}
 </p>
 
