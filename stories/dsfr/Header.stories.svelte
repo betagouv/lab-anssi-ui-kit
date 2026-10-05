@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -252,7 +253,37 @@
   ></dsfr-header>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+    const shadow = el?.shadowRoot;
+
+    await step("Le header a le rôle banner", async () => {
+      const header = shadow?.querySelector("header.fr-header");
+
+      await expect(header?.getAttribute("role")).toBe("banner");
+    });
+
+    await step("Le logo est présent", async () => {
+      const logo = shadow?.querySelector(".fr-logo");
+
+      await expect(logo).toBeTruthy();
+    });
+
+    await step("Le titre du service est affiché", async () => {
+      const serviceTitle = shadow?.querySelector(".fr-header__service-title");
+
+      await expect(serviceTitle?.textContent?.trim()).toContain(args.brandService);
+    });
+
+    await step("La navigation est présente", async () => {
+      const nav = shadow?.querySelector("nav");
+
+      await expect(nav).toBeTruthy();
+    });
+  }}
+/>
 
 <Story name="Avec navigation" />
 
@@ -265,14 +296,78 @@
   }}
 />
 
-<Story name="Service" args={{ hasNavigation: false }} />
+<Story
+  name="Service"
+  args={{ hasNavigation: false }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+    const shadow = el?.shadowRoot;
+
+    await step("Le header est rendu sans navigation", async () => {
+      const nav = shadow?.querySelector("nav");
+
+      await expect(nav).toBeNull();
+    });
+  }}
+/>
 
 <Story
   name="Avec liens d'accès rapide"
-  args={{ hasNavigation: false, hasToolLinks: true, toolLinks: toolLinksAccueil }}
+  args={{
+    hasNavigation: false,
+    hasToolLinks: true,
+    toolLinks: [
+      ...toolLinksAccueil,
+      { classes: ["fr-btn--display"], url: "#", label: "Paramètres d'affichage", markup: "button" },
+    ],
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+    const shadow = el?.shadowRoot;
+    const toolLinksData = (args as unknown as { toolLinks: { label: string }[] }).toolLinks ?? [];
+
+    await step("Les liens d'accès rapide sont affichés avec les bons labels", async () => {
+      const links = shadow?.querySelectorAll(".fr-header__tools-links .fr-btn");
+
+      await expect(links?.length).toBe(toolLinksData.length);
+
+      for (let i = 0; i < toolLinksData.length; i++) {
+        await expect(links?.[i]?.textContent?.trim()).toBe(toolLinksData[i].label);
+      }
+    });
+
+    await step("Le clic sur un lien bouton émet toolLinkClick", async () => {
+      const handler = fn();
+      el?.addEventListener("toolLinkClick", handler);
+
+      const toolButton = shadow?.querySelector(
+        ".fr-header__tools-links button.fr-btn--display",
+      ) as HTMLElement;
+
+      toolButton.click();
+
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls[0][0].detail.label).toBe("Paramètres d'affichage");
+
+      el?.removeEventListener("toolLinkClick", handler);
+    });
+  }}
 />
 
-<Story name="Avec recherche" args={{ hasNavigation: false, hasSearch: true }} />
+<Story
+  name="Avec recherche"
+  args={{ hasNavigation: false, hasSearch: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton de recherche est présent", async () => {
+      const searchBtn = shadow?.querySelector("button.fr-btn--search");
+
+      await expect(searchBtn).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Avec liens d'accès rapide et recherche"
@@ -284,7 +379,21 @@
   }}
 />
 
-<Story name="Avec opérateur (vertical)" args={{ hasNavigation: false, hasBrandOperator: true }} />
+<Story
+  name="Avec opérateur (vertical)"
+  args={{ hasNavigation: false, hasBrandOperator: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-header");
+    const shadow = el?.shadowRoot;
+
+    await step("Le logo opérateur est présent", async () => {
+      const operatorImg = shadow?.querySelector(".fr-header__operator img") as HTMLImageElement;
+
+      await expect(operatorImg).toBeTruthy();
+      await expect(operatorImg?.src).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Avec opérateur (horizontal)"
