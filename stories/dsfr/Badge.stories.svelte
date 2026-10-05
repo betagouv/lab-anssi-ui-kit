@@ -62,26 +62,36 @@
   }}
 />
 
-<Story name="Statuts">
-  {#snippet template(_args: Args)}
+<Story
+  name="Statuts"
+  args={{
+    label: badgeArgs.label,
+  }}
+>
+  {#snippet template(args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-      <dsfr-badge type="status" status="success"></dsfr-badge>
-      <dsfr-badge type="status" status="warning"></dsfr-badge>
-      <dsfr-badge type="status" status="error"></dsfr-badge>
-      <dsfr-badge type="status" status="info"></dsfr-badge>
-      <dsfr-badge type="status" status="new"></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="success"></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="warning"></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="error"></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="info"></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="new"></dsfr-badge>
     </div>
   {/snippet}
 </Story>
 
-<Story name="Statut sans icône">
-  {#snippet template(_args: Args)}
+<Story
+  name="Statut sans icône"
+  args={{
+    label: badgeArgs.label,
+  }}
+>
+  {#snippet template(args: Args)}
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-      <dsfr-badge type="status" status="success" has-no-icon></dsfr-badge>
-      <dsfr-badge type="status" status="warning" has-no-icon></dsfr-badge>
-      <dsfr-badge type="status" status="error" has-no-icon></dsfr-badge>
-      <dsfr-badge type="status" status="info" has-no-icon></dsfr-badge>
-      <dsfr-badge type="status" status="new" has-no-icon></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="success" has-no-icon></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="warning" has-no-icon></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="error" has-no-icon></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="info" has-no-icon></dsfr-badge>
+      <dsfr-badge label={args.label} type="status" status="new" has-no-icon></dsfr-badge>
     </div>
   {/snippet}
 </Story>
@@ -115,7 +125,7 @@
       status={args.status}
       type={args.type}
     >
-      {args.label}
+      <strong>{args.label} (slot)</strong>
     </dsfr-badge>
   {/snippet}
 </Story>
