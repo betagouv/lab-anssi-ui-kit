@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -104,4 +105,48 @@
   ></dsfr-footer>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-footer");
+    const shadow = el?.shadowRoot;
+
+    await step("Le logo est présent", async () => {
+      const logo = shadow?.querySelector(".fr-logo");
+
+      await expect(logo).toBeTruthy();
+    });
+
+    await step(
+      "Les 4 liens institutionnels sont présents avec les bons labels et href",
+      async () => {
+        const expectedLinks = [
+          { label: "info.gouv.fr", href: "https://info.gouv.fr" },
+          { label: "service-public.gouv.fr", href: "https://service-public.gouv.fr" },
+          { label: "legifrance.gouv.fr", href: "https://legifrance.gouv.fr" },
+          { label: "data.gouv.fr", href: "https://data.gouv.fr" },
+        ];
+        const contentLinks = shadow?.querySelectorAll(".fr-footer__content-link");
+
+        await expect(contentLinks?.length).toBe(4);
+
+        for (let i = 0; i < expectedLinks.length; i++) {
+          await expect(contentLinks?.[i]?.textContent?.trim()).toBe(expectedLinks[i].label);
+          await expect(contentLinks?.[i]?.getAttribute("href")).toBe(expectedLinks[i].href);
+        }
+      },
+    );
+
+    await step("Les liens du bas sont présents avec les bons labels", async () => {
+      const bottomLinksData =
+        (args as unknown as { bottomLinks: { label: string }[] }).bottomLinks ?? [];
+      const bottomLinks = shadow?.querySelectorAll(".fr-footer__bottom-link");
+
+      await expect(bottomLinks?.length).toBe(bottomLinksData.length);
+
+      for (let i = 0; i < bottomLinksData.length; i++) {
+        await expect(bottomLinks?.[i]?.textContent?.trim()).toBe(bottomLinksData[i].label);
+      }
+    });
+  }}
+/>
