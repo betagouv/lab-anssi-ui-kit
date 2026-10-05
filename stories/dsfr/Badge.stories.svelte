@@ -15,7 +15,8 @@
     component: DsfrBadge,
     argTypes: {
       ...badgeArgTypes,
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu du badge (remplace la prop `label`)",
         control: false,
         table: { category: "Slots" },

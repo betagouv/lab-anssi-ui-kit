@@ -26,11 +26,6 @@
     component: DsfrModal,
     argTypes: {
       ...modalArgTypes,
-      default: {
-        description: "Contenu principal de la modale",
-        control: false,
-        table: { category: "Slots" },
-      },
       onopen: {
         description: "Déclenché lors de l'ouverture de la modale.",
         table: {
@@ -47,7 +42,13 @@
         },
         control: false,
       },
-      footerSlot: {
+      slotDefault: {
+        name: "default",
+        description: "Contenu principal de la modale",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotFooter: {
         name: "footer",
         description: "Contenu du footer",
         control: false,

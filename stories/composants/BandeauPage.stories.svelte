@@ -21,21 +21,6 @@
         control: { type: "select" },
         options: ["clair", "sombre"],
       },
-      badgesgroup: {
-        description: "Groupe de badges affiché au-dessus du titre",
-        control: false,
-        table: { category: "Slots" },
-      },
-      buttonsgroup: {
-        description: "Boutons ou liens d'action affichés sous la description du bandeau",
-        control: false,
-        table: { category: "Slots" },
-      },
-      media: {
-        description: "Contenu média affiché dans la partie secondaire (image par défaut)",
-        control: false,
-        table: { category: "Slots" },
-      },
       inverse: {
         table: { disable: true },
       },
@@ -53,6 +38,24 @@
       },
       badges: {
         table: { disable: true },
+      },
+      slotBadgesgroup: {
+        name: "badgesgroup",
+        description: "Groupe de badges affiché au-dessus du titre",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotButtonsgroup: {
+        name: "buttonsgroup",
+        description: "Boutons ou liens d'action affichés sous la description du bandeau",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotMedia: {
+        name: "media",
+        description: "Contenu média affiché dans la partie secondaire (image par défaut)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: {

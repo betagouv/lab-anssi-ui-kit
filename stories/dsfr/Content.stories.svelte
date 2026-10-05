@@ -44,26 +44,10 @@
           value: "string",
         },
       },
-      image: {
-        description: "Élément image personnalisé (remplace le rendu par défaut quand `type='img'`)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      "caption (slot)": {
-        description: "Contenu de la légende (remplace la prop `caption`)",
-        control: false,
-        table: { category: "Slots" },
-      },
       svg: {
         if: { arg: "type", eq: "svg" },
         control: { type: "object" },
         description: "SVG",
-      },
-      video: {
-        description:
-          "Élément vidéo personnalisé (remplace le rendu par défaut quand `type='video'`)",
-        control: false,
-        table: { category: "Slots" },
       },
       type: {
         control: { type: "select" },
@@ -91,6 +75,25 @@
         if: { arg: "type", eq: "video" },
         control: { type: "object" },
         description: "Vidéo",
+      },
+      slotCaption: {
+        name: "caption",
+        description: "Contenu de la légende (remplace la prop `caption`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotImage: {
+        name: "image",
+        description: "Élément image personnalisé (remplace le rendu par défaut quand `type='img'`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotVideo: {
+        name: "video",
+        description:
+          "Élément vidéo personnalisé (remplace le rendu par défaut quand `type='video'`)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: {

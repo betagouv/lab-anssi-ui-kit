@@ -22,7 +22,8 @@
           value: "boolean",
         },
       },
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu du lien (remplace la prop `label`)",
         control: false,
         table: { category: "Slots" },

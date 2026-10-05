@@ -15,16 +15,6 @@
         description: "Taille du bouton",
         options: ["sm", "md", "lg"],
       },
-      button: {
-        description: "Bouton déclencheur personnalisé (remplace le DsfrButton généré par défaut)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      default: {
-        description: "Contenu du panneau déroulant",
-        control: false,
-        table: { category: "Slots" },
-      },
       onitemclicked: {
         description:
           "Déclenché au clic sur un élément du menu déroulant.<br>" +
@@ -38,6 +28,18 @@
       disabled: {
         control: "boolean",
         description: "Désactive le bouton d'ouverture du dropdown",
+      },
+      slotDefault: {
+        name: "default",
+        description: "Contenu du panneau déroulant",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotButton: {
+        name: "button",
+        description: "Bouton déclencheur personnalisé (remplace le DsfrButton généré par défaut)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: {

@@ -16,7 +16,8 @@
     args: { ...accordionArgs, titleMarkupLevel: 4 },
     argTypes: {
       ...accordionArgTypes,
-      default: {
+      slotDefault: {
+        name: "default",
         description: "Contenu de l'accordéon (remplace la prop `content`)",
         control: false,
         table: { category: "Slots" },

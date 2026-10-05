@@ -22,7 +22,8 @@
         description: "Affiche le slot `text` avec du contenu personnalisé",
         if: { arg: "disabled", eq: true },
       },
-      text: {
+      slotText: {
+        name: "text",
         description:
           "Contenu personnalisé du texte informatif, permettant d'utiliser des composants riches (ex: `DsfrLink`). Remplace la prop `text`.",
         control: false,

@@ -18,30 +18,34 @@
     component: DsfrTile,
     argTypes: {
       ...tileArgTypes,
-      description: {
-        description: "Description personnalisée de la tuile (remplace la prop `description`)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      badge: {
-        description: "Badge personnalisé dans la tuile",
-        control: false,
-        table: { category: "Slots" },
-      },
-      tag: {
-        description: "Tag personnalisé dans la tuile",
-        control: false,
-        table: { category: "Slots" },
-      },
-      pictogram: {
-        description: "Pictogramme SVG personnalisé (remplace la prop `pictogramName`)",
-        control: false,
-        table: { category: "Slots" },
-      },
       noIcon: {
         control: "boolean",
         description:
           "Si true, ajoute la classe fr-tile--no-icon pour désactiver l'icône associée au lien",
+      },
+      slotBadge: {
+        name: "badge",
+        description: "Badge personnalisé dans la tuile",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotDescription: {
+        name: "description",
+        description: "Description personnalisée de la tuile (remplace la prop `description`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotPictogram: {
+        name: "pictogram",
+        description: "Pictogramme SVG personnalisé (remplace la prop `pictogramName`)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotTag: {
+        name: "tag",
+        description: "Tag personnalisé dans la tuile",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: { ...tileArgs, href: "#" },

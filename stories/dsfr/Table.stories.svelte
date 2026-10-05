@@ -68,51 +68,6 @@
         control: "boolean",
         description: "Fixe la première cellule de l'en-tête (sticky)",
       },
-      headersegmented: {
-        description: "Contrôles de segmentation dans l'en-tête du tableau",
-        control: false,
-        table: { category: "Slots" },
-      },
-      headersearch: {
-        description: "Barre de recherche dans l'en-tête du tableau",
-        control: false,
-        table: { category: "Slots" },
-      },
-      headerbuttons: {
-        description: "Boutons d'action dans l'en-tête du tableau",
-        control: false,
-        table: { category: "Slots" },
-      },
-      tableheader: {
-        description: "En-tête personnalisé du tableau (remplace le rendu automatique)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      tablecontent: {
-        description: "Corps personnalisé du tableau (remplace le rendu automatique des lignes)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      empty: {
-        description: "Contenu affiché quand le tableau ne contient aucune ligne",
-        control: false,
-        table: { category: "Slots" },
-      },
-      footerselect: {
-        description: "Sélecteur du nombre d'éléments par page (remplace le DsfrSelect par défaut)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      footerpagination: {
-        description: "Pagination personnalisée (remplace le DsfrPagination par défaut)",
-        control: false,
-        table: { category: "Slots" },
-      },
-      footerbuttons: {
-        description: "Boutons d'action dans le pied du tableau",
-        control: false,
-        table: { category: "Slots" },
-      },
       onpagechanged: {
         description: "Déclenché lors du changement de page.<br>" + "`detail: number`",
         table: {
@@ -139,6 +94,60 @@
           type: { summary: "CustomEvent<{ keys: (string | number)[], rows: Row[] }>" },
         },
         control: false,
+      },
+      slotEmpty: {
+        name: "empty",
+        description: "Contenu affiché quand le tableau ne contient aucune ligne",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotFooterbuttons: {
+        name: "footerbuttons",
+        description: "Boutons d'action dans le pied du tableau",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotFooterpagination: {
+        name: "footerpagination",
+        description: "Pagination personnalisée (remplace le DsfrPagination par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotFooterselect: {
+        name: "footerselect",
+        description: "Sélecteur du nombre d'éléments par page (remplace le DsfrSelect par défaut)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotHeaderbuttons: {
+        name: "headerbuttons",
+        description: "Boutons d'action dans l'en-tête du tableau",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotHeadersearch: {
+        name: "headersearch",
+        description: "Barre de recherche dans l'en-tête du tableau",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotHeadersegmented: {
+        name: "headersegmented",
+        description: "Contrôles de segmentation dans l'en-tête du tableau",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotTablecontent: {
+        name: "tablecontent",
+        description: "Corps personnalisé du tableau (remplace le rendu automatique des lignes)",
+        control: false,
+        table: { category: "Slots" },
+      },
+      slotTableheader: {
+        name: "tableheader",
+        description: "En-tête personnalisé du tableau (remplace le rendu automatique)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: tableArgs,
