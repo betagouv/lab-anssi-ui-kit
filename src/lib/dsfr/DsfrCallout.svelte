@@ -76,11 +76,13 @@
     <p class="fr-callout__text">{text}</p>
   </slot>
   {#if hasButton}
-    <slot name="button">
-      {#if buttonLabel}
-        <DsfrButton label={buttonLabel} />
-      {/if}
-    </slot>
+    <div class="fr-callout__btn">
+      <slot name="button">
+        {#if buttonLabel}
+          <DsfrButton label={buttonLabel} />
+        {/if}
+      </slot>
+    </div>
   {/if}
 </div>
 
@@ -97,8 +99,8 @@
 
   @include set-shadow-host();
   @include set-dsfr-sizing("callout") {
-    &__text:not(:last-child) {
-      margin-bottom: 1rem;
+    &__btn {
+      @include margin-top(4v);
     }
 
     :global(::slotted([slot="title"])) {
