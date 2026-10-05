@@ -307,8 +307,8 @@ importers:
         specifier: ~8.5.28
         version: 8.5.28
       postcss-discard-empty:
-        specifier: ~9.0.3
-        version: 9.0.3(postcss@8.5.28)
+        specifier: ~9.0.4
+        version: 9.0.4(postcss@8.5.28)
       postcss-root-to-host:
         specifier: ~0.0.0
         version: 0.0.0(postcss@8.5.28)
@@ -2629,8 +2629,8 @@ packages:
     peerDependencies:
       postcss: ^8.5.28
 
-  postcss-discard-empty@9.0.3:
-    resolution: {integrity: sha512-1h7JrXrHVr9IGTNMKcvyLqhlDeDU83zXyda88jbm6tAgtRBPNARR/RUx3uuCzY1dHD7+jw5p6jmhvkzu4XCwNg==}
+  postcss-discard-empty@9.0.4:
+    resolution: {integrity: sha512-8+FAo/ss2R22Qb0RqoJrckxeIkJ7hD7f0uoMm+wGX4Am3RhHNgZ5onFgFdVDCEo1n9HBybhpfmBRB1qeRtexag==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0}
     peerDependencies:
       postcss: ^8.5.28
@@ -4636,7 +4636,7 @@ snapshots:
       postcss-convert-values: 9.0.3(postcss@8.5.28)
       postcss-discard-comments: 9.0.3(postcss@8.5.28)
       postcss-discard-duplicates: 9.0.3(postcss@8.5.28)
-      postcss-discard-empty: 9.0.3(postcss@8.5.28)
+      postcss-discard-empty: 9.0.4(postcss@8.5.28)
       postcss-discard-overridden: 9.0.3(postcss@8.5.28)
       postcss-merge-longhand: 9.0.4(postcss@8.5.28)
       postcss-merge-rules: 9.0.4(postcss@8.5.28)
@@ -5478,7 +5478,7 @@ snapshots:
     dependencies:
       postcss: 8.5.28
 
-  postcss-discard-empty@9.0.3(postcss@8.5.28):
+  postcss-discard-empty@9.0.4(postcss@8.5.28):
     dependencies:
       postcss: 8.5.28
 
