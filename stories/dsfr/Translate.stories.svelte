@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -44,7 +45,47 @@
   ></dsfr-translate>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-translate");
+    const shadow = el?.shadowRoot;
+    const languagesData =
+      (args as unknown as { languages: { locale: string; active?: boolean }[] }).languages ?? [];
+    const activeLocale = languagesData.find((l) => l.active)?.locale ?? languagesData[0]?.locale;
+
+    await step("Le bouton affiche la langue active", async () => {
+      const button = shadow?.querySelector("button[aria-controls]");
+
+      await expect(button?.textContent?.trim()).toContain(activeLocale?.toUpperCase());
+    });
+
+    await step("Le menu est fermé par défaut", async () => {
+      const button = shadow?.querySelector("button[aria-controls]");
+      const collapse = shadow?.querySelector(".fr-collapse");
+
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(false);
+    });
+
+    await step("Le clic sur le bouton ouvre le menu des langues", async () => {
+      const button = shadow?.querySelector("button[aria-controls]") as HTMLElement;
+
+      await userEvent.click(button);
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+
+      await expect(button.getAttribute("aria-expanded")).toBe("true");
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+
+    await step("Le menu contient toutes les langues", async () => {
+      const links = shadow?.querySelectorAll(".fr-translate__language");
+
+      await expect(links?.length).toBe(languagesData.length);
+    });
+  }}
+/>
 
 <Story name="Bouton tertiaire" args={{ buttonKind: "tertiary" }} />
 
