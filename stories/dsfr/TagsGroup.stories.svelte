@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,7 +68,26 @@
   ></dsfr-tags-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tags-group");
+    const shadow = el?.shadowRoot;
+    const tagsData = (args as unknown as { tags: unknown[] }).tags ?? [];
+
+    await step("Les tags correspondent aux données", async () => {
+      const tags = shadow?.querySelectorAll(".fr-tag");
+
+      await expect(tags?.length).toBe(tagsData.length);
+    });
+
+    await step("Le groupe utilise une liste ul par défaut", async () => {
+      const ul = shadow?.querySelector("ul.fr-tags-group");
+
+      await expect(ul).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Taille MD"
@@ -85,6 +105,16 @@
     type: "default",
     tags: getTagsData(),
   }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tags-group");
+    const shadow = el?.shadowRoot;
+
+    await step("La classe de taille SM est appliquée", async () => {
+      const group = shadow?.querySelector(".fr-tags-group");
+
+      await expect(group?.classList.contains("fr-tags-group--sm")).toBe(true);
+    });
+  }}
 />
 
 <Story
@@ -92,6 +122,17 @@
   args={{
     type: "clickable",
     tags: getTagsData(),
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tags-group");
+    const shadow = el?.shadowRoot;
+    const tagsData = (args as unknown as { tags: unknown[] }).tags ?? [];
+
+    await step("Les tags cliquables sont des liens", async () => {
+      const links = shadow?.querySelectorAll("a.fr-tag");
+
+      await expect(links?.length).toBe(tagsData.length);
+    });
   }}
 />
 
@@ -101,6 +142,47 @@
     type: "pressable",
     tags: pressableTags,
   }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tags-group");
+    const shadow = el?.shadowRoot;
+    const tagsData = (args as unknown as { tags: unknown[] }).tags ?? [];
+
+    await step("Les tags pressables sont des boutons", async () => {
+      const buttons = shadow?.querySelectorAll("button.fr-tag");
+
+      await expect(buttons?.length).toBe(tagsData.length);
+    });
+
+    await step("Le clic sur un tag le sélectionne et émet selected", async () => {
+      const handler = fn();
+      el?.addEventListener("selected", handler);
+
+      const button = shadow?.querySelector("button.fr-tag") as HTMLElement;
+
+      await expect(button?.getAttribute("aria-pressed")).toBe("false");
+
+      await userEvent.click(button);
+
+      await expect(button?.getAttribute("aria-pressed")).toBe("true");
+      await expect(handler).toHaveBeenCalledOnce();
+
+      el?.removeEventListener("selected", handler);
+    });
+
+    await step("Le clic sur un tag sélectionné le désélectionne et émet unselected", async () => {
+      const handler = fn();
+      el?.addEventListener("unselected", handler);
+
+      const button = shadow?.querySelector("button.fr-tag") as HTMLElement;
+
+      await userEvent.click(button);
+
+      await expect(button?.getAttribute("aria-pressed")).toBe("false");
+      await expect(handler).toHaveBeenCalledOnce();
+
+      el?.removeEventListener("unselected", handler);
+    });
+  }}
 />
 
 <Story
@@ -108,5 +190,17 @@
   args={{
     type: "dismissible",
     tags: getTagsData(),
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tags-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Les tags fermables ont la classe dismiss", async () => {
+      const buttons = shadow?.querySelectorAll("button.fr-tag");
+
+      buttons?.forEach((btn) => {
+        expect(btn.classList.contains("fr-tag--dismiss")).toBe(true);
+      });
+    });
   }}
 />
