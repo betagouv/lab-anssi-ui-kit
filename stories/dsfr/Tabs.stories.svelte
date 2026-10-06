@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -68,12 +69,69 @@
   </dsfr-tabs>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabs");
+    const shadow = el?.shadowRoot;
+    const tabsData = (args as unknown as { tabs: { label: string }[] }).tabs ?? [];
+
+    await step("Les onglets correspondent aux données", async () => {
+      const tabButtons = shadow?.querySelectorAll("[role='tab']");
+
+      await expect(tabButtons?.length).toBe(tabsData.length);
+    });
+
+    await step("Le premier onglet est sélectionné par défaut", async () => {
+      const firstTab = shadow?.querySelector("[role='tab']");
+
+      await expect(firstTab?.getAttribute("aria-selected")).toBe("true");
+      await expect(firstTab?.textContent?.trim()).toBe(tabsData[0].label);
+    });
+
+    await step("Le clic sur le deuxième onglet le sélectionne et émet tabchanged", async () => {
+      const handler = fn();
+      el?.addEventListener("tabchanged", handler);
+
+      const tabButtons = shadow?.querySelectorAll("[role='tab']");
+      const secondTab = tabButtons?.[1] as HTMLButtonElement;
+
+      await userEvent.click(secondTab);
+
+      await expect(secondTab.getAttribute("aria-selected")).toBe("true");
+
+      const firstTab = tabButtons?.[0] as HTMLButtonElement;
+
+      await expect(firstTab.getAttribute("aria-selected")).toBe("false");
+
+      await expect(handler).toHaveBeenCalledOnce();
+
+      const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+      await expect(detail.index).toBe(1);
+      await expect(detail.tab.label).toBe(tabsData[1].label);
+
+      el?.removeEventListener("tabchanged", handler);
+    });
+  }}
+/>
 
 <Story
   name="Avec Icones"
   args={{
     hasIcon: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabs");
+    const shadow = el?.shadowRoot;
+
+    await step("Les onglets ont une icône", async () => {
+      const tabButtons = shadow?.querySelectorAll("[role='tab']");
+
+      tabButtons?.forEach((tab) => {
+        expect(tab.classList.contains("fr-tabs__tab--icon-left")).toBe(true);
+      });
+    });
   }}
 />
 
