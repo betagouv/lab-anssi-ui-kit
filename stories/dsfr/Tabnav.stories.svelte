@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrTabnav from "$lib/dsfr/DsfrTabnav.svelte";
@@ -106,7 +107,32 @@
   ></dsfr-tabnav>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+    const { ariaLabel } = args as unknown as { ariaLabel: string };
+
+    await step("La navigation a le bon aria-label", async () => {
+      const nav = shadow?.querySelector("nav.fr-tabnav");
+
+      await expect(nav?.getAttribute("aria-label")).toBe(ariaLabel);
+    });
+
+    await step("Les liens correspondent aux données", async () => {
+      const links = shadow?.querySelectorAll(".fr-tabnav__link");
+
+      await expect(links?.length).toBe(args.links.length);
+    });
+
+    await step("Le lien actif correspond au premier lien", async () => {
+      const activeLink = shadow?.querySelector(".fr-tabnav__link[aria-current='page']");
+
+      await expect(activeLink?.textContent?.trim()).toBe(args.links[0].label);
+    });
+  }}
+/>
 
 <Story
   name="Deuxième lien actif"
@@ -118,12 +144,33 @@
       { label: "Accessibilité", href: "#accessibilite" },
     ],
   }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+    const activeIndex = args.links.findIndex((l) => l.current);
+
+    await step("Le lien actif correspond au lien marqué current", async () => {
+      const activeLink = shadow?.querySelector(".fr-tabnav__link[aria-current='page']");
+
+      await expect(activeLink?.textContent?.trim()).toBe(args.links[activeIndex].label);
+    });
+  }}
 />
 
 <Story
   name="Centré"
   args={{
     centered: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+
+    await step("La classe de centrage est appliquée", async () => {
+      const nav = shadow?.querySelector("nav.fr-tabnav");
+
+      await expect(nav?.classList.contains("fr-tabnav--centered")).toBe(true);
+    });
   }}
 />
 
@@ -139,11 +186,62 @@
       { label: "Changelog", href: "#changelog" },
     ],
   }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+
+    await step("Tous les liens sont affichés", async () => {
+      const links = shadow?.querySelectorAll(".fr-tabnav__link");
+
+      await expect(links?.length).toBe(args.links.length);
+    });
+  }}
 />
 
-<Story name="Contrôle externe" args={{ activeIndex: 2 }} />
+<Story
+  name="Contrôle externe"
+  args={{ activeIndex: 2 }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+    const activeIdx = (args as unknown as { activeIndex: number }).activeIndex;
 
-<Story name="Mode routeur" args={{ routerMode: true }}>
+    await step("Le lien actif correspond à l'index externe", async () => {
+      const activeLink = shadow?.querySelector(".fr-tabnav__link[aria-current='page']");
+
+      await expect(activeLink?.textContent?.trim()).toBe(args.links[activeIdx].label);
+    });
+  }}
+/>
+
+<Story
+  name="Mode routeur"
+  args={{ routerMode: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabnav");
+    const shadow = el?.shadowRoot;
+
+    await step("Le clic sur un lien inactif émet l'événement linkclicked", async () => {
+      const handler = fn();
+      el?.addEventListener("linkclicked", handler);
+
+      const inactiveLink = shadow?.querySelector(
+        ".fr-tabnav__link:not([aria-current='page'])",
+      ) as HTMLElement;
+      inactiveLink?.click();
+
+      await expect(handler).toHaveBeenCalledOnce();
+
+      const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+      await expect(detail).toHaveProperty("index");
+      await expect(detail).toHaveProperty("link");
+      await expect(detail.link.label).toBe(inactiveLink?.textContent?.trim());
+
+      el?.removeEventListener("linkclicked", handler);
+    });
+  }}
+>
   {#snippet template(args: Args)}
     <dsfr-tabnav
       links={args.links}
