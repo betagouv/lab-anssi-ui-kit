@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -86,11 +87,57 @@
   ></dsfr-search>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-search");
+    const shadow = el?.shadowRoot;
+
+    await step("La saisie met à jour la valeur et émet l'événement valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const input = shadow?.querySelector("input.fr-input") as HTMLInputElement;
+
+      await userEvent.type(input, "test recherche");
+
+      await expect(input.value).toBe("test recherche");
+      await expect(handler).toHaveBeenCalled();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe("test recherche");
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+
+    await step("Le clic sur le bouton émet l'événement search", async () => {
+      const handler = fn();
+      el?.addEventListener("search", handler);
+
+      const button = shadow?.querySelector("button.fr-btn") as HTMLButtonElement;
+
+      await userEvent.click(button);
+
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe("test recherche");
+
+      el?.removeEventListener("search", handler);
+    });
+  }}
+/>
 
 <Story
   name="Taille LG"
   args={{
     size: "lg",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-search");
+    const shadow = el?.shadowRoot;
+    const size = (args as unknown as { size: string }).size;
+
+    await step("La barre de recherche a la classe de taille correspondante", async () => {
+      const searchBar = shadow?.querySelector(".fr-search-bar");
+
+      await expect(searchBar?.classList.contains(`fr-search-bar--${size}`)).toBe(true);
+    });
   }}
 />
