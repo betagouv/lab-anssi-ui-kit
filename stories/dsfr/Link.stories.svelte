@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,7 +68,26 @@
   ></dsfr-link>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-link");
+    const shadow = el?.shadowRoot;
+    const link = shadow?.querySelector("a.fr-link");
+
+    await step("Le lien a la classe de taille correspondante", async () => {
+      await expect(link?.classList.contains(`fr-link--${args.size ?? "md"}`)).toBe(true);
+    });
+
+    await step("Le texte du lien est affiché", async () => {
+      await expect(link?.textContent?.trim()).toBe(args.label);
+    });
+
+    await step("Le lien pointe vers la bonne URL", async () => {
+      await expect(link?.getAttribute("href")).toBe(args.href);
+    });
+  }}
+/>
 
 <Story name="Lien texte (neutre)">
   {#snippet template(_args: Args)}
@@ -109,7 +129,21 @@
   {/snippet}
 </Story>
 
-<Story name="Désactivé" args={{ ...linkArgs, disabled: true }} />
+<Story
+  name="Désactivé"
+  args={{ ...linkArgs, disabled: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-link");
+    const shadow = el?.shadowRoot;
+
+    await step("Le lien est désactivé", async () => {
+      const link = shadow?.querySelector("a.fr-link");
+
+      await expect(link?.getAttribute("aria-disabled")).toBe("true");
+      await expect(link?.hasAttribute("href")).toBe(false);
+    });
+  }}
+/>
 
 <Story
   name="Téléchargement"
@@ -120,9 +154,39 @@
     download: true,
     detail: "JPG – 61,88 ko",
   }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-link");
+    const shadow = el?.shadowRoot;
+
+    await step("Le lien est en mode téléchargement", async () => {
+      const link = shadow?.querySelector("a.fr-link");
+
+      await expect(link?.classList.contains("fr-link--download")).toBe(true);
+    });
+
+    await step("Le détail du fichier est affiché", async () => {
+      const detail = shadow?.querySelector(".fr-link__detail");
+
+      await expect(detail?.textContent?.trim()).toContain(args.detail);
+    });
+  }}
 />
 
-<Story name="Externe" args={{ ...linkArgs, blank: true }} />
+<Story
+  name="Externe"
+  args={{ ...linkArgs, blank: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-link");
+    const shadow = el?.shadowRoot;
+
+    await step("Le lien s'ouvre dans un nouvel onglet avec les bons attributs", async () => {
+      const link = shadow?.querySelector("a.fr-link");
+
+      await expect(link?.getAttribute("target")).toBe("_blank");
+      await expect(link?.getAttribute("rel")).toBe("noopener external");
+    });
+  }}
+/>
 
 <Story
   name="Retour en haut"
