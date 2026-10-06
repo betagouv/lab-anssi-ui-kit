@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -24,7 +25,7 @@
         control: false,
       },
     },
-    args: radioArgs,
+    args: { ...radioArgs, value: "radio-1" },
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
@@ -61,4 +62,31 @@
   ></dsfr-radio>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radio");
+    const shadow = el?.shadowRoot;
+
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label?.textContent?.trim()).toBe(args.label);
+    });
+
+    await step("Le clic sur le radio le coche et émet l'événement valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const input = shadow?.querySelector('input[type="radio"]') as HTMLInputElement;
+
+      await userEvent.click(input);
+
+      await expect(input.checked).toBe(true);
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(args.value);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
