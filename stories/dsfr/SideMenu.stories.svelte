@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -76,7 +77,46 @@
   ></dsfr-side-menu>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-side-menu");
+    const shadow = el?.shadowRoot;
+    const itemsData = (args as unknown as { items: unknown[] }).items ?? [];
+
+    await step("Le titre est affiché", async () => {
+      const title = shadow?.querySelector(".fr-sidemenu__title");
+
+      await expect(title?.textContent?.trim()).toBe(args.title);
+    });
+
+    await step("Les éléments du menu correspondent aux données", async () => {
+      const list = shadow?.querySelector(
+        ".fr-sidemenu__inner > .fr-sidemenu__collapse > .fr-sidemenu__list",
+      );
+      const items = list?.querySelectorAll(":scope > .fr-sidemenu__item");
+
+      await expect(items?.length).toBe(itemsData.length);
+    });
+
+    await step("Un clic sur un bouton de sous-menu déplie le contenu", async () => {
+      const menuButton = shadow?.querySelector(
+        ".fr-sidemenu__item .fr-sidemenu__btn",
+      ) as HTMLButtonElement;
+
+      await expect(menuButton?.getAttribute("aria-expanded")).toBe("false");
+
+      await userEvent.click(menuButton);
+
+      await expect(menuButton?.getAttribute("aria-expanded")).toBe("true");
+
+      const ariaControls = menuButton?.getAttribute("aria-controls");
+      const collapse = shadow?.querySelector(`#${ariaControls}`);
+
+      await expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true);
+    });
+  }}
+/>
 
 <Story
   name="Lien"
