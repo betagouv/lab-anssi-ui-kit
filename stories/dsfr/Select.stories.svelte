@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -104,6 +105,56 @@
   ></dsfr-select>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-select");
+    const shadow = el?.shadowRoot;
+    const optionsData =
+      (args as unknown as { options: { value: string; label: string }[] }).options ?? [];
 
-<Story name="Texte d'aide" args={{ hint: "Texte de description additionnel" }} />
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label?.textContent).toContain(args.label);
+    });
+
+    await step("Les options correspondent aux données", async () => {
+      const select = shadow?.querySelector("select.fr-select");
+      const options = select?.querySelectorAll('option:not([value=""])');
+
+      await expect(options?.length).toBe(optionsData.length);
+    });
+
+    await step("La sélection d'une option émet l'événement valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const select = shadow?.querySelector("select.fr-select") as HTMLSelectElement;
+      const targetValue = optionsData[1]?.value;
+
+      await userEvent.selectOptions(select, targetValue);
+
+      await expect(select.value).toBe(targetValue);
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(targetValue);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
+
+<Story
+  name="Texte d'aide"
+  args={{ hint: "Texte de description additionnel" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-select");
+    const shadow = el?.shadowRoot;
+
+    await step("Le texte d'aide est affiché", async () => {
+      const hint = shadow?.querySelector(".fr-hint-text");
+
+      await expect(hint?.textContent?.trim()).toBe((args as unknown as { hint: string }).hint);
+    });
+  }}
+/>
