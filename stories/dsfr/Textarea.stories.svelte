@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -96,4 +97,31 @@
   ></dsfr-textarea>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-textarea");
+    const shadow = el?.shadowRoot;
+
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label");
+
+      await expect(label?.textContent?.trim()).toBe(args.label);
+    });
+
+    await step("La saisie met à jour la valeur et émet valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const textarea = shadow?.querySelector("textarea.fr-input") as HTMLTextAreaElement;
+
+      await userEvent.type(textarea, "Texte de test");
+
+      await expect(textarea.value).toContain("Texte de test");
+      await expect(handler).toHaveBeenCalled();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toContain("Texte de test");
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
