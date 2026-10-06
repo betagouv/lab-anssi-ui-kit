@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
@@ -64,11 +65,63 @@
   ></dsfr-label>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-label");
+    const shadow = el?.shadowRoot;
 
-<Story name="Avec texte additionnel" args={{ hint: "Format attendu : JJ/MM/AAAA." }} />
+    await step("Le texte du label est affiché", async () => {
+      const span = shadow?.querySelector("label.fr-label > span");
 
-<Story name="Masqué (fr-sr-only)" args={{ hidden: true }} />
+      await expect(span?.textContent?.trim()).toContain(args.label);
+    });
+
+    await step("L'attribut for est défini", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label?.getAttribute("for")).toBe(args.for);
+    });
+  }}
+/>
+
+<Story
+  name="Avec texte additionnel"
+  args={{ hint: "Format attendu : JJ/MM/AAAA." }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-label");
+    const shadow = el?.shadowRoot;
+
+    await step("Le texte additionnel est affiché", async () => {
+      const hint = shadow?.querySelector(".fr-hint-text");
+
+      await expect(hint?.textContent?.trim()).toContain(args.hint);
+    });
+  }}
+/>
+
+<Story
+  name="Masqué (fr-sr-only)"
+  args={{ hidden: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-label");
+    const shadow = el?.shadowRoot;
+
+    await step("Le label a la classe fr-sr-only", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label?.classList.contains("fr-sr-only")).toBe(true);
+    });
+
+    await step("Le label n'est pas visuellement visible", async () => {
+      const label = shadow?.querySelector("label.fr-label") as HTMLElement;
+      const rect = label?.getBoundingClientRect();
+
+      await expect(rect?.width).toBeLessThanOrEqual(1);
+      await expect(rect?.height).toBeLessThanOrEqual(1);
+    });
+  }}
+/>
 
 <Story name="Tailles de texte (fr-text--xs à fr-text--lead)">
   {#snippet template(args: Args)}
@@ -92,4 +145,18 @@
   {/snippet}
 </Story>
 
-<Story name="Taille et graisse combinées" args={{ labelSize: "lg", labelWeight: "bold" }} />
+<Story
+  name="Taille et graisse combinées"
+  args={{ labelSize: "lg", labelWeight: "bold" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-label");
+    const shadow = el?.shadowRoot;
+
+    await step("Le span a les classes de taille et de graisse correspondantes", async () => {
+      const span = shadow?.querySelector("label.fr-label > span");
+
+      await expect(span?.classList.contains(`fr-text--${args.labelSize}`)).toBe(true);
+      await expect(span?.classList.contains(`fr-text--${args.labelWeight}`)).toBe(true);
+    });
+  }}
+/>
