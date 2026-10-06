@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -111,9 +112,40 @@
   </dsfr-tile>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tile");
+    const shadow = el?.shadowRoot;
 
-<Story name="Taille SM" args={{ size: "sm" }} />
+    await step("Le titre est affiché", async () => {
+      const title = shadow?.querySelector(".fr-tile__title");
+
+      await expect(title?.textContent?.trim()).toBe(args.title);
+    });
+
+    await step("Le lien pointe vers le bon href", async () => {
+      const link = shadow?.querySelector(".fr-tile__title a");
+
+      await expect(link?.getAttribute("href")).toBe(args.href);
+    });
+  }}
+/>
+
+<Story
+  name="Taille SM"
+  args={{ size: "sm" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tile");
+    const shadow = el?.shadowRoot;
+
+    await step("La classe de taille SM est appliquée", async () => {
+      const tile = shadow?.querySelector(".fr-tile");
+
+      await expect(tile?.classList.contains("fr-tile--sm")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Avec Tag" args={{ enlarge: true, hasTag: true }} />
 
@@ -122,6 +154,22 @@
 <Story
   name="Horizontale"
   args={{ enlarge: true, hasDescription: true, horizontal: true, hasDetails: true }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tile");
+    const shadow = el?.shadowRoot;
+
+    await step("La tuile a la classe horizontale", async () => {
+      const tile = shadow?.querySelector(".fr-tile");
+
+      await expect(tile?.classList.contains("fr-tile--horizontal")).toBe(true);
+    });
+
+    await step("La description est affichée", async () => {
+      const desc = shadow?.querySelector(".fr-tile__desc");
+
+      await expect(desc?.textContent?.trim()).toBe(args.description);
+    });
+  }}
 />
 
 <Story
@@ -137,6 +185,22 @@
     download: true,
     hasDetails: true,
     details: "Détail obligatoire (Extension - Poids - Langue)",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tile");
+    const shadow = el?.shadowRoot;
+
+    await step("La tuile a la classe download", async () => {
+      const tile = shadow?.querySelector(".fr-tile");
+
+      await expect(tile?.classList.contains("fr-tile--download")).toBe(true);
+    });
+
+    await step("Le détail obligatoire est affiché", async () => {
+      const detail = shadow?.querySelector(".fr-tile__detail");
+
+      await expect(detail?.textContent?.trim()).toBe(args.details);
+    });
   }}
 />
 
@@ -159,7 +223,24 @@
   args={{ enlarge: true, horizontal: true, verticalBreakpoint: "md", hasDescription: true }}
 />
 
-<Story name="Sans lien" args={{ actionMarkup: false, noLink: true }} />
+<Story
+  name="Sans lien"
+  args={{ actionMarkup: false, noLink: true }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tile");
+    const shadow = el?.shadowRoot;
+
+    await step("Le titre est affiché sans lien", async () => {
+      const title = shadow?.querySelector(".fr-tile__title");
+
+      await expect(title?.textContent?.trim()).toBe(args.title);
+
+      const link = title?.querySelector("a");
+
+      await expect(link).toBeNull();
+    });
+  }}
+/>
 
 <Story
   name="Horizontale sans lien"
