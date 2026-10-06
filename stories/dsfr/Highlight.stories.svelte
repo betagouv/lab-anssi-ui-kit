@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -50,13 +51,38 @@
   <dsfr-highlight {...args}></dsfr-highlight>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-highlight");
+    const shadow = el?.shadowRoot;
+
+    await step("Le texte est affiché avec la classe de taille correspondante", async () => {
+      const text = shadow?.querySelector(`p.fr-text--${args.size ?? "md"}`);
+
+      await expect(text?.textContent?.trim()).toContain(args.text);
+    });
+  }}
+/>
 
 <Story name="Taille SM" args={{ size: "sm" }} />
 
 <Story name="Taille LG" args={{ size: "lg" }} />
 
-<Story name="Accent" args={{ accent: "green-menthe" }} />
+<Story
+  name="Accent"
+  args={{ accent: "green-menthe" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-highlight");
+    const shadow = el?.shadowRoot;
+
+    await step("La classe d'accent correspond à la prop", async () => {
+      const highlight = shadow?.querySelector(".fr-highlight");
+
+      await expect(highlight?.classList.contains(`fr-highlight--${args.accent}`)).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Avec usage du slot par défaut">
   {#snippet template(args: Args)}
