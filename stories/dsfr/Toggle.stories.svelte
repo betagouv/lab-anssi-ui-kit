@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -70,14 +71,82 @@
   ></dsfr-toggle>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-toggle");
+    const shadow = el?.shadowRoot;
 
-<Story name="Description" args={{ hint: "Texte additionnel de l'interrupteur" }} />
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label.fr-toggle__label");
+
+      await expect(label?.textContent?.trim()).toBe(args.label);
+    });
+
+    await step("Le clic bascule l'état et émet valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const input = shadow?.querySelector("input.fr-toggle__input") as HTMLInputElement;
+
+      await expect(input.checked).toBe(false);
+
+      await userEvent.click(input);
+
+      await expect(input.checked).toBe(true);
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(true);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
+
+<Story
+  name="Description"
+  args={{ hint: "Texte additionnel de l'interrupteur" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-toggle");
+    const shadow = el?.shadowRoot;
+
+    await step("Le texte additionnel est affiché", async () => {
+      const hint = shadow?.querySelector(".fr-hint-text");
+
+      await expect(hint?.textContent?.trim()).toBe((args as unknown as { hint: string }).hint);
+    });
+  }}
+/>
 
 <Story name="État" args={{ state: true }} />
 
-<Story name="Erreur" args={{ status: "error" }} />
+<Story
+  name="Erreur"
+  args={{ status: "error" }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-toggle");
+    const shadow = el?.shadowRoot;
+
+    await step("La classe de statut erreur est appliquée", async () => {
+      const toggle = shadow?.querySelector(".fr-toggle");
+
+      await expect(toggle?.classList.contains("fr-toggle--error")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Valide" args={{ status: "valid" }} />
 
-<Story name="Désactivé" args={{ disabled: true }} />
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-toggle");
+    const shadow = el?.shadowRoot;
+
+    await step("L'interrupteur est désactivé", async () => {
+      const input = shadow?.querySelector("input.fr-toggle__input") as HTMLInputElement;
+
+      await expect(input?.disabled).toBe(true);
+    });
+  }}
+/>
