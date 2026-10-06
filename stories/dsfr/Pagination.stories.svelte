@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -67,11 +68,60 @@
   ></dsfr-pagination>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-pagination");
+    const shadow = el?.shadowRoot;
+    const pagesData = (args as unknown as { pages: { label: string }[] }).pages ?? [];
+
+    await step("Les liens de page correspondent au nombre de pages", async () => {
+      const pageLinks = shadow?.querySelectorAll(
+        ".fr-pagination__link:not(.fr-pagination__link--first):not(.fr-pagination__link--last):not(.fr-pagination__link--prev):not(.fr-pagination__link--next)",
+      );
+
+      await expect(pageLinks?.length).toBe(pagesData.length);
+    });
+
+    await step("La page courante est marquée aria-current=page", async () => {
+      const current = shadow?.querySelector('.fr-pagination__link[aria-current="page"]');
+
+      await expect(current).toBeTruthy();
+    });
+
+    await step("Les boutons première/dernière et précédent/suivant sont présents", async () => {
+      const first = shadow?.querySelector(".fr-pagination__link--first");
+      const last = shadow?.querySelector(".fr-pagination__link--last");
+      const prev = shadow?.querySelector(".fr-pagination__link--prev");
+      const next = shadow?.querySelector(".fr-pagination__link--next");
+
+      await expect(first).toBeTruthy();
+      await expect(last).toBeTruthy();
+      await expect(prev).toBeTruthy();
+      await expect(next).toBeTruthy();
+    });
+  }}
+/>
 
 <Story
   name="Dernière page"
   args={{
     currentPageIndex: paginationArgs.pages.length,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-pagination");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton dernière page est désactivé", async () => {
+      const last = shadow?.querySelector(".fr-pagination__link--last");
+
+      await expect(last?.getAttribute("aria-disabled")).toBe("true");
+    });
+
+    await step("Le bouton suivant est désactivé", async () => {
+      const next = shadow?.querySelector(".fr-pagination__link--next");
+
+      await expect(next?.getAttribute("aria-disabled")).toBe("true");
+    });
   }}
 />
