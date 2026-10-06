@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -115,7 +116,20 @@
   <dsfr-navigation id={args.id} aria-label={args.ariaLabel} items={args.items}></dsfr-navigation>
 {/snippet}
 
-<Story name="Navigation" />
+<Story
+  name="Navigation"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+    const shadow = el?.shadowRoot;
+    const itemsData = (args as unknown as { items: unknown[] }).items ?? [];
+
+    await step("Les items de navigation sont présents", async () => {
+      const items = shadow?.querySelectorAll(".fr-nav__item");
+
+      await expect(items?.length).toBe(itemsData.length);
+    });
+  }}
+/>
 
 <Story
   name="Liens"
@@ -127,6 +141,24 @@
       getItemArgs("nav-links-03", "link", true),
       getItemArgs("nav-links-04"),
     ],
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+    const shadow = el?.shadowRoot;
+    const itemsData = (args as unknown as { items: { label: string; active?: boolean }[] }).items;
+
+    await step("Les liens de navigation sont rendus", async () => {
+      const links = shadow?.querySelectorAll(".fr-nav__link");
+
+      await expect(links?.length).toBe(itemsData.length);
+    });
+
+    await step("Le lien actif est marqué aria-current=page", async () => {
+      const activeItem = itemsData.find((item) => item.active);
+      const activeLink = shadow?.querySelector('.fr-nav__link[aria-current="page"]');
+
+      await expect(activeLink?.textContent?.trim()).toBe(activeItem?.label);
+    });
   }}
 />
 
@@ -167,6 +199,50 @@
         ],
       },
     ],
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-navigation");
+    const shadow = el?.shadowRoot;
+    const itemsData = (args as unknown as { items: { items?: unknown[] }[] }).items;
+
+    await step("Les boutons de menu sont rendus", async () => {
+      const buttons = shadow?.querySelectorAll(".fr-nav__btn");
+
+      await expect(buttons?.length).toBe(itemsData.length);
+    });
+
+    await step("Le clic sur un bouton ouvre le sous-menu", async () => {
+      const button = shadow?.querySelector(".fr-nav__btn") as HTMLElement;
+
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+
+      await userEvent.click(button);
+
+      await expect(button?.getAttribute("aria-expanded")).toBe("true");
+
+      const expanded = shadow?.querySelector(".fr-collapse--expanded");
+
+      await expect(expanded).toBeTruthy();
+    });
+
+    await step("Le sous-menu contient le bon nombre de liens", async () => {
+      const firstMenuItems = itemsData[0]?.items ?? [];
+      const submenuLinks = shadow?.querySelectorAll(".fr-collapse--expanded .fr-nav__link");
+
+      await expect(submenuLinks?.length).toBe(firstMenuItems.length);
+    });
+
+    await step("Un second clic ferme le sous-menu", async () => {
+      const button = shadow?.querySelector(".fr-nav__btn") as HTMLElement;
+
+      await userEvent.click(button);
+
+      await expect(button?.getAttribute("aria-expanded")).toBe("false");
+
+      const expanded = shadow?.querySelector(".fr-collapse--expanded");
+
+      await expect(expanded).toBeNull();
+    });
   }}
 />
 
