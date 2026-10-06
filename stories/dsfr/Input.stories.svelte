@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -105,15 +106,105 @@
   ></dsfr-input>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
 
-<Story name="Erreur" args={{ status: "error" }} />
+    await step("Le champ de saisie a le bon type", async () => {
+      const input = shadow?.querySelector("input");
 
-<Story name="Succès" args={{ status: "valid" }} />
+      await expect(input?.type).toBe(args.type);
+    });
 
-<Story name="Désactivé" args={{ disabled: true }} />
+    await step("Émet l'événement valuechanged avec la valeur saisie", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
 
-<Story name="Avec icône" args={{ label: "Champ avec une icône", icon: "warning-line" }} />
+      const input = shadow?.querySelector("input") as HTMLInputElement;
+
+      await userEvent.type(input, "test@example.com");
+
+      await expect(handler).toHaveBeenCalled();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe("test@example.com");
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
+
+<Story
+  name="Erreur"
+  args={{ status: "error" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe a la classe de statut correspondante", async () => {
+      const group = shadow?.querySelector(".fr-input-group");
+
+      await expect(group?.classList.contains(`fr-input-group--${args.status}`)).toBe(true);
+    });
+
+    await step("Le champ a un aria-describedby pour le message d'erreur", async () => {
+      const input = shadow?.querySelector("input");
+
+      await expect(input?.getAttribute("aria-describedby")).toBeTruthy();
+    });
+  }}
+/>
+
+<Story
+  name="Succès"
+  args={{ status: "valid" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
+
+    await step("Le groupe a la classe de statut correspondante", async () => {
+      const group = shadow?.querySelector(".fr-input-group");
+
+      await expect(group?.classList.contains(`fr-input-group--${args.status}`)).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
+
+    await step("Le champ est désactivé", async () => {
+      const input = shadow?.querySelector("input");
+
+      await expect(input?.disabled).toBe(true);
+    });
+
+    await step("Le groupe a la classe disabled", async () => {
+      const group = shadow?.querySelector(".fr-input-group");
+
+      await expect(group?.classList.contains("fr-input-group--disabled")).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Avec icône"
+  args={{ label: "Champ avec une icône", icon: "warning-line" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
+
+    await step("Le wrapper a la classe d'icône correspondante", async () => {
+      const wrap = shadow?.querySelector(".fr-input-wrap");
+
+      await expect(wrap?.classList.contains(`fr-icon-${args.icon}`)).toBe(true);
+    });
+  }}
+/>
 
 <Story
   name="Téléphone"
@@ -138,6 +229,16 @@
   args={{
     label: "Champ type mot de passe",
     type: "password",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-input");
+    const shadow = el?.shadowRoot;
+
+    await step("Le champ a le type password", async () => {
+      const input = shadow?.querySelector("input");
+
+      await expect(input?.type).toBe(args.type);
+    });
   }}
 />
 
