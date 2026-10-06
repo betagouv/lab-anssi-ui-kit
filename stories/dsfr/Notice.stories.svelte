@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -52,7 +53,26 @@
   ></dsfr-notice>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+    const shadow = el?.shadowRoot;
+    const type = (args as unknown as { type?: string }).type ?? "info";
+
+    await step("Le bandeau a la classe de type correspondante", async () => {
+      const notice = shadow?.querySelector(".fr-notice");
+
+      await expect(notice?.classList.contains(`fr-notice--${type}`)).toBe(true);
+    });
+
+    await step("Le titre est affiché", async () => {
+      const title = shadow?.querySelector(".fr-notice__title");
+
+      await expect(title?.textContent?.trim()).toBe(args.title);
+    });
+  }}
+/>
 
 <Story
   name="Information"
@@ -63,6 +83,23 @@
     hasLink: true,
     blank: true,
     dismissible: true,
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+    const shadow = el?.shadowRoot;
+    const { type, linkLabel } = args as unknown as { type?: string; linkLabel?: string };
+
+    await step("Le bandeau a la classe de type correspondante", async () => {
+      const notice = shadow?.querySelector(".fr-notice");
+
+      await expect(notice?.classList.contains(`fr-notice--${type ?? "info"}`)).toBe(true);
+    });
+
+    await step("Le lien est présent", async () => {
+      const link = shadow?.querySelector(".fr-notice__link");
+
+      await expect(link?.textContent?.trim()).toBe(linkLabel);
+    });
   }}
 />
 
@@ -75,6 +112,33 @@
     hasLink: true,
     blank: true,
     dismissible: true,
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-notice");
+    const shadow = el?.shadowRoot;
+    const type = (args as unknown as { type?: string }).type ?? "info";
+
+    await step("Le bandeau a la classe de type correspondante", async () => {
+      const notice = shadow?.querySelector(".fr-notice");
+
+      await expect(notice?.classList.contains(`fr-notice--${type}`)).toBe(true);
+    });
+
+    await step("Le bouton de fermeture est présent", async () => {
+      const closeBtn = shadow?.querySelector("button.fr-btn--close");
+
+      await expect(closeBtn).toBeTruthy();
+    });
+
+    await step("Le bandeau disparaît après clic sur le bouton de fermeture", async () => {
+      const closeBtn = shadow?.querySelector("button.fr-btn--close") as HTMLElement;
+
+      await userEvent.click(closeBtn);
+
+      const notice = shadow?.querySelector(".fr-notice");
+
+      await expect(notice).toBeNull();
+    });
   }}
 />
 
