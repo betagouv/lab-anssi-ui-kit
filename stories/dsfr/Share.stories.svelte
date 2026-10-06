@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -64,12 +65,58 @@
   </dsfr-share>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-share");
+    const shadow = el?.shadowRoot;
+    const buttonsData = (args as unknown as { buttons: { type: string }[] }).buttons ?? [];
+
+    await step("Le titre est affiché", async () => {
+      const title = shadow?.querySelector(".fr-share__title");
+
+      await expect(title?.textContent?.trim()).toBe(args.title);
+    });
+
+    await step("Les boutons de partage correspondent aux données", async () => {
+      const buttons = shadow?.querySelectorAll(".fr-btns-group li");
+
+      await expect(buttons?.length).toBe(buttonsData.length);
+    });
+  }}
+/>
 
 <Story
   name="Désactivé"
   args={{
     disabled: true,
     hasText: true,
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-share");
+    const shadow = el?.shadowRoot;
+    const buttonsData = (args as unknown as { buttons: { type: string }[] }).buttons ?? [];
+    const socialTypes = [
+      "facebook",
+      "twitter-x",
+      "twitter",
+      "bluesky",
+      "threads",
+      "linkedin",
+      "mastodon",
+    ];
+    const socialCount = buttonsData.filter((b) => socialTypes.includes(b.type)).length;
+
+    await step("Le texte informatif est affiché", async () => {
+      const text = shadow?.querySelector(".fr-share__text");
+
+      await expect(text?.textContent?.trim()).toBeTruthy();
+    });
+
+    await step("Les boutons sociaux sont désactivés", async () => {
+      const disabledLinks = shadow?.querySelectorAll("a[aria-disabled='true']");
+
+      await expect(disabledLinks?.length).toBe(socialCount);
+    });
   }}
 />
