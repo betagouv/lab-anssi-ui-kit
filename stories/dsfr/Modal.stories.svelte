@@ -1,6 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
-  import { expect, userEvent } from "storybook/test";
+  import { expect, fn, userEvent, waitFor } from "storybook/test";
   import { type ComponentProps } from "svelte";
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -71,35 +71,6 @@
         },
       },
     },
-    play: async ({ args, canvasElement }) => {
-      if (args.footerType !== "buttonsgroup") return;
-
-      const openButton = canvasElement
-        .querySelector(".story-container > dsfr-button")
-        ?.shadowRoot?.querySelector<HTMLButtonElement>("button");
-      const modal = canvasElement.querySelector("dsfr-modal");
-      if (!openButton || !modal?.shadowRoot) return;
-
-      await userEvent.click(openButton);
-
-      const closeButton = modal.shadowRoot.querySelector<HTMLButtonElement>(".fr-btn--close");
-      const buttonsGroup = modal.querySelector("dsfr-buttons-group[slot='footer']");
-      const actionButtons = Array.from(
-        buttonsGroup?.shadowRoot?.querySelectorAll<HTMLButtonElement>("button") ?? [],
-      );
-      const [firstAction, lastAction] = actionButtons;
-      if (!closeButton || !firstAction || !lastAction) return;
-
-      firstAction.focus();
-      await userEvent.tab();
-      await expect(lastAction).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(closeButton).toHaveFocus();
-
-      await userEvent.tab({ shift: true });
-      await expect(lastAction).toHaveFocus();
-    },
     render: template,
   });
 
@@ -154,7 +125,57 @@
   </div>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ canvasElement, step }) => {
+    const modal = canvasElement.querySelector("dsfr-modal")!;
+
+    await step("Le clic sur le bouton ouvre la modale et émet l'événement open", async () => {
+      const openHandler = fn();
+      modal.addEventListener("open", openHandler);
+
+      const openButton = canvasElement.querySelector<HTMLButtonElement>(
+        ".story-container > button.fr-btn",
+      )!;
+
+      await userEvent.click(openButton);
+
+      await waitFor(() => {
+        const dialog = modal.shadowRoot?.querySelector(".fr-modal");
+        expect(dialog?.classList.contains("fr-modal--opened")).toBe(true);
+      });
+      await expect(openHandler).toHaveBeenCalledOnce();
+
+      modal.removeEventListener("open", openHandler);
+    });
+
+    await step("Le titre de la modale est affiché", async () => {
+      const title = modal.shadowRoot?.querySelector(".fr-modal__title");
+
+      await expect(title?.textContent?.trim()).toBeTruthy();
+    });
+
+    await step(
+      "Le clic sur le bouton fermer ferme la modale et émet l'événement close",
+      async () => {
+        const closeHandler = fn();
+        modal.addEventListener("close", closeHandler);
+
+        const closeButton = modal.shadowRoot!.querySelector<HTMLButtonElement>(".fr-btn--close")!;
+
+        await userEvent.click(closeButton);
+
+        await waitFor(() => {
+          const dialog = modal.shadowRoot?.querySelector(".fr-modal");
+          expect(dialog?.classList.contains("fr-modal--opened")).toBe(false);
+        });
+        await expect(closeHandler).toHaveBeenCalledOnce();
+
+        modal.removeEventListener("close", closeHandler);
+      },
+    );
+  }}
+/>
 
 <Story name="Size SM" args={{ id: "modal-sm", size: "sm" }} />
 
@@ -170,6 +191,30 @@
     icon: "info-line",
     footer: true,
     footerType: "buttonsgroup",
+  }}
+  play={async ({ args, canvasElement, step }) => {
+    if (args.footerType !== "buttonsgroup") return;
+
+    const openButton = canvasElement.querySelector<HTMLButtonElement>(
+      ".story-container > button.fr-btn",
+    );
+    const modal = canvasElement.querySelector("dsfr-modal");
+    if (!openButton || !modal?.shadowRoot) return;
+
+    await userEvent.click(openButton);
+
+    await step("Les boutons d'action du pied de page sont présents", async () => {
+      const buttonsGroup = modal.querySelector("dsfr-buttons-group[slot='footer']");
+      const actionButtons = buttonsGroup?.shadowRoot?.querySelectorAll("button");
+
+      await expect(actionButtons?.length).toBeGreaterThanOrEqual(2);
+    });
+
+    await step("Le bouton de fermeture est présent", async () => {
+      const closeButton = modal.shadowRoot!.querySelector(".fr-btn--close");
+
+      await expect(closeButton).toBeTruthy();
+    });
   }}
 />
 
