@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, userEvent, waitFor } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import DsfrUser from "$lib/dsfr/DsfrUser.svelte";
@@ -97,7 +98,57 @@
   ></dsfr-user>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-user");
+    const shadow = el?.shadowRoot;
+    const linksData = (args as unknown as { links: unknown[] }).links ?? [];
+
+    await step("Le bouton déclencheur affiche le libellé", async () => {
+      const button = shadow?.querySelector(".fr-user__btn");
+
+      await expect(button?.textContent?.trim()).toBe(args.buttonLabel);
+    });
+
+    await step("Le clic ouvre le menu utilisateur", async () => {
+      const button = shadow?.querySelector(".fr-user__btn") as HTMLElement;
+
+      await expect(button.getAttribute("aria-expanded")).toBe("false");
+
+      await userEvent.click(button);
+
+      await expect(button.getAttribute("aria-expanded")).toBe("true");
+
+      const collapse = shadow?.querySelector(".fr-collapse");
+
+      await waitFor(() => expect(collapse?.classList.contains("fr-collapse--expanded")).toBe(true));
+    });
+
+    await step("Le menu contient les informations utilisateur", async () => {
+      const userName = shadow?.querySelector(".fr-user__name");
+
+      await expect(userName?.textContent?.trim()).toContain((args.userName as string)?.trim());
+
+      const userEmail = shadow?.querySelector(".fr-user__email");
+
+      await expect(userEmail?.textContent?.trim()).toBe(args.userEmail);
+    });
+
+    await step("Les liens de navigation correspondent aux données", async () => {
+      const links = shadow?.querySelectorAll(".fr-user__link");
+
+      await expect(links?.length).toBe(linksData.length);
+    });
+
+    await step("Le bouton de déconnexion est présent", async () => {
+      const logoutBtn = shadow?.querySelector(".fr-user__logout .fr-btn");
+
+      await expect(logoutBtn).toBeTruthy();
+      await expect(logoutBtn?.textContent?.trim()).toBe("Se déconnecter");
+    });
+  }}
+/>
 
 <Story
   name="Sans texte d'information"
@@ -116,6 +167,16 @@
     collapseId: "user-menu-no-logout-collapse",
     hasLogout: false,
   }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-user");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton de déconnexion est absent", async () => {
+      const logout = shadow?.querySelector(".fr-user__logout");
+
+      await expect(logout).toBeNull();
+    });
+  }}
 />
 
 <Story
@@ -124,5 +185,15 @@
     id: "user-menu-disabled",
     collapseId: "user-menu-disabled-collapse",
     disabled: true,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-user");
+    const shadow = el?.shadowRoot;
+
+    await step("Le bouton déclencheur est désactivé", async () => {
+      const button = shadow?.querySelector(".fr-user__btn") as HTMLButtonElement;
+
+      await expect(button?.disabled).toBe(true);
+    });
   }}
 />
