@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -46,4 +47,40 @@
   ></dsfr-stepper>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-stepper");
+    const shadow = el?.shadowRoot;
+    const { currentStep, stepCount, nextStep } = args as unknown as {
+      currentStep: number;
+      stepCount: number;
+      nextStep: string;
+    };
+
+    await step("Le titre de l'étape est affiché", async () => {
+      const title = shadow?.querySelector(".fr-stepper__title");
+
+      await expect(title?.textContent).toContain(args.title);
+    });
+
+    await step("L'état de l'étape correspond aux données", async () => {
+      const state = shadow?.querySelector(".fr-stepper__state");
+
+      await expect(state?.textContent?.trim()).toBe(`Étape ${currentStep} sur ${stepCount}`);
+    });
+
+    await step("La barre de progression a les bons attributs", async () => {
+      const steps = shadow?.querySelector(".fr-stepper__steps");
+
+      await expect(steps?.getAttribute("data-fr-current-step")).toBe(String(currentStep));
+      await expect(steps?.getAttribute("data-fr-steps")).toBe(String(stepCount));
+    });
+
+    await step("Les détails de l'étape suivante sont affichés", async () => {
+      const details = shadow?.querySelector(".fr-stepper__details");
+
+      await expect(details?.textContent).toContain(nextStep);
+    });
+  }}
+/>
