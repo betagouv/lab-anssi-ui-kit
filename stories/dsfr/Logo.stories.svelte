@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -36,13 +37,57 @@
   <dsfr-logo {...args}></dsfr-logo>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
+    const shadow = el?.shadowRoot;
+    const logo = shadow?.querySelector("p.fr-logo");
+    const { size, title } = args as unknown as { size?: string; title: string };
 
-<Story name="Taille SM" args={{ ...logoArgs, size: "sm" }} />
+    await step("Le logo a la classe de taille correspondante", async () => {
+      await expect(logo?.classList.contains(`fr-logo--${size ?? "md"}`)).toBe(true);
+    });
+
+    await step("Le titre du logo est affiché", async () => {
+      await expect(logo?.innerHTML).toContain(title);
+    });
+  }}
+/>
+
+<Story
+  name="Taille SM"
+  args={{ ...logoArgs, size: "sm" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
+    const shadow = el?.shadowRoot;
+
+    await step("Le logo a la classe de taille correspondante", async () => {
+      const logo = shadow?.querySelector("p.fr-logo");
+      const size = (args as unknown as { size: string }).size;
+
+      await expect(logo?.classList.contains(`fr-logo--${size}`)).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Taille MD" args={{ ...logoArgs, size: "md" }} />
 
-<Story name="Taille LG" args={{ ...logoArgs, size: "lg" }} />
+<Story
+  name="Taille LG"
+  args={{ ...logoArgs, size: "lg" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-logo");
+    const shadow = el?.shadowRoot;
+
+    await step("Le logo a la classe de taille correspondante", async () => {
+      const logo = shadow?.querySelector("p.fr-logo");
+      const size = (args as unknown as { size: string }).size;
+
+      await expect(logo?.classList.contains(`fr-logo--${size}`)).toBe(true);
+    });
+  }}
+/>
 
 <Story name="République Française" args={{ ...logoArgs, title: "République <br>Française" }} />
 
