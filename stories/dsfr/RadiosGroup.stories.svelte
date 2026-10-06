@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -40,7 +41,10 @@
         control: false,
       },
     },
-    args: { radios: getRadiosGroupData(), ...radiosGroupArgs, name: "radios-group" },
+    args: {
+      radios: getRadiosGroupData().map((r, i) => ({ ...r, value: `radio-${i + 1}` })),
+      ...radiosGroupArgs,
+    },
     parameters: {
       actions: { handles: ["valuechanged"] },
       docs: {
@@ -80,17 +84,119 @@
   ></dsfr-radios-group>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+    const shadow = el?.shadowRoot;
+    const radiosData = (args as unknown as { radios: { value?: string }[] }).radios ?? [];
 
-<Story name="Texte d'aide de la légende" args={{ hint: "Texte de description additionnel" }} />
+    await step("La légende est affichée", async () => {
+      const legend = shadow?.querySelector("legend");
 
-<Story name="Texte d'aide des radios" args={{ radios: getRadiosGroupData(3, true) }} />
+      await expect(legend?.textContent).toContain(args.legend);
+    });
 
-<Story name="Désactivé" args={{ disabled: true }} />
+    await step("Les boutons radio sont rendus", async () => {
+      const radios = shadow?.querySelectorAll('input[type="radio"]');
+
+      await expect(radios?.length).toBe(radiosData.length);
+    });
+
+    await step("Un clic sur un radio le sélectionne et émet l'événement valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const radios = shadow?.querySelectorAll('input[type="radio"]');
+      const secondRadio = radios?.[1] as HTMLInputElement;
+
+      await userEvent.click(secondRadio);
+
+      await expect(secondRadio.checked).toBe(true);
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(radiosData[1]?.value);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
+
+<Story
+  name="Texte d'aide de la légende"
+  args={{ hint: "Texte de description additionnel" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le texte d'aide de la légende est affiché", async () => {
+      const hint = shadow?.querySelector("legend .fr-hint-text");
+
+      await expect(hint?.textContent?.trim()).toBe(args.hint);
+    });
+  }}
+/>
+
+<Story
+  name="Texte d'aide des radios"
+  args={{ radios: getRadiosGroupData(3, true) }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+    const shadow = el?.shadowRoot;
+    const radiosData = (args as unknown as { radios: { hint?: string }[] }).radios ?? [];
+
+    await step("Chaque radio affiche son texte d'aide", async () => {
+      const hints = shadow?.querySelectorAll(".fr-radio-group .fr-hint-text");
+
+      await expect(hints?.length).toBe(radiosData.length);
+
+      hints?.forEach((hint, i) => {
+        expect(hint?.textContent?.trim()).toBe(radiosData[i]?.hint);
+      });
+    });
+  }}
+/>
+
+<Story
+  name="Désactivé"
+  args={{ disabled: true }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+    const shadow = el?.shadowRoot;
+
+    await step("Le fieldset est désactivé", async () => {
+      const fieldset = shadow?.querySelector("fieldset") as HTMLFieldSetElement;
+
+      await expect(fieldset?.disabled).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Valide" args={{ status: "valid" }} />
 
-<Story name="Erreur" args={{ status: "error" }} />
+<Story
+  name="Erreur"
+  args={{ status: "error" }}
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-radios-group");
+    const shadow = el?.shadowRoot;
+    const { status, errorMessage: errorText } = args as unknown as {
+      status: string;
+      errorMessage: string;
+    };
+
+    await step("Le fieldset a le statut correspondant", async () => {
+      const fieldset = shadow?.querySelector("fieldset.fr-fieldset");
+
+      await expect(fieldset?.classList.contains(`fr-fieldset--${status}`)).toBe(true);
+    });
+
+    await step("Le message d'erreur est affiché", async () => {
+      const message = shadow?.querySelector(".fr-message--error");
+
+      await expect(message?.textContent?.trim()).toBe(errorText);
+    });
+  }}
+/>
 
 <Story name="Taille MD" args={{ size: "md" }} />
 
