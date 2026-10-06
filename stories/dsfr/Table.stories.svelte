@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn, userEvent } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -193,6 +194,7 @@
     has-footer-select={args.hasFooterSelect || undefined}
     has-footer-pagination={args.hasFooterPagination || undefined}
     has-footer-buttons={args.hasFooterButtons || undefined}
+    items-per-page={args.itemsPerPage ? JSON.stringify(args.itemsPerPage) : undefined}
     table={args.table}
     selectable={args.selectable || undefined}
     select-all={args.selectAll || undefined}
@@ -200,15 +202,95 @@
   ></dsfr-table>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+    const tableData = (args as unknown as { table: { thead: unknown[][]; tbodies: unknown[][][] } })
+      .table;
+    const headerCount = tableData?.thead?.[0]?.length ?? 0;
+    const rowCount = tableData?.tbodies?.reduce((acc, tbody) => acc + tbody.length, 0) ?? 0;
 
-<Story name="Taille small" args={{ size: "sm" }} />
+    await step("Le caption est affiché", async () => {
+      const caption = shadow?.querySelector("caption");
 
-<Story name="Taille medium" args={{ size: "md" }} />
+      await expect(caption?.textContent).toContain(args.caption);
+    });
 
-<Story name="Taille large" args={{ size: "lg" }} />
+    await step("Les en-têtes de colonnes correspondent aux données", async () => {
+      const headers = shadow?.querySelectorAll("thead th");
 
-<Story name="Avec bordure" args={{ bordered: true }} />
+      await expect(headers?.length).toBe(headerCount);
+    });
+
+    await step("Les lignes de données correspondent aux données", async () => {
+      const rows = shadow?.querySelectorAll("tbody tr");
+
+      await expect(rows?.length).toBe(rowCount);
+    });
+  }}
+/>
+
+<Story
+  name="Taille small"
+  args={{ size: "sm" }}
+  play={async ({ args, canvasElement, step }) => {
+    const shadow = canvasElement.querySelector("dsfr-table")?.shadowRoot;
+    const size = (args as unknown as { size: string }).size;
+
+    await step("Le tableau a la classe de taille correspondante", async () => {
+      const table = shadow?.querySelector(".fr-table");
+
+      await expect(table?.classList.contains(`fr-table--${size}`)).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Taille medium"
+  args={{ size: "md" }}
+  play={async ({ args, canvasElement, step }) => {
+    const shadow = canvasElement.querySelector("dsfr-table")?.shadowRoot;
+    const size = (args as unknown as { size: string }).size;
+
+    await step("Le tableau a la classe de taille correspondante", async () => {
+      const table = shadow?.querySelector(".fr-table");
+
+      await expect(table?.classList.contains(`fr-table--${size}`)).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Taille large"
+  args={{ size: "lg" }}
+  play={async ({ args, canvasElement, step }) => {
+    const shadow = canvasElement.querySelector("dsfr-table")?.shadowRoot;
+    const size = (args as unknown as { size: string }).size;
+
+    await step("Le tableau a la classe de taille correspondante", async () => {
+      const table = shadow?.querySelector(".fr-table");
+
+      await expect(table?.classList.contains(`fr-table--${size}`)).toBe(true);
+    });
+  }}
+/>
+
+<Story
+  name="Avec bordure"
+  args={{ bordered: true }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+
+    await step("Le tableau a la classe bordered", async () => {
+      const table = shadow?.querySelector(".fr-table");
+
+      await expect(table?.classList.contains("fr-table--bordered")).toBe(true);
+    });
+  }}
+/>
 
 <Story name="Sans scroll" args={{ noScroll: true }} />
 
@@ -245,14 +327,142 @@
   automatiquement via la prop `selectable`, on part donc de la table simple et on délègue
   l'ajout de la colonne au composant.
 -->
-<Story name="Sélectionnable" args={{ selectable: true }} />
+<Story
+  name="Sélectionnable"
+  args={{ selectable: true }}
+  play={async ({ args, canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+    const tableData = (args as unknown as { table: { tbodies: unknown[][][] } }).table;
+    const rowCount = tableData?.tbodies?.reduce((acc, tbody) => acc + tbody.length, 0) ?? 0;
+
+    await step("Les checkboxes de sélection correspondent aux lignes", async () => {
+      const checkboxes = shadow?.querySelectorAll('tbody input[type="checkbox"]');
+
+      await expect(checkboxes?.length).toBe(rowCount);
+    });
+
+    await step("Émet selectionchanged lors de la sélection d'une ligne", async () => {
+      const handler = fn();
+      dsfrTable?.addEventListener("selectionchanged", handler);
+
+      const checkbox = shadow?.querySelector('tbody input[type="checkbox"]') as HTMLInputElement;
+
+      await userEvent.click(checkbox);
+
+      await expect(handler).toHaveBeenCalledOnce();
+
+      const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+      await expect(detail).toHaveProperty("keys");
+      await expect(detail).toHaveProperty("rows");
+      await expect(detail.keys.length).toBe(1);
+
+      dsfrTable?.removeEventListener("selectionchanged", handler);
+    });
+  }}
+/>
 
 <Story
   name="Sélectionnable avec ligne sélectionnée"
-  args={{ selectable: true, selectedRowKeys: [1] }}
+  args={{ selectable: true, selectedRowKeys: [0] }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+
+    await step("La ligne pré-sélectionnée a sa checkbox cochée", async () => {
+      const firstCheckbox = shadow?.querySelector(
+        'tbody input[type="checkbox"]',
+      ) as HTMLInputElement;
+
+      await expect(firstCheckbox?.checked).toBe(true);
+    });
+
+    await step("La ligne pré-sélectionnée a l'attribut aria-selected", async () => {
+      const selectedRow = shadow?.querySelector('tbody tr[aria-selected="true"]');
+
+      await expect(selectedRow).toBeTruthy();
+    });
+  }}
 />
 
-<Story name="Sélectionnable avec tout sélectionner" args={{ selectable: true, selectAll: true }} />
+<Story
+  name="Sélectionnable avec tout sélectionner"
+  args={{ selectable: true, selectAll: true }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+
+    await step(
+      "Le clic sur tout sélectionner coche toutes les lignes et émet l'événement",
+      async () => {
+        const handler = fn();
+        dsfrTable?.addEventListener("selectionchanged", handler);
+
+        const selectAll = shadow?.querySelector('thead input[type="checkbox"]') as HTMLInputElement;
+
+        await userEvent.click(selectAll);
+
+        await expect(handler).toHaveBeenCalledOnce();
+
+        const rowCheckboxes = shadow?.querySelectorAll(
+          'tbody input[type="checkbox"]',
+        ) as NodeListOf<HTMLInputElement>;
+
+        for (const cb of rowCheckboxes) {
+          await expect(cb.checked).toBe(true);
+        }
+
+        dsfrTable?.removeEventListener("selectionchanged", handler);
+      },
+    );
+  }}
+/>
+
+<Story
+  name="Avec pagination"
+  args={{
+    hasFooter: true,
+    hasFooterSelect: true,
+    hasFooterPagination: true,
+    itemsPerPage: [2, 5],
+  }}
+  play={async ({ canvasElement, step }) => {
+    const dsfrTable = canvasElement.querySelector("dsfr-table");
+    const shadow = dsfrTable?.shadowRoot;
+
+    await step("Le changement de page émet l'événement pagechanged", async () => {
+      const handler = fn();
+      dsfrTable?.addEventListener("pagechanged", handler);
+
+      const nextLink = shadow?.querySelector(".fr-pagination__link--next") as HTMLElement;
+
+      await userEvent.click(nextLink);
+
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(2);
+
+      dsfrTable?.removeEventListener("pagechanged", handler);
+    });
+
+    await step(
+      "Le changement du nombre de lignes émet l'événement rowsperpagechanged",
+      async () => {
+        const handler = fn();
+        dsfrTable?.addEventListener("rowsperpagechanged", handler);
+
+        const select = shadow?.querySelector("select.fr-select") as HTMLSelectElement;
+
+        await userEvent.selectOptions(select, "5");
+
+        await expect(handler).toHaveBeenCalledOnce();
+        await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(5);
+
+        dsfrTable?.removeEventListener("rowsperpagechanged", handler);
+      },
+    );
+  }}
+/>
 
 <!--
   Limitation : la story DSFR « ComplexTableStory » utilise rowspan, colspan, l'attribut headers
