@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { defineMeta } from "@storybook/addon-svelte-csf";
+  import { expect, fn } from "storybook/test";
   import { type ComponentProps } from "svelte";
 
   import {
@@ -101,4 +102,47 @@
   ></dsfr-range>
 {/snippet}
 
-<Story name="Défaut" />
+<Story
+  name="Par défaut"
+  play={async ({ args, canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-range");
+    const shadow = el?.shadowRoot;
+
+    await step("Le label est affiché", async () => {
+      const label = shadow?.querySelector("label.fr-label");
+
+      await expect(label?.textContent).toContain(args.label);
+    });
+
+    await step("Les indicateurs min et max sont affichés", async () => {
+      const min = shadow?.querySelector(".fr-range__min");
+      const max = shadow?.querySelector(".fr-range__max");
+
+      await expect(min?.textContent?.trim()).toBe(String(args.min));
+      await expect(max?.textContent?.trim()).toBe(String(args.max));
+    });
+
+    await step("La valeur de sortie est affichée", async () => {
+      const output = shadow?.querySelector(".fr-range__output");
+
+      await expect(output?.textContent?.trim()).toBe(String(args.value));
+    });
+
+    await step("Le changement de valeur émet l'événement valuechanged", async () => {
+      const handler = fn();
+      el?.addEventListener("valuechanged", handler);
+
+      const input = shadow?.querySelector('input[type="range"]') as HTMLInputElement;
+      const newValue = 75;
+      const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set;
+
+      setter?.call(input, newValue);
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+
+      await expect(handler).toHaveBeenCalledOnce();
+      await expect(handler.mock.calls.at(-1)?.[0].detail).toBe(newValue);
+
+      el?.removeEventListener("valuechanged", handler);
+    });
+  }}
+/>
