@@ -10,10 +10,13 @@
       actif: { reflect: false, type: "Boolean", attribute: "actif" },
       largeurMaximale: { reflect: false, type: "Boolean", attribute: "largeur-maximale" },
     },
+    extend: withIconsStyleSheet,
   }}
 />
 
 <script lang="ts">
+  import { withIconsStyleSheet } from "$lib/utilitaires";
+
   import Icone from "$lib/composants/Icone.svelte";
 
   interface Props {
