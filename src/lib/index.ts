@@ -39,6 +39,7 @@ export { default as DsfrCallout } from "./dsfr/DsfrCallout.svelte";
 export { default as DsfrCard } from "./dsfr/DsfrCard.svelte";
 export { default as DsfrCheckbox } from "./dsfr/DsfrCheckbox.svelte";
 export { default as DsfrCheckboxesGroup } from "./dsfr/DsfrCheckboxesGroup.svelte";
+export { default as DsfrCombobox } from "./dsfr/DsfrCombobox.svelte";
 export { default as DsfrContainer } from "./dsfr/DsfrContainer.svelte";
 export { default as DsfrContent } from "./dsfr/DsfrContent.svelte";
 export { default as DsfrConnect } from "./dsfr/DsfrConnect.svelte";
