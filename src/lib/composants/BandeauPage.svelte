@@ -163,6 +163,7 @@
 
   .lab-anssi-bandeau-page {
     background-color: var(--background-color, var(--artwork-major-blue-france));
+    overflow: hidden;
 
     &,
     & * {
