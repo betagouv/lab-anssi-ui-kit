@@ -58,6 +58,7 @@
         },
       },
     },
+    tags: ["Avec slots"],
     render: template,
   });
 

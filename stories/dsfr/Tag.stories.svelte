@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Tag",
     component: DsfrTag,
+    tags: ["Avec slots"],
     argTypes: {
       ...tagArgTypes,
       onselected: {
@@ -31,6 +32,12 @@
           type: { summary: "CustomEvent<string>" },
         },
         control: false,
+      },
+      slotDefault: {
+        name: "default",
+        description: "Contenu personnalisé du bouton (remplace la prop `label`)",
+        control: false,
+        table: { category: "Slots" },
       },
     },
     args: tagArgs,

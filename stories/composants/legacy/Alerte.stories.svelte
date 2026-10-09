@@ -7,6 +7,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Alerte",
     component: Alerte,
+    tags: ["Avec slots"],
     args: {
       description: "Une alerte d'information",
       type: "information",

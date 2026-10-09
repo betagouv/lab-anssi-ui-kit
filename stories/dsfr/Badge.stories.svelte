@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Badge",
     component: DsfrBadge,
+    tags: ["Avec slots"],
     argTypes: {
       ...badgeArgTypes,
       slotDefault: {

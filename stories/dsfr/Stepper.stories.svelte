@@ -17,6 +17,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Stepper",
     component: DsfrStepper,
+    tags: ["Avec slots"],
     argTypes: stepperArgTypes,
     args: { ...stepperArgs, hideDetails: false },
     parameters: {

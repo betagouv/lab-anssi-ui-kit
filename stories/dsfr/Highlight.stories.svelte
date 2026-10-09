@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Highlight",
     component: DsfrHighlight,
+    tags: ["Avec slots"],
     argTypes: {
       ...highlightArgTypes,
       slotText: {

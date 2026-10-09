@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Notice",
     component: DsfrNotice,
+    tags: ["Avec slots"],
     args: noticeArgs,
     argTypes: noticeArgTypes,
     parameters: {

@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Link",
     component: DsfrLink,
+    tags: ["Avec slots"],
     argTypes: {
       ...linkArgTypes,
       neutral: {
