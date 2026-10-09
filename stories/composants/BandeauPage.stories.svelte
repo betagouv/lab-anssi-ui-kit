@@ -11,6 +11,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Bandeau page",
     component: BandeauPage,
+    tags: ["Avec slots"],
     argTypes: {
       type: {
         description: "Type du bandeau",

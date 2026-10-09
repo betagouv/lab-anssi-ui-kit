@@ -15,6 +15,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Callout",
     component: DsfrCallout,
+    tags: ["Avec slots"],
     argTypes: {
       ...calloutArgTypes,
       slotButton: {

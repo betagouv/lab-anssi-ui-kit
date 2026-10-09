@@ -48,6 +48,7 @@
       },
     },
     render: template,
+    tags: ["Avec slots"],
   });
 
   type Args = ComponentProps<DsfrAlert>;

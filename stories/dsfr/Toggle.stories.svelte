@@ -14,6 +14,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Toggle",
     component: DsfrToggle,
+    tags: ["Avec slots"],
     argTypes: {
       ...toggleArgTypes,
       onvaluechanged: {

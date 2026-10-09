@@ -99,6 +99,7 @@
       },
     },
     render: template,
+    tags: ["Avec slots"],
   });
 
   type Args = ComponentProps<Marelle>;
