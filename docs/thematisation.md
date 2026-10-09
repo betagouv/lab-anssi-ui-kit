@@ -431,13 +431,33 @@ themes: {
 
 ## Utilisation dans un projet
 
+### Projet Svelte
+
+Dans un projet Svelte, importez les composants directement depuis le package et chargez le fichier de thème dans votre CSS :
+
+```svelte
+<script>
+  import { DsfrButton } from "@lab-anssi/ui-kit";
+</script>
+
+<DsfrButton>Ceci est un bouton !</DsfrButton>
+```
+
+```css
+/* Chargez les variables DSFR et le thème souhaité */
+@import "@lab-anssi/ui-kit/dist/assets/dsfr-variables.css";
+@import "@lab-anssi/ui-kit/dist/assets/lab-anssi-theme.mss.css";
+```
+
+### Projet HTML / WebComponents
+
 Pour utiliser les composants thématisés dans une page HTML, trois ressources sont nécessaires :
 
 1. **Les variables DSFR** (`dsfr-variables.css`) - Fournit les valeurs par défaut des variables CSS du DSFR[^1]
 2. **Un fichier de thème** (`lab-anssi-theme.{CIGLE-DU-THEME}.css`) - Surcharge les variables avec les couleurs du thème choisi
 3. **Le script de la librairie** (`lab-anssi-ui-kit.iife.js`) - Enregistre les Web Components
 
-### Exemple complet
+#### Exemple complet
 
 ```html
 <!doctype html>
@@ -449,13 +469,14 @@ Pour utiliser les composants thématisés dans une page HTML, trois ressources s
 
     <!-- 1. Variables DSFR (valeurs par défaut) -->
     <link
-      href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/1.41.1/dsfr-variables.css"
+      href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/{version}/dsfr-variables.css"
       rel="stylesheet"
+      nonce="{nonce}"
     />
 
     <!-- 2. Thème souhaité (ici MonServiceSécurisé) -->
     <link
-      href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/1.41.1/lab-anssi-theme.mss.css"
+      href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/{version}/lab-anssi-theme.mss.css"
       rel="stylesheet"
     />
   </head>
