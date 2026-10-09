@@ -166,6 +166,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Bloc fonctionnalités",
     component: BlocFonctionnalites,
+    tags: ["Avec slots"],
     argTypes: {
       slotMedia: {
         name: "media",

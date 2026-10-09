@@ -8,6 +8,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Bandeau Titre",
     component: BandeauTitre,
+    tags: ["Avec slots"],
     args: {
       titre: "Titre de la page",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

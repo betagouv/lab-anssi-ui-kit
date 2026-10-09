@@ -12,6 +12,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Content Media",
     component: DsfrContent,
+    tags: ["Avec slots"],
     argTypes: {
       size: {
         control: { type: "select" },
