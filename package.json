@@ -85,7 +85,7 @@
     "@vitest/browser": "~4.1.11",
     "@vitest/browser-playwright": "~4.1.11",
     "@vitest/coverage-v8": "~4.1.11",
-    "cssnano": "~9.1.2",
+    "cssnano": "~9.2.0",
     "dotenv": "~18.0.5",
     "eslint": "~10.11.0",
     "eslint-config-prettier": "~10.1.8",
