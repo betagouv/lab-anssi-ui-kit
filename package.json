@@ -81,7 +81,7 @@
     "@sveltejs/vite-plugin-svelte": "~7.3.0",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/svelte": "~5.4.2",
-    "@types/node": "~24.19.0",
+    "@types/node": "~24.19.1",
     "@vitest/browser": "~4.1.11",
     "@vitest/browser-playwright": "~4.1.11",
     "@vitest/coverage-v8": "~4.1.11",
