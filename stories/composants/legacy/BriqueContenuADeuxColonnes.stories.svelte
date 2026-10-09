@@ -10,6 +10,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Brique Contenu A Deux Colonnes",
     component: BriqueContenuADeuxColonnes,
+    tags: ["Avec slots"],
     args: {
       titre: "MonServiceSécurisé",
       paragraphe:

@@ -10,6 +10,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Brique Rejoindre La Communauté",
     component: RejoindreLaCommunaute,
+    tags: ["Avec slots"],
     args: {
       titre: "Rejoindre la communauté",
       raisons: ["Échanger directement avec les membres."],

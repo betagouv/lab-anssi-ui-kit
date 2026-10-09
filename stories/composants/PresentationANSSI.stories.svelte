@@ -8,6 +8,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Presentation ANSSI",
     component: PresentationANSSI,
+    tags: ["Avec slots"],
     render: template,
   });
 

@@ -17,6 +17,7 @@
   const { Story } = defineMeta({
     title: "Composants/DSFR/Tile",
     component: DsfrTile,
+    tags: ["Avec slots"],
     argTypes: {
       ...tileArgTypes,
       noIcon: {

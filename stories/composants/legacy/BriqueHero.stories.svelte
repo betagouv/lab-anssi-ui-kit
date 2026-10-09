@@ -10,6 +10,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Brique Hero",
     component: BriqueHero,
+    tags: ["Avec slots"],
     args: {
       badge: true,
       titre: "MonServiceSécurisé",

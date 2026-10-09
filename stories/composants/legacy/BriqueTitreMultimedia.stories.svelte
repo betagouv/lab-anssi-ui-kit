@@ -16,6 +16,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Brique Titre Multimedia",
     component: BriqueTitreMultimedia,
+    tags: ["Avec slots"],
     args: {
       titre: "Titre pour MSS",
       multimedia: { source, sourcesoustitres: sousTitres, imagedecouverture: couverture },

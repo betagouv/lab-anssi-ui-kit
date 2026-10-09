@@ -8,6 +8,7 @@
   const { Story } = defineMeta({
     title: "Composants/Lab ANSSI/Legacy/Tag",
     component: Tag,
+    tags: ["Avec slots"],
     args: {
       couleurFond: undefined,
       couleurTexte: undefined,
