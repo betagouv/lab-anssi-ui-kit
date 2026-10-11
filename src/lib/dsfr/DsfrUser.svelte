@@ -99,7 +99,8 @@
    * @returns {"left" | "right"} L'alignement optimal : "left" ou "right"
    */
   function defineAlignment(collapseElement: HTMLElement): "left" | "right" {
-    const hostRect = $host().getBoundingClientRect();
+    const host = $host() ?? container;
+    const hostRect = host.getBoundingClientRect();
     const containerWidth = collapseElement.offsetWidth || collapseElement.scrollWidth;
     const viewportWidth = window.innerWidth;
 
@@ -218,7 +219,9 @@
   function handleLogout(event: MouseEvent) {
     event.stopPropagation();
 
-    $host().dispatchEvent(new CustomEvent("logout", { bubbles: true, composed: true }));
+    ($host() ?? container)?.dispatchEvent(
+      new CustomEvent("logout", { bubbles: true, composed: true }),
+    );
   }
 
   /**
@@ -234,7 +237,7 @@
   function handleLinkClick(event: MouseEvent, link: UserLink, index: number) {
     event.stopPropagation();
 
-    $host().dispatchEvent(
+    ($host() ?? container)?.dispatchEvent(
       new CustomEvent("linkclicked", { detail: { link, index }, bubbles: true, composed: true }),
     );
   }
