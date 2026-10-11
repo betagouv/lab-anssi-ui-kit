@@ -78,10 +78,10 @@
   let currentValues: string[] = $derived(values);
   function handleChange() {
     // REVIEW deprecate this event in favor of valueschanged
-    $host().dispatchEvent(
+    $host()?.dispatchEvent(
       new CustomEvent<string[]>("valuechanged", { detail: currentValues, bubbles: true }),
     );
-    $host().dispatchEvent(
+    $host()?.dispatchEvent(
       new CustomEvent<string[]>("valueschanged", { detail: currentValues, bubbles: true }),
     );
   }
