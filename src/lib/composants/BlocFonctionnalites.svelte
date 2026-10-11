@@ -193,9 +193,9 @@
   let mediaCloneContainer = $state<HTMLDivElement>();
 
   const hasMediaSlotContent = $derived(
-    !$host().querySelector('[slot="media"]') &&
+    !$host()?.querySelector('[slot="media"]') &&
       !!fonctionnaliteActive?.id &&
-      !!$host().querySelector(`[slot="media-${fonctionnaliteActive.id}"]`),
+      !!$host()?.querySelector(`[slot="media-${fonctionnaliteActive.id}"]`),
   );
 
   $effect(() => {
@@ -225,8 +225,10 @@
     return () => clearInterval(interval);
   });
 
+  let rootElement: HTMLDivElement;
+
   $effect(() => {
-    const host = $host();
+    const host = $host() ?? rootElement;
     const activeId = fonctionnaliteActive?.id;
 
     if (activeId) {
@@ -393,6 +395,7 @@
       "lab-anssi-fonctionnalites--media-gauche": orientationMedia === "gauche",
     },
   ]}
+  bind:this={rootElement}
 >
   <section class="lab-anssi-fonctionnalites__conteneur">
     <header class="lab-anssi-fonctionnalites__entete">
