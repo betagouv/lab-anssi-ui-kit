@@ -66,6 +66,8 @@
     items?: ButtonItem[];
     /** Désactive le bouton d'ouverture du dropdown */
     disabled?: boolean;
+    /** Callback appelé lors du clic sur un élément du dropdown */
+    onitemclicked?: (detail: { item: ButtonItem; index: number }) => void;
   }
 
   let {
@@ -81,6 +83,7 @@
     align = "left",
     items = [],
     disabled,
+    onitemclicked,
   }: Props = $props();
   let dropdown: HTMLElement;
   let effectiveAlign = $derived<"left" | "right">(align);
@@ -222,6 +225,7 @@
    */
   function handleItemClick(event: MouseEvent, item: ButtonItem, index: number) {
     event.stopPropagation();
+    onitemclicked?.({ item, index });
     ($host() ?? dropdown)?.dispatchEvent(
       new CustomEvent("itemclicked", { detail: { item, index }, bubbles: true }),
     );

@@ -89,6 +89,8 @@
     legendSize?: TextSize;
     /** Applique une classe utilitaire de graisse DSFR (fr-text--light à fr-text--heavy) sur la légende */
     legendWeight?: TextWeight;
+    /** Callback appelé lors du changement de valeur */
+    onvaluechanged?: (value: string) => void;
   }
 
   let {
@@ -111,6 +113,7 @@
     internals,
     legendSize,
     legendWeight,
+    onvaluechanged,
   }: Props = $props();
 
   let hostElement: HTMLElement = $host();
@@ -135,7 +138,8 @@
    * Met à jour la valeur et déclenche l'événement 'valuechanged'.
    */
   function handleChange() {
-    hostElement.dispatchEvent(new CustomEvent("valuechanged", { detail: value, bubbles: true }));
+    onvaluechanged?.(value!);
+    hostElement?.dispatchEvent(new CustomEvent("valuechanged", { detail: value, bubbles: true }));
   }
 
   /**

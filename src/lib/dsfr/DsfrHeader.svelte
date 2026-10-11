@@ -156,6 +156,8 @@
     hasHeaderTag?: boolean;
     /** Permet de définir le conteneur comme "fluide" ou non */
     fluid?: boolean;
+    /** Callback appelé lors du clic sur un lien d'accès rapide */
+    ontoolLinkClick?: (link: ToolLink) => void;
   }
 
   let {
@@ -198,13 +200,15 @@
     navigationItems,
     hasHeaderTag = true,
     fluid = false,
+    ontoolLinkClick,
   }: Props = $props();
 
   let openedMenuModal = $state(false);
   let openedSearchModal = $state(false);
 
   function handleToolLinkClick(link: ToolLink) {
-    ($host() as HTMLElement).dispatchEvent(
+    ontoolLinkClick?.(link);
+    $host()?.dispatchEvent(
       new CustomEvent("toolLinkClick", { detail: link, bubbles: true, composed: true }),
     );
   }

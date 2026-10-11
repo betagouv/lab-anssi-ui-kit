@@ -45,9 +45,11 @@
      * Permet un contrôle externe de l'état actif sans reconstruire le tableau `links`.
      */
     activeIndex?: number;
+    /** Callback appelé lors du clic sur un lien */
+    onlinkclicked?: (detail: { index: number; link: TabnavLink }) => void;
   }
 
-  let { links = [], ariaLabel, centered, routerMode, activeIndex }: Props = $props();
+  let { links = [], ariaLabel, centered, routerMode, activeIndex, onlinkclicked }: Props = $props();
 
   let expanded = $state(false);
   let collapseEl: HTMLDivElement;
@@ -74,7 +76,8 @@
 
     event.preventDefault();
 
-    $host().dispatchEvent(
+    onlinkclicked?.({ index, link });
+    $host()?.dispatchEvent(
       new CustomEvent("linkclicked", { detail: { index, link }, bubbles: true }),
     );
   }

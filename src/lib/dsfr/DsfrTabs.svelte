@@ -51,9 +51,11 @@
     ariaLabel?: string;
     /** Index de l'onglet actif à l'initialisation */
     activeTabIndex?: number;
+    /** Callback appelé lors du changement d'onglet */
+    ontabchanged?: (detail: { index: number; tab: Tab }) => void;
   }
 
-  let { hasIcon, tabs = [], ariaLabel, activeTabIndex = 0 }: Props = $props();
+  let { hasIcon, tabs = [], ariaLabel, activeTabIndex = 0, ontabchanged }: Props = $props();
 
   let activeIndex = $state(untrack(() => activeTabIndex));
 
@@ -103,6 +105,7 @@
   function selectTab(index: number) {
     activeIndex = index;
 
+    ontabchanged?.({ index, tab: tabs[index] });
     ($host() ?? tabsElement)?.dispatchEvent(
       new CustomEvent("tabchanged", { detail: { index, tab: tabs[index] }, bubbles: true }),
     );
