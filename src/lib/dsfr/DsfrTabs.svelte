@@ -103,7 +103,7 @@
   function selectTab(index: number) {
     activeIndex = index;
 
-    $host().dispatchEvent(
+    ($host() ?? tabsElement)?.dispatchEvent(
       new CustomEvent("tabchanged", { detail: { index, tab: tabs[index] }, bubbles: true }),
     );
   }
