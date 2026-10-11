@@ -8,6 +8,7 @@ Pour contribuer à ce projet, veuillez suivre les étapes suivantes :
 2. Créez une branche dédiée à votre contribution (ex : `feature/mon-nouveau-composant`).
 3. Développez votre fonctionnalité ou correctif en respectant les conventions du projet.
 4. Vérifiez que le code build correctement (`pnpm run build`) et que les tests passent (`pnpm test`).
+   > **Note :** La commande `pnpm run build` produit à la fois les composants Svelte (via `svelte-package` dans `dist/`) et les WebComponents (bundle IIFE dans `dist/webcomponents/`).
 5. Soumettez une Pull Request (PR) détaillée sur le dépôt principal.
 6. Attendez la revue et les retours éventuels des mainteneurs.
 
