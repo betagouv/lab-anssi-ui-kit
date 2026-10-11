@@ -105,7 +105,8 @@
    * mais qu'il n'y a pas assez d'espace à gauche, le dropdown sera aligné à gauche.
    */
   function defineAlignment(collapseElement: HTMLElement): "left" | "right" {
-    const hostRect = $host().getBoundingClientRect();
+    const host = $host() ?? dropdown;
+    const hostRect = host.getBoundingClientRect();
     const containerWidth = collapseElement.offsetWidth || collapseElement.scrollWidth;
     const viewportWidth = window.innerWidth;
 
@@ -221,7 +222,7 @@
    */
   function handleItemClick(event: MouseEvent, item: ButtonItem, index: number) {
     event.stopPropagation();
-    $host().dispatchEvent(
+    ($host() ?? dropdown)?.dispatchEvent(
       new CustomEvent("itemclicked", { detail: { item, index }, bubbles: true }),
     );
   }
