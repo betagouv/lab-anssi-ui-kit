@@ -82,7 +82,7 @@
   function resize() {
     if (!elementsEl || !fieldsetEl) return;
 
-    const host = $host() as HTMLElement;
+    const host = ($host() ?? fieldsetEl) as HTMLElement;
     const parentWidth = host.parentElement?.offsetWidth ?? 0;
 
     fieldsetEl.classList.remove("fr-segmented--vertical");
@@ -103,7 +103,7 @@
    *
    */
   $effect(() => {
-    const host = $host() as HTMLElement;
+    const host = ($host() ?? fieldsetEl) as HTMLElement;
     const parent = host.parentElement;
 
     if (!parent) return;
