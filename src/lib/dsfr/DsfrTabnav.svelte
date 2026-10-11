@@ -18,6 +18,8 @@
   setThemeable($host());
 
   interface TabnavLink {
+    /** Identifiant optionnel, utilisé comme clé de rendu */
+    id?: string;
     /** Libellé du lien */
     label: string;
     /** URL de destination */
@@ -92,7 +94,7 @@
       </button>
       <div class="fr-collapse" id="fr-tabnav-collapse" bind:this={collapseEl}>
         <ul>
-          {#each links as link, i (link.href)}
+          {#each links as link, i (link.id ?? `${link.href}-${i}`)}
             <li>
               {#if i === resolvedIndex}
                 <span class="fr-tabnav__link" aria-current="page" use:createSlot={`link-${i + 1}`}>
