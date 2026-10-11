@@ -64,6 +64,10 @@
     hasLogout?: boolean;
     /** Libellé du bouton de déconnexion */
     logoutLabel?: string;
+    /** Callback appelé lors de la déconnexion */
+    onlogout?: () => void;
+    /** Callback appelé lors du clic sur un lien utilisateur */
+    onlinkclicked?: (detail: { link: UserLink; index: number }) => void;
   }
 
   let {
@@ -80,6 +84,8 @@
     disabled,
     hasLogout,
     logoutLabel = "Se déconnecter",
+    onlogout,
+    onlinkclicked,
   }: Props = $props();
 
   let container: HTMLElement;
@@ -219,6 +225,7 @@
   function handleLogout(event: MouseEvent) {
     event.stopPropagation();
 
+    onlogout?.();
     ($host() ?? container)?.dispatchEvent(
       new CustomEvent("logout", { bubbles: true, composed: true }),
     );
@@ -237,6 +244,7 @@
   function handleLinkClick(event: MouseEvent, link: UserLink, index: number) {
     event.stopPropagation();
 
+    onlinkclicked?.({ link, index });
     ($host() ?? container)?.dispatchEvent(
       new CustomEvent("linkclicked", { detail: { link, index }, bubbles: true, composed: true }),
     );

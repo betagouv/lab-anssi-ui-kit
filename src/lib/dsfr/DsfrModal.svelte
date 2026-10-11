@@ -44,6 +44,10 @@
     footer?: boolean;
     /** Ouverture de la modale */
     opened?: boolean;
+    /** Callback appelé à l'ouverture de la modale */
+    onopen?: () => void;
+    /** Callback appelé à la fermeture de la modale */
+    onclose?: () => void;
   }
 
   let {
@@ -56,6 +60,8 @@
     markup = "dialog",
     opened = false,
     footer = false,
+    onopen,
+    onclose,
   }: Props = $props();
 
   let dialogElement: HTMLDialogElement | HTMLDivElement | undefined = $state();
@@ -99,7 +105,8 @@
         dialogElement?.querySelector<HTMLElement>(".fr-btn--close")?.focus();
       });
 
-      $host().dispatchEvent(new CustomEvent("open", { bubbles: true }));
+      onopen?.();
+      $host()?.dispatchEvent(new CustomEvent("open", { bubbles: true }));
     } else if (!opened && previousOpened) {
       hasScrollDivider = false;
 
@@ -108,7 +115,8 @@
       }
       previouslyFocused = null;
 
-      $host().dispatchEvent(new CustomEvent("close", { bubbles: true }));
+      onclose?.();
+      $host()?.dispatchEvent(new CustomEvent("close", { bubbles: true }));
     }
 
     previousOpened = opened;

@@ -52,7 +52,10 @@
     errorMessage?: string;
     /** Texte du message de succès */
     validMessage?: string;
-    /** Taille de checkbox */
+    /** Callback appelé lors du changement de valeur (déprécié, utiliser onvalueschanged) */
+    onvaluechanged?: (values: string[]) => void;
+    /** Callback appelé lors du changement des valeurs sélectionnées */
+    onvalueschanged?: (values: string[]) => void;
   }
   const {
     id = "",
@@ -65,6 +68,8 @@
     status,
     errorMessage,
     validMessage,
+    onvaluechanged,
+    onvalueschanged,
   }: Props = $props();
 
   const statusClass = $derived.by(() => {
@@ -78,9 +83,11 @@
   let currentValues: string[] = $derived(values);
   function handleChange() {
     // REVIEW deprecate this event in favor of valueschanged
+    onvaluechanged?.(currentValues);
     $host()?.dispatchEvent(
       new CustomEvent<string[]>("valuechanged", { detail: currentValues, bubbles: true }),
     );
+    onvalueschanged?.(currentValues);
     $host()?.dispatchEvent(
       new CustomEvent<string[]>("valueschanged", { detail: currentValues, bubbles: true }),
     );
