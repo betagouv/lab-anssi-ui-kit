@@ -65,41 +65,10 @@ La bibliothèque propose **deux modes de distribution** :
 
 | Mode                  | Format                     | Dossier                          | Cas d’usage                                         |
 | --------------------- | -------------------------- | -------------------------------- | --------------------------------------------------- |
-| **Composants Svelte** | ES modules (tree-shakable) | `dist/composants` et `dist/dsfr` | Projets Svelte 5                                    |
 | **WebComponents**     | Bundle IIFE                | `dist/webcomponents/`            | Tout projet HTML/JS (React, Vue, Angular, vanilla…) |
+| **Composants Svelte** | ES modules (tree-shakable) | `dist/composants` et `dist/dsfr` | Projets Svelte 5                                    |
 
 Le dossier `dist/` est construit à l’aide de la commande `pnpm run build`.
-
-### Composants Svelte
-
-#### Installation
-
-```bash
-pnpm add -D @lab-anssi/ui-kit@latest
-```
-
-> [!IMPORTANT]
-> Le package déclare `svelte` (>= 5.57.0) en `peerDependencies`. Assurez-vous que votre projet utilise une version compatible.
-
-#### Import
-
-Les composants sont importables directement depuis le point d’entrée du package :
-
-```ts
-import { Alerte, CentreAide, ResumePssi } from "@lab-anssi/ui-kit";
-```
-
-Ils sont compilés par [`@sveltejs/package`](https://svelte.dev/docs/kit/packaging) et bénéficient du tree-shaking : seuls les composants importés sont inclus dans votre bundle final.
-
-#### Exemple
-
-```svelte
-<script>
-  import { Alerte } from "@lab-anssi/ui-kit";
-</script>
-
-<Alerte type="information">Ceci est une alerte informative.</Alerte>
-```
 
 ### WebComponents
 
@@ -154,6 +123,52 @@ Une fois ces ressources chargées, les WebComponents sont prêts à être utilis
 
 ```html
 <lab-anssi-centre-aide nom-service="MonService" liens="[...]"></lab-anssi-centre-aide>
+```
+
+### Composants Svelte
+
+#### Installation
+
+```bash
+pnpm add -D @lab-anssi/ui-kit@latest
+```
+
+> [!IMPORTANT]
+> Le package déclare `svelte` (>= 5.57.0) en `peerDependencies`. Assurez-vous que votre projet utilise une version compatible.
+
+#### Import
+
+Les composants sont importables directement depuis le point d’entrée du package :
+
+```ts
+import { Alerte, CentreAide, ResumePssi } from "@lab-anssi/ui-kit";
+```
+
+Ils sont compilés par [`@sveltejs/package`](https://svelte.dev/docs/kit/packaging) et bénéficient du tree-shaking : seuls les composants importés sont inclus dans votre bundle final.
+
+#### Feuilles de styles
+
+Certains composants DSFR nécessitent des feuilles de styles CSS pour fonctionner correctement.<br/> Importez-les dans le CSS global de votre application (layout, `+layout.svelte`, `app.css`, etc.) :
+
+```css
+/* Variables CSS du DSFR (couleurs, espacements, etc.) */
+@import "@lab-anssi/ui-kit/dist/assets/dsfr-variables.css";
+
+/* Classes d'icônes DSFR (nécessaire pour les composants utilisant des icônes) */
+@import "@lab-anssi/ui-kit/dist/assets/dsfr-icons.css";
+```
+
+> [!NOTE]
+> Ces imports sont nécessaires car en contexte Svelte (sans Shadow DOM), les styles d'icônes ne sont pas injectés automatiquement dans le DOM.
+
+#### Exemple
+
+```svelte
+<script>
+  import { Alerte } from "@lab-anssi/ui-kit";
+</script>
+
+<Alerte type="information">Ceci est une alerte informative.</Alerte>
 ```
 
 ## Release
