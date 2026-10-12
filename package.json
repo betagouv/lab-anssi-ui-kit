@@ -21,10 +21,11 @@
     }
   },
   "scripts": {
-    "build": "svelte-package && pnpm run build:manifest && pnpm run build:webcomponents && pnpm run copy:icons && publint",
+    "build": "svelte-package && pnpm run build:styles:icons && pnpm run build:manifest && pnpm run build:webcomponents && pnpm run copy:icons && publint",
     "build:tokens": "node src/tokens/build.config.ts && pnpm prettier -w .storybook/lab-anssi-themes.css",
     "build:webcomponents": "vite -c vite.webcomponents.config.ts build",
     "build:styles:dsfr": "sass src/lib/styles/dsfr-variables.scss dist/assets/dsfr-variables.css -I node_modules -I node_modules/@gouvfr/dsfr --no-source-map",
+    "build:styles:icons": "node scripts/build-dsfr-icons.mjs",
     "build:manifest": "node scripts/generate-ui-manifest.mjs",
     "prepare": "husky",
     "check": "UI_KIT_CHECK=1 svelte-check --tsconfig ./tsconfig.check.json --threshold error",
