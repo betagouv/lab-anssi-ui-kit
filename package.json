@@ -59,6 +59,7 @@
       "types": "./dist/webcomponents/lab-anssi-ui-kit.jsx.d.ts",
       "import": "./dist/webcomponents/lab-anssi-ui-kit.iife.js"
     },
+    "./dist/assets/*": "./dist/assets/*",
     "./web-types.json": "./dist/web-types.json"
   },
   "web-types": "./dist/web-types.json",
