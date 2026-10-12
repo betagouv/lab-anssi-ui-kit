@@ -5,7 +5,7 @@
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       tabs: { attribute: "tabs", type: "Array" },
       ariaLabel: { attribute: "aria-label", type: "String" },
-      activeTabIndex: { attribute: "active-tab-index", type: "Number" },
+      activeTabIndex: { attribute: "active-tab-index", type: "Number", reflect: true },
     },
     extend: (CustomElementClass) => {
       return class extends CustomElementClass {
@@ -25,7 +25,6 @@
 />
 
 <script lang="ts">
-  import { untrack } from "svelte";
   import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
@@ -57,7 +56,7 @@
 
   let { hasIcon, tabs = [], ariaLabel, activeTabIndex = 0, ontabchanged }: Props = $props();
 
-  let activeIndex = $state(untrack(() => activeTabIndex));
+  let activeIndex = $derived(activeTabIndex);
 
   let tabsElement: HTMLDivElement | undefined;
   let tabsListElement: HTMLUListElement | undefined;
