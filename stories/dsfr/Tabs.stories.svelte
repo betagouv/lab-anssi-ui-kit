@@ -135,6 +135,52 @@
   }}
 />
 
+<Story
+  name="Onglet actif initial (activeTabIndex)"
+  args={{
+    ...tabsArgs,
+    activeTabIndex: 2,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-tabs");
+    const shadow = el?.shadowRoot;
+
+    await step("Le troisième onglet devrait être sélectionné par défaut", async () => {
+      const tabButtons = shadow?.querySelectorAll("[role='tab']");
+      const thirdTab = tabButtons?.[2] as HTMLButtonElement;
+
+      await expect(thirdTab?.getAttribute("aria-selected")).toBe("true");
+    });
+
+    await step("Les autres onglets ne devraient pas être sélectionnés", async () => {
+      const tabButtons = shadow?.querySelectorAll("[role='tab']");
+
+      tabButtons?.forEach((tab, i) => {
+        if (i !== 2) {
+          expect(tab.getAttribute("aria-selected")).toBe("false");
+        }
+      });
+    });
+
+    await step("Le troisième panneau devrait être visible", async () => {
+      const panels = shadow?.querySelectorAll("[role='tabpanel']");
+      const thirdPanel = panels?.[2] as HTMLDivElement;
+
+      await expect(thirdPanel?.classList.contains("fr-tabs__panel--selected")).toBe(true);
+    });
+  }}
+>
+  {#snippet template(args: Args)}
+    {@const props = tabsProps($state.snapshot(args))}
+    <dsfr-tabs
+      tabs={props.tabs}
+      aria-label="Exemple d'onglets avec onglet actif initial"
+      active-tab-index={args.activeTabIndex}
+    >
+    </dsfr-tabs>
+  {/snippet}
+</Story>
+
 <Story name="Avec Slots" args={{ ...tabsArgs, hasIcon: false }}>
   {#snippet template(args: Args)}
     {@const props = tabsProps($state.snapshot(args))}
