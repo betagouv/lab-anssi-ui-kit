@@ -214,7 +214,7 @@
           type="radio"
           id={radio.id}
           {name}
-          value={radio.value || radio.id}
+          value={radio.value ?? radio.id}
           bind:group={value}
           onchange={handleChange}
           onblur={formValidation.handleBlur}
