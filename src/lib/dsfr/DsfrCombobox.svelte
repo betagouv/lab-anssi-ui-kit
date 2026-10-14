@@ -158,9 +158,6 @@
   let expanded = $state(false);
   let searchQuery = $state("");
 
-  let isCollapsing = false;
-  let collapsingTimeout: ReturnType<typeof setTimeout> | undefined;
-
   const formValidation = createFormValidation();
 
   const isUserControlled = $derived(status !== "default");
@@ -209,52 +206,17 @@
     return enabledOptions.length > 0 && enabledOptions.every((o) => values!.includes(o.value));
   });
 
-  function adjust() {
-    if (!panelElement) return;
-    panelElement.style.setProperty("--collapser", "none");
-    const height = panelElement.offsetHeight;
-    panelElement.style.setProperty("--collapse", -height + "px");
-    panelElement.style.setProperty("--collapser", "");
-  }
-
-  function endCollapsing() {
-    if (!isCollapsing) return;
-    if (collapsingTimeout) clearTimeout(collapsingTimeout);
-    collapsingTimeout = undefined;
-    isCollapsing = false;
-    panelElement?.classList.remove("fr-collapsing");
-  }
-
-  function startCollapsing(isExpanding: boolean) {
-    if (!panelElement) return;
-    isCollapsing = true;
-    panelElement.classList.add("fr-collapsing");
-    adjust();
-    requestAnimationFrame(() => {
-      if (isExpanding) {
-        panelElement.classList.add("fr-collapse--expanded");
-      } else {
-        panelElement.classList.remove("fr-collapse--expanded");
-      }
-      collapsingTimeout = setTimeout(() => endCollapsing(), 500);
-    });
-  }
-
-  function handleTransitionEnd() {
-    endCollapsing();
-  }
-
   function expand() {
     if (expanded || disabled) return;
     expanded = true;
     searchQuery = "";
-    startCollapsing(true);
+    panelElement?.classList.add("fr-collapse--expanded");
   }
 
   function close() {
     if (!expanded) return;
     expanded = false;
-    startCollapsing(false);
+    panelElement?.classList.remove("fr-collapse--expanded");
     triggerElement?.focus();
   }
 
@@ -415,7 +377,6 @@
       id={`${id}-panel`}
       role="presentation"
       onkeydown={handleKeydown}
-      ontransitionend={handleTransitionEnd}
     >
       <div class="fr-combobox__content">
         {#if multiple && selectAllButton}
@@ -642,6 +603,11 @@
       z-index: 1000;
       background-color: var(--background-overlap-grey);
       box-shadow: 0 4px 12px rgb(0 0 18 / 16%);
+      transition: none;
+
+      &::before {
+        transition: none;
+      }
 
       &.fr-collapse--expanded {
         --collapse-max-height: 26.875rem;
