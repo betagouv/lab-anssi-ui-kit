@@ -174,7 +174,6 @@
   );
 
   const allOptions = $derived(optionGroups.flatMap((g) => g.options));
-  const enabledOptions = $derived(allOptions.filter((o) => !o.disabled));
 
   const filteredGroups = $derived.by<ComboboxOptionGroup[]>(() => {
     if (!searchQuery) return optionGroups;
@@ -192,6 +191,10 @@
       .filter((group) => group.options.length > 0);
   });
 
+  const filteredEnabledOptions = $derived(
+    filteredGroups.flatMap((g) => g.options).filter((o) => !o.disabled),
+  );
+
   const displayText = $derived.by(() => {
     if (multiple) {
       const count = values?.length ?? 0;
@@ -205,9 +208,12 @@
 
   const isPlaceholder = $derived(multiple ? (values?.length ?? 0) === 0 : !value);
 
-  const allSelected = $derived.by(() => {
+  const allFilteredSelected = $derived.by(() => {
     if (!multiple || !values) return false;
-    return enabledOptions.length > 0 && enabledOptions.every((o) => values!.includes(o.value));
+    return (
+      filteredEnabledOptions.length > 0 &&
+      filteredEnabledOptions.every((o) => values!.includes(o.value))
+    );
   });
 
   function expand() {
@@ -264,10 +270,12 @@
   }
 
   function handleSelectAll() {
-    if (allSelected) {
-      values = [];
+    const filteredSet = new Set(filteredEnabledOptions.map((o) => o.value));
+    if (allFilteredSelected) {
+      values = (values ?? []).filter((v) => !filteredSet.has(v));
     } else {
-      values = enabledOptions.map((o) => o.value);
+      const existing = new Set(values ?? []);
+      values = [...existing, ...filteredSet.values().filter((v) => !existing.has(v))];
     }
     onvalueschanged?.(values);
     hostElement.dispatchEvent(new CustomEvent("valueschanged", { detail: values, bubbles: true }));
@@ -385,12 +393,13 @@
       <div class="fr-combobox__content">
         {#if multiple && selectAllButton}
           <DsfrButton
-            label={allSelected ? "Tout désélectionner" : "Tout sélectionner"}
+            label={allFilteredSelected ? "Tout désélectionner" : "Tout sélectionner"}
             kind="tertiary"
             iconPlace="left"
-            icon={allSelected ? "close-circle-line" : "check-line"}
+            icon={allFilteredSelected ? "close-circle-line" : "check-line"}
             hasIcon
             centered
+            disabled={filteredEnabledOptions.length === 0}
             onclick={handleSelectAll}
           />
         {/if}
