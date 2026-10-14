@@ -36,6 +36,25 @@
     },
   ];
 
+  const selectAllTestGroups = [
+    {
+      legend: "Région Nord",
+      options: [
+        { value: "nord-1", label: "Lille" },
+        { value: "nord-2", label: "Amiens" },
+        { value: "nord-3", label: "Calais", disabled: true },
+      ],
+    },
+    {
+      legend: "Région Sud",
+      options: [
+        { value: "sud-1", label: "Marseille" },
+        { value: "sud-2", label: "Nice" },
+        { value: "sud-3", label: "Toulon" },
+      ],
+    },
+  ];
+
   const groupedOptionsWithHints = [
     {
       legend: "Fruits",
@@ -803,5 +822,156 @@
     selectAllButton: true,
     optionGroups: villesOptionGroups,
     values: [],
+  }}
+/>
+
+<Story
+  name="Tout sélectionner avec filtre"
+  args={{
+    id: "combobox-select-all-filter",
+    multiple: true,
+    searchable: true,
+    selectAllButton: true,
+    optionGroups: selectAllTestGroups,
+    values: [],
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-combobox");
+    const shadow = el?.shadowRoot;
+
+    await step("Ouvrir le panel", async () => {
+      const button = shadow?.querySelector(".fr-combobox__button") as HTMLButtonElement;
+
+      await userEvent.click(button);
+    });
+
+    const findSelectAllBtn = () =>
+      Array.from(shadow?.querySelectorAll("button") ?? []).find((btn) =>
+        btn.textContent?.trim().match(/^Tout (dé)?sélectionner$/),
+      ) as HTMLButtonElement;
+
+    await step(
+      "Sans filtre, 'Tout sélectionner' sélectionne toutes les options non désactivées",
+      async () => {
+        const handler = fn();
+        el?.addEventListener("valueschanged", handler);
+
+        await userEvent.click(findSelectAllBtn());
+
+        await expect(handler).toHaveBeenCalledOnce();
+
+        const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+        await expect(detail).toContain("nord-1");
+        await expect(detail).toContain("nord-2");
+        await expect(detail).not.toContain("nord-3");
+        await expect(detail).toContain("sud-1");
+        await expect(detail).toContain("sud-2");
+        await expect(detail).toContain("sud-3");
+        await expect(detail.length).toBe(5);
+
+        el?.removeEventListener("valueschanged", handler);
+      },
+    );
+
+    await step("'Tout désélectionner' vide la sélection", async () => {
+      const handler = fn();
+      el?.addEventListener("valueschanged", handler);
+
+      await userEvent.click(findSelectAllBtn());
+
+      await expect(handler).toHaveBeenCalledOnce();
+
+      const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+      await expect(detail.length).toBe(0);
+
+      el?.removeEventListener("valueschanged", handler);
+    });
+
+    const setSearchQuery = async (query: string) => {
+      const searchInput = shadow?.querySelector("input.fr-input") as HTMLInputElement;
+
+      searchInput.value = query;
+      searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      await new Promise((r) => requestAnimationFrame(r));
+    };
+
+    await step(
+      "Filtrer par légende puis 'Tout sélectionner' ne sélectionne que le groupe filtré",
+      async () => {
+        await setSearchQuery("Nord");
+
+        const handler = fn();
+        el?.addEventListener("valueschanged", handler);
+
+        await userEvent.click(findSelectAllBtn());
+
+        await expect(handler).toHaveBeenCalledOnce();
+
+        const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+        await expect(detail).toContain("nord-1");
+        await expect(detail).toContain("nord-2");
+        await expect(detail).not.toContain("nord-3");
+        await expect(detail).not.toContain("sud-1");
+        await expect(detail.length).toBe(2);
+
+        el?.removeEventListener("valueschanged", handler);
+      },
+    );
+
+    await step(
+      "Filtrer par légende 'Sud' puis 'Tout sélectionner' préserve les sélections existantes",
+      async () => {
+        await setSearchQuery("Sud");
+
+        const handler = fn();
+        el?.addEventListener("valueschanged", handler);
+
+        await userEvent.click(findSelectAllBtn());
+
+        await expect(handler).toHaveBeenCalledOnce();
+
+        const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+        await expect(detail).toContain("nord-1");
+        await expect(detail).toContain("nord-2");
+        await expect(detail).toContain("sud-1");
+        await expect(detail).toContain("sud-2");
+        await expect(detail).toContain("sud-3");
+        await expect(detail.length).toBe(5);
+
+        el?.removeEventListener("valueschanged", handler);
+      },
+    );
+
+    await step("'Tout désélectionner' avec filtre ne retire que les options visibles", async () => {
+      const handler = fn();
+      el?.addEventListener("valueschanged", handler);
+
+      await userEvent.click(findSelectAllBtn());
+
+      await expect(handler).toHaveBeenCalledOnce();
+
+      const detail = handler.mock.calls.at(-1)?.[0].detail;
+
+      await expect(detail).toContain("nord-1");
+      await expect(detail).toContain("nord-2");
+      await expect(detail).not.toContain("sud-1");
+      await expect(detail).not.toContain("sud-2");
+      await expect(detail).not.toContain("sud-3");
+      await expect(detail.length).toBe(2);
+
+      el?.removeEventListener("valueschanged", handler);
+    });
+
+    await step("Recherche sans résultat désactive le bouton 'Tout sélectionner'", async () => {
+      await setSearchQuery("zzzzz");
+
+      const selectAllBtn = findSelectAllBtn();
+
+      await expect(selectAllBtn?.disabled).toBe(true);
+    });
   }}
 />
