@@ -57,6 +57,278 @@
     },
   ];
 
+  const villesDeFrance = [
+    "Paris",
+    "Marseille",
+    "Lyon",
+    "Toulouse",
+    "Nice",
+    "Nantes",
+    "Montpellier",
+    "Strasbourg",
+    "Bordeaux",
+    "Lille",
+    "Rennes",
+    "Reims",
+    "Saint-Étienne",
+    "Toulon",
+    "Le Havre",
+    "Grenoble",
+    "Dijon",
+    "Angers",
+    "Nîmes",
+    "Villeurbanne",
+    "Clermont-Ferrand",
+    "Le Mans",
+    "Aix-en-Provence",
+    "Brest",
+    "Tours",
+    "Amiens",
+    "Limoges",
+    "Annecy",
+    "Perpignan",
+    "Boulogne-Billancourt",
+    "Metz",
+    "Besançon",
+    "Orléans",
+    "Rouen",
+    "Mulhouse",
+    "Caen",
+    "Nancy",
+    "Saint-Denis",
+    "Argenteuil",
+    "Montreuil",
+    "Roubaix",
+    "Tourcoing",
+    "Dunkerque",
+    "Avignon",
+    "Nanterre",
+    "Poitiers",
+    "Créteil",
+    "Versailles",
+    "Pau",
+    "Colombes",
+    "Aubervilliers",
+    "Asnières-sur-Seine",
+    "Vitry-sur-Seine",
+    "Aulnay-sous-Bois",
+    "Rueil-Malmaison",
+    "Saint-Maur-des-Fossés",
+    "Antibes",
+    "Calais",
+    "Champigny-sur-Marne",
+    "La Rochelle",
+    "Béziers",
+    "Cannes",
+    "Saint-Nazaire",
+    "Colmar",
+    "Drancy",
+    "Mérignac",
+    "Ajaccio",
+    "Bourges",
+    "Issy-les-Moulineaux",
+    "Levallois-Perret",
+    "Quimper",
+    "Valence",
+    "Troyes",
+    "Neuilly-sur-Seine",
+    "Antony",
+    "La Seyne-sur-Mer",
+    "Clichy",
+    "Lorient",
+    "Sarcelles",
+    "Pessac",
+    "Ivry-sur-Seine",
+    "Chambéry",
+    "Niort",
+    "Villenave-d'Ornon",
+    "Hyères",
+    "Cholet",
+    "Beauvais",
+    "Épinay-sur-Seine",
+    "Meaux",
+    "Bayonne",
+    "Châteauroux",
+    "Charleville-Mézières",
+    "Saint-Brieuc",
+    "Blois",
+    "Cagnes-sur-Mer",
+    "Vannes",
+    "La Roche-sur-Yon",
+    "Arles",
+    "Tarbes",
+    "Albi",
+  ];
+
+  const villesOptionGroups = [
+    {
+      legend: "Île-de-France",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Paris",
+            "Boulogne-Billancourt",
+            "Saint-Denis",
+            "Argenteuil",
+            "Montreuil",
+            "Nanterre",
+            "Créteil",
+            "Versailles",
+            "Colombes",
+            "Aubervilliers",
+            "Asnières-sur-Seine",
+            "Vitry-sur-Seine",
+            "Aulnay-sous-Bois",
+            "Rueil-Malmaison",
+            "Saint-Maur-des-Fossés",
+            "Champigny-sur-Marne",
+            "Drancy",
+            "Issy-les-Moulineaux",
+            "Levallois-Perret",
+            "Neuilly-sur-Seine",
+            "Antony",
+            "Clichy",
+            "Sarcelles",
+            "Ivry-sur-Seine",
+            "Épinay-sur-Seine",
+            "Meaux",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Auvergne-Rhône-Alpes",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Lyon",
+            "Grenoble",
+            "Saint-Étienne",
+            "Villeurbanne",
+            "Clermont-Ferrand",
+            "Annecy",
+            "Valence",
+            "Chambéry",
+            "Cholet",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Provence-Alpes-Côte d'Azur",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Marseille",
+            "Nice",
+            "Toulon",
+            "Aix-en-Provence",
+            "Avignon",
+            "Antibes",
+            "Cannes",
+            "La Seyne-sur-Mer",
+            "Hyères",
+            "Cagnes-sur-Mer",
+            "Arles",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Nouvelle-Aquitaine",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Bordeaux",
+            "Limoges",
+            "Poitiers",
+            "Pau",
+            "La Rochelle",
+            "Mérignac",
+            "Pessac",
+            "Niort",
+            "Villenave-d'Ornon",
+            "Bayonne",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Occitanie",
+      options: villesDeFrance
+        .filter((v) =>
+          ["Toulouse", "Montpellier", "Nîmes", "Perpignan", "Béziers", "Tarbes", "Albi"].includes(
+            v,
+          ),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Hauts-de-France",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Lille",
+            "Amiens",
+            "Roubaix",
+            "Tourcoing",
+            "Dunkerque",
+            "Calais",
+            "Beauvais",
+            "Charleville-Mézières",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Grand Est",
+      options: villesDeFrance
+        .filter((v) =>
+          ["Strasbourg", "Reims", "Metz", "Mulhouse", "Nancy", "Colmar", "Troyes"].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Pays de la Loire",
+      options: villesDeFrance
+        .filter((v) =>
+          ["Nantes", "Angers", "Le Mans", "Saint-Nazaire", "La Roche-sur-Yon"].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Bretagne",
+      options: villesDeFrance
+        .filter((v) =>
+          ["Rennes", "Brest", "Lorient", "Quimper", "Saint-Brieuc", "Vannes"].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Normandie",
+      options: villesDeFrance
+        .filter((v) => ["Rouen", "Le Havre", "Caen"].includes(v))
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+    {
+      legend: "Autres régions",
+      options: villesDeFrance
+        .filter((v) =>
+          [
+            "Dijon",
+            "Besançon",
+            "Orléans",
+            "Tours",
+            "Bourges",
+            "Ajaccio",
+            "Châteauroux",
+            "Blois",
+          ].includes(v),
+        )
+        .map((v) => ({ value: v.toLowerCase().replace(/\s+/g, "-"), label: v })),
+    },
+  ];
+
   const { Story } = defineMeta({
     title: "Composants/DSFR/Combobox",
     component: DsfrCombobox,
@@ -517,5 +789,19 @@
         (args as unknown as { validMessage: string }).validMessage,
       );
     });
+  }}
+/>
+
+<Story
+  name="Grand volume d'options"
+  args={{
+    id: "combobox-villes",
+    label: "Ville de résidence",
+    placeholder: "Rechercher une ville",
+    multiple: true,
+    searchable: true,
+    selectAllButton: true,
+    optionGroups: villesOptionGroups,
+    values: [],
   }}
 />
