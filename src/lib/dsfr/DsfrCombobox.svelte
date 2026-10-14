@@ -181,10 +181,14 @@
 
     const query = searchQuery.toLowerCase();
     return optionGroups
-      .map((group) => ({
-        ...group,
-        options: group.options.filter((o) => o.label.toLowerCase().includes(query)),
-      }))
+      .map((group) => {
+        if (group.legend?.toLowerCase().includes(query)) return group;
+
+        return {
+          ...group,
+          options: group.options.filter((o) => o.label.toLowerCase().includes(query)),
+        };
+      })
       .filter((group) => group.options.length > 0);
   });
 
