@@ -541,6 +541,7 @@
 
   .fr-combobox {
     position: relative;
+    min-width: var(--dsfr-combobox-min-width, #{rem(282px)});
 
     &__button {
       appearance: none;
