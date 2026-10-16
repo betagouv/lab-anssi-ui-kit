@@ -6,7 +6,7 @@ import viteScssPreprocessorOptions from "../outils/vite-preprocessor-options.ts"
 const varEnv = loadEnv(process.env.STORYBOOK_ENV ?? "production", process.cwd(), "VITE_");
 
 const config: StorybookConfig = {
-  staticDirs: ["../static"],
+  staticDirs: ["../static", { from: "../node_modules/@gouvfr/dsfr/dist/artwork", to: "/artwork" }],
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|ts|svelte)"],
   addons: [
     "@storybook/addon-svelte-csf",

@@ -204,7 +204,6 @@
 
 <Story name="En ligne" args={{ inline: true }} />
 
-<!--
 <Story name="Riche" args={{ rich: true }} />
 
 <Story name="Riche avec indice" args={{ rich: true, hint: "Texte de description additionnel" }} />
@@ -219,4 +218,3 @@
 <Story name="Riche sans image" args={{ rich: true, hasPictogram: false }} />
 
 <Story name="Riche sans image en ligne" args={{ rich: true, hasPictogram: false, inline: true }} />
--->
