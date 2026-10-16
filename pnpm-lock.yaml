@@ -297,7 +297,7 @@ importers:
         specifier: ~8.5.29
         version: 8.5.29
       postcss-discard-empty:
-        specifier: ~9.0.6
+        specifier: ~9.0.7
         version: 9.0.7(postcss@8.5.29)
       postcss-root-to-host:
         specifier: ~0.0.0
