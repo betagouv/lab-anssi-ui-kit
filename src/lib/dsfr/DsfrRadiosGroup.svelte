@@ -33,8 +33,9 @@
 />
 
 <script lang="ts">
-  import type { Size, TextSize, TextWeight } from "$lib/types";
+  import type { Accent, Size, TextSize, TextWeight } from "$lib/types";
   import { setThemeable } from "$lib/utilitaires";
+  import { getPictogramPath } from "$lib/utilitaires/pictogramPath";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
@@ -48,6 +49,10 @@
     disabled?: boolean;
     form?: string;
     required?: boolean;
+    /** Nom du pictogramme DSFR (ex: "city-hall") */
+    pictogramName?: string;
+    /** Couleur d'accentuation du pictogramme */
+    pictogramAccent?: Accent;
   };
 
   interface Props {
@@ -99,8 +104,8 @@
     radios,
     hint,
     size = "md",
-    rich: _rich,
-    hasPictogram: _hasPictogram,
+    rich,
+    hasPictogram,
     inline,
     name,
     disabled,
@@ -209,7 +214,7 @@
 
   {#each radios as radio (radio.id)}
     <div class={["fr-fieldset__element", inline && "fr-fieldset__element--inline"]}>
-      <div class={["fr-radio-group", `fr-radio-group--${size}`]}>
+      <div class={["fr-radio-group", rich && "fr-radio-rich", !rich && `fr-radio-group--${size}`]}>
         <input
           type="radio"
           id={radio.id}
@@ -230,6 +235,28 @@
             <span class="fr-hint-text">{radio.hint}</span>
           {/if}
         </label>
+        {#if rich && hasPictogram && radio.pictogramName}
+          {@const path = getPictogramPath(radio.pictogramName)}
+          {@const accent =
+            radio.pictogramAccent && radio.pictogramAccent !== "défaut"
+              ? `fr-artwork--${radio.pictogramAccent}`
+              : undefined}
+          {#if path}
+            <div class="fr-radio-rich__pictogram">
+              <svg
+                aria-hidden="true"
+                class={["fr-artwork", accent]}
+                viewBox="0 0 80 80"
+                width="80px"
+                height="80px"
+              >
+                <use class="fr-artwork-decorative" href={`${path}#artwork-decorative`}></use>
+                <use class="fr-artwork-minor" href={`${path}#artwork-minor`}></use>
+                <use class="fr-artwork-major" href={`${path}#artwork-major`}></use>
+              </svg>
+            </div>
+          {/if}
+        {/if}
       </div>
     </div>
   {/each}
@@ -260,10 +287,13 @@
   @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
   @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/artwork/module";
   // DSFR Component styles
   @import "@gouvfr/dsfr/dist/component/form/form.main.css";
   @import "@gouvfr/dsfr/dist/component/radio/radio.main.css";
 
+  @include _core-artwork-scheme;
   @include set-shadow-host();
   @include set-dsfr-sizing("fieldset");
 </style>
