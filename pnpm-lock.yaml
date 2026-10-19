@@ -297,8 +297,8 @@ importers:
         specifier: ~8.5.29
         version: 8.5.29
       postcss-discard-empty:
-        specifier: ~9.0.7
-        version: 9.0.7(postcss@8.5.29)
+        specifier: ~9.0.8
+        version: 9.0.8(postcss@8.5.29)
       postcss-root-to-host:
         specifier: ~0.0.0
         version: 0.0.0(postcss@8.5.29)
@@ -1791,6 +1791,12 @@ packages:
     peerDependencies:
       postcss: ^8.5.29
 
+  cssnano-utils@9.0.0:
+    resolution: {integrity: sha512-HIdFG2S06bygEl6+bZYPvA0/UyoYseXR/RpcvvwyE2NxWBbkZ70y9uRnvFwlQ4ztSlIeBqQBcwOMQG6DVrRHuA==}
+    engines: {node: ^22.22.3 || ^24.15.0 || >=26.0}
+    peerDependencies:
+      postcss: ^8.5.29
+
   cssnano@9.4.0:
     resolution: {integrity: sha512-+bn2yyAYMlE8biUcSN4iRUEmhe7TlPymr8OpruYPmK0vkcrZLeG1uFv3m/WhIksTa4DhPKMOI0uZCDxs+5EnyQ==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0}
@@ -2619,8 +2625,8 @@ packages:
     peerDependencies:
       postcss: ^8.5.29
 
-  postcss-discard-empty@9.0.7:
-    resolution: {integrity: sha512-+Hnvh0x+yyDg9X8g42m12M0MUvfTeeyjsJjOwXQ281sJVgD1naWUsF3ji+SmxUrCmeNOPtSgeL8LBlfyEXNTlA==}
+  postcss-discard-empty@9.0.8:
+    resolution: {integrity: sha512-hCGjUuCd/IxKRyVl/uaJOLJTeACXo4GkS+0kRTvO8bBs0OxrGJWhxRaRPKXCdftCI+At0aAlosIgS0yjWNubuQ==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0}
     peerDependencies:
       postcss: ^8.5.29
@@ -4623,7 +4629,7 @@ snapshots:
       postcss-convert-values: 9.0.8(postcss@8.5.29)
       postcss-discard-comments: 9.0.7(postcss@8.5.29)
       postcss-discard-duplicates: 9.0.6(postcss@8.5.29)
-      postcss-discard-empty: 9.0.7(postcss@8.5.29)
+      postcss-discard-empty: 9.0.8(postcss@8.5.29)
       postcss-discard-overridden: 9.0.6(postcss@8.5.29)
       postcss-merge-longhand: 9.3.0(postcss@8.5.29)
       postcss-merge-rules: 9.1.3(postcss@8.5.29)
@@ -4647,6 +4653,11 @@ snapshots:
       postcss-unique-selectors: 9.0.6(postcss@8.5.29)
 
   cssnano-utils@8.2.1(postcss@8.5.29):
+    dependencies:
+      '@csstools/css-tokenizer': 4.0.2
+      postcss: 8.5.29
+
+  cssnano-utils@9.0.0(postcss@8.5.29):
     dependencies:
       '@csstools/css-tokenizer': 4.0.2
       postcss: 8.5.29
@@ -5469,9 +5480,9 @@ snapshots:
       cssnano-utils: 8.2.1(postcss@8.5.29)
       postcss: 8.5.29
 
-  postcss-discard-empty@9.0.7(postcss@8.5.29):
+  postcss-discard-empty@9.0.8(postcss@8.5.29):
     dependencies:
-      cssnano-utils: 8.2.1(postcss@8.5.29)
+      cssnano-utils: 9.0.0(postcss@8.5.29)
       postcss: 8.5.29
 
   postcss-discard-overridden@9.0.6(postcss@8.5.29):
