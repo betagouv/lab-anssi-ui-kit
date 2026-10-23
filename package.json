@@ -84,9 +84,9 @@
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/svelte": "~5.4.2",
     "@types/node": "~24.19.2",
-    "@vitest/browser": "~4.1.11",
-    "@vitest/browser-playwright": "~4.1.11",
-    "@vitest/coverage-v8": "~4.1.11",
+    "@vitest/browser": "~4.1.12",
+    "@vitest/browser-playwright": "~4.1.12",
+    "@vitest/coverage-v8": "~4.1.12",
     "cssnano": "~9.6.0",
     "dotenv": "~18.0.8",
     "eslint": "~10.12.0",
@@ -111,7 +111,7 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "~8.71.2",
     "vite": "~8.3.4",
-    "vitest": "~4.1.11"
+    "vitest": "~4.1.12"
   },
   "lint-staged": {
     "*.{js,ts,svelte}": "eslint --cache --fix",
