@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/betagouv/lab-anssi-ui-kit#readme",
   "engines": {
-    "node": ">=24.22.0"
+    "node": ">=24.22.1"
   },
   "devEngines": {
     "packageManager": {
