@@ -1,14 +1,30 @@
 import { parse, type AST } from "svelte/compiler";
 import ts, { ScriptTarget } from "typescript";
 
+type AppelEnregistrementIdempotent = {
+  type: "CallExpression";
+  callee: { type: "Identifier"; name: string };
+  arguments: { value?: unknown }[];
+};
+
 type ConfigurationCustomElement = NonNullable<AST.SvelteOptions["customElement"]>;
 
 const extraitNomDepuisConfiguration = (configuration: ConfigurationCustomElement): string => {
-  if (!configuration.tag) {
+  if (configuration.tag) return configuration.tag;
+
+  const extension = configuration.extend as unknown as AppelEnregistrementIdempotent | undefined;
+  const nomEnregistré =
+    extension?.type === "CallExpression" &&
+    extension.callee.type === "Identifier" &&
+    extension.callee.name === "avecEnregistrementIdempotent"
+      ? extension.arguments[0]?.value
+      : undefined;
+
+  if (typeof nomEnregistré !== "string") {
     throw new Error("Impossible de déterminer le nom du web component");
   }
 
-  return configuration.tag;
+  return nomEnregistré;
 };
 
 export const extraitConfigurationWebComponent = (contenuSvelteOptions: string) => {

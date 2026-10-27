@@ -1,3 +1,4 @@
+export { avecEnregistrementIdempotent } from "./enregistrement-web-component";
 export { getIconsStyleSheet, withIconsStyleSheet } from "./icons-stylesheet";
 
 /**
