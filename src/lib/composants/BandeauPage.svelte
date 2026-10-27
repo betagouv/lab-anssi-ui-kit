@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-bandeau-page",
     props: {
       titre: { attribute: "titre", type: "String" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
@@ -16,10 +15,12 @@
       simple: { attribute: "simple", type: "Boolean" },
       ficheCatalogue: { attribute: "fiche-catalogue", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-bandeau-page"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import DsfrBreadcrumb from "$lib/dsfr/DsfrBreadcrumb.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";
 

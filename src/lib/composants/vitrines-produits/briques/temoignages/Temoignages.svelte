@@ -1,17 +1,17 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-temoignages",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       temoignages: { reflect: false, type: "Array", attribute: "temoignages" },
       size: { reflect: false, type: "String", attribute: "size" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-temoignages"),
   }}
 />
 
 <script lang="ts">
   import type { Temoignage } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import "$lib/dsfr/DsfrButton.svelte";

@@ -1,6 +1,14 @@
-<svelte:options customElement="lab-anssi-navigation-pied-de-page" />
+<svelte:options
+  customElement={{
+    props: {
+      conforme: { type: "Boolean" },
+    },
+    extend: avecEnregistrementIdempotent("lab-anssi-navigation-pied-de-page"),
+  }}
+/>
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   interface Props {
     conforme?: boolean;
   }

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-multi-select",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -13,10 +12,12 @@
       errorMessage: { attribute: "error-message", type: "String" },
       validMessage: { attribute: "valid-message", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-multi-select"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import {
     clickOutside,
     pressEscape,

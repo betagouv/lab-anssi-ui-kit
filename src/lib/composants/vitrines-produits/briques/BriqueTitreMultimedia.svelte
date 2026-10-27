@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-titre-multimedia",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       multimedia: { reflect: false, type: "Object", attribute: "multimedia" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-titre-multimedia"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { Video } from "$lib/types";
 
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";

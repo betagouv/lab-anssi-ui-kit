@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-marelle",
     props: {
       titre: { attribute: "titre", type: "String" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
@@ -8,12 +7,13 @@
       baliseSousTitre: { attribute: "balise-sous-titre", type: "String" },
       action: { attribute: "action", type: "Object" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-marelle"),
   }}
 />
 
 <script lang="ts">
   import type { Action, EtapeMarelle } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";

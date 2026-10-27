@@ -1,6 +1,11 @@
-<svelte:options customElement="lab-anssi-resume-pssi" />
+<svelte:options
+  customElement={{
+    extend: avecEnregistrementIdempotent("lab-anssi-resume-pssi"),
+  }}
+/>
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   interface Props {
     nomService: string;
   }

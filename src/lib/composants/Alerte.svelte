@@ -1,15 +1,16 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-alerte",
     props: {
       description: { reflect: false, type: "String", attribute: "description" },
       type: { reflect: false, type: "String", attribute: "type" },
       fermable: { reflect: false, type: "Boolean", attribute: "fermable" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-alerte"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   interface Props {
     description?: string;
     type?: "information" | "erreur";

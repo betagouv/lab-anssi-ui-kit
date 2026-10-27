@@ -1,15 +1,16 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-liste-articles",
     props: {
       articles: { reflect: false, type: "Array", attribute: "articles" },
       categories: { reflect: false, type: "Object", attribute: "categories" },
       idCategorieChoisie: { reflect: false, type: "String", attribute: "id-categorie-choisie" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-liste-articles"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { CategoriesArticle, ResumeArticle } from "$lib/types";
   import CarteArticle from "$lib/composants/blog/CarteArticle.svelte";
   import ListeDeroulante from "$lib/composants/blog/ListeDeroulante.svelte";

@@ -1,15 +1,16 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-marelle-etape",
     props: {
       index: { attribute: "index", type: "Number" },
       etapeMarelle: { attribute: "etape-marelle", type: "Object" },
       baliseTitre: { attribute: "balise-titre", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-marelle-etape"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { EtapeMarelle } from "$lib/types";
 
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-bouton",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       variante: { reflect: false, type: "String", attribute: "variante" },
@@ -10,12 +9,12 @@
       actif: { reflect: false, type: "Boolean", attribute: "actif" },
       largeurMaximale: { reflect: false, type: "Boolean", attribute: "largeur-maximale" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("lab-anssi-bouton", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
-  import { withIconsStyleSheet } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, withIconsStyleSheet } from "$lib/utilitaires";
 
   import Icone from "$lib/composants/Icone.svelte";
 

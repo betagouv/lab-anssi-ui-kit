@@ -1,16 +1,19 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-icone",
     props: {
       nom: { reflect: false, type: "String", attribute: "nom" },
       taille: { reflect: false, type: "String", attribute: "taille" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("lab-anssi-icone", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
-  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+  } from "$lib/utilitaires";
 
   interface Props {
     nom: string;

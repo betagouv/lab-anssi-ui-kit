@@ -1,10 +1,18 @@
-<svelte:options customElement={{ tag: "lab-anssi-centre-aide", extend: withIconsStyleSheet }} />
+<svelte:options
+  customElement={{
+    extend: avecEnregistrementIdempotent("lab-anssi-centre-aide", withIconsStyleSheet),
+  }}
+/>
 
 <script lang="ts">
   import { fly } from "svelte/transition";
   import { MediaQuery } from "svelte/reactivity";
 
-  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setThemeable,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 

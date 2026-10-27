@@ -1,16 +1,17 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-bandeau-titre",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       description: { reflect: false, type: "String", attribute: "description" },
       filAriane: { reflect: false, type: "Array", attribute: "fil-ariane" },
       tag: { reflect: false, type: "Object", attribute: "tag" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-bandeau-titre"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { Lien, NoeudFilAriane, InfosTag } from "$lib/types";
   import Tag from "$lib/composants/Tag.svelte";
 

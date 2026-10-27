@@ -1,18 +1,21 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-carrousel-tuiles",
     props: {
       tuiles: { attribute: "tuiles", type: "Array" },
       fond: { attribute: "fond", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("lab-anssi-carrousel-tuiles", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { Tuiles } from "$lib/types";
-  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setThemeable,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrTile from "$lib/dsfr/DsfrTile.svelte";

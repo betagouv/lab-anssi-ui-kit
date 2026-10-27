@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-page-crisp",
     props: {
       contenu: { reflect: false, type: "String", attribute: "contenu" },
       tableDesMatieres: { reflect: false, type: "Array", attribute: "table-des-matieres" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-page-crisp"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { TableDesMatieres } from "$lib/types";
   import SommaireMobile from "$lib/composants/blog/SommaireMobile.svelte";
   import { onDestroy, tick } from "svelte";
