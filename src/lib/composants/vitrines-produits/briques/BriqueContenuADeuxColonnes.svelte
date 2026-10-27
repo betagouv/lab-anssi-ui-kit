@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-brique-contenu-a-deux-colonnes",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       paragraphe: { reflect: false, type: "String", attribute: "paragraphe" },
@@ -8,10 +7,12 @@
       ordre: { reflect: false, type: "String", attribute: "ordre" },
       illustration: { reflect: false, type: "Object", attribute: "illustration" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-brique-contenu-a-deux-colonnes"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
 

@@ -1,6 +1,14 @@
-<svelte:options customElement="lab-anssi-mes-services-cyber-lien-diagnostic-cyber" />
+<svelte:options
+  customElement={{
+    props: {
+      versExterne: { type: "Boolean" },
+    },
+    extend: avecEnregistrementIdempotent("lab-anssi-mes-services-cyber-lien-diagnostic-cyber"),
+  }}
+/>
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import { srcAsset } from "$lib/assets/assets";
 
   interface Props {

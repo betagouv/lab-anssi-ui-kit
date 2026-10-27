@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-tag",
     props: {
       couleurFond: { reflect: false, type: "String", attribute: "couleur-fond" },
       couleurTexte: { reflect: false, type: "String", attribute: "couleur-texte" },
@@ -9,10 +8,12 @@
       type: { reflect: false, type: "String", attribute: "type" },
       presse: { reflect: false, type: "Boolean", attribute: "presse" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-tag"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   interface Props {
     label?: string;
     couleurTexte: string | undefined;

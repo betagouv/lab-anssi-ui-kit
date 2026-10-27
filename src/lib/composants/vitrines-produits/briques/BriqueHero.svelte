@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-brique-hero",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       soustitre: { reflect: false, type: "String", attribute: "soustitre" },
@@ -10,10 +9,12 @@
       actiondroite: { reflect: false, type: "Object", attribute: "actiondroite" },
       partenaires: { reflect: false, type: "Array", attribute: "partenaires" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-brique-hero"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
   import LienExterne from "$lib/composants/icones/LienExterne.svelte";

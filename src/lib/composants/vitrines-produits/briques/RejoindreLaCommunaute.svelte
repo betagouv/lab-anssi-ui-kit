@@ -1,16 +1,17 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-brique-rejoindre-la-communaute",
     props: {
       titre: { reflect: false, type: "String", attribute: "titre" },
       raisons: { reflect: false, type: "Array", attribute: "raisons" },
       action: { reflect: false, type: "Object", attribute: "action" },
       illustration: { reflect: false, type: "Object", attribute: "illustration" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-brique-rejoindre-la-communaute"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import Brique from "$lib/composants/vitrines-produits/briques/Brique.svelte";
   import type { Action, Image } from "$lib/types";
 

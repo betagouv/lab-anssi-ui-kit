@@ -1,16 +1,16 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-presentation-anssi",
     props: {
       titre: { attribute: "titre", type: "String" },
       labelBouton: { attribute: "label-bouton", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-presentation-anssi"),
   }}
 />
 
 <script lang="ts">
   import { srcAsset } from "$lib/assets/assets.js";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrContainer from "$lib/dsfr/DsfrContainer.svelte";

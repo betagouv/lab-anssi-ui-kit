@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-filtres",
     props: {
       elements: { attribute: "elements", type: "Array" },
       filtres: { attribute: "filtres", type: "Array" },
@@ -9,10 +8,12 @@
       valeur: { attribute: "valeur", type: "String" },
       type: { attribute: "type", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-filtres"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   type ElementFiltre = {
     icone: string;
     libelle: string;

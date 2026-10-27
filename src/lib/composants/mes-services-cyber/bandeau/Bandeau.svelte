@@ -1,6 +1,9 @@
-<svelte:options customElement="lab-anssi-mes-services-cyber-bandeau" />
+<svelte:options
+  customElement={{ extend: avecEnregistrementIdempotent("lab-anssi-mes-services-cyber-bandeau") }}
+/>
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import { srcAsset } from "$lib/assets/assets.js";
 
   const CLE_LOCAL_STORAGE = "lab-anssi-ui-kit-msc-bandeau-affichage";

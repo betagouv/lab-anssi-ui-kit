@@ -1,16 +1,17 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-reactions",
     props: {
       reactions: { attribute: "reactions", type: "Array" },
       variant: { attribute: "variant", type: "String" },
       tooltipTexte: { attribute: "tooltip-texte", type: "String" },
       tooltipId: { attribute: "tooltip-id", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-reactions"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   type Reaction = {
     id: string;
     emoji: string;

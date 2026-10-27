@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-ancres",
     props: {
       ancres: { attribute: "ancres", type: "Array" },
       indexActif: { attribute: "index-actif", type: "Number" },
     },
+    extend: avecEnregistrementIdempotent("lab-anssi-ancres"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   type Ancre = {
     label: string;
     cible: string;

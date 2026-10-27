@@ -1,17 +1,19 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-bouton-suite-cyber-navigation",
     props: {
       sourceUtm: { attribute: "source-utm", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent(
+      "lab-anssi-bouton-suite-cyber-navigation",
+      withIconsStyleSheet,
+    ),
   }}
 />
 
 <script lang="ts">
   import { srcAsset } from "$lib/assets/assets.js";
   import { slide } from "svelte/transition";
-  import { withIconsStyleSheet } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, withIconsStyleSheet } from "$lib/utilitaires";
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
   import DsfrLink from "$lib/dsfr/DsfrLink.svelte";
 

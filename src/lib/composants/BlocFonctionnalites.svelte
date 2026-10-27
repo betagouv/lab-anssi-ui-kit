@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "lab-anssi-fonctionnalites",
     props: {
       titre: { attribute: "titre", type: "String" },
       description: { attribute: "description", type: "String" },
@@ -17,13 +16,17 @@
       activeDefilement: { attribute: "active-defilement", type: "Boolean" },
       delaiDefilement: { attribute: "delai-defilement", type: "Number" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("lab-anssi-fonctionnalites", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setThemeable,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
   import "$lib/dsfr/DsfrButton.svelte";
