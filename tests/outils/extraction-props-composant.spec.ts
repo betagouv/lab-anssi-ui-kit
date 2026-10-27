@@ -15,6 +15,10 @@ const contenuSvelteOptionsComplexe = `
   }}
 />
 `;
+const contenuSvelteOptionsAvecEnregistrementIdempotent = contenuSvelteOptionsComplexe.replace(
+  '    tag: "lab-anssi-un-composant",\n',
+  '    extend: avecEnregistrementIdempotent("lab-anssi-un-composant"),\n',
+);
 const contenuSvelteScript = (nomProp: string = "uneprops", estOptionnelle: boolean = false) => `
   interface Props {
     ${nomProp}${estOptionnelle ? "?" : ""}: {
@@ -40,6 +44,15 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
     it("sait extraire le nom pour une déclaration complexe", () => {
       const { nomWebComponent } = extraitPropsComposant(
         contenuSvelteOptionsComplexe,
+        contenuSvelteScript(),
+      );
+
+      expect(nomWebComponent).toBe("lab-anssi-un-composant");
+    });
+
+    it("extrait le nom fourni à l’enregistrement idempotent", () => {
+      const { nomWebComponent } = extraitPropsComposant(
+        contenuSvelteOptionsAvecEnregistrementIdempotent,
         contenuSvelteScript(),
       );
 
