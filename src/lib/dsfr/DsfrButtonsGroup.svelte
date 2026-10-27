@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-buttons-group",
     props: {
       size: { attribute: "size", type: "String" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
@@ -12,13 +11,18 @@
       reverse: { attribute: "reverse", type: "Boolean" },
       buttons: { attribute: "buttons", type: "Object" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-buttons-group", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

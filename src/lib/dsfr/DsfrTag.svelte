@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tag",
     props: {
       label: { attribute: "label", type: "String" },
       type: { attribute: "type", type: "String" },
@@ -15,13 +14,18 @@
       accent: { attribute: "accent", type: "String" },
       id: { attribute: "id", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-tag", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
   setThemeable($host());
 
   type TagSize = Extract<Size, "sm" | "md">;

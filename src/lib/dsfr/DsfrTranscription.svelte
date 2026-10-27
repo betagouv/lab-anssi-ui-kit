@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-transcription",
     props: {
       id: { attribute: "id", type: "String" },
       title: { attribute: "title", type: "String" },
@@ -8,11 +7,12 @@
       fullscreenAriaLabel: { attribute: "fullscreen-aria-label", type: "String" },
       isExpanded: { attribute: "is-expanded", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-transcription"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

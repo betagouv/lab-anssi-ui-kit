@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-quote",
     props: {
       text: { attribute: "text", type: "String" },
       size: { attribute: "size", type: "String" },
@@ -14,12 +13,13 @@
       accent: { attribute: "accent", type: "String" },
       sourceUrl: { attribute: "source-url", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-quote"),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

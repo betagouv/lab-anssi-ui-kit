@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-table",
     props: {
       id: { attribute: "id", type: "String" },
       caption: { attribute: "caption", type: "String" },
@@ -35,12 +34,13 @@
       selectedRowKeys: { attribute: "selected-row-keys", type: "Array" },
       disabledRowKeys: { attribute: "disabled-row-keys", type: "Array" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-table"),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import { setIndeterminate } from "$lib/directives/actions.svelte";
 
   import DsfrPagination from "$lib/dsfr/DsfrPagination.svelte";

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-checkboxes-group",
     props: {
       id: { attribute: "id", type: "String" },
       legend: { attribute: "legend", type: "String" },
@@ -19,7 +18,7 @@
       legendSize: { attribute: "legend-size", type: "String" },
       legendWeight: { attribute: "legend-weight", type: "String" },
     },
-    extend: (customElementConstructor) => {
+    extend: avecEnregistrementIdempotent("dsfr-checkboxes-group", (customElementConstructor) => {
       return class extends customElementConstructor {
         static formAssociated = true;
 
@@ -28,13 +27,13 @@
           this.internals = this.attachInternals();
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { Size, TextSize, TextWeight } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 

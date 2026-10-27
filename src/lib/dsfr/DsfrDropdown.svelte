@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-dropdown",
     props: {
       id: { attribute: "id", type: "String" },
       collapseId: { attribute: "collapse-id", type: "String" },
@@ -15,14 +14,18 @@
       items: { attribute: "items", type: "Array" },
       disabled: { attribute: "disabled", type: "Boolean", reflect: true },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-dropdown", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
   import { clickOutside } from "$lib/directives/actions.svelte";
-  import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   import DsfrButton from "./DsfrButton.svelte";
 

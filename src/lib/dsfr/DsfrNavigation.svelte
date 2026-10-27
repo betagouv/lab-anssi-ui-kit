@@ -1,17 +1,20 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-navigation",
     props: {
       id: { attribute: "id", type: "String" },
       ariaLabel: { attribute: "aria-label", type: "String" },
       items: { attribute: "items", type: "Array" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-navigation", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setThemeable,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
   import DsfrButton from "./DsfrButton.svelte";

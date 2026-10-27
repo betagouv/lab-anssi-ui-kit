@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-badge",
     props: {
       label: { attribute: "label", type: "String" },
       accent: { attribute: "accent", type: "String" },
@@ -12,13 +11,17 @@
       status: { attribute: "status", type: "String" },
       type: { attribute: "type", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-badge", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+  } from "$lib/utilitaires";
 
   type BadgeSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-breadcrumb",
     props: {
       id: { attribute: "id", type: "String" },
       segments: { attribute: "segments", type: "Array" },
@@ -10,10 +9,12 @@
       inverse: { attribute: "inverse", type: "Boolean" },
       hasMarginVariant: { attribute: "has-margin-variant", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-breadcrumb"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   type Segment = {
     id: string;
     label: string;

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-button",
     props: {
       label: { attribute: "label", type: "String" },
       kind: { attribute: "kind", type: "String" },
@@ -18,7 +17,7 @@
       centered: { attribute: "centered", type: "Boolean" },
       expandable: { attribute: "expandable", type: "Boolean" },
     },
-    extend: (CustomElementClass) => {
+    extend: avecEnregistrementIdempotent("dsfr-button", (CustomElementClass) => {
       return class extends CustomElementClass {
         static formAssociated = true;
 
@@ -38,13 +37,18 @@
           }
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { Kind, Size } from "$lib/types";
-  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    getIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

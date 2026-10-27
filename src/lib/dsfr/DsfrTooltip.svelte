@@ -1,16 +1,16 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tooltip",
     props: {
       id: { attribute: "id", type: "String" },
       content: { attribute: "content", type: "String" },
       type: { attribute: "type", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-tooltip"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   type TooltipType = "hover" | "click";
 

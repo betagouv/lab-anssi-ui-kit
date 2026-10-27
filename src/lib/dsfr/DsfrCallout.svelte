@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-callout",
     props: {
       hasTitle: { attribute: "has-title", type: "Boolean" },
       title: { attribute: "title", type: "String" },
@@ -13,13 +12,18 @@
       buttonLabel: { attribute: "button-label", type: "String" },
       accent: { attribute: "accent", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-callout", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";
 

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-card",
     props: {
       src: { attribute: "src", type: "String" },
       alt: { attribute: "alt", type: "String" },
@@ -38,13 +37,18 @@
       noIcon: { attribute: "no-icon", type: "Boolean" },
       lang: { attribute: "lang", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-card", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

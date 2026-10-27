@@ -1,18 +1,18 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-highlight",
     props: {
       text: { attribute: "text", type: "String" },
       id: { attribute: "id", type: "String" },
       size: { attribute: "size", type: "String" },
       accent: { attribute: "accent", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-highlight"),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

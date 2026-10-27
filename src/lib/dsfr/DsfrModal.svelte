@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-modal",
     props: {
       id: { attribute: "id", type: "String" },
       title: { attribute: "title", type: "String" },
@@ -11,13 +10,18 @@
       opened: { attribute: "opened", type: "Boolean" },
       footer: { attribute: "has-footer", type: "Boolean" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-modal", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
   import { trapFocus } from "$lib/directives/actions.svelte";
 
   setThemeable($host());

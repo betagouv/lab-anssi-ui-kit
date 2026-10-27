@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-stepper",
     props: {
       title: { attribute: "title", type: "String" },
       nextStep: { attribute: "next-step", type: "String" },
@@ -9,11 +8,12 @@
       level: { attribute: "level", type: "Number" },
       hideDetails: { attribute: "hide-details", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-stepper"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 
