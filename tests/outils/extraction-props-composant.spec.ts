@@ -1,5 +1,8 @@
 import { expect, it, describe } from "vitest";
-import { extraitPropsComposant } from "../../outils/extraction-props-composant";
+import {
+  extraitConfigurationWebComponent,
+  extraitPropsComposant,
+} from "../../outils/extraction-props-composant";
 
 const contenuSvelteOptionsSimple = `<svelte:options customElement="lab-anssi-un-composant" />`;
 const contenuSvelteOptionsComplexe = `
@@ -42,6 +45,16 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
 
       expect(nomWebComponent).toBe("lab-anssi-un-composant");
     });
+
+    it("extrait la configuration normalisée des props", () => {
+      const configuration = extraitConfigurationWebComponent(contenuSvelteOptionsComplexe);
+
+      expect(configuration.props.uneProps).toEqual({
+        reflect: false,
+        type: "String",
+        attribute: "une-props",
+      });
+    });
   });
 
   describe("sur extraction des props du web component", () => {
@@ -70,7 +83,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
         ).not.toThrowError();
       });
 
-      it("reste robuste si le composant n'a pas de props", () => {
+      it("conserve les props si aucune configuration spécifique n'est fournie", () => {
         const contenuSvelteOptionsComplexeSansProps = `
             <svelte:options
               customElement={{
@@ -84,7 +97,7 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
           contenuSvelteScript(),
         );
 
-        expect(props).toEqual([]);
+        expect(props).toEqual([{ nom: "uneprops", optionnelle: false }]);
       });
     });
 
@@ -96,6 +109,19 @@ describe("L'utilitaire d'extraction des props de composants (pour le fichier JSX
         );
 
         expect(props[0].nom).toBe("une-props");
+      });
+
+      it("utilise le nom de la prop si aucun attribut n'est configuré", () => {
+        const contenuSvelteOptionsSansAttribut = contenuSvelteOptionsComplexe.replace(
+          ', attribute: "une-props"',
+          "",
+        );
+        const { props } = extraitPropsComposant(
+          contenuSvelteOptionsSansAttribut,
+          contenuSvelteScript("uneProps"),
+        );
+
+        expect(props[0].nom).toBe("uneProps");
       });
 
       it("sait dire si une props est optionnelle", () => {

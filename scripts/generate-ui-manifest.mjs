@@ -2,6 +2,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, globSync } from "node:fs";
 import { dirname, basename } from "node:path";
+import { extraitConfigurationWebComponent } from "../outils/extraction-props-composant.ts";
 
 const COMPONENTS_GLOB = "src/lib/**/*.svelte";
 const STORIES_GLOB = "stories/**/*.stories.svelte";
@@ -113,35 +114,29 @@ function parseEvents(script) {
 
 function parseComponent(file) {
   const src = readFileSync(file, "utf8");
-  const opt = src.match(/<svelte:options[\s\S]*?customElement=\{\{([\s\S]*?)\n\s*\}\}/);
-  if (!opt) return null;
-  const block = opt[1];
-
-  const tag = block.match(/tag:\s*["'`]([^"'`]+)["'`]/)?.[1];
-  if (!tag) return null;
+  const options = src.match(/<svelte:options[\s\S]*?\/>/)?.[0];
+  if (!options) return null;
 
   const componentName = basename(file, ".svelte");
+  const { nomWebComponent: tag, props: customElementProps } =
+    extraitConfigurationWebComponent(options);
 
   const { localTypes, props: tsProps, script } = parseScript(src);
   const events = parseEvents(script);
 
-  const propsBlock = block.match(/props:\s*\{([\s\S]*?)\n\s*\}/)?.[1] ?? "";
-  const props = [];
-  const re = /(\w+):\s*\{([^}]*)\}/g;
-  let m;
-  while ((m = re.exec(propsBlock))) {
-    const [, name, body] = m;
+  const props = Object.entries(customElementProps).map(([name, customElementProp]) => {
     const tsInfo = tsProps[name];
     const resolved = tsInfo ? resolveType(tsInfo.typeExpr, localTypes) : null;
-    props.push({
+    return {
       name,
-      attribute: body.match(/attribute:\s*["'`]([^"'`]+)["'`]/)?.[1] ?? name,
-      type: body.match(/type:\s*["'`]?(\w+)["'`]?/)?.[1] ?? "String",
+      attribute: customElementProp.attribute ?? name,
+      type: customElementProp.type ?? "String",
       ...(tsInfo?.typeExpr && { tsType: tsInfo.typeExpr }),
       ...(tsInfo?.description && { description: tsInfo.description }),
       ...(resolved?.options && { options: resolved.options }),
-    });
-  }
+    };
+  });
+
   return { tagName: tag, componentName, source: file, props, events };
 }
 
