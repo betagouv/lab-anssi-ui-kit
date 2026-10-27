@@ -16,5 +16,5 @@
       "$lib/*": ["./src/lib/*"]
     }
   },
-  "include": ["./stories", "./src"]
+  "include": ["./stories", "./src", "./tests"]
 }

@@ -21,6 +21,7 @@ export default defineConfig({
   resolve: {
     alias: {
       src: path.resolve(import.meta.dirname, "src"),
+      $lib: path.resolve(import.meta.dirname, "src/lib"),
     },
   },
   plugins: [svelte()],
@@ -38,7 +39,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: "unit",
-          include: ["tests/**/*.spec.ts"],
+          include: ["tests/outils/**/*.spec.ts"],
           environment: "node",
         },
       },
@@ -54,6 +55,23 @@ export default defineConfig({
         ],
         test: {
           name: "storybook",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [
+              {
+                browser: "chromium",
+              },
+            ],
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "browser",
+          include: ["tests/browser/**/*.spec.ts"],
           browser: {
             enabled: true,
             headless: true,
