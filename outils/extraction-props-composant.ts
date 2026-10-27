@@ -1,30 +1,34 @@
-import { parse } from "svelte/compiler";
+import { parse, type AST } from "svelte/compiler";
 import ts, { ScriptTarget } from "typescript";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type SvelteASTNode = Record<string, any>;
-/* eslint-enable @typescript-eslint/no-explicit-any */
+type ConfigurationCustomElement = NonNullable<AST.SvelteOptions["customElement"]>;
+
+const extraitNomDepuisConfiguration = (configuration: ConfigurationCustomElement): string => {
+  if (!configuration.tag) {
+    throw new Error("Impossible de déterminer le nom du web component");
+  }
+
+  return configuration.tag;
+};
+
+export const extraitConfigurationWebComponent = (contenuSvelteOptions: string) => {
+  const configuration = parse(contenuSvelteOptions, { modern: true }).options?.customElement;
+
+  if (!configuration) {
+    throw new Error("Impossible de trouver la déclaration du web component");
+  }
+
+  return {
+    nomWebComponent: extraitNomDepuisConfiguration(configuration),
+    props: configuration.props ?? {},
+  };
+};
 
 export const extraitPropsComposant = (
   contenuSvelteOptions: string,
   contenuSvelteScript: string,
 ) => {
-  const ast = parse(contenuSvelteOptions);
-  const noeudOptions = (ast.html.children as SvelteASTNode[] | undefined)?.find(
-    (noeud) => noeud.name === "svelte:options",
-  );
-  const noeudCustomElement = noeudOptions?.attributes.find(
-    (attribut: SvelteASTNode) => (attribut.name = "customElement"),
-  );
-
-  const estDeclarationSimple = noeudCustomElement.value[0].type === "Text";
-
-  const nomWebComponent = estDeclarationSimple
-    ? noeudCustomElement.value[0].data
-    : noeudCustomElement.value[0].expression.properties.find(
-        (p: SvelteASTNode) => p.key.name === "tag",
-      ).value.value;
-
+  const configuration = extraitConfigurationWebComponent(contenuSvelteOptions);
   const props: { nom: string; optionnelle: boolean }[] = [];
   const source = ts.createSourceFile(
     "component.ts",
@@ -51,40 +55,21 @@ export const extraitPropsComposant = (
 
   parcoursAST(source);
 
-  if (!estDeclarationSimple) {
-    const noeudProps = noeudCustomElement.value[0].expression.properties.find(
-      (p: SvelteASTNode) => p.key.name === "props",
-    );
+  for (const [nom, configurationProp] of Object.entries(configuration.props)) {
+    const nomRéel = configurationProp.attribute ?? nom;
 
-    if (!noeudProps)
-      return {
-        nomWebComponent,
-        props: [],
-      };
-
-    const propsAvecAttribut: { nom: string; nomReel: string }[] = noeudProps.value.properties.map(
-      (p: SvelteASTNode) => {
-        const nom = p.key.name;
-        const nomReel = p.value.properties.find((v: SvelteASTNode) => v.key.name === "attribute")
-          .value.value;
-
-        if (nomReel.toLowerCase() !== nomReel)
-          throw new Error(
-            "Il est impossible d'utiliser des props avec majuscules pour les web components",
-          );
-
-        return { nom, nomReel };
-      },
-    );
-
-    for (const propAvecAttribut of propsAvecAttribut) {
-      const index = props.findIndex((p) => p.nom === propAvecAttribut.nom);
-      if (index !== -1) props[index].nom = propAvecAttribut.nomReel;
+    if (configurationProp.attribute && nomRéel.toLowerCase() !== nomRéel) {
+      throw new Error(
+        "Il est impossible d'utiliser des props avec majuscules pour les web components",
+      );
     }
+
+    const index = props.findIndex((prop) => prop.nom === nom);
+    if (index !== -1) props[index].nom = nomRéel;
   }
 
   return {
-    nomWebComponent,
+    nomWebComponent: configuration.nomWebComponent,
     props,
   };
 };
