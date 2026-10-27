@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-connect",
     props: {
       id: { attribute: "id", type: "String" },
       href: { attribute: "href", type: "String" },
@@ -8,10 +7,12 @@
       markup: { attribute: "markup", type: "String" },
       disabled: { attribute: "disabled", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-connect"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import DsfrLink from "./DsfrLink.svelte";
 
   interface Props {

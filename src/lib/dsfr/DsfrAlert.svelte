@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-alert",
     props: {
       buttonCloseLabel: { attribute: "button-close-label", type: "String" },
       hasTitle: { attribute: "has-title", type: "String" },
@@ -14,13 +13,18 @@
       icon: { attribute: "icon", type: "String" },
       titleTag: { attribute: "title-tag", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-alert", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

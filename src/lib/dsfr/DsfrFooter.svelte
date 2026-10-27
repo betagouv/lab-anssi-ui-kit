@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-footer",
     props: {
       id: { attribute: "id", type: "String" },
       isMourning: { attribute: "is-mourning", type: "Boolean" },
@@ -25,11 +24,12 @@
       bottomCopyright: { attribute: "bottom-copyright", type: "String" },
       compact: { attribute: "compact", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-footer"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host(), false);
 

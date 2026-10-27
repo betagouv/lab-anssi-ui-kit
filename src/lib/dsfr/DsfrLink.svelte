@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-link",
     props: {
       label: { attribute: "label", type: "String" },
       size: { attribute: "size", type: "String" },
@@ -18,13 +17,18 @@
       iconPlace: { attribute: "icon-place", type: "String" },
       neutral: { attribute: "neutral", type: "Boolean" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-link", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

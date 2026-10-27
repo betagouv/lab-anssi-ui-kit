@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-range",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -27,13 +26,14 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-range"),
   }}
 />
 
 <script lang="ts">
   import { untrack } from "svelte";
   import type { Size, TextSize, TextWeight } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";
 

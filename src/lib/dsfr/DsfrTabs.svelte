@@ -1,13 +1,12 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tabs",
     props: {
       hasIcon: { attribute: "has-icon", type: "Boolean" },
       tabs: { attribute: "tabs", type: "Array" },
       ariaLabel: { attribute: "aria-label", type: "String" },
       activeTabIndex: { attribute: "active-tab-index", type: "Number", reflect: true },
     },
-    extend: (CustomElementClass) => {
+    extend: avecEnregistrementIdempotent("dsfr-tabs", (CustomElementClass) => {
       return class extends CustomElementClass {
         connectedCallback() {
           super.connectedCallback();
@@ -20,12 +19,17 @@
           }
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
-  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    getIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
   setThemeable($host());

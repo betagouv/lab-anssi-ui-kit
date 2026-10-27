@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-segmented",
     props: {
       size: { attribute: "size", type: "String" },
       legend: { attribute: "legend", type: "String" },
@@ -11,13 +10,18 @@
       elements: { attribute: "elements", type: "Array" },
       value: { attribute: "value", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-segmented", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
   setThemeable($host());
 
   type SegmentedSize = Extract<Size, "sm" | "md">;

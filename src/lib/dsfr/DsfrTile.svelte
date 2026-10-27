@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tile",
     props: {
       title: { attribute: "title", type: "String" },
       hasDescription: { attribute: "has-description", type: "Boolean" },
@@ -29,13 +28,14 @@
       markupLevel: { attribute: "markup-level", type: "Number" },
       noIcon: { attribute: "no-icon", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-tile"),
   }}
 />
 
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

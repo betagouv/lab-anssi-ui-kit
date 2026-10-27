@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-toggle",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -17,11 +16,12 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-toggle"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import DsfrMessagesGroup from "./DsfrMessagesGroup.svelte";
 
   setThemeable($host());

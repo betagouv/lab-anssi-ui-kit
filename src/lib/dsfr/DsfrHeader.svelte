@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-header",
     props: {
       id: { attribute: "id", type: "String" },
       isMourning: { attribute: "is-mourning", type: "Boolean" },
@@ -42,13 +41,18 @@
       hasHeaderTag: { attribute: "has-header-tag", type: "Boolean" },
       fluid: { attribute: "fluid", type: "Boolean" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-header", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
-  import { setIconClass, withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setIconClass,
+    withIconsStyleSheet,
+    setThemeable,
+  } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
   import DsfrButton from "./DsfrButton.svelte";
   import DsfrNavigation from "./DsfrNavigation.svelte";

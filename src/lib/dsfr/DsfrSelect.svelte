@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-select",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -23,7 +22,7 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
-    extend: (customElementConstructor) => {
+    extend: avecEnregistrementIdempotent("dsfr-select", (customElementConstructor) => {
       return class extends customElementConstructor {
         static formAssociated = true;
 
@@ -32,13 +31,13 @@
           this.internals = this.attachInternals();
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { TextSize, TextWeight } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
   import DsfrLabel from "$lib/dsfr/DsfrLabel.svelte";

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-side-menu",
     props: {
       title: { attribute: "title", type: "String" },
       items: { attribute: "items", type: "Object" },
@@ -11,11 +10,12 @@
       modifier: { attribute: "modifier", type: "String" },
       activeItem: { attribute: "active-item", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-side-menu"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

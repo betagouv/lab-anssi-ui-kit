@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-radio",
     props: {
       id: { attribute: "id", type: "String" },
       name: { attribute: "name", type: "String" },
@@ -16,7 +15,7 @@
       form: { attribute: "form", type: "String" },
       required: { attribute: "required", type: "Boolean" },
     },
-    extend: (customElementConstructor) => {
+    extend: avecEnregistrementIdempotent("dsfr-radio", (customElementConstructor) => {
       return class extends customElementConstructor {
         static formAssociated = true;
 
@@ -25,13 +24,13 @@
           this.internals = this.attachInternals();
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   setThemeable($host());
 
   type RadioSize = Extract<Size, "sm" | "md">;

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tags-group",
     props: {
       tags: { attribute: "tags", type: "Array" },
       type: { attribute: "type", type: "String" },
@@ -8,13 +7,17 @@
       groupMarkup: { attribute: "group-markup", type: "String" },
       hasIcon: { attribute: "has-icon", type: "Boolean" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-tags-group", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size } from "$lib/types";
-  import { withIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setThemeable,
+  } from "$lib/utilitaires";
   setThemeable($host());
 
   type TagsGroupSize = Extract<Size, "sm" | "md">;

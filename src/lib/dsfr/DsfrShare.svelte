@@ -1,18 +1,21 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-share",
     props: {
       title: { attribute: "title", type: "String" },
       buttons: { attribute: "buttons", type: "Object" },
       disabled: { attribute: "disabled", type: "Boolean" },
       text: { attribute: "text", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-share", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setThemeable,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
 
   setThemeable($host());
 

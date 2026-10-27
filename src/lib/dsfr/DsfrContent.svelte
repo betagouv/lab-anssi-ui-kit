@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-content",
     props: {
       size: { attribute: "size", type: "String" },
       caption: { attribute: "caption", type: "String" },
@@ -14,10 +13,12 @@
       vid: { attribute: "vid", type: "Object" },
       svg: { attribute: "svg", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-content"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { Size } from "$lib/types";
 
   type Image = {

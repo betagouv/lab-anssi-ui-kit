@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-messages-group",
     props: {
       id: { attribute: "id", type: "String" },
       status: { attribute: "status", type: "String" },
@@ -11,10 +10,12 @@
       messages: { attribute: "messages", type: "Object" },
       context: { attribute: "context", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-messages-group"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   /**
    * Structure de messages contrainte :
    * - `errors` et `valids` sont mutuellement exclusifs (union discriminée)

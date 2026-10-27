@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-pagination",
     props: {
       pages: { attribute: "pages", type: "Array" },
       hasFirstAndLast: { attribute: "has-first-and-last", type: "Boolean" },
@@ -14,11 +13,12 @@
       prevAndNextHasLgLabel: { attribute: "prev-and-next-has-lg-label", type: "Boolean" },
       currentPageIndex: { attribute: "current-page-index", type: "Number" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-pagination"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

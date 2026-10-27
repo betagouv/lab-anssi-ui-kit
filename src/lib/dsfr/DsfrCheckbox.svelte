@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-checkbox",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -17,7 +16,7 @@
       required: { attribute: "required", type: "Boolean" },
       indeterminate: { attribute: "indeterminate", type: "Boolean", reflect: true },
     },
-    extend: (customElementConstructor) => {
+    extend: avecEnregistrementIdempotent("dsfr-checkbox", (customElementConstructor) => {
       return class extends customElementConstructor {
         static formAssociated = true;
 
@@ -26,13 +25,13 @@
           this.internals = this.attachInternals();
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { Size } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
   import { setIndeterminate } from "$lib/directives/actions.svelte";
 

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-accordion",
     props: {
       isExpanded: { attribute: "is-expanded", type: "Boolean" },
       id: { attribute: "id", type: "String" },
@@ -8,11 +7,12 @@
       content: { attribute: "content", type: "String" },
       titleMarkupLevel: { attribute: "title-markup-level", type: "Number" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-accordion"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
 

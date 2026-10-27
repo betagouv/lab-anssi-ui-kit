@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-notice",
     props: {
       title: { attribute: "title", type: "String" },
       hasDescription: { attribute: "has-description", type: "Boolean" },
@@ -18,7 +17,7 @@
       blank: { attribute: "blank", type: "Boolean" },
       buttonLabel: { attribute: "button-label", type: "String" },
     },
-    extend: (CustomElementClass) => {
+    extend: avecEnregistrementIdempotent("dsfr-notice", (CustomElementClass) => {
       return class extends CustomElementClass {
         connectedCallback() {
           super.connectedCallback();
@@ -31,12 +30,17 @@
           }
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
-  import { getIconsStyleSheet, setIconClass, setThemeable } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    getIconsStyleSheet,
+    setIconClass,
+    setThemeable,
+  } from "$lib/utilitaires";
   import DsfrContainer from "./DsfrContainer.svelte";
 
   setThemeable($host());

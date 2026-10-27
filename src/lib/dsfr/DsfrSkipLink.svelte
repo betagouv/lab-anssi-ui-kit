@@ -1,15 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-skiplink",
     props: {
       items: { attribute: "items", type: "Array" },
       ariaLabel: { attribute: "aria-label", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-skiplink"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import DsfrLink from "./DsfrLink.svelte";
 
   setThemeable($host());

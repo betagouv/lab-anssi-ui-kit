@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-combobox",
     props: {
       id: { attribute: "id", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -24,7 +23,7 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
-    extend: (customElementConstructor) => {
+    extend: avecEnregistrementIdempotent("dsfr-combobox", (customElementConstructor) => {
       return class extends customElementConstructor {
         static formAssociated = true;
 
@@ -44,13 +43,13 @@
           }
         }
       };
-    },
+    }),
   }}
 />
 
 <script lang="ts">
   import type { TextSize, TextWeight } from "$lib/types";
-  import { getIconsStyleSheet, setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, getIconsStyleSheet, setThemeable } from "$lib/utilitaires";
   import { createFormValidation } from "$lib/utilitaires/createFormValidation.svelte";
 
   import DsfrButton from "$lib/dsfr/DsfrButton.svelte";

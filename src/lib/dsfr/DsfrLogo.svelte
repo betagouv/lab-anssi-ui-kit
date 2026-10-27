@@ -1,14 +1,15 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-logo",
     props: {
       title: { attribute: "title", type: "String" },
       size: { attribute: "size", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-logo"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { Size } from "$lib/types";
 
   type LogoSize = Extract<Size, "sm" | "md" | "lg">;

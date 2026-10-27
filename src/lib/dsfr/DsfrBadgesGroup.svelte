@@ -1,18 +1,21 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-badges-group",
     props: {
       badges: { attribute: "badges", type: "Array" },
       size: { attribute: "size", type: "String" },
       groupMarkup: { attribute: "group-markup", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-badges-group", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Accent, Size, Status } from "$lib/types";
-  import { withIconsStyleSheet, setIconClass } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    withIconsStyleSheet,
+    setIconClass,
+  } from "$lib/utilitaires";
 
   type BadgesGroupSize = Extract<Size, "sm" | "md">;
   type BadgeType = "default" | "accent" | "status";

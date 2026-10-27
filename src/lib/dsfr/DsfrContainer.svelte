@@ -1,13 +1,14 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-container",
     props: {
       fluid: { attribute: "fluid", type: "Boolean" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-container"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   interface Props {
     /** Permet de définir le conteneur comme "fluide" ou non */
     fluid?: boolean;

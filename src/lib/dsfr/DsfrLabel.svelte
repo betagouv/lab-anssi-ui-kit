@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-label",
     props: {
       for: { attribute: "for", type: "String" },
       label: { attribute: "label", type: "String" },
@@ -15,10 +14,12 @@
       labelSize: { attribute: "label-size", type: "String" },
       labelWeight: { attribute: "label-weight", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-label"),
   }}
 />
 
 <script lang="ts">
+  import { avecEnregistrementIdempotent } from "$lib/utilitaires";
   import type { TextSize, TextWeight } from "$lib/types";
 
   interface Props {

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-user",
     props: {
       id: { attribute: "id", type: "String" },
       collapseId: { attribute: "collapse-id", type: "String" },
@@ -16,14 +15,18 @@
       hasLogout: { attribute: "has-logout", type: "Boolean" },
       logoutLabel: { attribute: "logout-label", type: "String" },
     },
-    extend: withIconsStyleSheet,
+    extend: avecEnregistrementIdempotent("dsfr-user", withIconsStyleSheet),
   }}
 />
 
 <script lang="ts">
   import type { Kind } from "$lib/types";
   import { clickOutside } from "$lib/directives/actions.svelte";
-  import { setIconClass, withIconsStyleSheet } from "$lib/utilitaires";
+  import {
+    avecEnregistrementIdempotent,
+    setIconClass,
+    withIconsStyleSheet,
+  } from "$lib/utilitaires";
 
   import DsfrButton from "./DsfrButton.svelte";
 

@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-translate",
     props: {
       id: { attribute: "id", type: "String" },
       collapseId: { attribute: "collapse-id", type: "String" },
@@ -10,12 +9,13 @@
       buttonTitle: { attribute: "button-title", type: "String" },
       buttonKind: { attribute: "button-kind", type: "String" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-translate"),
   }}
 />
 
 <script lang="ts">
   import type { Kind, TranslateLanguage } from "$lib/types";
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
 
   setThemeable($host());
   interface Props {

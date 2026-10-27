@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    tag: "dsfr-tabnav",
     props: {
       links: { attribute: "links", type: "Array" },
       ariaLabel: { attribute: "aria-label", type: "String" },
@@ -8,11 +7,12 @@
       routerMode: { attribute: "router-mode", type: "Boolean" },
       activeIndex: { attribute: "active-index", type: "Number" },
     },
+    extend: avecEnregistrementIdempotent("dsfr-tabnav"),
   }}
 />
 
 <script lang="ts">
-  import { setThemeable } from "$lib/utilitaires";
+  import { avecEnregistrementIdempotent, setThemeable } from "$lib/utilitaires";
   import { createSlot } from "$lib/directives/actions.svelte";
 
   setThemeable($host());
