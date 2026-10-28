@@ -103,7 +103,7 @@
     "prettier": "~3.9.10",
     "prettier-plugin-svelte": "~4.1.1",
     "publint": "~0.3.25",
-    "sass": "~1.105.2",
+    "sass": "~1.106.0",
     "storybook": "~10.6.3",
     "style-dictionary": "^5.7.0",
     "svelte": "~5.57.2",
