@@ -105,7 +105,7 @@
     "publint": "~0.3.25",
     "sass": "~1.106.1",
     "storybook": "~10.6.3",
-    "style-dictionary": "^5.7.0",
+    "style-dictionary": "^5.7.1",
     "svelte": "~5.57.2",
     "svelte-check": "~4.7.7",
     "typescript": "~6.0.3",
