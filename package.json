@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/betagouv/lab-anssi-ui-kit#readme",
   "engines": {
-    "node": ">=24.22.2"
+    "node": ">=26.13.0"
   },
   "devEngines": {
     "packageManager": {
@@ -83,7 +83,7 @@
     "@sveltejs/vite-plugin-svelte": "~7.3.1",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/svelte": "~5.4.2",
-    "@types/node": "~26.6.5",
+    "@types/node": "~26.6.6",
     "@vitest/browser": "~4.1.12",
     "@vitest/browser-playwright": "~4.1.12",
     "@vitest/coverage-v8": "~4.1.12",
