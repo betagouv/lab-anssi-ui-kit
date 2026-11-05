@@ -17,6 +17,7 @@ on:
       - ".prettierrc"
       - ".prettierignore"
       - "pnpm-lock.yaml"
+      - ".nvmrc"
       - ".github/workflows/**"
   pull_request:
     branches: [main]
@@ -33,6 +34,7 @@ on:
       - ".prettierrc"
       - ".prettierignore"
       - "pnpm-lock.yaml"
+      - ".nvmrc"
       - ".github/workflows/**"
 
 jobs:
@@ -47,10 +49,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Utiliser la version Node.js 24
+      - name: Utiliser la version Node.js du projet
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24.22.1
+          node-version-file: ".nvmrc"
 
       - name: Installer les dépendances pnpm
         uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
