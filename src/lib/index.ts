@@ -79,3 +79,4 @@ export { default as DsfrToggle } from "./dsfr/DsfrToggle.svelte";
 export { default as DsfrTooltip } from "./dsfr/DsfrTooltip.svelte";
 export { default as DsfrTranscription } from "./dsfr/DsfrTranscription.svelte";
 export { default as DsfrTranslate } from "./dsfr/DsfrTranslate.svelte";
+export { default as DsfrUpload } from "./dsfr/DsfrUpload.svelte";
