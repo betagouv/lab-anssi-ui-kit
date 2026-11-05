@@ -13,6 +13,7 @@ on:
       - "vite.webcomponents.config.ts"
       - "svelte.config.js"
       - "tsconfig.json"
+      - "tsconfig.check.json"
       - "eslint.config.js"
       - ".prettierrc"
       - ".prettierignore"
@@ -30,6 +31,7 @@ on:
       - "vite.webcomponents.config.ts"
       - "svelte.config.js"
       - "tsconfig.json"
+      - "tsconfig.check.json"
       - "eslint.config.js"
       - ".prettierrc"
       - ".prettierignore"
@@ -63,6 +65,9 @@ jobs:
 
       - name: Contrôler le linting
         run: pnpm run lint
+
+      - name: Contrôler les types Svelte et TypeScript
+        run: pnpm run check
 
       - name: Contrôler le format
         run: pnpm run format:check
