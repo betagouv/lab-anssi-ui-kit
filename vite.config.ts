@@ -7,6 +7,7 @@ import { playwright } from "@vitest/browser-playwright";
 import {
   assetsPath,
   replaceIconPaths,
+  removeFontFaces,
   varEnv,
   viteScssPreprocessorOptions,
 } from "./outils/index.ts";
@@ -27,7 +28,7 @@ export default defineConfig({
   plugins: [svelte()],
   css: {
     postcss: {
-      plugins: [replaceIconPaths({ assetsPath })],
+      plugins: [removeFontFaces(), replaceIconPaths({ assetsPath })],
     },
     preprocessorOptions: {
       scss: viteScssPreprocessorOptions(varEnv),

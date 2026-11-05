@@ -70,6 +70,10 @@ La bibliothèque propose **deux modes de distribution** :
 
 Le dossier `dist/` est construit à l’aide de la commande `pnpm run build`.
 
+### Polices
+
+Les composants utilisent les polices déclarées par l'application hôte. Chargez les déclarations `@font-face` de Marianne (et de Spectral si nécessaire) dans une feuille de styles globale. Les composants ne déclarent pas de chemins vers les fichiers de polices.
+
 ### WebComponents
 
 Les **WebComponents** sont disponibles sous forme de bundle IIFE dans `dist/webcomponents/` et peuvent être intégrés dans n’importe quel projet HTML/JS.
