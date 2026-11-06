@@ -9,6 +9,7 @@ import {
   genereJSX,
   injecteNonce,
   replaceIconPaths,
+  removeFontFaces,
   varEnv,
   viteScssPreprocessorOptions,
 } from "./outils/index.ts";
@@ -35,6 +36,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
+        removeFontFaces(),
         extractDataUriSvg(assetsPath),
         replaceIconPaths({ assetsPath }),
         root2host,

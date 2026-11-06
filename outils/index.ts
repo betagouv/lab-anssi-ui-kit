@@ -1,6 +1,7 @@
 import { loadEnv } from "vite";
 
 export { default as extractDataUriSvg } from "./postcss-extract-data-uri-svg.ts";
+export { default as removeFontFaces } from "./postcss-remove-font-faces.ts";
 export { default as replaceIconPaths } from "./postcss-replace-icon-paths.ts";
 export { default as genereJSX } from "./vite-plugin-genere-jsx.ts";
 export { default as injecteNonce } from "./vite-plugin-injecte-nonce.ts";
