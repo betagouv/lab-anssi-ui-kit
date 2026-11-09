@@ -197,3 +197,35 @@
     });
   }}
 />
+
+<Story
+  name="Liens désactivés"
+  args={{
+    id: "user-menu-disabled-links",
+    collapseId: "user-menu-disabled-links-collapse",
+    links: [
+      { label: "Lien actif", href: "#profil" },
+      { label: "Lien désactivé", href: "#parametres", disabled: true },
+      { label: "Action désactivée", markup: "button", disabled: true },
+    ],
+  }}
+  play={async ({ canvasElement, step }) => {
+    const el = canvasElement.querySelector("dsfr-user") as HTMLElement;
+    const shadow = el.shadowRoot;
+
+    el.style.setProperty("--text-disabled-grey", "rgb(123, 124, 125)");
+    el.style.setProperty("--text-action-high-grey", "rgb(10, 11, 12)");
+
+    await step("Les liens et actions désactivés utilisent la couleur dédiée", async () => {
+      const link = shadow?.querySelector("a[aria-disabled='true']") as HTMLAnchorElement;
+      const button = shadow?.querySelector("button.fr-user__link:disabled") as HTMLButtonElement;
+      const enabledLink = shadow?.querySelector("a[href]") as HTMLAnchorElement;
+
+      await expect(link).not.toHaveAttribute("href");
+      await expect(button).toBeDisabled();
+      await expect(getComputedStyle(link).color).toBe("rgb(123, 124, 125)");
+      await expect(getComputedStyle(button).color).toBe("rgb(123, 124, 125)");
+      await expect(getComputedStyle(enabledLink).color).toBe("rgb(10, 11, 12)");
+    });
+  }}
+/>

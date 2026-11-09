@@ -355,7 +355,21 @@
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
   @import "@gouvfr/dsfr/src/dsfr/core/index";
-  @import "@gouvfr/dsfr/dist/core/core.min.css";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/list";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/collapse/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/scheme";
+  @include _core-scheme;
   // DSFR Button
   @import "@gouvfr/dsfr/src/dsfr/component/button/index";
   @import "@gouvfr/dsfr/src/dsfr/component/button/style/module/default";
