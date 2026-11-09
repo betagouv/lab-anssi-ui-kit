@@ -280,9 +280,24 @@
 <style lang="scss">
   // DSFR Core styles
   @use "src/lib/styles/mixins-dsfr.scss" as *;
-  @use "@gouvfr/dsfr/src/dsfr/core/main" as *;
+  @import "@gouvfr/dsfr/src/dsfr/core/index";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/link";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/button";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/focus";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/hover";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/cursor";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/disabled";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/action/module/enlarge";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/heading";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/typography/module/paragraph";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/box-sizing";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/reset/module/tap-highlight";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/icon/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/media/module";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/margin";
+  @import "@gouvfr/dsfr/src/dsfr/core/style/spacing/module/elevation";
   // DSFR Component styles
-  @use "@gouvfr/dsfr/dist/component/link/link.main.css";
+  @import "@gouvfr/dsfr/dist/component/link/link.main.css";
   @import "@gouvfr/dsfr/dist/component/card/card.main.css";
 
   @include set-shadow-host();
