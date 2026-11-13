@@ -287,8 +287,8 @@ importers:
         specifier: ~10.6.5
         version: 10.6.5(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.0)
       style-dictionary:
-        specifier: ^5.7.1
-        version: 5.7.1
+        specifier: ^5.8.0
+        version: 5.8.0
       svelte:
         specifier: ~5.57.3
         version: 5.57.3(@typescript-eslint/types@8.72.1)
@@ -2754,8 +2754,8 @@ packages:
     resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==}
     engines: {node: '>=8'}
 
-  style-dictionary@5.7.1:
-    resolution: {integrity: sha512-qO9WsyR5jZWz8+5JRtehn7HF8YAvm+Jd8UxiYHtvZhYSNwfMfAVOBK1anjdZwbH+njFb7xuQsjqpD+djPXErcw==}
+  style-dictionary@5.8.0:
+    resolution: {integrity: sha512-RqOa3FF+9Dol5kP8KKtr5oqVijz1TPbs53+lBj9aMJy/JVPwl1pRj/4IzdnvDWXZaePYaO8Z5zgBTvcjeGh6cA==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -5372,7 +5372,7 @@ snapshots:
     dependencies:
       min-indent: 1.0.1
 
-  style-dictionary@5.7.1:
+  style-dictionary@5.8.0:
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.2
       '@bundled-es-modules/glob': 13.0.6
