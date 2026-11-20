@@ -75,7 +75,7 @@
     "@chromatic-com/storybook": "~5.6.0",
     "@eslint/compat": "~2.1.1",
     "@eslint/js": "~10.0.1",
-    "@fullhuman/postcss-purgecss": "~8.0.0",
+    "@fullhuman/postcss-purgecss": "~9.1.0",
     "@gouvfr/dsfr": "1.14.4",
     "@storybook/addon-a11y": "~10.6.6",
     "@storybook/addon-docs": "~10.6.6",
