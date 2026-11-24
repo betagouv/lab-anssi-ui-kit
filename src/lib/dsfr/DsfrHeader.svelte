@@ -617,6 +617,10 @@
     &__brand-top {
       overflow: var(--brand-top-overflow, hidden);
     }
+
+    :global(::slotted([slot="afternavigation"])) {
+      height: 100%;
+    }
   }
 
   .fr-header :global(.fr-nav__list) {
