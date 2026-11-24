@@ -2,3 +2,15 @@
 // Destinée à être importée une seule fois dans le bundle via adoptedStyleSheets
 // Ne pas importer directement dans un <style> de composant Svelte
 @import "@gouvfr/dsfr/src/dsfr/utility/icons/main";
+
+.fr-icon-verified-badge-fill::before,
+.fr-icon-verified-badge-fill::after {
+  -webkit-mask-image: url("../../icons/business/verified-badge-fill.svg");
+  mask-image: url("../../icons/business/verified-badge-fill.svg");
+}
+
+.fr-icon-verified-badge-line::before,
+.fr-icon-verified-badge-line::after {
+  -webkit-mask-image: url("../../icons/business/verified-badge-line.svg");
+  mask-image: url("../../icons/business/verified-badge-line.svg");
+}
