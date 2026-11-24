@@ -321,5 +321,13 @@
       font-size: 0.875rem;
       line-height: 1.5rem;
     }
+
+    &__partners-sub {
+      ul {
+        @include respond-from("sm") {
+          align-items: center;
+        }
+      }
+    }
   }
 </style>
