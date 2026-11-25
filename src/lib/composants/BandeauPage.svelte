@@ -6,7 +6,9 @@
       description: { attribute: "description", type: "String" },
       mention: { attribute: "mention", type: "String" },
       urlImage: { attribute: "url-image", type: "String" },
+      sansBoutons: { attribute: "sans-boutons", type: "Boolean" },
       sansImage: { attribute: "sans-image", type: "Boolean" },
+      sansMention: { attribute: "sans-mention", type: "Boolean" },
       avecFilAriane: { attribute: "avec-fil-ariane", type: "Boolean" },
       liensFilAriane: { attribute: "liens-fil-ariane", type: "Array" },
       type: { attribute: "type", type: "String" },
@@ -41,8 +43,12 @@
     mention?: string;
     /** Url de l'image */
     urlImage?: string | undefined;
+    /** Si "vrai", les boutons ne sont pas affichés */
+    sansBoutons?: boolean;
     /** Si "vrai", l'image n'est pas affichée */
     sansImage?: boolean;
+    /** Si "vrai", la mention n'est pas affichée */
+    sansMention?: boolean;
     /** Si "vrai", le fil d'Ariane est affiché */
     avecFilAriane?: boolean;
     /** Segments du fil d'Ariane */
@@ -65,7 +71,9 @@
     description,
     mention,
     urlImage,
+    sansBoutons = false,
     sansImage = false,
+    sansMention = false,
     avecFilAriane = false,
     liensFilAriane = [],
     type = "default",
@@ -124,13 +132,13 @@
           </p>
         </slot>
 
-        {#if $$slots.buttonsgroup && !variationSimple}
+        {#if !sansBoutons && $$slots.buttonsgroup && !variationSimple}
           <div class="lab-anssi-bandeau-page__actions">
             <slot name="buttonsgroup" />
           </div>
         {/if}
 
-        {#if mention || $$slots.mention}
+        {#if !sansMention && (mention || $$slots.mention)}
           <slot name="mention">
             <p class="lab-anssi-bandeau-page__mention">
               {mention}
