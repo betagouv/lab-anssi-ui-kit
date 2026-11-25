@@ -43,9 +43,9 @@
         <div class="presentation-anssi__description">
           <slot>
             <p>
-              Créée en 2009, l'Agence nationale de la sécurité des systèmes d'information (<abbr
-                >ANSSI</abbr
-              >) est l'autorité nationale en matière de cybersécurité et de cyberdéfense.
+              Créée en 2009, l'Agence nationale de la sécurité des systèmes d'information (<abbr>
+                ANSSI
+              </abbr>) est l'autorité nationale en matière de cybersécurité et de cyberdéfense.
             </p>
             <p>
               <strong>
