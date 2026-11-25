@@ -37,8 +37,8 @@
         <li>
           <a href={`#${entree.id}`} onclick={() => ouvreEntree(entree.id)}>
             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html entree.texte}</a
-          >
+            {@html entree.texte}
+          </a>
         </li>
       {/each}
     </ul>
