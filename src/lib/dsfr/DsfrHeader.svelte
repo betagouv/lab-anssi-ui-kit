@@ -466,7 +466,11 @@
                 ariaLabel={navigationAriaLabel ?? ""}
                 items={navigationItems ?? []}
               >
-                <div slot="afternavigation" use:createSlot={`afternavigation`}></div>
+                <div
+                  class="last-nav-item-container"
+                  slot="afternavigation"
+                  use:createSlot={`afternavigation`}
+                ></div>
               </DsfrNavigation>
             {:else}
               <DsfrNavigation
@@ -617,10 +621,6 @@
     &__brand-top {
       overflow: var(--brand-top-overflow, hidden);
     }
-
-    :global(::slotted([slot="afternavigation"])) {
-      height: 100%;
-    }
   }
 
   .fr-header :global(.fr-nav__list) {
@@ -628,5 +628,9 @@
       margin: 0 -1rem;
       max-width: calc(100% + 1rem);
     }
+  }
+
+  .last-nav-item-container {
+    height: 100%;
   }
 </style>
