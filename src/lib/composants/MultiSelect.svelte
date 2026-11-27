@@ -171,6 +171,8 @@
 </div>
 
 <style lang="scss">
+  @use "@gouvfr/dsfr/src/module/color";
+  @use "@gouvfr/dsfr/src/module/disabled/mixin/colors";
   @use "@gouvfr/dsfr/src/dsfr/component/form/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/select/main" as *;
   @use "@gouvfr/dsfr/src/dsfr/component/checkbox/main" as *;
@@ -198,6 +200,16 @@
   details[open] summary {
     outline: 2px solid #0a76f6;
     outline-offset: 2px;
+  }
+
+  details summary[aria-disabled="true"] {
+    @include colors.colors(
+      (
+        legacy: false,
+        text: true,
+        box-shadow: bottom-2-in,
+      )
+    );
   }
 
   .fr-select-group--disabled summary {
