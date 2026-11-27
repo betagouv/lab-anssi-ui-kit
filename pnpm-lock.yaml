@@ -254,8 +254,8 @@ importers:
         specifier: ~10.1.8
         version: 10.1.8(eslint@10.15.0(supports-color@7.2.0))
       eslint-plugin-storybook:
-        specifier: ~10.6.7
-        version: 10.6.7(eslint@10.15.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
+        specifier: ~10.6.8
+        version: 10.6.8(eslint@10.15.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       eslint-plugin-svelte:
         specifier: ~3.24.1
         version: 3.24.1(eslint@10.15.0(supports-color@7.2.0))(svelte@5.58.0(@typescript-eslint/types@8.73.0))
@@ -1871,8 +1871,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-storybook@10.6.7:
-    resolution: {integrity: sha512-L+dSHmoFxgPEuaMxuEq3mYMBVeDZnWq/vL4QK3b7JdjAA4SRZsXrl/teYoB2x+5SKkMEtIBZZYb+OL0NALGv+w==}
+  eslint-plugin-storybook@10.6.8:
+    resolution: {integrity: sha512-H+v2hkMdYCDfxV/cp54PSUkLZCq/AWfzBZFFdgK3J7FVV11kxTtsnuI4sLxjMTIwVZCYjCw/GwzH4VQmKSE/Vw==}
     peerDependencies:
       eslint: '>=8'
 
@@ -4477,7 +4477,7 @@ snapshots:
     dependencies:
       eslint: 10.15.0(supports-color@7.2.0)
 
-  eslint-plugin-storybook@10.6.7(eslint@10.15.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3):
+  eslint-plugin-storybook@10.6.8(eslint@10.15.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3):
     dependencies:
       '@typescript-eslint/types': 8.73.0
       '@typescript-eslint/utils': 8.73.0(eslint@10.15.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
