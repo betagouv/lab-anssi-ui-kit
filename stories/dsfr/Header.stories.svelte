@@ -12,6 +12,7 @@
   import PlaceholderPaysage from "@gouvfr/dsfr/example/img/placeholder.16x9.png";
 
   import DsfrHeader from "$lib/dsfr/DsfrHeader.svelte";
+  import "$lib/dsfr/DsfrButton.svelte";
 
   import webComponentSourceCode from "../utilitaires/webComponentSource.js";
 
@@ -404,3 +405,91 @@
     brandOperatorStyle: "max-width: 9.0625rem;",
   }}
 />
+
+<Story
+  name="Avec slot after navigation"
+  args={{
+    hasSlotAfterNavigation: true,
+    navigationItems: navigationItemsMinimaux,
+  }}
+  play={async ({ canvasElement, step }) => {
+    const header = canvasElement.querySelector("dsfr-header");
+    const shadow = header?.shadowRoot;
+
+    await step("Le conteneur afternavigation est slotté dans DsfrNavigation", async () => {
+      const navShadow = shadow?.querySelector("dsfr-navigation")?.shadowRoot;
+      const afterNavItem = navShadow?.querySelector(".fr-nav__item--last");
+      await expect(afterNavItem).toBeTruthy();
+
+      const navSlot = afterNavItem?.querySelector(
+        "slot[name='afternavigation']",
+      ) as HTMLSlotElement | null;
+      await expect(navSlot).toBeTruthy();
+
+      const assignedToNav = navSlot!.assignedElements();
+      const container = assignedToNav.find((el) =>
+        el.classList.contains("last-nav-item-container"),
+      );
+      await expect(container).toBeTruthy();
+    });
+
+    await step("Le bouton Se connecter est slotté dans le conteneur", async () => {
+      const navShadow = shadow?.querySelector("dsfr-navigation")?.shadowRoot;
+      const container = (
+        navShadow?.querySelector(
+          ".fr-nav__item--last slot[name='afternavigation']",
+        ) as HTMLSlotElement
+      )
+        ?.assignedElements()
+        ?.find((el) => el.classList.contains("last-nav-item-container")) as HTMLElement | undefined;
+
+      const innerSlot = container?.querySelector("slot[name='afternavigation']") as
+        HTMLSlotElement | undefined;
+      await expect(innerSlot).toBeTruthy();
+
+      const assignedToContainer = innerSlot!.assignedElements();
+      const button = assignedToContainer.find(
+        (el) => el.tagName.toLowerCase() === "dsfr-button",
+      ) as HTMLElement | undefined;
+      await expect(button).toBeTruthy();
+      await expect(button!.getAttribute("label")).toBe("Se connecter");
+    });
+  }}
+>
+  {#snippet template(args: Args)}
+    <dsfr-header
+      id={args.id}
+      is-mourning={args.isMourning || undefined}
+      menu-id={args.menuId}
+      menu-modal-id={args.menuModalId}
+      has-tool-links={args.hasToolLinks || undefined}
+      tool-links={JSON.stringify(args.toolLinks)}
+      has-search={args.hasSearch || undefined}
+      search-id={args.searchId}
+      search-modal-id={args.searchModalId}
+      search-btn-id={args.searchBtnId}
+      search-input-id={args.searchInputId}
+      search-label={args.searchLabel}
+      search-placeholder={args.searchPlaceholder}
+      search-title={args.searchTitle}
+      brand-logo-title={args.brandLogoTitle}
+      brand-service={args.brandService}
+      has-brand-tagline={args.hasBrandTagline || undefined}
+      brand-tagline={args.brandTagline}
+      brand-link-id={args.brandLinkId}
+      brand-link-title={args.brandLinkTitle}
+      brand-link-href={args.brandLinkHref}
+      has-navigation={args.hasNavigation || undefined}
+      has-slot-after-navigation={args.hasSlotAfterNavigation || undefined}
+      navigation-id={args.navigationId}
+      navigation-aria-label={args.navigationAriaLabel}
+      navigation-items={JSON.stringify(args.navigationItems)}
+      has-header-tag={args.hasHeaderTag || undefined}
+      fluid={args.fluid || undefined}
+    >
+      <dsfr-button slot="afternavigation" label="Se connecter" icon="account-circle-line">
+        Se connecter
+      </dsfr-button>
+    </dsfr-header>
+  {/snippet}
+</Story>
