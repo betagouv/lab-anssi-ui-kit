@@ -69,7 +69,7 @@
   },
   "web-types": "./dist/web-types.json",
   "peerDependencies": {
-    "svelte": "^5.58.0"
+    "svelte": "^5.58.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "~5.6.0",
@@ -110,7 +110,7 @@
     "sass": "~1.108.2",
     "storybook": "~10.6.8",
     "style-dictionary": "^5.8.0",
-    "svelte": "~5.58.0",
+    "svelte": "~5.58.1",
     "svelte-check": "~4.7.8",
     "typescript": "~6.0.3",
     "typescript-eslint": "~8.73.0",
